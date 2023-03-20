@@ -38,7 +38,7 @@ test("that BallotActivityList mounts", async () => {
   expect(wrapper.text()).toContain("Item actor");
 });
 
-test.only("that activities are listed", async () => {
+test("that activities are listed", async () => {
   const wrapper = mount(BallotActivityList, {
     global: {
       plugins: [i18n],
