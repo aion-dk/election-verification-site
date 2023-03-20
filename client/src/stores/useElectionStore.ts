@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import { api } from "../lib/api";
+import type { Election } from '../Types'
 
 export default defineStore("useElectionStore", () => {
-  const election = ref({});
+  const election = ref<Election>({});
 
-  const setElection = (newElection) => {
+  const setElection = (newElection: Election) => {
     election.value = newElection;
   };
 

@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { onMounted, ref, watch, computed } from "vue";
+import { watch, computed } from "vue";
 import { RouterView, useRoute } from "vue-router";
 import useLocaleStore from "./stores/useLocaleStore";
 import useElectionStore from "./stores/useElectionStore";
@@ -18,18 +18,18 @@ watch(route, async (newRoute) => {
   const slug = newRoute.params.electionSlug;
   if (slug) electionStore.loadElection(slug.toString());
 
-  const locale = newRoute.params.locale;
+  const locale = newRoute.params.locale as string;
   if (locale) localeStore.setLocale(locale);
 });
 
 watch(electionStore, () => {
   setTitle();
   if (route.params.electionSlug) {
-    electionStore.loadElection(route.params.electionSlug);
+    electionStore.loadElection(route.params.electionSlug as string);
 
     if (route.params.trackingCode) {
       ballotStore.loadBallot(
-        route.params.trackingCode,
+        route.params.trackingCode as string,
         electionStore.election.slug
       );
     }
@@ -43,10 +43,13 @@ function setTitle() {
     "DBAS",
     electionStore.election?.content?.title[localeStore.locale],
   ].filter((s) => s);
-  window.top.document.title = title.join(" - ");
+  if(window.top) window.top.document.title = title.join(" - ");
 }
 
-function changeLocale(newLocale) {
+type Locale = `en` | `es`
+
+function changeLocale(newLocale: Locale) {
+  console.log(newLocale)
   const url = new URL(window.location.href);
   const newUrl = url.pathname.replace(
     `/${localeStore.locale}/`,

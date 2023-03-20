@@ -6,7 +6,7 @@ import { useRoute } from "vue-router";
 const route = useRoute();
 const _electionSlug = ref(null);
 
-function submitForm(event: any) {
+function submitForm(event: Event) {
   event.preventDefault();
   event.stopPropagation();
   router.push(`/${route.params.locale}/${_electionSlug.value}`);

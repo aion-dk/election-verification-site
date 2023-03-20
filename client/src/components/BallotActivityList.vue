@@ -25,7 +25,7 @@ defineProps({
       </li>
     </ul>
 
-    <BallotActivity :activity="activity" v-for="activity in activities" />
+    <BallotActivity :activity="activity" v-for="(activity, key) in activities" :key="key" />
   </div>
 </template>
 

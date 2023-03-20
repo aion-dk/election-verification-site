@@ -41,6 +41,7 @@ app.use(router);
 app.use(i18n);
 
 app.component("font-awesome-icon", FontAwesomeIcon);
+// eslint-disable-next-line vue/multi-word-component-names
 app.component("tooltip", VuePopper);
 
 app.mount("#dbas-client");

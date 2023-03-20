@@ -1,12 +1,13 @@
 <script lang="ts" setup>
 import { computed } from "vue";
-import { RouterLink, useRoute } from "vue-router";
+import { RouterLink } from "vue-router";
 import config from "../lib/config";
-import router from "../router";
 import enFlag from "../assets/en.svg";
 import esFlag from "../assets/es.svg";
+import type { FlagLocaleMap } from "../Types";
 
 const emit = defineEmits(["changeLocale"]);
+
 
 const props = defineProps({
   locale: {
@@ -19,12 +20,12 @@ const props = defineProps({
   },
 });
 const _locales = computed(() => props.election.content?.locales || ["en"]);
-const _flagLocaleMap = {
+const _flagLocaleMap:FlagLocaleMap = {
   en: enFlag,
   es: esFlag,
 };
 
-function setLocale(newLocale) {
+function setLocale(newLocale: string) {
   emit("changeLocale", newLocale);
 }
 </script>
@@ -79,7 +80,8 @@ function setLocale(newLocale) {
 
       <div class="Header__Flags">
         <img
-          v-for="l in _locales"
+          v-for="(l, key) in _locales"
+          :key="key"
           :src="_flagLocaleMap[l]"
           :class="{
             Header__Flag: true,

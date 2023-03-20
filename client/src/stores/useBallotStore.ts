@@ -1,11 +1,12 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import useAVClient from "../lib/useAVClient";
+import type { Ballot } from "../Types"
 
 export default defineStore("useBallotStore", () => {
-  const ballot = ref(null);
+  const ballot = ref<Ballot>(null);
 
-  const setBallot = (newBallot) => {
+  const setBallot = (newBallot: Ballot) => {
     ballot.value = newBallot;
   };
 
@@ -24,8 +25,9 @@ export default defineStore("useBallotStore", () => {
       ballot.value = {
         trackingCode: trackingCode,
         status: res.status,
-        activities: res.activities.reverse(),
+        activities: (res.activities as any).reverse(),
       };
+
     } catch (e) {
       console.log("Unable to find ballot", trackingCode);
       resetBallot();

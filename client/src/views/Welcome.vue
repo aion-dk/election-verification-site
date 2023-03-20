@@ -29,7 +29,7 @@ function setInfo() {
     .join(", ");
 }
 
-async function lookupBallot(event) {
+async function lookupBallot(event: Event) {
   event.preventDefault();
   event.stopPropagation();
   _disabled.value = true;
@@ -55,17 +55,17 @@ async function lookupBallot(event) {
 
 watch(route, (newRoute) => {
   _electionSlug.value = newRoute.params.electionSlug;
-  _locale.value = newRoute.params.locale;
+  _locale.value = newRoute.params.locale as string;
   setInfo();
 });
 
-watch(electionStore, (newElectionStore) => {
+watch(electionStore, () => {
   setInfo();
 });
 
 onMounted(() => {
   setInfo();
-  document.querySelector(".Welcome__TrackingCode").focus();
+  (document.querySelector(".Welcome__TrackingCode") as HTMLInputElement)?.focus();
 });
 </script>
 
@@ -108,7 +108,7 @@ onMounted(() => {
 
           <button
             class="Welcome__SubmitButton"
-            type="primary"
+            type="submit"
             :disabled="_disabled"
             name="lookup-ballot"
             id="lookup-ballot"

@@ -10,10 +10,18 @@
     "plugin:@typescript-eslint/recommended"
   ],
   "overrides": [],
-  "parser": "@typescript-eslint/parser",
+  "parser": "vue-eslint-parser",
   "parserOptions": {
-    "ecmaVersion": "latest"
+    "parser": {
+      "ts": "@typescript-eslint/parser",
+      "<template>": "espree"
+    }
   },
-  "plugins": ["vue", "@typescript-eslint"],
-  "rules": {}
+  "plugins": [
+    "vue",
+    "@typescript-eslint"
+  ],
+  "rules": {
+    "vue/multi-word-component-names": "off"
+  }
 }

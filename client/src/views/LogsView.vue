@@ -12,9 +12,7 @@ const route = useRoute();
 const localeStore = useLocaleStore();
 const electionStore = useElectionStore();
 const boardStore = useBoardStore();
-const prevPage = ref(0);
-const nextPage = ref(0);
-const configItemsOnly = ref(false);
+const configItemsOnly = ref<boolean>(false);
 
 watch(electionStore, () => loadPage(currentPage()));
 watch(route, () => loadPage(currentPage()));
@@ -91,7 +89,7 @@ onMounted(() => loadPage(currentPage()));
     </ul>
 
     <div role="log">
-      <BoardItem v-for="item in boardStore.items" :item="item" />
+      <BoardItem v-for="(item, key) in boardStore.items" :key="key" :item="item" />
     </div>
 
     <div class="LogsView__Pagination">

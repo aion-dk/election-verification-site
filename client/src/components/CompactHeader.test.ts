@@ -1,8 +1,15 @@
 import { expect, test } from "vitest";
 import { mount } from "@vue/test-utils";
 import CompactHeader from "./CompactHeader.vue";
+import type { FlagLocaleMap } from "../Types";
 
-const content = {
+interface Content {
+  title: FlagLocaleMap
+  state?: string
+  jurisdiction?: string
+}
+
+const content: Content = {
   title: {
     en: "Funny Election",
     da: "Sjovt valg",
