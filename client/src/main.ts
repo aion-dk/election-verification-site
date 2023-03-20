@@ -4,7 +4,10 @@ import App from "./App.vue";
 import router from "./router";
 import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
+
+// @ts-ignore
 import VuePopper from "@kalimahapps/vue-popper";
+
 import i18n from "./lib/i18n";
 import {
   faFingerprint,
