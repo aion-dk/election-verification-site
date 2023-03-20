@@ -15,23 +15,24 @@ defineProps({
   <div class="BoardItem">
     <ExpandableSection>
       <template v-slot:collapsed>
-        <span class="BoardItem__Type">
+        <span class="BoardItem__Type" aria-label="Activity">
           {{ $t(`components.board_item.${item.type}.type`) }}
         </span>
 
-        <span class="BoardItem__Date">
+        <span class="BoardItem__Date" aria-label="Activity registered at">
           <font-awesome-icon
             icon="fa-solid fa-clock"
             class="BoardItem__InlineIcon"
+            aria-hidden="true"
           />
           <DateTime :date-time="item.registeredAt" format="relative" />
         </span>
 
-        <span class="BoardItem__ShortAddress">
+        <span class="BoardItem__ShortAddress" aria-label="Activity identifier">
           <ItemIdentifier :address="item.address" />
         </span>
 
-        <span class="BoardItem__Author">
+        <span class="BoardItem__Author" aria-label="Activity authored by">
           <font-awesome-icon
             icon="fa-solid fa-user"
             class="BoardItem__InlineIcon"

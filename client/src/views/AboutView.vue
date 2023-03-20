@@ -15,7 +15,7 @@ const localeStore = useLocaleStore();
     />
 
     <div class="AboutView__Header">
-      <h1>About this website</h1>
+      <h2>About this website</h2>
       <p>
         This site gives voters the ability to independently verify that their
         ballot is recorded, received, and counted correctly. All activity in the
@@ -67,7 +67,7 @@ const localeStore = useLocaleStore();
   margin: 47px 0;
 }
 
-.AboutView h1 {
+.AboutView h2 {
   margin-top: 47px;
   font-weight: 600;
   font-size: 26px;

@@ -75,7 +75,10 @@ function setLocale(newLocale: string) {
         target="_blank"
       >
         {{ $t("header.contact") }}
-        <font-awesome-icon icon="fa-solid fa-arrow-up-right-from-square" />
+        <font-awesome-icon
+          aria-hidden="true"
+          icon="fa-solid fa-arrow-up-right-from-square"
+        />
       </a>
 
       <div class="Header__Flags">

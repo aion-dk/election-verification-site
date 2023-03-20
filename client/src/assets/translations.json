@@ -131,7 +131,7 @@
       },
       "logs": {
         "title": "Election Logs",
-        "intro": "These are all the election events in chronological order. This allows you to publicly audit the election.",
+        "intro": "These are all the election events in reverse chronological order. This allows you to publicly audit the election.",
         "download_button": "Download the full election activity log (json)",
         "config_only": "Configuration items only?"
       },

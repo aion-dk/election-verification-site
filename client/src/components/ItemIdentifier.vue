@@ -14,6 +14,9 @@ const props = defineProps({
 
 const copied = ref(false);
 const shortAddress = computed(() => hexToShortCode(props.address.slice(0, 10)));
+const periodicedShortAddress = computed(() => {
+  return props.item?.address?.split("")?.join(". ");
+});
 
 async function copy() {
   try {
@@ -39,7 +42,12 @@ async function copy() {
 
     <tooltip hover placement="top">
       <template #default>
-        <code class="ItemIdentifier__ShortCode" @click="copy" role="button">
+        <code
+          class="ItemIdentifier__ShortCode"
+          @click="copy"
+          role="button"
+          :aria-label="periodicedShortAddress"
+        >
           {{ shortAddress }}
         </code>
       </template>

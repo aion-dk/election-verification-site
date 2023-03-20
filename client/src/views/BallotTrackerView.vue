@@ -4,7 +4,7 @@ import useBallotStore from "../stores/useBallotStore";
 import useLocaleStore from "../stores/useLocaleStore";
 import CompactHeader from "../components/CompactHeader.vue";
 import Infobox from "../components/Infobox.vue";
-import { ref, watch, onMounted } from "vue";
+import { ref, watch, computed, onMounted } from "vue";
 import BallotActivityList from "../components/BallotActivityList.vue";
 import router from "../router";
 import { useRoute } from "vue-router";
@@ -15,6 +15,9 @@ const localeStore = useLocaleStore();
 const electionStore = useElectionStore();
 const ballotStore = useBallotStore();
 const ballot = ref<Ballot>(null);
+const periodicedTrackingCode = computed(() => {
+  return ballotStore.ballot?.trackingCode?.split("")?.join(". ");
+});
 
 watch(ballotStore, () => setBallot());
 watch(route, () => setBallot());
@@ -46,7 +49,9 @@ onMounted(() => setBallot());
       <Infobox class="BallotTracker__TrackingCode" role="alertdialog">
         <h3 role="alert" id="tracking-code" aria-flowto="infobox">
           <span>{{ $t("views.tracker.currently_tracking") }}</span>
-          <code>{{ ballot.trackingCode }}</code>
+          <code :aria-label="periodicedTrackingCode">
+            {{ ballot.trackingCode }}
+          </code>
         </h3>
         <button
           class="BallotTracker__Cancel"
