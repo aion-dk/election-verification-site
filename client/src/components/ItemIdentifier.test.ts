@@ -33,14 +33,14 @@ test("clicking copies the short address", async () => {
     },
   });
   const wrapper = mount(ItemIdentifier, options);
-  const ac = await wrapper.get(".ItemIdentifier__ShortCode").trigger("click");
+  await wrapper.get(".ItemIdentifier__ShortCode").trigger("click");
   expect(copiedText).toContain("16fSovo");
 });
 
 test("handles invalid address", async () => {
   props.address = "invalid-address";
   try {
-    const wrapper = mount(ItemIdentifier, options);
+    mount(ItemIdentifier, options);
     expect("no error thrown").toContain("is expected");
   } catch (e) {
     expect("error thrown").toContain("error thrown");
