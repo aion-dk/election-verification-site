@@ -15,7 +15,7 @@ const props = defineProps({
 const copied = ref(false);
 const shortAddress = computed(() => hexToShortCode(props.address.slice(0, 10)));
 const periodicedShortAddress = computed(() => {
-  return props.item?.address?.split("")?.join(". ");
+  return props.address?.split("")?.join(". ");
 });
 
 async function copy() {
