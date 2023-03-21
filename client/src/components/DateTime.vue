@@ -14,9 +14,12 @@ const props = defineProps({
     default: "relative",
     validate: (s: string) => ["absolute", "relative"].indexOf(s) >= 0,
   },
+  timeZone: {
+    type: String,
+    default: Intl.DateTimeFormat().resolvedOptions().timeZone,
+  },
 });
 
-const tz = Intl.DateTimeFormat().resolvedOptions().timeZone;
 const value = ref(
   props.format === "absolute"
     ? absolute(props.dateTime)
@@ -31,7 +34,7 @@ const label = ref(
 function relative(date: any) {
   return moment
     .parseZone(date)
-    .tz(tz)
+    .tz(props.timeZone)
     .locale(window.navigator.language)
     .fromNow();
 }
@@ -39,7 +42,7 @@ function relative(date: any) {
 function absolute(date: any) {
   return moment
     .parseZone(date)
-    .tz(tz)
+    .tz(props.timeZone)
     .locale(window.navigator.language)
     .format("LLLL zz");
 }
