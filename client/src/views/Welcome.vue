@@ -65,7 +65,9 @@ watch(electionStore, () => {
 
 onMounted(() => {
   setInfo();
-  (document.querySelector(".Welcome__TrackingCode") as HTMLInputElement)?.focus();
+  (
+    document.querySelector(".Welcome__TrackingCode") as HTMLInputElement
+  )?.focus();
 });
 </script>
 

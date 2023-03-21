@@ -43,13 +43,13 @@ function setTitle() {
     "DBAS",
     electionStore.election?.content?.title[localeStore.locale],
   ].filter((s) => s);
-  if(window.top) window.top.document.title = title.join(" - ");
+  if (window.top) window.top.document.title = title.join(" - ");
 }
 
-type Locale = `en` | `es`
+type Locale = `en` | `es`;
 
 function changeLocale(newLocale: Locale) {
-  console.log(newLocale)
+  console.log(newLocale);
   const url = new URL(window.location.href);
   const newUrl = url.pathname.replace(
     `/${localeStore.locale}/`,

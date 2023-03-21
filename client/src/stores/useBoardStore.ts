@@ -11,7 +11,6 @@ export default defineStore("boardStore", () => {
   const currentFilter = ref<string[]>([]);
 
   const loadPage = async (slug: string, page: number, filter: string[]) => {
-
     if (currentPage.value === page && filter == currentFilter.value) return;
 
     let url = `/${slug}/board?page=${page}`;

@@ -8,7 +8,6 @@ import type { FlagLocaleMap } from "../Types";
 
 const emit = defineEmits(["changeLocale"]);
 
-
 const props = defineProps({
   locale: {
     type: String,
@@ -20,7 +19,7 @@ const props = defineProps({
   },
 });
 const _locales = computed(() => props.election.content?.locales || ["en"]);
-const _flagLocaleMap:FlagLocaleMap = {
+const _flagLocaleMap: FlagLocaleMap = {
   en: enFlag,
   es: esFlag,
 };

@@ -4,9 +4,9 @@ import CompactHeader from "./CompactHeader.vue";
 import type { FlagLocaleMap } from "../Types";
 
 interface Content {
-  title: FlagLocaleMap
-  state?: string
-  jurisdiction?: string
+  title: FlagLocaleMap;
+  state?: string;
+  jurisdiction?: string;
 }
 
 const content: Content = {
