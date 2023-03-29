@@ -6,6 +6,7 @@ import Infobox from "../components/Infobox.vue";
 import useBallotStore from "../stores/useBallotStore";
 import router from "../router";
 import useLocaleStore from "../stores/useLocaleStore";
+import useAVVerifier from '@/lib/useAVVerifier'
 
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
@@ -16,6 +17,7 @@ const _locale = ref(localeStore.locale);
 const _title = ref("Loading..");
 const _info = ref("Loading..");
 const _trackingCode = ref(null);
+const _verificationCode = ref(null);
 const _error = ref(false);
 const _disabled = ref(false);
 
@@ -51,6 +53,24 @@ async function lookupBallot(event: Event) {
   }
 
   _disabled.value = false;
+}
+
+async function initiateVerification(event: Event) {
+  event.preventDefault();
+  event.stopPropagation();
+  _disabled.value = true;
+  _error.value = false;
+
+  try {
+    const avVerifier = await useAVVerifier(_electionSlug.value as string);
+    const address = await avVerifier.findBallot(_verificationCode.value)
+    console.log("verifying address:", address)
+    await router.push({ name: "BallotVerifierView", params: { verificationCode: _verificationCode.value } })
+  } catch(e) {
+    // _error.value = "Your ballot could not be found";
+  } finally {
+    _disabled.value = false;
+  }
 }
 
 watch(route, (newRoute) => {
@@ -144,6 +164,61 @@ onMounted(() => {
       </Infobox>
     </div>
 
+    <div class="Welcome__Content">
+      <Infobox class="Welcome__About">
+        <h3>{{ $t("views.welcome.about.header") }}</h3>
+        <p>{{ $t("views.welcome.about.p1") }}</p>
+        <p>{{ $t("views.welcome.about.p2") }}</p>
+      </Infobox>
+
+      <Infobox class="Welcome__Tracking">
+        <form @submit="initiateVerification">
+          <input
+            :disabled="_disabled"
+            type="text"
+            name="verification-code"
+            id="verification-code"
+            :placeholder="$t('views.welcome.verification_code_input')"
+            v-model="_verificationCode"
+            class="Welcome__VerificationCode"
+          />
+
+          <button
+            class="Welcome__SubmitButton"
+            type="submit"
+            :disabled="_disabled"
+            name="initiate-verification"
+            id="initiate-verification"
+            @click="initiateVerification"
+          >
+            <font-awesome-icon icon="fa-solid fa-fingerprint" />
+            <span>
+              {{ $t("views.welcome.initiate_verification_button") }}
+            </span>
+          </button>
+        </form>
+
+        <p class="Tooltip">
+          <tooltip hover placement="bottom">
+            <template #default>
+              <span>{{ $t("views.welcome.locate_tracking_code") }}</span>
+              <span
+                :aria-label="$t('views.welcome.locate_tracking_code_tooltip')"
+              >
+                <font-awesome-icon icon="fa-solid fa-circle-question" />
+              </span>
+            </template>
+
+            <template #content>
+              <span id="tracking-code-tooltip">
+                {{ $t("views.welcome.locate_tracking_code_tooltip") }}
+              </span>
+            </template>
+          </tooltip>
+        </p>
+      </Infobox>
+    </div>
+
     <div class="Welcome__Footer">
       <p class="Tooltip">
         <tooltip hover placement="right">
@@ -193,6 +268,7 @@ onMounted(() => {
 
 .Welcome__Content {
   display: flex;
+  margin-bottom: 40px;
 }
 
 .Welcome__About {
