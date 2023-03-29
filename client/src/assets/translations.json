@@ -1,5 +1,19 @@
 {
   "en": {
+    "errors": {
+      "verify": {
+        "invalid_code": {
+          "title": "Invalid verification code",
+          "description": "The verification code does not exist in this election. Please try voting again, or contact the election officials for further help."
+        }
+      },
+      "track": {
+        "invalid_code": {
+          "title": "Invalid tracking code",
+          "description": "Please check that the tracking code was entered correctly. The code is case sensitive. If you are checking to make sure your ballot was recorded correctly before submitting, use the ballot check site instead. Still having problems? Contact your local election official."
+        }
+      }
+    },
     "header": {
       "dbas": "Digital Ballot Audit Site",
       "about": "About",
@@ -196,10 +210,6 @@
           "header": "Ballot tracker",
           "p1": "I have voted and I want to track my ballot.",
           "p2": "To check the status of your ballot, you need to input the tracking code from the Voter receipt."
-        },
-        "error": {
-          "title": "Tracking code not found",
-          "content": "Please check that the tracking code was entered correctly. The code is case sensitive. If you are checking to make sure your ballot was recorded correctly before submitting, use the ballot check site instead. Still having problems? Contact your local election official."
         }
       }
     }

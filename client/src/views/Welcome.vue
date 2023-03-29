@@ -6,7 +6,7 @@ import Infobox from "../components/Infobox.vue";
 import useBallotStore from "../stores/useBallotStore";
 import router from "../router";
 import useLocaleStore from "../stores/useLocaleStore";
-import useAVVerifier from '@/lib/useAVVerifier'
+import useAVVerifier from "@/lib/useAVVerifier";
 
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
@@ -18,7 +18,7 @@ const _title = ref("Loading..");
 const _info = ref("Loading..");
 const _trackingCode = ref(null);
 const _verificationCode = ref(null);
-const _error = ref(false);
+const _error = ref(null);
 const _disabled = ref(false);
 
 function setInfo() {
@@ -35,7 +35,7 @@ async function lookupBallot(event: Event) {
   event.preventDefault();
   event.stopPropagation();
   _disabled.value = true;
-  _error.value = false;
+  _error.value = null;
 
   if (_trackingCode.value && electionStore.election.slug) {
     await ballotStore.loadBallot(
@@ -49,7 +49,7 @@ async function lookupBallot(event: Event) {
       `/${_locale.value}/${_electionSlug.value}/track/${_trackingCode.value}`
     );
   } else {
-    _error.value = true;
+    _error.value = "track.invalid_code";
   }
 
   _disabled.value = false;
@@ -59,14 +59,19 @@ async function initiateVerification(event: Event) {
   event.preventDefault();
   event.stopPropagation();
   _disabled.value = true;
-  _error.value = false;
+  _error.value = null;
 
   try {
     const avVerifier = await useAVVerifier(_electionSlug.value as string);
-    const address = await avVerifier.findBallot(_verificationCode.value)
-    await router.push({ name: "BallotVerifierView", params: { verificationCode: _verificationCode.value } })
-  } catch(e) {
-    // _error.value = "Your ballot could not be found";
+    const address = await avVerifier.findBallot(_verificationCode.value);
+    await router.push({
+      name: "BallotVerifierView",
+      params: {
+        verificationCode: _verificationCode.value,
+      },
+    });
+  } catch (e) {
+    _error.value = "verify.invalid_code";
   } finally {
     _disabled.value = false;
   }
@@ -102,10 +107,12 @@ onMounted(() => {
     <div v-if="_error" class="Welcome__Error" role="alert">
       <p class="title">
         <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />
-        {{ $t("views.welcome.error.title") }}
+        {{ $t(`errors.${_error}.title`) }}
       </p>
 
-      <p>{{ $t("views.welcome.error.content") }}</p>
+      <p>
+        {{ $t(`errors.${_error}.description`) }}
+      </p>
     </div>
 
     <div class="Welcome__Content">
@@ -203,7 +210,9 @@ onMounted(() => {
             <template #default>
               <span>{{ $t("views.welcome.locate_verification_code") }}</span>
               <span
-                :aria-label="$t('views.welcome.locate_verification_code_tooltip')"
+                :aria-label="
+                  $t('views.welcome.locate_verification_code_tooltip')
+                "
               >
                 <font-awesome-icon icon="fa-solid fa-circle-question" />
               </span>

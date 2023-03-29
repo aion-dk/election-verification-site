@@ -4,19 +4,19 @@ import useLocaleStore from "../stores/useLocaleStore";
 import CompactHeader from "../components/CompactHeader.vue";
 import Infobox from "../components/Infobox.vue";
 import router from "../router";
-import useAVVerifier from '@/lib/useAVVerifier';
-import { api } from '@/lib/api'
-import { onMounted, ref, watch } from 'vue'
-import { useRoute } from 'vue-router'
+import useAVVerifier from "@/lib/useAVVerifier";
+import { api } from "@/lib/api";
+import { onMounted, ref, watch } from "vue";
+import { useRoute } from "vue-router";
 
 const localeStore = useLocaleStore();
 const electionStore = useElectionStore();
 const _pairingCode = ref<string | null>(null);
 const _decryptedBallot = ref<Array<any>>([]);
-const route = useRoute()
-const avVerifier = ref(null)
+const route = useRoute();
+const avVerifier = ref(null);
 
-watch(electionStore, () => startSpoiling())
+watch(electionStore, () => startSpoiling());
 
 function cancel() {
   router.push(`/${localeStore.locale}/${electionStore.election.slug}`);
@@ -27,30 +27,34 @@ async function createAvVerifier() {
 }
 
 async function startSpoiling() {
-  console.log(electionStore.election.slug)
-  if(!electionStore.election?.slug) return
+  console.log(electionStore.election.slug);
+  if (!electionStore.election?.slug) return;
   // console.log(avVerifier)
   // const pollResult = avVerifier.pollForSpoilRequest();
 
-  await createAvVerifier()
-  const address = await avVerifier.value.findBallot(route.params.verificationCode as string)
-  const path = `${electionStore.election.slug}/verification/spoil_status?id=${address}`
+  await createAvVerifier();
+  const address = await avVerifier.value.findBallot(
+    route.params.verificationCode as string
+  );
+  const path = `${electionStore.election.slug}/verification/spoil_status?id=${address}`;
 
-  const { data } = await api.get(path)
+  const { data } = await api.get(path);
 
-  _pairingCode.value = await avVerifier.value.submitVerifierKey(data.item.address)
+  _pairingCode.value = await avVerifier.value.submitVerifierKey(
+    data.item.address
+  );
 
-  pollForCommitmentOpening()
+  pollForCommitmentOpening();
 }
 
 async function pollForCommitmentOpening() {
-  await createAvVerifier()
+  await createAvVerifier();
 
-  await avVerifier.value.pollForCommitmentOpening()
-  _decryptedBallot.value = await avVerifier.value.decryptBallot()
+  await avVerifier.value.pollForCommitmentOpening();
+  _decryptedBallot.value = await avVerifier.value.decryptBallot();
 }
 
-onMounted(startSpoiling)
+onMounted(startSpoiling);
 </script>
 
 <template>
@@ -61,7 +65,10 @@ onMounted(startSpoiling)
     />
 
     <div>
-      <p>Go to the voting system and confirm the pairing code is correctly displayed there.</p>
+      <p>
+        Go to the voting system and confirm the pairing code is correctly
+        displayed there.
+      </p>
       {{ _pairingCode }}
     </div>
 
