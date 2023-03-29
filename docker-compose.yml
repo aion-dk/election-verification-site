@@ -12,11 +12,11 @@ services:
       - "/usr/src/app/node_modules"
     command: npm run dev
     ports:
-      - 5173:5173
+      - 3010:3010
     environment:
       SERVICE_NAME: dbas
     healthcheck:
-      test: curl -s http://localhost:5173
+      test: curl -s http://localhost:3010
       interval: 5s
       start_period: 10s
       timeout: 5s

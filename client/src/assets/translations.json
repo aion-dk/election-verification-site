@@ -180,9 +180,18 @@
         "footer": "Did you mean Ballot Check instead?",
         "footer_tooltip": "A ballot check is performed before you submit your ballot. It enables you to confirm your ballot was recorded and encrypted correctly.",
         "locate_tracking_code": "Where do I find my tracking code?",
-        "locate_tracking_code_tooltip": "Your ballot tracking code was displayed in the VoteHub app after you submitted your ballot. It was also sent to the email address in your voter registration record.Can't find your code?You can re-open the VoteHub app and enter your identifying information to retrieve the Tracking Code.",
+        "locate_tracking_code_tooltip": "Your ballot tracking code was displayed in the VoteHub app after you submitted your ballot. It was also sent to the email address in your voter registration record. Can't find your code? You can re-open the VoteHub app and enter your identifying information to retrieve the Tracking Code.",
+        "locate_verification_code": "Where do I find my verification code?",
+        "locate_verification_code_tooltip": "Your verification code was displayed in the VoteHub app after you submitted your ballot. It was also sent to the email address in your voter registration record.",
         "track_ballot_button": "Track my ballot",
         "tracking_code_input": "Ballot tracking code",
+        "initiate_verification_button": "Verify my ballot",
+        "verification_code_input": "Verification code",
+        "verify": {
+          "header": "Verify my ballot",
+          "p1": "I want to verify that my vote is intact and unchanged",
+          "p2": "I have a verification code, and I want to ensure that my digital vote has not been altered while in transit"
+        },
         "about": {
           "header": "Ballot tracker",
           "p1": "I have voted and I want to track my ballot.",

@@ -18,6 +18,7 @@ import {
   faCircleInfo,
   faCircleQuestion,
   faMagnifyingGlass,
+  faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -36,6 +37,7 @@ library.add(faMagnifyingGlass);
 library.add(faArrowUpRightFromSquare);
 library.add(faChevronRight);
 library.add(faChevronLeft);
+library.add(faTriangleExclamation);
 
 const app = createApp(App);
 

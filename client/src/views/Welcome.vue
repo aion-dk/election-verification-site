@@ -64,7 +64,6 @@ async function initiateVerification(event: Event) {
   try {
     const avVerifier = await useAVVerifier(_electionSlug.value as string);
     const address = await avVerifier.findBallot(_verificationCode.value)
-    console.log("verifying address:", address)
     await router.push({ name: "BallotVerifierView", params: { verificationCode: _verificationCode.value } })
   } catch(e) {
     // _error.value = "Your ballot could not be found";
@@ -131,7 +130,7 @@ onMounted(() => {
           <button
             class="Welcome__SubmitButton"
             type="submit"
-            :disabled="_disabled"
+            :disabled="_disabled || !_trackingCode"
             name="lookup-ballot"
             id="lookup-ballot"
             @click="lookupBallot"
@@ -166,9 +165,9 @@ onMounted(() => {
 
     <div class="Welcome__Content">
       <Infobox class="Welcome__About">
-        <h3>{{ $t("views.welcome.about.header") }}</h3>
-        <p>{{ $t("views.welcome.about.p1") }}</p>
-        <p>{{ $t("views.welcome.about.p2") }}</p>
+        <h3>{{ $t("views.welcome.verify.header") }}</h3>
+        <p>{{ $t("views.welcome.verify.p1") }}</p>
+        <p>{{ $t("views.welcome.verify.p2") }}</p>
       </Infobox>
 
       <Infobox class="Welcome__Tracking">
@@ -180,13 +179,14 @@ onMounted(() => {
             id="verification-code"
             :placeholder="$t('views.welcome.verification_code_input')"
             v-model="_verificationCode"
-            class="Welcome__VerificationCode"
+            class="Welcome__TrackingCode"
+            data-1p-ignore
           />
 
           <button
             class="Welcome__SubmitButton"
             type="submit"
-            :disabled="_disabled"
+            :disabled="_disabled || !_verificationCode"
             name="initiate-verification"
             id="initiate-verification"
             @click="initiateVerification"
@@ -201,9 +201,9 @@ onMounted(() => {
         <p class="Tooltip">
           <tooltip hover placement="bottom">
             <template #default>
-              <span>{{ $t("views.welcome.locate_tracking_code") }}</span>
+              <span>{{ $t("views.welcome.locate_verification_code") }}</span>
               <span
-                :aria-label="$t('views.welcome.locate_tracking_code_tooltip')"
+                :aria-label="$t('views.welcome.locate_verification_code_tooltip')"
               >
                 <font-awesome-icon icon="fa-solid fa-circle-question" />
               </span>
@@ -211,7 +211,7 @@ onMounted(() => {
 
             <template #content>
               <span id="tracking-code-tooltip">
-                {{ $t("views.welcome.locate_tracking_code_tooltip") }}
+                {{ $t("views.welcome.locate_verification_code_tooltip") }}
               </span>
             </template>
           </tooltip>
