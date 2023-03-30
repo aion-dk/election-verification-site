@@ -9,7 +9,3 @@ export interface Meta {
   total_pages?: number;
   total_count?: number;
 }
-
-export interface FlagLocaleMap {
-  [locale: string]: string;
-}

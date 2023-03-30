@@ -2,11 +2,6 @@
 import { computed } from "vue";
 import { RouterLink } from "vue-router";
 import config from "../lib/config";
-import enFlag from "../assets/en.svg";
-import esFlag from "../assets/es.svg";
-import type { FlagLocaleMap } from "../Types";
-
-const emit = defineEmits(["changeLocale"]);
 
 const props = defineProps({
   locale: {
@@ -18,11 +13,14 @@ const props = defineProps({
     required: true,
   },
 });
+
+const emit = defineEmits(["changeLocale"]);
+
 const _locales = computed(() => props.election.content?.locales || ["en"]);
-const _flagLocaleMap: FlagLocaleMap = {
-  en: enFlag,
-  es: esFlag,
-};
+const localeMap = {
+  "en": "English",
+  "es": "Española",
+}
 
 function setLocale(newLocale: string) {
   emit("changeLocale", newLocale);
@@ -80,21 +78,16 @@ function setLocale(newLocale: string) {
         />
       </a>
 
-      <div class="Header__Flags">
-        <img
-          v-for="(l, key) in _locales"
-          :key="key"
-          :src="_flagLocaleMap[l]"
-          :class="{
-            Header__Flag: true,
-            ['Header__Flag--current']: locale === l,
-          }"
-          :data-testid="`flag-${l}`"
-          :alt="$t(`header.change_locale.${l}`)"
+      <div class="Header__Locales">
+        <button
+          v-for="locale in _locales"
+          :key="locale"
+          :data-testid="`change-locale-${l}`"
           role="menuitem"
-          tabindex="0"
-          @click="() => setLocale(l)"
-        />
+          @click="() => setLocale(locale)"
+        >
+          {{ localeMap[locale] }}
+        </button>
       </div>
     </div>
   </nav>
@@ -146,9 +139,16 @@ function setLocale(newLocale: string) {
   color: #495057;
 }
 
-.Header__Flags {
+.Header__Locales {
   margin-left: 20px;
   margin-right: 10px;
+  display: flex;
+}
+
+.Header__Locales button {
+  border: none;
+  background: none;
+  cursor: pointer;
 }
 
 .Header__Flag {

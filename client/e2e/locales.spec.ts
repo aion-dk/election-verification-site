@@ -19,8 +19,8 @@ test("changing locale", async ({ page }) => {
   });
 
   await page.goto("/en/us3");
-  await page.getByTestId("flag-es").click();
+  await page.getByText("Española").click();
   await page.getByRole("menuitem", { name: "Información" }).click();
-  await page.getByTestId("flag-en").click();
+  await page.getByText("English").click();
   await page.getByRole("menuitem", { name: "About" }).click();
 });
