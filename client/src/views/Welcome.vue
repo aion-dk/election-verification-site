@@ -6,7 +6,8 @@ import Infobox from "../components/Infobox.vue";
 import useBallotStore from "../stores/useBallotStore";
 import router from "../router";
 import useLocaleStore from "../stores/useLocaleStore";
-import useAVVerifier from "@/lib/useAVVerifier";
+import useAVVerifier from "../lib/useAVVerifier";
+import useVerificationStore from "../stores/useVerificationStore";
 
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
@@ -20,6 +21,7 @@ const _trackingCode = ref(null);
 const _verificationCode = ref(null);
 const _error = ref(null);
 const _disabled = ref(false);
+const verificationStore = useVerificationStore();
 
 function setInfo() {
   _title.value = electionStore.election?.content?.title[_locale.value];
@@ -62,15 +64,18 @@ async function initiateVerification(event: Event) {
   _error.value = null;
 
   try {
-    const avVerifier = await useAVVerifier(_electionSlug.value as string);
-    const address = await avVerifier.findBallot(_verificationCode.value);
+    await verificationStore.generatePairingCode(
+      _electionSlug.value,
+      _verificationCode.value
+    );
     await router.push({
       name: "BallotVerifierView",
       params: {
-        verificationCode: _verificationCode.value,
+        pairingCode: verificationStore.pairingCode,
       },
     });
   } catch (e) {
+    console.error(e);
     _error.value = "verify.invalid_code";
   } finally {
     _disabled.value = false;

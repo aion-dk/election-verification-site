@@ -4,57 +4,25 @@ import useLocaleStore from "../stores/useLocaleStore";
 import CompactHeader from "../components/CompactHeader.vue";
 import Infobox from "../components/Infobox.vue";
 import router from "../router";
-import useAVVerifier from "@/lib/useAVVerifier";
-import { api } from "@/lib/api";
-import { onMounted, ref, watch } from "vue";
+import { api } from "../lib/api";
+import { onMounted } from "vue";
 import { useRoute } from "vue-router";
+import useVerificationStore from "../stores/useVerificationStore";
 
 const localeStore = useLocaleStore();
 const electionStore = useElectionStore();
-const _pairingCode = ref<string | null>(null);
+const verificationStore = useVerificationStore();
 const _decryptedBallot = ref<Array<any>>([]);
-const route = useRoute();
-const avVerifier = ref(null);
-
-watch(electionStore, () => startSpoiling());
 
 function cancel() {
   router.push(`/${localeStore.locale}/${electionStore.election.slug}`);
 }
 
-async function createAvVerifier() {
-  avVerifier.value ||= await useAVVerifier(electionStore.election.slug);
+async function redirectUnlessPairingCode() {
+  if (!verificationStore.pairingCode) await cancel()
 }
 
-async function startSpoiling() {
-  console.log(electionStore.election.slug);
-  if (!electionStore.election?.slug) return;
-  // console.log(avVerifier)
-  // const pollResult = avVerifier.pollForSpoilRequest();
-
-  await createAvVerifier();
-  const address = await avVerifier.value.findBallot(
-    route.params.verificationCode as string
-  );
-  const path = `${electionStore.election.slug}/verification/spoil_status?id=${address}`;
-
-  const { data } = await api.get(path);
-
-  _pairingCode.value = await avVerifier.value.submitVerifierKey(
-    data.item.address
-  );
-
-  pollForCommitmentOpening();
-}
-
-async function pollForCommitmentOpening() {
-  await createAvVerifier();
-
-  await avVerifier.value.pollForCommitmentOpening();
-  _decryptedBallot.value = await avVerifier.value.decryptBallot();
-}
-
-onMounted(startSpoiling);
+onMounted(redirectUnlessPairingCode)
 </script>
 
 <template>
@@ -64,17 +32,18 @@ onMounted(startSpoiling);
       :locale="localeStore.locale"
     />
 
-    <div>
-      <p>
-        Go to the voting system and confirm the pairing code is correctly
-        displayed there.
-      </p>
-      {{ _pairingCode }}
-    </div>
+    <p>Pairing code: <code>{{ verificationStore.pairingCode }}</code></p>
 
-    <div>
-      {{ _decryptedBallot }}
-    </div>
+    <p>
+      Go to the voting system and confirm the pairing code is correctly
+      displayed there.
+    </p>
+
+    <p v-if="!verificationStore.ballot">Waiting for confirmation in the voting application</p>
+
+    <pre v-if="verificationStore.ballot">
+      {{ verificationStore.ballot }}
+    </pre>
   </div>
 </template>
 

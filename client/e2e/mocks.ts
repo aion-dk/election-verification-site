@@ -12,6 +12,8 @@ export const latestConfig = {
   },
 };
 
+export const verificationCodeFound = {};
+
 export const foundBallotStatus = {
   status: "found",
   activities: [

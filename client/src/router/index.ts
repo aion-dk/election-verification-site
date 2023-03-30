@@ -30,7 +30,7 @@ const router = createRouter({
     },
     {
       name: "BallotVerifierView",
-      path: "/:locale/:electionSlug/verify/:verificationCode",
+      path: "/:locale/:electionSlug/verify/:pairingCode",
       component: BallotVerifierView,
     },
     {
