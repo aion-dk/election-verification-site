@@ -5,7 +5,7 @@ import CompactHeader from "../components/CompactHeader.vue";
 import Infobox from "../components/Infobox.vue";
 import router from "../router";
 import { api } from "../lib/api";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import useVerificationStore from "../stores/useVerificationStore";
 
