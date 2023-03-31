@@ -152,6 +152,11 @@
           "author": "Election Official",
           "details": "Your affidavit has been rejected. Please contact your Election Officials office to cure your affidavit."
         },
+        "SpoilRequestItem": {
+          "type": "Spoil Request",
+          "author": "You",
+          "info": "You have challenged the integrity of the voting system and performed the Benaloh challenge."
+        },
         "AffidavitAcceptItem": {
           "type": "Affidavit Accepted",
           "author": "Election Official",
