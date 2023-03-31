@@ -1,5 +1,11 @@
 {
   "en": {
+    "locales": {
+      "en": "English",
+      "de": "Deutsch",
+      "da": "Dansk",
+      "es": "Espanõl"
+    },
     "errors": {
       "verify": {
         "invalid_code": {

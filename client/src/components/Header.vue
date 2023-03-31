@@ -2,6 +2,10 @@
 import { computed } from "vue";
 import { RouterLink } from "vue-router";
 import config from "../lib/config";
+import DropDown from "./DropDown.vue"
+import { uniq } from "lodash"
+import i18n from "../lib/i18n";
+const { t } = i18n.global;
 
 const props = defineProps({
   locale: {
@@ -16,19 +20,22 @@ const props = defineProps({
 
 const emit = defineEmits(["changeLocale"]);
 
-const _locales = computed(() => props.election.content?.locales || ["en"]);
+const _locales = computed(() => uniq(props.election.content?.locales || ["en"]));
+const availableLocales = computed(() => {
+  const arr = []
+  _locales.value.map(l => {
+    arr.push({
+      selected: l === props.locale,
+      value: l,
+      display: t(`locales.${l}`),
+    })
+  })
 
-interface LocaleMap {
-  en: String;
-  es?: String;
-}
-
-const localeMap: LocaleMap = {
-  en: "English",
-  es: "Española",
-};
+  return arr
+})
 
 function setLocale(newLocale: string) {
+  console.log("Setting new locale", newLocale)
   emit("changeLocale", newLocale);
 }
 </script>
@@ -84,17 +91,10 @@ function setLocale(newLocale: string) {
         />
       </a>
 
-      <div class="Header__Locales">
-        <button
-          v-for="locale in _locales"
-          :key="locale"
-          :data-testid="`change-locale-${locale}`"
-          role="menuitem"
-          @click="() => setLocale(locale)"
-        >
-          {{ localeMap[locale] }}
-        </button>
-      </div>
+      <DropDown
+        class="Header__Locales"
+        :options="availableLocales"
+        @change="(value) => setLocale(value)" />
     </div>
   </nav>
 </template>
@@ -146,25 +146,12 @@ function setLocale(newLocale: string) {
 }
 
 .Header__Locales {
-  margin-left: 20px;
-  margin-right: 10px;
-  display: flex;
-}
-
-.Header__Locales button {
+  margin-right: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #495057;
   border: none;
-  background: none;
-  cursor: pointer;
-}
-
-.Header__Flag {
-  width: 30px;
-  height: 24px;
-  margin: 3px;
-  cursor: pointer;
-}
-
-.Header__Flag--current {
-  border: solid 1px #000;
 }
 </style>
