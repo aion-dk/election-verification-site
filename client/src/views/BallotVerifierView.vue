@@ -43,7 +43,7 @@ onMounted(redirectUnlessPairingCode)
       <h1 class="BallotVerifier__Title">Pairing code</h1>
 
       <p class="BallotVerifier__Info">
-        Go to the voting application and confirm this pairing code match the one displayed there.
+        Go to the voting application and confirm this pairing code match the one displayed there. Then follow the instructions in the voting application.
       </p>
 
       <code class="BallotVerifier__Code">{{ verificationStore.pairingCode }}</code>
