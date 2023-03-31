@@ -5,7 +5,7 @@ import { api } from "../lib/api";
 
 export default defineStore("verificationStore", () => {
   const pairingCode = ref(null);
-  const ballot = ref(null)
+  const ballot = ref(null);
 
   async function decryptWhenAvailable(avVerifier) {
     await avVerifier.pollForCommitmentOpening();
@@ -20,7 +20,7 @@ export default defineStore("verificationStore", () => {
 
     pairingCode.value = await avVerifier.submitVerifierKey(data.item.address);
 
-    decryptWhenAvailable(avVerifier)
+    decryptWhenAvailable(avVerifier);
   }
 
   return { generatePairingCode, pairingCode, ballot };

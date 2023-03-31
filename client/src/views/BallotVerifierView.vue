@@ -13,17 +13,17 @@ const localeStore = useLocaleStore();
 const electionStore = useElectionStore();
 const verificationStore = useVerificationStore();
 const _decryptedBallot = ref<Array<any>>([]);
-const route = useRoute()
+const route = useRoute();
 
 function cancel() {
   router.push(`/${route.params.locale}/${route.params.electionSlug}`);
 }
 
 function redirectUnlessPairingCode() {
-  if (!verificationStore.pairingCode) cancel()
+  if (!verificationStore.pairingCode) cancel();
 }
 
-onMounted(redirectUnlessPairingCode)
+onMounted(redirectUnlessPairingCode);
 </script>
 
 <template>
@@ -43,33 +43,36 @@ onMounted(redirectUnlessPairingCode)
       <h1 class="BallotVerifier__Title">Pairing code</h1>
 
       <p class="BallotVerifier__Info">
-        Go to the voting application and confirm this pairing code match the one displayed there. Then follow the instructions in the voting application.
+        Go to the voting application and confirm this pairing code match the one
+        displayed there. Then follow the instructions in the voting application.
       </p>
 
-      <code class="BallotVerifier__Code">{{ verificationStore.pairingCode }}</code>
+      <code class="BallotVerifier__Code">{{
+        verificationStore.pairingCode
+      }}</code>
     </div>
   </div>
 </template>
 
 <style type="text/css" scoped>
-  .BallotVerifier {
-    font-family: "Open Sans";
-  }
+.BallotVerifier {
+  font-family: "Open Sans";
+}
 
-  .BallotVerifier__Title {
-    font-size: 26px;
-    text-align: center;
-  }
+.BallotVerifier__Title {
+  font-size: 26px;
+  text-align: center;
+}
 
-  .BallotVerifier__Info {
-    text-align: center;
-  }
+.BallotVerifier__Info {
+  text-align: center;
+}
 
-  .BallotVerifier__Code {
-    font-size: 40px;
-    font-family: "Red Hat Mono";
-    text-align: center;
-    display: block;
-    letter-spacing: 5px;
-  }
+.BallotVerifier__Code {
+  font-size: 40px;
+  font-family: "Red Hat Mono";
+  text-align: center;
+  display: block;
+  letter-spacing: 5px;
+}
 </style>

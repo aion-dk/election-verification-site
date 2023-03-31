@@ -18,9 +18,9 @@ const emit = defineEmits(["changeLocale"]);
 
 const _locales = computed(() => props.election.content?.locales || ["en"]);
 const localeMap = {
-  "en": "English",
-  "es": "Española",
-}
+  en: "English",
+  es: "Española",
+};
 
 function setLocale(newLocale: string) {
   emit("changeLocale", newLocale);
