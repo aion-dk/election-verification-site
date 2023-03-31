@@ -8,6 +8,7 @@ import router from "../router";
 import useLocaleStore from "../stores/useLocaleStore";
 import useAVVerifier from "../lib/useAVVerifier";
 import useVerificationStore from "../stores/useVerificationStore";
+import Error from "../components/Error.vue";
 
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
@@ -109,16 +110,7 @@ onMounted(() => {
       </h1>
     </div>
 
-    <div v-if="_error" class="Welcome__Error" role="alert">
-      <p class="title">
-        <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />
-        {{ $t(`errors.${_error}.title`) }}
-      </p>
-
-      <p>
-        {{ $t(`errors.${_error}.description`) }}
-      </p>
-    </div>
+    <Error v-if="_error" :errorPath="_error" />
 
     <div class="Welcome__Content">
       <Infobox class="Welcome__About">
@@ -345,21 +337,6 @@ onMounted(() => {
 .Welcome__SubmitButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.Welcome__Error {
-  background-color: #fcede9;
-  border: none;
-  border-left: solid 6px #ea4e2c;
-  padding: 17px 36px;
-  margin-bottom: 40px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-}
-
-.Welcome__Error p.title {
-  font-weight: 700;
-  font-size: 18px;
-  color: #495057;
 }
 
 svg {
