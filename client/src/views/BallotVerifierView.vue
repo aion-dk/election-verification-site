@@ -13,13 +13,14 @@ const localeStore = useLocaleStore();
 const electionStore = useElectionStore();
 const verificationStore = useVerificationStore();
 const _decryptedBallot = ref<Array<any>>([]);
+const route = useRoute()
 
 function cancel() {
-  router.push(`/${localeStore.locale}/${electionStore.election.slug}`);
+  router.push(`/${route.params.locale}/${route.params.electionSlug}`);
 }
 
-async function redirectUnlessPairingCode() {
-  if (!verificationStore.pairingCode) await cancel()
+function redirectUnlessPairingCode() {
+  if (!verificationStore.pairingCode) cancel()
 }
 
 onMounted(redirectUnlessPairingCode)
