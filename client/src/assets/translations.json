@@ -34,6 +34,16 @@
         "info": "What does this mean?",
         "expand": "Click to read more",
         "collapse": "Click to read less",
+        "SegmentsConfigItem": {
+          "type": "Segments configured",
+          "author": "Election Official",
+          "info": "The election official has configured the segments that is publicized about the voters."
+        },
+        "SpoilRequestItem": {
+          "type": "Spoil Request",
+          "author": "Voter",
+          "info": "A voter has tested his vote to verify the integrity of the system."
+        },
         "ExtractionDataItem": {
           "type": "Extracted votes",
           "author": "Election Official",
