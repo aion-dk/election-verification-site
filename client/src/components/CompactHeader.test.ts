@@ -1,10 +1,9 @@
 import { expect, test } from "vitest";
 import { mount } from "@vue/test-utils";
 import CompactHeader from "./CompactHeader.vue";
-import type { FlagLocaleMap } from "../Types";
 
 interface Content {
-  title: FlagLocaleMap;
+  title?: Object;
   state?: string;
   jurisdiction?: string;
 }

@@ -17,7 +17,13 @@ const props = defineProps({
 const emit = defineEmits(["changeLocale"]);
 
 const _locales = computed(() => props.election.content?.locales || ["en"]);
-const localeMap = {
+
+interface LocaleMap {
+  en: String;
+  es?: String;
+}
+
+const localeMap: LocaleMap = {
   en: "English",
   es: "Española",
 };
@@ -82,7 +88,7 @@ function setLocale(newLocale: string) {
         <button
           v-for="locale in _locales"
           :key="locale"
-          :data-testid="`change-locale-${l}`"
+          :data-testid="`change-locale-${locale}`"
           role="menuitem"
           @click="() => setLocale(locale)"
         >

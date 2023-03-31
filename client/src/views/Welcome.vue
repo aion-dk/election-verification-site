@@ -65,7 +65,7 @@ async function initiateVerification(event: Event) {
 
   try {
     await verificationStore.generatePairingCode(
-      _electionSlug.value,
+      _electionSlug.value as string,
       _verificationCode.value
     );
     await router.push({
