@@ -34,18 +34,15 @@ onMounted(redirectUnlessPairingCode);
     />
 
     <div class="BallotVerifier__Spoiled" v-if="verificationStore.ballot">
-      <h1 class="BallotVerifier__Title">Decrypted vote</h1>
+      <h1 class="BallotVerifier__Title">{{ $t("views.verifier.decrypted.title") }}</h1>
 
       <pre>{{ verificationStore.ballot }}</pre>
     </div>
 
     <div class="BallotVerifier__InProgress" v-else>
-      <h1 class="BallotVerifier__Title">Pairing code</h1>
+      <h1 class="BallotVerifier__Title">{{ $t("views.verifier.inprogress.title") }}</h1>
 
-      <p class="BallotVerifier__Info">
-        Go to the voting application and confirm this pairing code match the one
-        displayed there. Then follow the instructions in the voting application.
-      </p>
+      <p class="BallotVerifier__Info">{{ $t("views.verifier.inprogress.info") }}</p>
 
       <code class="BallotVerifier__Code">{{
         verificationStore.pairingCode

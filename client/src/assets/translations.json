@@ -175,6 +175,15 @@
       }
     },
     "views": {
+      "verifier": {
+        "inprogress": {
+          "title": "Pairing code",
+          "info": "Go to the voting application and confirm this pairing code match the one displayed there. Then follow the instructions in the voting application."
+        },
+        "decrypted": {
+          "title": "Decrypted vote"
+        }
+      },
       "help": {
         "title": "Help Using the Ballot Tracker",
         "info": "Have questions? We are here to help."
