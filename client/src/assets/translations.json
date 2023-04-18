@@ -180,9 +180,11 @@
           "title": "Pairing code",
           "info": "Go to the voting application and confirm this pairing code match the one displayed there. Then follow the instructions in the voting application."
         },
-        "decrypted": {
-          "title": "Decrypted vote"
-        }
+        "spoiled": {
+          "title": "Your vote has been opened",
+          "description": "Below you will find your decrypted vote, with its contents revealed for you to verify. If they do not match your cast intention, please contact an election official."
+        },
+        "blank_pile": "Blank"
       },
       "help": {
         "title": "Help Using the Ballot Tracker",

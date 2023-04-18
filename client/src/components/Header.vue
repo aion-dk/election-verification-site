@@ -20,7 +20,7 @@ const props = defineProps({
 
 const emit = defineEmits(["changeLocale"]);
 
-const _locales = computed(() => uniq(props.election.content?.locales || ["en"]));
+const _locales = computed(() => uniq(props.election.locales || ["en"]));
 const availableLocales = computed(() => {
   const arr = []
   _locales.value.map(l => {

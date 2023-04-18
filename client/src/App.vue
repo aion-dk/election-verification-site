@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { watch, computed } from "vue";
+import { watch, computed, onMounted, ref } from 'vue'
 import { RouterView, useRoute } from "vue-router";
 import useLocaleStore from "./stores/useLocaleStore";
-import useElectionStore from "./stores/useElectionStore";
+import useConfigStore from "./stores/useConfigStore";
 import useBallotStore from "./stores/useBallotStore";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
@@ -10,27 +10,31 @@ import router from "./router";
 import i18n from "./lib/i18n";
 
 const ballotStore = useBallotStore();
-const electionStore = useElectionStore();
+const configStore = useConfigStore();
 const localeStore = useLocaleStore();
 const route = useRoute();
+const isLoaded = ref(false);
 
 watch(route, async (newRoute) => {
   const slug = newRoute.params.electionSlug;
-  if (slug) electionStore.loadElection(slug.toString());
+
+  if (slug) await configStore.loadConfig(slug.toString());
 
   const locale = newRoute.params.locale as string;
   if (locale) localeStore.setLocale(locale);
 });
 
-watch(electionStore, () => {
+watch(configStore, async () => {
   setTitle();
   if (route.params.electionSlug) {
-    electionStore.loadElection(route.params.electionSlug as string);
+    await configStore.loadConfig(route.params.electionSlug as string);
+
+    isLoaded.value = true
 
     if (route.params.trackingCode) {
-      ballotStore.loadBallot(
+      await ballotStore.loadBallot(
         route.params.trackingCode as string,
-        electionStore.election.slug
+        configStore.boardSlug
       );
     }
   }
@@ -41,7 +45,7 @@ const locale = computed(() => localeStore.locale);
 function setTitle() {
   const title = [
     "DBAS",
-    electionStore.election?.content?.title[localeStore.locale],
+    configStore.election.title[localeStore.locale],
   ].filter((s) => s);
   if (window.top) window.top.document.title = title.join(" - ");
 }
@@ -63,11 +67,11 @@ function changeLocale(newLocale: Locale) {
 </script>
 
 <template>
-  <div class="DBAS">
+  <div class="DBAS" v-if='isLoaded'>
     <!-- <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a> -->
 
     <Header
-      :election="electionStore.election"
+      :election="configStore.election"
       :locale="locale"
       @changeLocale="changeLocale"
     />

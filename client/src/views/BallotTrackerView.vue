@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import useElectionStore from "../stores/useElectionStore";
+import useConfigStore from "../stores/useConfigStore";
 import useBallotStore from "../stores/useBallotStore";
 import useLocaleStore from "../stores/useLocaleStore";
 import CompactHeader from "../components/CompactHeader.vue";
@@ -12,7 +12,7 @@ import type { Ballot } from "../Types";
 
 const route = useRoute();
 const localeStore = useLocaleStore();
-const electionStore = useElectionStore();
+const configStore = useConfigStore();
 const ballotStore = useBallotStore();
 const ballot = ref<Ballot>(null);
 const periodicedTrackingCode = computed(() => {
@@ -27,7 +27,7 @@ function setBallot() {
 }
 
 function cancel() {
-  router.push(`/${localeStore.locale}/${electionStore.election.slug}`);
+  router.push(`/${localeStore.locale}/${configStore.boardSlug}`);
 }
 
 onMounted(() => setBallot());
@@ -36,7 +36,7 @@ onMounted(() => setBallot());
 <template>
   <div class="BallotTracker" v-if="ballot" aria-flowto="tracking-code">
     <CompactHeader
-      :election="electionStore.election"
+      :election="configStore.election"
       :locale="localeStore.locale"
     />
 

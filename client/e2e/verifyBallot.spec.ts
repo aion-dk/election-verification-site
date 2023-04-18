@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { latestConfig, verificationCodeFound } from "./mocks.ts";
+import { latestConfig } from "./mocks.ts";
 
 test("verifying a ballot", async ({ page }) => {
   // Mock Network calls

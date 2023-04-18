@@ -2,20 +2,19 @@ import { expect, test } from "vitest";
 import { mount } from "@vue/test-utils";
 import CompactHeader from "./CompactHeader.vue";
 
-interface Content {
-  title?: Object;
+interface Election {
+  title?: any;
   state?: string;
   jurisdiction?: string;
 }
 
-const content: Content = {
+const election: Election = {
   title: {
     en: "Funny Election",
     da: "Sjovt valg",
   },
 };
 const locale = "en";
-const election = { content };
 
 test("it displays the election title", () => {
   const wrapper = mount(CompactHeader, {
@@ -38,7 +37,7 @@ test("it changes the election title when the locale changes", () => {
 });
 
 test("it includes area information", () => {
-  content.state = "Some state";
+  election.state = "Some state";
   const wrapper = mount(CompactHeader, {
     props: { election, locale },
   });
@@ -46,7 +45,7 @@ test("it includes area information", () => {
 });
 
 test("it includes jurisdiction information", () => {
-  content.jurisdiction = "Some jurisdiction";
+  election.jurisdiction = "Some jurisdiction";
   const wrapper = mount(CompactHeader, {
     props: { election, locale },
   });

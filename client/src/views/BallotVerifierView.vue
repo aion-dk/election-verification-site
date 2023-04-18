@@ -1,18 +1,17 @@
 <script setup lang="ts">
-import useElectionStore from "../stores/useElectionStore";
+import useConfigStore from "../stores/useConfigStore";
 import useLocaleStore from "../stores/useLocaleStore";
 import CompactHeader from "../components/CompactHeader.vue";
 import Infobox from "../components/Infobox.vue";
 import router from "../router";
 import { api } from "../lib/api";
-import { onMounted, ref } from "vue";
+import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import useVerificationStore from "../stores/useVerificationStore";
 
 const localeStore = useLocaleStore();
-const electionStore = useElectionStore();
+const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
-const _decryptedBallot = ref<Array<any>>([]);
 const route = useRoute();
 
 function cancel() {
@@ -29,17 +28,35 @@ onMounted(redirectUnlessPairingCode);
 <template>
   <div class="BallotVerifier">
     <CompactHeader
-      :election="electionStore.election"
+      :election="configStore.election"
       :locale="localeStore.locale"
     />
 
-    <div class="BallotVerifier__Spoiled" v-if="verificationStore.ballot">
-      <h1 class="BallotVerifier__Title">{{ $t("views.verifier.decrypted.title") }}</h1>
+    <div v-if="verificationStore.ballot" class="BallotVerifier__Spoiled">
+      <Infobox class="BallotVerifier__Infobox" id="infobox">
+        <h2>{{ $t("views.verifier.spoiled.title") }} </h2>
+        <p>{{ $t("views.verifier.spoiled.description") }}</p>
+      </Infobox>
+      <Infobox class="BallotVerifier__DecryptedVoteBox" id="decrypted_box">
+        <div v-for='contest in verificationStore.ballot' class='BallotVerifier__Contest'>
+          <h3>{{ configStore.getContest(contest.reference).title[$i18n.locale] }}</h3>
+          <div v-for='pile in contest.piles' class='BallotVerifier__Pile'>
+            <div class='BallotVerifier__PileMultiplier'>
+              x {{ pile.multiplier }}
+            </div>
+            <div v-if='pile.optionSelections.length === 0' class='BallotVerifier__Option'>
+              {{ $t("views.verifier.blank_pile")}}
+            </div>
+            <div v-else v-for='selection in pile.optionSelections' class='BallotVerifier__Option'>
+              {{ configStore.getContestOption(contest.reference, selection.reference).title[$i18n.locale] }}
+            </div>
 
-      <pre>{{ verificationStore.ballot }}</pre>
+          </div>
+        </div>
+      </Infobox>
     </div>
 
-    <div class="BallotVerifier__InProgress" v-else>
+    <div v-else class="BallotVerifier__InProgress">
       <h1 class="BallotVerifier__Title">{{ $t("views.verifier.inprogress.title") }}</h1>
 
       <p class="BallotVerifier__Info">{{ $t("views.verifier.inprogress.info") }}</p>
@@ -71,5 +88,30 @@ onMounted(redirectUnlessPairingCode);
   text-align: center;
   display: block;
   letter-spacing: 5px;
+}
+
+.BallotVerifier__Infobox, .BallotVerifier__DecryptedVoteBox {
+  margin-bottom: 20px;
+}
+
+.BallotVerifier__Contest {
+  margin-bottom: 40px;
+}
+
+.BallotVerifier__Pile {
+  margin-bottom: 20px;
+}
+
+.BallotVerifier__Option {
+  border: 1px solid #cccccc;
+  padding: 20px;
+}
+
+.BallotVerifier__PileMultiplier {
+  font-size: 20px;
+  font-weight: bold;
+  background: black;
+  color: white;
+  padding: 1px 20px;
 }
 </style>

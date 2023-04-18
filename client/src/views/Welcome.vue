@@ -1,18 +1,17 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import useElectionStore from "../stores/useElectionStore";
+import useConfigStore from "../stores/useConfigStore";
 import { ref, watch, onMounted } from "vue";
 import Infobox from "../components/Infobox.vue";
 import useBallotStore from "../stores/useBallotStore";
 import router from "../router";
 import useLocaleStore from "../stores/useLocaleStore";
-import useAVVerifier from "../lib/useAVVerifier";
 import useVerificationStore from "../stores/useVerificationStore";
 import Error from "../components/Error.vue";
 
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
-const electionStore = useElectionStore();
+const configStore = useConfigStore();
 const route = useRoute();
 const _electionSlug = ref(route.params.electionSlug);
 const _locale = ref(localeStore.locale);
@@ -25,10 +24,10 @@ const _disabled = ref(false);
 const verificationStore = useVerificationStore();
 
 function setInfo() {
-  _title.value = electionStore.election?.content?.title[_locale.value];
+  _title.value = configStore.election.title[_locale.value];
   _info.value = [
-    electionStore.election?.content?.jurisdiction,
-    electionStore.election?.content?.state,
+    configStore.election.jurisdiction,
+    configStore.election.state,
   ]
     .filter((s) => s)
     .join(", ");
@@ -40,10 +39,10 @@ async function lookupBallot(event: Event) {
   _disabled.value = true;
   _error.value = null;
 
-  if (_trackingCode.value && electionStore.election.slug) {
+  if (_trackingCode.value && configStore.boardSlug) {
     await ballotStore.loadBallot(
       _trackingCode.value,
-      electionStore.election.slug
+      configStore.boardSlug
     );
   }
 
@@ -89,7 +88,7 @@ watch(route, (newRoute) => {
   setInfo();
 });
 
-watch(electionStore, () => {
+watch(configStore, () => {
   setInfo();
 });
 
@@ -109,7 +108,6 @@ onMounted(() => {
         <small>{{ _info }}</small>
       </h1>
     </div>
-
     <Error v-if="_error" :errorPath="_error" />
 
     <div class="Welcome__Content">
