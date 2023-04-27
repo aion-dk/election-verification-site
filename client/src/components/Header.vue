@@ -5,6 +5,7 @@ import config from "../lib/config";
 import DropDown from "./DropDown.vue";
 import { uniq } from "lodash";
 import i18n from "../lib/i18n";
+import type { DropdownOption } from '@/Types'
 const { t } = i18n.global;
 
 const props = defineProps({
@@ -22,16 +23,13 @@ const emit = defineEmits(["changeLocale"]);
 
 const _locales = computed(() => uniq(props.election.locales || ["en"]));
 const availableLocales = computed(() => {
-  const arr = [];
-  _locales.value.map((l) => {
-    arr.push({
+  return _locales.value.map((l: unknown): DropdownOption => {
+    return {
       selected: l === props.locale,
-      value: l,
+      value: l as string,
       display: t(`locales.${l}`),
-    });
+    };
   });
-
-  return arr;
 });
 
 function setLocale(newLocale: string) {
