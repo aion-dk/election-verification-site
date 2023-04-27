@@ -34,32 +34,52 @@ onMounted(redirectUnlessPairingCode);
 
     <div v-if="verificationStore.ballot" class="BallotVerifier__Spoiled">
       <Infobox class="BallotVerifier__Infobox" id="infobox">
-        <h2>{{ $t("views.verifier.spoiled.title") }} </h2>
+        <h2>{{ $t("views.verifier.spoiled.title") }}</h2>
         <p>{{ $t("views.verifier.spoiled.description") }}</p>
       </Infobox>
       <Infobox class="BallotVerifier__DecryptedVoteBox" id="decrypted_box">
-        <div v-for='contest in verificationStore.ballot' class='BallotVerifier__Contest'>
-          <h3>{{ configStore.getContest(contest.reference).title[$i18n.locale] }}</h3>
-          <div v-for='pile in contest.piles' class='BallotVerifier__Pile'>
-            <div class='BallotVerifier__PileMultiplier'>
+        <div
+          v-for="contest in verificationStore.ballot"
+          class="BallotVerifier__Contest"
+        >
+          <h3>
+            {{ configStore.getContest(contest.reference).title[$i18n.locale] }}
+          </h3>
+          <div v-for="pile in contest.piles" class="BallotVerifier__Pile">
+            <div class="BallotVerifier__PileMultiplier">
               x {{ pile.multiplier }}
             </div>
-            <div v-if='pile.optionSelections.length === 0' class='BallotVerifier__Option'>
-              {{ $t("views.verifier.blank_pile")}}
+            <div
+              v-if="pile.optionSelections.length === 0"
+              class="BallotVerifier__Option"
+            >
+              {{ $t("views.verifier.blank_pile") }}
             </div>
-            <div v-else v-for='selection in pile.optionSelections' class='BallotVerifier__Option'>
-              {{ configStore.getContestOption(contest.reference, selection.reference).title[$i18n.locale] }}
+            <div
+              v-else
+              v-for="selection in pile.optionSelections"
+              class="BallotVerifier__Option"
+            >
+              {{
+                configStore.getContestOption(
+                  contest.reference,
+                  selection.reference
+                ).title[$i18n.locale]
+              }}
             </div>
-
           </div>
         </div>
       </Infobox>
     </div>
 
     <div v-else class="BallotVerifier__InProgress">
-      <h1 class="BallotVerifier__Title">{{ $t("views.verifier.inprogress.title") }}</h1>
+      <h1 class="BallotVerifier__Title">
+        {{ $t("views.verifier.inprogress.title") }}
+      </h1>
 
-      <p class="BallotVerifier__Info">{{ $t("views.verifier.inprogress.info") }}</p>
+      <p class="BallotVerifier__Info">
+        {{ $t("views.verifier.inprogress.info") }}
+      </p>
 
       <code class="BallotVerifier__Code">{{
         verificationStore.pairingCode
@@ -90,7 +110,8 @@ onMounted(redirectUnlessPairingCode);
   letter-spacing: 5px;
 }
 
-.BallotVerifier__Infobox, .BallotVerifier__DecryptedVoteBox {
+.BallotVerifier__Infobox,
+.BallotVerifier__DecryptedVoteBox {
   margin-bottom: 20px;
 }
 

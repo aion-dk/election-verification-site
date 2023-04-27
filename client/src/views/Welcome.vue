@@ -25,10 +25,7 @@ const verificationStore = useVerificationStore();
 
 function setInfo() {
   _title.value = configStore.election.title[_locale.value];
-  _info.value = [
-    configStore.election.jurisdiction,
-    configStore.election.state,
-  ]
+  _info.value = [configStore.election.jurisdiction, configStore.election.state]
     .filter((s) => s)
     .join(", ");
 }
@@ -40,10 +37,7 @@ async function lookupBallot(event: Event) {
   _error.value = null;
 
   if (_trackingCode.value && configStore.boardSlug) {
-    await ballotStore.loadBallot(
-      _trackingCode.value,
-      configStore.boardSlug
-    );
+    await ballotStore.loadBallot(_trackingCode.value, configStore.boardSlug);
   }
 
   if (ballotStore.ballot?.status) {

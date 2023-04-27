@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, computed, onMounted, ref } from 'vue'
+import { watch, computed, onMounted, ref } from "vue";
 import { RouterView, useRoute } from "vue-router";
 import useLocaleStore from "./stores/useLocaleStore";
 import useConfigStore from "./stores/useConfigStore";
@@ -29,7 +29,7 @@ watch(configStore, async () => {
   if (route.params.electionSlug) {
     await configStore.loadConfig(route.params.electionSlug as string);
 
-    isLoaded.value = true
+    isLoaded.value = true;
 
     if (route.params.trackingCode) {
       await ballotStore.loadBallot(
@@ -43,10 +43,9 @@ watch(configStore, async () => {
 const locale = computed(() => localeStore.locale);
 
 function setTitle() {
-  const title = [
-    "DBAS",
-    configStore.election.title[localeStore.locale],
-  ].filter((s) => s);
+  const title = ["DBAS", configStore.election.title[localeStore.locale]].filter(
+    (s) => s
+  );
   if (window.top) window.top.document.title = title.join(" - ");
 }
 
@@ -67,7 +66,7 @@ function changeLocale(newLocale: Locale) {
 </script>
 
 <template>
-  <div class="DBAS" v-if='isLoaded'>
+  <div class="DBAS" v-if="isLoaded">
     <!-- <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a> -->
 
     <Header

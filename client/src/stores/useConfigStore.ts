@@ -2,7 +2,11 @@ import { defineStore } from "pinia";
 import { ref } from "vue";
 import { api } from "../lib/api";
 import type { Election } from "../Types";
-import type { ContestContent, LatestConfigItems, OptionContent } from '@aion-dk/js-client/dist/lib/av_client/types'
+import type {
+  ContestContent,
+  LatestConfigItems,
+  OptionContent,
+} from "@aion-dk/js-client/dist/lib/av_client/types";
 
 export default defineStore("useConfigStore", () => {
   const boardSlug = ref<string>(null);
@@ -14,21 +18,25 @@ export default defineStore("useConfigStore", () => {
   };
 
   const setLatestConfig = (newConfig: LatestConfigItems) => {
-    latestConfig.value = newConfig
-  }
+    latestConfig.value = newConfig;
+  };
 
   const setElection = (newElection: Election) => {
-    election.value = newElection
-  }
+    election.value = newElection;
+  };
 
   const getContest = (contestReference: string): ContestContent => {
-    return latestConfig.value.contestConfigs[contestReference].content
-  }
+    return latestConfig.value.contestConfigs[contestReference].content;
+  };
 
-  const getContestOption = (contestReference: string, optionReference: string): OptionContent => {
-    return latestConfig.value.contestConfigs[contestReference].content.options
-      .find(o => o.reference === optionReference)
-  }
+  const getContestOption = (
+    contestReference: string,
+    optionReference: string
+  ): OptionContent => {
+    return latestConfig.value.contestConfigs[
+      contestReference
+    ].content.options.find((o) => o.reference === optionReference);
+  };
 
   const loadConfig = async (slug: string) => {
     if (boardSlug.value == slug) return;
@@ -36,14 +44,12 @@ export default defineStore("useConfigStore", () => {
     const { data } = await api.get(`${slug}/configuration/latest_config`);
     setSlug(slug);
     setLatestConfig({
-      ...data.items
-    })
-    setElection(
-      {
-        ...latestConfig.value?.electionConfig.content,
-        slug: boardSlug.value,
-      }
-    )
+      ...data.items,
+    });
+    setElection({
+      ...latestConfig.value?.electionConfig.content,
+      slug: boardSlug.value,
+    });
   };
 
   return {

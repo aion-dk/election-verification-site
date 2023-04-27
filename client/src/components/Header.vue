@@ -2,8 +2,8 @@
 import { computed } from "vue";
 import { RouterLink } from "vue-router";
 import config from "../lib/config";
-import DropDown from "./DropDown.vue"
-import { uniq } from "lodash"
+import DropDown from "./DropDown.vue";
+import { uniq } from "lodash";
 import i18n from "../lib/i18n";
 const { t } = i18n.global;
 
@@ -22,20 +22,20 @@ const emit = defineEmits(["changeLocale"]);
 
 const _locales = computed(() => uniq(props.election.locales || ["en"]));
 const availableLocales = computed(() => {
-  const arr = []
-  _locales.value.map(l => {
+  const arr = [];
+  _locales.value.map((l) => {
     arr.push({
       selected: l === props.locale,
       value: l,
       display: t(`locales.${l}`),
-    })
-  })
+    });
+  });
 
-  return arr
-})
+  return arr;
+});
 
 function setLocale(newLocale: string) {
-  console.log("Setting new locale", newLocale)
+  console.log("Setting new locale", newLocale);
   emit("changeLocale", newLocale);
 }
 </script>
@@ -94,7 +94,8 @@ function setLocale(newLocale: string) {
       <DropDown
         class="Header__Locales"
         :options="availableLocales"
-        @change="(value) => setLocale(value)" />
+        @change="(value) => setLocale(value)"
+      />
     </div>
   </nav>
 </template>

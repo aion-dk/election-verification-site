@@ -12,7 +12,10 @@ export default defineStore("verificationStore", () => {
     ballot.value = await avVerifier.decryptBallot();
   }
 
-  async function generatePairingCode(electionSlug: string, verificationCode: string) {
+  async function generatePairingCode(
+    electionSlug: string,
+    verificationCode: string
+  ) {
     const avVerifier = await useAVVerifier(electionSlug);
     const ballotAddress = await avVerifier.findBallot(verificationCode);
     const path = `${electionSlug}/verification/spoil_status?id=${ballotAddress}`;
