@@ -109,7 +109,7 @@ test("tracking a rejected ballot has the right text", async ({ page }) => {
 
   // For some reason this allow the firefox to not break
   // Seems like it needs just a millisecond more to load the proper data on the page
-  await page.locator(".BallotTracker__StatusInfo h3")
+  await page.locator(".BallotTracker__StatusInfo h3");
 
   expect(page.locator(".BallotTracker__StatusInfo h3")).toHaveText(
     "Ballot not accepted"

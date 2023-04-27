@@ -19,8 +19,8 @@ test("changing locale", async ({ page }) => {
   });
 
   await page.goto("/en/us3");
-  await page.locator(".Header__Locales").selectOption("es")
+  await page.locator(".Header__Locales").selectOption("es");
   await page.getByRole("menuitem", { name: "Información" }).click();
-  await page.locator(".Header__Locales").selectOption("en")
+  await page.locator(".Header__Locales").selectOption("en");
   await page.getByRole("menuitem", { name: "About" }).click();
 });
