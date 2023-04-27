@@ -64,7 +64,7 @@ test("verifying with an invalid verification code", async ({ page }) => {
   await expect(page.locator("h1")).toHaveText("Funny Election");
   await page.getByPlaceholder("Verification code").fill("invalid-code");
   await page.getByRole("button", { name: "Verify my ballot" }).click();
-  await expect(page.locator(".Welcome__Error")).toContainText(
+  await expect(page.locator(".Error__Title")).toContainText(
     "Invalid verification code"
   );
   await page.getByPlaceholder("Verification code").fill("invalid-code");
