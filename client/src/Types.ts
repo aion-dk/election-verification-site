@@ -12,5 +12,5 @@ export interface Meta {
 export type DropdownOption = {
   selected: boolean;
   value: string;
-  display: string
+  display: string;
 };

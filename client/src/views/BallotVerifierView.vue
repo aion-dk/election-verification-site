@@ -4,7 +4,6 @@ import useLocaleStore from "../stores/useLocaleStore";
 import CompactHeader from "../components/CompactHeader.vue";
 import Infobox from "../components/Infobox.vue";
 import router from "../router";
-import { api } from "../lib/api";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import useVerificationStore from "../stores/useVerificationStore";
@@ -40,12 +39,17 @@ onMounted(redirectUnlessPairingCode);
       <Infobox class="BallotVerifier__DecryptedVoteBox" id="decrypted_box">
         <div
           v-for="contest in verificationStore.ballot"
+          :key="contest.reference"
           class="BallotVerifier__Contest"
         >
           <h3>
             {{ configStore.getContest(contest.reference).title[$i18n.locale] }}
           </h3>
-          <div v-for="pile in contest.piles" class="BallotVerifier__Pile">
+          <div
+            v-for="(pile, index) in contest.piles"
+            class="BallotVerifier__Pile"
+            :key="index"
+          >
             <div class="BallotVerifier__PileMultiplier">
               x {{ pile.multiplier }}
             </div>
@@ -57,7 +61,8 @@ onMounted(redirectUnlessPairingCode);
             </div>
             <div
               v-else
-              v-for="selection in pile.optionSelections"
+              v-for="(selection, index) in pile.optionSelections"
+              :key="index"
               class="BallotVerifier__Option"
             >
               {{

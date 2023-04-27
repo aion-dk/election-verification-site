@@ -15,8 +15,8 @@
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
     "prettier:ci": "npx prettier -c  ./",
     "prettier": " npx prettier -w  ./",
-    "lint": "eslint . --fix",
-    "lint:ci": "eslint ."
+    "lint": "eslint ./src/**/* --fix",
+    "lint:ci": "eslint ./src/**/*"
   },
   "dependencies": {
     "@aion-dk/js-client": "^3.0.1",

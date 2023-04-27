@@ -1,9 +1,13 @@
 <script lang="ts" setup>
 import { defineEmits } from "vue";
-import type { PropType } from 'vue';
-import type { DropdownOption } from '@/Types'
+import type { PropType } from "vue";
+import type { DropdownOption } from "@/Types";
 
 const emit = defineEmits(["change"]);
+
+const selectEmit = (event: any) => {
+  emit("change", event.target.value);
+};
 
 defineProps({
   options: {
@@ -18,10 +22,7 @@ defineProps({
 </script>
 
 <template>
-  <select
-    :disabled="disabled"
-    @change="(event) => emit('change', event.target.value)"
-  >
+  <select :disabled="disabled" @change="(event) => selectEmit(event)">
     <option
       v-for="option in options"
       :value="option.value"

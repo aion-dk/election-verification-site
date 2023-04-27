@@ -5,7 +5,7 @@ import config from "../lib/config";
 import DropDown from "./DropDown.vue";
 import { uniq } from "lodash";
 import i18n from "../lib/i18n";
-import type { DropdownOption } from '@/Types'
+import type { DropdownOption } from "@/Types";
 const { t } = i18n.global;
 
 const props = defineProps({
