@@ -19,7 +19,7 @@
     "lint:ci": "eslint ."
   },
   "dependencies": {
-    "@aion-dk/js-client": "^2.1.4",
+    "@aion-dk/js-client": "^3.0.2",
     "@fortawesome/fontawesome-svg-core": "^6.3.0",
     "@fortawesome/free-solid-svg-icons": "^6.3.0",
     "@fortawesome/vue-fontawesome": "^3.0.3",
