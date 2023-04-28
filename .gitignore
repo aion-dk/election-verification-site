@@ -41,4 +41,5 @@ client/*.sln
 client/*.sw?
 
 client/test-results/
+client/src/test-results/
 client/playwright-report/
