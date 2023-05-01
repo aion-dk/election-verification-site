@@ -68,6 +68,10 @@ const localeStore = useLocaleStore();
 </template>
 
 <style type="text/css" scoped>
+.HelpView {
+  font-family: "Open Sans";
+}
+
 .HelpView__Header {
   text-align: center;
 }
