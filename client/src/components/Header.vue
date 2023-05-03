@@ -26,7 +26,7 @@ const availableLocales = computed(() => {
   return _locales.value.map((l: unknown): DropdownOption => {
     return {
       selected: l === props.locale,
-      value: l as string,
+      value: l.toString(),
       display: t(`locales.${l}`),
     };
   });

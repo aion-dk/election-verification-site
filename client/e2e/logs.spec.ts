@@ -1,5 +1,5 @@
 import { test } from "@playwright/test";
-import { latestConfig, boardItemsPage1, boardItemsPage2 } from "./mocks.ts";
+import { latestConfig, boardItemsPage1, boardItemsPage2 } from "./mocks";
 
 test("downloading logs", async ({ page }) => {
   // Mock Network calls

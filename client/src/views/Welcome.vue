@@ -59,7 +59,7 @@ async function initiateVerification(event: Event) {
 
   try {
     await verificationStore.generatePairingCode(
-      _electionSlug.value as string,
+      _electionSlug.value.toString(),
       _verificationCode.value
     );
     await router.push({
@@ -78,7 +78,7 @@ async function initiateVerification(event: Event) {
 
 watch(route, (newRoute) => {
   _electionSlug.value = newRoute.params.electionSlug;
-  _locale.value = newRoute.params.locale as string;
+  _locale.value = newRoute.params.locale.toString();
   setInfo();
 });
 

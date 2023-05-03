@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, computed, onMounted, ref } from "vue";
+import { watch, computed, ref } from "vue";
 import { RouterView, useRoute } from "vue-router";
 import useLocaleStore from "./stores/useLocaleStore";
 import useConfigStore from "./stores/useConfigStore";
@@ -20,20 +20,20 @@ watch(route, async (newRoute) => {
 
   if (slug) await configStore.loadConfig(slug.toString());
 
-  const locale = newRoute.params.locale as string;
+  const locale = newRoute.params.locale.toString();
   if (locale) localeStore.setLocale(locale);
 });
 
 watch(configStore, async () => {
   setTitle();
   if (route.params.electionSlug) {
-    await configStore.loadConfig(route.params.electionSlug as string);
+    await configStore.loadConfig(route.params.electionSlug.toString());
 
     isLoaded.value = true;
 
     if (route.params.trackingCode) {
       await ballotStore.loadBallot(
-        route.params.trackingCode as string,
+        route.params.trackingCode.toString(),
         configStore.boardSlug
       );
     }

@@ -3,7 +3,7 @@ import {
   latestConfig,
   foundBallotStatus,
   rejectedBallotStatus,
-} from "./mocks.ts";
+} from "./mocks";
 
 test("tracking a ballot", async ({ page }) => {
   // Mock Network calls

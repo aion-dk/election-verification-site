@@ -1,5 +1,5 @@
 import { test } from "@playwright/test";
-import { latestConfig } from "./mocks.ts";
+import { latestConfig } from "./mocks";
 
 test("changing locale", async ({ page }) => {
   // Mock Network calls
