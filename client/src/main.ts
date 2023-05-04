@@ -20,6 +20,8 @@ import {
   faMagnifyingGlass,
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
+import * as UILibrary from "@assemblyvoting/ui-library";
+import "@assemblyvoting/ui-library/styles"; 
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
@@ -41,6 +43,7 @@ library.add(faTriangleExclamation);
 
 const app = createApp(App);
 
+app.use(UILibrary.default);
 app.use(createPinia());
 app.use(router);
 app.use(i18n);

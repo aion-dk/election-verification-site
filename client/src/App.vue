@@ -59,7 +59,7 @@ function changeLocale(newLocale: Locale) {
     `/${newLocale}/`
   );
 
-  i18n.global.locale = newLocale;
+  i18n.global.locale = newLocale as any; // Apparently there is an incompatibility between i18n legacy mode and vue composition API.
   localeStore.setLocale(newLocale);
   router.replace(newUrl);
 }
