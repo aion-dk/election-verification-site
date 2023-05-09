@@ -80,6 +80,7 @@ onMounted(redirectUnlessPairingCode);
             }"
             disabled
             checked
+            displayMode
           />
           <AVOption
             v-else
@@ -88,6 +89,7 @@ onMounted(redirectUnlessPairingCode);
             :option="parsedOption(selection, contest, pile, oIndex)"
             disabled
             checked
+            displayMode
           />
           </div> 
         </div>
