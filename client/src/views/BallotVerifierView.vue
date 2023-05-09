@@ -33,8 +33,12 @@ const parsedOption = (
     configStore.getContest(contest.reference).markingType.voteVariation ===
     "ranked";
   const optionImage =
-    (configStore.getContestOption(contest.reference, selection.reference) as any)
-      .image || null;
+    (
+      configStore.getContestOption(
+        contest.reference,
+        selection.reference
+      ) as any
+    ).image || null;
 
   const option: any = {
     title: configStore.getContestOption(contest.reference, selection.reference)
