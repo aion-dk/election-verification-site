@@ -107,16 +107,16 @@ test("tracking a rejected ballot has the right text", async ({ page }) => {
   // Seems like it needs just a millisecond more to load the proper data on the page
   await page.locator(".BallotTracker__StatusInfo h3");
 
-  expect(page.locator(".BallotTracker__StatusInfo h3")).toHaveText(
+  await expect(page.locator(".BallotTracker__StatusInfo h3")).toHaveText(
     "Ballot not accepted"
   );
-  expect(page.locator(".BallotTracker__StatusInfo p")).toHaveText(
+  await expect(page.locator(".BallotTracker__StatusInfo p")).toHaveText(
     "There is a problem with your signature affidavit. Contact your local election official for next steps and to cure your affidavit."
   );
-  expect(page.locator(".BallotTracker__StatusInfo p")).toHaveText(
+  await expect(page.locator(".BallotTracker__StatusInfo p")).toHaveText(
     "There is a problem with your signature affidavit. Contact your local election official for next steps and to cure your affidavit."
   );
-  expect(page.locator(".BallotActivity__Type").first()).toHaveText(
+  await expect(page.locator(".BallotActivity__Type").first()).toHaveText(
     "Affidavit Rejected"
   );
 });
