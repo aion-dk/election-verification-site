@@ -7,7 +7,7 @@ import router from "../router";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import useVerificationStore from "../stores/useVerificationStore";
-import { useI18n } from 'vue-i18n';
+import { useI18n } from "vue-i18n";
 
 const localeStore = useLocaleStore();
 const configStore = useConfigStore();
@@ -23,18 +23,25 @@ function redirectUnlessPairingCode() {
   if (!verificationStore.pairingCode) cancel();
 }
 
-const parsedOption = (selection: any, contest: any, pile: any, index: number) => {
-  const isRanked = configStore.getContest(contest.reference).markingType.voteVariation === 'ranked';
-  const optionImage = (configStore.getOption(contest.reference, selection.reference) as any).image || null;
+const parsedOption = (
+  selection: any,
+  contest: any,
+  pile: any,
+  index: number
+) => {
+  const isRanked =
+    configStore.getContest(contest.reference).markingType.voteVariation ===
+    "ranked";
+  const optionImage =
+    (configStore.getOption(contest.reference, selection.reference) as any)
+      .image || null;
 
   const option: any = {
-    title: configStore.getContestOption(
-        contest.reference,
-        selection.reference
-      ).title[i18n.locale.value.toString()],
-  }
+    title: configStore.getContestOption(contest.reference, selection.reference)
+      .title[i18n.locale.value.toString()],
+  };
 
-  if (isRanked) option.rank = index+1;
+  if (isRanked) option.rank = index + 1;
   if (optionImage) option.image = optionImage;
 
   return option;
@@ -69,29 +76,29 @@ onMounted(redirectUnlessPairingCode);
             class="BallotVerifier__Pile"
             :key="pIndex"
           >
-          <div class="BallotVerifier__PileMultiplier">
-            x {{ pile.multiplier }}
+            <div class="BallotVerifier__PileMultiplier">
+              x {{ pile.multiplier }}
+            </div>
+            <AVOption
+              v-if="pile.optionSelections.length === 0"
+              :key="`pile-${pIndex}-option-blank`"
+              :option="{
+                title: $t('views.verifier.blank_pile'),
+              }"
+              disabled
+              checked
+              displayMode
+            />
+            <AVOption
+              v-else
+              v-for="(selection, oIndex) in pile.optionSelections"
+              :key="`pile-${pIndex}-option-${oIndex}`"
+              :option="parsedOption(selection, contest, pile, oIndex)"
+              disabled
+              checked
+              displayMode
+            />
           </div>
-          <AVOption
-            v-if="pile.optionSelections.length === 0"
-            :key="`pile-${pIndex}-option-blank`"
-            :option="{
-              title: $t('views.verifier.blank_pile')
-            }"
-            disabled
-            checked
-            displayMode
-          />
-          <AVOption
-            v-else
-            v-for="(selection, oIndex) in pile.optionSelections"
-            :key="`pile-${pIndex}-option-${oIndex}`"
-            :option="parsedOption(selection, contest, pile, oIndex)"
-            disabled
-            checked
-            displayMode
-          />
-          </div> 
         </div>
       </Infobox>
     </div>

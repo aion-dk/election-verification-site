@@ -154,7 +154,6 @@ onMounted(() => {
       </AVCard>
     </div>
 
-
     <div class="Welcome__Content">
       <AVCard class="Welcome__Card_Overrides">
         <h3>{{ $t("views.welcome.verify.header") }}</h3>

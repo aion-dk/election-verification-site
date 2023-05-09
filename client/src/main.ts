@@ -21,7 +21,7 @@ import {
   faTriangleExclamation,
 } from "@fortawesome/free-solid-svg-icons";
 import * as UILibrary from "@assemblyvoting/ui-library";
-import "@assemblyvoting/ui-library/styles"; 
+import "@assemblyvoting/ui-library/styles";
 
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore

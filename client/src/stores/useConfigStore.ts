@@ -29,10 +29,15 @@ export default defineStore("useConfigStore", () => {
     return latestConfig.value.contestConfigs[contestReference].content;
   };
 
-  const getOption = (contestReference: string, optionReference: string): OptionContent => {
+  const getOption = (
+    contestReference: string,
+    optionReference: string
+  ): OptionContent => {
     const contest = getContest(contestReference);
-    return contest.options.find(option => option.reference === optionReference)
-  }
+    return contest.options.find(
+      (option) => option.reference === optionReference
+    );
+  };
 
   const getContestOption = (
     contestReference: string,
