@@ -7,13 +7,11 @@ import router from "../router";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import useVerificationStore from "../stores/useVerificationStore";
-import { useI18n } from "vue-i18n";
 
 const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
 const route = useRoute();
-const i18n = useI18n({});
 
 function cancel() {
   router.push(`/${route.params.locale}/${route.params.electionSlug}`);
@@ -42,7 +40,7 @@ const parsedOption = (
 
   const option: any = {
     title: configStore.getContestOption(contest.reference, selection.reference)
-      .title[i18n.locale.value.toString()],
+      .title[localeStore.locale],
   };
 
   if (isRanked) option.rank = index + 1;

@@ -9,5 +9,4 @@ export default createI18n({
   locale: locale,
   fallbackLocale: "en",
   messages: translations,
-  legacy: false,
 });
