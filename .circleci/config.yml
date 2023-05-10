@@ -184,7 +184,7 @@ commands:
           name: Run component client tests
           command: |
             docker run --name=component -e CI="1" 534003348933.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested bash -c "npm run test:unit:ci"
-            docker cp component:/usr/src/app/test-results .
+            docker cp component:/usr/src/app/src/test-results .
       - store_artifacts:
           path: test-results
   run-linting:
