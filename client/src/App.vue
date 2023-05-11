@@ -1,13 +1,16 @@
 <script setup lang="ts">
-import { watch, computed, ref } from "vue";
+import { watch, ref } from "vue";
 import { RouterView, useRoute } from "vue-router";
 import useLocaleStore from "./stores/useLocaleStore";
 import useConfigStore from "./stores/useConfigStore";
 import useBallotStore from "./stores/useBallotStore";
+import { useConferenceConnector } from './lib/conferenceServices';
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import router from "./router";
-import i18n from "./lib/i18n";
+import { loadLocaleMessages, setLocale } from './lib/i18n';
+import i18n from './lib/i18n';
+import type { Locale } from './Types'
 
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
@@ -18,7 +21,10 @@ const isLoaded = ref(false);
 watch(route, async (newRoute) => {
   const slug = newRoute.params.electionSlug;
 
-  if (slug) await configStore.loadConfig(slug.toString());
+  if (slug) {
+    await configStore.loadConfig(slug.toString());
+    await setConfigurations(slug.toString());
+  }
 
   const locale = newRoute.params.locale.toString();
   if (locale) localeStore.setLocale(locale);
@@ -40,8 +46,6 @@ watch(configStore, async () => {
   }
 });
 
-const locale = computed(() => localeStore.locale);
-
 function setTitle() {
   const title = ["DBAS", configStore.election.title[localeStore.locale]].filter(
     (s) => s
@@ -49,19 +53,27 @@ function setTitle() {
   if (window.top) window.top.document.title = title.join(" - ");
 }
 
-type Locale = `en` | `es`;
+const setConfigurations = async (slug: string) => {
+  let browserLocale = navigator.languages.find((locale) => i18n.global.availableLocales.includes(locale as Locale));
+  if (browserLocale) setLocale(browserLocale as Locale);
 
-function changeLocale(newLocale: Locale) {
-  console.log(newLocale);
-  const url = new URL(window.location.href);
-  const newUrl = url.pathname.replace(
-    `/${localeStore.locale}/`,
-    `/${newLocale}/`
-  );
+  const { conferenceClient } = useConferenceConnector(slug);
+  const enabledLocales = (await conferenceClient.getStatus()).election.enabledLocales;
+  localeStore.setEnabledLocales(enabledLocales);
 
-  i18n.global.locale = newLocale as any; // Apparently there is an incompatibility between i18n legacy mode and vue composition API.
-  localeStore.setLocale(newLocale);
-  router.replace(newUrl);
+  // Set THEME
+
+  let paramLocale = router.currentRoute.value.params.locale?.toString();
+
+  if (localeStore.enabledLocales) {
+    let preferredLocale = localeStore.enabledLocales.includes(paramLocale) ? paramLocale : null;
+    let browserLocale = navigator.languages.find((locale) => localeStore.enabledLocales.includes(locale));
+    setLocale(preferredLocale || browserLocale || localeStore.enabledLocales[0]);
+
+    for (let i = 0; i < localeStore.enabledLocales.length; i++) {
+      loadLocaleMessages(localeStore.enabledLocales[i], await conferenceClient.getTranslationsData(localeStore.enabledLocales[i]));
+    }
+  }
 }
 </script>
 
@@ -71,8 +83,8 @@ function changeLocale(newLocale: Locale) {
 
     <Header
       :election="configStore.election"
-      :locale="locale"
-      @changeLocale="changeLocale"
+      :locale="localeStore.locale"
+      @changeLocale="setLocale"
     />
     <main class="DBAS__Content" id="main">
       <RouterView class="DBAS__InnerContent" />

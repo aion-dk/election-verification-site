@@ -1,3 +1,5 @@
+import type { ContestConfig, LocalString } from "@aion-dk/js-client/dist/lib/av_client/types";
+
 export type Election = any;
 
 export type Ballot = any;
@@ -9,8 +11,64 @@ export interface Meta {
   total_pages?: number;
   total_count?: number;
 }
+
 export type DropdownOption = {
   selected: boolean;
   value: string;
   display: string;
 };
+
+export class HttpError extends Error {
+  constructor(msg?: string) {
+    super(msg);
+    this.name = 'HttpError';
+    Object.setPrototypeOf(this, new.target.prototype);
+  }
+}
+
+export interface ElectionStatusResponse {
+  activeSlide?: any;
+  contests?: ContestConfig[];
+  election: ElectionStatus;
+  slides?: any[];
+  VoterCounts?: VoterCounts;
+}
+
+export interface VoterCounts {
+  activeEligibles: number;
+  activeEligiblesOrVoted: number;
+  activeVoters: number;
+  totalVoters: number;
+}
+
+export interface ElectionStatus {
+  id: number;
+  slug: string;
+  title: LocalString;
+  description: LocalString;
+  mode: 'demo' | 'production' | 'disabled';
+  trustMode: 'verifiable' | 'trusted';
+  enabledLocales: string[];
+  readyForVoting: boolean;
+  boardSlug: string;
+  boardUrl: string;
+  dbasUrl: string;
+  redirect?: any;
+  userModules?: any;
+  voterCountsConfig?: VoterCounts;
+  theme?: Theme;
+  electionCodeTexts: any[];
+  streamUrl?: string | null;
+  hide_dbas: boolean;
+  hideBenaloh: boolean;
+}
+
+export interface Theme {
+  color: string;
+  danger: string;
+  logo: string | null;
+  background: string | null;
+  splash: string | null;
+}
+
+export type Locale = "en" | "da";
