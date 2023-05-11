@@ -1,5 +1,10 @@
 import { test, expect } from "@playwright/test";
-import { latestConfig, foundBallotStatus, rejectedBallotStatus, translations } from "./mocks";
+import {
+  latestConfig,
+  foundBallotStatus,
+  rejectedBallotStatus,
+  translations,
+} from "./mocks";
 
 test("tracking a ballot", async ({ page }) => {
   // Mock Network calls

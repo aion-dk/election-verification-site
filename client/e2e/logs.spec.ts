@@ -1,5 +1,10 @@
 import { test } from "@playwright/test";
-import { latestConfig, boardItemsPage1, boardItemsPage2, translations } from "./mocks";
+import {
+  latestConfig,
+  boardItemsPage1,
+  boardItemsPage2,
+  translations,
+} from "./mocks";
 
 test("downloading logs", async ({ page }) => {
   // Mock Network calls

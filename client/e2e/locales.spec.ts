@@ -17,11 +17,11 @@ test("changing locale", async ({ page }) => {
 
     // Intercept Translation calls
     if (url.indexOf("/translations") > 0) {
-        return route.fulfill({
-          status: 200,
-          contentType: "application/json",
-          body: JSON.stringify(translations),
-        });
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(translations),
+      });
     }
 
     return route.continue();
