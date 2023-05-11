@@ -46,7 +46,7 @@ export const rejectedBallotStatus = {
   ],
 };
 
-export const boardItemsPage1 = {
+export const boardItemsPage1: any = {
   items: [
     {
       address:
