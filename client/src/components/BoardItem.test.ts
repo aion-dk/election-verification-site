@@ -2,7 +2,10 @@ import { expect, test } from "vitest";
 import { mount } from "@vue/test-utils";
 import BoardItem from "./BoardItem.vue";
 import { createI18n } from "vue-i18n";
-import messages from "../assets/translations.json";
+import { translations } from '../../e2e/mocks'
+
+const neededStrings = JSON.stringify(translations.translations.en.js.ballot_verification_site)
+const messages = {en: JSON.parse(neededStrings)}
 
 const i18n = createI18n({ messages });
 

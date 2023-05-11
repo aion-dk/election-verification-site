@@ -1,5 +1,5 @@
 import { test } from "@playwright/test";
-import { latestConfig, boardItemsPage1, boardItemsPage2 } from "./mocks";
+import { latestConfig, boardItemsPage1, boardItemsPage2, translations } from "./mocks";
 
 test("downloading logs", async ({ page }) => {
   // Mock Network calls
@@ -21,6 +21,15 @@ test("downloading logs", async ({ page }) => {
         status: 200,
         contentType: "application/octet-stream",
         body: JSON.stringify({}),
+      });
+    }
+
+    // Intercept Translation calls
+    if (url.indexOf("/translations") > 0) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(translations),
       });
     }
 
@@ -70,6 +79,15 @@ test("traversing board items", async ({ page }) => {
       });
     }
 
+    // Intercept Translation calls
+    if (url.indexOf("/translations") > 0) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(translations),
+      });
+    }
+
     return route.continue();
   });
 
@@ -86,7 +104,7 @@ test("traversing board items", async ({ page }) => {
   await page.getByText("12g69GA").click();
 
   // Page 1 again
-  await page.getByRole("link", { name: "Previos page" }).click();
+  await page.getByRole("link", { name: "Previous page" }).click();
   await page.getByText("16fSovo").click();
   await page.getByText("VMMHYWv").click();
 
