@@ -1,8 +1,8 @@
-import type { AxiosResponse } from 'axios';
-import { HttpError } from '../Types';
-import httpErrorHandler from './httpErrorHandler';
+import type { AxiosResponse } from "axios";
+import { HttpError } from "../Types";
+import httpErrorHandler from "./httpErrorHandler";
 
-declare module 'axios' {
+declare module "axios" {
   export interface AxiosRequestConfig {
     raw?: boolean;
     silent?: boolean;
@@ -18,7 +18,7 @@ export const responseHandler = (response: AxiosResponse<any>) => {
   if (response.status == 200) {
     const data = response?.data;
     if (!data) {
-      throw new HttpError('API Error. No data!');
+      throw new HttpError("API Error. No data!");
     }
     return data;
   }
@@ -27,7 +27,7 @@ export const responseHandler = (response: AxiosResponse<any>) => {
     return;
   }
 
-  throw new HttpError('API Error! Invalid status code!');
+  throw new HttpError("API Error! Invalid status code!");
 };
 
 export const responseErrorHandler = (response: AxiosResponse<any>) => {

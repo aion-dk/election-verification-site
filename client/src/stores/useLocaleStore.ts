@@ -11,7 +11,7 @@ export default defineStore("useLocaleStore", () => {
 
   const setEnabledLocales = (response: string[]) => {
     enabledLocales.value = response;
-  }
+  };
 
   return { locale, setLocale, enabledLocales, setEnabledLocales };
 });

@@ -1,4 +1,7 @@
-import type { ContestConfig, LocalString } from "@aion-dk/js-client/dist/lib/av_client/types";
+import type {
+  ContestConfig,
+  LocalString,
+} from "@aion-dk/js-client/dist/lib/av_client/types";
 
 export type Election = any;
 
@@ -21,7 +24,7 @@ export type DropdownOption = {
 export class HttpError extends Error {
   constructor(msg?: string) {
     super(msg);
-    this.name = 'HttpError';
+    this.name = "HttpError";
     Object.setPrototypeOf(this, new.target.prototype);
   }
 }
@@ -46,8 +49,8 @@ export interface ElectionStatus {
   slug: string;
   title: LocalString;
   description: LocalString;
-  mode: 'demo' | 'production' | 'disabled';
-  trustMode: 'verifiable' | 'trusted';
+  mode: "demo" | "production" | "disabled";
+  trustMode: "verifiable" | "trusted";
   enabledLocales: string[];
   readyForVoting: boolean;
   boardSlug: string;

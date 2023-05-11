@@ -1,6 +1,6 @@
 import { createI18n } from "vue-i18n";
-import { nextTick } from 'vue';
-import type { Locale } from '../Types'
+import { nextTick } from "vue";
+import type { Locale } from "../Types";
 
 let locale = "en";
 const url = new URL(window.location.href);
@@ -13,31 +13,31 @@ const i18n = createI18n({
   datetimeFormats: {
     en: {
       short: {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
+        year: "numeric",
+        month: "short",
+        day: "numeric",
       },
       long: {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        weekday: 'short',
-        hour: 'numeric',
-        minute: 'numeric',
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        weekday: "short",
+        hour: "numeric",
+        minute: "numeric",
       },
     },
     da: {
       short: {
-        year: 'numeric',
-        day: 'numeric',
+        year: "numeric",
+        day: "numeric",
       },
       long: {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        weekday: 'short',
-        hour: 'numeric',
-        minute: 'numeric',
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        weekday: "short",
+        hour: "numeric",
+        minute: "numeric",
       },
     },
   },

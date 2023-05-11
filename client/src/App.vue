@@ -4,13 +4,13 @@ import { RouterView, useRoute } from "vue-router";
 import useLocaleStore from "./stores/useLocaleStore";
 import useConfigStore from "./stores/useConfigStore";
 import useBallotStore from "./stores/useBallotStore";
-import { useConferenceConnector } from './lib/conferenceServices';
+import { useConferenceConnector } from "./lib/conferenceServices";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import router from "./router";
-import { loadLocaleMessages, setLocale } from './lib/i18n';
-import i18n from './lib/i18n';
-import type { Locale } from './Types'
+import { loadLocaleMessages, setLocale } from "./lib/i18n";
+import i18n from "./lib/i18n";
+import type { Locale } from "./Types";
 
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
@@ -54,11 +54,14 @@ function setTitle() {
 }
 
 const setConfigurations = async (slug: string) => {
-  let browserLocale = navigator.languages.find((locale) => i18n.global.availableLocales.includes(locale as Locale));
+  let browserLocale = navigator.languages.find((locale) =>
+    i18n.global.availableLocales.includes(locale as Locale)
+  );
   if (browserLocale) setLocale(browserLocale as Locale);
 
   const { conferenceClient } = useConferenceConnector(slug);
-  const enabledLocales = (await conferenceClient.getStatus()).election.enabledLocales;
+  const enabledLocales = (await conferenceClient.getStatus()).election
+    .enabledLocales;
   localeStore.setEnabledLocales(enabledLocales);
 
   // Set THEME
@@ -66,15 +69,26 @@ const setConfigurations = async (slug: string) => {
   let paramLocale = router.currentRoute.value.params.locale?.toString();
 
   if (localeStore.enabledLocales) {
-    let preferredLocale = localeStore.enabledLocales.includes(paramLocale) ? paramLocale : null;
-    let browserLocale = navigator.languages.find((locale) => localeStore.enabledLocales.includes(locale));
-    setLocale(preferredLocale || browserLocale || localeStore.enabledLocales[0]);
+    let preferredLocale = localeStore.enabledLocales.includes(paramLocale)
+      ? paramLocale
+      : null;
+    let browserLocale = navigator.languages.find((locale) =>
+      localeStore.enabledLocales.includes(locale)
+    );
+    setLocale(
+      preferredLocale || browserLocale || localeStore.enabledLocales[0]
+    );
 
     for (let i = 0; i < localeStore.enabledLocales.length; i++) {
-      loadLocaleMessages(localeStore.enabledLocales[i], await conferenceClient.getTranslationsData(localeStore.enabledLocales[i]));
+      loadLocaleMessages(
+        localeStore.enabledLocales[i],
+        await conferenceClient.getTranslationsData(
+          localeStore.enabledLocales[i]
+        )
+      );
     }
   }
-}
+};
 </script>
 
 <template>
