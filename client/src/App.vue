@@ -60,30 +60,26 @@ const setConfigurations = async (slug: string) => {
   if (browserLocale) setLocale(browserLocale as Locale);
 
   const { conferenceClient } = useConferenceConnector(slug);
-  const enabledLocales = (await conferenceClient.getStatus()).election
-    .enabledLocales;
-  localeStore.setEnabledLocales(enabledLocales);
-
   // Set THEME
 
   let paramLocale = router.currentRoute.value.params.locale?.toString();
 
-  if (localeStore.enabledLocales) {
-    let preferredLocale = localeStore.enabledLocales.includes(paramLocale)
+  if (configStore.election.locales) {
+    let preferredLocale = configStore.election.locales.includes(paramLocale)
       ? paramLocale
       : null;
     let browserLocale = navigator.languages.find((locale) =>
-      localeStore.enabledLocales.includes(locale)
+      configStore.election.locales.includes(locale)
     );
     setLocale(
-      preferredLocale || browserLocale || localeStore.enabledLocales[0]
+      preferredLocale || browserLocale || configStore.election.locales[0]
     );
 
-    for (let i = 0; i < localeStore.enabledLocales.length; i++) {
+    for (let i = 0; i < configStore.election.locales.length; i++) {
       loadLocaleMessages(
-        localeStore.enabledLocales[i],
+        configStore.election.locales[i],
         await conferenceClient.getTranslationsData(
-          localeStore.enabledLocales[i]
+          configStore.election.locales[i]
         )
       );
     }
