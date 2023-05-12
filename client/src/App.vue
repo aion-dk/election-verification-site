@@ -47,7 +47,13 @@ watch(configStore, async () => {
 });
 
 function updateLocale(newLocale: Locale) {
-  setLocale(newLocale, localeStore.locale)
+  const newUrl = url.pathname.replace(
+    `/${localeStore.locale}/`,
+    `/${newLocale}/`
+  );
+
+  router.replace(newUrl);
+  setLocale(newLocale)
   localeStore.setLocale(newLocale);
 }
 
@@ -62,13 +68,9 @@ const setConfigurations = async (slug: string) => {
   let browserLocale = navigator.languages.find((locale) =>
     i18n.global.availableLocales.includes(locale as Locale)
   );
-  if (browserLocale) setLocale(browserLocale as Locale, localeStore.locale);
+  if (browserLocale) setLocale(browserLocale as Locale);
 
   const { conferenceClient } = useConferenceConnector(slug);
-
-  // backgroundImageUrl.value = `${electionStore.electionStatus?.theme?.background}`;
-  // splashImageUrl.value = `${electionStore.electionStatus?.theme?.splash}`;
-  // await setupTheme(await conferenceClient.getStylingData());
 
   let paramLocale = router.currentRoute.value.params.locale?.toString();
 
@@ -80,7 +82,7 @@ const setConfigurations = async (slug: string) => {
       configStore.election.locales.includes(locale)
     );
     setLocale(
-      preferredLocale || browserLocale || configStore.election.locales[0], localeStore.locale
+      preferredLocale || browserLocale || configStore.election.locales[0]
     );
 
     for (let i = 0; i < configStore.election.locales.length; i++) {
