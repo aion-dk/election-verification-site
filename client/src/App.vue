@@ -60,7 +60,10 @@ const setConfigurations = async (slug: string) => {
   if (browserLocale) setLocale(browserLocale as Locale);
 
   const { conferenceClient } = useConferenceConnector(slug);
-  // Set THEME
+
+  // backgroundImageUrl.value = `${electionStore.electionStatus?.theme?.background}`;
+  // splashImageUrl.value = `${electionStore.electionStatus?.theme?.splash}`;
+  // await setupTheme(await conferenceClient.getStylingData());
 
   let paramLocale = router.currentRoute.value.params.locale?.toString();
 
