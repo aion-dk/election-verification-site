@@ -12,19 +12,23 @@ export default defineStore("verificationStore", () => {
     ballot.value = await avVerifier.decryptBallot();
   }
 
+  function reset() {
+    pairingCode.value = null
+    ballot.value = null
+  }
+
   async function generatePairingCode(
     electionSlug: string,
     verificationCode: string
   ) {
     const avVerifier = await useAVVerifier(electionSlug);
-    const ballotAddress = await avVerifier.findBallot(verificationCode);
-    const path = `${electionSlug}/verification/spoil_status?id=${ballotAddress}`;
-    const { data } = await api.get(path);
+    await avVerifier.findBallot(verificationCode);
 
-    pairingCode.value = await avVerifier.submitVerifierKey(data.item.address);
+    const spoilAddress = await avVerifier.pollForSpoilRequest()
+    pairingCode.value = await avVerifier.submitVerifierKey(spoilAddress);
 
     decryptWhenAvailable(avVerifier);
   }
 
-  return { generatePairingCode, pairingCode, ballot };
+  return { generatePairingCode, pairingCode, ballot, reset };
 });

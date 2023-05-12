@@ -86,6 +86,7 @@ watch(configStore, () => {
 });
 
 onMounted(() => {
+  verificationStore.reset()
   setInfo();
   (
     document.querySelector(".Welcome__TrackingCode") as HTMLInputElement
