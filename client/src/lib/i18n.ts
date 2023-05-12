@@ -2,12 +2,10 @@ import { createI18n } from "vue-i18n";
 import { nextTick } from "vue";
 import type { Locale } from "../Types";
 import router from '../router';
-import useLocaleStore from '../stores/useLocaleStore'
 
 let locale = "en";
 const url = new URL(window.location.href);
 if (url.pathname.split("/")[1]) locale = url.pathname.split("/")[1];
-const localeStore = useLocaleStore();
 
 const i18n = createI18n({
   locale: locale,
@@ -46,14 +44,14 @@ const i18n = createI18n({
   },
 });
 
-export function setLocale(newLocale: Locale) {
+export function setLocale(newLocale: Locale, oldLocale: string) {
   i18n.global.locale = locale as Locale;
 
   const newUrl = url.pathname.replace(
-    `/${localeStore.locale}/`,
+    `/${oldLocale}/`,
     `/${newLocale}/`
   );
-  localeStore.setLocale(newLocale);
+
   router.replace(newUrl);
 }
 

@@ -46,6 +46,11 @@ watch(configStore, async () => {
   }
 });
 
+function updateLocale(newLocale: Locale) {
+  setLocale(newLocale, localeStore.locale)
+  localeStore.setLocale(newLocale);
+}
+
 function setTitle() {
   const title = ["DBAS", configStore.election.title[localeStore.locale]].filter(
     (s) => s
@@ -57,7 +62,7 @@ const setConfigurations = async (slug: string) => {
   let browserLocale = navigator.languages.find((locale) =>
     i18n.global.availableLocales.includes(locale as Locale)
   );
-  if (browserLocale) setLocale(browserLocale as Locale);
+  if (browserLocale) setLocale(browserLocale as Locale, localeStore.locale);
 
   const { conferenceClient } = useConferenceConnector(slug);
 
@@ -75,7 +80,7 @@ const setConfigurations = async (slug: string) => {
       configStore.election.locales.includes(locale)
     );
     setLocale(
-      preferredLocale || browserLocale || configStore.election.locales[0]
+      preferredLocale || browserLocale || configStore.election.locales[0], localeStore.locale
     );
 
     for (let i = 0; i < configStore.election.locales.length; i++) {
@@ -97,7 +102,7 @@ const setConfigurations = async (slug: string) => {
     <Header
       :election="configStore.election"
       :locale="localeStore.locale"
-      @changeLocale="setLocale"
+      @changeLocale="updateLocale"
     />
     <main class="DBAS__Content" id="main">
       <RouterView class="DBAS__InnerContent" />
