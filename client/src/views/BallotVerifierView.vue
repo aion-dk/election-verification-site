@@ -7,7 +7,7 @@ import router from "../router";
 import { onMounted } from "vue";
 import { useRoute } from "vue-router";
 import useVerificationStore from "../stores/useVerificationStore";
-import Timedown from '@/components/Timedown.vue'
+import Timedown from "@/components/Timedown.vue";
 
 const localeStore = useLocaleStore();
 const configStore = useConfigStore();
@@ -63,7 +63,11 @@ onMounted(redirectUnlessPairingCode);
     <Timedown
       :maxSeconds="configStore.election.bcTimeout"
       :currentSeconds="configStore.election.bcTimeout"
-      @timeout="() => { router.push({ name: 'Welcome' }) }"
+      @timeout="
+        () => {
+          router.push({ name: 'Welcome' });
+        }
+      "
     />
 
     <div v-if="verificationStore.ballot" class="BallotVerifier__Spoiled">

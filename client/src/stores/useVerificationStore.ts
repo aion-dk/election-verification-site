@@ -5,7 +5,7 @@ import useAVVerifier from "../lib/useAVVerifier";
 export default defineStore("verificationStore", () => {
   const setupAVVerifier = async (electionSlug: string) => {
     avVerifier.value = await useAVVerifier(electionSlug);
-  }
+  };
 
   const avVerifier = ref(null);
   const pairingCode = ref(null);
@@ -32,5 +32,12 @@ export default defineStore("verificationStore", () => {
     decryptWhenAvailable();
   }
 
-  return { generatePairingCode, setupAVVerifier, findBallot, pairingCode, ballot, reset };
+  return {
+    generatePairingCode,
+    setupAVVerifier,
+    findBallot,
+    pairingCode,
+    ballot,
+    reset,
+  };
 });

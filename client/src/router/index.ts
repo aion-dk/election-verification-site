@@ -6,7 +6,7 @@ import MissingSlugView from "../views/MissingSlugView.vue";
 import LogsView from "../views/LogsView.vue";
 import HelpView from "../views/HelpView.vue";
 import AboutView from "../views/AboutView.vue";
-import BallotVerifierFound from '@/views/BallotVerifierFound.vue'
+import BallotVerifierFound from "@/views/BallotVerifierFound.vue";
 
 const router = createRouter({
   history: createWebHistory(),

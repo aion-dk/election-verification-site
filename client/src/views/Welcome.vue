@@ -57,12 +57,12 @@ async function initiateVerification(event: Event) {
   _error.value = null;
 
   try {
-    await verificationStore.findBallot(_verificationCode.value)
+    await verificationStore.findBallot(_verificationCode.value);
 
     verificationStore.generatePairingCode();
 
     setTimeout(async () => {
-      if(verificationStore.pairingCode) return
+      if (verificationStore.pairingCode) return;
 
       await router.push({
         name: "BallotVerifierFound",
@@ -70,7 +70,7 @@ async function initiateVerification(event: Event) {
           verificationCode: _verificationCode.value,
         },
       });
-    }, 2000)
+    }, 2000);
   } catch (e) {
     console.error(e);
     _disabled.value = false;
@@ -89,7 +89,7 @@ watch(configStore, () => {
 });
 
 watch(verificationStore, async (newStore) => {
-  if(!newStore.pairingCode) return
+  if (!newStore.pairingCode) return;
 
   await router.push({
     name: "BallotVerifierView",
@@ -97,7 +97,7 @@ watch(verificationStore, async (newStore) => {
       pairingCode: newStore.pairingCode,
     },
   });
-})
+});
 
 onMounted(() => {
   verificationStore.reset();

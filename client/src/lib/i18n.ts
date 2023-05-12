@@ -203,7 +203,8 @@ const i18n = createI18n({
         verifier: {
           found: {
             title: "Your ballot has been found!",
-            description: "Go back to the voting app and follow the instructions there to continue the ballot test."
+            description:
+              "Go back to the voting app and follow the instructions there to continue the ballot test.",
           },
           inprogress: {
             title: "Pairing code",

@@ -12,7 +12,7 @@ export default defineStore("useConfigStore", () => {
   const boardSlug = ref<string>(null);
   const latestConfig = ref<LatestConfigItems | null>(null);
   const election = ref<Election | null>(null);
-  const bcTimeout = computed(() => election.value?.content?.bcTimeout)
+  const bcTimeout = computed(() => election.value?.content?.bcTimeout);
 
   const setSlug = (newSlug: string) => {
     boardSlug.value = newSlug;
