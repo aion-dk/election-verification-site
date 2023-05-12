@@ -1,7 +1,6 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import useAVVerifier from "../lib/useAVVerifier";
-import { api } from "../lib/api";
 
 export default defineStore("verificationStore", () => {
   const pairingCode = ref(null);
@@ -13,8 +12,8 @@ export default defineStore("verificationStore", () => {
   }
 
   function reset() {
-    pairingCode.value = null
-    ballot.value = null
+    pairingCode.value = null;
+    ballot.value = null;
   }
 
   async function generatePairingCode(
@@ -24,7 +23,7 @@ export default defineStore("verificationStore", () => {
     const avVerifier = await useAVVerifier(electionSlug);
     await avVerifier.findBallot(verificationCode);
 
-    const spoilAddress = await avVerifier.pollForSpoilRequest()
+    const spoilAddress = await avVerifier.pollForSpoilRequest();
     pairingCode.value = await avVerifier.submitVerifierKey(spoilAddress);
 
     decryptWhenAvailable(avVerifier);
