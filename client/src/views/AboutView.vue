@@ -1,16 +1,16 @@
 <script setup lang="ts">
 import CompactHeader from "../components/CompactHeader.vue";
-import useElectionStore from "../stores/useElectionStore";
+import useConfigStore from "../stores/useConfigStore";
 import useLocaleStore from "../stores/useLocaleStore";
 
-const electionStore = useElectionStore();
+const configStore = useConfigStore();
 const localeStore = useLocaleStore();
 </script>
 
 <template>
   <main class="AboutView">
     <CompactHeader
-      :election="electionStore.election"
+      :election="configStore.election"
       :locale="localeStore.locale"
     />
 

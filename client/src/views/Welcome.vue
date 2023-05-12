@@ -1,30 +1,30 @@
 <script setup lang="ts">
 import { useRoute } from "vue-router";
-import useElectionStore from "../stores/useElectionStore";
+import useConfigStore from "../stores/useConfigStore";
 import { ref, watch, onMounted } from "vue";
-import Infobox from "../components/Infobox.vue";
 import useBallotStore from "../stores/useBallotStore";
 import router from "../router";
 import useLocaleStore from "../stores/useLocaleStore";
+import useVerificationStore from "../stores/useVerificationStore";
+import Error from "../components/Error.vue";
 
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
-const electionStore = useElectionStore();
+const configStore = useConfigStore();
 const route = useRoute();
 const _electionSlug = ref(route.params.electionSlug);
 const _locale = ref(localeStore.locale);
 const _title = ref("Loading..");
 const _info = ref("Loading..");
 const _trackingCode = ref(null);
-const _error = ref(false);
+const _verificationCode = ref(null);
+const _error = ref(null);
 const _disabled = ref(false);
+const verificationStore = useVerificationStore();
 
 function setInfo() {
-  _title.value = electionStore.election?.content?.title[_locale.value];
-  _info.value = [
-    electionStore.election?.content?.jurisdiction,
-    electionStore.election?.content?.state,
-  ]
+  _title.value = configStore.election.title[_locale.value];
+  _info.value = [configStore.election.jurisdiction, configStore.election.state]
     .filter((s) => s)
     .join(", ");
 }
@@ -33,13 +33,10 @@ async function lookupBallot(event: Event) {
   event.preventDefault();
   event.stopPropagation();
   _disabled.value = true;
-  _error.value = false;
+  _error.value = null;
 
-  if (_trackingCode.value && electionStore.election.slug) {
-    await ballotStore.loadBallot(
-      _trackingCode.value,
-      electionStore.election.slug
-    );
+  if (_trackingCode.value && configStore.boardSlug) {
+    await ballotStore.loadBallot(_trackingCode.value, configStore.boardSlug);
   }
 
   if (ballotStore.ballot?.status) {
@@ -47,23 +44,49 @@ async function lookupBallot(event: Event) {
       `/${_locale.value}/${_electionSlug.value}/track/${_trackingCode.value}`
     );
   } else {
-    _error.value = true;
+    _error.value = "track.invalid_code";
   }
 
   _disabled.value = false;
 }
 
+async function initiateVerification(event: Event) {
+  event.preventDefault();
+  event.stopPropagation();
+  _disabled.value = true;
+  _error.value = null;
+
+  try {
+    await verificationStore.generatePairingCode(
+      _electionSlug.value.toString(),
+      _verificationCode.value
+    );
+    await router.push({
+      name: "BallotVerifierView",
+      params: {
+        pairingCode: verificationStore.pairingCode,
+      },
+    });
+  } catch (e) {
+    console.error(e);
+    _error.value = "verify.invalid_code";
+  } finally {
+    _disabled.value = false;
+  }
+}
+
 watch(route, (newRoute) => {
   _electionSlug.value = newRoute.params.electionSlug;
-  _locale.value = newRoute.params.locale as string;
+  _locale.value = newRoute.params.locale.toString();
   setInfo();
 });
 
-watch(electionStore, () => {
+watch(configStore, () => {
   setInfo();
 });
 
 onMounted(() => {
+  verificationStore.reset();
   setInfo();
   (
     document.querySelector(".Welcome__TrackingCode") as HTMLInputElement
@@ -79,24 +102,15 @@ onMounted(() => {
         <small>{{ _info }}</small>
       </h1>
     </div>
-
-    <div v-if="_error" class="Welcome__Error" role="alert">
-      <p class="title">
-        <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />
-        {{ $t("views.welcome.error.title") }}
-      </p>
-
-      <p>{{ $t("views.welcome.error.content") }}</p>
-    </div>
+    <Error v-if="_error" :errorPath="_error" />
 
     <div class="Welcome__Content">
-      <Infobox class="Welcome__About">
+      <AVCard class="Welcome__Card_Overrides">
         <h3>{{ $t("views.welcome.about.header") }}</h3>
         <p>{{ $t("views.welcome.about.p1") }}</p>
         <p>{{ $t("views.welcome.about.p2") }}</p>
-      </Infobox>
-
-      <Infobox class="Welcome__Tracking">
+      </AVCard>
+      <AVCard class="Welcome__Card_Overrides Welcome__Tracking">
         <form @submit="lookupBallot">
           <input
             :disabled="_disabled"
@@ -107,20 +121,17 @@ onMounted(() => {
             v-model="_trackingCode"
             class="Welcome__TrackingCode"
           />
-
-          <button
-            class="Welcome__SubmitButton"
-            type="submit"
-            :disabled="_disabled"
+          <AVButton
+            :label="$t('views.welcome.track_ballot_button')"
+            type="neutral"
             name="lookup-ballot"
             id="lookup-ballot"
+            :disabled="_disabled || !_trackingCode"
+            iconLeft
+            fullWidth
+            icon="magnifying-glass"
             @click="lookupBallot"
-          >
-            <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
-            <span>
-              {{ $t("views.welcome.track_ballot_button") }}
-            </span>
-          </button>
+          />
         </form>
 
         <p class="Tooltip">
@@ -141,7 +152,61 @@ onMounted(() => {
             </template>
           </tooltip>
         </p>
-      </Infobox>
+      </AVCard>
+    </div>
+
+    <div class="Welcome__Content">
+      <AVCard class="Welcome__Card_Overrides">
+        <h3>{{ $t("views.welcome.verify.header") }}</h3>
+        <p>{{ $t("views.welcome.verify.p1") }}</p>
+        <p>{{ $t("views.welcome.verify.p2") }}</p>
+      </AVCard>
+      <AVCard class="Welcome__Card_Overrides Welcome__Tracking">
+        <form @submit="initiateVerification">
+          <input
+            :disabled="_disabled"
+            type="text"
+            name="verification-code"
+            id="verification-code"
+            :placeholder="$t('views.welcome.verification_code_input')"
+            v-model="_verificationCode"
+            class="Welcome__TrackingCode"
+            data-1p-ignore
+          />
+          <AVButton
+            :label="$t('views.welcome.initiate_verification_button')"
+            type="neutral"
+            name="initiate-verification"
+            id="initiate-verification"
+            :disabled="_disabled || !_verificationCode"
+            iconLeft
+            fullWidth
+            icon="fingerprint"
+            @click="initiateVerification"
+          />
+        </form>
+
+        <p class="Tooltip">
+          <tooltip hover placement="bottom">
+            <template #default>
+              <span>{{ $t("views.welcome.locate_verification_code") }}</span>
+              <span
+                :aria-label="
+                  $t('views.welcome.locate_verification_code_tooltip')
+                "
+              >
+                <font-awesome-icon icon="fa-solid fa-circle-question" />
+              </span>
+            </template>
+
+            <template #content>
+              <span id="tracking-code-tooltip">
+                {{ $t("views.welcome.locate_verification_code_tooltip") }}
+              </span>
+            </template>
+          </tooltip>
+        </p>
+      </AVCard>
     </div>
 
     <div class="Welcome__Footer">
@@ -193,11 +258,18 @@ onMounted(() => {
 
 .Welcome__Content {
   display: flex;
+  margin-bottom: 2.5rem;
+  gap: 2.5rem;
 }
 
-.Welcome__About {
-  margin-right: 40px;
-  flex-shrink: 1;
+.Welcome__Card_Overrides {
+  padding: 2.5rem !important;
+  min-width: 50%;
+}
+
+.Welcome__Tracking {
+  justify-content: center;
+  min-width: 40%;
 }
 
 .Welcome__Footer {
@@ -206,15 +278,6 @@ onMounted(() => {
 
 .Welcome__Widget {
   width: 100%;
-}
-
-.Welcome__Tracking {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-grow: 1;
-  min-width: 480px;
 }
 
 .Welcome__Tracking form {
@@ -236,6 +299,7 @@ onMounted(() => {
   text-align: center;
   padding: 0 20px;
   font-size: 16px;
+  margin-bottom: 1rem;
 }
 
 .Welcome__SubmitButton {
@@ -255,21 +319,6 @@ onMounted(() => {
 .Welcome__SubmitButton:disabled {
   opacity: 0.5;
   cursor: not-allowed;
-}
-
-.Welcome__Error {
-  background-color: #fcede9;
-  border: none;
-  border-left: solid 6px #ea4e2c;
-  padding: 17px 36px;
-  margin-bottom: 40px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-}
-
-.Welcome__Error p.title {
-  font-weight: 700;
-  font-size: 18px;
-  color: #495057;
 }
 
 svg {

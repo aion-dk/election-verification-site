@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   aws-ecr: circleci/aws-ecr@8.2.1
-  docker: assemblyvoting/docker@1.2.5
+  docker: assemblyvoting/docker@1.2.6
 
 executors:
   vm-linux-ubuntu:
@@ -266,7 +266,6 @@ jobs:
             docker pull ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/dbas:${CIRCLE_SHA1}-untested
       - docker/scan:
           image: ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/dbas:${CIRCLE_SHA1}-untested
-          ignored_cves: "CVE-2021-4048,CVE-2021-3756,CVE-2023-23914"
   client-e2e:
     executor: vm-linux-ubuntu
     steps:

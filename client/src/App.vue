@@ -1,75 +1,110 @@
 <script setup lang="ts">
-import { watch, computed } from "vue";
+import { watch, ref } from "vue";
 import { RouterView, useRoute } from "vue-router";
 import useLocaleStore from "./stores/useLocaleStore";
-import useElectionStore from "./stores/useElectionStore";
+import useConfigStore from "./stores/useConfigStore";
 import useBallotStore from "./stores/useBallotStore";
+import { useConferenceConnector } from "./lib/conferenceServices";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import router from "./router";
+import { loadLocaleMessages, setLocale } from "./lib/i18n";
 import i18n from "./lib/i18n";
+import type { Locale } from "./Types";
 
 const ballotStore = useBallotStore();
-const electionStore = useElectionStore();
+const configStore = useConfigStore();
 const localeStore = useLocaleStore();
 const route = useRoute();
+const isLoaded = ref(false);
 
 watch(route, async (newRoute) => {
   const slug = newRoute.params.electionSlug;
-  if (slug) electionStore.loadElection(slug.toString());
 
-  const locale = newRoute.params.locale as string;
+  if (slug) {
+    await configStore.loadConfig(slug.toString());
+    await setConfigurations(slug.toString());
+  }
+
+  const locale = newRoute.params.locale.toString();
   if (locale) localeStore.setLocale(locale);
 });
 
-watch(electionStore, () => {
+watch(configStore, async () => {
   setTitle();
   if (route.params.electionSlug) {
-    electionStore.loadElection(route.params.electionSlug as string);
+    await configStore.loadConfig(route.params.electionSlug.toString());
+
+    isLoaded.value = true;
 
     if (route.params.trackingCode) {
-      ballotStore.loadBallot(
-        route.params.trackingCode as string,
-        electionStore.election.slug
+      await ballotStore.loadBallot(
+        route.params.trackingCode.toString(),
+        configStore.boardSlug
       );
     }
   }
 });
 
-const locale = computed(() => localeStore.locale);
-
-function setTitle() {
-  const title = [
-    "DBAS",
-    electionStore.election?.content?.title[localeStore.locale],
-  ].filter((s) => s);
-  if (window.top) window.top.document.title = title.join(" - ");
-}
-
-type Locale = `en` | `es`;
-
-function changeLocale(newLocale: Locale) {
-  console.log(newLocale);
-  const url = new URL(window.location.href);
-  const newUrl = url.pathname.replace(
+function updateLocale(newLocale: Locale) {
+  const newUrl = route.fullPath.replace(
     `/${localeStore.locale}/`,
     `/${newLocale}/`
   );
 
-  i18n.global.locale = newLocale;
-  localeStore.setLocale(newLocale);
   router.replace(newUrl);
+  setLocale(newLocale);
+  localeStore.setLocale(newLocale);
 }
+
+function setTitle() {
+  const title = ["DBAS", configStore.election.title[localeStore.locale]].filter(
+    (s) => s
+  );
+  if (window.top) window.top.document.title = title.join(" - ");
+}
+
+const setConfigurations = async (slug: string) => {
+  let browserLocale = navigator.languages.find((locale) =>
+    i18n.global.availableLocales.includes(locale as Locale)
+  );
+  if (browserLocale) setLocale(browserLocale as Locale);
+
+  const { conferenceClient } = useConferenceConnector(slug);
+
+  let paramLocale = router.currentRoute.value.params.locale?.toString();
+
+  if (configStore.election.locales) {
+    let preferredLocale = configStore.election.locales.includes(paramLocale)
+      ? paramLocale
+      : null;
+    let browserLocale = navigator.languages.find((locale) =>
+      configStore.election.locales.includes(locale)
+    );
+    setLocale(
+      preferredLocale || browserLocale || configStore.election.locales[0]
+    );
+
+    for (let i = 0; i < configStore.election.locales.length; i++) {
+      loadLocaleMessages(
+        configStore.election.locales[i],
+        await conferenceClient.getTranslationsData(
+          configStore.election.locales[i]
+        )
+      );
+    }
+  }
+};
 </script>
 
 <template>
-  <div class="DBAS">
+  <div class="DBAS" v-if="isLoaded">
     <!-- <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a> -->
 
     <Header
-      :election="electionStore.election"
-      :locale="locale"
-      @changeLocale="changeLocale"
+      :election="configStore.election"
+      :locale="localeStore.locale"
+      @changeLocale="updateLocale"
     />
     <main class="DBAS__Content" id="main">
       <RouterView class="DBAS__InnerContent" />

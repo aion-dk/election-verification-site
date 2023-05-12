@@ -42,3 +42,6 @@ client/*.sw?
 
 client/test-results/
 client/playwright-report/
+
+*/.env
+.vscode

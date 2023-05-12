@@ -13,15 +13,15 @@ const props = defineProps({
 });
 
 const area = computed(() =>
-  [props.election.content?.jurisdiction, props.election.content?.state]
+  [props.election.jurisdiction, props.election.state]
     .filter((s) => s)
     .join(", ")
 );
 </script>
 
 <template>
-  <div class="CompactHeader" v-if="election.content">
-    <h1 class="CompactHeader__Title">{{ election.content.title[locale] }}</h1>
+  <div class="CompactHeader" v-if="election">
+    <h1 class="CompactHeader__Title">{{ election.title[locale] }}</h1>
     <div class="CompactHeader__CircleSpacer" v-if="area" />
     <p class="CompactHeader__Area">{{ area }}</p>
   </div>

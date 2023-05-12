@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import CompactHeader from "../components/CompactHeader.vue";
 import ExpandableSection from "../components/ExpandableSection.vue";
-import useElectionStore from "../stores/useElectionStore";
+import useConfigStore from "../stores/useConfigStore";
 import useLocaleStore from "../stores/useLocaleStore";
 
-const electionStore = useElectionStore();
+const configStore = useConfigStore();
 const localeStore = useLocaleStore();
 </script>
 
 <template>
   <main class="HelpView">
     <CompactHeader
-      :election="electionStore.election"
+      :election="configStore.election"
       :locale="localeStore.locale"
     />
 
@@ -68,6 +68,10 @@ const localeStore = useLocaleStore();
 </template>
 
 <style type="text/css" scoped>
+.HelpView {
+  font-family: "Open Sans";
+}
+
 .HelpView__Header {
   text-align: center;
 }

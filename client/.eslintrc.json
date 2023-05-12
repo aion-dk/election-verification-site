@@ -7,7 +7,8 @@
   "extends": [
     "eslint:recommended",
     "plugin:vue/vue3-essential",
-    "plugin:@typescript-eslint/recommended"
+    "plugin:@typescript-eslint/recommended",
+    "plugin:json/recommended"
   ],
   "overrides": [],
   "parser": "vue-eslint-parser",
@@ -17,7 +18,7 @@
       "<template>": "espree"
     }
   },
-  "plugins": ["vue", "@typescript-eslint"],
+  "plugins": ["vue", "@typescript-eslint", "json"],
   "rules": {
     "vue/multi-word-component-names": "off",
     "@typescript-eslint/no-explicit-any": "off"
