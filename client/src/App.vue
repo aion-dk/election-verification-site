@@ -53,7 +53,7 @@ function updateLocale(newLocale: Locale) {
   );
 
   router.replace(newUrl);
-  setLocale(newLocale)
+  setLocale(newLocale);
   localeStore.setLocale(newLocale);
 }
 
