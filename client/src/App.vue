@@ -47,7 +47,7 @@ watch(configStore, async () => {
 });
 
 function updateLocale(newLocale: Locale) {
-  const newUrl = url.pathname.replace(
+  const newUrl = route.fullPath.replace(
     `/${localeStore.locale}/`,
     `/${newLocale}/`
   );
