@@ -7,6 +7,7 @@ import router from "../router";
 import useLocaleStore from "../stores/useLocaleStore";
 import useVerificationStore from "../stores/useVerificationStore";
 import Error from "../components/Error.vue";
+import Timedown from "../components/Timedown.vue"
 
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
@@ -103,6 +104,12 @@ onMounted(() => {
       </h1>
     </div>
     <Error v-if="_error" :errorPath="_error" />
+
+    <Timedown
+      :maxSeconds="600"
+      :currentSeconds="12"
+      @timeout="() => _error = 'track.invalid_code'"
+    />
 
     <div class="Welcome__Content">
       <AVCard class="Welcome__Card_Overrides">
