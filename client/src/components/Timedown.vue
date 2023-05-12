@@ -1,6 +1,8 @@
 <script setup lang="ts">
-  import { computed, ref, onMounted } from "vue"
+  import { computed, ref, watch, onMounted } from "vue"
   import humanizeDuration from "humanize-duration"
+
+  const emit = defineEmits(['timeout'])
 
   const props = defineProps({
     maxSeconds: {
@@ -13,25 +15,25 @@
     },
   })
 
+  function decrementSeconds() {
+    if (secondsLeft.value > 0) secondsLeft.value--
+  }
+
   const secondsLeft = ref(props.currentSeconds)
   const interval = ref(null);
   const miliseconds = computed(() => secondsLeft.value * 1000)
   const displayValue = computed(() => humanizeDuration(miliseconds.value))
-  const percentageWidth = computed(() => {
-    if (secondsLeft.value <= 0) {
-      clearInterval(interval.value)
-      return 0
-    }
-    return secondsLeft.value / props.maxSeconds * 100
-  })
+  const percentageWidth = computed(() => secondsLeft.value / props.maxSeconds * 100)
   const style = computed(() => {
     return `
       --width: ${percentageWidth.value}%;
     `
   })
 
+  watch(secondsLeft, () => (secondsLeft.value === 0) ? emit("timeout") : null)
+
   onMounted(() => {
-    interval.value = setInterval(() => secondsLeft.value --, 1000)
+    interval.value = setInterval(() => decrementSeconds(), 1000)
   })
 </script>
 
@@ -60,5 +62,8 @@
     text-align: right;
     padding: 0 5px;
     box-sizing: border-box;
+    min-width: 20px;
+    height: 20px;
+    line-height: 20px;
   }
 </style>

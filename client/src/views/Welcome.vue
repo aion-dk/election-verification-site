@@ -105,7 +105,11 @@ onMounted(() => {
     </div>
     <Error v-if="_error" :errorPath="_error" />
 
-    <Timedown :maxSeconds="600" :currentSeconds="600" />
+    <Timedown
+      :maxSeconds="600"
+      :currentSeconds="12"
+      @timeout="() => _error = 'track.invalid_code'"
+    />
 
     <div class="Welcome__Content">
       <AVCard class="Welcome__Card_Overrides">
