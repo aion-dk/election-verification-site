@@ -3,12 +3,17 @@ import { ref } from "vue";
 import useAVVerifier from "../lib/useAVVerifier";
 
 export default defineStore("verificationStore", () => {
+  const setupAVVerifier = async (electionSlug: string) => {
+    avVerifier.value = await useAVVerifier(electionSlug);
+  }
+
+  const avVerifier = ref(null);
   const pairingCode = ref(null);
   const ballot = ref(null);
 
-  async function decryptWhenAvailable(avVerifier: any) {
-    await avVerifier.pollForCommitmentOpening();
-    ballot.value = await avVerifier.decryptBallot();
+  async function decryptWhenAvailable() {
+    await avVerifier.value.pollForCommitmentOpening();
+    ballot.value = avVerifier.value.decryptBallot();
   }
 
   function reset() {
@@ -16,18 +21,16 @@ export default defineStore("verificationStore", () => {
     ballot.value = null;
   }
 
-  async function generatePairingCode(
-    electionSlug: string,
-    verificationCode: string
-  ) {
-    const avVerifier = await useAVVerifier(electionSlug);
-    await avVerifier.findBallot(verificationCode);
-
-    const spoilAddress = await avVerifier.pollForSpoilRequest();
-    pairingCode.value = await avVerifier.submitVerifierKey(spoilAddress);
-
-    decryptWhenAvailable(avVerifier);
+  async function findBallot(verificationCode: string) {
+    return await avVerifier.value.findBallot(verificationCode);
   }
 
-  return { generatePairingCode, pairingCode, ballot, reset };
+  async function generatePairingCode() {
+    const spoilAddress = await avVerifier.value.pollForSpoilRequest();
+    pairingCode.value = await avVerifier.value.submitVerifierKey(spoilAddress);
+
+    decryptWhenAvailable();
+  }
+
+  return { generatePairingCode, setupAVVerifier, findBallot, pairingCode, ballot, reset };
 });

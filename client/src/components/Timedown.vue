@@ -1,6 +1,7 @@
 <script setup lang="ts">
   import { computed, ref, watch, onMounted } from "vue"
   import humanizeDuration from "humanize-duration"
+  import i18n from '../lib/i18n'
 
   const emit = defineEmits(['timeout'])
 
@@ -22,7 +23,7 @@
   const secondsLeft = ref(props.currentSeconds)
   const interval = ref(null);
   const miliseconds = computed(() => secondsLeft.value * 1000)
-  const displayValue = computed(() => humanizeDuration(miliseconds.value))
+  const displayValue = computed(() => humanizeDuration(miliseconds.value, { language: i18n.global.locale }))
   const percentageWidth = computed(() => secondsLeft.value / props.maxSeconds * 100)
   const style = computed(() => {
     return `

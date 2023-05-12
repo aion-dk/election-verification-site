@@ -7,7 +7,6 @@ import router from "../router";
 import useLocaleStore from "../stores/useLocaleStore";
 import useVerificationStore from "../stores/useVerificationStore";
 import Error from "../components/Error.vue";
-import Timedown from "../components/Timedown.vue"
 
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
@@ -58,21 +57,24 @@ async function initiateVerification(event: Event) {
   _error.value = null;
 
   try {
-    await verificationStore.generatePairingCode(
-      _electionSlug.value.toString(),
-      _verificationCode.value
-    );
-    await router.push({
-      name: "BallotVerifierView",
-      params: {
-        pairingCode: verificationStore.pairingCode,
-      },
-    });
+    await verificationStore.findBallot(_verificationCode.value)
+
+    verificationStore.generatePairingCode();
+
+    setTimeout(async () => {
+      if(verificationStore.pairingCode) return
+
+      await router.push({
+        name: "BallotVerifierFound",
+        params: {
+          verificationCode: _verificationCode.value,
+        },
+      });
+    }, 2000)
   } catch (e) {
     console.error(e);
-    _error.value = "verify.invalid_code";
-  } finally {
     _disabled.value = false;
+    _error.value = "verify.invalid_code";
   }
 }
 
@@ -86,8 +88,21 @@ watch(configStore, () => {
   setInfo();
 });
 
+watch(verificationStore, async (newStore) => {
+  if(!newStore.pairingCode) return
+
+  await router.push({
+    name: "BallotVerifierView",
+    params: {
+      pairingCode: newStore.pairingCode,
+    },
+  });
+})
+
 onMounted(() => {
   verificationStore.reset();
+  verificationStore.setupAVVerifier(_electionSlug.value as string);
+
   setInfo();
   (
     document.querySelector(".Welcome__TrackingCode") as HTMLInputElement
@@ -104,12 +119,6 @@ onMounted(() => {
       </h1>
     </div>
     <Error v-if="_error" :errorPath="_error" />
-
-    <Timedown
-      :maxSeconds="600"
-      :currentSeconds="12"
-      @timeout="() => _error = 'track.invalid_code'"
-    />
 
     <div class="Welcome__Content">
       <AVCard class="Welcome__Card_Overrides">
