@@ -28,6 +28,7 @@
     "@pinia/testing": "^0.0.15",
     "@playwright/test": "^1.32.3",
     "@rushstack/eslint-patch": "^1.1.4",
+    "@types/humanize-duration": "^3.27.1",
     "@types/jsdom": "^20.0.1",
     "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
