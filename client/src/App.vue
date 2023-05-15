@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, ref } from "vue";
+import { watch, ref, onMounted } from "vue";
 import { RouterView, useRoute } from "vue-router";
 import useLocaleStore from "./stores/useLocaleStore";
 import useConfigStore from "./stores/useConfigStore";
@@ -19,32 +19,25 @@ const localeStore = useLocaleStore();
 const route = useRoute();
 const isLoaded = ref(false);
 
-watch(route, async (newRoute) => {
-  const slug = newRoute.params.electionSlug;
-
-  if (slug) {
-    await configStore.loadConfig(slug.toString());
-    await setConfigurations(slug.toString());
-  }
-
-  const locale = newRoute.params.locale.toString();
-  if (locale) localeStore.setLocale(locale);
-});
-
-watch(configStore, async () => {
+onMounted(async () => {
+  await router.isReady();
+  const slug = route.params.electionSlug.toString();
+  await configStore.loadConfig(slug);
+  await setConfigurations(slug);
   setTitle();
-  if (route.params.electionSlug) {
-    await configStore.loadConfig(route.params.electionSlug.toString());
 
-    isLoaded.value = true;
-
-    if (route.params.trackingCode) {
-      await ballotStore.loadBallot(
-        route.params.trackingCode.toString(),
-        configStore.boardSlug
-      );
-    }
+  if (route.params.trackingCode) {
+    await ballotStore.loadBallot(
+      route.params.trackingCode.toString(),
+      configStore.boardSlug
+    );
   }
+
+  isLoaded.value = true;
+})
+
+watch(route, async (newRoute) => {
+  localeStore.setLocale(newRoute.params.locale.toString());
 });
 
 function updateLocale(newLocale: Locale) {
