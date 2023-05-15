@@ -25,9 +25,7 @@ export function useConferenceConnector(slug: string) {
   return {
     conferenceClient: {
       async getStatus() {
-        const status = await conferenceApi.value.get(
-          `/${parsedSlug}/status`
-        )
+        const status = await conferenceApi.value.get(`/${parsedSlug}/status`);
         return (status as any).election as ElectionStatusResponse;
       },
       async getStylingData() {

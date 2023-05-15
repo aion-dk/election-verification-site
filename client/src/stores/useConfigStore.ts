@@ -57,11 +57,11 @@ export default defineStore("useConfigStore", () => {
 
   const setElectionStatus = async (newStatus: ElectionStatus) => {
     electionStatus.value = newStatus;
-  }
+  };
 
-  const setElectionTheme =  async (newTheme: string) => {
+  const setElectionTheme = async (newTheme: string) => {
     electionTheme.value = newTheme;
-  }
+  };
 
   return {
     latestConfig,
