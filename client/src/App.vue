@@ -20,7 +20,6 @@ const route = useRoute();
 const isLoaded = ref(false);
 
 onMounted(async () => {
-  await router.isReady();
   const slug = route.params.electionSlug.toString();
   await configStore.loadConfig(slug);
   await setConfigurations(slug);
