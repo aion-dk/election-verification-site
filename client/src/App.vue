@@ -34,7 +34,7 @@ onMounted(async () => {
   }
 
   isLoaded.value = true;
-})
+});
 
 watch(route, async (newRoute) => {
   localeStore.setLocale(newRoute.params.locale.toString());
