@@ -65,6 +65,11 @@ function setTitle() {
 }
 
 const setConfigurations = async (slug: string) => {
+  setLanguage(slug);
+  setTheme(slug);
+};
+
+const setLanguage = async (slug: string) => {
   let browserLocale = navigator.languages.find((locale) =>
     i18n.global.availableLocales.includes(locale as Locale)
   );
@@ -94,6 +99,10 @@ const setConfigurations = async (slug: string) => {
       );
     }
   }
+};
+
+const setTheme = async (slug: string) => {
+  console.log(slug)
 };
 </script>
 
