@@ -26,19 +26,19 @@ const isMenuOpened = ref<boolean>(false);
 
 const toggleMenu = () => {
   isMenuOpened.value = !isMenuOpened.value;
-}
+};
 
 const emit = defineEmits(["changeLocale"]);
 
 const availableLocales = computed(() => {
-  return props.election.locales.map((lang: unknown):DropdownOption => {
+  return props.election.locales.map((lang: unknown): DropdownOption => {
     return {
       selected: lang === props.locale,
       value: lang.toString(),
-      display: t(`locales.${lang}`)
-    }
-  })
-})
+      display: t(`locales.${lang}`),
+    };
+  });
+});
 
 function setLocale(newLocale: string) {
   emit("changeLocale", newLocale);
@@ -47,7 +47,10 @@ function setLocale(newLocale: string) {
 
 <template>
   <AVNavbar>
-    <RouterLink class="Header__Election_Info" :to="`/${locale}/${election.slug}`">
+    <RouterLink
+      class="Header__Election_Info"
+      :to="`/${locale}/${election.slug}`"
+    >
       <img
         class="Header__Logo"
         aria-hidden="true"
@@ -59,10 +62,13 @@ function setLocale(newLocale: string) {
         <span class="Header__Subtitle">{{ electionName }}</span>
       </div>
     </RouterLink>
-    
-    <div class="Header__Links" :class="{
-      Header__Show: !isMenuOpened
-    }">
+
+    <div
+      class="Header__Links"
+      :class="{
+        Header__Show: !isMenuOpened,
+      }"
+    >
       <RouterLink
         class="Header__Link"
         role="menuitem"
@@ -217,12 +223,12 @@ function setLocale(newLocale: string) {
 @media only screen and (max-width: 976px) {
   .Header__Link {
     font-size: 1rem;
-    padding: .5rem;
+    padding: 0.5rem;
   }
 
   .Header__Locales {
     font-size: 1rem;
-    padding-left: .5rem;
+    padding-left: 0.5rem;
   }
 }
 

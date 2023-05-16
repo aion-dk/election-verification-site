@@ -135,13 +135,13 @@ const setTheme = async (conferenceClient: any) => {
 
 <template>
   <div v-if="!isLoaded" class="DBAS__Loading_Page">
-    <AVSpinner size="xlarge" color="neutral"/>
+    <AVSpinner size="xlarge" color="neutral" />
   </div>
   <div class="DBAS" v-if="isLoaded">
     <!-- <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a> -->
 
     <Header
-      :election="configStore.election"            
+      :election="configStore.election"
       :electionName="electionName"
       :locale="localeStore.locale"
       @changeLocale="updateLocale"
@@ -168,17 +168,7 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  
 }
-
-
-
-
-
-
-
-
-
 
 .DBAS {
   display: flex;
@@ -186,8 +176,8 @@ body {
 }
 
 .DBAS__Content {
-  height: calc(100vh - 120px);
-  margin-top: 80px;
+  height: calc(100vh - 246px);
+  margin-top: 70px;
   overflow-y: auto;
 }
 
@@ -216,5 +206,11 @@ body {
 
 .DBAS_SkipToContentLink:focus {
   margin-top: 100px;
+}
+
+@media only screen and (max-width: 768px) {
+  .DBAS__Content {
+    height: calc(100vh - 118px);
+  }
 }
 </style>
