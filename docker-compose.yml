@@ -1,8 +1,8 @@
 version: "3"
 services:
   client:
-    image: client:latest
-    # image: "534003348933.dkr.ecr.eu-west-1.amazonaws.com/dbas-client:main"
+    image: digital-ballot-audit-site:latest
+    # image: "534003348933.dkr.ecr.eu-west-1.amazonaws.com/digital-ballot-audit-site:dev-main"
     build:
       context: ./client
       ssh:

@@ -234,7 +234,7 @@ jobs:
     executor: vm-linux-ubuntu
     steps:
       - build-image:
-          service_name: "dbas"
+          service_name: "digital-ballot-audit-site"
           tag_prefix: "dev-"
           target: "development"
           environment: "development"
@@ -243,7 +243,7 @@ jobs:
     executor: vm-linux-ubuntu
     steps:
       - build-image:
-          service_name: "dbas"
+          service_name: "digital-ballot-audit-site"
           tag_prefix: ""
           target: "production"
           environment: "production"
@@ -263,14 +263,14 @@ jobs:
       - run:
           name: Pull the image for scanning
           command: |
-            docker pull ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/dbas:${CIRCLE_SHA1}-untested
+            docker pull ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/digital-ballot-audit-site:${CIRCLE_SHA1}-untested
       - docker/scan:
-          image: ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/dbas:${CIRCLE_SHA1}-untested
+          image: ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/digital-ballot-audit-site:${CIRCLE_SHA1}-untested
   client-e2e:
     executor: vm-linux-ubuntu
     steps:
       - run-e2e: &client-service-aws
-          service_name: "dbas"
+          service_name: "digital-ballot-audit-site"
           tag_prefix: "dev-"
           aws_access_key_id: "${AWS_ACCESS_KEY_ID}"
           aws_secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
