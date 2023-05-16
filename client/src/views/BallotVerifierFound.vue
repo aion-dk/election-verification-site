@@ -3,16 +3,16 @@ import useConfigStore from "../stores/useConfigStore";
 import useLocaleStore from "../stores/useLocaleStore";
 import CompactHeader from "../components/CompactHeader.vue";
 import Infobox from "../components/Infobox.vue";
-import { watch } from 'vue'
-import router from '@/router'
-import useVerificationStore from '@/stores/useVerificationStore'
+import { watch } from "vue";
+import router from "@/router";
+import useVerificationStore from "@/stores/useVerificationStore";
 
 const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
 
 watch(verificationStore, async (store) => {
-  console.log(store)
+  console.log(store);
   if (!store.pairingCode) return;
 
   await router.push({
