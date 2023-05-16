@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useRoute } from "vue-router";
+// import { useRoute } from "vue-router";
 import useConfigStore from "../stores/useConfigStore";
 import { ref, watch, onMounted } from "vue";
 import useBallotStore from "../stores/useBallotStore";
@@ -11,9 +11,9 @@ import Error from "../components/Error.vue";
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
-const route = useRoute();
-const _electionSlug = ref(route.params.electionSlug);
-const _locale = ref(localeStore.locale);
+// const route = useRoute();
+// const _electionSlug = ref(route.params.electionSlug);
+// const _locale = ref(localeStore.locale);
 const _title = ref("Loading..");
 const _info = ref("Loading..");
 const _trackingCode = ref(null);
@@ -23,7 +23,7 @@ const _disabled = ref(false);
 const verificationStore = useVerificationStore();
 
 function setInfo() {
-  _title.value = configStore.election.title[_locale.value];
+  _title.value = configStore.election.title[localeStore.locale];
   _info.value = [configStore.election.jurisdiction, configStore.election.state]
     .filter((s) => s)
     .join(", ");
@@ -41,7 +41,7 @@ async function lookupBallot(event: Event) {
 
   if (ballotStore.ballot?.status) {
     router.push(
-      `/${_locale.value}/${_electionSlug.value}/track/${_trackingCode.value}`
+      `/${localeStore.locale}/${configStore.boardSlug}/track/${_trackingCode.value}`
     );
   } else {
     _error.value = "track.invalid_code";
@@ -78,11 +78,11 @@ async function initiateVerification(event: Event) {
   }
 }
 
-watch(route, (newRoute) => {
-  _electionSlug.value = newRoute.params.electionSlug;
-  _locale.value = newRoute.params.locale.toString();
-  setInfo();
-});
+// watch(route, (newRoute) => {
+//   _electionSlug.value = newRoute.params.electionSlug;
+//   _locale.value = newRoute.params.locale.toString();
+//   setInfo();
+// });
 
 watch(configStore, () => {
   setInfo();
@@ -101,7 +101,7 @@ watch(verificationStore, async (newStore) => {
 
 onMounted(() => {
   verificationStore.reset();
-  verificationStore.setupAVVerifier(_electionSlug.value as string);
+  verificationStore.setupAVVerifier(configStore.boardSlug);
 
   setInfo();
   (
@@ -112,6 +112,7 @@ onMounted(() => {
 
 <template>
   <div class="Welcome">
+    <div class="election-banner" />
     <div class="Welcome__Header">
       <h1 class="Welcome__Title">
         <span>{{ _title }}</span>

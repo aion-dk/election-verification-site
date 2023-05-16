@@ -1,9 +1,8 @@
 <script lang="ts" setup>
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { RouterLink } from "vue-router";
 import config from "../lib/config";
 import DropDown from "./DropDown.vue";
-import { uniq } from "lodash";
 import i18n from "../lib/i18n";
 import type { DropdownOption } from "@/Types";
 const { t } = i18n.global;
@@ -11,47 +10,65 @@ const { t } = i18n.global;
 const props = defineProps({
   locale: {
     type: String,
-    default: "en",
+    required: true,
   },
   election: {
     type: Object,
     required: true,
   },
+  electionName: {
+    type: String,
+    default: "",
+  },
 });
+
+const isMenuOpened = ref<boolean>(false);
+
+const toggleMenu = () => {
+  isMenuOpened.value = !isMenuOpened.value;
+};
 
 const emit = defineEmits(["changeLocale"]);
 
-const _locales = computed(() => uniq(props.election.locales || ["en"]));
 const availableLocales = computed(() => {
-  return _locales.value.map((l: unknown): DropdownOption => {
+  return props.election.locales.map((lang: unknown): DropdownOption => {
     return {
-      selected: l === props.locale,
-      value: l.toString(),
-      display: t(`locales.${l}`),
+      selected: lang === props.locale,
+      value: lang.toString(),
+      display: t(`locales.${lang}`),
     };
   });
 });
 
 function setLocale(newLocale: string) {
-  console.log("Setting new locale", newLocale);
   emit("changeLocale", newLocale);
 }
 </script>
 
 <template>
-  <nav class="Header" role="menubar">
-    <img
-      class="Header__Logo"
-      aria-hidden="true"
-      :src="config.logoUrl"
-      alt="DBAS Logo"
-    />
-
-    <RouterLink class="Header__Title" :to="`/${locale}/${election.slug}`">
-      {{ $t("header.dbas") }}
+  <AVNavbar>
+    <RouterLink
+      class="Header__Election_Info"
+      :to="`/${locale}/${election.slug}`"
+    >
+      <img
+        class="Header__Logo"
+        aria-hidden="true"
+        :src="config.logoUrl"
+        alt="DBAS Logo"
+      />
+      <div class="Header__Text">
+        <span class="Header__Title">{{ $t("header.dbas") }}</span>
+        <span class="Header__Subtitle">{{ electionName }}</span>
+      </div>
     </RouterLink>
 
-    <div class="Header__Links">
+    <div
+      class="Header__Links"
+      :class="{
+        Header__Show: !isMenuOpened,
+      }"
+    >
       <RouterLink
         class="Header__Link"
         role="menuitem"
@@ -95,62 +112,140 @@ function setLocale(newLocale: string) {
         @change="(value) => setLocale(value)"
       />
     </div>
-  </nav>
+    <button class="Header__Hamburger_Btn" @click="toggleMenu">
+      <AVIcon v-if="isMenuOpened" icon="xmark" />
+      <AVIcon v-else icon="bars" />
+    </button>
+  </AVNavbar>
 </template>
 
 <style type="text/css" scoped>
-.Header {
+.Header__Election_Info {
   display: flex;
-  font-family: "Open Sans";
   align-items: center;
-  box-shadow: 0px 4px 10px #ccc;
-  position: fixed;
-  width: 100%;
-  z-index: 2;
-  background-color: #fff;
-  box-sizing: border-box;
-}
-
-.Header__Title {
-  font-weight: 600;
-  font-size: 26px;
-  margin: 0;
-  padding: 0;
   text-decoration: none;
-  color: #495057;
+  gap: 1rem;
 }
 
 .Header__Logo {
   height: 54px;
   width: 54px;
   object-fit: cover;
-  margin: 8px 11px;
   border-radius: 3px;
 }
 
-.Header__Links {
-  flex-grow: 1;
-  justify-content: flex-end;
-  align-items: center;
+.Header__Text {
   display: flex;
+  gap: 1rem;
+}
+
+.Header__Title {
+  font-weight: 600;
+  font-size: 1.625rem;
+  line-height: 1.625rem;
+  color: #495057;
+}
+
+.Header__Subtitle {
+  font-size: 1.125rem;
+  line-height: 1.625rem;
+  color: #495057;
+}
+
+.Header__Links {
+  display: block;
+}
+
+.Header__Hamburger_Btn {
+  display: none;
+  border: none;
+  background: none;
+  font-size: 1.5rem;
+  width: 50px;
+  height: 50px;
 }
 
 .Header__Link {
-  padding: 20px;
-  font-size: 18px;
-  font-weight: 700;
-  text-transform: uppercase;
+  padding: 1.25rem;
+  font-size: 1.125rem;
+  font-weight: 400;
   text-decoration: none;
   color: #495057;
 }
 
+.Header__Link:hover {
+  color: #212529;
+}
+
 .Header__Locales {
-  margin-right: 20px;
-  font-size: 18px;
-  font-weight: 700;
-  text-transform: uppercase;
-  text-decoration: none;
+  padding-left: 1rem;
+  font-size: 1.125rem;
+  font-weight: 400;
   color: #495057;
   border: none;
+}
+
+.Header__Locales:hover {
+  color: #212529;
+}
+
+@media only screen and (max-width: 768px) {
+  .Header__Links {
+    position: absolute;
+    top: 70px;
+    left: 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100vw;
+    height: calc(100vh - 70px);
+    background-color: white;
+  }
+
+  .Header__Link {
+    font-size: 1.5rem !important;
+    margin-bottom: 3rem;
+  }
+  .Header__Locales {
+    font-size: 1.5rem !important;
+  }
+
+  .Header__Hamburger_Btn {
+    display: block;
+  }
+
+  .Header__Show {
+    display: none;
+  }
+}
+
+@media only screen and (max-width: 976px) {
+  .Header__Link {
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+
+  .Header__Locales {
+    font-size: 1rem;
+    padding-left: 0.5rem;
+  }
+}
+
+@media only screen and (max-width: 1440px) {
+  .Header__Text {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .Header__Title {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+  }
+
+  .Header__Subtitle {
+    font-size: 1rem;
+    line-height: 1.2rem;
+  }
 }
 </style>

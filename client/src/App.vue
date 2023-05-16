@@ -18,6 +18,7 @@ const configStore = useConfigStore();
 const localeStore = useLocaleStore();
 const route = useRoute();
 const isLoaded = ref(false);
+const electionName = ref("");
 
 onMounted(async () => {
   const slug = route.params.electionSlug.toString();
@@ -55,6 +56,7 @@ function setTitle() {
     (s) => s
   );
   if (window.top) window.top.document.title = title.join(" - ");
+  electionName.value = configStore.election.title[localeStore.locale];
 }
 
 const setConfigurations = async (slug: string) => {
@@ -132,11 +134,15 @@ const setTheme = async (conferenceClient: any) => {
 </script>
 
 <template>
+  <div v-if="!isLoaded" class="DBAS__Loading_Page">
+    <AVSpinner size="xlarge" color="neutral" />
+  </div>
   <div class="DBAS" v-if="isLoaded">
     <!-- <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a> -->
 
     <Header
       :election="configStore.election"
+      :electionName="electionName"
       :locale="localeStore.locale"
       @changeLocale="updateLocale"
     />
@@ -149,20 +155,30 @@ const setTheme = async (conferenceClient: any) => {
 
 <style type="text/css">
 body {
+  font-family: "Open Sans";
+  overflow: hidden;
   padding: 0;
   margin: 0;
 }
 
-.DBAS {
+.DBAS__Loading_Page {
+  width: 100vw;
   height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.DBAS {
   display: flex;
   flex-direction: column;
 }
 
 .DBAS__Content {
-  height: calc(100vh - 120px);
-  margin-top: 80px;
-  overflow-y: scroll;
+  height: calc(100vh - 246px);
+  margin-top: 70px;
+  overflow-y: auto;
 }
 
 .DBAS__InnerContent {
@@ -190,5 +206,11 @@ body {
 
 .DBAS_SkipToContentLink:focus {
   margin-top: 100px;
+}
+
+@media only screen and (max-width: 768px) {
+  .DBAS__Content {
+    height: calc(100vh - 118px);
+  }
 }
 </style>
