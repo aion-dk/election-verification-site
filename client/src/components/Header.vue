@@ -2,11 +2,11 @@
 import { computed } from "vue";
 import { RouterLink } from "vue-router";
 import config from "../lib/config";
-import enFlag from "../assets/en.svg";
-import esFlag from "../assets/es.svg";
-import type { FlagLocaleMap } from "../Types";
-
-const emit = defineEmits(["changeLocale"]);
+import DropDown from "./DropDown.vue";
+import { uniq } from "lodash";
+import i18n from "../lib/i18n";
+import type { DropdownOption } from "@/Types";
+const { t } = i18n.global;
 
 const props = defineProps({
   locale: {
@@ -18,13 +18,22 @@ const props = defineProps({
     required: true,
   },
 });
-const _locales = computed(() => props.election.content?.locales || ["en"]);
-const _flagLocaleMap: FlagLocaleMap = {
-  en: enFlag,
-  es: esFlag,
-};
+
+const emit = defineEmits(["changeLocale"]);
+
+const _locales = computed(() => uniq(props.election.locales || ["en"]));
+const availableLocales = computed(() => {
+  return _locales.value.map((l: unknown): DropdownOption => {
+    return {
+      selected: l === props.locale,
+      value: l.toString(),
+      display: t(`locales.${l}`),
+    };
+  });
+});
 
 function setLocale(newLocale: string) {
+  console.log("Setting new locale", newLocale);
   emit("changeLocale", newLocale);
 }
 </script>
@@ -80,22 +89,11 @@ function setLocale(newLocale: string) {
         />
       </a>
 
-      <div class="Header__Flags">
-        <img
-          v-for="(l, key) in _locales"
-          :key="key"
-          :src="_flagLocaleMap[l]"
-          :class="{
-            Header__Flag: true,
-            ['Header__Flag--current']: locale === l,
-          }"
-          :data-testid="`flag-${l}`"
-          :alt="$t(`header.change_locale.${l}`)"
-          role="menuitem"
-          tabindex="0"
-          @click="() => setLocale(l)"
-        />
-      </div>
+      <DropDown
+        class="Header__Locales"
+        :options="availableLocales"
+        @change="(value) => setLocale(value)"
+      />
     </div>
   </nav>
 </template>
@@ -146,19 +144,13 @@ function setLocale(newLocale: string) {
   color: #495057;
 }
 
-.Header__Flags {
-  margin-left: 20px;
-  margin-right: 10px;
-}
-
-.Header__Flag {
-  width: 30px;
-  height: 24px;
-  margin: 3px;
-  cursor: pointer;
-}
-
-.Header__Flag--current {
-  border: solid 1px #000;
+.Header__Locales {
+  margin-right: 20px;
+  font-size: 18px;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: #495057;
+  border: none;
 }
 </style>

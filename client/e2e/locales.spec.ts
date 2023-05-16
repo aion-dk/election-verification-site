@@ -1,5 +1,5 @@
 import { test } from "@playwright/test";
-import { latestConfig } from "./mocks.ts";
+import { latestConfig, translations } from "./mocks";
 
 test("changing locale", async ({ page }) => {
   // Mock Network calls
@@ -15,12 +15,21 @@ test("changing locale", async ({ page }) => {
       });
     }
 
+    // Intercept Translation calls
+    if (url.indexOf("/translations") > 0) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(translations),
+      });
+    }
+
     return route.continue();
   });
 
   await page.goto("/en/us3");
-  await page.getByTestId("flag-es").click();
+  await page.locator(".Header__Locales").selectOption("es");
   await page.getByRole("menuitem", { name: "Información" }).click();
-  await page.getByTestId("flag-en").click();
+  await page.locator(".Header__Locales").selectOption("en");
   await page.getByRole("menuitem", { name: "About" }).click();
 });

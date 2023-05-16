@@ -2,7 +2,7 @@
 import CompactHeader from "../components/CompactHeader.vue";
 import { options } from "../lib/api";
 import useLocaleStore from "../stores/useLocaleStore";
-import useElectionStore from "../stores/useElectionStore";
+import useConfigStore from "../stores/useConfigStore";
 import useBoardStore from "../stores/useBoardStore";
 import { onMounted, ref, watch } from "vue";
 import { useRoute, RouterLink } from "vue-router";
@@ -10,11 +10,11 @@ import BoardItem from "../components/BoardItem.vue";
 
 const route = useRoute();
 const localeStore = useLocaleStore();
-const electionStore = useElectionStore();
+const configStore = useConfigStore();
 const boardStore = useBoardStore();
 const configItemsOnly = ref<boolean>(false);
 
-watch(electionStore, () => loadPage(currentPage()));
+watch(configStore, () => loadPage(currentPage()));
 watch(route, () => loadPage(currentPage()));
 watch(configItemsOnly, () => loadPage(1));
 
@@ -42,8 +42,8 @@ function filter() {
 }
 
 function loadPage(page: number) {
-  if (electionStore.election.slug) {
-    boardStore.loadPage(electionStore.election.slug, page, filter());
+  if (configStore.boardSlug) {
+    boardStore.loadPage(configStore.boardSlug, page, filter());
   }
 }
 
@@ -53,7 +53,7 @@ onMounted(() => loadPage(currentPage()));
 <template>
   <main class="LogsView">
     <CompactHeader
-      :election="electionStore.election"
+      :election="configStore.election"
       :locale="localeStore.locale"
     />
 
@@ -96,10 +96,10 @@ onMounted(() => loadPage(currentPage()));
 
     <div class="LogsView__Pagination">
       <RouterLink
-        aria-label="Previos page"
+        aria-label="Previous page"
         class="LogsView__PageLink"
         v-if="boardStore.meta.prev_page"
-        :to="`/${localeStore.locale}/${electionStore.election.slug}/logs/${boardStore.meta.prev_page}`"
+        :to="`/${localeStore.locale}/${configStore.boardSlug}/logs/${boardStore.meta.prev_page}`"
       >
         <font-awesome-icon icon="fa-solid fa-chevron-left" />
       </RouterLink>
@@ -112,7 +112,7 @@ onMounted(() => loadPage(currentPage()));
         aria-label="Next page"
         class="LogsView__PageLink"
         v-if="boardStore.meta.next_page"
-        :to="`/${localeStore.locale}/${electionStore.election.slug}/logs/${boardStore.meta.next_page}`"
+        :to="`/${localeStore.locale}/${configStore.boardSlug}/logs/${boardStore.meta.next_page}`"
       >
         <font-awesome-icon icon="fa-solid fa-chevron-right" />
       </RouterLink>
@@ -121,7 +121,7 @@ onMounted(() => loadPage(currentPage()));
     <div class="LogsView__Footer">
       <a
         class="LogsView__DownloadButton"
-        :href="`${options.baseURL}/${electionStore.election.slug}/download_log`"
+        :href="`${options.baseURL}/${configStore.boardSlug}/download_log`"
       >
         <font-awesome-icon icon="fa-solid fa-download" />
         <span>

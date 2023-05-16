@@ -3,7 +3,8 @@ import {
   latestConfig,
   foundBallotStatus,
   rejectedBallotStatus,
-} from "./mocks.ts";
+  translations,
+} from "./mocks";
 
 test("tracking a ballot", async ({ page }) => {
   // Mock Network calls
@@ -25,6 +26,15 @@ test("tracking a ballot", async ({ page }) => {
         status: 200,
         contentType: "application/json",
         body: JSON.stringify(foundBallotStatus),
+      });
+    }
+
+    // Intercept Translation calls
+    if (url.indexOf("/translations") > 0) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(translations),
       });
     }
 
@@ -63,6 +73,15 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
       });
     }
 
+    // Intercept Translation calls
+    if (url.indexOf("/translations") > 0) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(translations),
+      });
+    }
+
     return route.continue();
   });
 
@@ -70,8 +89,8 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
   await expect(page.locator("h1")).toHaveText("Funny Election");
   await page.getByPlaceholder("Ballot tracking code").fill("abcdef");
   await page.getByRole("button", { name: "Track my ballot" }).click();
-  await expect(page.locator(".Welcome__Error")).toHaveText(
-    /Tracking code not found/
+  await expect(page.locator(".Error__Title")).toContainText(
+    "Invalid tracking code"
   );
   await page.getByPlaceholder("Ballot tracking code").fill("hijklm");
 });
@@ -99,6 +118,15 @@ test("tracking a rejected ballot has the right text", async ({ page }) => {
       });
     }
 
+    // Intercept Translation calls
+    if (url.indexOf("/translations") > 0) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(translations),
+      });
+    }
+
     return route.continue();
   });
 
@@ -107,16 +135,20 @@ test("tracking a rejected ballot has the right text", async ({ page }) => {
   await page.getByPlaceholder("Ballot tracking code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Track my ballot" }).click();
 
-  expect(page.locator(".BallotTracker__StatusInfo h3")).toHaveText(
+  // For some reason this allow the firefox to not break
+  // Seems like it needs just a millisecond more to load the proper data on the page
+  await page.locator(".BallotTracker__StatusInfo h3");
+
+  await expect(page.locator(".BallotTracker__StatusInfo h3")).toHaveText(
     "Ballot not accepted"
   );
-  expect(page.locator(".BallotTracker__StatusInfo p")).toHaveText(
+  await expect(page.locator(".BallotTracker__StatusInfo p")).toHaveText(
     "There is a problem with your signature affidavit. Contact your local election official for next steps and to cure your affidavit."
   );
-  expect(page.locator(".BallotTracker__StatusInfo p")).toHaveText(
+  await expect(page.locator(".BallotTracker__StatusInfo p")).toHaveText(
     "There is a problem with your signature affidavit. Contact your local election official for next steps and to cure your affidavit."
   );
-  expect(page.locator(".BallotActivity__Type").first()).toHaveText(
+  await expect(page.locator(".BallotActivity__Type").first()).toHaveText(
     "Affidavit Rejected"
   );
 });
