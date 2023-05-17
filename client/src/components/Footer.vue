@@ -28,7 +28,7 @@ import avlogo from "../assets/avlogo.svg";
 .Footer__Text {
   color: white;
   font-size: 0.75rem;
-  margin-right: .25rem;
+  margin-right: 0.25rem;
 }
 
 .Footer__Image {

@@ -5,12 +5,12 @@ import config from "../lib/config";
 import DropDown from "./DropDown.vue";
 import i18n from "../lib/i18n";
 import type { DropdownOption } from "@/Types";
-import {storeToRefs } from 'pinia'
-import useConfigStore from '../stores/useConfigStore'
+import { storeToRefs } from "pinia";
+import useConfigStore from "../stores/useConfigStore";
 
 const { t } = i18n.global;
-const configStore = useConfigStore()
-const { electionStatus } = storeToRefs(configStore)
+const configStore = useConfigStore();
+const { electionStatus } = storeToRefs(configStore);
 const logo = ref(null);
 
 const props = defineProps({
@@ -52,7 +52,7 @@ function setLocale(newLocale: string) {
 
 watch(electionStatus, () => {
   if (electionStatus.value.theme?.logo) {
-    logo.value = electionStatus.value.theme?.logo
+    logo.value = electionStatus.value.theme?.logo;
   }
 });
 </script>

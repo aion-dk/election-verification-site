@@ -6,8 +6,8 @@ import router from "../router";
 import useLocaleStore from "../stores/useLocaleStore";
 import useVerificationStore from "../stores/useVerificationStore";
 import Error from "../components/Error.vue";
-import SplashScreen from '../components/SplashScreen.vue'
-import i18n from '../lib/i18n'
+import SplashScreen from "../components/SplashScreen.vue";
+import i18n from "../lib/i18n";
 
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
@@ -19,7 +19,7 @@ const _verificationCode = ref(null);
 const _error = ref(null);
 const _disabled = ref(false);
 const verificationStore = useVerificationStore();
-const electionTitle = ref("")
+const electionTitle = ref("");
 
 function setInfo() {
   _title.value = configStore.election.title[localeStore.locale];
@@ -82,7 +82,7 @@ const splashImgUrl = ref(null);
 watch(configStore, () => {
   setInfo();
   splashImgUrl.value = configStore.electionStatus?.theme?.splash;
-  electionTitle.value = configStore.electionStatus.title[i18n.global.locale]
+  electionTitle.value = configStore.electionStatus.title[i18n.global.locale];
 });
 
 watch(verificationStore, async (newStore) => {
@@ -112,116 +112,130 @@ onMounted(() => {
     <SplashScreen :image="splashImgUrl" />
     <Error v-if="_error" :errorPath="_error" />
 
-<div class="Welcome__Content">
-  <div class="Welcome__Infobox bg-theme-transparent">
-      <h1 class="Welcome__Title text-contrast">{{ $t("views.welcome.title") }}</h1>
-      <h2 class="Welcome__Subtitle text-contrast">{{ electionTitle }}</h2>
-      <p class="Welcome__Info text-contrast">{{ $t("views.welcome.description") }}</p>
-    </div>
-
-    <div class="Welcome__CTA">
-      <AVCard class="Welcome__Card_Overrides">
-        <h3>{{ $t("views.welcome.ballot_tester.title") }}</h3>
-        <p>{{ $t("views.welcome.ballot_tester.subtitle") }} <span class="text-brand">{{ $t("views.welcome.ballot_tester.subtitle_strong") }}</span></p>
-        <p>{{ $t("views.welcome.ballot_tester.description") }}</p>
-        <form @submit="initiateVerification">
-          <input
-            :disabled="_disabled"
-            type="text"
-            name="verification-code"
-            id="verification-code"
-            :placeholder="$t('views.welcome.ballot_tester.placeholder')"
-            v-model="_verificationCode"
-            class="Welcome__TrackingCode"
-            data-1p-ignore
-          />
-          <AVButton
-            :label="$t('views.welcome.ballot_tester.button')"
-            type="neutral"
-            name="initiate-verification"
-            id="initiate-verification"
-            :disabled="_disabled || !_verificationCode"
-            iconLeft
-            fullWidth
-            icon="fingerprint"
-            @click="initiateVerification"
-            class="Welcome__Button_Overrides"
-          />
-        </form>
-  
-        <p class="Tooltip">
-          <tooltip hover placement="bottom">
-            <template #default>
-              <span>{{ $t("views.welcome.ballot_tester.tooltip_helper") }}</span>
-              <span
-                :aria-label="
-                  $t('views.welcome.ballot_tester.tooltip_text')
-                "
-              >
-                <font-awesome-icon icon="fa-solid fa-circle-question" />
-              </span>
-            </template>
-  
-            <template #content>
-              <span id="tracking-code-tooltip">
-                {{ $t("views.welcome.ballot_tester.tooltip_text") }}
-              </span>
-            </template>
-          </tooltip>
+    <div class="Welcome__Content">
+      <div class="Welcome__Infobox bg-theme-transparent">
+        <h1 class="Welcome__Title text-contrast">
+          {{ $t("views.welcome.title") }}
+        </h1>
+        <h2 class="Welcome__Subtitle text-contrast">{{ electionTitle }}</h2>
+        <p class="Welcome__Info text-contrast">
+          {{ $t("views.welcome.description") }}
         </p>
-      </AVCard>
+      </div>
 
-      <AVCard class="Welcome__Card_Overrides">
-        <h3>{{ $t("views.welcome.ballot_tracker.title") }}</h3>
-        <p>{{ $t("views.welcome.ballot_tracker.subtitle") }} <span class="text-brand">{{ $t("views.welcome.ballot_tracker.subtitle_strong") }}</span></p>
-        <p>{{ $t("views.welcome.ballot_tracker.description") }}</p>
-        <form @submit="lookupBallot">
-          <input
-            :disabled="_disabled"
-            type="text"
-            name="tracking-code"
-            id="tracking-code"
-            :placeholder="$t('views.welcome.ballot_tracker.placeholder')"
-            v-model="_trackingCode"
-            class="Welcome__TrackingCode"
-          />
-          <AVButton
-            :label="$t('views.welcome.ballot_tracker.button')"
-            type="neutral"
-            name="lookup-ballot"
-            id="lookup-ballot"
-            :disabled="_disabled || !_trackingCode"
-            iconLeft
-            fullWidth
-            icon="magnifying-glass"
-            @click="lookupBallot"
-            class="Welcome__Button_Overrides"
-          />
-        </form>
+      <div class="Welcome__CTA">
+        <AVCard class="Welcome__Card_Overrides">
+          <h3>{{ $t("views.welcome.ballot_tester.title") }}</h3>
+          <p>
+            {{ $t("views.welcome.ballot_tester.subtitle") }}
+            <span class="text-brand">{{
+              $t("views.welcome.ballot_tester.subtitle_strong")
+            }}</span>
+          </p>
+          <p>{{ $t("views.welcome.ballot_tester.description") }}</p>
+          <form @submit="initiateVerification">
+            <input
+              :disabled="_disabled"
+              type="text"
+              name="verification-code"
+              id="verification-code"
+              :placeholder="$t('views.welcome.ballot_tester.placeholder')"
+              v-model="_verificationCode"
+              class="Welcome__TrackingCode"
+              data-1p-ignore
+            />
+            <AVButton
+              :label="$t('views.welcome.ballot_tester.button')"
+              type="neutral"
+              name="initiate-verification"
+              id="initiate-verification"
+              :disabled="_disabled || !_verificationCode"
+              iconLeft
+              fullWidth
+              icon="fingerprint"
+              @click="initiateVerification"
+              class="Welcome__Button_Overrides"
+            />
+          </form>
 
-        <p class="Tooltip">
-          <tooltip hover placement="bottom">
-            <template #default>
-              <span>{{ $t("views.welcome.ballot_tracker.tooltip_helper") }}</span>
-              <span
-                :aria-label="$t('views.welcome.ballot_tracker.tooltip_text')"
-              >
-                <font-awesome-icon icon="fa-solid fa-circle-question" />
-              </span>
-            </template>
+          <p class="Tooltip">
+            <tooltip hover placement="bottom">
+              <template #default>
+                <span>{{
+                  $t("views.welcome.ballot_tester.tooltip_helper")
+                }}</span>
+                <span
+                  :aria-label="$t('views.welcome.ballot_tester.tooltip_text')"
+                >
+                  <font-awesome-icon icon="fa-solid fa-circle-question" />
+                </span>
+              </template>
 
-            <template #content>
-              <span id="tracking-code-tooltip">
-                {{ $t("views.welcome.ballot_tracker.tooltip_text") }}
-              </span>
-            </template>
-          </tooltip>
-        </p>
-      </AVCard>
+              <template #content>
+                <span id="tracking-code-tooltip">
+                  {{ $t("views.welcome.ballot_tester.tooltip_text") }}
+                </span>
+              </template>
+            </tooltip>
+          </p>
+        </AVCard>
+
+        <AVCard class="Welcome__Card_Overrides">
+          <h3>{{ $t("views.welcome.ballot_tracker.title") }}</h3>
+          <p>
+            {{ $t("views.welcome.ballot_tracker.subtitle") }}
+            <span class="text-brand">{{
+              $t("views.welcome.ballot_tracker.subtitle_strong")
+            }}</span>
+          </p>
+          <p>{{ $t("views.welcome.ballot_tracker.description") }}</p>
+          <form @submit="lookupBallot">
+            <input
+              :disabled="_disabled"
+              type="text"
+              name="tracking-code"
+              id="tracking-code"
+              :placeholder="$t('views.welcome.ballot_tracker.placeholder')"
+              v-model="_trackingCode"
+              class="Welcome__TrackingCode"
+            />
+            <AVButton
+              :label="$t('views.welcome.ballot_tracker.button')"
+              type="neutral"
+              name="lookup-ballot"
+              id="lookup-ballot"
+              :disabled="_disabled || !_trackingCode"
+              iconLeft
+              fullWidth
+              icon="magnifying-glass"
+              @click="lookupBallot"
+              class="Welcome__Button_Overrides"
+            />
+          </form>
+
+          <p class="Tooltip">
+            <tooltip hover placement="bottom">
+              <template #default>
+                <span>{{
+                  $t("views.welcome.ballot_tracker.tooltip_helper")
+                }}</span>
+                <span
+                  :aria-label="$t('views.welcome.ballot_tracker.tooltip_text')"
+                >
+                  <font-awesome-icon icon="fa-solid fa-circle-question" />
+                </span>
+              </template>
+
+              <template #content>
+                <span id="tracking-code-tooltip">
+                  {{ $t("views.welcome.ballot_tracker.tooltip_text") }}
+                </span>
+              </template>
+            </tooltip>
+          </p>
+        </AVCard>
+      </div>
     </div>
-
-  </div>
-
   </div>
 </template>
 

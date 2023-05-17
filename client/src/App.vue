@@ -102,13 +102,12 @@ const setTheme = async (conferenceClient: any) => {
 
     // Setting Theme
     configStore.setElectionTheme(
-      await conferenceClient
-        .getStylingData()
-        .then((theme: string) => {
-          const themeStylingTag: HTMLStyleElement = document.createElement("style");
-          themeStylingTag.innerHTML = theme.toString();
-          document.head.appendChild(themeStylingTag);
-        })
+      await conferenceClient.getStylingData().then((theme: string) => {
+        const themeStylingTag: HTMLStyleElement =
+          document.createElement("style");
+        themeStylingTag.innerHTML = theme.toString();
+        document.head.appendChild(themeStylingTag);
+      })
     );
   }
 };
