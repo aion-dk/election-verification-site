@@ -61,8 +61,10 @@ onMounted(redirectUnlessPairingCode);
     />
 
     <Timedown
+      v-if='!verificationStore.ballot'
       :maxSeconds="configStore.election.bcTimeout"
       :currentSeconds="configStore.election.bcTimeout"
+      style='margin-bottom: 20px'
       @timeout="
         () => {
           router.push({ name: 'Welcome' });

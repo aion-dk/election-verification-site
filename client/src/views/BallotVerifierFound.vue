@@ -3,7 +3,7 @@ import useConfigStore from "../stores/useConfigStore";
 import useLocaleStore from "../stores/useLocaleStore";
 import CompactHeader from "../components/CompactHeader.vue";
 import Infobox from "../components/Infobox.vue";
-import { watch } from "vue";
+import { watch, onMounted } from "vue";
 import router from "@/router";
 import useVerificationStore from "@/stores/useVerificationStore";
 
@@ -11,8 +11,7 @@ const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
 
-watch(verificationStore, async (store) => {
-  console.log(store);
+async function checkForPairingCode(store: any) {
   if (!store.pairingCode) return;
 
   await router.push({
@@ -21,7 +20,15 @@ watch(verificationStore, async (store) => {
       pairingCode: store.pairingCode,
     },
   });
+}
+
+watch(verificationStore, async (store) => {
+  await checkForPairingCode(store)
 });
+
+onMounted(async () => {
+  await checkForPairingCode(verificationStore)
+})
 </script>
 
 <template>
