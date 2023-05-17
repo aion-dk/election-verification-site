@@ -344,28 +344,32 @@ export const translations = {
               },
             },
             welcome: {
-              footer: "Did you mean Ballot Check instead?",
-              footer_tooltip:
-                "A ballot check is performed before you submit your ballot. It enables you to confirm your ballot was recorded and encrypted correctly.",
-              locate_tracking_code: "Where do I find my tracking code?",
-              locate_tracking_code_tooltip:
-                "Your ballot tracking code was displayed in the VoteHub app after you submitted your ballot. It was also sent to the email address in your voter registration record. Can't find your code? You can re-open the VoteHub app and enter your identifying information to retrieve the Tracking Code.",
-              locate_verification_code: "Where do I find my verification code?",
-              locate_verification_code_tooltip:
-                "Your verification code was displayed in the VoteHub app after you submitted your ballot. It was also sent to the email address in your voter registration record.",
-              track_ballot_button: "Track my ballot",
-              tracking_code_input: "Ballot tracking code",
-              initiate_verification_button: "Verify my ballot",
-              verification_code_input: "Verification code",
-              verify: {
-                header: "Verify my ballot",
-                p1: "I want to verify that my vote is intact and unchanged",
-                p2: "I have a verification code, and I want to ensure that my digital vote has not been altered while in transit",
+              title: "Ballot Verification Site",
+              description:
+                "This site provides overview of the election, allows voters to follow and verify their ballot and provides a file for the auditors.",
+              ballot_tester: {
+                title: "Ballot Tester",
+                subtitle: "I am voting and I want to",
+                subtitle_strong: "check my choices",
+                description:
+                  "To test that your choices were recorded correctly, you need to input the testing code that is shown on the voting page.",
+                placeholder: "Testing Code",
+                button: "Start the Test",
+                tooltip_helper: "Where do I find the testing code",
+                tooltip_text:
+                  "Your testing code is displayed on the voting page after you decided to test your ballot. In case it is not there, go back to the voting page and try to test your ballot again.",
               },
-              about: {
-                header: "Ballot tracker",
-                p1: "I have voted and I want to track my ballot.",
-                p2: "To check the status of your ballot, you need to input the tracking code from the Voter receipt.",
+              ballot_tracker: {
+                title: "Ballot Tracker",
+                subtitle: "I have voted and I want to",
+                subtitle_strong: "track my ballot",
+                description:
+                  "To verify that your ballot was casted and is recorded in the Digital Ballot Box, you need to input the tracking code shown on the voting page.",
+                placeholder: "Tracking Code",
+                button: "Track my ballot",
+                tooltip_helper: "I don’t have my tracking code",
+                tooltip_text:
+                  "Your ballot tracking code is displayed on the election page after you submitted your ballot. It is 7 character code.",
               },
             },
           },
@@ -403,10 +407,8 @@ export const status = {
     id: 2,
     slug: "93b0d474",
     title: {
-      en: "Example Election",
-      da: "Valgeksempel",
-      de: "Wahlbeispiel",
-      es: "Elección de ejemplo",
+      en: "Funny Election",
+      es: "Elección divertida",
     },
     description: {
       en: "This is an election example, it shows what an election could look like.",

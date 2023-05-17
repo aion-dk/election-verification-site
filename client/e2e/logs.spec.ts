@@ -4,6 +4,7 @@ import {
   boardItemsPage1,
   boardItemsPage2,
   translations,
+  status,
 } from "./mocks";
 
 test("downloading logs", async ({ page }) => {
@@ -35,6 +36,15 @@ test("downloading logs", async ({ page }) => {
         status: 200,
         contentType: "application/json",
         body: JSON.stringify(translations),
+      });
+    }
+
+    // Intercept Status calls
+    if (url.indexOf("/status") > 0) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(status),
       });
     }
 
@@ -90,6 +100,15 @@ test("traversing board items", async ({ page }) => {
         status: 200,
         contentType: "application/json",
         body: JSON.stringify(translations),
+      });
+    }
+
+    // Intercept Status calls
+    if (url.indexOf("/status") > 0) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(status),
       });
     }
 

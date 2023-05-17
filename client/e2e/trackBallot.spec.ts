@@ -4,6 +4,7 @@ import {
   foundBallotStatus,
   rejectedBallotStatus,
   translations,
+  status,
 } from "./mocks";
 
 test("tracking a ballot", async ({ page }) => {
@@ -38,16 +39,25 @@ test("tracking a ballot", async ({ page }) => {
       });
     }
 
+    // Intercept Status calls
+    if (url.indexOf("/status") > 0) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(status),
+      });
+    }
+
     return route.continue();
   });
 
   await page.goto("/en/us3");
-  await expect(page.locator("h1")).toHaveText("Funny Election");
-  await page.getByPlaceholder("Ballot tracking code").fill("5ksv8Ee");
+  await expect(page.locator("h1")).toHaveText("Ballot Verification Site");
+  await page.getByPlaceholder("Tracking code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Track my ballot" }).click();
   await page.locator(".ExpandableSection__Expander").first().click();
   await page.getByRole("button", { name: "Cancel tracking 5ksv8Ee" }).click();
-  await page.getByPlaceholder("Ballot tracking code").fill("5ksv8Ee");
+  await page.getByPlaceholder("Tracking code").fill("5ksv8Ee");
 });
 
 test("tracking a non-existing ballot shows an error", async ({ page }) => {
@@ -82,17 +92,26 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
       });
     }
 
+    // Intercept Status calls
+    if (url.indexOf("/status") > 0) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(status),
+      });
+    }
+
     return route.continue();
   });
 
   await page.goto("/en/us3");
-  await expect(page.locator("h1")).toHaveText("Funny Election");
-  await page.getByPlaceholder("Ballot tracking code").fill("abcdef");
+  await expect(page.locator("h1")).toHaveText("Ballot Verification Site");
+  await page.getByPlaceholder("Tracking code").fill("abcdef");
   await page.getByRole("button", { name: "Track my ballot" }).click();
   await expect(page.locator(".Error__Title")).toContainText(
     "Invalid tracking code"
   );
-  await page.getByPlaceholder("Ballot tracking code").fill("hijklm");
+  await page.getByPlaceholder("Tracking code").fill("hijklm");
 });
 
 test("tracking a rejected ballot has the right text", async ({ page }) => {
@@ -127,12 +146,21 @@ test("tracking a rejected ballot has the right text", async ({ page }) => {
       });
     }
 
+    // Intercept Status calls
+    if (url.indexOf("/status") > 0) {
+      return route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(status),
+      });
+    }
+
     return route.continue();
   });
 
   await page.goto("/en/us3");
-  await expect(page.locator("h1")).toHaveText("Funny Election");
-  await page.getByPlaceholder("Ballot tracking code").fill("5ksv8Ee");
+  await expect(page.locator("h1")).toHaveText("Ballot Verification Site");
+  await page.getByPlaceholder("Tracking code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Track my ballot" }).click();
 
   // For some reason this allow the firefox to not break

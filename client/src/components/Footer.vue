@@ -4,9 +4,9 @@ import avlogo from "../assets/avlogo.svg";
 
 <template>
   <footer class="Footer">
-    <span class="Footer__Text">Technology by</span>
+    <span class="Footer__Text">{{ $t("footer.technology_by") }}</span>
     <a href="https://assemblyvoting.com" target="_blank">
-      <img class="Footer__Image" :src="avlogo" alt="Assembly Voting Logo" />
+      <img class="Footer__Image" :src="avlogo" :alt="$t('footer.av_img_alt')" />
     </a>
   </footer>
 </template>
