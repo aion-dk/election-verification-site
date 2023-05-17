@@ -1,11 +1,17 @@
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { computed, ref, watch } from "vue";
 import { RouterLink } from "vue-router";
 import config from "../lib/config";
 import DropDown from "./DropDown.vue";
 import i18n from "../lib/i18n";
 import type { DropdownOption } from "@/Types";
+import {storeToRefs } from 'pinia'
+import useConfigStore from '../stores/useConfigStore'
+
 const { t } = i18n.global;
+const configStore = useConfigStore()
+const { electionStatus } = storeToRefs(configStore)
+const logo = ref(null);
 
 const props = defineProps({
   locale: {
@@ -43,6 +49,12 @@ const availableLocales = computed(() => {
 function setLocale(newLocale: string) {
   emit("changeLocale", newLocale);
 }
+
+watch(electionStatus, () => {
+  if (electionStatus.value.theme?.logo) {
+    logo.value = electionStatus.value.theme?.logo
+  }
+});
 </script>
 
 <template>
@@ -52,9 +64,10 @@ function setLocale(newLocale: string) {
       :to="`/${locale}/${election.slug}`"
     >
       <img
+        v-if="logo"
         class="Header__Logo"
         aria-hidden="true"
-        :src="config.logoUrl"
+        :src="logo"
         alt="DBAS Logo"
       />
       <div class="Header__Text">
@@ -124,17 +137,15 @@ function setLocale(newLocale: string) {
   display: flex;
   align-items: center;
   text-decoration: none;
-  gap: 1rem;
 }
 
 .Header__Logo {
-  height: 54px;
-  width: 54px;
+  height: 3rem;
   object-fit: cover;
-  border-radius: 3px;
 }
 
 .Header__Text {
+  margin-left: 1rem;
   display: flex;
   gap: 1rem;
 }

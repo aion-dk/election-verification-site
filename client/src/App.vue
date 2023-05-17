@@ -11,7 +11,6 @@ import router from "./router";
 import { loadLocaleMessages, setLocale } from "./lib/i18n";
 import i18n from "./lib/i18n";
 import type { Locale } from "./Types";
-import defaultSplashImg from "./assets/splash.jpg";
 
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
@@ -101,34 +100,16 @@ const setTheme = async (conferenceClient: any) => {
     // Setting Splash Image
     configStore.setElectionStatus(await conferenceClient.getStatus());
 
-    const splashStyle = `\n
-      .election-banner {
-        position: absolute;
-        top: 70px;
-        left: 0;
-        z-index: -99;
-        min-height: 580px;
-        width: 100vw;
-        background-image: url("${
-          configStore.electionStatus?.theme?.splash
-            ? configStore.electionStatus?.theme?.splash
-            : defaultSplashImg
-        }");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      } \n`;
-
     // Setting Theme
     configStore.setElectionTheme(
       await conferenceClient
         .getStylingData()
-        .then((theme: string) => (theme += splashStyle))
+        .then((theme: string) => {
+          const themeStylingTag: HTMLStyleElement = document.createElement("style");
+          themeStylingTag.innerHTML = theme.toString();
+          document.head.appendChild(themeStylingTag);
+        })
     );
-
-    const themeStylingTag: HTMLStyleElement = document.createElement("style");
-    themeStylingTag.innerHTML = splashStyle.toString();
-    document.head.appendChild(themeStylingTag);
   }
 };
 </script>
@@ -154,6 +135,10 @@ const setTheme = async (conferenceClient: any) => {
 </template>
 
 <style type="text/css">
+* {
+  box-sizing: border-box !important;
+}
+
 body {
   font-family: "Open Sans";
   overflow: hidden;

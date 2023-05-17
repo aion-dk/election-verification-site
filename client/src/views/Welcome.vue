@@ -1,5 +1,4 @@
 <script setup lang="ts">
-// import { useRoute } from "vue-router";
 import useConfigStore from "../stores/useConfigStore";
 import { ref, watch, onMounted } from "vue";
 import useBallotStore from "../stores/useBallotStore";
@@ -7,13 +6,12 @@ import router from "../router";
 import useLocaleStore from "../stores/useLocaleStore";
 import useVerificationStore from "../stores/useVerificationStore";
 import Error from "../components/Error.vue";
+import SplashScreen from '../components/SplashScreen.vue'
+import i18n from '../lib/i18n'
 
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
-// const route = useRoute();
-// const _electionSlug = ref(route.params.electionSlug);
-// const _locale = ref(localeStore.locale);
 const _title = ref("Loading..");
 const _info = ref("Loading..");
 const _trackingCode = ref(null);
@@ -21,6 +19,7 @@ const _verificationCode = ref(null);
 const _error = ref(null);
 const _disabled = ref(false);
 const verificationStore = useVerificationStore();
+const electionTitle = ref("")
 
 function setInfo() {
   _title.value = configStore.election.title[localeStore.locale];
@@ -78,14 +77,12 @@ async function initiateVerification(event: Event) {
   }
 }
 
-// watch(route, (newRoute) => {
-//   _electionSlug.value = newRoute.params.electionSlug;
-//   _locale.value = newRoute.params.locale.toString();
-//   setInfo();
-// });
+const splashImgUrl = ref(null);
 
 watch(configStore, () => {
   setInfo();
+  splashImgUrl.value = configStore.electionStatus?.theme?.splash;
+  electionTitle.value = configStore.electionStatus.title[i18n.global.locale]
 });
 
 watch(verificationStore, async (newStore) => {
@@ -112,86 +109,34 @@ onMounted(() => {
 
 <template>
   <div class="Welcome">
-    <div class="election-banner" />
-    <div class="Welcome__Header">
-      <h1 class="Welcome__Title">
-        <span>{{ _title }}</span>
-        <small>{{ _info }}</small>
-      </h1>
-    </div>
+    <SplashScreen :image="splashImgUrl" />
     <Error v-if="_error" :errorPath="_error" />
 
-    <div class="Welcome__Content">
-      <AVCard class="Welcome__Card_Overrides">
-        <h3>{{ $t("views.welcome.about.header") }}</h3>
-        <p>{{ $t("views.welcome.about.p1") }}</p>
-        <p>{{ $t("views.welcome.about.p2") }}</p>
-      </AVCard>
-      <AVCard class="Welcome__Card_Overrides Welcome__Tracking">
-        <form @submit="lookupBallot">
-          <input
-            :disabled="_disabled"
-            type="text"
-            name="tracking-code"
-            id="tracking-code"
-            :placeholder="$t('views.welcome.tracking_code_input')"
-            v-model="_trackingCode"
-            class="Welcome__TrackingCode"
-          />
-          <AVButton
-            :label="$t('views.welcome.track_ballot_button')"
-            type="neutral"
-            name="lookup-ballot"
-            id="lookup-ballot"
-            :disabled="_disabled || !_trackingCode"
-            iconLeft
-            fullWidth
-            icon="magnifying-glass"
-            @click="lookupBallot"
-          />
-        </form>
-
-        <p class="Tooltip">
-          <tooltip hover placement="bottom">
-            <template #default>
-              <span>{{ $t("views.welcome.locate_tracking_code") }}</span>
-              <span
-                :aria-label="$t('views.welcome.locate_tracking_code_tooltip')"
-              >
-                <font-awesome-icon icon="fa-solid fa-circle-question" />
-              </span>
-            </template>
-
-            <template #content>
-              <span id="tracking-code-tooltip">
-                {{ $t("views.welcome.locate_tracking_code_tooltip") }}
-              </span>
-            </template>
-          </tooltip>
-        </p>
-      </AVCard>
+<div class="Welcome__Content">
+  <div class="Welcome__Infobox bg-theme-transparent">
+      <h1 class="Welcome__Title text-contrast">{{ $t("views.welcome.title") }}</h1>
+      <h2 class="Welcome__Subtitle text-contrast">{{ electionTitle }}</h2>
+      <p class="Welcome__Info text-contrast">{{ $t("views.welcome.description") }}</p>
     </div>
 
-    <div class="Welcome__Content">
+    <div class="Welcome__CTA">
       <AVCard class="Welcome__Card_Overrides">
-        <h3>{{ $t("views.welcome.verify.header") }}</h3>
-        <p>{{ $t("views.welcome.verify.p1") }}</p>
-        <p>{{ $t("views.welcome.verify.p2") }}</p>
-      </AVCard>
-      <AVCard class="Welcome__Card_Overrides Welcome__Tracking">
+        <h3>{{ $t("views.welcome.ballot_tester.title") }}</h3>
+        <p>{{ $t("views.welcome.ballot_tester.subtitle") }} <span class="text-brand">{{ $t("views.welcome.ballot_tester.subtitle_strong") }}</span></p>
+        <p>{{ $t("views.welcome.ballot_tester.description") }}</p>
         <form @submit="initiateVerification">
           <input
             :disabled="_disabled"
             type="text"
             name="verification-code"
             id="verification-code"
-            :placeholder="$t('views.welcome.verification_code_input')"
+            :placeholder="$t('views.welcome.ballot_tester.placeholder')"
             v-model="_verificationCode"
             class="Welcome__TrackingCode"
             data-1p-ignore
           />
           <AVButton
-            :label="$t('views.welcome.initiate_verification_button')"
+            :label="$t('views.welcome.ballot_tester.button')"
             type="neutral"
             name="initiate-verification"
             id="initiate-verification"
@@ -200,17 +145,66 @@ onMounted(() => {
             fullWidth
             icon="fingerprint"
             @click="initiateVerification"
+            class="Welcome__Button_Overrides"
+          />
+        </form>
+  
+        <p class="Tooltip">
+          <tooltip hover placement="bottom">
+            <template #default>
+              <span>{{ $t("views.welcome.ballot_tester.tooltip_helper") }}</span>
+              <span
+                :aria-label="
+                  $t('views.welcome.ballot_tester.tooltip_text')
+                "
+              >
+                <font-awesome-icon icon="fa-solid fa-circle-question" />
+              </span>
+            </template>
+  
+            <template #content>
+              <span id="tracking-code-tooltip">
+                {{ $t("views.welcome.ballot_tester.tooltip_text") }}
+              </span>
+            </template>
+          </tooltip>
+        </p>
+      </AVCard>
+
+      <AVCard class="Welcome__Card_Overrides">
+        <h3>{{ $t("views.welcome.ballot_tracker.title") }}</h3>
+        <p>{{ $t("views.welcome.ballot_tracker.subtitle") }} <span class="text-brand">{{ $t("views.welcome.ballot_tracker.subtitle_strong") }}</span></p>
+        <p>{{ $t("views.welcome.ballot_tracker.description") }}</p>
+        <form @submit="lookupBallot">
+          <input
+            :disabled="_disabled"
+            type="text"
+            name="tracking-code"
+            id="tracking-code"
+            :placeholder="$t('views.welcome.ballot_tracker.placeholder')"
+            v-model="_trackingCode"
+            class="Welcome__TrackingCode"
+          />
+          <AVButton
+            :label="$t('views.welcome.ballot_tracker.button')"
+            type="neutral"
+            name="lookup-ballot"
+            id="lookup-ballot"
+            :disabled="_disabled || !_trackingCode"
+            iconLeft
+            fullWidth
+            icon="magnifying-glass"
+            @click="lookupBallot"
+            class="Welcome__Button_Overrides"
           />
         </form>
 
         <p class="Tooltip">
           <tooltip hover placement="bottom">
             <template #default>
-              <span>{{ $t("views.welcome.locate_verification_code") }}</span>
+              <span>{{ $t("views.welcome.ballot_tracker.tooltip_helper") }}</span>
               <span
-                :aria-label="
-                  $t('views.welcome.locate_verification_code_tooltip')
-                "
+                :aria-label="$t('views.welcome.ballot_tracker.tooltip_text')"
               >
                 <font-awesome-icon icon="fa-solid fa-circle-question" />
               </span>
@@ -218,7 +212,7 @@ onMounted(() => {
 
             <template #content>
               <span id="tracking-code-tooltip">
-                {{ $t("views.welcome.locate_verification_code_tooltip") }}
+                {{ $t("views.welcome.ballot_tracker.tooltip_text") }}
               </span>
             </template>
           </tooltip>
@@ -226,30 +220,15 @@ onMounted(() => {
       </AVCard>
     </div>
 
-    <div class="Welcome__Footer">
-      <p class="Tooltip">
-        <tooltip hover placement="right">
-          <template #default>
-            <span>{{ $t("views.welcome.footer") }}</span>
-            <span :aria-label="$t('views.welcome.footer_tooltip')">
-              <font-awesome-icon icon="fa-solid fa-circle-info" />
-            </span>
-          </template>
+  </div>
 
-          <template #content>
-            <span>
-              {{ $t("views.welcome.footer_tooltip") }}
-            </span>
-          </template>
-        </tooltip>
-      </p>
-    </div>
   </div>
 </template>
 
 <style type="text/css" scoped>
 .Welcome {
-  font-family: "Open Sans";
+  height: 100%;
+  width: 100%;
 }
 
 .Welcome__Title {
@@ -268,41 +247,34 @@ onMounted(() => {
   font-weight: 600;
 }
 
-.Welcome__Header {
-  margin-bottom: 60px;
-  margin-top: 120px;
-}
-
 .Welcome__Content {
   display: flex;
-  margin-bottom: 2.5rem;
-  gap: 2.5rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Welcome__CTA {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  margin-top: -5rem;
 }
 
 .Welcome__Card_Overrides {
-  padding: 2.5rem !important;
-  min-width: 50%;
+  box-sizing: border-box;
+  padding: 3rem !important;
+  width: 35%;
 }
 
-.Welcome__Tracking {
-  justify-content: center;
-  min-width: 40%;
+.Welcome__Card_Overrides:first-child {
+  margin-right: 3%;
 }
 
-.Welcome__Footer {
-  margin-top: 24px;
-}
-
-.Welcome__Widget {
-  width: 100%;
-}
-
-.Welcome__Tracking form {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+.Welcome__Button_Overrides {
+  background-color: var(--av-theme-background) !important;
+  border-color: var(--av-theme-background) !important;
+  color: var(--av-theme-text) !important;
 }
 
 .Welcome__TrackingCode {
@@ -319,27 +291,33 @@ onMounted(() => {
   margin-bottom: 1rem;
 }
 
-.Welcome__SubmitButton {
-  box-sizing: border-box;
-  width: 100%;
-  background-color: #343a40;
-  color: #fff;
-  border: none;
-  border-radius: 12px;
-  height: 44px;
-  line-height: 44px;
-  margin-top: 16px;
-  cursor: pointer;
-  font-size: 16px;
-}
-
-.Welcome__SubmitButton:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
 svg {
   margin-right: 5px;
   margin-left: 5px;
+}
+
+.Welcome__Infobox {
+  border-top-right-radius: 1.5rem;
+  border-top-left-radius: 1.5rem;
+  padding: 5rem 5rem 7rem 5rem;
+  max-width: calc(73% - 18rem);
+}
+
+.Welcome__Title {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.Welcome__Subtitle {
+  margin: 0 0 1rem 0;
+  font-size: 1.75rem;
+  font-weight: 600;
+}
+
+.Welcome__Info {
+  margin: 0 0 2rem 0;
+  font-size: 1.25rem;
+  font-weight: 400;
 }
 </style>
