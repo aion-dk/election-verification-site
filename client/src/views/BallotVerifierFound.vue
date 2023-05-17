@@ -23,12 +23,12 @@ async function checkForPairingCode(store: any) {
 }
 
 watch(verificationStore, async (store) => {
-  await checkForPairingCode(store)
+  await checkForPairingCode(store);
 });
 
 onMounted(async () => {
-  await checkForPairingCode(verificationStore)
-})
+  await checkForPairingCode(verificationStore);
+});
 </script>
 
 <template>
