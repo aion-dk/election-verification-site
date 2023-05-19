@@ -127,7 +127,7 @@ const setTheme = async (conferenceClient: any) => {
       @changeLocale="updateLocale"
     />
     <main class="DBAS__Content" id="main">
-      <RouterView class="DBAS__InnerContent" />
+      <RouterView />
     </main>
     <Footer />
   </div>
@@ -139,6 +139,17 @@ const setTheme = async (conferenceClient: any) => {
 }
 
 body {
+  /* Neutral colors from AV design system */
+  --slate-100: #f7f7f7;
+  --slate-200: #e9ecef;
+  --slate-300: #dee2e6;
+  --slate-400: #ced4da;
+  --slate-500: #adb5bd;
+  --slate-600: #6c757d;
+  --slate-700: #495057;
+  --slate-800: #343a40;
+  --slate-900: #212529;
+
   font-family: "Open Sans";
   overflow: hidden;
   padding: 0;
@@ -162,13 +173,6 @@ body {
 .DBAS__Content {
   height: calc(100vh - 246px);
   margin-top: 70px;
-  overflow-y: auto;
-}
-
-.DBAS__InnerContent {
-  width: 80vw;
-  margin: auto;
-  padding: 0;
 }
 
 .popper-content-wrapper {

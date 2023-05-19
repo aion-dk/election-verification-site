@@ -123,14 +123,18 @@ export const translations = {
             },
           },
           header: {
-            dbas: "Digital Ballot Audit Site",
+            dbas: "Ballot Verification Site",
+            verification: "Ballot Tester",
+            tracking: "Ballot Tracker",
             about: "About",
-            logs: "Logs",
-            help: "Help",
+            logs: "Election Activity Log",
+            help: "FAQ",
             contact: "Contact",
             change_locale: {
               en: "Switch to English",
               es: "Cambiar a Español",
+              da: "Skift til Dansk",
+              de: "Auf Deutsch umstellen",
             },
           },
           components: {
@@ -372,6 +376,35 @@ export const translations = {
                   "Your ballot tracking code is displayed on the election page after you submitted your ballot. It is 7 character code.",
               },
             },
+            verification_landing: {
+              title: "Ballot Tester",
+              subtitle: "I am voting and I want to",
+              subtitle_strong: "check my choices",
+              description:
+                "You can check that your choices were recorded correctly. Input the testing code that is shown on the voting page and follow the instructions shown on the screen.",
+              placeholder: "Testing Code",
+              button: "Start the Test",
+              tooltip_helper: "Where do I find the testing code",
+              tooltip_text:
+                "Your testing code is displayed on the voting page after you decided to test your ballot. In case it is not there, go back to the voting page and try to test your ballot again.",
+              help: {
+                title: "How does the ",
+                title_strong: "test work?",
+                steps: {
+                  step_1:
+                    "<strong>Input your testing code</strong> - Find it on the Voting Page",
+                  step_2:
+                    "<strong>Passkeys</strong> get displayed in both - Voting app and Ballot Tester - check if they <strong>match</strong>",
+                  step_3:
+                    "On the voting page click on <strong>“Match” or “Do not match”</strong>",
+                  step_4:
+                    "<strong>Your choices are now shown</strong> in the Ballot Tester. Check if they are all correct.",
+                  step_5:
+                    "On the <strong>voting page register</strong> if they are your choices or not",
+                },
+                footer: "All done!",
+              },
+            },
           },
         },
       },
@@ -386,7 +419,9 @@ export const translations = {
             es: "Espanõl",
           },
           header: {
-            dbas: "Digital Ballot Audit Site",
+            dbas: "Verificación de elección",
+            verification: "Testeo de Boleta",
+            tracking: "Seguimiento de Boleta",
             about: "Información",
             logs: "Registros",
             help: "Ayuda",
@@ -394,6 +429,8 @@ export const translations = {
             change_locale: {
               en: "Switch to English",
               es: "Cambiar a Español",
+              da: "Skift til Dansk",
+              de: "Auf Deutsch umstellen",
             },
           },
         },

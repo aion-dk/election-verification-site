@@ -3,6 +3,7 @@ import Welcome from "../views/Welcome.vue";
 import BallotTrackerView from "../views/BallotTrackerView.vue";
 import BallotVerifierView from "../views/BallotVerifierView.vue";
 import MissingSlugView from "../views/MissingSlugView.vue";
+import BallotVerificationLanding from "../views/BallotVerificationLanding.vue";
 import LogsView from "../views/LogsView.vue";
 import HelpView from "../views/HelpView.vue";
 import AboutView from "../views/AboutView.vue";
@@ -33,6 +34,11 @@ const router = createRouter({
       name: "BallotVerifierView",
       path: "/:locale/:electionSlug/verify/:pairingCode",
       component: BallotVerifierView,
+    },
+    {
+      name: "BallotVerificationLanding",
+      path: "/:locale/:electionSlug/verification",
+      component: BallotVerificationLanding,
     },
     {
       name: "BallotVerifierFound",

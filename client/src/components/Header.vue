@@ -85,9 +85,17 @@ watch(electionStatus, () => {
       <RouterLink
         class="Header__Link"
         role="menuitem"
-        :to="`/${locale}/${election.slug}/about`"
+        :to="`/${locale}/${election.slug}/verification`"
       >
-        {{ $t("header.about") }}
+        {{ $t("header.verification") }}
+      </RouterLink>
+
+      <RouterLink
+        class="Header__Link"
+        role="menuitem"
+        :to="`/${locale}/${election.slug}/tracking`"
+      >
+        {{ $t("header.tracking") }}
       </RouterLink>
 
       <RouterLink
