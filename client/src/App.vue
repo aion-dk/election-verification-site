@@ -60,8 +60,8 @@ function setTitle() {
 
 const setConfigurations = async (slug: string) => {
   const { conferenceClient } = useConferenceConnector(slug);
-  setLanguage(conferenceClient);
-  setTheme(conferenceClient);
+  await setLanguage(conferenceClient);
+  await setTheme(conferenceClient);
 };
 
 const setLanguage = async (conferenceClient: any) => {
@@ -98,16 +98,20 @@ const setLanguage = async (conferenceClient: any) => {
 const setTheme = async (conferenceClient: any) => {
   if (!configStore.electionStatus || !configStore.electionTheme) {
     // Setting Splash Image
-    configStore.setElectionStatus(await conferenceClient.getStatus());
+    const status = await conferenceClient.getStatus();
+    if (status) configStore.setElectionStatus(status);
 
     // Setting Theme
     configStore.setElectionTheme(
-      await conferenceClient.getStylingData().then((theme: string) => {
-        const themeStylingTag: HTMLStyleElement =
-          document.createElement("style");
-        themeStylingTag.innerHTML = theme.toString();
-        document.head.appendChild(themeStylingTag);
-      })
+      await conferenceClient
+        .getStylingData()
+        .then((theme: string) => {
+          const themeStylingTag: HTMLStyleElement =
+            document.createElement("style");
+          themeStylingTag.innerHTML = theme.toString();
+          document.head.appendChild(themeStylingTag);
+        })
+        .catch((err: Error) => console.error(err))
     );
   }
 };

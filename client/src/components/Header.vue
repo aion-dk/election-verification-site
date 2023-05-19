@@ -1,17 +1,14 @@
 <script lang="ts" setup>
-import { computed, ref, watch } from "vue";
+import { computed, ref } from "vue";
 import { RouterLink } from "vue-router";
 import config from "../lib/config";
 import DropDown from "./DropDown.vue";
 import i18n from "../lib/i18n";
 import type { DropdownOption } from "@/Types";
-import { storeToRefs } from "pinia";
 import useConfigStore from "../stores/useConfigStore";
 
 const { t } = i18n.global;
 const configStore = useConfigStore();
-const { electionStatus } = storeToRefs(configStore);
-const logo = ref(null);
 
 const props = defineProps({
   locale: {
@@ -46,15 +43,9 @@ const availableLocales = computed(() => {
   });
 });
 
-function setLocale(newLocale: string) {
+const setLocale = (newLocale: string) => {
   emit("changeLocale", newLocale);
-}
-
-watch(electionStatus, () => {
-  if (electionStatus.value.theme?.logo) {
-    logo.value = electionStatus.value.theme?.logo;
-  }
-});
+};
 </script>
 
 <template>
@@ -64,10 +55,10 @@ watch(electionStatus, () => {
       :to="`/${locale}/${election.slug}`"
     >
       <img
-        v-if="logo"
+        v-if="configStore.electionStatus?.theme?.logo"
         class="Header__Logo"
         aria-hidden="true"
-        :src="logo"
+        :src="configStore.electionStatus?.theme?.logo"
         alt="DBAS Logo"
       />
       <div class="Header__Text">

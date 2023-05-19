@@ -7,7 +7,6 @@ import useLocaleStore from "../stores/useLocaleStore";
 import useVerificationStore from "../stores/useVerificationStore";
 import Error from "../components/Error.vue";
 import SplashScreen from "../components/SplashScreen.vue";
-import i18n from "../lib/i18n";
 
 const localeStore = useLocaleStore();
 const ballotStore = useBallotStore();
@@ -19,7 +18,6 @@ const _verificationCode = ref(null);
 const _error = ref(null);
 const _disabled = ref(false);
 const verificationStore = useVerificationStore();
-const electionTitle = ref("");
 
 function setInfo() {
   _title.value = configStore.election.title[localeStore.locale];
@@ -77,12 +75,8 @@ async function initiateVerification(event: Event) {
   }
 }
 
-const splashImgUrl = ref(null);
-
 watch(configStore, () => {
   setInfo();
-  splashImgUrl.value = configStore.electionStatus?.theme?.splash;
-  electionTitle.value = configStore.electionStatus.title[i18n.global.locale];
 });
 
 watch(verificationStore, async (newStore) => {
@@ -109,7 +103,7 @@ onMounted(() => {
 
 <template>
   <div class="Welcome">
-    <SplashScreen :image="splashImgUrl" />
+    <SplashScreen />
     <Error v-if="_error" :errorPath="_error" />
 
     <div class="Welcome__Content">
@@ -117,7 +111,7 @@ onMounted(() => {
         <h1 class="Welcome__Title text-contrast">
           {{ $t("views.welcome.title") }}
         </h1>
-        <h2 class="Welcome__Subtitle text-contrast">{{ electionTitle }}</h2>
+        <h2 class="Welcome__Subtitle text-contrast">{{ _title }}</h2>
         <p class="Welcome__Info text-contrast">
           {{ $t("views.welcome.description") }}
         </p>

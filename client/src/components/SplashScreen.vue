@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import { watch, ref } from "vue";
-import { storeToRefs } from "pinia";
+import { ref, onMounted } from "vue";
 import useConfigStore from "../stores/useConfigStore";
 const configStore = useConfigStore();
-
-const { electionStatus } = storeToRefs(configStore);
 const bgStyle = ref(null);
 
-watch(electionStatus, () => {
-  if (electionStatus.value.theme?.splash) {
-    bgStyle.value = `
+onMounted(() => {
+  bgStyle.value = `
       background-image: url("${configStore.electionStatus?.theme?.splash}");
       background-repeat: no-repeat;
       background-position: center;
       background-size: cover;
     `;
-  }
 });
 </script>
 
