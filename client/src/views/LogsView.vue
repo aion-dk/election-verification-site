@@ -47,6 +47,10 @@ function loadPage(page: number) {
   }
 }
 
+function downloadLog() {
+  window.location.href = `${options.baseURL}/${configStore.boardSlug}/download_log`
+}
+
 onMounted(() => loadPage(currentPage()));
 </script>
 
@@ -119,7 +123,7 @@ onMounted(() => loadPage(currentPage()));
     </div>
 
     <div class="LogsView__Footer">
-      <AVButton @click="window.location=`${options.baseURL}/${configStore.boardSlug}/download_log`" size="small" type="neutral">
+      <AVButton @click="downloadLog" size="small" type="neutral">
         <font-awesome-icon icon="fa-solid fa-download" />
         <span style="text-wrap: normal">
           {{ $t("views.logs.download_button") }}
