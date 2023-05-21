@@ -23,8 +23,9 @@ function toggle() {
 
 <template>
   <div
+      @click="toggle"
+      class="ExpandableSection"
     :class="{
-      ExpandableSection: true,
       ['ExpandableSection--expanded']: _expanded,
     }"
   >
@@ -38,7 +39,6 @@ function toggle() {
 
     <button
       class="ExpandableSection__Expander"
-      @click="toggle"
       :aria-label="_label"
     >
       <font-awesome-icon v-if="_expanded" icon="fa-solid fa-minus" />
@@ -57,6 +57,11 @@ function toggle() {
   margin-bottom: 20px;
   flex-direction: column;
   position: relative;
+}
+
+.ExpandableSection:hover, .ExpandableSection:focus-within {
+    background-color: rgba(0,0,0,10%);
+    cursor: pointer;
 }
 
 .ExpandableSection__Line {
