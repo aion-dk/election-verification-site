@@ -48,7 +48,7 @@ function loadPage(page: number) {
 }
 
 function downloadLog() {
-  window.location.href = `${options.baseURL}/${configStore.boardSlug}/download_log`
+  window.location.href = `${options.baseURL}/${configStore.boardSlug}/download_log`;
 }
 
 onMounted(() => loadPage(currentPage()));

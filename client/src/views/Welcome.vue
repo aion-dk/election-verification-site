@@ -220,8 +220,7 @@ onMounted(() => {
       </AVCard>
     </div>
 
-    <div class="Welcome__Footer">
-    </div>
+    <div class="Welcome__Footer"></div>
   </div>
 </template>
 
@@ -255,8 +254,6 @@ onMounted(() => {
   display: flex;
   margin-bottom: 2.5rem;
   gap: 2.5rem;
-
-
 }
 
 .AVCard {
@@ -322,12 +319,10 @@ svg {
   margin-left: 5px;
 }
 
-
-@media(max-width: 992px) {
+@media (max-width: 992px) {
   .Welcome__Content {
     flex-wrap: wrap;
     gap: var(--av-padding);
   }
 }
-
 </style>

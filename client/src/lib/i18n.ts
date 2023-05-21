@@ -175,7 +175,8 @@ const i18n = createI18n({
           SpoilRequestItem: {
             type: "Spoil Request",
             author: "You",
-            details: "You have challenged the integrity of the voting system and performed the Benaloh challenge.",
+            details:
+              "You have challenged the integrity of the voting system and performed the Benaloh challenge.",
           },
           SessionExpiryItem: {
             type: "Explicit Session Expiry",

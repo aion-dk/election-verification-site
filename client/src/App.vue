@@ -201,8 +201,8 @@ body {
   margin-top: 100px;
 }
 
-@media(max-width: 992px) {
-  :root{
+@media (max-width: 992px) {
+  :root {
     --av-padding: 1.5rem;
     --av-margin-bottom: 1.5rem;
   }
@@ -215,5 +215,4 @@ body {
     padding: var(--av-padding) !important;
   }
 }
-
 </style>

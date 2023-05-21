@@ -123,7 +123,6 @@ onMounted(() => setBallot());
   margin-bottom: 20px;
 }
 
-
 .BallotTracker__Cancel {
   border: none;
   background: transparent;
@@ -135,13 +134,13 @@ onMounted(() => setBallot());
   color: #adb5bd;
 }
 
-@media(max-width: 992px) {
-    .BallotTracker__Row {
-        flex-direction: column-reverse;
-    }
+@media (max-width: 992px) {
+  .BallotTracker__Row {
+    flex-direction: column-reverse;
+  }
 
-    .BallotTracker__Infobox {
-        max-width: unset;
-    }
+  .BallotTracker__Infobox {
+    max-width: unset;
+  }
 }
 </style>

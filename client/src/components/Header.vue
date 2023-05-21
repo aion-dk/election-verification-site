@@ -6,7 +6,7 @@ import DropDown from "./DropDown.vue";
 import { uniq } from "lodash";
 import i18n from "../lib/i18n";
 import type { DropdownOption } from "@/Types";
-import HamburgerIcon from '@/components/HamburgerIcon.vue'
+import HamburgerIcon from "@/components/HamburgerIcon.vue";
 const { t } = i18n.global;
 
 const props = defineProps({
@@ -38,13 +38,12 @@ function setLocale(newLocale: string) {
   emit("changeLocale", newLocale);
 }
 
-function toggleMobileMenu(){
-  let menuButton = document.getElementById("BurgerButton")
-  let menu = document.getElementById("LinksMobile")
-  menuButton.classList.toggle('active');
-  menu.classList.toggle('open');
+function toggleMobileMenu() {
+  let menuButton = document.getElementById("BurgerButton");
+  let menu = document.getElementById("LinksMobile");
+  menuButton.classList.toggle("active");
+  menu.classList.toggle("open");
 }
-
 </script>
 
 <template>
@@ -60,9 +59,12 @@ function toggleMobileMenu(){
       <RouterLink class="Header__Title" :to="`/${locale}/${election.slug}`">
         {{ $t("header.dbas") }}
       </RouterLink>
-
     </div>
-    <button id='BurgerButton' class="Header__BurgerButton" @click='toggleMobileMenu'>
+    <button
+      id="BurgerButton"
+      class="Header__BurgerButton"
+      @click="toggleMobileMenu"
+    >
       <HamburgerIcon :stroke="'#495057'" class="Header__BurgerIcon" />
     </button>
 
@@ -82,12 +84,12 @@ function toggleMobileMenu(){
       />
     </div>
   </AVNavbar>
-  <div id='LinksMobile' class="Header__LinksMobile">
+  <div id="LinksMobile" class="Header__LinksMobile">
     <RouterLink
       role="button"
       class="Header__Link"
       :to="`/${locale}/${election.slug}/logs`"
-      @click='toggleMobileMenu'
+      @click="toggleMobileMenu"
     >
       {{ $t("header.logs") }}
     </RouterLink>
@@ -108,7 +110,7 @@ function toggleMobileMenu(){
 
 .Header__Brand {
   display: flex;
-  align-items: center
+  align-items: center;
 }
 
 .Header__BurgerButton {
@@ -186,14 +188,14 @@ function toggleMobileMenu(){
   border: none;
 }
 
-@media(max-width: 992px) {
+@media (max-width: 992px) {
   .AVNavbar.Navbar {
     position: relative;
     min-height: 70px;
     height: 0;
   }
   .Header__Links {
-    display: none
+    display: none;
   }
 
   .Header__Title {
