@@ -68,41 +68,12 @@ function toggleMobileMenu(){
 
     <div class="Header__Links">
       <RouterLink
-        class="Header__Link"
-        role="menuitem"
-        :to="`/${locale}/${election.slug}/about`"
-      >
-        {{ $t("header.about") }}
-      </RouterLink>
-
-      <RouterLink
         role="menuitem"
         class="Header__Link"
         :to="`/${locale}/${election.slug}/logs`"
       >
         {{ $t("header.logs") }}
       </RouterLink>
-
-      <RouterLink
-        role="menuitem"
-        class="Header__Link"
-        :to="`/${locale}/${election.slug}/help`"
-      >
-        {{ $t("header.help") }}
-      </RouterLink>
-
-      <a
-        role="menuitem"
-        class="Header__Link"
-        :href="config.contactUrl"
-        target="_blank"
-      >
-        {{ $t("header.contact") }}
-        <font-awesome-icon
-          aria-hidden="true"
-          icon="fa-solid fa-arrow-up-right-from-square"
-        />
-      </a>
 
       <DropDown
         class="Header__Locales"
@@ -113,15 +84,6 @@ function toggleMobileMenu(){
   </AVNavbar>
   <div id='LinksMobile' class="Header__LinksMobile">
     <RouterLink
-      class="Header__Link"
-      role="button"
-      :to="`/${locale}/${election.slug}/about`"
-      @click='toggleMobileMenu'
-    >
-      {{ $t("header.about") }}
-    </RouterLink>
-
-    <RouterLink
       role="button"
       class="Header__Link"
       :to="`/${locale}/${election.slug}/logs`"
@@ -129,30 +91,6 @@ function toggleMobileMenu(){
     >
       {{ $t("header.logs") }}
     </RouterLink>
-
-    <RouterLink
-      role="button"
-      class="Header__Link"
-      :to="`/${locale}/${election.slug}/help`"
-      @click='toggleMobileMenu'
-    >
-      {{ $t("header.help") }}
-    </RouterLink>
-
-    <a
-      role="button"
-      class="Header__Link"
-      :href="config.contactUrl"
-      target="_blank"
-      @click='toggleMobileMenu'
-    >
-      {{ $t("header.contact") }}
-      <font-awesome-icon
-        aria-hidden="true"
-        icon="fa-solid fa-arrow-up-right-from-square"
-      />
-    </a>
-
     <DropDown
       class="Header__Link"
       :options="availableLocales"
@@ -267,6 +205,7 @@ function toggleMobileMenu(){
   }
 
   .Header__LinksMobile.open {
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
     display: flex;
     flex-direction: column;
   }
