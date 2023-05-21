@@ -175,12 +175,12 @@ const i18n = createI18n({
           SpoilRequestItem: {
             type: "Spoil Request",
             author: "You",
-            info: "You have challenged the integrity of the voting system and performed the Benaloh challenge.",
+            details: "You have challenged the integrity of the voting system and performed the Benaloh challenge.",
           },
           SessionExpiryItem: {
             type: "Explicit Session Expiry",
             author: "You",
-            info: "You have explicitly expired your voter session.",
+            details: "You have explicitly expired your voter session.",
           },
           AffidavitAcceptItem: {
             type: "Affidavit Accepted",
