@@ -148,6 +148,11 @@ const setTheme = async (conferenceClient: any) => {
 </template>
 
 <style type="text/css">
+:root {
+  --av-padding: 2.5rem;
+  --av-margin-bottom: 2.5rem;
+}
+
 body {
   padding: 0;
   margin: 0;
@@ -193,6 +198,11 @@ body {
 }
 
 @media(max-width: 992px) {
+  :root{
+    --av-padding: 1.5rem;
+    --av-margin-bottom: 1.5rem;
+  }
+
   .DBAS__InnerContent {
     width: 90vw;
   }

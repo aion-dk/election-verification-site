@@ -327,12 +327,11 @@ svg {
 @media(max-width: 992px) {
   .Welcome__Content {
     flex-wrap: wrap;
-    gap: 1.5rem;
+    gap: var(--av-padding);
   }
 
   .Welcome__Card_Overrides {
-    padding: 1.5rem !important;
-    min-width: 50%;
+    padding: var(--av-padding) !important;
   }
 }
 
