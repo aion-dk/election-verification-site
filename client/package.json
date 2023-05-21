@@ -13,8 +13,8 @@
     "test:e2e:ci": "playwright test --output test-results/artifacts",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit -p tsconfig.vitest.json --composite false",
-    "prettier:ci": "npx prettier -c  ./",
-    "prettier": " npx prettier -w  ./",
+    "prettier:ci": "npx prettier -c ./",
+    "prettier": "npx prettier -w ./",
     "lint": "eslint ./src/**/* --fix",
     "lint:ci": "eslint ./src/**/*"
   },
