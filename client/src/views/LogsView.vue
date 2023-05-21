@@ -119,15 +119,12 @@ onMounted(() => loadPage(currentPage()));
     </div>
 
     <div class="LogsView__Footer">
-      <a
-        class="LogsView__DownloadButton"
-        :href="`${options.baseURL}/${configStore.boardSlug}/download_log`"
-      >
+      <AVButton @click="window.location=`${options.baseURL}/${configStore.boardSlug}/download_log`" size="small" type="neutral">
         <font-awesome-icon icon="fa-solid fa-download" />
-        <span>
+        <span style="text-wrap: normal">
           {{ $t("views.logs.download_button") }}
         </span>
-      </a>
+      </AVButton>
     </div>
   </main>
 </template>
@@ -151,9 +148,9 @@ onMounted(() => loadPage(currentPage()));
 }
 
 .LogsView {
-  width: 900px;
+  max-width: 900px;
   margin: auto;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
 }
 
 .LogsView__Header * {
