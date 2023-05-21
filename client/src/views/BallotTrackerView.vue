@@ -88,12 +88,6 @@ onMounted(() => setBallot());
   margin-bottom: var(--av-margin-bottom);
 }
 
-@media(max-width: 992px) {
-  .BallotTracker__Row {
-    flex-direction: column-reverse;
-  }
-}
-
 .BallotTracker__Row--stacked {
   flex-direction: column;
 }
@@ -139,5 +133,15 @@ onMounted(() => setBallot());
   font-size: 40px;
   cursor: pointer;
   color: #adb5bd;
+}
+
+@media(max-width: 992px) {
+    .BallotTracker__Row {
+        flex-direction: column-reverse;
+    }
+
+    .BallotTracker__Infobox {
+        max-width: unset;
+    }
 }
 </style>

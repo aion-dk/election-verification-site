@@ -57,15 +57,24 @@ function toggle() {
   margin-bottom: 20px;
   flex-direction: column;
   position: relative;
+  cursor: pointer;
 }
 
 .ExpandableSection:hover, .ExpandableSection:focus-within {
     background-color: rgba(0,0,0,10%);
-    cursor: pointer;
+}
+.ExpandableSection:focus-within {
+    outline: #317be7 2px solid;
 }
 
 .ExpandableSection__Line {
   display: flex;
+}
+
+@media(max-width: 992px) {
+  .ExpandableSection__Line {
+    flex-direction: column;
+  }
 }
 
 .ExpandableSection__Expander {
