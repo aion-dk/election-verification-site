@@ -79,12 +79,19 @@ onMounted(() => setBallot());
 
 <style type="text/css" scoped>
 .BallotTracker {
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
 }
 
 .BallotTracker__Row {
   display: flex;
-  margin-bottom: 40px;
+  gap: var(--av-padding);
+  margin-bottom: var(--av-margin-bottom);
+}
+
+@media(max-width: 992px) {
+  .BallotTracker__Row {
+    flex-direction: column-reverse;
+  }
 }
 
 .BallotTracker__Row--stacked {
@@ -92,7 +99,6 @@ onMounted(() => setBallot());
 }
 
 .BallotTracker__TrackingCode {
-  margin-left: 40px;
   flex-grow: 1;
   text-align: center;
   display: flex;
@@ -112,7 +118,7 @@ onMounted(() => setBallot());
 
 .BallotTracker__TrackingCode code {
   font-size: 40px;
-  font-family: "Red Hat Mono";
+  font-family: "Red Hat Mono", monospace;
   letter-spacing: 5px;
 }
 
