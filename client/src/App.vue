@@ -158,6 +158,10 @@ body {
   margin: 0;
 }
 
+.AVCard--default {
+  padding: var(--av-padding) !important;
+}
+
 .DBAS {
   height: 100vh;
   height: 100dvh;
@@ -205,6 +209,10 @@ body {
 
   .DBAS__InnerContent {
     width: 90vw;
+  }
+
+  .AVCard {
+    padding: var(--av-padding) !important;
   }
 }
 

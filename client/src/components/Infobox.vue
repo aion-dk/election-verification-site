@@ -8,7 +8,7 @@
 .Infobox {
   background-color: #fff;
   border: solid 1px #e9ecef;
-  padding: 40px;
+  padding: var(--av-padding);
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
 }
 </style>

@@ -121,7 +121,7 @@ onMounted(() => {
     <Error v-if="_error" :errorPath="_error" />
 
     <div class="Welcome__Content">
-      <AVCard class="Welcome__Card_Overrides Welcome__Tracking">
+      <AVCard class="Welcome__Tracking">
         <h3>{{ $t("views.welcome.about.header") }}</h3>
         <p>{{ $t("views.welcome.about.p1") }}</p>
         <p>{{ $t("views.welcome.about.p2") }}</p>
@@ -168,7 +168,7 @@ onMounted(() => {
           </tooltip>
         </p>
       </AVCard>
-      <AVCard class="Welcome__Card_Overrides Welcome__Tracking">
+      <AVCard class="Welcome__Tracking">
         <h3>{{ $t("views.welcome.verify.header") }}</h3>
         <p>{{ $t("views.welcome.verify.p1") }}</p>
         <p>{{ $t("views.welcome.verify.p2") }}</p>
@@ -247,8 +247,8 @@ onMounted(() => {
 }
 
 .Welcome__Header {
-  margin-bottom: 60px;
-  margin-top: 120px;
+  margin-bottom: 40px;
+  margin-top: 40px;
 }
 
 .Welcome__Content {
@@ -259,8 +259,7 @@ onMounted(() => {
 
 }
 
-.Welcome__Card_Overrides {
-  padding: 2.5rem !important;
+.AVCard {
   min-width: 50%;
 }
 
@@ -328,10 +327,6 @@ svg {
   .Welcome__Content {
     flex-wrap: wrap;
     gap: var(--av-padding);
-  }
-
-  .Welcome__Card_Overrides {
-    padding: var(--av-padding) !important;
   }
 }
 
