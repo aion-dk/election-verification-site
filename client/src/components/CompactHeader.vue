@@ -29,7 +29,7 @@ const area = computed(() =>
 
 <style type="text/css" scoped>
 .CompactHeader {
-  margin: 47px 0;
+  margin: var(--av-margin-bottom) 0;
   display: flex;
   align-items: center;
   font-family: "Open Sans";

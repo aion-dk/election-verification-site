@@ -68,13 +68,6 @@ onMounted(() => setBallot());
       </Infobox>
     </div>
 
-    <div class="BallotTracker__Row">
-      <Infobox class="BallotTracker__StatusInfo">
-        <h3>{{ $t(`views.tracker.status_map.${ballot.status}.title`) }}</h3>
-        <p>{{ $t(`views.tracker.status_map.${ballot.status}.description`) }}</p>
-      </Infobox>
-    </div>
-
     <div
       class="BallotTracker__Row BallotTracker__Row--stacked"
       v-if="ballot.activities.length"
@@ -86,12 +79,13 @@ onMounted(() => setBallot());
 
 <style type="text/css" scoped>
 .BallotTracker {
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
 }
 
 .BallotTracker__Row {
   display: flex;
-  margin-bottom: 40px;
+  gap: var(--av-padding);
+  margin-bottom: var(--av-margin-bottom);
 }
 
 .BallotTracker__Row--stacked {
@@ -99,7 +93,6 @@ onMounted(() => setBallot());
 }
 
 .BallotTracker__TrackingCode {
-  margin-left: 40px;
   flex-grow: 1;
   text-align: center;
   display: flex;
@@ -119,7 +112,7 @@ onMounted(() => setBallot());
 
 .BallotTracker__TrackingCode code {
   font-size: 40px;
-  font-family: "Red Hat Mono";
+  font-family: "Red Hat Mono", monospace;
   letter-spacing: 5px;
 }
 
@@ -130,13 +123,6 @@ onMounted(() => setBallot());
   margin-bottom: 20px;
 }
 
-.BallotTracker__StatusInfo {
-  width: 100%;
-}
-
-.BallotTracker__StatusInfo h3 {
-  font-size: 24px;
-}
 
 .BallotTracker__Cancel {
   border: none;
@@ -147,5 +133,15 @@ onMounted(() => setBallot());
   font-size: 40px;
   cursor: pointer;
   color: #adb5bd;
+}
+
+@media(max-width: 992px) {
+    .BallotTracker__Row {
+        flex-direction: column-reverse;
+    }
+
+    .BallotTracker__Infobox {
+        max-width: unset;
+    }
 }
 </style>
