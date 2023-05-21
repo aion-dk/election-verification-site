@@ -121,12 +121,11 @@ onMounted(() => {
     <Error v-if="_error" :errorPath="_error" />
 
     <div class="Welcome__Content">
-      <AVCard class="Welcome__Card_Overrides">
+      <AVCard class="Welcome__Card_Overrides Welcome__Tracking">
         <h3>{{ $t("views.welcome.about.header") }}</h3>
         <p>{{ $t("views.welcome.about.p1") }}</p>
         <p>{{ $t("views.welcome.about.p2") }}</p>
-      </AVCard>
-      <AVCard class="Welcome__Card_Overrides Welcome__Tracking">
+
         <form @submit="lookupBallot">
           <input
             :disabled="_disabled"
@@ -169,15 +168,11 @@ onMounted(() => {
           </tooltip>
         </p>
       </AVCard>
-    </div>
-
-    <div class="Welcome__Content">
-      <AVCard class="Welcome__Card_Overrides">
+      <AVCard class="Welcome__Card_Overrides Welcome__Tracking">
         <h3>{{ $t("views.welcome.verify.header") }}</h3>
         <p>{{ $t("views.welcome.verify.p1") }}</p>
         <p>{{ $t("views.welcome.verify.p2") }}</p>
-      </AVCard>
-      <AVCard class="Welcome__Card_Overrides Welcome__Tracking">
+
         <form @submit="initiateVerification">
           <input
             :disabled="_disabled"
@@ -226,22 +221,6 @@ onMounted(() => {
     </div>
 
     <div class="Welcome__Footer">
-      <p class="Tooltip">
-        <tooltip hover placement="right">
-          <template #default>
-            <span>{{ $t("views.welcome.footer") }}</span>
-            <span :aria-label="$t('views.welcome.footer_tooltip')">
-              <font-awesome-icon icon="fa-solid fa-circle-info" />
-            </span>
-          </template>
-
-          <template #content>
-            <span>
-              {{ $t("views.welcome.footer_tooltip") }}
-            </span>
-          </template>
-        </tooltip>
-      </p>
     </div>
   </div>
 </template>
@@ -276,6 +255,8 @@ onMounted(() => {
   display: flex;
   margin-bottom: 2.5rem;
   gap: 2.5rem;
+
+
 }
 
 .Welcome__Card_Overrides {
@@ -341,4 +322,18 @@ svg {
   margin-right: 5px;
   margin-left: 5px;
 }
+
+
+@media(max-width: 992px) {
+  .Welcome__Content {
+    flex-wrap: wrap;
+    gap: 1.5rem;
+  }
+
+  .Welcome__Card_Overrides {
+    padding: 1.5rem !important;
+    min-width: 50%;
+  }
+}
+
 </style>

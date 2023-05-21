@@ -191,4 +191,11 @@ body {
 .DBAS_SkipToContentLink:focus {
   margin-top: 100px;
 }
+
+@media(max-width: 992px) {
+  .DBAS__InnerContent {
+    width: 90vw;
+  }
+}
+
 </style>
