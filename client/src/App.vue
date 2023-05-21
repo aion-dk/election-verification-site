@@ -181,7 +181,7 @@ body {
 }
 
 .popper-content-wrapper {
-  max-width: 400px;
+  max-width: calc(min(400px, 90vw));
   --vue-popper-bg: #000;
   --vue-popper-padding: 6px;
   --vue-popper-text-color: #fff;
