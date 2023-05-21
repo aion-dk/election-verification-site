@@ -13,6 +13,7 @@
 
 <style type="text/css" scoped>
 .Footer {
+  box-sizing: border-box;
   background-color: #fff;
   font-family: "Open Sans";
   display: flex;
@@ -22,7 +23,6 @@
   padding: 10px;
   font-weight: 400;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;

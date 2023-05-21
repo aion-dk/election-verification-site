@@ -160,13 +160,13 @@ body {
 
 .DBAS {
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
 }
 
 .DBAS__Content {
-  height: calc(100vh - 120px);
-  margin-top: 80px;
+  flex-grow: 1;
   overflow-y: scroll;
 }
 
