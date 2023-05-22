@@ -1,5 +1,30 @@
+<script lang="ts" setup>
+
+const lines = {
+    l1x1: 1,
+    l1y1: 1,
+    l1x2: 5,
+    l1y2: 1,
+    l2x1: 1,
+    l2y1: 3,
+    l2x2: 5,
+    l2y2: 3,
+    l3x1: 1,
+    l3y1: 5,
+    l3x2: 5,
+    l3y2: 5,
+}
+
+const props = defineProps({
+  stroke: {
+    type: String,
+    default: "black",
+  }
+});
+</script>
+
 <template>
-  <svg viewBox="0,0,6,6" height="1em" :stroke="stroke" stroke-linecap="square">
+  <svg viewBox="0,0,6,6" height="1em" :stroke="props.stroke" stroke-linecap="square">
     <line
       :x1="lines.l1x1"
       :y1="lines.l1y1"
@@ -20,34 +45,3 @@
     ></line>
   </svg>
 </template>
-<script>
-export default {
-  name: "HamburgerIcon",
-  props: {
-    expanded: {
-      type: Boolean,
-      default: false,
-    },
-    stroke: {
-      type: String,
-      default: "black",
-    },
-  },
-  data: () => ({
-    lines: {
-      l1x1: 1,
-      l1y1: 1,
-      l1x2: 5,
-      l1y2: 1,
-      l2x1: 1,
-      l2y1: 3,
-      l2x2: 5,
-      l2y2: 3,
-      l3x1: 1,
-      l3y1: 5,
-      l3x2: 5,
-      l3y2: 5,
-    },
-  }),
-};
-</script>
