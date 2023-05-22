@@ -175,7 +175,7 @@ body {
 }
 
 .DBAS__Content {
-  height: calc(100vh - 246px);
+  height: calc(100vh - 118px);
   margin-top: 70px;
 }
 
@@ -198,11 +198,5 @@ body {
 
 .DBAS_SkipToContentLink:focus {
   margin-top: 100px;
-}
-
-@media only screen and (max-width: 768px) {
-  .DBAS__Content {
-    height: calc(100vh - 118px);
-  }
 }
 </style>

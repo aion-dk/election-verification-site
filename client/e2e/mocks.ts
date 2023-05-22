@@ -376,7 +376,7 @@ export const translations = {
                   "Your ballot tracking code is displayed on the election page after you submitted your ballot. It is 7 character code.",
               },
             },
-            verification_landing: {
+            verification: {
               title: "Ballot Tester",
               subtitle: "I am voting and I want to",
               subtitle_strong: "check my choices",
@@ -405,7 +405,7 @@ export const translations = {
                 footer: "All done!",
               },
             },
-            tracking_landing: {
+            tracking: {
               title: "Ballot Tracker",
               subtitle: "I have voted and I want to",
               subtitle_strong: "track my ballot",

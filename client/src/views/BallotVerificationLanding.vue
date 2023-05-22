@@ -69,16 +69,16 @@ watch(verificationStore, async (newStore) => {
         class="VerificationLanding__Icon text-theme"
       />
       <h3 class="VerificationLanding__Title">
-        {{ $t("views.verification_landing.title") }}
+        {{ $t("views.verification.title") }}
       </h3>
       <h4 class="VerificationLanding__Subtitle">
-        {{ $t("views.verification_landing.subtitle") }}
+        {{ $t("views.verification.subtitle") }}
         <strong class="text-theme">{{
-          $t("views.verification_landing.subtitle_strong")
+          $t("views.verification.subtitle_strong")
         }}</strong>
       </h4>
       <p class="VerificationLanding__Description">
-        {{ $t("views.verification_landing.description") }}
+        {{ $t("views.verification.description") }}
       </p>
       <Error v-if="error" :errorPath="error" />
       <div class="VerificationLanding__Action_Container">
@@ -88,13 +88,13 @@ watch(verificationStore, async (newStore) => {
             type="text"
             name="verification-code"
             id="verification-code"
-            :placeholder="$t('views.verification_landing.placeholder')"
+            :placeholder="$t('views.verification.placeholder')"
             v-model="verificationCode"
             class="VerificationLanding__TrackingCode"
             data-1p-ignore
           />
           <AVButton
-            :label="$t('views.verification_landing.button')"
+            :label="$t('views.verification.button')"
             type="neutral"
             name="initiate-verification"
             id="initiate-verification"
@@ -113,14 +113,13 @@ watch(verificationStore, async (newStore) => {
                 icon="circle-question"
                 class="VerificationLanding__Tooltip_Icon"
               />
-              <span>{{ $t("views.verification_landing.tooltip_helper") }}</span>
-              <span :aria-label="$t('views.verification_landing.tooltip_text')">
-              </span>
+              <span>{{ $t("views.verification.tooltip_helper") }}</span>
+              <span :aria-label="$t('views.verification.tooltip_text')"> </span>
             </template>
 
             <template #content>
               <span id="tracking-code-tooltip">
-                {{ $t("views.verification_landing.tooltip_text") }}
+                {{ $t("views.verification.tooltip_text") }}
               </span>
             </template>
           </tooltip>
@@ -129,9 +128,9 @@ watch(verificationStore, async (newStore) => {
     </section>
     <aside class="VerificationLanding__Help">
       <h5 class="VerificationLanding__Help_Title">
-        {{ $t("views.verification_landing.help.title")
+        {{ $t("views.verification.help.title")
         }}<strong class="text-theme">{{
-          $t("views.verification_landing.help.title_strong")
+          $t("views.verification.help.title_strong")
         }}</strong>
       </h5>
       <div class="VerificationLanding__Help_Container">
@@ -142,14 +141,20 @@ watch(verificationStore, async (newStore) => {
         >
           <span class="VerificationLanding__Step_Index">{{ step }}</span>
           <p
-            v-html="$t(`views.verification_landing.help.steps.step_${step}`)"
-            class="text-contrast"
+            v-html="$t(`views.verification.help.steps.step_${step}`)"
+            class="VerificationLanding__Step_Text text-contrast"
           />
         </div>
         <span class="VerificationLanding__Help_Footer text-contrast">{{
-          $t(`views.verification_landing.help.footer`)
+          $t(`views.verification.help.footer`)
         }}</span>
       </div>
+      <img
+        v-if="configStore.electionStatus?.theme?.logo"
+        class="VerificationLanding__Brand_Logo"
+        :src="configStore.electionStatus?.theme?.logo"
+        :alt="$t('header.election_logo_alt')"
+      />
     </aside>
   </div>
 </template>
@@ -158,7 +163,7 @@ watch(verificationStore, async (newStore) => {
 .VerificationLanding__Container {
   display: flex;
   width: 100vw;
-  height: calc(100vh - 118px);
+  height: 100%;
 }
 
 .VerificationLanding__Action {
@@ -179,28 +184,32 @@ watch(verificationStore, async (newStore) => {
 }
 
 .VerificationLanding__Action_Container {
-  max-width: 32rem;
+  width: 30rem;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.VerificationLanding__Action_Container form {
+  width: 100%;
 }
 
 .VerificationLanding__Title {
   font-size: 3rem;
   font-weight: 600;
   color: var(--slate-900);
-  margin-bottom: 2rem;
+  margin: 0 0 1.5rem 0;
 }
 .VerificationLanding__Subtitle {
   color: var(--slate-700);
   font-size: 2.25rem;
   font-weight: 500;
-  margin-bottom: 2rem;
+  margin: 0 0 3rem 0;
 }
 
 .VerificationLanding__Description {
   color: var(--slate-700);
-  margin-bottom: 3rem;
+  margin: 0 0 3rem 0;
 }
 
 .VerificationLanding__TrackingCode {
@@ -282,6 +291,10 @@ watch(verificationStore, async (newStore) => {
   font-size: 2.25rem;
 }
 
+.VerificationLanding__Brand_Logo {
+  display: none;
+}
+
 @media only screen and (max-width: 1800px) {
   .VerificationLanding__Action {
     width: 60%;
@@ -330,6 +343,16 @@ watch(verificationStore, async (newStore) => {
   .VerificationLanding__Help_Container {
     margin-bottom: 3rem;
   }
+
+  .VerificationLanding__Action_Container {
+    width: 100%;
+  }
+
+  .VerificationLanding__Brand_Logo {
+    display: block;
+    width: 30%;
+    margin-bottom: 2rem;
+  }
 }
 
 @media only screen and (max-width: 768px) {
@@ -357,6 +380,56 @@ watch(verificationStore, async (newStore) => {
 
   .VerificationLanding__Help_Footer {
     font-size: 1.5rem;
+  }
+}
+
+@media only screen and (max-height: 1080px) and (min-width: 976px) {
+  .VerificationLanding__Help_Container {
+    padding: 3rem 2rem;
+    gap: 1.5rem;
+  }
+
+  .VerificationLanding__Help_Footer {
+    font-size: 1.5rem;
+  }
+
+  .VerificationLanding__Step_Index {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .VerificationLanding__Step_Text {
+    margin: 1rem 0 0 0;
+  }
+
+  .VerificationLanding__Help_Title {
+    font-size: 1.75rem;
+    margin: 0 0 2rem 0;
+  }
+}
+
+@media only screen and (max-height: 720px) and (min-width: 976px) {
+  .VerificationLanding__Help_Container {
+    padding: 3rem 2rem;
+    gap: 1rem;
+  }
+
+  .VerificationLanding__Help_Footer {
+    font-size: 1.25rem;
+  }
+
+  .VerificationLanding__Step_Index {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .VerificationLanding__Step_Text {
+    margin: 0.5rem 0 0 0;
+  }
+
+  .VerificationLanding__Help_Title {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
   }
 }
 </style>

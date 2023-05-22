@@ -59,7 +59,7 @@ const setLocale = (newLocale: string) => {
         class="Header__Logo"
         aria-hidden="true"
         :src="configStore.electionStatus?.theme?.logo"
-        alt="DBAS Logo"
+        :alt="$t('header.election_logo_alt')"
       />
       <div class="Header__Text">
         <span class="Header__Title">{{ $t("header.dbas") }}</span>
@@ -155,14 +155,13 @@ const setLocale = (newLocale: string) => {
 
 .Header__Title {
   font-weight: 600;
-  font-size: 1.625rem;
-  line-height: 1.625rem;
+  font-size: 1.2rem;
+  line-height: 1.25rem;
   color: #495057;
 }
 
 .Header__Subtitle {
-  font-size: 1.125rem;
-  line-height: 1.625rem;
+  font-size: 1rem;
   color: #495057;
 }
 
@@ -232,10 +231,6 @@ const setLocale = (newLocale: string) => {
   .Header__Show {
     display: none;
   }
-
-  .Header__Text {
-    display: none;
-  }
 }
 
 @media only screen and (max-width: 1440px) {
@@ -244,14 +239,8 @@ const setLocale = (newLocale: string) => {
     gap: 0;
   }
 
-  .Header__Title {
-    font-size: 1.2rem;
-    line-height: 1.2rem;
-  }
-
-  .Header__Subtitle {
-    font-size: 1rem;
-    line-height: 1.2rem;
+  .Header__Logo {
+    display: none;
   }
 }
 </style>

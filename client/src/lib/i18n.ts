@@ -9,6 +9,7 @@ if (url.pathname.split("/")[1]) locale = url.pathname.split("/")[1];
 const i18n = createI18n({
   locale: locale,
   fallbackLocale: "en",
+  warnHtmlInMessage: "off",
   messages: {
     en: {
       locales: {
