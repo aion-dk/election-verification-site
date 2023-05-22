@@ -141,7 +141,7 @@ function toggleMobileMenu() {
 .AVNavbar.Navbar {
   position: relative;
   box-sizing: border-box;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
 }
 
 .Header__Brand {
@@ -205,7 +205,7 @@ function toggleMobileMenu() {
 }
 
 .Header__LinksMobile .Header__Link {
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   font-size: 18px;
   font-weight: 700;
   text-transform: uppercase;

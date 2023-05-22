@@ -54,9 +54,9 @@ const localeStore = useLocaleStore();
 
 <style type="text/css" scoped>
 .AboutView {
-  width: 900px;
+  max-width: 900px;
   margin: auto;
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
 }
 
 .AboutView__Header * {
