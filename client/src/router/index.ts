@@ -8,7 +8,7 @@ import LogsView from "../views/LogsView.vue";
 import HelpView from "../views/HelpView.vue";
 import AboutView from "../views/AboutView.vue";
 import BallotVerifierFound from "@/views/BallotVerifierFound.vue";
-import BallotTrackingLanding from '../views/BallotTrackingLanding.vue'
+import BallotTrackingLanding from "../views/BallotTrackingLanding.vue";
 
 const router = createRouter({
   history: createWebHistory(),

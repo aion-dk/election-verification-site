@@ -405,6 +405,36 @@ export const translations = {
                 footer: "All done!",
               },
             },
+            tracking_landing: {
+              title: "Ballot Tracker",
+              subtitle: "I have voted and I want to",
+              subtitle_strong: "track my ballot",
+              description:
+                "To verify that your ballot was casted and recorded in the Digital Ballot Box, you need to input the tracking code showed at the end of the voting process on the voting page.",
+              placeholder: "Tracking code",
+              button: "Track my ballot",
+              tooltip_helper: "Where do I find my tracking code?",
+              tooltip_text:
+                "Your ballot tracking code is displayed on the election page after you submitted your ballot. It is 7 character code.",
+              help: {
+                title: "Make sure your vote counts in ",
+                title_strong: "2 easy steps",
+                steps: {
+                  step_1:
+                    "<strong>Input your tracking code</strong> - Find it on the Voting Page",
+                  step_2:
+                    "Check that <strong>your ballot is registered</strong> in the Digital Ballot Box",
+                },
+                bonus: {
+                  title: "Bonus:",
+                  description:
+                    "See all the activity connected to your tracking code",
+                  q1: "When did you sign in?",
+                  q2: "Did you try to test your choices?",
+                  q3: "How many times?",
+                },
+              },
+            },
           },
         },
       },

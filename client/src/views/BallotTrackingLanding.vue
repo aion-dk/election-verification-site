@@ -1,9 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import useConfigStore from '../stores/useConfigStore'
-import useBallotStore from '../stores/useBallotStore'
-import useLocaleStore from '../stores/useLocaleStore'
+import { ref } from "vue";
+import useConfigStore from "../stores/useConfigStore";
+import useBallotStore from "../stores/useBallotStore";
+import useLocaleStore from "../stores/useLocaleStore";
 import router from "../router";
+import Error from "../components/Error.vue";
 
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
@@ -32,7 +33,7 @@ const lookupBallot = async (event: Event) => {
   }
 
   disabled.value = false;
-}
+};
 </script>
 
 <template>
@@ -122,11 +123,21 @@ const lookupBallot = async (event: Event) => {
         </div>
 
         <div>
-          <p class="text-contrast TrackingLanding__Bonus"><strong>{{ $t(`views.tracking_landing.help.bonus.title`) }}</strong></p>
-          <p class="text-contrast TrackingLanding__Bonus">{{ $t(`views.tracking_landing.help.bonus.description`) }}</p>
-          <p class="text-contrast TrackingLanding__Bonus">{{ $t(`views.tracking_landing.help.bonus.q1`) }}</p>
-          <p class="text-contrast TrackingLanding__Bonus">{{ $t(`views.tracking_landing.help.bonus.q2`) }}</p>
-          <p class="text-contrast TrackingLanding__Bonus">{{ $t(`views.tracking_landing.help.bonus.q3`) }}</p>
+          <p class="text-contrast TrackingLanding__Bonus">
+            <strong>{{ $t(`views.tracking_landing.help.bonus.title`) }}</strong>
+          </p>
+          <p class="text-contrast TrackingLanding__Bonus">
+            {{ $t(`views.tracking_landing.help.bonus.description`) }}
+          </p>
+          <p class="text-contrast TrackingLanding__Bonus">
+            {{ $t(`views.tracking_landing.help.bonus.q1`) }}
+          </p>
+          <p class="text-contrast TrackingLanding__Bonus">
+            {{ $t(`views.tracking_landing.help.bonus.q2`) }}
+          </p>
+          <p class="text-contrast TrackingLanding__Bonus">
+            {{ $t(`views.tracking_landing.help.bonus.q3`) }}
+          </p>
         </div>
       </div>
     </aside>
