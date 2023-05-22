@@ -68,15 +68,15 @@ watch(verificationStore, async (newStore) => {
         icon="envelope-open-text"
         class="VerificationLanding__Icon text-theme"
       />
-      <h1 class="VerificationLanding__Title">
+      <h3 class="VerificationLanding__Title">
         {{ $t("views.verification_landing.title") }}
-      </h1>
-      <h2 class="VerificationLanding__Subtitle">
+      </h3>
+      <h4 class="VerificationLanding__Subtitle">
         {{ $t("views.verification_landing.subtitle") }}
         <strong class="text-theme">{{
           $t("views.verification_landing.subtitle_strong")
         }}</strong>
-      </h2>
+      </h4>
       <p class="VerificationLanding__Description">
         {{ $t("views.verification_landing.description") }}
       </p>
@@ -128,12 +128,12 @@ watch(verificationStore, async (newStore) => {
       </div>
     </section>
     <aside class="VerificationLanding__Help">
-      <h3 class="VerificationLanding__Help_Title">
+      <h5 class="VerificationLanding__Help_Title">
         {{ $t("views.verification_landing.help.title")
         }}<strong class="text-theme">{{
           $t("views.verification_landing.help.title_strong")
         }}</strong>
-      </h3>
+      </h5>
       <div class="VerificationLanding__Help_Container">
         <div
           v-for="step in steps"

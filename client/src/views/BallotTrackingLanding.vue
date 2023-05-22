@@ -43,15 +43,15 @@ const lookupBallot = async (event: Event) => {
         icon="magnifying-glass"
         class="TrackingLanding__Icon text-theme"
       />
-      <h1 class="TrackingLanding__Title">
+      <h3 class="TrackingLanding__Title">
         {{ $t("views.tracking_landing.title") }}
-      </h1>
-      <h2 class="TrackingLanding__Subtitle">
+      </h3>
+      <h4 class="TrackingLanding__Subtitle">
         {{ $t("views.tracking_landing.subtitle") }}
         <strong class="text-theme">{{
           $t("views.tracking_landing.subtitle_strong")
         }}</strong>
-      </h2>
+      </h4>
       <p class="TrackingLanding__Description">
         {{ $t("views.tracking_landing.description") }}
       </p>
@@ -103,12 +103,12 @@ const lookupBallot = async (event: Event) => {
       </div>
     </section>
     <aside class="TrackingLanding__Help">
-      <h3 class="TrackingLanding__Help_Title">
+      <h5 class="TrackingLanding__Help_Title">
         {{ $t("views.tracking_landing.help.title")
         }}<strong class="text-theme">{{
           $t("views.tracking_landing.help.title_strong")
         }}</strong>
-      </h3>
+      </h5>
       <div class="TrackingLanding__Help_Container">
         <div
           v-for="step in steps"

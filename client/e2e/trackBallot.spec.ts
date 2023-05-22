@@ -52,7 +52,7 @@ test("tracking a ballot", async ({ page }) => {
   });
 
   await page.goto("/en/us3/tracking");
-  await expect(page.locator("h1")).toHaveText("Ballot Tracker");
+  await expect(page.locator("h3")).toHaveText("Ballot Tracker");
   await page.getByPlaceholder("Tracking code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Track my ballot" }).click();
   await page.locator(".ExpandableSection__Expander").first().click();
@@ -105,7 +105,7 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
   });
 
   await page.goto("/en/us3/tracking");
-  await expect(page.locator("h1")).toHaveText("Ballot Tracker");
+  await expect(page.locator("h3")).toHaveText("Ballot Tracker");
   await page.getByPlaceholder("Tracking code").fill("abcdef");
   await page.getByRole("button", { name: "Track my ballot" }).click();
   await expect(page.locator(".Error__Title")).toContainText(
@@ -159,7 +159,7 @@ test("tracking a rejected ballot has the right text", async ({ page }) => {
   });
 
   await page.goto("/en/us3/tracking");
-  await expect(page.locator("h1")).toHaveText("Ballot Tracker");
+  await expect(page.locator("h3")).toHaveText("Ballot Tracker");
   await page.getByPlaceholder("Tracking code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Track my ballot" }).click();
 

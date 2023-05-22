@@ -77,6 +77,7 @@ const setLocale = (newLocale: string) => {
         class="Header__Link"
         role="menuitem"
         :to="`/${locale}/${election.slug}/verification`"
+        @click="toggleMenu"
       >
         {{ $t("header.verification") }}
       </RouterLink>
@@ -85,6 +86,7 @@ const setLocale = (newLocale: string) => {
         class="Header__Link"
         role="menuitem"
         :to="`/${locale}/${election.slug}/tracking`"
+        @click="toggleMenu"
       >
         {{ $t("header.tracking") }}
       </RouterLink>
@@ -93,6 +95,7 @@ const setLocale = (newLocale: string) => {
         role="menuitem"
         class="Header__Link"
         :to="`/${locale}/${election.slug}/logs`"
+        @click="toggleMenu"
       >
         {{ $t("header.logs") }}
       </RouterLink>
@@ -101,6 +104,7 @@ const setLocale = (newLocale: string) => {
         role="menuitem"
         class="Header__Link"
         :to="`/${locale}/${election.slug}/help`"
+        @click="toggleMenu"
       >
         {{ $t("header.help") }}
       </RouterLink>
@@ -199,7 +203,7 @@ const setLocale = (newLocale: string) => {
   color: #212529;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (max-width: 976px) {
   .Header__Links {
     position: absolute;
     top: 70px;
@@ -228,17 +232,9 @@ const setLocale = (newLocale: string) => {
   .Header__Show {
     display: none;
   }
-}
 
-@media only screen and (max-width: 976px) {
-  .Header__Link {
-    font-size: 1rem;
-    padding: 0.5rem;
-  }
-
-  .Header__Locales {
-    font-size: 1rem;
-    padding-left: 0.5rem;
+  .Header__Text {
+    display: none;
   }
 }
 
