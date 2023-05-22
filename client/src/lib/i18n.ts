@@ -128,6 +128,7 @@ const i18n = createI18n({
             type: "Ballot encryption key",
             author: "Trustee",
             info: "Ballot encryption key has been generated",
+            encryption_key: "Ballot encryption key identifier is:",
           },
           CastRequestItem: {
             type: "Ballot cast",
