@@ -33,7 +33,7 @@ const links = [
     text: "header.help",
     route: `/${props.locale}/${props.election.slug}/help`,
   },
-]
+];
 
 const emit = defineEmits(["changeLocale"]);
 
@@ -83,20 +83,26 @@ function toggleMobileMenu() {
     </button>
 
     <div class="Header__Links">
-      <RouterLink role="menuitem" class="Header__Link" v-for="link in links" :key="link.route" :to="link.route">
+      <RouterLink
+        role="menuitem"
+        class="Header__Link"
+        v-for="link in links"
+        :key="link.route"
+        :to="link.route"
+      >
         {{ $t(link.text) }}
       </RouterLink>
 
       <a
-          role="menuitem"
-          class="Header__Link"
-          :href="config.contactUrl"
-          target="_blank"
+        role="menuitem"
+        class="Header__Link"
+        :href="config.contactUrl"
+        target="_blank"
       >
         {{ $t("header.contact") }}
         <font-awesome-icon
-            aria-hidden="true"
-            icon="fa-solid fa-arrow-up-right-from-square"
+          aria-hidden="true"
+          icon="fa-solid fa-arrow-up-right-from-square"
         />
       </a>
 
@@ -108,25 +114,27 @@ function toggleMobileMenu() {
     </div>
   </AVNavbar>
   <div id="LinksMobile" class="Header__LinksMobile">
-    <RouterLink role="menuitem"
-                class="Header__Link"
-                v-for="link in links"
-                :key="link.route"
-                :to="link.route"
-                @click="toggleMobileMenu">
+    <RouterLink
+      role="menuitem"
+      class="Header__Link"
+      v-for="link in links"
+      :key="link.route"
+      :to="link.route"
+      @click="toggleMobileMenu"
+    >
       {{ $t(link.text) }}
     </RouterLink>
 
     <a
-        role="menuitem"
-        class="Header__Link"
-        :href="config.contactUrl"
-        target="_blank"
+      role="menuitem"
+      class="Header__Link"
+      :href="config.contactUrl"
+      target="_blank"
     >
       {{ $t("header.contact") }}
       <font-awesome-icon
-          aria-hidden="true"
-          icon="fa-solid fa-arrow-up-right-from-square"
+        aria-hidden="true"
+        icon="fa-solid fa-arrow-up-right-from-square"
       />
     </a>
     <DropDown
@@ -193,6 +201,10 @@ function toggleMobileMenu() {
 .Header__LinksMobile {
   background: white;
   display: none;
+}
+
+.Header__Link.router-link-active {
+  background-color: #efefef;
 }
 
 .Header__Link {

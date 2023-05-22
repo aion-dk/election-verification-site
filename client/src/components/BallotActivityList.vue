@@ -46,6 +46,11 @@ defineProps({
   display: flex;
   font-size: 14px;
 }
+@media (max-width: 992px) {
+  .BallotActivitiesList__ColumnDescriptions {
+    display: none;
+  }
+}
 
 .BallotActivitiesList__ColumnDescriptions--time {
   width: 150px;

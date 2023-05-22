@@ -192,6 +192,11 @@ onMounted(() => loadPage(currentPage()));
   display: flex;
   font-size: 14px;
 }
+@media (max-width: 992px) {
+  .LogsView__ColumnDescriptions {
+    display: none;
+  }
+}
 
 .LogsView__ColumnDescriptions--time {
   width: 170px;
