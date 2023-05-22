@@ -97,5 +97,4 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
 
 test.skip("tracking a rejected ballot has the right text", async ({ page }) => {
   // Mock Network calls
-
 });
