@@ -22,15 +22,15 @@ const props = defineProps({
 
 const links = [
   {
-    text: t("header.about"),
+    text: "header.about",
     route: `/${props.locale}/${props.election.slug}/about`,
   },
   {
-    text: t("header.logs"),
+    text: "header.logs",
     route: `/${props.locale}/${props.election.slug}/logs`,
   },
   {
-    text: t("header.help"),
+    text: "header.help",
     route: `/${props.locale}/${props.election.slug}/help`,
   },
 ]
@@ -84,7 +84,7 @@ function toggleMobileMenu() {
 
     <div class="Header__Links">
       <RouterLink role="menuitem" class="Header__Link" v-for="link in links" :key="link.route" :to="link.route">
-        {{ link.text }}
+        {{ $t(link.text) }}
       </RouterLink>
 
       <a
@@ -114,7 +114,7 @@ function toggleMobileMenu() {
                 :key="link.route"
                 :to="link.route"
                 @click="toggleMobileMenu">
-      {{ link.text }}
+      {{ $t(link.text) }}
     </RouterLink>
 
     <a
