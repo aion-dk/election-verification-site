@@ -34,7 +34,6 @@ const availableLocales = computed(() => {
 });
 
 function setLocale(newLocale: string) {
-  console.log("Setting new locale", newLocale);
   emit("changeLocale", newLocale);
 }
 

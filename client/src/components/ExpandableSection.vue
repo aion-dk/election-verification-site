@@ -78,11 +78,10 @@ function toggle() {
 .ExpandableSection__Expander {
   background-color: #343a40;
   border-radius: 100%;
-  height: 25px;
-  width: 25px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  height: 24px;
+  width: 24px;
+  display: grid;
+  place-content: center;
   position: absolute;
   top: 16px;
   right: 16px;
