@@ -20,6 +20,21 @@ const props = defineProps({
   },
 });
 
+const links = [
+  {
+    text: t("header.about"),
+    route: `/${props.locale}/${props.election.slug}/about`,
+  },
+  {
+    text: t("header.logs"),
+    route: `/${props.locale}/${props.election.slug}/logs`,
+  },
+  {
+    text: t("header.help"),
+    route: `/${props.locale}/${props.election.slug}/help`,
+  },
+]
+
 const emit = defineEmits(["changeLocale"]);
 
 const _locales = computed(() => uniq(props.election.locales || ["en"]));
@@ -68,13 +83,22 @@ function toggleMobileMenu() {
     </button>
 
     <div class="Header__Links">
-      <RouterLink
-        role="menuitem"
-        class="Header__Link"
-        :to="`/${locale}/${election.slug}/logs`"
-      >
-        {{ $t("header.logs") }}
+      <RouterLink role="menuitem" class="Header__Link" v-for="link in links" :key="link.route" :to="link.route">
+        {{ link.text }}
       </RouterLink>
+
+      <a
+          role="menuitem"
+          class="Header__Link"
+          :href="config.contactUrl"
+          target="_blank"
+      >
+        {{ $t("header.contact") }}
+        <font-awesome-icon
+            aria-hidden="true"
+            icon="fa-solid fa-arrow-up-right-from-square"
+        />
+      </a>
 
       <DropDown
         class="Header__Locales"
@@ -84,14 +108,27 @@ function toggleMobileMenu() {
     </div>
   </AVNavbar>
   <div id="LinksMobile" class="Header__LinksMobile">
-    <RouterLink
-      role="button"
-      class="Header__Link"
-      :to="`/${locale}/${election.slug}/logs`"
-      @click="toggleMobileMenu"
-    >
-      {{ $t("header.logs") }}
+    <RouterLink role="menuitem"
+                class="Header__Link"
+                v-for="link in links"
+                :key="link.route"
+                :to="link.route"
+                @click="toggleMobileMenu">
+      {{ link.text }}
     </RouterLink>
+
+    <a
+        role="menuitem"
+        class="Header__Link"
+        :href="config.contactUrl"
+        target="_blank"
+    >
+      {{ $t("header.contact") }}
+      <font-awesome-icon
+          aria-hidden="true"
+          icon="fa-solid fa-arrow-up-right-from-square"
+      />
+    </a>
     <DropDown
       class="Header__Link"
       :options="availableLocales"
