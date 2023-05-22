@@ -68,11 +68,6 @@ onMounted(() => setBallot());
       </Infobox>
     </div>
 
-    <Infobox class="BallotTracker__StatusInfo">
-      <h3>{{ $t(`views.tracker.status_map.${ballot.status}.title`) }}</h3>
-      <p>{{ $t(`views.tracker.status_map.${ballot.status}.description`) }}</p>
-    </Infobox>
-
     <div
       class="BallotTracker__Row BallotTracker__Row--stacked"
       v-if="ballot.activities.length"
