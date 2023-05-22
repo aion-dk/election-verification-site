@@ -45,7 +45,7 @@ test("downloading logs", async ({ page }) => {
   await page.getByRole("menuitem", { name: "Logs" }).click();
   const downloadPromise = page.waitForEvent("download");
   await page
-    .getByRole("link", {
+    .getByRole("button", {
       name: "Download the full election activity log (json)",
     })
     .click();
