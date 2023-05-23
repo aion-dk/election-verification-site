@@ -1,23 +1,23 @@
 version: "3"
 services:
   client:
-    image: digital-ballot-audit-site:latest
-    # image: "534003348933.dkr.ecr.eu-west-1.amazonaws.com/digital-ballot-audit-site:dev-main"
+    image: "election-verification-site:latest"
+    # image: "534003348933.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:dev-main"
     build:
-      context: ./client
+      context: "./client"
       ssh:
-        - default
+        - "default"
     volumes:
       - "./client:/usr/src/app"
       - "/usr/src/app/node_modules"
-    command: npm run dev
+    command: "npm run dev"
     ports:
-      - 3010:3010
+      - "3010:3010"
     environment:
-      SERVICE_NAME: dbas
+      SERVICE_NAME: "dbas"
     healthcheck:
-      test: curl -s http://localhost:3010
-      interval: 5s
-      start_period: 10s
-      timeout: 5s
+      test: "curl -s http://localhost:3010"
+      interval: "5s"
+      start_period: "10s"
+      timeout: "5s"
       retries: 10
