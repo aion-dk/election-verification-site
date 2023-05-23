@@ -4,6 +4,8 @@ import useVerificationStore from "../stores/useVerificationStore";
 import useConfigStore from "../stores/useConfigStore";
 import router from "../router";
 import Error from "../components/Error.vue";
+import ContentLayout from "../components/ContentLayout.vue";
+import MainIcon from "../components/MainIcon.vue";
 
 const verificationStore = useVerificationStore();
 const configStore = useConfigStore();
@@ -62,12 +64,12 @@ watch(verificationStore, async (newStore) => {
 </script>
 
 <template>
-  <div class="VerificationLanding__Container">
-    <section class="VerificationLanding__Action">
-      <AVIcon
-        icon="envelope-open-text"
-        class="VerificationLanding__Icon text-theme"
-      />
+  <ContentLayout
+    :help-title="$t('views.verification.help.title')"
+    :help-title-strong="$t('views.verification.help.title_strong')"
+  >
+    <template v-slot:action>
+      <MainIcon icon="envelope-open-text" />
       <h3 class="VerificationLanding__Title">
         {{ $t("views.verification.title") }}
       </h3>
@@ -125,64 +127,27 @@ watch(verificationStore, async (newStore) => {
           </tooltip>
         </p>
       </div>
-    </section>
-    <aside class="VerificationLanding__Help">
-      <h5 class="VerificationLanding__Help_Title">
-        {{ $t("views.verification.help.title")
-        }}<strong class="text-theme">{{
-          $t("views.verification.help.title_strong")
-        }}</strong>
-      </h5>
-      <div class="VerificationLanding__Help_Container">
-        <div
-          v-for="step in steps"
-          :key="`verification-step-${step}`"
-          class="VerificationLanding__Step"
-        >
-          <span class="VerificationLanding__Step_Index">{{ step }}</span>
-          <p
-            v-html="$t(`views.verification.help.steps.step_${step}`)"
-            class="VerificationLanding__Step_Text text-contrast"
-          />
-        </div>
-        <span class="VerificationLanding__Help_Footer text-contrast">{{
-          $t(`views.verification.help.footer`)
-        }}</span>
+    </template>
+    <template v-slot:help>
+      <div
+        v-for="step in steps"
+        :key="`verification-step-${step}`"
+        class="VerificationLanding__Step"
+      >
+        <span class="VerificationLanding__Step_Index">{{ step }}</span>
+        <p
+          v-html="$t(`views.verification.help.steps.step_${step}`)"
+          class="VerificationLanding__Step_Text text-contrast"
+        />
       </div>
-      <img
-        v-if="configStore.electionStatus?.theme?.logo"
-        class="VerificationLanding__Brand_Logo"
-        :src="configStore.electionStatus?.theme?.logo"
-        :alt="$t('header.election_logo_alt')"
-      />
-    </aside>
-  </div>
+      <span class="VerificationLanding__Help_Footer text-contrast">{{
+        $t(`views.verification.help.footer`)
+      }}</span>
+    </template>
+  </ContentLayout>
 </template>
 
 <style scoped>
-.VerificationLanding__Container {
-  display: flex;
-  width: 100vw;
-  height: 100%;
-}
-
-.VerificationLanding__Action {
-  width: 70%;
-  padding: 5rem;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-
-.VerificationLanding__Icon {
-  opacity: 0.05;
-  font-size: 20rem;
-  position: absolute;
-  right: 3rem;
-  top: 3rem;
-}
-
 .VerificationLanding__Action_Container {
   width: 30rem;
   display: flex;
@@ -200,6 +165,7 @@ watch(verificationStore, async (newStore) => {
   color: var(--slate-900);
   margin: 0 0 1.5rem 0;
 }
+
 .VerificationLanding__Subtitle {
   color: var(--slate-700);
   font-size: 2.25rem;
@@ -240,35 +206,6 @@ watch(verificationStore, async (newStore) => {
   margin-right: 0.5rem;
 }
 
-.VerificationLanding__Help {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 30%;
-  background-color: var(--slate-100);
-  padding: 0 6rem;
-}
-
-.VerificationLanding__Help_Title {
-  font-size: 2rem;
-  font-weight: 500;
-  margin: 0 0 2rem 0;
-  text-align: center;
-}
-
-.VerificationLanding__Help_Container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--av-theme-background);
-  border-radius: 12px;
-  padding: 5rem 4rem;
-  gap: 2rem;
-  text-align: center;
-}
-
 .VerificationLanding__Step {
   display: flex;
   flex-direction: column;
@@ -291,67 +228,9 @@ watch(verificationStore, async (newStore) => {
   font-size: 2.25rem;
 }
 
-.VerificationLanding__Brand_Logo {
-  display: none;
-}
-
-@media only screen and (max-width: 1800px) {
-  .VerificationLanding__Action {
-    width: 60%;
-  }
-  .VerificationLanding__Help {
-    width: 40%;
-  }
-}
-
-@media only screen and (max-width: 1440px) {
-  .VerificationLanding__Help {
-    padding: 0 4rem;
-  }
-
-  .VerificationLanding__Help_Container {
-    padding: 4rem 3rem;
-    gap: 1rem;
-  }
-}
-
 @media only screen and (max-width: 976px) {
-  .VerificationLanding__Container {
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-  }
-
-  .VerificationLanding__Action {
-    align-items: center;
-    text-align: center;
-    width: 100%;
-    padding-bottom: 2rem;
-  }
-
-  .VerificationLanding__Icon {
-    opacity: 1;
-    font-size: 5rem;
-    position: static;
-  }
-
-  .VerificationLanding__Help {
-    width: 100%;
-    padding-top: 2rem;
-  }
-
-  .VerificationLanding__Help_Container {
-    margin-bottom: 3rem;
-  }
-
   .VerificationLanding__Action_Container {
     width: 100%;
-  }
-
-  .VerificationLanding__Brand_Logo {
-    display: block;
-    width: 30%;
-    margin-bottom: 2rem;
   }
 }
 
@@ -370,25 +249,12 @@ watch(verificationStore, async (newStore) => {
     margin-bottom: 2rem;
   }
 
-  .VerificationLanding__Help_Container {
-    padding: 3rem 2rem;
-  }
-
-  .VerificationLanding__Help_Title {
-    font-size: 1.5rem;
-  }
-
   .VerificationLanding__Help_Footer {
     font-size: 1.5rem;
   }
 }
 
 @media only screen and (max-height: 1080px) and (min-width: 976px) {
-  .VerificationLanding__Help_Container {
-    padding: 3rem 2rem;
-    gap: 1.5rem;
-  }
-
   .VerificationLanding__Help_Footer {
     font-size: 1.5rem;
   }
@@ -401,19 +267,9 @@ watch(verificationStore, async (newStore) => {
   .VerificationLanding__Step_Text {
     margin: 1rem 0 0 0;
   }
-
-  .VerificationLanding__Help_Title {
-    font-size: 1.75rem;
-    margin: 0 0 2rem 0;
-  }
 }
 
 @media only screen and (max-height: 720px) and (min-width: 976px) {
-  .VerificationLanding__Help_Container {
-    padding: 3rem 2rem;
-    gap: 1rem;
-  }
-
   .VerificationLanding__Help_Footer {
     font-size: 1.25rem;
   }
@@ -425,11 +281,6 @@ watch(verificationStore, async (newStore) => {
 
   .VerificationLanding__Step_Text {
     margin: 0.5rem 0 0 0;
-  }
-
-  .VerificationLanding__Help_Title {
-    font-size: 1.5rem;
-    margin: 0 0 1rem 0;
   }
 }
 </style>

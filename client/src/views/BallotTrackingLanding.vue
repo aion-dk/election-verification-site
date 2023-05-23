@@ -5,6 +5,8 @@ import useBallotStore from "../stores/useBallotStore";
 import useLocaleStore from "../stores/useLocaleStore";
 import router from "../router";
 import Error from "../components/Error.vue";
+import ContentLayout from "../components/ContentLayout.vue";
+import MainIcon from "../components/MainIcon.vue";
 
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
@@ -37,12 +39,12 @@ const lookupBallot = async (event: Event) => {
 </script>
 
 <template>
-  <div class="TrackingLanding__Container">
-    <section class="TrackingLanding__Action">
-      <AVIcon
-        icon="magnifying-glass"
-        class="TrackingLanding__Icon text-theme"
-      />
+  <ContentLayout
+    :help-title="$t('views.tracking.help.title')"
+    :help-title-strong="$t('views.tracking.help.title_strong')"
+  >
+    <template v-slot:action>
+      <MainIcon icon="magnifying-glass" />
       <h3 class="TrackingLanding__Title">
         {{ $t("views.tracking.title") }}
       </h3>
@@ -100,79 +102,42 @@ const lookupBallot = async (event: Event) => {
           </tooltip>
         </p>
       </div>
-    </section>
-    <aside class="TrackingLanding__Help">
-      <h5 class="TrackingLanding__Help_Title">
-        {{ $t("views.tracking.help.title")
-        }}<strong class="text-theme">{{
-          $t("views.tracking.help.title_strong")
-        }}</strong>
-      </h5>
-      <div class="TrackingLanding__Help_Container">
-        <div
-          v-for="step in steps"
-          :key="`verification-step-${step}`"
-          class="TrackingLanding__Step"
-        >
-          <span class="TrackingLanding__Step_Index">{{ step }}</span>
-          <p
-            v-html="$t(`views.tracking.help.steps.step_${step}`)"
-            class="text-contrast"
-          />
-        </div>
-
-        <div>
-          <p class="text-contrast TrackingLanding__Bonus">
-            <strong>{{ $t(`views.tracking.help.bonus.title`) }}</strong>
-          </p>
-          <p class="text-contrast TrackingLanding__Bonus">
-            {{ $t(`views.tracking.help.bonus.description`) }}
-          </p>
-          <p class="text-contrast TrackingLanding__Bonus">
-            {{ $t(`views.tracking.help.bonus.q1`) }}
-          </p>
-          <p class="text-contrast TrackingLanding__Bonus">
-            {{ $t(`views.tracking.help.bonus.q2`) }}
-          </p>
-          <p class="text-contrast TrackingLanding__Bonus">
-            {{ $t(`views.tracking.help.bonus.q3`) }}
-          </p>
-        </div>
+    </template>
+    <template v-slot:help>
+      <div
+        v-for="step in steps"
+        :key="`verification-step-${step}`"
+        class="TrackingLanding__Step"
+      >
+        <span class="TrackingLanding__Step_Index">{{ step }}</span>
+        <p
+          v-html="$t(`views.tracking.help.steps.step_${step}`)"
+          class="text-contrast"
+        />
       </div>
-      <img
-        v-if="configStore.electionStatus?.theme?.logo"
-        class="TrackingLanding__Brand_Logo"
-        :src="configStore.electionStatus?.theme?.logo"
-        :alt="$t('header.election_logo_alt')"
-      />
-    </aside>
-  </div>
+
+      <div>
+        <p class="text-contrast TrackingLanding__Bonus">
+          <strong>{{ $t(`views.tracking.help.bonus.title`) }}</strong>
+        </p>
+        <p class="text-contrast TrackingLanding__Bonus">
+          {{ $t(`views.tracking.help.bonus.description`) }}
+        </p>
+        <p class="text-contrast TrackingLanding__Bonus">
+          {{ $t(`views.tracking.help.bonus.q1`) }}
+        </p>
+        <p class="text-contrast TrackingLanding__Bonus">
+          {{ $t(`views.tracking.help.bonus.q2`) }}
+        </p>
+        <p class="text-contrast TrackingLanding__Bonus">
+          {{ $t(`views.tracking.help.bonus.q3`) }}
+        </p>
+      </div>
+    </template>
+  </ContentLayout>
 </template>
 
 <style scoped>
-.TrackingLanding__Container {
-  display: flex;
-  width: 100vw;
-  height: 100%;
-}
-
-.TrackingLanding__Action {
-  width: 70%;
-  padding: 5rem;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-}
-
-.TrackingLanding__Icon {
-  opacity: 0.05;
-  font-size: 20rem;
-  position: absolute;
-  right: 3rem;
-  top: 3rem;
-}
-
 .TrackingLanding__Action_Container {
   width: 30rem;
   display: flex;
@@ -190,6 +155,7 @@ const lookupBallot = async (event: Event) => {
   color: var(--slate-900);
   margin: 0 0 1.5rem 0;
 }
+
 .TrackingLanding__Subtitle {
   color: var(--slate-700);
   font-size: 2.25rem;
@@ -230,35 +196,6 @@ const lookupBallot = async (event: Event) => {
   margin-right: 0.5rem;
 }
 
-.TrackingLanding__Help {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 30%;
-  background-color: var(--slate-100);
-  padding: 0 6rem;
-}
-
-.TrackingLanding__Help_Title {
-  font-size: 2rem;
-  font-weight: 500;
-  margin: 0 0 2rem 0;
-  text-align: center;
-}
-
-.TrackingLanding__Help_Container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: var(--av-theme-background);
-  border-radius: 12px;
-  padding: 5rem 4rem;
-  gap: 2rem;
-  text-align: center;
-}
-
 .TrackingLanding__Step {
   display: flex;
   flex-direction: column;
@@ -283,63 +220,9 @@ const lookupBallot = async (event: Event) => {
   margin: 0;
 }
 
-.TrackingLanding__Brand_Logo {
-  display: none;
-}
-
-@media only screen and (max-width: 1800px) {
-  .TrackingLanding__Action {
-    width: 60%;
-  }
-  .TrackingLanding__Help {
-    width: 40%;
-  }
-}
-
-@media only screen and (max-width: 1440px) {
-  .TrackingLanding__Help {
-    padding: 0 4rem;
-  }
-
-  .TrackingLanding__Help_Container {
-    padding: 4rem 3rem;
-    gap: 1rem;
-  }
-}
-
 @media only screen and (max-width: 976px) {
-  .TrackingLanding__Container {
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-  }
-
-  .TrackingLanding__Action {
-    align-items: center;
-    text-align: center;
+  .TrackingLanding__Action_Container {
     width: 100%;
-    padding-bottom: 2rem;
-  }
-
-  .TrackingLanding__Icon {
-    opacity: 1;
-    font-size: 5rem;
-    position: static;
-  }
-
-  .TrackingLanding__Help {
-    width: 100%;
-    padding-top: 2rem;
-  }
-
-  .TrackingLanding__Help_Container {
-    margin-bottom: 3rem;
-  }
-
-  .TrackingLanding__Brand_Logo {
-    display: block;
-    width: 30%;
-    margin-bottom: 2rem;
   }
 }
 
@@ -357,63 +240,19 @@ const lookupBallot = async (event: Event) => {
   .TrackingLanding__Description {
     margin-bottom: 2rem;
   }
-
-  .TrackingLanding__Help_Container {
-    padding: 3rem 2rem;
-  }
-
-  .TrackingLanding__Help_Title {
-    font-size: 1.5rem;
-  }
-
-  .TrackingLanding__Help_Footer {
-    font-size: 1.5rem;
-  }
 }
 
 @media only screen and (max-height: 1080px) and (min-width: 976px) {
-  .TrackingLanding__Help_Container {
-    padding: 3rem 2rem;
-    gap: 1.5rem;
-  }
-
-  .TrackingLanding__Help_Footer {
-    font-size: 1.5rem;
-  }
-
   .TrackingLanding__Step_Index {
     width: 1.5rem;
     height: 1.5rem;
-  }
-
-  .TrackingLanding__Step_Text {
-    margin: 1rem 0 0 0;
-  }
-
-  .TrackingLanding__Help_Title {
-    font-size: 1.75rem;
-    margin: 0 0 2rem 0;
   }
 }
 
 @media only screen and (max-height: 720px) and (min-width: 976px) {
-  .TrackingLanding__Help_Container {
-    padding: 3rem 2rem;
-    gap: 1rem;
-  }
-
-  .TrackingLanding__Help_Footer {
-    font-size: 1.25rem;
-  }
-
   .TrackingLanding__Step_Index {
     width: 1.5rem;
     height: 1.5rem;
-  }
-
-  .TrackingLanding__Help_Title {
-    font-size: 1.5rem;
-    margin: 0 0 1rem 0;
   }
 }
 </style>
