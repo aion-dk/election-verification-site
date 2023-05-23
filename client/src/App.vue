@@ -11,6 +11,7 @@ import router from "./router";
 import { loadLocaleMessages, setLocale } from "./lib/i18n";
 import i18n from "./lib/i18n";
 import type { Locale } from "./Types";
+import { fallbackMessages } from "./assets/translations";
 
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
@@ -85,12 +86,16 @@ const setLanguage = async (conferenceClient: any) => {
     );
 
     for (let i = 0; i < configStore.election.locales.length; i++) {
-      loadLocaleMessages(
-        configStore.election.locales[i],
-        await conferenceClient.getTranslationsData(
-          configStore.election.locales[i]
-        )
-      );
+      const locale = configStore.election.locales[i];
+      const response = await conferenceClient
+        .getTranslationsData(configStore.election.locales[i])
+        .catch((err: Error) => {
+          console.error(err);
+        });
+
+      response
+        ? loadLocaleMessages(locale, response)
+        : loadLocaleMessages(locale, (fallbackMessages as any)[locale]);
     }
   }
 };
@@ -98,7 +103,9 @@ const setLanguage = async (conferenceClient: any) => {
 const setTheme = async (conferenceClient: any) => {
   if (!configStore.electionStatus || !configStore.electionTheme) {
     // Setting Splash Image
-    const status = await conferenceClient.getStatus();
+    const status = await conferenceClient
+      .getStatus()
+      .catch((err: Error) => console.error(err));
     if (status) configStore.setElectionStatus(status);
 
     // Setting Theme

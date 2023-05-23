@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { latestConfig, translations, status } from "./mocks";
+import { latestConfig, status } from "./mocks";
 
 test("verifying a ballot", async ({ page }) => {
   // Mock Network calls
@@ -12,15 +12,6 @@ test("verifying a ballot", async ({ page }) => {
         status: 200,
         contentType: "application/json",
         body: JSON.stringify(latestConfig),
-      });
-    }
-
-    // Intercept Translation calls
-    if (url.indexOf("/translations") > 0) {
-      return route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify(translations),
       });
     }
 
@@ -65,15 +56,6 @@ test("verifying with an invalid verification code", async ({ page }) => {
       });
     }
 
-    // Intercept Translation calls
-    if (url.indexOf("/translations") > 0) {
-      return route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify(translations),
-      });
-    }
-
     // Intercept Status calls
     if (url.indexOf("/status") > 0) {
       return route.fulfill({
@@ -91,7 +73,7 @@ test("verifying with an invalid verification code", async ({ page }) => {
   await page.getByPlaceholder("Testing code").fill("invalid-code");
   await page.getByRole("button", { name: "Start the Test" }).click();
   await expect(page.locator(".Error__Title")).toContainText(
-    "Invalid verification code"
+    "Testing code not found"
   );
   await page.getByPlaceholder("Testing code").fill("invalid-code");
 });

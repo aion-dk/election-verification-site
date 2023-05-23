@@ -1,5 +1,5 @@
 import { test } from "@playwright/test";
-import { latestConfig, translations, status } from "./mocks";
+import { latestConfig, status } from "./mocks";
 
 test("changing locale", async ({ page }) => {
   // Mock Network calls
@@ -12,15 +12,6 @@ test("changing locale", async ({ page }) => {
         status: 200,
         contentType: "application/json",
         body: JSON.stringify(latestConfig),
-      });
-    }
-
-    // Intercept Translation calls
-    if (url.indexOf("/translations") > 0) {
-      return route.fulfill({
-        status: 200,
-        contentType: "application/json",
-        body: JSON.stringify(translations),
       });
     }
 
