@@ -216,20 +216,40 @@ const setLocale = (newLocale: string) => {
     background-color: white;
   }
 
-  .Header__Link {
-    font-size: 1.5rem !important;
-    margin-bottom: 3rem;
-  }
-  .Header__Locales {
-    font-size: 1.5rem !important;
-  }
-
   .Header__Hamburger_Btn {
     display: block;
   }
 
   .Header__Show {
     display: none;
+  }
+}
+
+@media only screen and (min-height: 800px) and (max-width: 976px) {
+  .Header__Link {
+    font-size: 1.5rem !important;
+    margin: 1.5rem 0;
+  }
+  .Header__Locales {
+    font-size: 1.5rem !important;
+    margin: 1.5rem 0;
+  }
+}
+
+@media only screen and (max-height: 800px) and (max-width: 976px) {
+  .Header__Link {
+    font-size: 1.2rem !important;
+    margin: .5rem 0;
+  }
+
+  .Header__Link:first-of-type {
+    font-size: 1.2rem !important;
+    margin: 0 0 .5rem 0;
+  }
+
+  .Header__Locales {
+    font-size: 1.2rem !important;
+    margin: .5rem 0;
   }
 }
 
