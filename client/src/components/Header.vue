@@ -22,16 +22,8 @@ const props = defineProps({
 
 const links = [
   {
-    text: "header.about",
-    route: `/${props.locale}/${props.election.slug}/about`,
-  },
-  {
     text: "header.logs",
     route: `/${props.locale}/${props.election.slug}/logs`,
-  },
-  {
-    text: "header.help",
-    route: `/${props.locale}/${props.election.slug}/help`,
   },
 ];
 
