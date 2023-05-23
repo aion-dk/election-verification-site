@@ -30,31 +30,29 @@ onMounted(() => (ballot.value = ballotStore.ballot));
     <ContentLayout
       :help-title="$t('views.tracker.help.title')"
       :help-title-strong="$t('views.tracker.help.title_strong')"
+      :breadcrumb="$t('views.tracker.title')"
     >
       <template v-slot:action>
-        <p class="BallotTracker__Breadcrumb">{{ $t("views.tracker.title") }}</p>
-        <div class="BallotTracker__Mobile_Wrapper">
-          <TrackedBallotManager
-            :tracking-code="ballot.trackingCode"
-            :periodiced-tracking-code="periodicedTrackingCode"
-            @cancel="cancel"
-          />
+        <TrackedBallotManager
+          :tracking-code="ballot.trackingCode"
+          :periodiced-tracking-code="periodicedTrackingCode"
+          @cancel="cancel"
+        />
 
-          <h3 class="BallotTracker__Title">
-            {{ $t("views.tracker.info.title") }}
-          </h3>
-          <p class="BallotTracker__Description">
-            {{ $t("views.tracker.info.description") }}
-          </p>
-          <p class="BallotTracker__Description expand">
-            {{ $t("views.tracker.info.extended_description") }}
-          </p>
+        <h3 class="BallotTracker__Title">
+          {{ $t("views.tracker.info.title") }}
+        </h3>
+        <p class="BallotTracker__Description">
+          {{ $t("views.tracker.info.description") }}
+        </p>
+        <p class="BallotTracker__Description expand">
+          {{ $t("views.tracker.info.extended_description") }}
+        </p>
 
-          <BallotActivityList
-            v-if="ballot.activities.length"
-            :activities="ballot.activities"
-          />
-        </div>
+        <BallotActivityList
+          v-if="ballot.activities.length"
+          :activities="ballot.activities"
+        />
       </template>
 
       <template v-slot:help>
@@ -88,12 +86,6 @@ onMounted(() => (ballot.value = ballotStore.ballot));
   display: flex;
   width: 100vw;
   height: 100%;
-}
-
-.BallotTracker__Breadcrumb {
-  color: var(--slate-900);
-  margin: 0 0 3.5rem 0;
-  width: 100%;
 }
 
 .BallotTracker__Title {
@@ -132,20 +124,6 @@ onMounted(() => (ballot.value = ballotStore.ballot));
     flex-direction: column;
     align-items: center;
     overflow-y: auto;
-  }
-
-  .BallotTracker__Mobile_Wrapper {
-    background-color: white;
-    border-radius: 12px;
-    padding: 3rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-
-  .BallotTracker__Breadcrumb {
-    margin: 1rem 0;
   }
 
   .BallotTracker__Description.expand {

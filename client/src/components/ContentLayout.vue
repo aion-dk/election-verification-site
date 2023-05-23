@@ -12,13 +12,22 @@ defineProps({
     type: String,
     required: true,
   },
+  breadcrumb: {
+    type: String,
+    default: null,
+  },
 });
 </script>
 
 <template>
   <div class="ContentLayout">
     <section class="ContentLayout__Action">
-      <slot name="action" />
+      <p v-if="breadcrumb" class="ContentLayout__Breadcrumb">
+        {{ breadcrumb }}
+      </p>
+      <div class="ContentLayout__Mobile_Wrapper">
+        <slot name="action" />
+      </div>
     </section>
     <aside class="ContentLayout__Help">
       <h5 class="ContentLayout__Help_Title">
@@ -52,6 +61,12 @@ defineProps({
   display: flex;
   flex-direction: column;
   align-items: start;
+}
+
+.ContentLayout__Breadcrumb {
+  color: var(--slate-900);
+  margin: 0 0 3.5rem 0;
+  width: 100%;
 }
 
 .ContentLayout__Help {
@@ -122,6 +137,20 @@ defineProps({
     padding: 1rem;
   }
 
+  .ContentLayout__Breadcrumb {
+    margin: -0.5rem 0 1rem 0;
+  }
+
+  .ContentLayout__Mobile_Wrapper {
+    background-color: white;
+    border-radius: 12px;
+    padding: 3rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
   .ContentLayout__Help {
     width: 100%;
     padding: 1rem;
@@ -129,6 +158,7 @@ defineProps({
 
   .ContentLayout__Help_Container {
     margin-bottom: 3rem;
+    width: 100%;
   }
 
   .ContentLayout__Brand_Logo {
@@ -141,6 +171,7 @@ defineProps({
 @media only screen and (max-width: 768px) {
   .ContentLayout__Help_Container {
     padding: 3rem 2rem;
+    width: 100%;
   }
 
   .ContentLayout__Help_Title {

@@ -239,17 +239,17 @@ const setLocale = (newLocale: string) => {
 @media only screen and (max-height: 800px) and (max-width: 976px) {
   .Header__Link {
     font-size: 1.2rem !important;
-    margin: .5rem 0;
+    margin: 0.5rem 0;
   }
 
   .Header__Link:first-of-type {
     font-size: 1.2rem !important;
-    margin: 0 0 .5rem 0;
+    margin: 0 0 0.5rem 0;
   }
 
   .Header__Locales {
     font-size: 1.2rem !important;
-    margin: .5rem 0;
+    margin: 0.5rem 0;
   }
 }
 
