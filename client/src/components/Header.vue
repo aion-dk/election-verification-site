@@ -143,34 +143,29 @@ const setLocale = (newLocale: string) => {
 }
 
 .Header__Logo {
-  height: 3rem;
-  object-fit: cover;
+  display: none;
 }
 
 .Header__Text {
   margin-left: 1rem;
   display: flex;
-  gap: 1rem;
+  flex-direction: column;
+  gap: 0;
 }
 
 .Header__Title {
   font-weight: 600;
   font-size: 1.2rem;
   line-height: 1.25rem;
-  color: #495057;
+  color: var(--slate-800);
 }
 
 .Header__Subtitle {
   font-size: 1rem;
-  color: #495057;
-}
-
-.Header__Links {
-  display: block;
+  color: var(--slate-700);
 }
 
 .Header__Hamburger_Btn {
-  display: none;
   border: none;
   background: none;
   font-size: 1.5rem;
@@ -183,84 +178,131 @@ const setLocale = (newLocale: string) => {
   font-size: 1.125rem;
   font-weight: 400;
   text-decoration: none;
-  color: #495057;
+  color: var(--slate-700);
 }
 
 .Header__Link:hover {
-  color: #212529;
+  color: var(--slate-900);
 }
 
 .Header__Locales {
   padding-left: 1rem;
   font-size: 1.125rem;
   font-weight: 400;
-  color: #495057;
+  color: var(--slate-700);
   border: none;
 }
 
 .Header__Locales:hover {
-  color: #212529;
+  color: var(--slate-900);
 }
 
-@media only screen and (max-width: 976px) {
-  .Header__Links {
-    position: absolute;
-    top: 70px;
-    left: 0px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    width: 100vw;
-    height: calc(100vh - 70px);
-    background-color: white;
-  }
-
-  .Header__Hamburger_Btn {
-    display: block;
-  }
-
-  .Header__Show {
-    display: none;
-  }
+.Header__Links {
+  position: absolute;
+  top: 70px;
+  left: 0px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100vw;
+  height: calc(100vh - 70px);
+  background-color: white;
 }
 
-@media only screen and (min-height: 800px) and (max-width: 976px) {
+.Header__Hamburger_Btn {
+  display: block;
+}
+
+.Header__Show {
+  display: none;
+}
+
+@media only screen and (min-width: 48rem) and (min-height: 50rem) {
   .Header__Link {
-    font-size: 1.5rem !important;
-    margin: 1.5rem 0;
-  }
-  .Header__Locales {
-    font-size: 1.5rem !important;
-    margin: 1.5rem 0;
-  }
-}
-
-@media only screen and (max-height: 800px) and (max-width: 976px) {
-  .Header__Link {
-    font-size: 1.2rem !important;
+    font-size: 1.2rem;
     margin: 0.5rem 0;
   }
 
   .Header__Link:first-of-type {
-    font-size: 1.2rem !important;
+    font-size: 1.2rem;
     margin: 0 0 0.5rem 0;
   }
 
   .Header__Locales {
-    font-size: 1.2rem !important;
+    font-size: 1.2rem;
     margin: 0.5rem 0;
   }
 }
 
-@media only screen and (max-width: 1440px) {
-  .Header__Text {
-    flex-direction: column;
-    gap: 0;
+@media only screen and (min-width: 48rem) and (min-height: 68rem) {
+  .Header__Logo {
+    height: 3rem;
+    object-fit: cover;
+    display: block;
+  }
+
+  .Header__Link {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+
+  .Header__Link:first-of-type {
+    font-size: 1.5rem;
+    margin: 0 0 1rem 0;
+  }
+
+  .Header__Locales {
+    font-size: 1.5rem;
+    margin: 1rem 0;
+  }
+}
+
+@media only screen and (min-width: 80rem) {
+  .Header__Hamburger_Btn {
+    display: none;
   }
 
   .Header__Logo {
-    display: none;
+    height: 3rem;
+    object-fit: cover;
+    display: block;
+  }
+
+  .Header__Links {
+    display: block;
+    position: static;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: fit-content;
+    height: 2.5rem;
+  }
+
+  .Header__Link {
+    padding: 1rem;
+    font-size: 1.125rem;
+    font-weight: 400;
+    text-decoration: none;
+  }
+
+  .Header__Link:first-of-type {
+    margin: 0;
+    font-size: 1.125rem;
+  }
+
+  .Header__Locales {
+    font-size: 1.125rem;
+    padding-left: 1rem;
+  }
+
+  .Header__Link:hover {
+    color: var(--slate-900);
+  }
+
+  .Header__Locales:hover {
+    color: var(--slate-900);
   }
 }
 </style>

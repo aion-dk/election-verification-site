@@ -34,6 +34,9 @@ defineProps({
 </template>
 
 <style type="text/css" scoped>
+.BallotActivitiesList {
+  width: 100%;
+}
 .BallotActivitiesList h4 {
   color: var(--slate-800);
   font-size: 1.25rem;
