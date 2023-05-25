@@ -79,51 +79,70 @@ onMounted(redirectUnlessPairingCode);
       :help-title-strong="$t('views.verifier.inprogress.help.title_strong')"
     >
       <template v-slot:action>
-        <div v-if="verificationStore.ballot" class="BallotVerifier__Spoiled">
-          <h2>{{ $t("views.verifier.spoiled.title") }}</h2>
-          <p>{{ $t("views.verifier.spoiled.description") }}</p>
+        <div v-if="verificationStore.ballot" class="BallotVerifier__Content">
+          <MainIcon icon="spell-check" />
+          <h3 class="BallotVerifier__Title_Secondary">
+            {{ $t("views.verifier.spoiled.title") }}
+          </h3>
+          <p class="BallotVerifier__Title">
+            {{ $t("views.verifier.spoiled.description") }}
+          </p>
+          <p class="BallotVerifier__Description">
+            {{ $t("views.verifier.spoiled.info") }}
+          </p>
+
           <div
-            v-for="contest in verificationStore.ballot"
+            v-for="(contest, index) in verificationStore.ballot"
             :key="contest.reference"
             class="BallotVerifier__Contest"
           >
-            <h3>
+            <h3 class="BallotVerifier__Contest_Title">
+              {{ index + 1 }}.
               {{
                 configStore.getContest(contest.reference).title[$i18n.locale]
               }}
             </h3>
             <div
               v-for="(pile, pIndex) in contest.piles"
-              class="BallotVerifier__Pile"
+              class="BallotVerifier___Contest_Pile"
               :key="pIndex"
             >
-              <div class="BallotVerifier__PileMultiplier">
-                x {{ pile.multiplier }}
+              <div
+                v-if="pile.multiplier > 1"
+                class="BallotVerifier__Contest_Header"
+              >
+                <span
+                  ><strong
+                    >{{ $t("views.verifier.spoiled.ballot_selection") }}
+                    {{ pIndex + 1 }}</strong
+                  ></span
+                >
+                <span
+                  >{{ $t("views.verifier.spoiled.assigned") }}
+                  {{ pile.multiplier }}</span
+                >
               </div>
-              <AVOption
-                v-if="pile.optionSelections.length === 0"
-                :key="`pile-${pIndex}-option-blank`"
-                :option="{
-                  title: $t('views.verifier.blank_pile'),
-                }"
-                disabled
-                checked
-                displayMode
-              />
-              <AVOption
-                v-else
-                v-for="(selection, oIndex) in pile.optionSelections"
-                :key="`pile-${pIndex}-option-${oIndex}`"
-                :option="parsedOption(selection, contest, pile, oIndex)"
-                disabled
-                checked
-                displayMode
-              />
+              <div class="BallotVerifier__Contest_Options">
+                <p v-if="pile.optionSelections.length === 0">
+                  {{ $t("views.verifier.blank_pile") }}
+                </p>
+                <p
+                  v-else
+                  v-for="(selection, oIndex) in pile.optionSelections"
+                  :key="`pile-${pIndex}-option-${oIndex}`"
+                >
+                  <span
+                    v-if="parsedOption(selection, contest, pile, oIndex).rank"
+                    >{{ parsedOption(selection, contest, pile, oIndex).rank }}:
+                  </span>
+                  {{ parsedOption(selection, contest, pile, oIndex).title }}
+                </p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div v-else class="BallotVerifier__InProgress">
+        <div v-else class="BallotVerifier__Content">
           <MainIcon icon="asterisk" />
           <h3 class="BallotVerifier__Title">
             {{ $t("views.verifier.inprogress.title") }}
@@ -156,7 +175,18 @@ onMounted(redirectUnlessPairingCode);
         </div>
       </template>
       <template v-slot:help>
-        <div v-if="verificationStore.ballot"></div>
+        <div v-if="verificationStore.ballot">
+          <AVIcon
+            icon="rectangle-list"
+            class="BallotVerifier__Help_Icon text-contrast"
+          />
+          <h3 class="BallotVerifier__Help_Title text-contrast">
+            {{ $t("views.verifier.inprogress.help.p1.title") }}
+          </h3>
+          <p class="BallotVerifier__Help_Description text-contrast">
+            {{ $t("views.verifier.inprogress.help.p1.description") }}
+          </p>
+        </div>
 
         <div v-else>
           <AVIcon
@@ -207,7 +237,7 @@ onMounted(redirectUnlessPairingCode);
   height: 100%;
 }
 
-.BallotVerifier__InProgress {
+.BallotVerifier__Content {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -221,6 +251,10 @@ onMounted(redirectUnlessPairingCode);
   font-weight: 800;
   text-align: center;
   font-size: 2.5rem;
+}
+
+.BallotVerifier__Title_Secondary {
+  display: none;
 }
 
 .BallotVerifier__Description {
@@ -324,6 +358,44 @@ onMounted(redirectUnlessPairingCode);
   background-color: var(--av-theme-background) !important;
 }
 
+.BallotVerifier__Contest {
+  width: 100%;
+  z-index: 10;
+}
+
+.BallotVerifier__Contest_Title {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--slate-800);
+}
+
+.BallotVerifier___Contest_Pile {
+  border: solid 1px var(--slate-200);
+  background-color: white;
+  margin: 0 0 1rem 0;
+}
+
+.BallotVerifier___Contest_Pile:last-of-type {
+  margin: 0;
+}
+
+.BallotVerifier__Contest_Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin: 0;
+  background-color: var(--slate-200);
+}
+
+.BallotVerifier__Contest_Options {
+  padding: 0.5rem;
+}
+
+.BallotVerifier__Contest_Options > p {
+  margin: 0;
+}
+
 @media only screen and (min-width: 48rem) {
   .BallotVerifier__Alert {
     flex-direction: row;
@@ -372,6 +444,10 @@ onMounted(redirectUnlessPairingCode);
 
   .BallotVerifier__Alert {
     margin: 1rem 0 3rem 0;
+  }
+
+  .BallotVerifier__Contest_Options {
+    padding: 0.5rem;
   }
 }
 </style>
