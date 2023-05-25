@@ -13,7 +13,7 @@ import avlogo from "../assets/avlogo.svg";
 
 <style type="text/css" scoped>
 .Footer {
-  background-color: #495057;
+  background-color: var(--slate-700);
   width: 100vw;
   height: 3rem;
   position: fixed;
@@ -23,6 +23,7 @@ import avlogo from "../assets/avlogo.svg";
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  z-index: 20;
 }
 
 .Footer__Text {

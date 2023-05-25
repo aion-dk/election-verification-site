@@ -70,7 +70,8 @@ async function copy() {
 }
 
 .ItemIdentifier__ShortCode {
-  font-family: "Red Hat Mono";
+  font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas",
+    "Liberation Mono", "Courier New", monospace;
   letter-spacing: 3px;
   font-weight: 400;
   cursor: pointer;

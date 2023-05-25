@@ -238,6 +238,7 @@ const setLocale = (newLocale: string) => {
 @media only screen and (min-width: 48rem) and (min-height: 68rem) {
   .Header__Logo {
     height: 3rem;
+    max-width: 12rem;
     object-fit: cover;
     display: block;
   }

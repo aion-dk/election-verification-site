@@ -190,7 +190,6 @@ defineProps({
     border-radius: 0;
     padding: 0 5rem 5rem 5rem;
     align-items: start;
-    min-height: 100%;
     height: fit-content;
   }
 

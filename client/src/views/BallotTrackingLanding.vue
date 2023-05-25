@@ -50,9 +50,7 @@ const lookupBallot = async (event: Event) => {
       </h3>
       <h4 class="TrackingLanding__Subtitle">
         {{ $t("views.tracking.subtitle") }}
-        <strong class="text-theme">{{
-          $t("views.tracking.subtitle_strong")
-        }}</strong>
+        <strong>{{ $t("views.tracking.subtitle_strong") }}</strong>
       </h4>
       <p class="TrackingLanding__Description">
         {{ $t("views.tracking.description") }}
@@ -151,8 +149,8 @@ const lookupBallot = async (event: Event) => {
 
 .TrackingLanding__Title {
   font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--slate-900);
+  font-weight: 800;
+  color: var(--slate-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
 }
@@ -234,7 +232,7 @@ const lookupBallot = async (event: Event) => {
   }
 
   .TrackingLanding__Title {
-    font-size: 3rem;
+    font-size: 3.5rem;
     padding-top: 4rem;
     margin-bottom: 1.5rem;
     display: block;

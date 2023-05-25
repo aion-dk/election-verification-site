@@ -75,9 +75,7 @@ watch(verificationStore, async (newStore) => {
       </h3>
       <h4 class="VerificationLanding__Subtitle">
         {{ $t("views.verification.subtitle") }}
-        <strong class="text-theme">{{
-          $t("views.verification.subtitle_strong")
-        }}</strong>
+        <strong>{{ $t("views.verification.subtitle_strong") }}</strong>
       </h4>
       <p class="VerificationLanding__Description">
         {{ $t("views.verification.description") }}
@@ -161,8 +159,8 @@ watch(verificationStore, async (newStore) => {
 
 .VerificationLanding__Title {
   font-size: 2.5rem;
-  font-weight: 600;
-  color: var(--slate-900);
+  font-weight: 800;
+  color: var(--slate-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
 }
@@ -237,7 +235,7 @@ watch(verificationStore, async (newStore) => {
   }
 
   .VerificationLanding__Title {
-    font-size: 3rem;
+    font-size: 3.5rem;
     padding-top: 4rem;
     margin-bottom: 1.5rem;
     display: block;

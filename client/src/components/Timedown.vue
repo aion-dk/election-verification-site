@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { computed, ref, watch, onMounted } from "vue";
 
-const emit = defineEmits(["timeout"]);
+const emit = defineEmits(["timeout", "alert"]);
 
 const props = defineProps({
   maxSeconds: {
@@ -37,6 +37,8 @@ const style = computed(() => {
 });
 
 watch(secondsLeft, () => (secondsLeft.value === 0 ? emit("timeout") : null));
+
+watch(secondsLeft, () => (secondsLeft.value === 180 ? emit("alert") : null));
 
 onMounted(() => {
   interval.value = setInterval(() => decrementSeconds(), 1000);
