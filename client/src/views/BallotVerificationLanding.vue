@@ -149,7 +149,7 @@ watch(verificationStore, async (newStore) => {
 
 <style scoped>
 .VerificationLanding__Action_Container {
-  width: 30rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -160,22 +160,25 @@ watch(verificationStore, async (newStore) => {
 }
 
 .VerificationLanding__Title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 600;
   color: var(--slate-900);
-  margin: 0 0 1.5rem 0;
+  margin: 0.5rem 0 1rem 0;
+  text-align: center;
 }
 
 .VerificationLanding__Subtitle {
   color: var(--slate-700);
-  font-size: 2.25rem;
+  font-size: 1.75rem;
   font-weight: 500;
-  margin: 0 0 3rem 0;
+  margin: 0 0 1rem 0;
+  text-align: center;
 }
 
 .VerificationLanding__Description {
   color: var(--slate-700);
-  margin: 0 0 3rem 0;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
 }
 
 .VerificationLanding__TrackingCode {
@@ -225,51 +228,34 @@ watch(verificationStore, async (newStore) => {
 }
 
 .VerificationLanding__Help_Footer {
-  font-size: 2.25rem;
+  font-size: 1.5rem;
 }
 
-@media only screen and (max-width: 976px) {
+@media only screen and (min-width: 80rem) and (min-height: 45rem) {
   .VerificationLanding__Action_Container {
-    width: 100%;
+    width: 30rem;
   }
-}
 
-@media only screen and (max-width: 768px) {
   .VerificationLanding__Title {
-    margin: 1rem 0;
-    font-size: 2.5rem;
+    font-size: 3rem;
+    padding-top: 4rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    text-align: left;
   }
 
   .VerificationLanding__Subtitle {
-    margin: 1rem 0;
-    font-size: 1.75rem;
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+    display: block;
+    text-align: left;
   }
 
   .VerificationLanding__Description {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    text-align: left;
   }
 
-  .VerificationLanding__Help_Footer {
-    font-size: 1.5rem;
-  }
-}
-
-@media only screen and (max-height: 1080px) and (min-width: 976px) {
-  .VerificationLanding__Help_Footer {
-    font-size: 1.5rem;
-  }
-
-  .VerificationLanding__Step_Index {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  .VerificationLanding__Step_Text {
-    margin: 1rem 0 0 0;
-  }
-}
-
-@media only screen and (max-height: 720px) and (min-width: 976px) {
   .VerificationLanding__Help_Footer {
     font-size: 1.25rem;
   }
@@ -281,6 +267,36 @@ watch(verificationStore, async (newStore) => {
 
   .VerificationLanding__Step_Text {
     margin: 0.5rem 0 0 0;
+  }
+}
+
+@media only screen and (min-width: 80rem) and (min-height: 68rem) {
+  .VerificationLanding__Help_Footer {
+    font-size: 1.75rem;
+  }
+
+  .VerificationLanding__Step_Index {
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+
+  .VerificationLanding__Step_Text {
+    margin: 1rem 0 0.5rem 0;
+  }
+}
+
+@media only screen and (min-width: 120rem) and (min-height: 90rem) {
+  .VerificationLanding__Help_Footer {
+    font-size: 2.25rem;
+  }
+
+  .VerificationLanding__Step_Index {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .VerificationLanding__Step_Text {
+    margin: 2rem 0 1rem 0;
   }
 }
 </style>

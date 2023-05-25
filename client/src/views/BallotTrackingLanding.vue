@@ -139,7 +139,7 @@ const lookupBallot = async (event: Event) => {
 
 <style scoped>
 .TrackingLanding__Action_Container {
-  width: 30rem;
+  width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -150,22 +150,25 @@ const lookupBallot = async (event: Event) => {
 }
 
 .TrackingLanding__Title {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 600;
   color: var(--slate-900);
-  margin: 0 0 1.5rem 0;
+  margin: 0.5rem 0 1rem 0;
+  text-align: center;
 }
 
 .TrackingLanding__Subtitle {
   color: var(--slate-700);
-  font-size: 2.25rem;
+  font-size: 1.75rem;
   font-weight: 500;
-  margin: 0 0 3rem 0;
+  margin: 0 0 1rem 0;
+  text-align: center;
 }
 
 .TrackingLanding__Description {
   color: var(--slate-700);
-  margin: 0 0 3rem 0;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
 }
 
 .TrackingLanding__TrackingCode {
@@ -214,45 +217,63 @@ const lookupBallot = async (event: Event) => {
   border-radius: 999px;
 }
 
+.TrackingLanding__Bonus strong {
+  display: block;
+  margin: 1rem 0 0.5rem 0;
+}
+
 .TrackingLanding__Bonus {
   align-self: flex-start;
-  text-align: left;
+  text-align: center;
   margin: 0;
 }
 
-@media only screen and (max-width: 976px) {
+@media only screen and (min-width: 80rem) and (min-height: 45rem) {
   .TrackingLanding__Action_Container {
-    width: 100%;
+    width: 30rem;
   }
-}
 
-@media only screen and (max-width: 768px) {
   .TrackingLanding__Title {
-    margin: 1rem 0;
-    font-size: 2.5rem;
+    font-size: 3rem;
+    padding-top: 4rem;
+    margin-bottom: 1.5rem;
+    display: block;
+    text-align: left;
   }
 
   .TrackingLanding__Subtitle {
-    margin: 1rem 0;
-    font-size: 1.75rem;
+    font-size: 2.25rem;
+    margin-bottom: 2rem;
+    display: block;
+    text-align: left;
   }
 
   .TrackingLanding__Description {
-    margin-bottom: 2rem;
+    margin-bottom: 3rem;
+    text-align: left;
   }
-}
 
-@media only screen and (max-height: 1080px) and (min-width: 976px) {
   .TrackingLanding__Step_Index {
     width: 1.5rem;
     height: 1.5rem;
   }
+
+  .TrackingLanding__Bonus strong {
+    margin: 0 0 0.5rem 0;
+  }
 }
 
-@media only screen and (max-height: 720px) and (min-width: 976px) {
+@media only screen and (min-width: 80rem) and (min-height: 68rem) {
   .TrackingLanding__Step_Index {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1.75rem;
+    height: 1.75rem;
+  }
+}
+
+@media only screen and (min-width: 120rem) and (min-height: 90rem) {
+  .TrackingLanding__Step_Index {
+    width: 2rem;
+    height: 2rem;
   }
 }
 </style>

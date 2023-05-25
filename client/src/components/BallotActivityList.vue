@@ -37,45 +37,36 @@ defineProps({
 .BallotActivitiesList {
   width: 100%;
 }
+
 .BallotActivitiesList h4 {
   color: var(--slate-800);
   font-size: 1.25rem;
-  margin: 0;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
 }
 
 .BallotActivitiesList__ColumnDescriptions {
-  list-style: none;
-  margin: 1rem 0;
-  display: flex;
-  font-size: 0.75rem;
-  padding-inline-start: 0;
+  display: none;
 }
 
-.BallotActivitiesList__ColumnDescriptions--time {
-  width: 30%;
-}
-
-.BallotActivitiesList__ColumnDescriptions--event {
-  width: 30%;
-  margin-left: 1rem;
-}
-
-.BallotActivitiesList__ColumnDescriptions--actor {
-  width: 30%;
-}
-
-@media only screen and (max-width: 976px) {
-  .BallotActivitiesList h4 {
-    margin-bottom: 1rem;
-    text-align: center;
-  }
-
-  .BallotActivitiesList {
-    width: 100%;
-  }
-
+@media only screen and (min-width: 48rem) {
   .BallotActivitiesList__ColumnDescriptions {
-    display: none;
+    list-style: none;
+    margin: 1rem 0;
+    display: flex;
+    font-size: 0.75rem;
+    padding-inline-start: 0;
+    color: var(--slate-600);
+  }
+
+  .BallotActivitiesList__ColumnDescriptions--time,
+  .BallotActivitiesList__ColumnDescriptions--event,
+  .BallotActivitiesList__ColumnDescriptions--actor {
+    width: 30%;
+  }
+
+  .BallotActivitiesList__ColumnDescriptions--event {
+    margin-left: 1rem;
   }
 }
 </style>

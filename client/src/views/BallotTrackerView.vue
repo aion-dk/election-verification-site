@@ -83,26 +83,27 @@ onMounted(() => (ballot.value = ballotStore.ballot));
 
 <style type="text/css" scoped>
 .BallotTracker {
-  display: flex;
   width: 100vw;
   height: 100%;
 }
 
 .BallotTracker__Title {
-  font-size: 3.5rem;
+  text-align: center;
+  font-size: 2.5rem;
   color: var(--slate-800);
   margin: 0 0 1rem 0;
   font-weight: 800;
 }
 
 .BallotTracker__Description {
-  margin: 0 0 1rem 0;
+  margin: 0 0 2rem 0;
   line-height: 2rem;
   color: var(--slate-700);
+  text-align: center;
 }
 
-.BallotTracker__Description:last-of-type {
-  margin-bottom: 3rem;
+.BallotTracker__Description.expand {
+  display: none;
 }
 
 .BallotTracker__Info {
@@ -112,42 +113,34 @@ onMounted(() => (ballot.value = ballotStore.ballot));
 }
 
 .BallotTracker__Info_Title {
-  font-size: 1.8rem;
+  text-align: center;
+  font-size: 1.6rem;
 }
 
 .BallotTracker__Info_Title_Small {
-  font-size: 1.5rem;
+  font-size: 1.3rem;
 }
 
-@media only screen and (max-width: 976px) {
-  .BallotTracker {
-    flex-direction: column;
-    align-items: center;
-    overflow-y: auto;
-  }
-
+@media only screen and (min-width: 48rem) {
   .BallotTracker__Description.expand {
-    display: none;
+    display: block;
+    margin-bottom: 4rem;
   }
+}
 
-  .BallotTracker__Description {
-    margin-bottom: 2rem;
-    text-align: center;
-  }
-
-  .BallotTracker__Info_Title {
-    text-align: center;
-    font-size: 1.6rem;
-  }
-
-  .BallotTracker__Info_Title_Small {
-    font-size: 1.3rem;
-    text-align: center;
+@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+  .BallotTracker__Description.expand {
+    text-align: left;
   }
 
   .BallotTracker__Title {
-    text-align: center;
-    font-size: 2.5rem;
+    text-align: left;
+    font-size: 3.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .BallotTracker__Description {
+    text-align: left;
   }
 }
 </style>

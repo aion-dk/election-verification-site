@@ -47,10 +47,12 @@ const cancel = () => {
 
 <style scoped>
 .BallotManager {
-  position: absolute;
-  right: 5rem;
-  top: 5rem;
-  width: 14rem;
+  display: block;
+  align-self: flex-end;
+  margin-bottom: 1rem;
+  background-color: white;
+  box-sizing: border-box;
+  border-radius: 12px;
 }
 
 .BallotManager__Tracking_Container {
@@ -60,8 +62,22 @@ const cancel = () => {
 }
 
 .BallotManager__Tracking_Code {
-  color: var(--slate-900);
-  font-size: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.25rem;
+}
+
+.BallotManager__Tracking_Icon {
+  color: var(--slate-800);
+  width: 0.75rem;
+  height: 0.75rem;
+}
+
+.BallotManager__Tracking_Text {
+  font-size: 0.6rem;
+  color: var(--slate-700);
+  margin: 0;
 }
 
 .BallotManager__Cancel {
@@ -70,46 +86,35 @@ const cancel = () => {
   cursor: pointer;
 }
 
-.BallotManager__Tracking_Icon {
-  color: var(--slate-800);
-  width: 1.25rem;
-  height: 1.25rem;
-}
-
 .BallotManager__Tracking_Line {
   border-bottom: 2px solid var(--slate-700);
+  border-radius: 99px;
   width: 100%;
-  margin: 0.25rem 0;
-}
-.BallotManager__Tracking_Text {
-  color: var(--slate-700);
-  margin: 0;
+  margin: 0.25rem 0 0 0;
 }
 
-@media only screen and (max-width: 976px) {
+@media only screen and (min-width: 48rem) {
   .BallotManager {
-    position: static;
     margin-bottom: 2rem;
-    align-self: flex-end;
-  }
-}
-
-@media only screen and (max-width: 480px) {
-  .BallotManager {
-    width: 8rem;
   }
 
   .BallotManager__Tracking_Code {
-    font-size: 1.25rem;
+    font-size: 2rem;
   }
 
   .BallotManager__Tracking_Icon {
-    width: 0.75rem;
-    height: 0.75rem;
+    width: 1.25rem;
+    height: 1.25rem;
   }
 
   .BallotManager__Tracking_Text {
-    font-size: 0.6rem;
+    font-size: 1rem;
+  }
+}
+
+@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+  .BallotManager {
+    margin-bottom: -3rem;
   }
 }
 </style>

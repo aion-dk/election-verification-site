@@ -54,13 +54,14 @@ function toggle() {
   border: solid 1px var(--slate-200);
   border-radius: 12px;
   padding: 1rem;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   flex-direction: column;
   position: relative;
 }
 
 .ExpandableSection__Line {
   display: flex;
+  flex-direction: column;
 }
 
 .ExpandableSection__Expander {
@@ -79,13 +80,13 @@ function toggle() {
   border: none;
 }
 
-@media only screen and (max-width: 768px) {
+@media only screen and (min-width: 48rem) {
   .ExpandableSection__Line {
-    flex-direction: column;
+    flex-direction: row;
   }
 
   .ExpandableSection {
-    margin-bottom: 0.5rem;
+    margin-bottom: 1rem;
   }
 }
 </style>
