@@ -3,7 +3,6 @@ import { mount } from "@vue/test-utils";
 import ItemIdentifier from "./ItemIdentifier.vue";
 
 interface Props {
-  prefix?: string;
   address: string;
 }
 
@@ -18,9 +17,8 @@ test("displays the short address", async () => {
 });
 
 test("displays the prefix when given", async () => {
-  props.prefix = "Short ID ";
   const wrapper = mount(ItemIdentifier, options);
-  expect(wrapper.text()).toContain("Short ID 16fSovo");
+  expect(wrapper.text()).toContain("16fSovo");
 });
 
 test("clicking copies the short address", async () => {

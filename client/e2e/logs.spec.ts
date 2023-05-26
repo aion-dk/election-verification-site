@@ -45,7 +45,7 @@ test("downloading logs", async ({ page }) => {
   await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
   const downloadPromise = page.waitForEvent("download");
   await page
-    .getByRole("link", {
+    .getByRole("button", {
       name: "Download the full election activity log (json)",
     })
     .click();
@@ -104,12 +104,12 @@ test("traversing board items", async ({ page }) => {
   await page.getByText("VMMHYWv").click();
 
   // Page 2
-  await page.getByRole("link", { name: "Next page" }).click();
+  await page.getByRole("button", { name: "Next page" }).click();
   await page.getByText("1yo3CEM").click();
   await page.getByText("12g69GA").click();
 
   // Page 1 again
-  await page.getByRole("link", { name: "Previous page" }).click();
+  await page.getByRole("button", { name: "Previous page" }).click();
   await page.getByText("16fSovo").click();
   await page.getByText("VMMHYWv").click();
 

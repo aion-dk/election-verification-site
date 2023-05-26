@@ -96,7 +96,9 @@ const classes = computed(() => {
             class="BoardItem__InlineIcon"
             aria-hidden="true"
           />
-          <span>{{ $t("components.board_item.identifier") }}</span>
+          <span class="BoardItem__Label">{{
+            $t("components.board_item.identifier")
+          }}</span>
           <ItemIdentifier :address="item.address" />
         </p>
 

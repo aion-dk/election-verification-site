@@ -23,7 +23,7 @@ export const fallbackMessages = {
       },
     },
     header: {
-      dbas: "Ballot Verification Site",
+      dbas: "Election Verification Site",
       verification: "Ballot Tester",
       tracking: "Ballot Tracker",
       about: "About",
@@ -48,7 +48,10 @@ export const fallbackMessages = {
         copied: "Copied",
       },
       board_item: {
-        info: "What does this mean?",
+        registered_at: "Timestamp: ",
+        identifier: "Short Address: ",
+        author: "Actor: ",
+        meaning: "What does this mean?",
         expand: "Click to read more",
         collapse: "Click to read less",
         SegmentsConfigItem: {
@@ -125,6 +128,7 @@ export const fallbackMessages = {
           type: "Ballot encryption key",
           author: "Trustee",
           info: "Ballot encryption key has been generated",
+          encryption_key: "Encryption key: ",
         },
         CastRequestItem: {
           type: "Ballot cast",
@@ -150,6 +154,12 @@ export const fallbackMessages = {
           type: "Encryption commitment",
           author: "Voter",
           info: "Voter and Digital Ballot Box have exchanged cryptographic information establishing trust.",
+        },
+        aria_labels: {
+          activity_type: "Activity",
+          activity_registered: "Activity registered at",
+          activity_author: "Activity authored by",
+          activity_identifier: "Activity identifier",
         },
       },
       ballot_activity_list: {
@@ -200,18 +210,51 @@ export const fallbackMessages = {
         currently_tracking: "You are currently tracking",
         cancel_cross_label: "Cancel tracking %{trackingCode}",
       },
+      timedown: {
+        expire_text: "The passkey will expire in %{time}",
+        alert: {
+          title: "You are running out of time.",
+          text: "Please confirm the passkeys match on the voting page before your session expires. If your session expires, you will need to re-seal your ballot and start over with a new testing code.",
+        },
+      },
     },
     views: {
       verifier: {
         inprogress: {
           title: "Compare passkeys",
           description: "Does this passkey match the one in the voting page?",
-          info: "Proceed to the voting page and check if the passkey is the same. If it is the same, confirm it on the voting page. If it differs, please abort the process and report it to the election organiser here.",
+          secondary_description:
+            "Proceed to the voting page and check if the passkey is the same. If it is the same, confirm it on the voting page. If it differs, please abort the process and report it to the election organiser here.",
+          help: {
+            title: "What's ",
+            title_strong: "next?",
+            p1: {
+              title: "Go back to the voting page",
+              description:
+                "Click on Match / Do not Match button and follow instructions on the screen.",
+            },
+          },
+          modal: {
+            title: "Your session has expired due to inactivity",
+            description:
+              "Please follow instructions on the voting page to restart the ballot test again.",
+            button: "Ok",
+            labelled_by: "Session expired",
+          },
         },
         spoiled: {
           title: "Check the Choices",
           description: "Your Ballot Choices",
           info: "The choices connected to the testing code are displayed below. Please check if those are the choices you made. After you check, go back to the voting page and select the option that suits you - confirm that the choices are correct or abort the voting process.",
+          assigned: "Assigned: ",
+          ballot_selection: "Ballot Selection ",
+          help: {
+            p1: {
+              title: "Go back to the voting page",
+              description:
+                "Confirm that the choices are yours or abort the process.",
+            },
+          },
         },
         blank_pile: "Blank",
       },
@@ -221,11 +264,36 @@ export const fallbackMessages = {
       },
       logs: {
         title: "Election Activity Logs",
-        description: "Public audit of the election",
-        intro:
+        subtitle: "Public audit of the election",
+        description:
           "All election activities are listed in this election activity log. You can go through it or download the whole activity log.",
         download_button: "Download the full election activity log (json)",
         config_only: "Configuration items only",
+        help: {
+          title: "What are the ",
+          title_strong: "logs for?",
+          p1: {
+            question: "What is an Election Activity log?",
+            answer:
+              "The log is visual representation of the Digital Ballot Box. It records every activity that was performed.",
+          },
+          p2: {
+            question: "Why do we need one?",
+            answer:
+              "Thanks to the log the integrity of the election can be verified. Verification can be carried out by a voter, when they track their ballot or by auditors who go through the whole log and make sure that everything is as it should be.",
+          },
+          p3: {
+            question: "Who is the log for?",
+            answer:
+              "For everyone who is interested. Primarily, the log is used by auditors who verify that the election was not tampered with. However, also voters or people who are interested can go through the logs and familiarise themselves with the activity types.",
+          },
+        },
+        aria_labels: {
+          first_page: "Go to first page",
+          prev_page: "Previous page",
+          next_page: "Next page",
+          last_page: "Go to last page",
+        },
       },
       tracker: {
         title: "Ballot Tracker",
@@ -252,32 +320,30 @@ export const fallbackMessages = {
         },
       },
       welcome: {
-        title: "Ballot Verification Site",
+        title: "Election Verification Site",
         description:
           "This site provides overview of the election, allows voters to follow and verify their ballot and provides a file for the auditors.",
         ballot_tester: {
-          title: "Ballot Tester",
-          subtitle: "I am voting and I want to",
-          subtitle_strong: "check my choices",
-          description:
-            "To test that your choices were recorded correctly, you need to input the testing code that is shown on the voting page.",
-          placeholder: "Testing Code",
-          button: "Start the Test",
-          tooltip_helper: "Where do I find the testing code",
-          tooltip_text:
-            "Your testing code is displayed on the voting page after you decided to test your ballot. In case it is not there, go back to the voting page and try to test your ballot again.",
+          title: "Test your ballot",
+          description: "I am voting and I want to check my choices",
+          button: "Test my ballot",
         },
         ballot_tracker: {
-          title: "Ballot Tracker",
-          subtitle: "I have voted and I want to",
-          subtitle_strong: "track my ballot",
-          description:
-            "To verify that your ballot was casted and is recorded in the Digital Ballot Box, you need to input the tracking code shown on the voting page.",
-          placeholder: "Tracking Code",
+          title: "Track your ballot",
+          description: "I have voted and I want to track my ballot",
           button: "Track my ballot",
-          tooltip_helper: "I don’t have my tracking code",
-          tooltip_text:
-            "Your ballot tracking code is displayed on the election page after you submitted your ballot. It is 7 character code.",
+        },
+        about: {
+          title: "About this site",
+          ballot_tester: "Ballot Tester",
+          ballot_tester_text:
+            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
+          ballot_tracker: "Ballot Tracker",
+          ballot_tracker_text:
+            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
+          audit_log: "Audit Log",
+          audit_log_text:
+            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
         },
       },
       verification: {
