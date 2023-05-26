@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import CompactHeader from "../components/CompactHeader.vue";
+// import CompactHeader from "../components/CompactHeader.vue";
 import { options } from "../lib/api";
 import useLocaleStore from "../stores/useLocaleStore";
 import useConfigStore from "../stores/useConfigStore";
@@ -52,10 +52,10 @@ onMounted(() => loadPage(currentPage()));
 
 <template>
   <main class="LogsView">
-    <CompactHeader
+    <!-- <CompactHeader
       :election="configStore.election"
       :locale="localeStore.locale"
-    />
+    /> -->
 
     <div class="LogsView__Header">
       <h2>{{ $t("views.logs.title") }}</h2>
