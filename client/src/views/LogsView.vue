@@ -7,6 +7,8 @@ import useBoardStore from "../stores/useBoardStore";
 import { onMounted, ref, watch } from "vue";
 import { useRoute, RouterLink } from "vue-router";
 import BoardItem from "../components/BoardItem.vue";
+import ContentLayout from "../components/ContentLayout.vue";
+import MainIcon from "../components/MainIcon.vue";
 
 const route = useRoute();
 const localeStore = useLocaleStore();
@@ -46,18 +48,92 @@ function loadPage(page: number) {
     boardStore.loadPage(configStore.boardSlug, page, filter());
   }
 }
-
 onMounted(() => loadPage(currentPage()));
 </script>
 
 <template>
-  <main class="LogsView">
-    <!-- <CompactHeader
+  <ContentLayout
+    :help-title="$t('views.logs.help.title')"
+    :help-title-strong="$t('views.logs.help.title_strong')"
+  >
+    <template v-slot:action>
+      <MainIcon icon="square-poll-vertical" />
+      <h3 class="LogsView__Title">
+        {{ $t("views.logs.title") }}
+      </h3>
+      <h4 class="LogsView__Subtitle">
+        {{ $t("views.logs.subtitle") }}
+      </h4>
+      <p class="LogsView__Description">
+        {{ $t("views.logs.description") }}
+      </p>
+
+      <label class="LogsView__Configuration_Only">
+        <input
+          type="checkbox"
+          name="config-items-only"
+          :value="true"
+          v-model="configItemsOnly"
+        />
+        {{ $t("views.logs.config_only") }}
+      </label>
+
+      <ul class="LogsView__ColumnDescriptions">
+        <li class="LogsView__ColumnDescriptions--event">
+          {{ $t("components.ballot_activity_list.type") }}
+        </li>
+        <li class="LogsView__ColumnDescriptions--time">
+          {{ $t("components.ballot_activity_list.time") }}
+        </li>
+        <li class="LogsView__ColumnDescriptions--identifier">
+          {{ $t("components.ballot_activity_list.identifier") }}
+        </li>
+        <li class="LogsView__ColumnDescriptions--actor">
+          {{ $t("components.ballot_activity_list.actor") }}
+        </li>
+      </ul>
+
+      <BoardItem
+        v-for="(item, key) in boardStore.items"
+        :key="key"
+        :item="item"
+      />
+
+      <div class="LogsView__Pagination">
+        <RouterLink
+          aria-label="Previous page"
+          class="LogsView__PageLink"
+          v-if="boardStore.meta.prev_page"
+          :to="`/${localeStore.locale}/${configStore.boardSlug}/logs/${boardStore.meta.prev_page}`"
+        >
+          <font-awesome-icon icon="fa-solid fa-chevron-left" />
+        </RouterLink>
+
+        <span class="LogsView__PageLink">{{ boardStore.currentPage }}</span>
+        <span class="LogsView__PageLink">/</span>
+        <span class="LogsView__PageLink">{{
+          boardStore.meta.total_pages
+        }}</span>
+
+        <RouterLink
+          aria-label="Next page"
+          class="LogsView__PageLink"
+          v-if="boardStore.meta.next_page"
+          :to="`/${localeStore.locale}/${configStore.boardSlug}/logs/${boardStore.meta.next_page}`"
+        >
+          <font-awesome-icon icon="fa-solid fa-chevron-right" />
+        </RouterLink>
+      </div>
+    </template>
+    <template v-slot:help> </template>
+  </ContentLayout>
+
+  <!-- <CompactHeader
       :election="configStore.election"
       :locale="localeStore.locale"
     /> -->
 
-    <div class="LogsView__Header">
+  <!-- <div class="LogsView__Header">
       <h2>{{ $t("views.logs.title") }}</h2>
       <p>{{ $t("views.logs.intro") }}</p>
       <p>
@@ -128,12 +204,49 @@ onMounted(() => loadPage(currentPage()));
           {{ $t("views.logs.download_button") }}
         </span>
       </a>
-    </div>
-  </main>
+    </div> -->
 </template>
 
 <style type="text/css" scoped>
-.LogsView__Pagination {
+.LogsView__Title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: var(--slate-800);
+  margin: 0.5rem 0 1rem 0;
+  text-align: center;
+}
+
+.LogsView__Subtitle {
+  display: none;
+}
+
+.LogsView__Description {
+  color: var(--slate-700);
+  margin: 0 0 1.5rem 0;
+  text-align: center;
+}
+
+.LogsView__Configuration_Only {
+  display: flex;
+  border: 2px solid var(--slate-600);
+  padding: 0.75rem;
+  border-radius: 12px;
+  font-weight: 600;
+  color: var(--slate-900);
+  margin: 0 0 2rem 0;
+}
+
+input[type="checkbox"] {
+  width: 1rem;
+  height: 1rem;
+  accent-color: var(--av-theme-background);
+}
+
+.LogsView__ColumnDescriptions {
+  display: none;
+}
+
+/* .LogsView__Pagination {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -206,5 +319,5 @@ onMounted(() => loadPage(currentPage()));
 
 svg {
   margin-right: 5px;
-}
+} */
 </style>

@@ -7,9 +7,6 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  prefix: {
-    type: String,
-  },
 });
 
 const copied = ref(false);
@@ -32,14 +29,6 @@ async function copy() {
 
 <template>
   <span class="ItemIdentifier">
-    <font-awesome-icon
-      icon="fa-solid fa-fingerprint"
-      class="ItemIdentifier__Icon"
-    />
-    <span class="ItemIdentifier__Prefix" v-if="prefix">
-      {{ prefix }}
-    </span>
-
     <tooltip hover placement="top">
       <template #default>
         <code
@@ -65,19 +54,11 @@ async function copy() {
 </template>
 
 <style type="text/css" scoped>
-.ItemIdentifier__Icon {
-  margin-right: 5px;
-}
-
 .ItemIdentifier__ShortCode {
   font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas",
     "Liberation Mono", "Courier New", monospace;
-  letter-spacing: 3px;
+  letter-spacing: 0.3rem;
   font-weight: 400;
-  cursor: pointer;
-}
-
-.ItemIdentifier__Prefix {
-  margin-right: 5px;
+  cursor: copy;
 }
 </style>

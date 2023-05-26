@@ -20,7 +20,7 @@ defineProps({
 </script>
 
 <template>
-  <main class="ContentLayout">
+  <div class="ContentLayout">
     <section class="ContentLayout__Action">
       <p v-if="breadcrumb" class="ContentLayout__Breadcrumb">
         {{ breadcrumb }}
@@ -44,7 +44,7 @@ defineProps({
         :alt="$t('header.election_logo_alt')"
       />
     </aside>
-  </main>
+  </div>
 </template>
 
 <style scoped>

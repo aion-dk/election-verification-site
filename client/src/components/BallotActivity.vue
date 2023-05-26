@@ -14,24 +14,32 @@ defineProps({
   <div class="BallotActivity">
     <ExpandableSection>
       <template v-slot:collapsed>
-        <div class="BallotActivity__Type" aria-label="Activity">
+        <p
+          class="BallotActivity__Type"
+          :aria-label="$t('components.board_item.aria_labels.activity_type')"
+        >
           {{ $t(`components.ballot_activity.${activity.type}.type`) }}
-        </div>
+        </p>
 
-        <div
+        <p
           class="BallotActivity__RegisteredAt"
-          aria-label="Activity registered"
+          :aria-label="
+            $t('components.board_item.aria_labels.activity_registered')
+          "
         >
           <AVIcon icon="clock" class="BallotActivity__Icon" />
           <DateTime :date-time="activity.registered_at" />
-        </div>
+        </p>
 
-        <div class="BallotActivity__Author" aria-label="Activity author">
+        <p
+          class="BallotActivity__Author"
+          :aria-label="$t('components.board_item.aria_labels.author')"
+        >
           <AVIcon icon="user" class="BallotActivity__Icon" />
           <span>
             {{ $t(`components.ballot_activity.${activity.type}.author`) }}
           </span>
-        </div>
+        </p>
       </template>
 
       <template v-slot:expanded>
@@ -48,6 +56,7 @@ defineProps({
           }}</span>
           <DateTime :date-time="activity.registered_at" format="long" />
         </p>
+
         <p class="BallotActivity__Author BallotActivity__Author_Expanded">
           <AVIcon icon="user" class="BallotActivity__Icon" />
           <span class="BallotActivity__Label">{{
@@ -55,12 +64,14 @@ defineProps({
           }}</span>
           {{ $t(`components.ballot_activity.${activity.type}.author`) }}
         </p>
+
         <p class="BallotActivity__Meaning">
           <AVIcon icon="circle-info" class="BallotActivity__Icon" />
           <span class="BallotActivity__Label">{{
             $t("components.ballot_activity.meaning")
           }}</span>
         </p>
+
         <p class="BallotActivity__Meaning">
           {{ $t(`components.ballot_activity.${activity.type}.details`) }}
         </p>
@@ -88,7 +99,7 @@ defineProps({
 .BallotActivity__Author {
   color: var(--slate-800);
   width: 100%;
-  margin: 0 0 0.5rem 0;
+  margin: 0 0 0 0;
 }
 
 .BallotActivity__Meaning {
@@ -128,10 +139,12 @@ defineProps({
 
   .BallotActivity__RegisteredAt_Expanded {
     margin-bottom: 0.5rem !important;
+    width: 100%;
   }
 
   .BallotActivity__Author_Expanded {
     margin-bottom: 0.5rem !important;
+    width: 100%;
   }
 }
 </style>

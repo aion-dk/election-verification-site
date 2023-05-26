@@ -57,6 +57,8 @@ function toggle() {
   margin-bottom: 0.5rem;
   flex-direction: column;
   position: relative;
+  background-color: white;
+  z-index: 10;
 }
 
 .ExpandableSection__Line {
