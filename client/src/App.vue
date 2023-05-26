@@ -161,7 +161,7 @@ body {
   --slate-800: #343a40;
   --slate-900: #212529;
 
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
   overflow: hidden;
   padding: 0;
   margin: 0;
@@ -170,6 +170,7 @@ body {
 .DBAS__Loading_Page {
   width: 100vw;
   height: 100vh;
+  height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
