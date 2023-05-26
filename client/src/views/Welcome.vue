@@ -186,6 +186,7 @@ const goToTracker = () => {
   font-size: 1.5rem;
   color: var(--slate-800);
   margin: 1rem 0;
+  text-align: center;
 }
 
 .Welcome__Card_Description {
