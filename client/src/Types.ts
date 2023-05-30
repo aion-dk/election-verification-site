@@ -51,6 +51,7 @@ export interface ElectionStatus {
   description: LocalString;
   mode: "demo" | "production" | "disabled";
   trustMode: "verifiable" | "trusted";
+  electionVerificationSite?: any;
   enabledLocales: string[];
   readyForVoting: boolean;
   boardSlug: string;

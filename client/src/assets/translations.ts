@@ -258,9 +258,181 @@ export const fallbackMessages = {
         },
         blank_pile: "Blank",
       },
-      help: {
+      faq: {
         title: "Frequently Asked Questions",
-        info: "Find answers to your questions and learn how the different parts of the verification site play together and form easy and secure election environment.",
+        description:
+          "Find answers to your questions and learn how the different parts of the verification site play together and form easy and secure election environment.",
+        navigation: {
+          ballot_tester: "Ballot Tester",
+          ballot_tracker: "Ballot Tracker",
+          logs: "Election Logs",
+          other: "Other",
+        },
+        questions: {
+          ballot_tester: {
+            q1: {
+              title: "How does the Ballot Test work?",
+              paragraphs: {
+                p1: "The ballot test consists of 5 steps where you get to use both the voting page and the ballot tester. You can do so on the same device with different tabs, different windows or you can use two different devices.",
+                p2: "The Steps are:",
+                p3: "1. Open ballot tester (the voting page guides to it when you press the button “Test ballot”) and input your testing code.",
+                p4: "2. Compare passkeys that are displayed in both ballot tester and on the voting page.",
+                p5: "3. If they are the same, you need to click the button “match” on the voting page. If they don’t match, you need to click the button “don’t match” on the voting page. The voting page will then guide you in what to do.",
+                p6: "4. If the passkeys matched then you can see your decrypted ballot in the ballot tester. Here you have an opportunity to see the choices that were recorded and check if they are the same ones you chose.",
+                p7: "5. Now the final step is to confirm that the choices displayed in the ballot tester are correct. If they are not correct, then indicate that on the voting page.",
+                p8: "The ballot test is now complete!",
+              },
+            },
+            q2: {
+              title: "Do I have to use two different devices for the test?",
+              paragraphs: {
+                p1: "The choice is up to you. The purpose of ballot test is to check that the voting page, nor your device is compromised. If you choose to use the same device, you are checking the voting page. If you use a different device you are checking both - the device and the voting page.",
+                p2: "So whatever you decide to do, you still are helping ensure the integrity of the election.",
+              },
+            },
+            q3: {
+              title: "I cant find my testing code. What do I do?",
+              paragraphs: {
+                p1: "Go back to the voting page and try to see it there. When you see a button labeled Ballot Test - click it and then your testing code will appear.",
+                p2: "Remember, that you can only perform ballot test before submitting your vote.",
+              },
+            },
+            q4: {
+              title: "My pairing codes do not match. What should I do?",
+              paragraphs: {
+                p1: "Go to the voting page and click on “don’t match”. Then the voting app will guide you through the process. You can choose to test again, or to abandon the voting process.",
+              },
+            },
+            q5: {
+              title:
+                "The decrypted choices do not match the ones I chose. What do I do?",
+              paragraphs: {
+                p1: "Indicate so on the voting page. The voting page will guide you in what to do next. When the choices do not match, we recommend trying the test again. If they still do not match, then please contact your election organiser and report the issue. Do not submit the vote.",
+              },
+            },
+            q6: {
+              title: "Can I perform several tests in a row?",
+              paragraphs: {
+                p1: "You can perform the test as many times as you want.",
+              },
+            },
+            q7: {
+              title:
+                "Why do I have to confirm my choices again after performing the test?",
+              paragraphs: {
+                p1: "Your ballot was decrypted during the test to display the choices. It needs to be encrypted again, therefore you get to see the overview of your choices to ensure those are the ones you want to submit. This new encryption allows for the anonymity to not be broken.",
+              },
+            },
+            q8: {
+              title: "Can I submit my ballot from this website?",
+              paragraphs: {
+                p1: "No, you can not submit your ballot through this website. You have to go back to the voting page and submit it there.",
+              },
+            },
+          },
+          ballot_tracker: {
+            q1: {
+              title: "How does the ballot tracking work?",
+              paragraphs: {
+                p1: "The ballot tracking is very simple. It is like tracking your shipment. You just open up the ballot tracker and input the tracking code. Maybe add something about how the ballot is located?",
+                p2: "The tracking code is shown on the voting page after you submitted your ballot.",
+              },
+            },
+            q2: {
+              title: "I cant see my tracking code. Where can I find it?",
+              paragraphs: {
+                p1: "The tracking code is shown on the voting page after you submitted your ballot. Take a picture of it or write it down somewhere, so you can go back to it whenever you want to.",
+                p2: "If you closed down the voting page and you did not stored your tracking code, there is unfortunately not a way to get to it again.",
+              },
+            },
+            q3: {
+              title: "My tracking code is not found. What do I do?",
+              paragraphs: {
+                p1: "First, make sure it is typed in correctly. The code is case sensitive, so check if the characters are spelled exactly as shown.",
+                p2: "If after that, you still see an error, try to log in to the voting system and see if you already voted. If you did, contact the election organiser.",
+              },
+            },
+            q4: {
+              title:
+                "Activity that is shown under my tracking code seems suspicious. Should I be worried?",
+              paragraphs: {
+                p1: "Activity types can be sometimes very hard to understand. Therefore make sure to read the description of the items. They should help you better understand what the activity actually is.",
+                p2: "If you still feel that the activity does look suspicious, contact your election organiser.",
+              },
+            },
+          },
+          logs: {
+            q1: {
+              title: "What is an election activity log?",
+              paragraphs: {
+                p1: "As in physical voting, you have the ballot box, in the digital election you have digital ballot box that records every activity performed during the election. It does so, to ensure that the election is valid and was not compromised.",
+                p2: "In the election activity log you can see all the activities. The log is mainly used by auditors or election scrutineers. But anybody can go in and follow what is happening. It is a public audit of the election.",
+              },
+            },
+            q2: {
+              title: "Who is the election log for?",
+              paragraphs: {
+                p1: "For anyone, who is interesting in looking through what has happened during an election.",
+              },
+            },
+            q3: {
+              title: "How do I use the log?",
+              paragraphs: {
+                p1: "You can use it however you feel like. Maybe you just want to browse around and get to know the activities?",
+                p2: "If you are an auditor, you might want to download the log and audit the election that way.",
+                p3: "It is up to you how you use it.",
+              },
+            },
+          },
+          other: {
+            q1: {
+              title: "Why is end-to-end verification important?",
+              paragraphs: {
+                p1: "Soon...",
+              },
+            },
+            q2: {
+              title:
+                "What role do I, as a voter play in verifying that the election’s integrity is achieved?",
+              paragraphs: {
+                p1: "Soon...",
+              },
+            },
+            q3: {
+              title: "How is my anonymity assured?",
+              paragraphs: {
+                p1: "Soon...",
+              },
+            },
+            q4: {
+              title:
+                "What is the difference between end-to-end verifiable voting and black box voting?",
+              paragraphs: {
+                p1: "Soon...",
+              },
+            },
+            q5: {
+              title: "Why is end-to-end verification important?",
+              paragraphs: {
+                p1: "Soon...",
+              },
+            },
+            q6: {
+              title:
+                "What role do I, as a voter play in verifying that the election’s integrity is achieved?",
+              paragraphs: {
+                p1: "You play important role, because you as a voter can perform both the Ballot Test and Ballot Tracking which helps to ensure that the election’s integrity is achieved and that the election is trustworthy.",
+              },
+            },
+          },
+        },
+        help: {
+          title: "Why should I ",
+          title_strong: "test and track my ballot?",
+          p1: "By testing and tracking your ballot, you gain trust in the digital election. Digital or online voting can sometimes feel foreign and untrustworthy.",
+          p2: "By verifying that your ballot was encrypted with the right choices and made it to the digital ballot box you ensure that your vote counts.",
+          p3: "Moreover, you also help to verify that the integrity of the election was held.",
+        },
       },
       logs: {
         title: "Election Activity Logs",

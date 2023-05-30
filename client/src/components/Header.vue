@@ -1,14 +1,16 @@
 <script lang="ts" setup>
-import { computed, ref } from "vue";
+import { computed, onMounted, ref, watch } from "vue";
 import { RouterLink } from "vue-router";
-import config from "../lib/config";
 import DropDown from "./DropDown.vue";
 import i18n from "../lib/i18n";
 import type { DropdownOption } from "@/Types";
 import useConfigStore from "../stores/useConfigStore";
+import useLocaleStore from "../stores/useLocaleStore";
 
 const { t } = i18n.global;
 const configStore = useConfigStore();
+const localeStore = useLocaleStore();
+const contactUrl = ref(null);
 
 const props = defineProps({
   locale: {
@@ -46,6 +48,21 @@ const availableLocales = computed(() => {
 const setLocale = (newLocale: string) => {
   emit("changeLocale", newLocale);
 };
+
+watch(localeStore, () => {
+  contactUrl.value =
+    configStore.electionStatus?.electionVerificationSite?.contactUrl[
+      localeStore.locale
+    ];
+});
+
+onMounted(() => {
+  if (configStore.electionStatus?.electionVerificationSite?.contactUrl)
+    contactUrl.value =
+      configStore.electionStatus?.electionVerificationSite?.contactUrl[
+        localeStore.locale
+      ];
+});
 </script>
 
 <template>
@@ -110,9 +127,10 @@ const setLocale = (newLocale: string) => {
       </RouterLink>
 
       <a
+        v-if="contactUrl"
         role="menuitem"
         class="Header__Link"
-        :href="config.contactUrl"
+        :href="contactUrl"
         target="_blank"
       >
         {{ $t("header.contact") }}
