@@ -6,7 +6,7 @@ import {
   status,
 } from "./mocks";
 
-test("downloading logs", async ({ page }) => {
+test("downloading logs", async ({ page, isMobile }) => {
   // Mock Network calls
   await page.route("**/*", async (route) => {
     const url = route.request().url();
@@ -42,17 +42,22 @@ test("downloading logs", async ({ page }) => {
   });
 
   await page.goto("/en/us3");
+  if(isMobile){ await page.locator(".Header__Hamburger_Btn").click() }
   await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
-  const downloadPromise = page.waitForEvent("download");
-  await page
-    .getByRole("button", {
-      name: "Download the full election activity log (json)",
-    })
-    .click();
-  await downloadPromise;
+  
+  if(!isMobile){
+    // The waitForEvent("download") method does not work in safari mobile so I'll skip it for now in mobile.
+    const downloadPromise = page.waitForEvent("download");
+    await page
+      .getByRole("button", {
+        name: "Download the full election activity log (json)",
+      })
+      .click();
+    await downloadPromise;
+  }
 });
 
-test("traversing board items", async ({ page }) => {
+test("traversing board items", async ({ page, isMobile }) => {
   // Mock Network calls
   await page.route("**/*", async (route) => {
     const url = route.request().url();
@@ -97,6 +102,7 @@ test("traversing board items", async ({ page }) => {
   });
 
   await page.goto("/en/us3");
+  if(isMobile){ await page.locator(".Header__Hamburger_Btn").click() }
   await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
 
   // Page 1

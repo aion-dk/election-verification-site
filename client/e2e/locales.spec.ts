@@ -1,7 +1,7 @@
 import { test } from "@playwright/test";
 import { latestConfig, status } from "./mocks";
 
-test("changing locale", async ({ page }) => {
+test("changing locale", async ({ page, isMobile }) => {
   // Mock Network calls
   await page.route("**/*", async (route) => {
     const url = route.request().url();
@@ -28,8 +28,11 @@ test("changing locale", async ({ page }) => {
   });
 
   await page.goto("/en/us3");
+
+  if(isMobile){ await page.locator(".Header__Hamburger_Btn").click() }
   await page.locator(".Header__Locales").selectOption("es");
   await page.getByRole("menuitem", { name: "Testeo de Boleta" }).click();
+  if(isMobile){ await page.locator(".Header__Hamburger_Btn").click() }
   await page.locator(".Header__Locales").selectOption("en");
   await page.getByRole("menuitem", { name: "Ballot Tester" }).click();
 });
