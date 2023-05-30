@@ -42,10 +42,12 @@ test("downloading logs", async ({ page, isMobile }) => {
   });
 
   await page.goto("/en/us3");
-  if(isMobile){ await page.locator(".Header__Hamburger_Btn").click() }
+  if (isMobile) {
+    await page.locator(".Header__Hamburger_Btn").click();
+  }
   await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
-  
-  if(!isMobile){
+
+  if (!isMobile) {
     // The waitForEvent("download") method does not work in safari mobile so I'll skip it for now in mobile.
     const downloadPromise = page.waitForEvent("download");
     await page
@@ -102,7 +104,9 @@ test("traversing board items", async ({ page, isMobile }) => {
   });
 
   await page.goto("/en/us3");
-  if(isMobile){ await page.locator(".Header__Hamburger_Btn").click() }
+  if (isMobile) {
+    await page.locator(".Header__Hamburger_Btn").click();
+  }
   await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
 
   // Page 1

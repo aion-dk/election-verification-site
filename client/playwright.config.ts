@@ -65,15 +65,15 @@ const config: PlaywrightTestConfig = {
 
     /* Test against mobile viewports. */
     {
-      name: 'Mobile Chrome',
+      name: "Mobile Chrome",
       use: {
-        ...devices['Pixel 5'],
+        ...devices["Pixel 5"],
       },
     },
     {
-      name: 'Mobile Safari',
+      name: "Mobile Safari",
       use: {
-        ...devices['iPhone 12'],
+        ...devices["iPhone 12"],
       },
     },
 
