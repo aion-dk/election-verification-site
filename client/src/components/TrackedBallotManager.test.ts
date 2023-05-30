@@ -7,7 +7,7 @@ import { fallbackMessages } from "../assets/translations";
 const neededStrings = JSON.stringify(fallbackMessages.en);
 const messages = { en: JSON.parse(neededStrings) };
 const i18n = createI18n({ messages });
-const props = { trackingCode: 'ABDCEF', periodicedTrackingCode: '123456' };
+const props = { trackingCode: "ABDCEF", periodicedTrackingCode: "123456" };
 
 test("displays correctly", async () => {
   const wrapper = mount(TrackedBallotManager, {
@@ -18,6 +18,6 @@ test("displays correctly", async () => {
   });
 
   expect(wrapper.text()).toContain("ABDCEF");
-  await wrapper.find("[data-testid=cancel]").trigger("click")
-  expect(wrapper.emitted().cancel).to.exist
+  await wrapper.find("[data-testid=cancel]").trigger("click");
+  expect(wrapper.emitted().cancel).to.exist;
 });
