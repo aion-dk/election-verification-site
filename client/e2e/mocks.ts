@@ -1,5 +1,3 @@
-// import fallbackTranslations from '../src/assets/translations.json'
-
 export const latestConfig = {
   items: {
     electionConfig: {
@@ -13,8 +11,6 @@ export const latestConfig = {
     },
   },
 };
-
-export const verificationCodeFound = {};
 
 export const foundBallotStatus = {
   status: "found",
@@ -77,19 +73,6 @@ export const boardItemsPage2 = {
     total_count: 4,
   },
 };
-
-// export const translations = {
-//   en: JSON.parse(fallbackTranslations as any),
-//   es: {
-//     header: {
-//       dbas: "Digital Ballot Audit Site",
-//       about: "Información",
-//       logs: "Registros",
-//       help: "Ayuda",
-//       contact: "Contacto"
-//     }
-//   }
-// };
 
 export const status = {
   election: {
