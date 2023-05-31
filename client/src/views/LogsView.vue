@@ -260,7 +260,7 @@ input[type="checkbox"] {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 80%;
+  width: 12rem;
   margin: 1rem 0 0 0;
 }
 
@@ -301,10 +301,6 @@ input[type="checkbox"] {
 }
 
 @media only screen and (min-width: 48rem) {
-  .LogsView__Pagination {
-    width: 50%;
-  }
-
   .LogsView__Title {
     margin: 0 0 1.5rem 0;
   }
@@ -353,7 +349,6 @@ input[type="checkbox"] {
   .LogsView__Pagination {
     align-self: center;
     margin-top: 2rem;
-    width: 30%;
   }
 
   .LogsView__Help_Title {
