@@ -134,10 +134,7 @@ onMounted(() => {
         target="_blank"
       >
         {{ $t("header.contact") }}
-        <font-awesome-icon
-          aria-hidden="true"
-          icon="fa-solid fa-arrow-up-right-from-square"
-        />
+        <AVIcon icon="arrow-up-right-from-square" aria-hidden="true" />
       </a>
 
       <DropDown
