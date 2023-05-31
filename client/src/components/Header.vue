@@ -201,11 +201,11 @@ onMounted(() => {
 }
 
 .Header__Locales {
-  padding-left: 1rem;
   font-size: 1.125rem;
   font-weight: 400;
   color: var(--slate-700);
   border: none;
+  padding: 1rem 0 1rem 1rem;
 }
 
 .Header__Locales:hover {
