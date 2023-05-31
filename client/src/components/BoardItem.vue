@@ -242,6 +242,12 @@ const classes = computed(() => {
     width: calc(20% + 0.6rem);
   }
 
+  .BoardItem__Date.BoardItem__Date_Expanded,
+  .BoardItem__ShortAddress.BoardItem__ShortAddress_Expanded,
+  .BoardItem__Author.BoardItem__Author_Expanded {
+    width: 100%;
+  }
+
   .BoardItem__Author {
     width: 24%;
     display: flex;
