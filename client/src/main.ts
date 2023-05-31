@@ -6,7 +6,6 @@ import i18n from "./lib/i18n";
 import * as UILibrary from "@assemblyvoting/ui-library";
 import "@assemblyvoting/ui-library/styles";
 
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import VuePopper from "@kalimahapps/vue-popper";
 
@@ -23,7 +22,6 @@ app.directive("focus", {
   },
 });
 
-// eslint-disable-next-line vue/multi-word-component-names
 app.component("tooltip", VuePopper);
 
 router.isReady().then(() => {
