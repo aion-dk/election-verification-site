@@ -56,7 +56,7 @@ defineProps({
   align-items: center;
   overflow-y: auto;
   background-color: var(--slate-100);
-  padding: 1rem;
+  padding: 1rem 1rem 3rem 1rem;
 }
 
 .ContentLayout__Action {
@@ -163,7 +163,7 @@ defineProps({
 @media only screen and (min-width: 80rem) and (min-height: 45rem) {
   .ContentLayout {
     flex-direction: row;
-    padding: 0;
+    padding: 0 0 3rem 0;
     overflow: hidden;
   }
 

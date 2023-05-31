@@ -186,7 +186,7 @@ body {
 }
 
 .DBAS__Content {
-  height: calc(100vh - 118px);
+  height: calc(100vh - 70px);
   margin-top: 70px;
 }
 

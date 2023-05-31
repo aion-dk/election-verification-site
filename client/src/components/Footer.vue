@@ -13,7 +13,8 @@ import avlogo from "../assets/avlogo.svg";
 
 <style type="text/css" scoped>
 .Footer {
-  background-color: var(--slate-700);
+  background-color: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(2px);
   width: 100vw;
   height: 3rem;
   position: fixed;
