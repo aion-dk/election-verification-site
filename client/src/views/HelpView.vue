@@ -5,8 +5,10 @@ import ExpandableSection from "../components/ExpandableSection.vue";
 import { onMounted, ref, watch } from "vue";
 import i18n from "../lib/i18n";
 import useLocaleStore from "../stores/useLocaleStore";
+import useConfigStore from "../stores/useConfigStore";
 
 const localeStore = useLocaleStore();
+const configStore = useConfigStore();
 const ballotTesterQuestions = ref(null);
 const ballotTrackerQuestions = ref(null);
 const logsQuestions = ref(null);
@@ -59,6 +61,7 @@ onMounted(() => {
   <ContentLayout
     :help-title="$t('views.faq.help.title')"
     :help-title-strong="$t('views.faq.help.title_strong')"
+    :logo="configStore.electionStatus?.theme?.logo"
   >
     <template v-slot:action>
       <MainIcon icon="circle-question" />

@@ -67,6 +67,7 @@ watch(verificationStore, async (newStore) => {
   <ContentLayout
     :help-title="$t('views.verification.help.title')"
     :help-title-strong="$t('views.verification.help.title_strong')"
+    :logo="configStore.electionStatus?.theme?.logo"
   >
     <template v-slot:action>
       <MainIcon icon="envelope-open-text" />

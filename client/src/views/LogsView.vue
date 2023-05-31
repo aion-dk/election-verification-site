@@ -76,6 +76,7 @@ onMounted(() => loadPage(currentPage()));
   <ContentLayout
     :help-title="$t('views.logs.help.title')"
     :help-title-strong="$t('views.logs.help.title_strong')"
+    :logo="configStore.electionStatus?.theme?.logo"
   >
     <template v-slot:action>
       <MainIcon icon="square-poll-vertical" />

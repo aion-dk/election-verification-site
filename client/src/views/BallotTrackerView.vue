@@ -31,6 +31,7 @@ onMounted(() => (ballot.value = ballotStore.ballot));
       :help-title="$t('views.tracker.help.title')"
       :help-title-strong="$t('views.tracker.help.title_strong')"
       :breadcrumb="$t('views.tracker.title')"
+      :logo="configStore.electionStatus?.theme?.logo"
     >
       <template v-slot:action>
         <TrackedBallotManager

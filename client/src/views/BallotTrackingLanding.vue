@@ -42,6 +42,7 @@ const lookupBallot = async (event: Event) => {
   <ContentLayout
     :help-title="$t('views.tracking.help.title')"
     :help-title-strong="$t('views.tracking.help.title_strong')"
+    :logo="configStore.electionStatus?.theme?.logo"
   >
     <template v-slot:action>
       <MainIcon icon="magnifying-glass" />

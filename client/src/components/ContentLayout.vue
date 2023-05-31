@@ -1,8 +1,4 @@
 <script setup lang="ts">
-import useConfigStore from "../stores/useConfigStore";
-
-const configStore = useConfigStore();
-
 defineProps({
   helpTitle: {
     type: String,
@@ -13,6 +9,10 @@ defineProps({
     required: true,
   },
   breadcrumb: {
+    type: String,
+    default: null,
+  },
+  logo: {
     type: String,
     default: null,
   },
@@ -38,9 +38,9 @@ defineProps({
         <slot name="help" />
       </div>
       <img
-        v-if="configStore.electionStatus?.theme?.logo"
+        v-if="logo"
         class="ContentLayout__Brand_Logo"
-        :src="configStore.electionStatus?.theme?.logo"
+        :src="logo"
         :alt="$t('header.election_logo_alt')"
       />
     </aside>

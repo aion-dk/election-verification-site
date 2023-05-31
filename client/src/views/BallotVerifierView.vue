@@ -77,6 +77,7 @@ onMounted(redirectUnlessPairingCode);
       :breadcrumb="$t('views.verification.title')"
       :help-title="$t('views.verifier.inprogress.help.title')"
       :help-title-strong="$t('views.verifier.inprogress.help.title_strong')"
+      :logo="configStore.electionStatus?.theme?.logo"
     >
       <template v-slot:action>
         <div v-if="verificationStore.ballot" class="BallotVerifier__Content">
