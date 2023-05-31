@@ -146,6 +146,16 @@ onMounted(redirectUnlessPairingCode);
               </div>
             </div>
           </div>
+
+          <AVButton
+            :label="$t('views.verifier.spoiled.finish')"
+            type="neutral"
+            name="finish-session"
+            id="finish-session"
+            fullWidth
+            class="BallotVerifier__Button_Overrides"
+            @click="restart"
+          />
         </div>
 
         <div v-else class="BallotVerifier__Content">
@@ -408,6 +418,12 @@ onMounted(redirectUnlessPairingCode);
   margin: 0;
 }
 
+.BallotVerifier__Button_Overrides {
+  margin: 2rem 0 0 0 !important;
+  background-color: var(--av-theme-background) !important;
+  border-color: var(--av-theme-background) !important;
+}
+
 @media only screen and (min-width: 48rem) {
   .BallotVerifier__Alert {
     flex-direction: row;
@@ -427,6 +443,11 @@ onMounted(redirectUnlessPairingCode);
 
   .Modal__Inner {
     width: 28rem;
+  }
+
+  .BallotVerifier__Button_Overrides {
+    max-width: fit-content;
+    margin-top: 3rem !important;
   }
 }
 
@@ -464,6 +485,15 @@ onMounted(redirectUnlessPairingCode);
 
   .BallotVerifier__Help_Description {
     font-size: 1.2rem;
+  }
+
+  .BallotVerifier__Button_Overrides {
+    max-width: fit-content;
+    align-self: flex-start;
+    margin-top: 3rem !important;
+    font-size: 1.125rem !important;
+    padding: 0.75rem 2.75rem !important;
+    border-radius: 14px !important;
   }
 }
 </style>
