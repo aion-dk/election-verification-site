@@ -169,7 +169,7 @@ defineProps({
 
   .ContentLayout__Action {
     background-color: white;
-    width: 70%;
+    width: calc(100% - 32rem);
     height: 100%;
     padding: 0;
     overflow-y: auto;
@@ -177,9 +177,10 @@ defineProps({
   }
 
   .ContentLayout__Help {
-    width: 30%;
+    width: 32rem;
     height: 100%;
-    padding: 0 3rem;
+    padding: 5rem 3rem;
+    justify-content: flex-start;
   }
 
   .ContentLayout__Help_Container {
@@ -204,12 +205,11 @@ defineProps({
 
 @media only screen and (min-width: 120rem) and (min-height: 68rem) {
   .ContentLayout__Action {
-    width: 60%;
+    width: calc(100% - 38rem);
   }
 
   .ContentLayout__Help {
-    width: 40%;
-    padding: 0 8rem;
+    width: 38rem;
   }
 
   .ContentLayout__Help_Container {
