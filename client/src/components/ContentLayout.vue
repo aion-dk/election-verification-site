@@ -154,6 +154,12 @@ defineProps({
   }
 }
 
+@media only screen and (min-width: 48rem) and (min-height: 68rem) {
+  .ContentLayout__Brand_Logo {
+    display: none;
+  }
+}
+
 @media only screen and (min-width: 80rem) and (min-height: 45rem) {
   .ContentLayout {
     flex-direction: row;
@@ -179,10 +185,6 @@ defineProps({
   .ContentLayout__Help_Container {
     padding: 3rem 2rem;
     gap: 1.5rem;
-  }
-
-  .ContentLayout__Brand_Logo {
-    display: none;
   }
 
   .ContentLayout__Mobile_Wrapper {
