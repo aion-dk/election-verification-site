@@ -6,10 +6,10 @@ const configStore = useConfigStore();
 const localeStore = useLocaleStore();
 
 const goToVerifier = () => {
-  router.push(`/${localeStore.locale}/${configStore.boardSlug}/verification`);
+  router.push(`/${localeStore.locale}/${configStore.boardSlug}/verify`);
 };
 const goToTracker = () => {
-  router.push(`/${localeStore.locale}/${configStore.boardSlug}/tracking`);
+  router.push(`/${localeStore.locale}/${configStore.boardSlug}/track`);
 };
 </script>
 

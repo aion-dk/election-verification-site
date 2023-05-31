@@ -93,7 +93,7 @@ onMounted(() => {
       <RouterLink
         class="Header__Link"
         role="menuitem"
-        :to="`/${locale}/${election.slug}/verification`"
+        :to="`/${locale}/${election.slug}/verify`"
         @click="toggleMenu"
       >
         {{ $t("header.verification") }}
@@ -102,7 +102,7 @@ onMounted(() => {
       <RouterLink
         class="Header__Link"
         role="menuitem"
-        :to="`/${locale}/${election.slug}/tracking`"
+        :to="`/${locale}/${election.slug}/track`"
         @click="toggleMenu"
       >
         {{ $t("header.tracking") }}

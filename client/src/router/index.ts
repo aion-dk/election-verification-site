@@ -26,7 +26,7 @@ const router = createRouter({
     },
     {
       name: "BallotTrackingLanding",
-      path: "/:locale/:electionSlug/tracking",
+      path: "/:locale/:electionSlug/track",
       component: BallotTrackingLanding,
     },
     {
@@ -36,7 +36,7 @@ const router = createRouter({
     },
     {
       name: "BallotVerificationLanding",
-      path: "/:locale/:electionSlug/verification",
+      path: "/:locale/:electionSlug/verify",
       component: BallotVerificationLanding,
     },
     {

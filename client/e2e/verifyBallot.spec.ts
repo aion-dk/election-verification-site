@@ -27,7 +27,7 @@ test("verifying a ballot", async ({ page }) => {
     return route.continue();
   });
 
-  await page.goto("/en/us3/verification");
+  await page.goto("/en/us3/verify");
   await expect(page.locator("h3")).toHaveText("Ballot Tester");
   await page.getByPlaceholder("Testing code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Start the Test" }).click();
@@ -68,7 +68,7 @@ test("verifying with an invalid verification code", async ({ page }) => {
     return route.continue();
   });
 
-  await page.goto("/en/us3/verification");
+  await page.goto("/en/us3/verify");
   await expect(page.locator("h3")).toHaveText("Ballot Tester");
   await page.getByPlaceholder("Testing code").fill("invalid-code");
   await page.getByRole("button", { name: "Start the Test" }).click();

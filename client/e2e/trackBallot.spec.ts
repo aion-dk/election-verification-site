@@ -36,7 +36,7 @@ test("tracking a ballot", async ({ page }) => {
     return route.continue();
   });
 
-  await page.goto("/en/us3/tracking");
+  await page.goto("/en/us3/track");
   await expect(page.locator("h3")).toHaveText("Ballot Tracker");
   await page.getByPlaceholder("Tracking code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Track my ballot" }).click();
@@ -80,7 +80,7 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
     return route.continue();
   });
 
-  await page.goto("/en/us3/tracking");
+  await page.goto("/en/us3/track");
   await expect(page.locator("h3")).toHaveText("Ballot Tracker");
   await page.getByPlaceholder("Tracking code").fill("abcdef");
   await page.getByRole("button", { name: "Track my ballot" }).click();

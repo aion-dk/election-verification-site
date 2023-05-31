@@ -19,7 +19,7 @@ const periodicedTrackingCode = computed(() => {
 });
 
 const cancel = () => {
-  router.push(`/${localeStore.locale}/${configStore.boardSlug}/tracking`);
+  router.push(`/${localeStore.locale}/${configStore.boardSlug}/track`);
 };
 
 onMounted(() => (ballot.value = ballotStore.ballot));
