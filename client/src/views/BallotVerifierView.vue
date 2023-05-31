@@ -450,5 +450,9 @@ onMounted(redirectUnlessPairingCode);
   .BallotVerifier__Contest_Options {
     padding: 1rem 1.5rem;
   }
+
+  .BallotVerifier__Help_Description {
+    font-size: 1.2rem;
+  }
 }
 </style>

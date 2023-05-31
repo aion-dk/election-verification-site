@@ -112,7 +112,7 @@ const lookupBallot = async (event: Event) => {
         <span class="TrackingLanding__Step_Index">{{ step }}</span>
         <p
           v-html="$t(`views.tracking.help.steps.step_${step}`)"
-          class="text-contrast"
+          class="TrackingLanding__Step_Text text-contrast"
         />
       </div>
 
@@ -274,6 +274,11 @@ const lookupBallot = async (event: Event) => {
   .TrackingLanding__Step_Index {
     width: 2rem;
     height: 2rem;
+  }
+
+  .TrackingLanding__Step_Text,
+  .TrackingLanding__Bonus {
+    font-size: 1.2rem;
   }
 }
 </style>

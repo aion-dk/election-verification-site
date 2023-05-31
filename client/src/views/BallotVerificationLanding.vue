@@ -297,6 +297,7 @@ watch(verificationStore, async (newStore) => {
 
   .VerificationLanding__Step_Text {
     margin: 2rem 0 1rem 0;
+    font-size: 1.2rem;
   }
 }
 </style>

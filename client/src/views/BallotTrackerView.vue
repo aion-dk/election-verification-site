@@ -143,5 +143,9 @@ onMounted(() => (ballot.value = ballotStore.ballot));
   .BallotTracker__Description {
     text-align: left;
   }
+
+  .BallotTracker__Info_Text {
+    font-size: 1.2rem;
+  }
 }
 </style>
