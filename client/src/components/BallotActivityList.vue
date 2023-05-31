@@ -11,8 +11,6 @@ defineProps({
 
 <template>
   <div class="BallotActivitiesList" role="log">
-    <h4>{{ $t("components.ballot_activity_list.title") }}</h4>
-
     <ul class="BallotActivitiesList__ColumnDescriptions" aria-hidden="true">
       <li class="BallotActivitiesList__ColumnDescriptions--event">
         {{ $t("components.ballot_activity_list.type") }}
