@@ -110,18 +110,18 @@ test("traversing board items", async ({ page, isMobile }) => {
   await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
 
   // Page 1
-  await page.getByText("16fSovo").click();
-  await page.getByText("VMMHYWv").click();
+  await page.getByText("Rejected affidavit").click();
+  await page.getByText("Accepted affidavit").click();
 
   // Page 2
   await page.getByRole("button", { name: "Next page" }).click();
-  await page.getByText("1yo3CEM").click();
-  await page.getByText("12g69GA").click();
+  await page.getByText("Voter session").click();
+  await page.getByText("Ballot cast").click();
 
   // Page 1 again
   await page.getByRole("button", { name: "Previous page" }).click();
-  await page.getByText("16fSovo").click();
-  await page.getByText("VMMHYWv").click();
+  await page.getByText("Rejected affidavit").click();
+  await page.getByText("Accepted affidavit").click();
 
   // Configuration only
   await page.getByText("Configuration items only").click();
