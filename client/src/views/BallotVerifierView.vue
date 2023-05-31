@@ -103,6 +103,11 @@ onMounted(redirectUnlessPairingCode);
                 configStore.getContest(contest.reference).title[$i18n.locale]
               }}
             </h3>
+            <p v-if="configStore.getContest(contest.reference).question">
+              {{
+                configStore.getContest(contest.reference).question[$i18n.locale]
+              }}
+            </p>
             <div
               v-for="(pile, pIndex) in contest.piles"
               class="BallotVerifier___Contest_Pile"
@@ -368,6 +373,12 @@ onMounted(redirectUnlessPairingCode);
   font-size: 1.375rem;
   font-weight: 600;
   color: var(--slate-800);
+  margin-bottom: 1rem;
+}
+
+.BallotVerifier__Contest_Title + p {
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 
 .BallotVerifier___Contest_Pile {
