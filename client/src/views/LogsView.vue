@@ -107,9 +107,6 @@ onMounted(() => loadPage(currentPage()));
         <li class="LogsView__ColumnDescriptions--time">
           {{ $t("components.ballot_activity_list.time") }}
         </li>
-        <li class="LogsView__ColumnDescriptions--identifier">
-          {{ $t("components.ballot_activity_list.identifier") }}
-        </li>
         <li class="LogsView__ColumnDescriptions--actor">
           {{ $t("components.ballot_activity_list.actor") }}
         </li>
@@ -333,12 +330,8 @@ input[type="checkbox"] {
 
   .LogsView__ColumnDescriptions--event,
   .LogsView__ColumnDescriptions--time,
-  .LogsView__ColumnDescriptions--identifier {
-    width: 30%;
-  }
-
   .LogsView__ColumnDescriptions--actor {
-    display: none;
+    width: 30%;
   }
 
   .LogsView__Button_Overrides {

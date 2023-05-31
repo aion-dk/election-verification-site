@@ -2,7 +2,6 @@
 import { computed } from "vue";
 import DateTime from "../components/DateTime.vue";
 import ExpandableSection from "./ExpandableSection.vue";
-import ItemIdentifier from "./ItemIdentifier.vue";
 
 const props = defineProps({
   item: {
@@ -45,20 +44,6 @@ const classes = computed(() => {
         </p>
 
         <p
-          class="BoardItem__ShortAddress"
-          :aria-label="
-            $t('components.board_item.aria_labels.activity_identifier')
-          "
-        >
-          <AVIcon
-            icon="fingerprint"
-            class="BoardItem__InlineIcon"
-            aria-hidden="true"
-          />
-          <ItemIdentifier :address="item.address" />
-        </p>
-
-        <p
           class="BoardItem__Author"
           :aria-label="$t('components.board_item.aria_labels.activity_author')"
         >
@@ -88,18 +73,6 @@ const classes = computed(() => {
             $t("components.board_item.registered_at")
           }}</span>
           <DateTime :date-time="item.registeredAt" format="absolute" />
-        </p>
-
-        <p class="BoardItem__ShortAddress BoardItem__ShortAddress_Expanded">
-          <AVIcon
-            icon="fingerprint"
-            class="BoardItem__InlineIcon"
-            aria-hidden="true"
-          />
-          <span class="BoardItem__Label">{{
-            $t("components.board_item.identifier")
-          }}</span>
-          <ItemIdentifier :address="item.address" />
         </p>
 
         <p class="BoardItem__Author BoardItem__Author_Expanded">
@@ -149,8 +122,7 @@ const classes = computed(() => {
   color: var(--slate-800);
 }
 
-.BoardItem__Date,
-.BoardItem__ShortAddress {
+.BoardItem__Date {
   color: var(--slate-800);
   width: 100%;
   margin: 0 0 0.5rem 0;
@@ -203,13 +175,9 @@ const classes = computed(() => {
     margin: 0;
   }
 
-  .BoardItem__ShortAddress {
+  .BoardItem__Author {
     width: 30%;
     margin: 0;
-  }
-
-  .BoardItem__Author {
-    display: none;
   }
 
   .BoardItem__Type_Expanded {
@@ -221,36 +189,9 @@ const classes = computed(() => {
     width: 100%;
   }
 
-  .BoardItem__ShortAddress_Expanded {
-    margin-bottom: 0.5rem !important;
-    width: 100%;
-  }
-
   .BoardItem__Author_Expanded {
     margin-bottom: 0.5rem !important;
     width: 100%;
-  }
-}
-
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
-  .BoardItem__Type {
-    width: calc(30% + 0.6rem);
-  }
-
-  .BoardItem__Date,
-  .BoardItem__ShortAddress {
-    width: calc(20% + 0.6rem);
-  }
-
-  .BoardItem__Date.BoardItem__Date_Expanded,
-  .BoardItem__ShortAddress.BoardItem__ShortAddress_Expanded,
-  .BoardItem__Author.BoardItem__Author_Expanded {
-    width: 100%;
-  }
-
-  .BoardItem__Author {
-    width: 24%;
-    display: flex;
   }
 }
 </style>
