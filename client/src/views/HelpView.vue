@@ -305,4 +305,14 @@ onMounted(() => {
     margin: 3rem 0 4rem 0;
   }
 }
+
+@media only screen and (min-width: 120rem) and (min-height: 68rem) {
+  .HelpView__Title {
+    font-size: 3.5rem;
+  }
+
+  .HelpView__Help_Description {
+    font-size: 1.2rem;
+  }
+}
 </style>
