@@ -66,7 +66,10 @@ const lookupBallot = async (event: Event) => {
             id="verification-code"
             :placeholder="$t('views.tracking.placeholder')"
             v-model="trackingCode"
-            class="TrackingLanding__TrackingCode"
+            :class="{
+              TrackingLanding__TrackingCode: true,
+              TrackingLanding__TrackingCode_Error: error,
+            }"
             data-1p-ignore
             v-focus
           />
@@ -183,6 +186,10 @@ const lookupBallot = async (event: Event) => {
   padding: 0 1.5rem;
   font-size: 1rem;
   margin-bottom: 1rem;
+}
+
+.TrackingLanding__TrackingCode_Error {
+  border: 2px solid var(--av-theme-danger-background);
 }
 
 .TrackingLanding__Button_Overrides {

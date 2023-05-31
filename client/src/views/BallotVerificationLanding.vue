@@ -91,7 +91,10 @@ watch(verificationStore, async (newStore) => {
             id="verification-code"
             :placeholder="$t('views.verification.placeholder')"
             v-model="verificationCode"
-            class="VerificationLanding__TrackingCode"
+            :class="{
+              VerificationLanding__TrackingCode: true,
+              VerificationLanding__TrackingCode_Error: error,
+            }"
             data-1p-ignore
             v-focus
           />
@@ -193,6 +196,10 @@ watch(verificationStore, async (newStore) => {
   padding: 0 1.5rem;
   font-size: 1rem;
   margin-bottom: 1rem;
+}
+
+.VerificationLanding__TrackingCode_Error {
+  border: 2px solid var(--av-theme-danger-background);
 }
 
 .VerificationLanding__Button_Overrides {

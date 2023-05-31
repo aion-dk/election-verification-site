@@ -26,6 +26,7 @@ defineProps({
   padding: 1.5rem 2rem;
   margin-bottom: 2rem;
   text-align: left;
+  z-index: 40;
 }
 
 .Error__Title {
