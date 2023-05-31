@@ -66,7 +66,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <AVNavbar>
+  <AVNavbar class="Header__Navbar_Overrides">
     <RouterLink
       class="Header__Election_Info"
       :to="`/${locale}/${election.slug}`"
@@ -234,6 +234,10 @@ onMounted(() => {
 }
 
 @media only screen and (min-width: 48rem) and (min-height: 50rem) {
+  .Header__Navbar_Overrides {
+    padding-right: 1.5rem !important;
+  }
+
   .Header__Link {
     font-size: 1.2rem;
     margin: 0.5rem 0;
