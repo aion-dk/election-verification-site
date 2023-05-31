@@ -93,6 +93,7 @@ watch(verificationStore, async (newStore) => {
             v-model="verificationCode"
             class="VerificationLanding__TrackingCode"
             data-1p-ignore
+            v-focus
           />
           <AVButton
             :label="$t('views.verification.button')"

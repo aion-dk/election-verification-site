@@ -48,6 +48,12 @@ app.use(createPinia());
 app.use(router);
 app.use(i18n);
 
+app.directive('focus', {
+  mounted(el) {
+    el.focus()
+  }
+})
+
 app.component("font-awesome-icon", FontAwesomeIcon);
 // eslint-disable-next-line vue/multi-word-component-names
 app.component("tooltip", VuePopper);

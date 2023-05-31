@@ -68,6 +68,7 @@ const lookupBallot = async (event: Event) => {
             v-model="trackingCode"
             class="TrackingLanding__TrackingCode"
             data-1p-ignore
+            v-focus
           />
           <AVButton
             :label="$t('views.tracking.button')"
