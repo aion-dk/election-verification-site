@@ -247,8 +247,8 @@ const goToTracker = () => {
     margin: 6rem 0;
   }
 
-  .Welcome__Card_Overrides {
-    padding: 5rem !important;
+  .Welcome__Button_Overrides {
+    margin-bottom: 1.25rem;
   }
 }
 
