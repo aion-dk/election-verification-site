@@ -234,12 +234,16 @@ onMounted(() => loadPage(currentPage()));
 
 .LogsView__Configuration_Only {
   display: flex;
-  border: 2px solid var(--slate-600);
+  border: 2px solid transparent;
   padding: 0.75rem;
   border-radius: 12px;
   font-weight: 600;
   color: var(--slate-900);
   margin: 0 0 2rem 0;
+}
+
+.LogsView__Configuration_Only:has(input[type="checkbox"]:checked) {
+  border: 2px solid var(--slate-600);
 }
 
 input[type="checkbox"] {
