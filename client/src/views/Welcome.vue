@@ -126,6 +126,13 @@ const goToTracker = () => {
           </p>
         </AVCard>
       </div>
+
+      <img
+        v-if="configStore.electionStatus?.theme?.logo"
+        class="Welcome__Brand_Logo"
+        :src="configStore.electionStatus?.theme?.logo"
+        :alt="$t('header.election_logo_alt')"
+      />
     </section>
   </div>
 </template>
@@ -242,6 +249,12 @@ const goToTracker = () => {
   text-align: center;
 }
 
+.Welcome__Brand_Logo {
+  display: block;
+  width: 40%;
+  margin-bottom: 3rem;
+}
+
 @media only screen and (min-width: 48rem) {
   .Welcome__Card_Line {
     width: 80%;
@@ -250,6 +263,16 @@ const goToTracker = () => {
 
   .Welcome__Button_Overrides {
     margin-bottom: 1.25rem;
+  }
+
+  .Welcome__Brand_Logo {
+    width: 30%;
+  }
+}
+
+@media only screen and (min-width: 48rem) and (min-height: 68rem) {
+  .Welcome__Brand_Logo {
+    display: none;
   }
 }
 
