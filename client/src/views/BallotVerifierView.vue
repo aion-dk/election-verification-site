@@ -160,7 +160,7 @@ onMounted(redirectUnlessPairingCode);
 
         <div v-else class="BallotVerifier__Content">
           <MainIcon icon="asterisk" />
-          <h3 class="BallotVerifier__Title">
+          <h3 class="BallotVerifier__Title BallotVerifier__Title_Passkey">
             {{ $t("views.verifier.inprogress.title") }}
           </h3>
 
@@ -267,6 +267,10 @@ onMounted(redirectUnlessPairingCode);
   font-weight: 800;
   text-align: center;
   font-size: 2.5rem;
+}
+
+.BallotVerifier__Title_Passkey {
+  font-weight: 600 !important;
 }
 
 .BallotVerifier__Title_Secondary {
@@ -425,6 +429,15 @@ onMounted(redirectUnlessPairingCode);
 }
 
 @media only screen and (min-width: 48rem) {
+  .BallotVerifier__Title_Secondary {
+    display: flex;
+    color: var(--slate-700);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    text-align: center;
+  }
+
   .BallotVerifier__Alert {
     flex-direction: row;
   }
@@ -457,6 +470,12 @@ onMounted(redirectUnlessPairingCode);
     margin: 0 0 1rem 0;
     width: 100%;
     text-align: left;
+    font-weight: 800;
+  }
+
+  .BallotVerifier__Title_Secondary {
+    text-align: left;
+    align-self: flex-start;
   }
 
   .BallotVerifier__Description {

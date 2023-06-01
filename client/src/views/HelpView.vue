@@ -177,7 +177,7 @@ onMounted(() => {
 <style type="text/css" scoped>
 .HelpView__Title {
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--slate-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
@@ -299,6 +299,7 @@ onMounted(() => {
   .HelpView__Title {
     padding-top: 5rem;
     text-align: left;
+    font-size: 3.5rem;
   }
 
   .HelpView__Description {

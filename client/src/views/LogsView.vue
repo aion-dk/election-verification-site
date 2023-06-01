@@ -255,7 +255,7 @@ onMounted(() => loadPage(currentPage()));
 <style type="text/css" scoped>
 .LogsView__Title {
   font-size: 2.5rem;
-  font-weight: 800;
+  font-weight: 600;
   color: var(--slate-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
@@ -352,7 +352,7 @@ input[type="checkbox"] {
     display: flex;
     color: var(--slate-700);
     font-size: 1.75rem;
-    font-weight: 500;
+    font-weight: 600;
     margin: 0 0 1rem 0;
     text-align: center;
   }
@@ -385,6 +385,10 @@ input[type="checkbox"] {
 }
 
 @media only screen and (min-width: 80rem) and (min-height: 45rem) {
+  .LogsView__Title {
+    font-size: 3.5rem;
+  }
+
   .LogsView__Subtitle {
     padding-top: 5rem;
   }
