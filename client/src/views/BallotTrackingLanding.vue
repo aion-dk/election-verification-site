@@ -268,6 +268,21 @@ const lookupBallot = async (event: Event) => {
   .TrackingLanding__Bonus strong {
     margin: 0 0 0.5rem 0;
   }
+
+  .TrackingLanding__TrackingCode {
+    border-radius: 14px;
+    height: 3.25rem;
+    line-height: 3.25rem;
+    font-size: 1.125rem;
+    margin-bottom: 1.125rem;
+  }
+
+  .TrackingLanding__Button_Overrides {
+    font-size: 1.125rem !important;
+    padding: 0.75rem 2.75rem !important;
+    border-radius: 14px !important;
+    margin-bottom: 1rem !important;
+  }
 }
 
 @media only screen and (min-width: 80rem) and (min-height: 68rem) {
