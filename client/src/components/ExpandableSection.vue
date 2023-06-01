@@ -66,19 +66,20 @@ const toggle = () => {
 }
 
 .ExpandableSection__Expander {
-  background-color: var(--slate-600);
+  background-color: white;
+  border: solid 1px var(--slate-600);
+  color: var(--slate-600);
   border-radius: 100%;
-  height: 25px;
-  width: 25px;
+  font-size: 1rem;
+  height: 1.5rem;
+  width: 1.5rem;
   display: flex;
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 1rem;
+  top: calc(1rem - 1px);
   right: 1rem;
   cursor: pointer;
-  color: white;
-  border: none;
 }
 
 @media only screen and (min-width: 48rem) {
