@@ -215,8 +215,13 @@ onMounted(() => {
   font-weight: 600;
 }
 
-.HelpView__Category_Button:hover {
-  font-weight: 600;
+.HelpView__Category_Button_Active > .HelpView__Category_Icon {
+  color: var(--av-theme-background);
+}
+
+.HelpView__Category_Button:hover:not(.HelpView__Category_Button_Active)
+  > .HelpView__Category_Icon {
+  color: var(--slate-800);
 }
 
 .HelpView__Category_Button:last-of-type {
@@ -224,7 +229,7 @@ onMounted(() => {
 }
 
 .HelpView__Category_Icon {
-  color: var(--av-theme-background);
+  color: var(--slate-600);
   width: 2rem;
   height: 2rem;
   margin: 0 1rem 0 0;
