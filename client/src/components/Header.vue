@@ -234,10 +234,6 @@ onMounted(() => {
 }
 
 @media only screen and (min-width: 48rem) and (min-height: 50rem) {
-  .Header__Navbar_Overrides {
-    padding-right: 1.5rem !important;
-  }
-
   .Header__Link {
     font-size: 1.2rem;
     margin: 0.5rem 0;
@@ -279,6 +275,10 @@ onMounted(() => {
 }
 
 @media only screen and (min-width: 80rem) {
+  .Header__Navbar_Overrides {
+    padding-right: 1.5rem !important;
+  }
+
   .Header__Hamburger_Btn {
     display: none;
   }
