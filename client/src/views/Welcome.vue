@@ -89,10 +89,6 @@ const goToTracker = () => {
             </div>
           </div>
         </AVCard>
-
-        <AVCard class="Welcome__Description">
-          <p>{{ $t("views.welcome.description") }}</p>
-        </AVCard>
       </div>
     </section>
 
@@ -100,6 +96,9 @@ const goToTracker = () => {
       <h4 class="Welcome__About_Title">
         {{ $t("views.welcome.about.title") }}
       </h4>
+      <AVCard class="Welcome__Description">
+        <p>{{ $t("views.welcome.description") }}</p>
+      </AVCard>
       <div>
         <AVCard class="Welcome__Card_Overrides">
           <h5 class="Welcome__About_Subtitle">
@@ -214,6 +213,7 @@ const goToTracker = () => {
   background-color: white;
   color: var(--slate-700);
   text-align: center;
+  margin-bottom: 2rem;
 }
 
 .Welcome__Description_Desktop {
