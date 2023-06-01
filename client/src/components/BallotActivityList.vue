@@ -13,13 +13,61 @@ defineProps({
   <div class="BallotActivitiesList" role="log">
     <ul class="BallotActivitiesList__ColumnDescriptions" aria-hidden="true">
       <li class="BallotActivitiesList__ColumnDescriptions--event">
-        {{ $t("components.ballot_activity_list.type") }}
+        <span class="BallotActivitiesList__Tooltip">
+          <tooltip hover placement="right">
+            <template #default>
+              {{ $t("components.ballot_activity_list.type") }}
+              <AVIcon
+                icon="circle-question"
+                class="BallotActivitiesList__Tooltip_Icon"
+              />
+            </template>
+
+            <template #content>
+              <span id="tracking-code-tooltip">
+                {{ $t("components.ballot_activity_list.type_tooltip") }}
+              </span>
+            </template>
+          </tooltip>
+        </span>
       </li>
       <li class="BallotActivitiesList__ColumnDescriptions--time">
-        {{ $t("components.ballot_activity_list.time") }}
+        <span class="BallotActivitiesList__Tooltip">
+          <tooltip hover placement="right">
+            <template #default>
+              {{ $t("components.ballot_activity_list.time") }}
+              <AVIcon
+                icon="circle-question"
+                class="BallotActivitiesList__Tooltip_Icon"
+              />
+            </template>
+
+            <template #content>
+              <span id="tracking-code-tooltip">
+                {{ $t("components.ballot_activity_list.time_tooltip") }}
+              </span>
+            </template>
+          </tooltip>
+        </span>
       </li>
       <li class="BallotActivitiesList__ColumnDescriptions--actor">
-        {{ $t("components.ballot_activity_list.actor") }}
+        <span class="BallotActivitiesList__Tooltip">
+          <tooltip hover placement="right">
+            <template #default>
+              {{ $t("components.ballot_activity_list.actor") }}
+              <AVIcon
+                icon="circle-question"
+                class="BallotActivitiesList__Tooltip_Icon"
+              />
+            </template>
+
+            <template #content>
+              <span id="tracking-code-tooltip">
+                {{ $t("components.ballot_activity_list.actor_tooltip") }}
+              </span>
+            </template>
+          </tooltip>
+        </span>
       </li>
     </ul>
 
@@ -45,6 +93,10 @@ defineProps({
 
 .BallotActivitiesList__ColumnDescriptions {
   display: none;
+}
+
+.BallotActivitiesList__Tooltip {
+  cursor: help;
 }
 
 @media only screen and (min-width: 48rem) {

@@ -102,13 +102,52 @@ onMounted(() => loadPage(currentPage()));
 
       <ul class="LogsView__ColumnDescriptions">
         <li class="LogsView__ColumnDescriptions--event">
-          {{ $t("components.ballot_activity_list.type") }}
+          <span class="LogsView__Tooltip">
+            <tooltip hover placement="right">
+              <template #default>
+                {{ $t("views.logs.headers.type") }}
+                <AVIcon icon="circle-question" class="LogsView__Tooltip_Icon" />
+              </template>
+
+              <template #content>
+                <span id="tracking-code-tooltip">
+                  {{ $t("views.logs.headers.type_tooltip") }}
+                </span>
+              </template>
+            </tooltip>
+          </span>
         </li>
         <li class="LogsView__ColumnDescriptions--time">
-          {{ $t("components.ballot_activity_list.time") }}
+          <span class="LogsView__Tooltip">
+            <tooltip hover placement="right">
+              <template #default>
+                {{ $t("views.logs.headers.time") }}
+                <AVIcon icon="circle-question" class="LogsView__Tooltip_Icon" />
+              </template>
+
+              <template #content>
+                <span id="tracking-code-tooltip">
+                  {{ $t("views.logs.headers.time_tooltip") }}
+                </span>
+              </template>
+            </tooltip>
+          </span>
         </li>
         <li class="LogsView__ColumnDescriptions--actor">
-          {{ $t("components.ballot_activity_list.actor") }}
+          <span class="LogsView__Tooltip">
+            <tooltip hover placement="right">
+              <template #default>
+                {{ $t("views.logs.headers.actor") }}
+                <AVIcon icon="circle-question" class="LogsView__Tooltip_Icon" />
+              </template>
+
+              <template #content>
+                <span id="tracking-code-tooltip">
+                  {{ $t("views.logs.headers.actor_tooltip") }}
+                </span>
+              </template>
+            </tooltip>
+          </span>
         </li>
       </ul>
 
@@ -298,6 +337,10 @@ input[type="checkbox"] {
   padding: 0.5rem 0.8rem !important;
   margin-top: 2rem;
   align-self: center;
+}
+
+.LogsView__Tooltip {
+  cursor: help;
 }
 
 @media only screen and (min-width: 48rem) {
