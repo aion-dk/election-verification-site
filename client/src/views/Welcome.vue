@@ -274,6 +274,17 @@ const goToTracker = () => {
   .Welcome__Brand_Logo {
     display: none;
   }
+
+  .Welcome__Card_Desktop {
+    flex-direction: row !important;
+    justify-content: space-evenly;
+  }
+
+  .Welcome__Card_Line {
+    width: 0.25rem;
+    height: 16rem;
+    margin: 0 3rem;
+  }
 }
 
 @media only screen and (min-width: 80rem) and (min-height: 45rem) {
@@ -328,11 +339,6 @@ const goToTracker = () => {
     padding: 0 8rem;
   }
 
-  .Welcome__Card_Desktop {
-    flex-direction: row !important;
-    justify-content: space-between;
-  }
-
   .Welcome__Card_Item {
     flex-direction: row;
     flex-grow: 2;
@@ -347,9 +353,7 @@ const goToTracker = () => {
   }
 
   .Welcome__Card_Line {
-    width: 0.25rem;
     height: 10rem;
-    margin: 0 3rem;
   }
 
   .Welcome__Card_Icon {
