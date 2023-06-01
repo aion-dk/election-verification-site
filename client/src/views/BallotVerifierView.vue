@@ -496,5 +496,10 @@ onMounted(redirectUnlessPairingCode);
     padding: 0.75rem 2.75rem !important;
     border-radius: 14px !important;
   }
+
+  .BallotVerifier__Help_Icon {
+    width: 4rem;
+    height: 4rem;
+  }
 }
 </style>
