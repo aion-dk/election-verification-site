@@ -20,12 +20,13 @@ const goToTracker = () => {
         <h1 class="Welcome__Description_Desktop_Title">
           {{ $t("views.welcome.title") }}
         </h1>
-        <h2 class="Welcome__Description_Desktop_Subtitle">
-          {{ configStore.election.title[localeStore.locale] }}
-        </h2>
       </div>
 
       <div class="Welcome__Description_Desktop_Container">
+        <h2 class="Welcome__Description_Desktop_Subtitle">
+          {{ configStore.election.title[localeStore.locale] }}
+        </h2>
+
         <p class="Welcome__Description_Desktop_About">
           {{ $t("views.welcome.description") }}
         </p>
@@ -256,7 +257,7 @@ const goToTracker = () => {
   .Welcome__Description_Desktop {
     padding: 5rem;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     width: 100%;
     background-color: white;
   }
@@ -267,17 +268,10 @@ const goToTracker = () => {
 
   .Welcome__Description_Desktop_Container {
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
   }
 
-  .Welcome__Description_Desktop_Container:first-of-type {
-    width: 60%;
-  }
-
-  .Welcome__Description_Desktop_Container:last-of-type {
-    width: 40%;
+  .Welcome__Description_Desktop_Container:last-of-type > * {
+    width: 50%;
   }
 
   .Welcome__Description_Desktop_Title {
