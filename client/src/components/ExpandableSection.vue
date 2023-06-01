@@ -27,6 +27,8 @@ const toggle = () => {
       ExpandableSection: true,
       ['ExpandableSection--expanded']: _expanded,
     }"
+    role="button"
+    @click="toggle"
   >
     <div class="ExpandableSection__Line" v-if="!_expanded">
       <slot name="collapsed"></slot>
@@ -36,11 +38,7 @@ const toggle = () => {
       <slot name="expanded"></slot>
     </div>
 
-    <button
-      class="ExpandableSection__Expander"
-      @click="toggle"
-      :aria-label="_label"
-    >
+    <button class="ExpandableSection__Expander" :aria-label="_label">
       <AVIcon v-if="_expanded" icon="minus" />
 
       <AVIcon v-else icon="plus" />
@@ -59,6 +57,7 @@ const toggle = () => {
   position: relative;
   background-color: white;
   z-index: 10;
+  cursor: pointer;
 }
 
 .ExpandableSection__Line {
