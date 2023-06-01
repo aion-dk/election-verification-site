@@ -473,6 +473,7 @@ onMounted(redirectUnlessPairingCode);
     text-align: left;
     width: 100%;
     font-size: 4rem;
+    margin: 3rem 0;
   }
 
   .BallotVerifier__Alert {

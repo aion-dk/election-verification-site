@@ -79,14 +79,14 @@ onMounted(() => {
 @media only screen and (min-width: 80rem) and (min-height: 45rem) {
   .Timedown {
     background-color: white;
-    width: 70%;
+    width: calc(100% - 32rem);
     position: absolute;
   }
 }
 
 @media only screen and (min-width: 120rem) and (min-height: 68rem) {
   .Timedown {
-    width: 60%;
+    width: calc(100% - 38rem);
   }
 }
 </style>
