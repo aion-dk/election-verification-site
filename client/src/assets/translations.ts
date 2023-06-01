@@ -26,7 +26,6 @@ export const fallbackMessages = {
       dbas: "Election Verification Site",
       verification: "Ballot Tester",
       tracking: "Ballot Tracker",
-      about: "About",
       logs: "Election Activity Log",
       help: "FAQ",
       contact: "Contact",
@@ -43,10 +42,6 @@ export const fallbackMessages = {
       av_img_alt: "Assembly Voting Logo",
     },
     components: {
-      item_identifier: {
-        tooltip: "Click to copy",
-        copied: "Copied",
-      },
       board_item: {
         registered_at: "Timestamp: ",
         identifier: "Short Address: ",
@@ -165,8 +160,11 @@ export const fallbackMessages = {
       ballot_activity_list: {
         title: "Activity connected to the tracking code",
         type: "Activity type",
+        type_tooltip: "Soon...",
         time: "Date and time",
+        time_tooltip: "Soon...",
         actor: "Actor",
+        actor_tooltip: "Soon...",
         identifier: "Identifier",
       },
       ballot_activity: {
@@ -182,12 +180,13 @@ export const fallbackMessages = {
         SpoilRequestItem: {
           type: "Spoil Request",
           author: "You",
-          info: "You have challenged the integrity of the voting system and performed the Ballot test.",
+          details:
+            "You have challenged the integrity of the voting system and performed the Ballot test.",
         },
         SessionExpiryItem: {
           type: "Explicit Session Expiry",
           author: "You",
-          info: "You have explicitly expired your voter session.",
+          details: "You have explicitly expired your voter session.",
         },
         AffidavitAcceptItem: {
           type: "Affidavit Accepted",
@@ -219,7 +218,68 @@ export const fallbackMessages = {
       },
     },
     views: {
+      welcome: {
+        title: "Election Verification Site",
+        description:
+          "This site provides overview of the election, allows voters to follow and verify their ballot and provides a file for the auditors.",
+        ballot_tester: {
+          title: "Test your ballot",
+          description: "I am voting and I want to check my choices",
+          button: "Test my ballot",
+        },
+        ballot_tracker: {
+          title: "Track your ballot",
+          description: "I have voted and I want to track my ballot",
+          button: "Track my ballot",
+        },
+        about: {
+          title: "About this site",
+          ballot_tester: "Ballot Tester",
+          ballot_tester_text:
+            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
+          ballot_tracker: "Ballot Tracker",
+          ballot_tracker_text:
+            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
+          audit_log: "Audit Log",
+          audit_log_text:
+            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
+        },
+      },
+      verification: {
+        title: "Ballot Tester",
+        subtitle: "I am voting and I want to",
+        subtitle_strong: "check my choices",
+        description:
+          "You can check that your choices were recorded correctly. Input the testing code that is shown on the voting page and follow the instructions shown on the screen.",
+        placeholder: "Testing Code",
+        button: "Start the Test",
+        tooltip_helper: "Where do I find the testing code",
+        tooltip_text:
+          "Your testing code is displayed on the voting page after you decided to test your ballot. In case it is not there, go back to the voting page and try to test your ballot again.",
+        help: {
+          title: "How does the ",
+          title_strong: "test work?",
+          steps: {
+            step_1:
+              "<strong>Input your testing code</strong> - Find it on the Voting Page",
+            step_2:
+              "<strong>Passkeys</strong> get displayed in both - Voting app and Ballot Tester - check if they <strong>match</strong>",
+            step_3:
+              "On the voting page click on <strong>“Match” or “Do not match”</strong>",
+            step_4:
+              "<strong>Your choices are now shown</strong> in the Ballot Tester. Check if they are all correct.",
+            step_5:
+              "On the <strong>voting page register</strong> if they are your choices or not",
+          },
+          footer: "All done!",
+        },
+      },
       verifier: {
+        found: {
+          title: "Your ballot has been found!",
+          description:
+            "Go back to the voting app and follow the instructions there to continue the ballot test.",
+        },
         inprogress: {
           title: "Compare passkeys",
           description: "Does this passkey match the one in the voting page?",
@@ -248,6 +308,7 @@ export const fallbackMessages = {
           info: "The choices connected to the testing code are displayed below. Please check if those are the choices you made. After you check, go back to the voting page and select the option that suits you - confirm that the choices are correct or abort the voting process.",
           assigned: "Assigned: ",
           ballot_selection: "Ballot Selection ",
+          finish: "Finish session",
           help: {
             p1: {
               title: "Go back to the voting page",
@@ -257,6 +318,100 @@ export const fallbackMessages = {
           },
         },
         blank_pile: "Blank",
+      },
+      tracking: {
+        title: "Ballot Tracker",
+        subtitle: "I have voted and I want to",
+        subtitle_strong: "track my ballot",
+        description:
+          "To verify that your ballot was casted and recorded in the Digital Ballot Box, you need to input the tracking code showed at the end of the voting process on the voting page.",
+        placeholder: "Tracking code",
+        button: "Track my ballot",
+        tooltip_helper: "Where do I find my tracking code?",
+        tooltip_text:
+          "Your ballot tracking code is displayed on the election page after you submitted your ballot. It is 7 character code.",
+        help: {
+          title: "Make sure your vote counts in ",
+          title_strong: "2 easy steps",
+          steps: {
+            step_1:
+              "<strong>Input your tracking code</strong> - Find it on the Voting Page",
+            step_2:
+              "Check that <strong>your ballot is registered</strong> in the Digital Ballot Box",
+          },
+          bonus: {
+            title: "Bonus:",
+            description: "See all the activity connected to your tracking code",
+            q1: "When did you sign in?",
+            q2: "Did you try to test your choices?",
+            q3: "How many times?",
+          },
+        },
+      },
+      tracker: {
+        title: "Ballot Tracker",
+        info: {
+          title: "Ballot Registered",
+          description: "Your vote has been registered in digital ballot box.",
+          extended_description:
+            "Below you can see all the activity attached to the code you are tracking. You can learn more about each activity by opening it up and reading the description.",
+        },
+        help: {
+          title: "What's ",
+          title_strong: "next?",
+          p1: {
+            title: "Congratulations!",
+            text1:
+              "You have tracked your ballot and helped to verify that the election is running correctly.",
+            text2:
+              "Now you can sit back and wait until the election results are in.",
+          },
+          p2: {
+            title: "Want to know more?",
+            text: "You can also read more about why this type of verification is important - know your rights and help us raise the industry standard around the world.",
+          },
+        },
+      },
+      logs: {
+        title: "Election Activity Logs",
+        subtitle: "Public audit of the election",
+        description:
+          "All election activities are listed in this election activity log. You can go through it or download the whole activity log.",
+        download_button: "Download the full election activity log (json)",
+        config_only: "Configuration items only",
+        headers: {
+          type: "Activity type",
+          type_tooltip: "Soon...",
+          time: "Date and time",
+          time_tooltip: "Soon...",
+          actor: "Actor",
+          actor_tooltip: "Soon...",
+        },
+        help: {
+          title: "What are the ",
+          title_strong: "logs for?",
+          p1: {
+            question: "What is an Election Activity log?",
+            answer:
+              "The log is visual representation of the Digital Ballot Box. It records every activity that was performed.",
+          },
+          p2: {
+            question: "Why do we need one?",
+            answer:
+              "Thanks to the log the integrity of the election can be verified. Verification can be carried out by a voter, when they track their ballot or by auditors who go through the whole log and make sure that everything is as it should be.",
+          },
+          p3: {
+            question: "Who is the log for?",
+            answer:
+              "For everyone who is interested. Primarily, the log is used by auditors who verify that the election was not tampered with. However, also voters or people who are interested can go through the logs and familiarise themselves with the activity types.",
+          },
+        },
+        aria_labels: {
+          first_page: "Go to first page",
+          prev_page: "Previous page",
+          next_page: "Next page",
+          last_page: "Go to last page",
+        },
       },
       faq: {
         title: "Frequently Asked Questions",
@@ -432,148 +587,6 @@ export const fallbackMessages = {
           p1: "By testing and tracking your ballot, you gain trust in the digital election. Digital or online voting can sometimes feel foreign and untrustworthy.",
           p2: "By verifying that your ballot was encrypted with the right choices and made it to the digital ballot box you ensure that your vote counts.",
           p3: "Moreover, you also help to verify that the integrity of the election was held.",
-        },
-      },
-      logs: {
-        title: "Election Activity Logs",
-        subtitle: "Public audit of the election",
-        description:
-          "All election activities are listed in this election activity log. You can go through it or download the whole activity log.",
-        download_button: "Download the full election activity log (json)",
-        config_only: "Configuration items only",
-        help: {
-          title: "What are the ",
-          title_strong: "logs for?",
-          p1: {
-            question: "What is an Election Activity log?",
-            answer:
-              "The log is visual representation of the Digital Ballot Box. It records every activity that was performed.",
-          },
-          p2: {
-            question: "Why do we need one?",
-            answer:
-              "Thanks to the log the integrity of the election can be verified. Verification can be carried out by a voter, when they track their ballot or by auditors who go through the whole log and make sure that everything is as it should be.",
-          },
-          p3: {
-            question: "Who is the log for?",
-            answer:
-              "For everyone who is interested. Primarily, the log is used by auditors who verify that the election was not tampered with. However, also voters or people who are interested can go through the logs and familiarise themselves with the activity types.",
-          },
-        },
-        aria_labels: {
-          first_page: "Go to first page",
-          prev_page: "Previous page",
-          next_page: "Next page",
-          last_page: "Go to last page",
-        },
-      },
-      tracker: {
-        title: "Ballot Tracker",
-        info: {
-          title: "Ballot Registered",
-          description: "Your vote has been registered in digital ballot box.",
-          extended_description:
-            "Below you can see all the activity attached to the code you are tracking. You can learn more about each activity by opening it up and reading the description.",
-        },
-        help: {
-          title: "What's ",
-          title_strong: "next?",
-          p1: {
-            title: "Congratulations!",
-            text1:
-              "You have tracked your ballot and helped to verify that the election is running correctly.",
-            text2:
-              "Now you can sit back and wait until the election results are in.",
-          },
-          p2: {
-            title: "Want to know more?",
-            text: "You can also read more about why this type of verification is important - know your rights and help us raise the industry standard around the world.",
-          },
-        },
-      },
-      welcome: {
-        title: "Election Verification Site",
-        description:
-          "This site provides overview of the election, allows voters to follow and verify their ballot and provides a file for the auditors.",
-        ballot_tester: {
-          title: "Test your ballot",
-          description: "I am voting and I want to check my choices",
-          button: "Test my ballot",
-        },
-        ballot_tracker: {
-          title: "Track your ballot",
-          description: "I have voted and I want to track my ballot",
-          button: "Track my ballot",
-        },
-        about: {
-          title: "About this site",
-          ballot_tester: "Ballot Tester",
-          ballot_tester_text:
-            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
-          ballot_tracker: "Ballot Tracker",
-          ballot_tracker_text:
-            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
-          audit_log: "Audit Log",
-          audit_log_text:
-            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
-        },
-      },
-      verification: {
-        title: "Ballot Tester",
-        subtitle: "I am voting and I want to",
-        subtitle_strong: "check my choices",
-        description:
-          "You can check that your choices were recorded correctly. Input the testing code that is shown on the voting page and follow the instructions shown on the screen.",
-        placeholder: "Testing Code",
-        button: "Start the Test",
-        tooltip_helper: "Where do I find the testing code",
-        tooltip_text:
-          "Your testing code is displayed on the voting page after you decided to test your ballot. In case it is not there, go back to the voting page and try to test your ballot again.",
-        help: {
-          title: "How does the ",
-          title_strong: "test work?",
-          steps: {
-            step_1:
-              "<strong>Input your testing code</strong> - Find it on the Voting Page",
-            step_2:
-              "<strong>Passkeys</strong> get displayed in both - Voting app and Ballot Tester - check if they <strong>match</strong>",
-            step_3:
-              "On the voting page click on <strong>“Match” or “Do not match”</strong>",
-            step_4:
-              "<strong>Your choices are now shown</strong> in the Ballot Tester. Check if they are all correct.",
-            step_5:
-              "On the <strong>voting page register</strong> if they are your choices or not",
-          },
-          footer: "All done!",
-        },
-      },
-      tracking: {
-        title: "Ballot Tracker",
-        subtitle: "I have voted and I want to",
-        subtitle_strong: "track my ballot",
-        description:
-          "To verify that your ballot was casted and recorded in the Digital Ballot Box, you need to input the tracking code showed at the end of the voting process on the voting page.",
-        placeholder: "Tracking code",
-        button: "Track my ballot",
-        tooltip_helper: "Where do I find my tracking code?",
-        tooltip_text:
-          "Your ballot tracking code is displayed on the election page after you submitted your ballot. It is 7 character code.",
-        help: {
-          title: "Make sure your vote counts in ",
-          title_strong: "2 easy steps",
-          steps: {
-            step_1:
-              "<strong>Input your tracking code</strong> - Find it on the Voting Page",
-            step_2:
-              "Check that <strong>your ballot is registered</strong> in the Digital Ballot Box",
-          },
-          bonus: {
-            title: "Bonus:",
-            description: "See all the activity connected to your tracking code",
-            q1: "When did you sign in?",
-            q2: "Did you try to test your choices?",
-            q3: "How many times?",
-          },
         },
       },
     },
