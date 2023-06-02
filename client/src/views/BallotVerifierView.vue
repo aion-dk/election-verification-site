@@ -429,6 +429,7 @@ onMounted(redirectUnlessPairingCode);
   margin: 2rem 0 0 0 !important;
   background-color: var(--av-theme-background) !important;
   border-color: var(--av-theme-background) !important;
+  color: var(--av-theme-text) !important;
 }
 
 @media only screen and (min-width: 48rem) {
