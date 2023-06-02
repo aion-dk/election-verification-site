@@ -67,13 +67,11 @@ defineProps({
   display: flex;
   flex-direction: column;
   align-items: start;
-  border: 1px solid green;
 }
 
 .ContentLayout__Breadcrumb {
   margin: -0.5rem 0 1rem 0;
   width: 100%;
-  border: red 1px solid;
 }
 
 .ContentLayout__Mobile_Wrapper {
@@ -84,7 +82,6 @@ defineProps({
   flex-direction: column;
   align-items: center;
   width: 100%;
-  border: solid blue 1px;
 }
 
 .ContentLayout__Help {

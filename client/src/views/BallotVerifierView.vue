@@ -254,6 +254,7 @@ onMounted(redirectUnlessPairingCode);
 .BallotVerifier {
   width: 100%;
   height: 100%;
+  position: relative;
 }
 
 .BallotVerifier__Content {

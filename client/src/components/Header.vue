@@ -244,7 +244,8 @@ onMounted(() => {
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: calc(100vh - 70px);
+  height: calc(100dvh - 70px);
+  padding-bottom: 3rem;
   background-color: white;
 }
 

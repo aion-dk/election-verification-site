@@ -172,7 +172,6 @@ body {
 
 .DBAS__Loading_Page {
   width: 100vw;
-  height: 100vh;
   height: 100dvh;
   display: flex;
   flex-direction: column;
@@ -211,5 +210,11 @@ body {
 .DBAS_SkipToContentLink:focus {
   margin-top: 6rem;
   margin-left: 2rem;
+}
+
+@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+  .DBAS__Loading_Page {
+    height: 100vh;
+  }
 }
 </style>

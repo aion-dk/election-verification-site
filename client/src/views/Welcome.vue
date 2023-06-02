@@ -263,7 +263,7 @@ const goToTracker = () => {
   display: block;
   width: 40%;
   height: auto;
-  margin-bottom: 3rem;
+  margin-bottom: 18dvh;
 }
 
 @media only screen and (min-width: 48rem) {
