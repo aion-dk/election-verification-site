@@ -63,7 +63,7 @@ defineProps({
 .ContentLayout__Action {
   align-items: center;
   width: 100%;
-  padding: 0;
+  padding: 1rem 0;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -71,7 +71,7 @@ defineProps({
 }
 
 .ContentLayout__Breadcrumb {
-  margin: 0.5rem 0 1rem 0;
+  margin: -0.5rem 0 1rem 0;;
   width: 100%;
   border: red 1px solid;
 }
