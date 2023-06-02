@@ -191,11 +191,12 @@ body {
 }
 
 .popper-content-wrapper {
-  max-width: 400px;
-  --vue-popper-bg: #000;
-  --vue-popper-padding: 6px;
-  --vue-popper-text-color: #fff;
-  --vue-popper-border-radius: 3px;
+  max-width: 25rem;
+  --vue-popper-bg: white;
+  --vue-popper-padding: 1rem;
+  --vue-popper-text-color: var(--slate-800);
+  --vue-popper-border-radius: 0px;
+  --vue-popper-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.15);
 }
 
 .Tooltip {
