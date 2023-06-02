@@ -318,6 +318,7 @@ onMounted(() => {
     justify-content: center;
     width: fit-content;
     height: 2.5rem;
+    padding-bottom: 0;
   }
 
   .Header__Link {
