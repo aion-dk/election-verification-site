@@ -42,6 +42,7 @@ defineProps({
         class="ContentLayout__Brand_Logo"
         :src="logo"
         :alt="$t('header.election_logo_alt')"
+        loading="lazy"
       />
     </aside>
   </div>

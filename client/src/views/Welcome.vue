@@ -37,8 +37,9 @@ const goToTracker = () => {
       <img
         v-if="configStore.electionStatus?.theme?.splash"
         :src="configStore.electionStatus?.theme?.splash"
-        alt=""
+        :alt="$t('views.welcome.splash_alt')"
         class="Welcome__Splash"
+        loading="lazy"
       />
     </div>
 

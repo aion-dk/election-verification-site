@@ -224,6 +224,7 @@ export const fallbackMessages = {
         title: "Election Verification Site",
         description:
           "This site provides overview of the election, allows voters to follow and verify their ballot and provides a file for the auditors.",
+        splash_alt: "Election splash screen",
         ballot_tester: {
           title: "Test your ballot",
           description: "I am voting and I want to check my choices",

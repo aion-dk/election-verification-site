@@ -77,6 +77,7 @@ onMounted(() => {
         aria-hidden="true"
         :src="configStore.electionStatus?.theme?.logo"
         :alt="$t('header.election_logo_alt')"
+        loading="lazy"
       />
       <div class="Header__Text">
         <span class="Header__Title">{{ $t("header.dbas") }}</span>
