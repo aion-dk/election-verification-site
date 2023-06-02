@@ -29,7 +29,7 @@ import avlogo from "../assets/avlogo.svg";
   justify-content: center;
   align-items: center;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
-  z-index: 20;
+  z-index: 90;
 }
 
 .Footer__Text {
@@ -41,7 +41,6 @@ import avlogo from "../assets/avlogo.svg";
 .Footer__Image {
   max-height: 2rem;
   padding-top: 2px;
-  width: 100%;
-  height: 100%;
+  height: auto;
 }
 </style>

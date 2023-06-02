@@ -71,7 +71,7 @@ const toggle = () => {
   color: var(--slate-600);
   border-radius: 100%;
   font-size: 1rem;
-  height: 1.5rem;
+  min-height: 1.5rem;
   width: 1.5rem;
   display: flex;
   align-items: center;

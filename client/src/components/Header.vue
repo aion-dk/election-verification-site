@@ -153,8 +153,18 @@ onMounted(() => {
       "
       @click="toggleMenu"
     >
-      <AVIcon v-if="isMenuOpened" icon="xmark" aria-hidden="true" />
-      <AVIcon v-else icon="bars" aria-hidden="true" />
+      <AVIcon
+        v-if="isMenuOpened"
+        icon="xmark"
+        class="Header__Hamburger_Icon"
+        aria-hidden="true"
+      />
+      <AVIcon
+        v-else
+        icon="bars"
+        class="Header__Hamburger_Icon"
+        aria-hidden="true"
+      />
     </button>
   </AVNavbar>
 </template>
@@ -195,6 +205,7 @@ onMounted(() => {
   font-size: 1.5rem;
   width: 50px;
   height: 50px;
+  color: var(--slate-800);
 }
 
 .Header__Link {
@@ -232,10 +243,6 @@ onMounted(() => {
   width: 100vw;
   height: calc(100vh - 70px);
   background-color: white;
-}
-
-.Header__Hamburger_Btn {
-  display: block;
 }
 
 .Header__Show {
