@@ -252,6 +252,7 @@ const goToTracker = () => {
 .Welcome__Brand_Logo {
   display: block;
   width: 40%;
+  height: auto;
   margin-bottom: 3rem;
 }
 

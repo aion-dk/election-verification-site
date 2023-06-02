@@ -143,7 +143,15 @@ onMounted(() => {
         @change="(value) => setLocale(value)"
       />
     </div>
-    <button class="Header__Hamburger_Btn" @click="toggleMenu">
+    <button
+      class="Header__Hamburger_Btn"
+      :aria-label="
+        isMenuOpened
+          ? $t('header.close_menu_aria_label')
+          : $t('header.open_menu_aria_label')
+      "
+      @click="toggleMenu"
+    >
       <AVIcon v-if="isMenuOpened" icon="xmark" />
       <AVIcon v-else icon="bars" />
     </button>

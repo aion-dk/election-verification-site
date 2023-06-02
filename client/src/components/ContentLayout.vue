@@ -110,6 +110,7 @@ defineProps({
 .ContentLayout__Brand_Logo {
   display: block;
   width: 40%;
+  height: auto;
   margin-bottom: 2rem;
 }
 

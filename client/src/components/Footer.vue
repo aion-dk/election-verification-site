@@ -36,5 +36,7 @@ import avlogo from "../assets/avlogo.svg";
 .Footer__Image {
   max-height: 2rem;
   padding-top: 2px;
+  width: 100%;
+  height: 100%;
 }
 </style>
