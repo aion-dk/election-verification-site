@@ -40,6 +40,7 @@ const goToTracker = () => {
         :alt="$t('views.welcome.splash_alt')"
         class="Welcome__Splash"
         loading="lazy"
+        aria-hidden="true"
       />
     </div>
 
@@ -47,7 +48,11 @@ const goToTracker = () => {
       <div class="Welcome__Heading_Content">
         <AVCard class="Welcome__Card_Overrides Welcome__Card_Desktop">
           <div class="Welcome__Card_Item">
-            <AVIcon icon="envelope-open-text" class="Welcome__Card_Icon" />
+            <AVIcon
+              icon="envelope-open-text"
+              class="Welcome__Card_Icon"
+              aria-hidden="true"
+            />
             <div>
               <h3 class="Welcome__Card_Title">
                 {{ $t("views.welcome.ballot_tester.title") }}
@@ -70,7 +75,11 @@ const goToTracker = () => {
           <div class="Welcome__Card_Line" />
 
           <div class="Welcome__Card_Item">
-            <AVIcon icon="magnifying-glass" class="Welcome__Card_Icon" />
+            <AVIcon
+              icon="magnifying-glass"
+              class="Welcome__Card_Icon"
+              aria-hidden="true"
+            />
             <div>
               <h3 class="Welcome__Card_Title">
                 {{ $t("views.welcome.ballot_tracker.title") }}

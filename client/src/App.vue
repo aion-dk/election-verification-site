@@ -132,7 +132,7 @@ const setTheme = async (conferenceClient: any) => {
     <AVSpinner size="xlarge" color="neutral" />
   </div>
   <div class="DBAS" v-if="isLoaded">
-    <!-- <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a> -->
+    <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a>
 
     <Header
       :election="configStore.election"
@@ -205,10 +205,11 @@ body {
 
 .DBAS_SkipToContentLink {
   position: absolute;
-  margin-top: -100px;
+  margin-top: -6rem;
 }
 
 .DBAS_SkipToContentLink:focus {
-  margin-top: 100px;
+  margin-top: 6rem;
+  margin-left: 2rem;
 }
 </style>

@@ -8,7 +8,7 @@ defineProps({
 </script>
 
 <template>
-  <AVIcon :icon="icon" class="MainIcon" />
+  <AVIcon :icon="icon" class="MainIcon" aria-hidden="true" />
 </template>
 
 <style scoped>

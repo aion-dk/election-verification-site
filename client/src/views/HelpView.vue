@@ -78,7 +78,7 @@ onMounted(() => {
         >
           <AVIcon
             icon="envelope-open-text"
-            aria-hidden="false"
+            aria-hidden="true"
             class="HelpView__Category_Icon"
           />
           <span class="HelpView__Category_Label">{{
@@ -94,7 +94,7 @@ onMounted(() => {
         >
           <AVIcon
             icon="magnifying-glass"
-            aria-hidden="false"
+            aria-hidden="true"
             class="HelpView__Category_Icon"
           />
           <span class="HelpView__Category_Label">{{
@@ -110,7 +110,7 @@ onMounted(() => {
         >
           <AVIcon
             icon="square-poll-vertical"
-            aria-hidden="false"
+            aria-hidden="true"
             class="HelpView__Category_Icon"
           />
           <span class="HelpView__Category_Label">{{
@@ -126,7 +126,7 @@ onMounted(() => {
         >
           <AVIcon
             icon="flag"
-            aria-hidden="false"
+            aria-hidden="true"
             class="HelpView__Category_Icon"
           />
           <span class="HelpView__Category_Label">{{

@@ -20,11 +20,7 @@ const cancel = () => {
 <template>
   <div class="BallotManager">
     <div class="BallotManager__Tracking_Container">
-      <code
-        class="BallotManager__Tracking_Code"
-        :aria-label="periodicedTrackingCode"
-        >{{ trackingCode }}</code
-      >
+      <code class="BallotManager__Tracking_Code">{{ trackingCode }}</code>
       <button
         class="BallotManager__Cancel"
         @click="cancel"
@@ -35,11 +31,15 @@ const cancel = () => {
           })
         "
       >
-        <AVIcon icon="xmark" class="BallotManager__Tracking_Icon" />
+        <AVIcon
+          icon="xmark"
+          class="BallotManager__Tracking_Icon"
+          aria-hidden="true"
+        />
       </button>
     </div>
-    <div class="BallotManager__Tracking_Line"></div>
-    <span class="BallotManager__Tracking_Text">{{
+    <div class="BallotManager__Tracking_Line" aria-hidden="true"></div>
+    <span class="BallotManager__Tracking_Text" aria-hidden="true">{{
       $t("components.tracked_ballot_manager.currently_tracking")
     }}</span>
   </div>

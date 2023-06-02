@@ -27,7 +27,11 @@ defineProps({
             $t('components.board_item.aria_labels.activity_registered')
           "
         >
-          <AVIcon icon="clock" class="BallotActivity__Icon" />
+          <AVIcon
+            icon="clock"
+            class="BallotActivity__Icon"
+            aria-hidden="true"
+          />
           <DateTime :date-time="activity.registered_at" />
         </p>
 
@@ -35,7 +39,7 @@ defineProps({
           class="BallotActivity__Author"
           :aria-label="$t('components.board_item.aria_labels.author')"
         >
-          <AVIcon icon="user" class="BallotActivity__Icon" />
+          <AVIcon icon="user" class="BallotActivity__Icon" aria-hidden="true" />
           <span>
             {{ $t(`components.ballot_activity.${activity.type}.author`) }}
           </span>
@@ -50,7 +54,11 @@ defineProps({
         <p
           class="BallotActivity__RegisteredAt BallotActivity__RegisteredAt_Expanded"
         >
-          <AVIcon icon="clock" class="BallotActivity__Icon" />
+          <AVIcon
+            icon="clock"
+            class="BallotActivity__Icon"
+            aria-hidden="true"
+          />
           <span class="BallotActivity__Label">{{
             $t("components.ballot_activity.registered_at")
           }}</span>
@@ -58,7 +66,7 @@ defineProps({
         </p>
 
         <p class="BallotActivity__Author BallotActivity__Author_Expanded">
-          <AVIcon icon="user" class="BallotActivity__Icon" />
+          <AVIcon icon="user" class="BallotActivity__Icon" aria-hidden="true" />
           <span class="BallotActivity__Label">{{
             $t("components.ballot_activity.author")
           }}</span>
@@ -66,7 +74,11 @@ defineProps({
         </p>
 
         <p class="BallotActivity__Meaning">
-          <AVIcon icon="circle-info" class="BallotActivity__Icon" />
+          <AVIcon
+            icon="circle-info"
+            class="BallotActivity__Icon"
+            aria-hidden="true"
+          />
           <span class="BallotActivity__Label">{{
             $t("components.ballot_activity.meaning")
           }}</span>

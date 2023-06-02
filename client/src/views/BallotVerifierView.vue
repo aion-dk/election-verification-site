@@ -168,6 +168,7 @@ onMounted(redirectUnlessPairingCode);
             <AVIcon
               icon="triangle-exclamation"
               class="BallotVerifier__Alert_Icon"
+              aria-hidden="true"
             />
             <div>
               <span class="BallotVerifier__Alert_Title">{{
@@ -195,6 +196,7 @@ onMounted(redirectUnlessPairingCode);
           <AVIcon
             icon="rectangle-list"
             class="BallotVerifier__Help_Icon text-contrast"
+            aria-hidden="true"
           />
           <h3 class="BallotVerifier__Help_Title text-contrast">
             {{ $t("views.verifier.inprogress.help.p1.title") }}
@@ -208,6 +210,7 @@ onMounted(redirectUnlessPairingCode);
           <AVIcon
             icon="rectangle-list"
             class="BallotVerifier__Help_Icon text-contrast"
+            aria-hidden="true"
           />
           <h3 class="BallotVerifier__Help_Title text-contrast">
             {{ $t("views.verifier.inprogress.help.p1.title") }}

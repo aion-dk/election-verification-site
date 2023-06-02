@@ -153,8 +153,8 @@ onMounted(() => {
       "
       @click="toggleMenu"
     >
-      <AVIcon v-if="isMenuOpened" icon="xmark" />
-      <AVIcon v-else icon="bars" />
+      <AVIcon v-if="isMenuOpened" icon="xmark" aria-hidden="true" />
+      <AVIcon v-else icon="bars" aria-hidden="true" />
     </button>
   </AVNavbar>
 </template>

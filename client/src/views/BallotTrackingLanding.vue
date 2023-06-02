@@ -92,6 +92,7 @@ const lookupBallot = async (event: Event) => {
               <AVIcon
                 icon="circle-question"
                 class="TrackingLanding__Tooltip_Icon"
+                aria-hidden="true"
               />
               <span>{{ $t("views.tracking.tooltip_helper") }}</span>
               <span :aria-label="$t('views.tracking.tooltip_text')"> </span>

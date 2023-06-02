@@ -106,7 +106,11 @@ onMounted(() => loadPage(currentPage()));
             <tooltip hover placement="right">
               <template #default>
                 {{ $t("views.logs.headers.type") }}
-                <AVIcon icon="circle-question" class="LogsView__Tooltip_Icon" />
+                <AVIcon
+                  icon="circle-question"
+                  class="LogsView__Tooltip_Icon"
+                  aria-hidden="true"
+                />
               </template>
 
               <template #content>
@@ -122,7 +126,11 @@ onMounted(() => loadPage(currentPage()));
             <tooltip hover placement="right">
               <template #default>
                 {{ $t("views.logs.headers.time") }}
-                <AVIcon icon="circle-question" class="LogsView__Tooltip_Icon" />
+                <AVIcon
+                  icon="circle-question"
+                  class="LogsView__Tooltip_Icon"
+                  aria-hidden="true"
+                />
               </template>
 
               <template #content>
@@ -138,7 +146,11 @@ onMounted(() => loadPage(currentPage()));
             <tooltip hover placement="right">
               <template #default>
                 {{ $t("views.logs.headers.actor") }}
-                <AVIcon icon="circle-question" class="LogsView__Tooltip_Icon" />
+                <AVIcon
+                  icon="circle-question"
+                  class="LogsView__Tooltip_Icon"
+                  aria-hidden="true"
+                />
               </template>
 
               <template #content>
@@ -168,8 +180,8 @@ onMounted(() => loadPage(currentPage()));
           @click="navigate(1)"
         >
           <div class="LogsView__Icon_Set">
-            <AVIcon icon="chevron-left" />
-            <AVIcon icon="chevron-left" />
+            <AVIcon icon="chevron-left" aria-hidden="true" />
+            <AVIcon icon="chevron-left" aria-hidden="true" />
           </div>
         </button>
 
@@ -182,7 +194,7 @@ onMounted(() => loadPage(currentPage()));
           :disabled="disableFirst"
           @click="navigate(boardStore.meta.prev_page)"
         >
-          <AVIcon icon="chevron-left" />
+          <AVIcon icon="chevron-left" aria-hidden="true" />
         </button>
 
         <span class="LogsView__PageLink">{{ boardStore.currentPage }}</span>
@@ -200,7 +212,7 @@ onMounted(() => loadPage(currentPage()));
           :disabled="disableLast"
           @click="navigate(boardStore.meta.next_page)"
         >
-          <AVIcon icon="chevron-right" />
+          <AVIcon icon="chevron-right" aria-hidden="true" />
         </button>
 
         <button
@@ -213,8 +225,8 @@ onMounted(() => loadPage(currentPage()));
           @click="navigate(boardStore.meta.total_pages)"
         >
           <div class="LogsView__Icon_Set">
-            <AVIcon icon="chevron-right" />
-            <AVIcon icon="chevron-right" />
+            <AVIcon icon="chevron-right" aria-hidden="true" />
+            <AVIcon icon="chevron-right" aria-hidden="true" />
           </div>
         </button>
       </div>

@@ -20,6 +20,7 @@ defineProps({
               <AVIcon
                 icon="circle-question"
                 class="BallotActivitiesList__Tooltip_Icon"
+                aria-hidden="true"
               />
             </template>
 
@@ -39,6 +40,7 @@ defineProps({
               <AVIcon
                 icon="circle-question"
                 class="BallotActivitiesList__Tooltip_Icon"
+                aria-hidden="true"
               />
             </template>
 
@@ -58,6 +60,7 @@ defineProps({
               <AVIcon
                 icon="circle-question"
                 class="BallotActivitiesList__Tooltip_Icon"
+                aria-hidden="true"
               />
             </template>
 

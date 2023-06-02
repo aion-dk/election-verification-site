@@ -10,7 +10,11 @@ defineProps({
 <template>
   <div class="Error">
     <span class="Error__Title">
-      <AVIcon icon="triangle-exclamation" class="Error__Icon_Overrides" />
+      <AVIcon
+        icon="triangle-exclamation"
+        class="Error__Icon_Overrides"
+        aria-hidden="true"
+      />
       <span>{{ $t(`errors.${errorPath}.title`) }}</span>
     </span>
     <p class="Error__Description">

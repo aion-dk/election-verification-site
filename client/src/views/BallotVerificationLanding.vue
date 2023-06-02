@@ -117,6 +117,7 @@ watch(verificationStore, async (newStore) => {
               <AVIcon
                 icon="circle-question"
                 class="VerificationLanding__Tooltip_Icon"
+                aria-hidden="true"
               />
               <span>{{ $t("views.verification.tooltip_helper") }}</span>
               <span :aria-label="$t('views.verification.tooltip_text')"> </span>

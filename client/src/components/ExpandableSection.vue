@@ -39,9 +39,9 @@ const toggle = () => {
     </div>
 
     <button class="ExpandableSection__Expander" :aria-label="_label">
-      <AVIcon v-if="_expanded" icon="minus" />
+      <AVIcon v-if="_expanded" icon="minus" aria-hidden="true" />
 
-      <AVIcon v-else icon="plus" />
+      <AVIcon v-else icon="plus" aria-hidden="true" />
     </button>
   </div>
 </template>
