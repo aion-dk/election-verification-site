@@ -69,9 +69,9 @@ const toggle = () => {
   background-color: white;
   border: solid 1px var(--slate-600);
   color: var(--slate-600);
-  border-radius: 100%;
+  border-radius: 99px;
   font-size: 1rem;
-  min-height: 1.5rem;
+  height: 1.5rem;
   width: 1.5rem;
   display: flex;
   align-items: center;

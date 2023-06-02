@@ -200,6 +200,9 @@ onMounted(() => {
 }
 
 .Header__Hamburger_Btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: none;
   background: none;
   font-size: 1.5rem;

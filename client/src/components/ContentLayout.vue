@@ -64,7 +64,6 @@ defineProps({
   align-items: center;
   width: 100%;
   padding: 1rem 0.2rem;
-  position: relative;
   display: flex;
   flex-direction: column;
   align-items: start;
@@ -175,7 +174,6 @@ defineProps({
     height: 100%;
     padding: 0;
     overflow-y: auto;
-    position: relative;
   }
 
   .ContentLayout__Help {
