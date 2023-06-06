@@ -405,6 +405,11 @@ input[type="checkbox"] {
     padding-top: 5rem;
   }
 
+  .LogsView__Description {
+    text-align: left;
+    align-self: flex-start;
+  }
+
   .LogsView__Pagination {
     align-self: center;
     margin-top: 2rem;
