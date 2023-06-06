@@ -116,10 +116,12 @@ onMounted(() => (ballot.value = ballotStore.ballot));
 .BallotTracker__Info_Title {
   text-align: center;
   font-size: 1.6rem;
+  font-weight: 600;
 }
 
 .BallotTracker__Info_Title_Small {
   font-size: 1.3rem;
+  font-weight: 600;
 }
 
 @media only screen and (min-width: 48rem) {

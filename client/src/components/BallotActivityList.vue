@@ -33,23 +33,8 @@ defineProps({
         </span>
       </li>
       <li class="BallotActivitiesList__ColumnDescriptions--time">
-        <span class="BallotActivitiesList__Tooltip">
-          <tooltip hover placement="right">
-            <template #default>
-              {{ $t("components.ballot_activity_list.time") }}
-              <AVIcon
-                icon="circle-question"
-                class="BallotActivitiesList__Tooltip_Icon"
-                aria-hidden="true"
-              />
-            </template>
-
-            <template #content>
-              <span id="tracking-code-tooltip">
-                {{ $t("components.ballot_activity_list.time_tooltip") }}
-              </span>
-            </template>
-          </tooltip>
+        <span class="BallotActivitiesList__Tooltip" style="cursor: default">
+          {{ $t("components.ballot_activity_list.time") }}
         </span>
       </li>
       <li class="BallotActivitiesList__ColumnDescriptions--actor">

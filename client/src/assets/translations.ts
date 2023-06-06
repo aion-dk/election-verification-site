@@ -7,18 +7,19 @@ export const fallbackMessages = {
       es: "Español",
     },
     errors: {
+      go_to_verification: "Go to the verification site",
       verify: {
         invalid_code: {
           title: "Testing code not found",
           description:
-            "The testing code does not exist in this election. Please try the test again, or vote again. If that does not help, please contact the election organizer.",
+            "Verify you have entered the testing code correctly. Be sure to match case and try again.",
         },
       },
       track: {
         invalid_code: {
           title: "Tracking code not found",
           description:
-            "Please check that the tracking code was entered correctly. The code is case sensitive. If you are checking to make sure your ballot was recorded correctly before submitting, use the ballot test instead. Still having problems? Contact the election organizer.",
+            "Verify you have entered the tracking code correctly. Be sure to match case. Nb.: If you are testing to make sure your choices were recorded correctly before submitting, use the ballot tester instead.",
         },
       },
     },
@@ -160,14 +161,11 @@ export const fallbackMessages = {
         },
       },
       ballot_activity_list: {
-        title: "Activity connected to the tracking code",
         type: "Activity type",
-        type_tooltip: "Soon...",
+        type_tooltip: "Type of the activity recorded on Digital Ballot Box",
         time: "Date and time",
-        time_tooltip: "Soon...",
         actor: "Actor",
-        actor_tooltip: "Soon...",
-        identifier: "Identifier",
+        actor_tooltip: "Source of the activity type",
       },
       ballot_activity: {
         registered_at: "Timestamp: ",
@@ -204,7 +202,7 @@ export const fallbackMessages = {
         VoterSessionItem: {
           type: "Sign in",
           author: "You",
-          details: "You have authenticated your self and signed in.",
+          details: "You have authenticated yourself and signed in.",
         },
       },
       tracked_ballot_manager: {
@@ -239,13 +237,13 @@ export const fallbackMessages = {
           title: "About this site",
           ballot_tester: "Ballot Tester",
           ballot_tester_text:
-            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
+            "Use this tab to independently verify that your ballot is recorded and sealed correctly in the digital ballot box. This ballot test is performed before a ballot is submitted. The test is an important tool to ensure every voter's ballot is cast as intended.",
           ballot_tracker: "Ballot Tracker",
           ballot_tracker_text:
-            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
+            "Voters can use this tab to verify their ballot was received correctly in the digital ballot box. Tracking the ballot is an important step in ensuring end-to-end verifiability as it verifies that the ballot is registered as cast.",
           audit_log: "Audit Log",
           audit_log_text:
-            "Lorem ipsum dolor sit amet consectetur. Tortor pulvinar interdum curabitur lorem vitae tellus tincidunt. Et massa fringilla in est sapien. Feugiat neque morbi sed sit vestibulum.",
+            "Election audit log is a representation of the digital ballot box and serves as a public audit of the election. Auditing this log verifies that all ballots submitted to the digital ballot box are counted as registered and that integrity of the election has been held.",
         },
       },
       verification: {
@@ -257,8 +255,7 @@ export const fallbackMessages = {
         placeholder: "Testing Code",
         button: "Start the Test",
         tooltip_helper: "Where do I find the testing code",
-        tooltip_text:
-          "Your testing code is displayed on the voting page after you decided to test your ballot. In case it is not there, go back to the voting page and try to test your ballot again.",
+        tooltip_text: "Your testing code is displayed on the voting page.",
         help: {
           title: "How does the ",
           title_strong: "test work?",
@@ -268,11 +265,11 @@ export const fallbackMessages = {
             step_2:
               "<strong>Passkeys</strong> get displayed in both - Voting app and Ballot Tester - check if they <strong>match</strong>",
             step_3:
-              "On the voting page click on <strong>“Match” or “Do not match”</strong>",
+              "On the voting page click on <strong>“Does match” or “Does not match”</strong>",
             step_4:
               "<strong>Your choices are now shown</strong> in the Ballot Tester. Check if they are all correct.",
             step_5:
-              "On the <strong>voting page register</strong> if they are your choices or not",
+              "On the <strong>voting page click</strong> on “Return to voting” if the choices are yours, otherwise contact the election provider.",
           },
           footer: "All done!",
         },
@@ -285,9 +282,10 @@ export const fallbackMessages = {
         },
         inprogress: {
           title: "Compare passkeys",
-          description: "Does this passkey match the one in the voting page?",
+          description:
+            "Does this passkey match the one shown on the voting page?",
           secondary_description:
-            "Proceed to the voting page and check if the passkey is the same. If it is the same, confirm it on the voting page. If it differs, please abort the process and report it to the election organiser here.",
+            "Proceed to the voting page and check if the passkey is the same. If it is the same, confirm it on the voting page. If it differs, please abort the process and report it to the election organiser.",
           help: {
             title: "What's ",
             title_strong: "next?",
@@ -308,15 +306,14 @@ export const fallbackMessages = {
         spoiled: {
           title: "Check the Choices",
           description: "Your Ballot Choices",
-          info: "The choices connected to the testing code are displayed below. Please check if those are the choices you made. After you check, go back to the voting page and select the option that suits you - confirm that the choices are correct or abort the voting process.",
+          info: "The choices connected to the testing code are displayed below. Please check if those are the choices you made. If they are, go back to the voting page and return to voting and follow the instructions on the screen. If the choices are not yours, please report this to the election organizer and do not submit your ballot.",
           assigned: "Assigned: ",
           ballot_selection: "Ballot Selection ",
-          finish: "Finish session",
+          finish: "Finish the test",
           help: {
             p1: {
               title: "Go back to the voting page",
-              description:
-                "Confirm that the choices are yours or abort the process.",
+              description: "Return to voting or abort the process.",
             },
           },
         },
@@ -327,12 +324,12 @@ export const fallbackMessages = {
         subtitle: "I have voted and I want to",
         subtitle_strong: "track my ballot",
         description:
-          "To verify that your ballot was casted and recorded in the Digital Ballot Box, you need to input the tracking code showed at the end of the voting process on the voting page.",
+          "To verify that your ballot was casted and recorded in the Digital Ballot Box, you need to input the tracking code shown at the end of the voting process on the voting page.",
         placeholder: "Tracking code",
         button: "Track my ballot",
         tooltip_helper: "Where do I find my tracking code?",
         tooltip_text:
-          "Your ballot tracking code is displayed on the election page after you submitted your ballot. It is 7 character code.",
+          "Your ballot tracking code is displayed on the election page after you submitted your ballot.",
         help: {
           title: "Make sure your vote counts in ",
           title_strong: "2 easy steps",
@@ -340,14 +337,7 @@ export const fallbackMessages = {
             step_1:
               "<strong>Input your tracking code</strong> - Find it on the Voting Page",
             step_2:
-              "Check that <strong>your ballot is registered</strong> in the Digital Ballot Box",
-          },
-          bonus: {
-            title: "Bonus:",
-            description: "See all the activity connected to your tracking code",
-            q1: "When did you sign in?",
-            q2: "Did you try to test your choices?",
-            q3: "How many times?",
+              "Check that <strong>your ballot is registered</strong> in the Digital Ballot Box and see all activity connected to it.",
           },
         },
       },
@@ -371,7 +361,7 @@ export const fallbackMessages = {
           },
           p2: {
             title: "Want to know more?",
-            text: "You can also read more about why this type of verification is important - know your rights and help us raise the industry standard around the world.",
+            text: "You can also read more about why this type of verification is important in the FAQs section. Get to know more about online voting and help us raise the industry standard around the world.",
           },
         },
       },
@@ -379,7 +369,7 @@ export const fallbackMessages = {
         title: "Election Activity Logs",
         subtitle: "Public audit of the election",
         description:
-          "All election activities are listed in this election activity log. You can go through it or download the whole activity log.",
+          "All election activities are listed in this election activity log. You can go through it or download the whole activity log at the bottom of the page.",
         download_button: "Download the full election activity log (json)",
         config_only: "Configuration items only",
         headers: {
@@ -419,7 +409,7 @@ export const fallbackMessages = {
       faq: {
         title: "Frequently Asked Questions",
         description:
-          "Find answers to your questions and learn how the different parts of the verification site play together and form easy and secure election environment.",
+          "Find answers to your questions and learn how the different parts of the verification site play together and form an easy and secure election environment.",
         navigation: {
           ballot_tester: "Ballot Tester",
           ballot_tracker: "Ballot Tracker",
@@ -435,9 +425,9 @@ export const fallbackMessages = {
                 p2: "The Steps are:",
                 p3: "1. Open ballot tester (the voting page guides to it when you press the button “Test ballot”) and input your testing code.",
                 p4: "2. Compare passkeys that are displayed in both ballot tester and on the voting page.",
-                p5: "3. If they are the same, you need to click the button “match” on the voting page. If they don’t match, you need to click the button “don’t match” on the voting page. The voting page will then guide you in what to do.",
+                p5: "3. If they are the same, you need to click the button “Does match” on the voting page. If they don’t match, you need to click the button “Does not match” on the voting page. The voting page will then guide you in what to do.",
                 p6: "4. If the passkeys matched then you can see your decrypted ballot in the ballot tester. Here you have an opportunity to see the choices that were recorded and check if they are the same ones you chose.",
-                p7: "5. Now the final step is to confirm that the choices displayed in the ballot tester are correct. If they are not correct, then indicate that on the voting page.",
+                p7: "5. Now the final step is to confirm that the choices displayed in the ballot tester are correct. If they are not correct, then indicate that on the voting page, return to voting and cast your vote.",
                 p8: "The ballot test is now complete!",
               },
             },
@@ -449,23 +439,23 @@ export const fallbackMessages = {
               },
             },
             q3: {
-              title: "I cant find my testing code. What do I do?",
+              title: "I can't find my testing code. What do I do?",
               paragraphs: {
-                p1: "Go back to the voting page and try to see it there. When you see a button labeled Ballot Test - click it and then your testing code will appear.",
+                p1: "Go to the voting page and try to find it there. When you see a button labeled Ballot Test - click it and then your testing code will appear.",
                 p2: "Remember, that you can only perform ballot test before submitting your vote.",
               },
             },
             q4: {
               title: "My pairing codes do not match. What should I do?",
               paragraphs: {
-                p1: "Go to the voting page and click on “don’t match”. Then the voting app will guide you through the process. You can choose to test again, or to abandon the voting process.",
+                p1: "Go to the voting page and click on “Does not match”. Then the voting app will guide you through the process. You can choose to test again, or to abandon the voting process.",
               },
             },
             q5: {
               title:
                 "The decrypted choices do not match the ones I chose. What do I do?",
               paragraphs: {
-                p1: "Indicate so on the voting page. The voting page will guide you in what to do next. When the choices do not match, we recommend trying the test again. If they still do not match, then please contact your election organiser and report the issue. Do not submit the vote.",
+                p1: "Indicate so on the voting page. The voting page will guide you in what to do next. When the choices do not match, we recommend trying the test again. If they still do not match, then please contact your election organizer and report the issue. Do not submit the vote.",
               },
             },
             q6: {
@@ -478,7 +468,7 @@ export const fallbackMessages = {
               title:
                 "Why do I have to confirm my choices again after performing the test?",
               paragraphs: {
-                p1: "Your ballot was decrypted during the test to display the choices. It needs to be encrypted again, therefore you get to see the overview of your choices to ensure those are the ones you want to submit. This new encryption allows for the anonymity to not be broken.",
+                p1: "Your ballot was decrypted during the test to display the choices. It needs to be encrypted again, therefore you get to see the overview of your choices to ensure those are the ones you want to submit.",
               },
             },
             q8: {
@@ -492,22 +482,22 @@ export const fallbackMessages = {
             q1: {
               title: "How does the ballot tracking work?",
               paragraphs: {
-                p1: "The ballot tracking is very simple. It is like tracking your shipment. You just open up the ballot tracker and input the tracking code. Maybe add something about how the ballot is located?",
+                p1: "The ballot tracking is very simple. It is like tracking your shipment. You just open up the ballot tracker and input the tracking code.",
                 p2: "The tracking code is shown on the voting page after you submitted your ballot.",
               },
             },
             q2: {
               title: "I cant see my tracking code. Where can I find it?",
               paragraphs: {
-                p1: "The tracking code is shown on the voting page after you submitted your ballot. Take a picture of it or write it down somewhere, so you can go back to it whenever you want to.",
-                p2: "If you closed down the voting page and you did not stored your tracking code, there is unfortunately not a way to get to it again.",
+                p1: "The tracking code is shown on the voting page after you submitted your ballot. Take a picture of it or write it down, so you can go back to it whenever you want to.",
+                p2: "If you closed down the voting page and you did not store your tracking code, there is unfortunately no way to get to it again.",
               },
             },
             q3: {
               title: "My tracking code is not found. What do I do?",
               paragraphs: {
                 p1: "First, make sure it is typed in correctly. The code is case sensitive, so check if the characters are spelled exactly as shown.",
-                p2: "If after that, you still see an error, try to log in to the voting system and see if you already voted. If you did, contact the election organiser.",
+                p2: "If after that, you still see an error, try to log in to the voting system and see if you already voted. If you did, contact the election organizer.",
               },
             },
             q4: {
@@ -523,7 +513,7 @@ export const fallbackMessages = {
             q1: {
               title: "What is an election activity log?",
               paragraphs: {
-                p1: "As in physical voting, you have the ballot box, in the digital election you have digital ballot box that records every activity performed during the election. It does so, to ensure that the election is valid and was not compromised.",
+                p1: "As in physical voting, you have the ballot box, in the digital election you have a digital ballot box that records every activity performed during the election. It does so, to ensure that the election is valid and is not compromised.",
                 p2: "In the election activity log you can see all the activities. The log is mainly used by auditors or election scrutineers. But anybody can go in and follow what is happening. It is a public audit of the election.",
               },
             },
@@ -531,14 +521,6 @@ export const fallbackMessages = {
               title: "Who is the election log for?",
               paragraphs: {
                 p1: "For anyone, who is interesting in looking through what has happened during an election.",
-              },
-            },
-            q3: {
-              title: "How do I use the log?",
-              paragraphs: {
-                p1: "You can use it however you feel like. Maybe you just want to browse around and get to know the activities?",
-                p2: "If you are an auditor, you might want to download the log and audit the election that way.",
-                p3: "It is up to you how you use it.",
               },
             },
           },
@@ -599,7 +581,6 @@ export const fallbackMessages = {
       dbas: "Sitio de verificación",
       verification: "Testeo de Boleta",
       tracking: "Seguimiento de Boleta",
-      about: "Ayuda",
       logs: "Registro de la elección",
       help: "Preguntas Frecuentes",
       contact: "Contacto",
@@ -610,6 +591,8 @@ export const fallbackMessages = {
         de: "Auf Deutsch umstellen",
       },
       election_logo_alt: "Logo de la elección",
+      open_menu_aria_label: "Abrir menú",
+      close_menu_aria_label: "Cerrar menú",
     },
   },
 };

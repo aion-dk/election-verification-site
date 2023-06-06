@@ -119,24 +119,6 @@ const lookupBallot = async (event: Event) => {
           class="TrackingLanding__Step_Text text-contrast"
         />
       </div>
-
-      <div>
-        <p class="text-contrast TrackingLanding__Bonus">
-          <strong>{{ $t(`views.tracking.help.bonus.title`) }}</strong>
-        </p>
-        <p class="text-contrast TrackingLanding__Bonus">
-          {{ $t(`views.tracking.help.bonus.description`) }}
-        </p>
-        <p class="text-contrast TrackingLanding__Bonus">
-          {{ $t(`views.tracking.help.bonus.q1`) }}
-        </p>
-        <p class="text-contrast TrackingLanding__Bonus">
-          {{ $t(`views.tracking.help.bonus.q2`) }}
-        </p>
-        <p class="text-contrast TrackingLanding__Bonus">
-          {{ $t(`views.tracking.help.bonus.q3`) }}
-        </p>
-      </div>
     </template>
   </ContentLayout>
 </template>
@@ -225,17 +207,6 @@ const lookupBallot = async (event: Event) => {
   border-radius: 999px;
 }
 
-.TrackingLanding__Bonus strong {
-  display: block;
-  margin: 1rem 0 0.5rem 0;
-}
-
-.TrackingLanding__Bonus {
-  align-self: flex-start;
-  text-align: center;
-  margin: 0;
-}
-
 @media only screen and (min-width: 80rem) and (min-height: 45rem) {
   .TrackingLanding__Action_Container {
     width: 30rem;
@@ -264,10 +235,6 @@ const lookupBallot = async (event: Event) => {
   .TrackingLanding__Step_Index {
     width: 1.5rem;
     height: 1.5rem;
-  }
-
-  .TrackingLanding__Bonus strong {
-    margin: 0 0 0.5rem 0;
   }
 
   .TrackingLanding__TrackingCode {
@@ -299,8 +266,7 @@ const lookupBallot = async (event: Event) => {
     height: 2rem;
   }
 
-  .TrackingLanding__Step_Text,
-  .TrackingLanding__Bonus {
+  .TrackingLanding__Step_Text {
     font-size: 1.2rem;
   }
 }

@@ -82,6 +82,7 @@ defineProps({
   flex-direction: column;
   align-items: center;
   width: 100%;
+  position: relative;
 }
 
 .ContentLayout__Help {
