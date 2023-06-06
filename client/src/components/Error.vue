@@ -1,11 +1,4 @@
 <script lang="ts" setup>
-import useLocaleStore from "../stores/useLocaleStore";
-import useConfigStore from "../stores/useConfigStore";
-import { RouterLink } from "vue-router";
-
-const localeStore = useLocaleStore();
-const configStore = useConfigStore();
-
 defineProps({
   errorPath: {
     type: String,
@@ -27,14 +20,6 @@ defineProps({
     <p class="Error__Description">
       {{ $t(`errors.${errorPath}.description`) }}
     </p>
-    <RouterLink
-      v-if="errorPath === 'track.invalid_code'"
-      class="Error__Link"
-      role="link"
-      :to="`/${localeStore.locale}/${configStore.boardSlug}/verify`"
-    >
-      {{ $t("errors.go_to_verification") }}
-    </RouterLink>
   </div>
 </template>
 
@@ -59,12 +44,5 @@ defineProps({
 
 .Error__Description {
   margin: 0.5rem 0 0 0;
-}
-
-.Error__Link {
-  color: white;
-  text-decoration: underline;
-  font-weight: 600;
-  margin-top: 1rem;
 }
 </style>
