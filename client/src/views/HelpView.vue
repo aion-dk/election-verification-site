@@ -246,6 +246,33 @@ onMounted(() => {
   margin: 0;
 }
 
+.HelpView__Category_Button:last-of-type {
+  margin: 0;
+}
+
+.HelpView__Category_Icon {
+  color: var(--av-theme-background);
+  width: 2rem;
+  height: 2rem;
+  margin: 0 1rem 0 0;
+}
+
+.HelpView__Category_Label {
+  color: var(--slate-800);
+  font-size: 1.25rem;
+}
+
+.HelpView__Divider {
+  width: 100%;
+  height: 2px;
+  background-color: var(--slate-300);
+  margin: 2rem 0;
+}
+
+.HelpView__Help_Description:last-of-type {
+  margin: 0;
+}
+
 .HelpView__FAQ_Container {
   width: 100%;
 }
