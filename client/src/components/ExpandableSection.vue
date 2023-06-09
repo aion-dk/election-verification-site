@@ -13,12 +13,12 @@ const props = defineProps({
 const _expanded = ref(props.expanded);
 const _label = ref(t("components.board_item.expand"));
 
-function toggle() {
+const toggle = () => {
   _expanded.value = !_expanded.value;
   _label.value = _expanded.value
     ? t("components.board_item.collapse")
     : t("components.board_item.expand");
-}
+};
 </script>
 
 <template>
