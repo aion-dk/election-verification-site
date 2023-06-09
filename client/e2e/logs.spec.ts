@@ -3,7 +3,7 @@ import {
   latestConfig,
   boardItemsPage1,
   boardItemsPage2,
-  translations,
+  status,
 } from "./mocks";
 
 test("downloading logs", async ({ page }) => {
@@ -29,12 +29,12 @@ test("downloading logs", async ({ page }) => {
       });
     }
 
-    // Intercept Translation calls
-    if (url.indexOf("/translations") > 0) {
+    // Intercept Status calls
+    if (url.indexOf("/status") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
-        body: JSON.stringify(translations),
+        body: JSON.stringify(status),
       });
     }
 
@@ -42,7 +42,7 @@ test("downloading logs", async ({ page }) => {
   });
 
   await page.goto("/en/us3");
-  await page.getByRole("menuitem", { name: "Logs" }).click();
+  await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
   const downloadPromise = page.waitForEvent("download");
   await page
     .getByRole("link", {
@@ -84,12 +84,12 @@ test("traversing board items", async ({ page }) => {
       });
     }
 
-    // Intercept Translation calls
-    if (url.indexOf("/translations") > 0) {
+    // Intercept Status calls
+    if (url.indexOf("/status") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
-        body: JSON.stringify(translations),
+        body: JSON.stringify(status),
       });
     }
 
@@ -97,7 +97,7 @@ test("traversing board items", async ({ page }) => {
   });
 
   await page.goto("/en/us3");
-  await page.getByRole("menuitem", { name: "Logs" }).click();
+  await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
 
   // Page 1
   await page.getByText("16fSovo").click();
@@ -114,5 +114,5 @@ test("traversing board items", async ({ page }) => {
   await page.getByText("VMMHYWv").click();
 
   // Configuration only
-  await page.getByText("Configuration items only?").click();
+  await page.getByText("Configuration items only").click();
 });

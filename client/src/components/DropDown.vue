@@ -1,5 +1,4 @@
 <script lang="ts" setup>
-import { defineEmits } from "vue";
 import type { PropType } from "vue";
 import type { DropdownOption } from "@/Types";
 

@@ -1,5 +1,5 @@
 import { test } from "@playwright/test";
-import { latestConfig, translations } from "./mocks";
+import { latestConfig, status } from "./mocks";
 
 test("changing locale", async ({ page }) => {
   // Mock Network calls
@@ -15,12 +15,12 @@ test("changing locale", async ({ page }) => {
       });
     }
 
-    // Intercept Translation calls
-    if (url.indexOf("/translations") > 0) {
+    // Intercept Status calls
+    if (url.indexOf("/status") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
-        body: JSON.stringify(translations),
+        body: JSON.stringify(status),
       });
     }
 
@@ -29,7 +29,7 @@ test("changing locale", async ({ page }) => {
 
   await page.goto("/en/us3");
   await page.locator(".Header__Locales").selectOption("es");
-  await page.getByRole("menuitem", { name: "Información" }).click();
+  await page.getByRole("menuitem", { name: "Testeo de Boleta" }).click();
   await page.locator(".Header__Locales").selectOption("en");
-  await page.getByRole("menuitem", { name: "About" }).click();
+  await page.getByRole("menuitem", { name: "Ballot Tester" }).click();
 });

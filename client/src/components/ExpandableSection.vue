@@ -41,9 +41,9 @@ function toggle() {
       @click="toggle"
       :aria-label="_label"
     >
-      <font-awesome-icon v-if="_expanded" icon="fa-solid fa-minus" />
+      <AVIcon v-if="_expanded" icon="minus" />
 
-      <font-awesome-icon v-else icon="fa-solid fa-plus" />
+      <AVIcon v-else icon="plus" />
     </button>
   </div>
 </template>
@@ -51,20 +51,21 @@ function toggle() {
 <style type="text/css" scoped>
 .ExpandableSection {
   display: flex;
-  border: solid 1px #dee2e6;
+  border: solid 1px var(--slate-200);
   border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 20px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
   flex-direction: column;
   position: relative;
 }
 
 .ExpandableSection__Line {
   display: flex;
+  flex-direction: column;
 }
 
 .ExpandableSection__Expander {
-  background-color: #343a40;
+  background-color: var(--slate-600);
   border-radius: 100%;
   height: 25px;
   width: 25px;
@@ -72,10 +73,20 @@ function toggle() {
   align-items: center;
   justify-content: center;
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: 1rem;
+  right: 1rem;
   cursor: pointer;
-  color: #fff;
+  color: white;
   border: none;
+}
+
+@media only screen and (min-width: 48rem) {
+  .ExpandableSection__Line {
+    flex-direction: row;
+  }
+
+  .ExpandableSection {
+    margin-bottom: 1rem;
+  }
 }
 </style>

@@ -1,18 +1,27 @@
 <script lang="ts" setup>
+import { computed } from "vue";
 import DateTime from "../components/DateTime.vue";
 import ExpandableSection from "./ExpandableSection.vue";
 import ItemIdentifier from "./ItemIdentifier.vue";
+import BoardItemContent from "./BoardItemContent.vue";
 
-defineProps({
+const props = defineProps({
   item: {
     type: Object,
     required: true,
   },
 });
+
+const classes = computed(() => {
+  return {
+    BoardItem: true,
+    [`BoardItem--${props.item.type}`]: true,
+  };
+});
 </script>
 
 <template>
-  <div class="BoardItem">
+  <div :class="classes">
     <ExpandableSection>
       <template v-slot:collapsed>
         <span class="BoardItem__Type" aria-label="Activity">
@@ -68,9 +77,7 @@ defineProps({
           <span>{{ $t(`components.board_item.${item.type}.author`) }}</span>
         </p>
 
-        <p>
-          {{ $t(`components.board_item.${item.type}.info`) }}
-        </p>
+        <BoardItemContent :item="item" />
       </template>
     </ExpandableSection>
   </div>
