@@ -44,7 +44,7 @@ const updateQuestions = (locale: string) => {
   ).views.faq.questions.other;
 };
 
-watch(localeStore, async () => {
+watch(localeStore, () => {
   updateQuestions(localeStore.locale);
   loadTab(currentTab.value);
 });
@@ -194,7 +194,7 @@ onMounted(() => {
   display: flex;
   flex-direction: column;
   width: 100%;
-  z-index: 90;
+  z-index: 40;
 }
 
 .HelpView__Category_Button {

@@ -12,6 +12,7 @@ import { loadLocaleMessages, setLocale } from "./lib/i18n";
 import i18n from "./lib/i18n";
 import type { Locale } from "./Types";
 import { fallbackMessages } from "./assets/translations";
+import { defaultTheme } from "./assets/theme";
 
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
@@ -109,17 +110,19 @@ const setTheme = async (conferenceClient: any) => {
     if (status) configStore.setElectionStatus(status);
 
     // Setting Theme
+    const themeStylingTag: HTMLStyleElement = document.createElement("style");
     configStore.setElectionTheme(
       await conferenceClient
         .getStylingData()
         .then((theme: string) => {
-          const themeStylingTag: HTMLStyleElement =
-            document.createElement("style");
           themeStylingTag.innerHTML = theme.toString();
-          document.head.appendChild(themeStylingTag);
         })
-        .catch((err: Error) => console.error(err))
+        .catch((err: Error) => {
+          console.error(err);
+          themeStylingTag.innerHTML = defaultTheme;
+        })
     );
+    document.head.appendChild(themeStylingTag);
   }
 };
 </script>
