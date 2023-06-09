@@ -447,7 +447,7 @@ onMounted(redirectUnlessPairingCode);
   }
 
   .BallotVerifier__Contest_Options {
-    padding: 0.5rem;
+    padding: 1rem 1.5rem;
   }
 }
 </style>
