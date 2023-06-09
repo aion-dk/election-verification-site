@@ -6,8 +6,6 @@ import MissingSlugView from "../views/MissingSlugView.vue";
 import BallotVerificationLanding from "../views/BallotVerificationLanding.vue";
 import LogsView from "../views/LogsView.vue";
 import HelpView from "../views/HelpView.vue";
-import AboutView from "../views/AboutView.vue";
-import BallotVerifierFound from "@/views/BallotVerifierFound.vue";
 import BallotTrackingLanding from "../views/BallotTrackingLanding.vue";
 
 const router = createRouter({
@@ -47,11 +45,6 @@ const router = createRouter({
       component: BallotVerifierView,
     },
     {
-      name: "BallotVerifierFound",
-      path: "/:locale/:electionSlug/verify/:verificationCode/found",
-      component: BallotVerifierFound,
-    },
-    {
       name: "LogsView",
       path: "/:locale/:electionSlug/logs",
       component: LogsView,
@@ -64,11 +57,6 @@ const router = createRouter({
       name: "HelpView",
       path: "/:locale/:electionSlug/help",
       component: HelpView,
-    },
-    {
-      name: "AboutView",
-      path: "/:locale/:electionSlug/about",
-      component: AboutView,
     },
   ],
 });
