@@ -1,7 +1,7 @@
 import type {
   ContestConfig,
   LocalString,
-} from "@aion-dk/js-client/dist/lib/av_client/types";
+} from "@assemblyvoting/js-client/dist/lib/av_client/types";
 
 export type Election = any;
 

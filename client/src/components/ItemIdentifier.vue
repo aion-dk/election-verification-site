@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { hexToShortCode } from "@aion-dk/js-client/dist/lib/av_client/short_codes";
+import { hexToShortCode } from "@assemblyvoting/js-client/dist/lib/av_client/short_codes";
 import { ref, computed } from "vue";
 
 const props = defineProps({
