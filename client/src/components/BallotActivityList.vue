@@ -11,17 +11,51 @@ defineProps({
 
 <template>
   <div class="BallotActivitiesList" role="log">
-    <h3>{{ $t("components.ballot_activity_list.title") }}</h3>
-
     <ul class="BallotActivitiesList__ColumnDescriptions" aria-hidden="true">
       <li class="BallotActivitiesList__ColumnDescriptions--event">
-        {{ $t("components.ballot_activity_list.type") }}
+        <span class="BallotActivitiesList__Tooltip">
+          <tooltip hover placement="right">
+            <template #default>
+              {{ $t("components.ballot_activity_list.type") }}
+              <AVIcon
+                icon="circle-question"
+                class="BallotActivitiesList__Tooltip_Icon"
+                aria-hidden="true"
+              />
+            </template>
+
+            <template #content>
+              <span id="tracking-code-tooltip">
+                {{ $t("components.ballot_activity_list.type_tooltip") }}
+              </span>
+            </template>
+          </tooltip>
+        </span>
       </li>
       <li class="BallotActivitiesList__ColumnDescriptions--time">
-        {{ $t("components.ballot_activity_list.time") }}
+        <span class="BallotActivitiesList__Tooltip" style="cursor: default">
+          {{ $t("components.ballot_activity_list.time") }}
+        </span>
       </li>
       <li class="BallotActivitiesList__ColumnDescriptions--actor">
-        {{ $t("components.ballot_activity_list.actor") }}
+        <span class="BallotActivitiesList__Tooltip">
+          <tooltip hover placement="right">
+            <template #default>
+              {{ $t("components.ballot_activity_list.actor") }}
+              <AVIcon
+                icon="circle-question"
+                class="BallotActivitiesList__Tooltip_Icon"
+                aria-hidden="true"
+              />
+            </template>
+
+            <template #content>
+              <span id="tracking-code-tooltip">
+                {{ $t("components.ballot_activity_list.actor_tooltip") }}
+              </span>
+            </template>
+          </tooltip>
+        </span>
       </li>
     </ul>
 
@@ -34,17 +68,19 @@ defineProps({
 </template>
 
 <style type="text/css" scoped>
-.BallotActivitiesList h3 {
-  padding: 20px 16px;
-  margin: 0;
+.BallotActivitiesList {
+  width: 100%;
+}
+
+.BallotActivitiesList h4 {
+  color: var(--slate-800);
+  font-size: 1.25rem;
+  margin: 0 0 1.5rem 0;
+  text-align: center;
 }
 
 .BallotActivitiesList__ColumnDescriptions {
-  list-style: none;
-  padding: 16px;
-  margin: 0;
-  display: flex;
-  font-size: 14px;
+  display: none;
 }
 @media (max-width: 992px) {
   .BallotActivitiesList__ColumnDescriptions {
@@ -52,11 +88,28 @@ defineProps({
   }
 }
 
-.BallotActivitiesList__ColumnDescriptions--time {
-  width: 150px;
+.BallotActivitiesList__Tooltip {
+  cursor: help;
 }
 
-.BallotActivitiesList__ColumnDescriptions--event {
-  width: 205px;
+@media only screen and (min-width: 48rem) {
+  .BallotActivitiesList__ColumnDescriptions {
+    list-style: none;
+    margin: 1rem 0;
+    display: flex;
+    font-size: 0.75rem;
+    padding-inline-start: 0;
+    color: var(--slate-600);
+  }
+
+  .BallotActivitiesList__ColumnDescriptions--time,
+  .BallotActivitiesList__ColumnDescriptions--event,
+  .BallotActivitiesList__ColumnDescriptions--actor {
+    width: 30%;
+  }
+
+  .BallotActivitiesList__ColumnDescriptions--event {
+    margin-left: 1rem;
+  }
 }
 </style>

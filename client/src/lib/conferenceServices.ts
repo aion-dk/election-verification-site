@@ -41,7 +41,7 @@ export function useConferenceConnector(slug: string) {
         }
 
         return currentTranslationsData.value?.translations[locale].js
-          .ballot_verification_site;
+          .election_verification_site;
       },
     },
   };

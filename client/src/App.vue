@@ -11,13 +11,15 @@ import router from "./router";
 import { loadLocaleMessages, setLocale } from "./lib/i18n";
 import i18n from "./lib/i18n";
 import type { Locale } from "./Types";
-import defaultSplashImg from "./assets/splash.jpg";
+import { fallbackMessages } from "./assets/translations";
+import { defaultTheme } from "./assets/theme";
 
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
 const localeStore = useLocaleStore();
 const route = useRoute();
 const isLoaded = ref(false);
+const electionName = ref("");
 
 onMounted(async () => {
   const slug = route.params.electionSlug.toString();
@@ -55,12 +57,13 @@ function setTitle() {
     (s) => s
   );
   if (window.top) window.top.document.title = title.join(" - ");
+  electionName.value = configStore.election.title[localeStore.locale];
 }
 
 const setConfigurations = async (slug: string) => {
   const { conferenceClient } = useConferenceConnector(slug);
-  setLanguage(conferenceClient);
-  setTheme(conferenceClient);
+  await setLanguage(conferenceClient);
+  await setTheme(conferenceClient);
 };
 
 const setLanguage = async (conferenceClient: any) => {
@@ -84,12 +87,16 @@ const setLanguage = async (conferenceClient: any) => {
     );
 
     for (let i = 0; i < configStore.election.locales.length; i++) {
-      loadLocaleMessages(
-        configStore.election.locales[i],
-        await conferenceClient.getTranslationsData(
-          configStore.election.locales[i]
-        )
-      );
+      const locale = configStore.election.locales[i];
+      const response = await conferenceClient
+        .getTranslationsData(configStore.election.locales[i])
+        .catch((err: Error) => {
+          console.error(err);
+        });
+
+      response
+        ? loadLocaleMessages(locale, response)
+        : loadLocaleMessages(locale, (fallbackMessages as any)[locale]);
     }
   }
 };
@@ -97,95 +104,98 @@ const setLanguage = async (conferenceClient: any) => {
 const setTheme = async (conferenceClient: any) => {
   if (!configStore.electionStatus || !configStore.electionTheme) {
     // Setting Splash Image
-    configStore.setElectionStatus(await conferenceClient.getStatus());
-
-    const splashStyle = `\n
-      .election-banner {
-        position: absolute;
-        top: 70px;
-        left: 0;
-        z-index: -99;
-        min-height: 580px;
-        width: 100vw;
-        background-image: url("${
-          configStore.electionStatus?.theme?.splash
-            ? configStore.electionStatus?.theme?.splash
-            : defaultSplashImg
-        }");
-        background-repeat: no-repeat;
-        background-position: center;
-        background-size: cover;
-      } \n`;
+    const status = await conferenceClient
+      .getStatus()
+      .catch((err: Error) => console.error(err));
+    if (status) configStore.setElectionStatus(status);
 
     // Setting Theme
+    const themeStylingTag: HTMLStyleElement = document.createElement("style");
     configStore.setElectionTheme(
       await conferenceClient
         .getStylingData()
-        .then((theme: string) => (theme += splashStyle))
+        .then((theme: string) => {
+          themeStylingTag.innerHTML = theme.toString();
+        })
+        .catch((err: Error) => {
+          console.error(err);
+          themeStylingTag.innerHTML = defaultTheme;
+        })
     );
-
-    const themeStylingTag: HTMLStyleElement = document.createElement("style");
-    themeStylingTag.innerHTML = splashStyle.toString();
     document.head.appendChild(themeStylingTag);
   }
 };
 </script>
 
 <template>
+  <div v-if="!isLoaded" class="DBAS__Loading_Page">
+    <AVSpinner size="xlarge" color="neutral" />
+  </div>
   <div class="DBAS" v-if="isLoaded">
-    <!-- <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a> -->
+    <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a>
 
     <Header
       :election="configStore.election"
+      :electionName="electionName"
       :locale="localeStore.locale"
       @changeLocale="updateLocale"
     />
     <main class="DBAS__Content" id="main">
-      <RouterView class="DBAS__InnerContent" />
+      <RouterView />
     </main>
     <Footer />
   </div>
 </template>
 
 <style type="text/css">
-:root {
-  --av-padding: 2.5rem;
-  --av-margin-bottom: 2.5rem;
+* {
+  box-sizing: border-box !important;
 }
 
 body {
+  /* Neutral colors from AV design system */
+  --slate-100: #f7f7f7;
+  --slate-200: #e9ecef;
+  --slate-300: #dee2e6;
+  --slate-400: #ced4da;
+  --slate-500: #adb5bd;
+  --slate-600: #6c757d;
+  --slate-700: #495057;
+  --slate-800: #343a40;
+  --slate-900: #212529;
+
+  font-family: "Open Sans", sans-serif;
+  overflow: hidden;
   padding: 0;
   margin: 0;
 }
 
-.AVCard--default {
-  padding: var(--av-padding) !important;
+.DBAS__Loading_Page {
+  width: 100vw;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .DBAS {
-  height: 100vh;
-  height: 100dvh;
   display: flex;
   flex-direction: column;
 }
 
 .DBAS__Content {
-  flex-grow: 1;
-  overflow-y: scroll;
-}
-
-.DBAS__InnerContent {
-  width: 80vw;
-  margin: auto;
-  padding: 0;
+  height: calc(100vh - 70px);
+  margin-top: 70px;
 }
 
 .popper-content-wrapper {
-  max-width: calc(min(400px, 90vw));
-  --vue-popper-bg: #000;
-  --vue-popper-padding: 6px;
-  --vue-popper-text-color: #fff;
-  --vue-popper-border-radius: 3px;
+  max-width: 25rem;
+  --vue-popper-bg: var(--slate-800);
+  --vue-popper-padding: 1rem;
+  --vue-popper-text-color: white;
+  --vue-popper-border-radius: 0px;
+  --vue-popper-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.15);
 }
 
 .Tooltip {
@@ -194,25 +204,17 @@ body {
 
 .DBAS_SkipToContentLink {
   position: absolute;
-  margin-top: -100px;
+  margin-top: -6rem;
 }
 
 .DBAS_SkipToContentLink:focus {
-  margin-top: 100px;
+  margin-top: 6rem;
+  margin-left: 2rem;
 }
 
-@media (max-width: 992px) {
-  :root {
-    --av-padding: 1.5rem;
-    --av-margin-bottom: 1.5rem;
-  }
-
-  .DBAS__InnerContent {
-    width: 90vw;
-  }
-
-  .AVCard {
-    padding: var(--av-padding) !important;
+@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+  .DBAS__Loading_Page {
+    height: 100vh;
   }
 }
 </style>

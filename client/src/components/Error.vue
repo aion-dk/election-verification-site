@@ -9,10 +9,14 @@ defineProps({
 
 <template>
   <div class="Error">
-    <h2 class="Error__Title">
-      <font-awesome-icon icon="fa-solid fa-triangle-exclamation" />
+    <span class="Error__Title">
+      <AVIcon
+        icon="triangle-exclamation"
+        class="Error__Icon_Overrides"
+        aria-hidden="true"
+      />
       <span>{{ $t(`errors.${errorPath}.title`) }}</span>
-    </h2>
+    </span>
     <p class="Error__Description">
       {{ $t(`errors.${errorPath}.description`) }}
     </p>
@@ -21,22 +25,24 @@ defineProps({
 
 <style type="text/css" scoped>
 .Error {
-  background-color: #fcede9;
-  border: none;
-  border-left: solid 6px #ea4e2c;
-  padding: 17px 36px;
-  margin-bottom: 40px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  background-color: var(--av-theme-danger-background);
+  color: white;
+  padding: 1.5rem 2rem;
+  margin-bottom: 2rem;
+  text-align: left;
+  z-index: 40;
 }
 
 .Error__Title {
-  font-weight: 700;
-  font-size: 18px;
-  color: #495057;
+  font-weight: 600;
+  color: white;
 }
 
-svg {
-  margin-right: 5px;
-  margin-left: 5px;
+.Error__Icon_Overrides {
+  margin-right: 0.5rem;
+}
+
+.Error__Description {
+  margin: 0.5rem 0 0 0;
 }
 </style>

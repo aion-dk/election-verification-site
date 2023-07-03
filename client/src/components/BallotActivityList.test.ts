@@ -8,7 +8,6 @@ const i18n = createI18n({
     en: {
       components: {
         ballot_activity_list: {
-          title: "Fun activities",
           type: "Item type",
           time: "Item time",
           actor: "Item actor",
@@ -32,7 +31,6 @@ test("that BallotActivityList mounts", async () => {
       activities: [],
     },
   });
-  expect(wrapper.text()).toContain("Fun activities");
   expect(wrapper.text()).toContain("Item type");
   expect(wrapper.text()).toContain("Item time");
   expect(wrapper.text()).toContain("Item actor");

@@ -1,26 +1,37 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
 import useLocaleStore from "../stores/useLocaleStore";
-import CompactHeader from "../components/CompactHeader.vue";
-import Infobox from "../components/Infobox.vue";
 import router from "../router";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import useVerificationStore from "../stores/useVerificationStore";
 import Timedown from "@/components/Timedown.vue";
+import ContentLayout from "../components/ContentLayout.vue";
+import MainIcon from "../components/MainIcon.vue";
 
 const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
 const route = useRoute();
+const showAlert = ref<boolean>(false);
+const showModal = ref<boolean>(false);
 
-function cancel() {
-  router.push(`/${route.params.locale}/${route.params.electionSlug}`);
-}
-
-function redirectUnlessPairingCode() {
+const redirectUnlessPairingCode = () => {
   if (!verificationStore.pairingCode) cancel();
-}
+};
+
+const setModal = () => {
+  showModal.value = true;
+};
+const setAlert = () => {
+  showAlert.value = true;
+};
+const restart = () => {
+  router.push({ name: "Welcome" });
+};
+const cancel = () => {
+  router.push(`/${route.params.locale}/${route.params.electionSlug}`);
+};
 
 const parsedOption = (
   selection: any,
@@ -55,131 +66,464 @@ onMounted(redirectUnlessPairingCode);
 
 <template>
   <div class="BallotVerifier">
-    <CompactHeader
-      :election="configStore.election"
-      :locale="localeStore.locale"
-    />
-
     <Timedown
       v-if="!verificationStore.ballot"
       :maxSeconds="configStore.election.bcTimeout"
       :currentSeconds="configStore.election.bcTimeout"
-      style="margin-bottom: 20px"
-      @timeout="
-        () => {
-          router.push({ name: 'Welcome' });
-        }
-      "
+      @alert="setAlert"
+      @timeout="setModal"
     />
-
-    <div v-if="verificationStore.ballot" class="BallotVerifier__Spoiled">
-      <Infobox class="BallotVerifier__Infobox" id="infobox">
-        <h2>{{ $t("views.verifier.spoiled.title") }}</h2>
-        <p>{{ $t("views.verifier.spoiled.description") }}</p>
-      </Infobox>
-      <Infobox class="BallotVerifier__DecryptedVoteBox" id="decrypted_box">
-        <div
-          v-for="contest in verificationStore.ballot"
-          :key="contest.reference"
-          class="BallotVerifier__Contest"
-        >
-          <h3>
-            {{ configStore.getContest(contest.reference).title[$i18n.locale] }}
+    <ContentLayout
+      :breadcrumb="$t('views.verification.title')"
+      :help-title="$t('views.verifier.inprogress.help.title')"
+      :help-title-strong="$t('views.verifier.inprogress.help.title_strong')"
+      :logo="configStore.electionStatus?.theme?.logo"
+    >
+      <template v-slot:action>
+        <div v-if="verificationStore.ballot" class="BallotVerifier__Content">
+          <MainIcon icon="spell-check" />
+          <h3 class="BallotVerifier__Title_Secondary">
+            {{ $t("views.verifier.spoiled.title") }}
           </h3>
+          <p class="BallotVerifier__Title">
+            {{ $t("views.verifier.spoiled.description") }}
+          </p>
+          <p class="BallotVerifier__Description">
+            {{ $t("views.verifier.spoiled.info") }}
+          </p>
+
           <div
-            v-for="(pile, pIndex) in contest.piles"
-            class="BallotVerifier__Pile"
-            :key="pIndex"
+            v-for="(contest, index) in verificationStore.ballot"
+            :key="contest.reference"
+            class="BallotVerifier__Contest"
           >
-            <div class="BallotVerifier__PileMultiplier">
-              x {{ pile.multiplier }}
+            <h3 class="BallotVerifier__Contest_Title">
+              {{ index + 1 }}.
+              {{
+                configStore.getContest(contest.reference).title[$i18n.locale]
+              }}
+            </h3>
+            <p v-if="configStore.getContest(contest.reference).question">
+              {{
+                configStore.getContest(contest.reference).question[$i18n.locale]
+              }}
+            </p>
+            <div
+              v-for="(pile, pIndex) in contest.piles"
+              class="BallotVerifier___Contest_Pile"
+              :key="pIndex"
+            >
+              <div
+                v-if="pile.multiplier > 1"
+                class="BallotVerifier__Contest_Header"
+              >
+                <span
+                  ><strong
+                    >{{ $t("views.verifier.spoiled.ballot_selection") }}
+                    {{ pIndex + 1 }}</strong
+                  ></span
+                >
+                <span
+                  >{{ $t("views.verifier.spoiled.assigned") }}
+                  {{ pile.multiplier }}</span
+                >
+              </div>
+              <div class="BallotVerifier__Contest_Options">
+                <p v-if="pile.optionSelections.length === 0">
+                  {{ $t("views.verifier.blank_pile") }}
+                </p>
+                <p
+                  v-else
+                  v-for="(selection, oIndex) in pile.optionSelections"
+                  :key="`pile-${pIndex}-option-${oIndex}`"
+                >
+                  <span
+                    v-if="parsedOption(selection, contest, pile, oIndex).rank"
+                    >{{ parsedOption(selection, contest, pile, oIndex).rank }}:
+                  </span>
+                  {{ parsedOption(selection, contest, pile, oIndex).title }}
+                </p>
+              </div>
             </div>
-            <AVOption
-              v-if="pile.optionSelections.length === 0"
-              :key="`pile-${pIndex}-option-blank`"
-              :option="{
-                title: $t('views.verifier.blank_pile'),
-              }"
-              disabled
-              checked
-              displayMode
-            />
-            <AVOption
-              v-else
-              v-for="(selection, oIndex) in pile.optionSelections"
-              :key="`pile-${pIndex}-option-${oIndex}`"
-              :option="parsedOption(selection, contest, pile, oIndex)"
-              disabled
-              checked
-              displayMode
-            />
           </div>
+
+          <AVButton
+            :label="$t('views.verifier.spoiled.finish')"
+            type="neutral"
+            name="finish-session"
+            id="finish-session"
+            fullWidth
+            class="BallotVerifier__Button_Overrides"
+            @click="restart"
+          />
         </div>
-      </Infobox>
-    </div>
 
-    <div v-else class="BallotVerifier__InProgress">
-      <h1 class="BallotVerifier__Title">
-        {{ $t("views.verifier.inprogress.title") }}
-      </h1>
+        <div v-else class="BallotVerifier__Content">
+          <MainIcon icon="asterisk" />
+          <h3 class="BallotVerifier__Title BallotVerifier__Title_Passkey">
+            {{ $t("views.verifier.inprogress.title") }}
+          </h3>
 
-      <p class="BallotVerifier__Info">
-        {{ $t("views.verifier.inprogress.info") }}
-      </p>
+          <div v-if="showAlert" class="BallotVerifier__Alert" role="alert">
+            <AVIcon
+              icon="triangle-exclamation"
+              class="BallotVerifier__Alert_Icon"
+              aria-hidden="true"
+            />
+            <div>
+              <span class="BallotVerifier__Alert_Title">{{
+                $t("components.timedown.alert.title")
+              }}</span>
+              <span class="BallotVerifier__Alert_Text">{{
+                $t("components.timedown.alert.text")
+              }}</span>
+            </div>
+          </div>
 
-      <code class="BallotVerifier__Code">{{
-        verificationStore.pairingCode
-      }}</code>
-    </div>
+          <p class="BallotVerifier__Description">
+            {{ $t("views.verifier.inprogress.description") }}
+          </p>
+          <code class="BallotVerifier__Code">{{
+            verificationStore.pairingCode
+          }}</code>
+          <p class="BallotVerifier__Secondary_Description">
+            {{ $t("views.verifier.inprogress.secondary_description") }}
+          </p>
+        </div>
+      </template>
+      <template v-slot:help>
+        <div v-if="verificationStore.ballot">
+          <AVIcon
+            icon="rectangle-list"
+            class="BallotVerifier__Help_Icon text-contrast"
+            aria-hidden="true"
+          />
+          <h3 class="BallotVerifier__Help_Title text-contrast">
+            {{ $t("views.verifier.inprogress.help.p1.title") }}
+          </h3>
+          <p class="BallotVerifier__Help_Description text-contrast">
+            {{ $t("views.verifier.inprogress.help.p1.description") }}
+          </p>
+        </div>
+
+        <div v-else>
+          <AVIcon
+            icon="rectangle-list"
+            class="BallotVerifier__Help_Icon text-contrast"
+            aria-hidden="true"
+          />
+          <h3 class="BallotVerifier__Help_Title text-contrast">
+            {{ $t("views.verifier.inprogress.help.p1.title") }}
+          </h3>
+          <p class="BallotVerifier__Help_Description text-contrast">
+            {{ $t("views.verifier.inprogress.help.p1.description") }}
+          </p>
+        </div>
+      </template>
+    </ContentLayout>
+
+    <AVModal
+      v-if="showModal"
+      :aria-labelled-by="$t('views.verifier.inprogress.modal.labelled_by')"
+      modal-active
+      class="Modal__Overrides"
+    >
+      <div class="Modal__Inner">
+        <AVIcon icon="clock-rotate-left" class="Modal__Icon" />
+        <h6 class="Modal__Title">
+          {{ $t("views.verifier.inprogress.modal.title") }}
+        </h6>
+        <p class="Modal__Text">
+          {{ $t("views.verifier.inprogress.modal.description") }}
+        </p>
+        <AVButton
+          :label="$t('views.verifier.inprogress.modal.button')"
+          type="neutral"
+          name="restart-process"
+          id="restart-process"
+          fullWidth
+          @click="restart"
+          class="Modal__Button_Overrides"
+        />
+      </div>
+    </AVModal>
   </div>
 </template>
 
 <style type="text/css" scoped>
 .BallotVerifier {
-  font-family: "Open Sans";
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.BallotVerifier__Content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
 }
 
 .BallotVerifier__Title {
-  font-size: 26px;
   text-align: center;
+  color: var(--slate-800);
+  margin: 0.5rem 0 1.5rem 0;
+  font-weight: 800;
+  text-align: center;
+  font-size: 2.5rem;
 }
 
-.BallotVerifier__Info {
+.BallotVerifier__Title_Passkey {
+  font-weight: 600 !important;
+}
+
+.BallotVerifier__Title_Secondary {
+  display: none;
+}
+
+.BallotVerifier__Description {
+  margin: 0 0 1rem 0;
   text-align: center;
+  color: var(--slate-700);
+}
+
+.BallotVerifier__Secondary_Description {
+  margin: 2rem 0 1rem 0;
+  text-align: center;
+  color: var(--slate-700);
 }
 
 .BallotVerifier__Code {
-  font-size: 40px;
-  font-family: "Red Hat Mono";
+  font-size: 2.25rem;
+  color: var(--slate-900);
+  font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas",
+    "Liberation Mono", "Courier New", monospace;
   text-align: center;
   display: block;
-  letter-spacing: 5px;
+  letter-spacing: 0.5rem;
+  margin: 1rem 0 0 0;
 }
 
-.BallotVerifier__Infobox,
-.BallotVerifier__DecryptedVoteBox {
-  margin-bottom: 20px;
+.BallotVerifier__Help_Icon {
+  width: 2rem;
+  height: 2rem;
+}
+
+.BallotVerifier__Help_Title {
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+.BallotVerifier__Help_Description {
+  margin: 0;
+}
+
+.BallotVerifier__Alert {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px black solid;
+  padding: 1rem;
+  margin: 0 0 1rem 0;
+  background-color: white;
+  z-index: 10;
+}
+
+.BallotVerifier__Alert_Icon {
+  margin: 0 0 1rem 0;
+}
+
+.BallotVerifier__Alert_Title {
+  font-weight: 600;
+  margin: 0 0 0.5rem 0;
+  display: block;
+  text-align: center;
+}
+
+.BallotVerifier__Alert_Text {
+  display: block;
+  text-align: center;
+}
+
+.Modal__Overrides {
+  padding: 0 1rem !important;
+}
+
+.Modal__Inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.Modal__Icon {
+  color: var(--slate-800);
+  height: 3rem;
+  width: 3rem;
+}
+
+.Modal__Title {
+  font-size: 1.625rem;
+  color: var(--slate-700);
+  margin: 1rem 0;
+  font-weight: 600;
+  text-align: center;
+}
+
+.Modal__Text {
+  color: var(--slate-700);
+  margin: 1rem 0 2rem 0;
+  text-align: center;
+}
+
+.Modal__Button_Overrides {
+  border-color: var(--av-theme-background) !important;
+  background-color: var(--av-theme-background) !important;
 }
 
 .BallotVerifier__Contest {
-  margin-bottom: 40px;
+  width: 100%;
+  z-index: 10;
 }
 
-.BallotVerifier__Pile {
-  margin-bottom: 20px;
+.BallotVerifier__Contest_Title {
+  font-size: 1.375rem;
+  font-weight: 600;
+  color: var(--slate-800);
+  margin-bottom: 1rem;
 }
 
-.BallotVerifier__Option {
-  border: 1px solid #cccccc;
-  padding: 20px;
+.BallotVerifier__Contest_Title + p {
+  margin-bottom: 1rem;
+  font-weight: 600;
 }
 
-.BallotVerifier__PileMultiplier {
-  text-align: right;
-  font-size: 20px;
-  font-weight: bold;
-  background: black;
-  color: white;
-  padding: 1px 20px;
+.BallotVerifier___Contest_Pile {
+  border: solid 1px var(--slate-200);
+  background-color: white;
+  margin: 0 0 1rem 0;
+}
+
+.BallotVerifier___Contest_Pile:last-of-type {
+  margin: 0;
+}
+
+.BallotVerifier__Contest_Header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  margin: 0;
+  background-color: var(--slate-200);
+}
+
+.BallotVerifier__Contest_Options {
+  padding: 0.5rem;
+}
+
+.BallotVerifier__Contest_Options > p {
+  margin: 0;
+}
+
+.BallotVerifier__Button_Overrides {
+  margin: 2rem 0 0 0 !important;
+  background-color: var(--av-theme-background) !important;
+  border-color: var(--av-theme-background) !important;
+  color: var(--av-theme-text) !important;
+}
+
+@media only screen and (min-width: 48rem) {
+  .BallotVerifier__Title_Secondary {
+    display: flex;
+    color: var(--slate-700);
+    font-size: 1.75rem;
+    font-weight: 600;
+    margin: 0 0 1rem 0;
+    text-align: center;
+  }
+
+  .BallotVerifier__Alert {
+    flex-direction: row;
+  }
+
+  .BallotVerifier__Alert_Icon {
+    margin: 0 1rem 0 0;
+  }
+
+  .BallotVerifier__Alert_Title {
+    text-align: left;
+  }
+
+  .BallotVerifier__Alert_Text {
+    text-align: left;
+  }
+
+  .Modal__Inner {
+    width: 28rem;
+  }
+
+  .BallotVerifier__Button_Overrides {
+    max-width: fit-content;
+    margin-top: 3rem !important;
+  }
+}
+
+@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+  .BallotVerifier__Title {
+    font-size: 3.5rem;
+    margin: 0 0 1rem 0;
+    width: 100%;
+    text-align: left;
+    font-weight: 800;
+  }
+
+  .BallotVerifier__Title_Secondary {
+    text-align: left;
+    align-self: flex-start;
+  }
+
+  .BallotVerifier__Description {
+    text-align: left;
+    width: 100%;
+  }
+
+  .BallotVerifier__Secondary_Description {
+    text-align: left;
+    width: 100%;
+  }
+
+  .BallotVerifier__Code {
+    text-align: left;
+    width: 100%;
+    font-size: 4rem;
+    margin: 3rem 0;
+  }
+
+  .BallotVerifier__Alert {
+    margin: 1rem 0 3rem 0;
+  }
+
+  .BallotVerifier__Contest_Options {
+    padding: 1rem 1.5rem;
+  }
+
+  .BallotVerifier__Help_Description {
+    font-size: 1.2rem;
+  }
+
+  .BallotVerifier__Button_Overrides {
+    max-width: fit-content;
+    align-self: flex-start;
+    margin-top: 3rem !important;
+    font-size: 1.125rem !important;
+    padding: 0.75rem 2.75rem !important;
+    border-radius: 14px !important;
+  }
+
+  .BallotVerifier__Help_Icon {
+    width: 4rem;
+    height: 4rem;
+  }
 }
 </style>
