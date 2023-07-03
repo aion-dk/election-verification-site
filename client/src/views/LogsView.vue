@@ -57,7 +57,7 @@ const loadPage = (page: number) => {
   if (configStore.boardSlug) {
     boardStore.loadPage(configStore.boardSlug, page, filter());
   }
-}
+};
 
 const navigate = (page: number) => {
   router.push(
