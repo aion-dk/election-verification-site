@@ -103,14 +103,14 @@ function classes(name: string) {
         <ul id="logs-submenu">
           <li>
             <RouterLink
-              :to="{ name: 'LogsView', params: { type: 'config', page: 1 } }"
-              >{{ $t("header.logs.config") }}</RouterLink
+              :to="{ name: 'LogsView', params: { type: 'activity', page: 1 } }"
+              >{{ $t("header.logs.activity") }}</RouterLink
             >
           </li>
           <li>
             <RouterLink
-              :to="{ name: 'LogsView', params: { type: 'activity', page: 1 } }"
-              >{{ $t("header.logs.activity") }}</RouterLink
+              :to="{ name: 'LogsView', params: { type: 'config', page: 1 } }"
+              >{{ $t("header.logs.config") }}</RouterLink
             >
           </li>
         </ul>
