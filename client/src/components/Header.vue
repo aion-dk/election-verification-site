@@ -274,7 +274,7 @@ onMounted(() => {
   .Header__Logo {
     height: 3rem;
     max-width: 12rem;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
   }
 
@@ -305,7 +305,7 @@ onMounted(() => {
 
   .Header__Logo {
     height: 3rem;
-    object-fit: cover;
+    object-fit: contain;
     display: block;
   }
 
