@@ -1,6 +1,7 @@
 import type {
   ContestConfig,
   LocalString,
+  OptionContent,
 } from "@aion-dk/js-client/dist/lib/av_client/types";
 
 export type Election = any;
@@ -76,3 +77,13 @@ export interface Theme {
 }
 
 export type Locale = "en" | "da";
+
+export interface FullOptionContent extends OptionContent {
+  url?: LocalString;
+  videoUrl?: LocalString;
+  image?: string;
+  selectable?: boolean;
+  exclusive?: boolean;
+  voteLimit?: number;
+  children?: FullOptionContent[];
+}

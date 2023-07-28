@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 import { api } from "../lib/api";
-import type { Election, ElectionStatus } from "../Types";
+import type { Election, ElectionStatus, FullOptionContent } from "../Types";
 import type {
   ContestContent,
   LatestConfigItems,
@@ -15,6 +15,7 @@ export default defineStore("useConfigStore", () => {
   const bcTimeout = computed(() => election.value?.content?.bcTimeout);
   const electionStatus = ref<ElectionStatus | null>(null);
   const electionTheme = ref<string>(null);
+  const selectableOptions = ref<FullOptionContent[]>([]);
 
   const setSlug = (newSlug: string) => {
     boardSlug.value = newSlug;
@@ -32,13 +33,24 @@ export default defineStore("useConfigStore", () => {
     return latestConfig.value.contestConfigs[contestReference].content;
   };
 
+  const childOptionLookUp = (option: FullOptionContent) => {
+    if (option.selectable) selectableOptions.value.push(option);
+    if (option.children)
+      option.children.map((children) => childOptionLookUp(children));
+  };
+
   const getContestOption = (
     contestReference: string,
     optionReference: string
   ): OptionContent => {
-    return latestConfig.value.contestConfigs[
-      contestReference
-    ].content.options.find((o) => o.reference === optionReference);
+    latestConfig.value.contestConfigs[contestReference].content.options.map(
+      (o) => childOptionLookUp(o)
+    );
+    const result = selectableOptions.value.find(
+      (o) => o.reference === optionReference
+    );
+    selectableOptions.value = [];
+    return result;
   };
 
   const loadConfig = async (slug: string) => {
