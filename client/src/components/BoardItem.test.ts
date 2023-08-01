@@ -5,7 +5,7 @@ import { createI18n } from "vue-i18n";
 import { translations } from "../../e2e/mocks";
 
 const neededStrings = JSON.stringify(
-  translations.translations.en.js.ballot_verification_site
+  translations.translations.en.js.election_verification_site
 );
 const messages = { en: JSON.parse(neededStrings) };
 

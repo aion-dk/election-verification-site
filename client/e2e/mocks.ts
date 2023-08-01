@@ -99,7 +99,7 @@ export const translations = {
   translations: {
     en: {
       js: {
-        ballot_verification_site: {
+        election_verification_site: {
           locales: {
             en: "English",
             de: "Deutsch",
@@ -374,7 +374,7 @@ export const translations = {
     },
     es: {
       js: {
-        ballot_verification_site: {
+        election_verification_site: {
           locales: {
             en: "English",
             de: "Deutsch",
