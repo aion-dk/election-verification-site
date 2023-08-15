@@ -1,12 +1,8 @@
-import { defineStore } from "pinia";
-import { ref, computed } from "vue";
-import { api } from "../lib/api";
-import type { Election, ElectionStatus, FullOptionContent } from "../Types";
-import type {
-  ContestContent,
-  LatestConfigItems,
-  OptionContent,
-} from "@aion-dk/js-client/dist/lib/av_client/types";
+import {defineStore} from "pinia";
+import {computed, ref} from "vue";
+import {api} from "@/lib/api";
+import type {Election, ElectionStatus, FullOptionContent} from "@/Types";
+import type {ContestContent, LatestConfigItems, OptionContent,} from "@aion-dk/js-client/dist/lib/av_client/types";
 
 export default defineStore("useConfigStore", () => {
   const boardSlug = ref<string>(null);
@@ -15,7 +11,6 @@ export default defineStore("useConfigStore", () => {
   const bcTimeout = computed(() => election.value?.content?.bcTimeout);
   const electionStatus = ref<ElectionStatus | null>(null);
   const electionTheme = ref<string>(null);
-  const selectableOptions = ref<FullOptionContent[]>([]);
 
   const setSlug = (newSlug: string) => {
     boardSlug.value = newSlug;
@@ -33,24 +28,26 @@ export default defineStore("useConfigStore", () => {
     return latestConfig.value.contestConfigs[contestReference].content;
   };
 
-  const childOptionLookUp = (option: FullOptionContent) => {
-    if (option.selectable) selectableOptions.value.push(option);
+  const flattenChildren = (option: FullOptionContent, maxDepth=100) => {
+    if(maxDepth <= 0) throw new Error("MAX RECURSION DEPTH FOR flattenChildren REACHED");
+
+    const result = [option]
     if (option.children)
-      option.children.map((children) => childOptionLookUp(children));
+      result.push(...option.children.flatMap((children) => flattenChildren(children, maxDepth-1)));
+
+    return result;
   };
 
   const getContestOption = (
     contestReference: string,
     optionReference: string
   ): OptionContent => {
-    latestConfig.value.contestConfigs[contestReference].content.options.map(
-      (o) => childOptionLookUp(o)
-    );
-    const result = selectableOptions.value.find(
-      (o) => o.reference === optionReference
-    );
-    selectableOptions.value = [];
-    return result;
+    return latestConfig.value
+      .contestConfigs[contestReference]
+      .content
+      .options
+      .flatMap(option => flattenChildren(option))
+      .find(option => option.reference === optionReference);
   };
 
   const loadConfig = async (slug: string) => {
