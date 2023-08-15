@@ -2,12 +2,13 @@
 import useConfigStore from "../stores/useConfigStore";
 import useLocaleStore from "../stores/useLocaleStore";
 import router from "../router";
-import { onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
+import {onMounted, ref} from "vue";
+import {useRoute} from "vue-router";
 import useVerificationStore from "../stores/useVerificationStore";
 import Timedown from "@/components/Timedown.vue";
-import ContentLayout from "../components/ContentLayout.vue";
-import MainIcon from "../components/MainIcon.vue";
+import ContentLayout from "@/components/ContentLayout.vue";
+import MainIcon from "@/components/MainIcon.vue";
+import BallotVerifierContest from "@/components/BallotVerifierContest.vue";
 
 const localeStore = useLocaleStore();
 const configStore = useConfigStore();
@@ -31,34 +32,6 @@ const restart = () => {
 };
 const cancel = () => {
   router.push(`/${route.params.locale}/${route.params.electionSlug}`);
-};
-
-const parsedOption = (
-  selection: any,
-  contest: any,
-  pile: any,
-  index: number
-) => {
-  const isRanked =
-    configStore.getContest(contest.reference).markingType.voteVariation ===
-    "ranked";
-  const optionImage =
-    (
-      configStore.getContestOption(
-        contest.reference,
-        selection.reference
-      ) as any
-    ).image || null;
-
-  const option: any = {
-    title: configStore.getContestOption(contest.reference, selection.reference)
-      .title[localeStore.locale],
-  };
-
-  if (isRanked) option.rank = index + 1;
-  if (optionImage) option.image = optionImage;
-
-  return option;
 };
 
 onMounted(redirectUnlessPairingCode);
@@ -92,60 +65,12 @@ onMounted(redirectUnlessPairingCode);
             {{ $t("views.verifier.spoiled.info") }}
           </p>
 
-          <div
-            v-for="(contest, index) in verificationStore.ballot"
-            :key="contest.reference"
-            class="BallotVerifier__Contest"
-          >
-            <h3 class="BallotVerifier__Contest_Title">
-              {{ index + 1 }}.
-              {{
-                configStore.getContest(contest.reference).title[$i18n.locale]
-              }}
-            </h3>
-            <p v-if="configStore.getContest(contest.reference).question">
-              {{
-                configStore.getContest(contest.reference).question[$i18n.locale]
-              }}
-            </p>
-            <div
-              v-for="(pile, pIndex) in contest.piles"
-              class="BallotVerifier___Contest_Pile"
-              :key="pIndex"
-            >
-              <div
-                v-if="pile.multiplier > 1"
-                class="BallotVerifier__Contest_Header"
-              >
-                <span
-                  ><strong
-                    >{{ $t("views.verifier.spoiled.ballot_selection") }}
-                    {{ pIndex + 1 }}</strong
-                  ></span
-                >
-                <span
-                  >{{ $t("views.verifier.spoiled.assigned") }}
-                  {{ pile.multiplier }}</span
-                >
-              </div>
-              <div class="BallotVerifier__Contest_Options">
-                <p v-if="pile.optionSelections.length === 0">
-                  {{ $t("views.verifier.blank_pile") }}
-                </p>
-                <p
-                  v-else
-                  v-for="(selection, oIndex) in pile.optionSelections"
-                  :key="`pile-${pIndex}-option-${oIndex}`"
-                >
-                  <span
-                    v-if="parsedOption(selection, contest, pile, oIndex).rank"
-                    >{{ parsedOption(selection, contest, pile, oIndex).rank }}:
-                  </span>
-                  {{ parsedOption(selection, contest, pile, oIndex).title }}
-                </p>
-              </div>
-            </div>
-          </div>
+          <BallotVerifierContest
+              v-for="(contestSelection, index) in verificationStore.ballot"
+              :key="contestSelection.reference"
+              :contest-selection="contestSelection"
+              :index="index"
+          />
 
           <AVButton
             :label="$t('views.verifier.spoiled.finish')"
@@ -250,7 +175,7 @@ onMounted(redirectUnlessPairingCode);
   </div>
 </template>
 
-<style type="text/css" scoped>
+<style lang="css" scoped>
 .BallotVerifier {
   width: 100%;
   height: 100%;
@@ -258,10 +183,10 @@ onMounted(redirectUnlessPairingCode);
 }
 
 .BallotVerifier__Content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
+  background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 576 512'%3e%3cpath fill='%23244FA50F' d='M112 0C99.1 0 87.4 7.8 82.5 19.7l-66.7 160-13.3 32c-6.8 16.3 .9 35 17.2 41.8s35-.9 41.8-17.2L66.7 224h90.7l5.1 12.3c6.8 16.3 25.5 24 41.8 17.2s24-25.5 17.2-41.8l-13.3-32-66.7-160C136.6 7.8 124.9 0 112 0zm18.7 160H93.3L112 115.2 130.7 160zM256 32v96 96c0 17.7 14.3 32 32 32h80c44.2 0 80-35.8 80-80c0-23.1-9.8-43.8-25.4-58.4c6-11.2 9.4-24 9.4-37.6c0-44.2-35.8-80-80-80H288c-17.7 0-32 14.3-32 32zm96 64H320V64h32c8.8 0 16 7.2 16 16s-7.2 16-16 16zm-32 64h32 16c8.8 0 16 7.2 16 16s-7.2 16-16 16H320V160zM566.6 310.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L352 434.7l-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l96 96c12.5 12.5 32.8 12.5 45.3 0l192-192z'%3e%3c/path%3e%3c/svg%3e");
+  background-position: right -2rem top 3rem;
+  background-repeat: no-repeat;
+  background-size: 22.5rem;
 }
 
 .BallotVerifier__Title {
@@ -382,44 +307,9 @@ onMounted(redirectUnlessPairingCode);
   background-color: var(--av-theme-background) !important;
 }
 
-.BallotVerifier__Contest {
-  width: 100%;
-  z-index: 10;
-}
-
-.BallotVerifier__Contest_Title {
-  font-size: 1.375rem;
-  font-weight: 600;
-  color: var(--slate-800);
-  margin-bottom: 1rem;
-}
-
 .BallotVerifier__Contest_Title + p {
   margin-bottom: 1rem;
   font-weight: 600;
-}
-
-.BallotVerifier___Contest_Pile {
-  border: solid 1px var(--slate-200);
-  background-color: white;
-  margin: 0 0 1rem 0;
-}
-
-.BallotVerifier___Contest_Pile:last-of-type {
-  margin: 0;
-}
-
-.BallotVerifier__Contest_Header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem;
-  margin: 0;
-  background-color: var(--slate-200);
-}
-
-.BallotVerifier__Contest_Options {
-  padding: 0.5rem;
 }
 
 .BallotVerifier__Contest_Options > p {
@@ -502,10 +392,6 @@ onMounted(redirectUnlessPairingCode);
 
   .BallotVerifier__Alert {
     margin: 1rem 0 3rem 0;
-  }
-
-  .BallotVerifier__Contest_Options {
-    padding: 1rem 1.5rem;
   }
 
   .BallotVerifier__Help_Description {
