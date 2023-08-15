@@ -114,6 +114,7 @@ export default {
 }
 
 .BallotVerifierContest__Pile {
+  margin-bottom: 1rem;
 }
 
 .BallotVerifierContest__Header {
@@ -130,6 +131,10 @@ export default {
   grid-auto-flow: row;
   grid-auto-rows: 1fr;
   gap: 1rem;
+  &:not(:first-child) {
+    border: 1px solid var(--slate-200);
+    padding: 1rem;
+  }
 }
 
 .BallotVerifierContest__Option {
