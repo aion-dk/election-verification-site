@@ -12,19 +12,14 @@
         :key="pIndex"
     >
       <div
-          v-if="pile.multiplier > 1"
+          v-if="contestSelection.piles.length > 1"
           class="BallotVerifierContest__Header"
       >
-                <span
-                ><strong
-                >{{ $t("views.verifier.spoiled.ballot_selection") }}
-                    {{ pIndex + 1 }}</strong
-                ></span
-                >
-        <span
-        >{{ $t("views.verifier.spoiled.assigned") }}
-                  {{ pile.multiplier }}</span
-        >
+        <strong>
+          <span v-t="'views.verifier.spoiled.ballot_selection'"/>
+          <span v-text="`${pIndex + 1}/${contestSelection.piles.length}`"/>
+        </strong>
+        <span v-text="`${$t('views.verifier.spoiled.assigned')} ${pile.multiplier}`"/>
       </div>
       <div class="BallotVerifierContest__Options">
         <p v-if="pile.optionSelections.length === 0">
