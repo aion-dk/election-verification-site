@@ -3,11 +3,11 @@ import useConfigStore from "../stores/useConfigStore";
 import router from "../router";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-import i18n from "../lib/i18n";
 import useVerificationStore from "../stores/useVerificationStore";
 import Timedown from "@/components/Timedown.vue";
-import ContentLayout from "../components/ContentLayout.vue";
-import MainIcon from "../components/MainIcon.vue";
+import ContentLayout from "@/components/ContentLayout.vue";
+import MainIcon from "@/components/MainIcon.vue";
+import BallotVerifierContest from "@/components/BallotVerifierContest.vue";
 
 const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
@@ -30,34 +30,6 @@ const restart = () => {
 };
 const cancel = () => {
   router.push(`/${route.params.locale}/${route.params.electionSlug}`);
-};
-
-const parsedOption = (
-  selection: any,
-  contest: any,
-  pile: any,
-  index: number
-) => {
-  const isRanked =
-    configStore.getContest(contest.reference).markingType.voteVariation ===
-    "ranked";
-  const optionImage =
-    (
-      configStore.getContestOption(
-        contest.reference,
-        selection.reference
-      ) as any
-    ).image || null;
-
-  const option: any = {
-    title: configStore.getContestOption(contest.reference, selection.reference)
-      .title[i18n.global.locale],
-  };
-
-  if (isRanked) option.rank = index + 1;
-  if (optionImage) option.image = optionImage;
-
-  return option;
 };
 
 onMounted(redirectUnlessPairingCode);
@@ -91,60 +63,12 @@ onMounted(redirectUnlessPairingCode);
             {{ $t("views.verifier.spoiled.info") }}
           </p>
 
-          <div
-            v-for="(contest, index) in verificationStore.ballot"
-            :key="contest.reference"
-            class="BallotVerifier__Contest"
-          >
-            <h3 class="BallotVerifier__Contest_Title">
-              {{ index + 1 }}.
-              {{
-                configStore.getContest(contest.reference).title[$i18n.locale]
-              }}
-            </h3>
-            <p v-if="configStore.getContest(contest.reference).question">
-              {{
-                configStore.getContest(contest.reference).question[$i18n.locale]
-              }}
-            </p>
-            <div
-              v-for="(pile, pIndex) in contest.piles"
-              class="BallotVerifier___Contest_Pile"
-              :key="pIndex"
-            >
-              <div
-                v-if="pile.multiplier > 1"
-                class="BallotVerifier__Contest_Header"
-              >
-                <span
-                  ><strong
-                    >{{ $t("views.verifier.spoiled.ballot_selection") }}
-                    {{ pIndex + 1 }}</strong
-                  ></span
-                >
-                <span
-                  >{{ $t("views.verifier.spoiled.assigned") }}
-                  {{ pile.multiplier }}</span
-                >
-              </div>
-              <div class="BallotVerifier__Contest_Options">
-                <p v-if="pile.optionSelections.length === 0">
-                  {{ $t("views.verifier.blank_pile") }}
-                </p>
-                <p
-                  v-else
-                  v-for="(selection, oIndex) in pile.optionSelections"
-                  :key="`pile-${pIndex}-option-${oIndex}`"
-                >
-                  <span
-                    v-if="parsedOption(selection, contest, pile, oIndex).rank"
-                    >{{ parsedOption(selection, contest, pile, oIndex).rank }}:
-                  </span>
-                  {{ parsedOption(selection, contest, pile, oIndex).title }}
-                </p>
-              </div>
-            </div>
-          </div>
+          <BallotVerifierContest
+            v-for="(contestSelection, index) in verificationStore.ballot"
+            :key="contestSelection.reference"
+            :contest-selection="contestSelection"
+            :index="index"
+          />
 
           <AVButton
             :label="$t('views.verifier.spoiled.finish')"
@@ -249,7 +173,7 @@ onMounted(redirectUnlessPairingCode);
   </div>
 </template>
 
-<style type="text/css" scoped>
+<style lang="css" scoped>
 .BallotVerifier {
   width: 100%;
   height: 100%;
@@ -259,8 +183,6 @@ onMounted(redirectUnlessPairingCode);
 .BallotVerifier__Content {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  width: 100%;
 }
 
 .BallotVerifier__Title {
@@ -381,44 +303,9 @@ onMounted(redirectUnlessPairingCode);
   background-color: var(--av-theme-background) !important;
 }
 
-.BallotVerifier__Contest {
-  width: 100%;
-  z-index: 10;
-}
-
-.BallotVerifier__Contest_Title {
-  font-size: 1.375rem;
-  font-weight: 600;
-  color: var(--slate-800);
-  margin-bottom: 1rem;
-}
-
 .BallotVerifier__Contest_Title + p {
   margin-bottom: 1rem;
   font-weight: 600;
-}
-
-.BallotVerifier___Contest_Pile {
-  border: solid 1px var(--slate-200);
-  background-color: white;
-  margin: 0 0 1rem 0;
-}
-
-.BallotVerifier___Contest_Pile:last-of-type {
-  margin: 0;
-}
-
-.BallotVerifier__Contest_Header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem;
-  margin: 0;
-  background-color: var(--slate-200);
-}
-
-.BallotVerifier__Contest_Options {
-  padding: 0.5rem;
 }
 
 .BallotVerifier__Contest_Options > p {
@@ -434,7 +321,7 @@ onMounted(redirectUnlessPairingCode);
 
 @media only screen and (min-width: 48rem) {
   .BallotVerifier__Title_Secondary {
-    display: flex;
+    display: block;
     color: var(--slate-700);
     font-size: 1.75rem;
     font-weight: 600;
@@ -501,10 +388,6 @@ onMounted(redirectUnlessPairingCode);
 
   .BallotVerifier__Alert {
     margin: 1rem 0 3rem 0;
-  }
-
-  .BallotVerifier__Contest_Options {
-    padding: 1rem 1.5rem;
   }
 
   .BallotVerifier__Help_Description {

@@ -1,6 +1,8 @@
 import type {
   ContestConfig,
+  ContestContent,
   LocalString,
+  MarkingType,
   OptionContent,
 } from "@aion-dk/js-client/dist/lib/av_client/types";
 
@@ -86,4 +88,13 @@ export interface FullOptionContent extends OptionContent {
   exclusive?: boolean;
   voteLimit?: number;
   children?: FullOptionContent[];
+}
+
+export interface FullMarkingType extends MarkingType {
+  votesAllowedPerOption?: number;
+}
+
+export interface FullContestContent extends ContestContent {
+  markingType: FullMarkingType;
+  votesAllowedPerOption?: number;
 }

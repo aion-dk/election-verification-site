@@ -18,6 +18,7 @@ defineProps({
   position: static;
   color: var(--av-theme-background);
   margin-bottom: 0.5rem;
+  pointer-events: none;
 }
 
 @media only screen and (min-width: 48rem) {
