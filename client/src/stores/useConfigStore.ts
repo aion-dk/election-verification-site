@@ -41,7 +41,7 @@ export default defineStore("useConfigStore", () => {
   const getContestOption = (
     contestReference: string,
     optionReference: string
-  ): OptionContent => {
+  ): FullOptionContent => {
     return latestConfig.value
       .contestConfigs[contestReference]
       .content

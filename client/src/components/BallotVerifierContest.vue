@@ -48,25 +48,32 @@
     </div>
   </div>
 </template>
-<script>
+<script lang="ts">
 import useConfigStore from "@/stores/useConfigStore";
 import OptionCheckbox from "@/components/OptionCheckbox.vue";
+import type {PropType} from "vue";
+import {defineComponent} from "vue";
+import type {ContestSelection, SelectionPile} from "@aion-dk/js-client/dist/lib/av_client/types";
+import type {FullContestContent} from "@/Types";
 
-export default {
+export default defineComponent({
   name: 'BallotVerifierContest',
   components: {OptionCheckbox},
   props: {
     contestSelection: {
-      type: Object,
+      type: Object as PropType<ContestSelection>,
       required: true,
     },
-    index: {}
+    index: {
+      type: Number,
+      required: true,
+    }
   },
   computed: {
     configStore() {
       return useConfigStore();
     },
-    contest() {
+    contest(): FullContestContent {
       return this.configStore.getContest(this.contestSelection.reference);
     },
     isRanked() {
@@ -77,8 +84,8 @@ export default {
     }
   },
   methods: {
-    parseOptions(pile) {
-      let talliedReferences = pile.optionSelections.reduce((tally, option) => {
+    parseOptions(pile: SelectionPile) {
+      let talliedReferences = pile.optionSelections.reduce((tally: any, option) => {
         tally[option.reference] = 1 + (tally[option.reference] || 0);
 
         return tally;
@@ -86,19 +93,16 @@ export default {
       return Object.entries(talliedReferences).map(([optionReference, count], index) => {
         const optionContent = this.configStore.getContestOption(this.contest.reference, optionReference)
 
-        const parsedOption = {
+        return {
           title: optionContent.title[this.$i18n.locale],
           count: count,
-        }
-
-        if (optionContent.image) parsedOption.image = optionContent.image;
-        if (this.isRanked) parsedOption.rank = index + 1;
-
-        return parsedOption;
+          rank: this.isRanked ? index + 1 : 0,
+          image: optionContent.image,
+        };
       })
     },
   },
-}
+});
 </script>
 <style lang="scss">
 .BallotVerifierContest__Title {
