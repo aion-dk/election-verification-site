@@ -1,47 +1,55 @@
 <template>
   <div class="BallotVerifierContest">
-    <h3 class="BallotVerifierContest__Title"
-        v-text="`${index + 1}. ${contest.title[$i18n.locale]}`"
+    <h3
+      class="BallotVerifierContest__Title"
+      v-text="`${index + 1}. ${contest.title[$i18n.locale]}`"
     />
-    <p v-if="contest.question"
-       v-text="contest.question[$i18n.locale]"
-    />
+    <p v-if="contest.question" v-text="contest.question[$i18n.locale]" />
     <div
-        v-for="(pile, pIndex) in contestSelection.piles"
-        class="BallotVerifierContest__Pile"
-        :key="pIndex"
+      v-for="(pile, pIndex) in contestSelection.piles"
+      class="BallotVerifierContest__Pile"
+      :key="pIndex"
     >
       <div
-          v-if="contestSelection.piles.length > 1"
-          class="BallotVerifierContest__Header"
+        v-if="contestSelection.piles.length > 1"
+        class="BallotVerifierContest__Header"
       >
         <strong>
-          <span v-t="'views.verifier.spoiled.ballot_selection'"/>
-          <span v-text="`${pIndex + 1}/${contestSelection.piles.length}`"/>
+          <span v-t="'views.verifier.spoiled.ballot_selection'" />
+          <span v-text="`${pIndex + 1}/${contestSelection.piles.length}`" />
         </strong>
-        <span v-text="`${$t('views.verifier.spoiled.assigned')} ${pile.multiplier}`"/>
+        <span
+          v-text="`${$t('views.verifier.spoiled.assigned')} ${pile.multiplier}`"
+        />
       </div>
       <div class="BallotVerifierContest__Options">
         <p v-if="pile.optionSelections.length === 0">
           {{ $t("views.verifier.blank_pile") }}
         </p>
         <div
-            class="BallotVerifierContest__Option"
-            v-else
-            v-for="(parsedOption, oIndex) in parseOptions(pile)"
-            :key="`pile-${pIndex}-option-${oIndex}`"
+          class="BallotVerifierContest__Option"
+          v-else
+          v-for="(parsedOption, oIndex) in parseOptions(pile)"
+          :key="`pile-${pIndex}-option-${oIndex}`"
         >
-          <img class="BallotVerifierContest__Option_Image" :src="parsedOption.image" v-if="parsedOption.image">
+          <img
+            class="BallotVerifierContest__Option_Image"
+            :src="parsedOption.image"
+            v-if="parsedOption.image"
+          />
           <div class="BallotVerifierContest__Option_Title">
             {{ parsedOption.title }}
           </div>
           <OptionCheckbox
-              v-if="!isMultipleCrossesPerVote"
-              :rank="parsedOption.rank"
-              class="BallotVerifierContest__Option_Cross"
+            v-if="!isMultipleCrossesPerVote"
+            :rank="parsedOption.rank"
+            class="BallotVerifierContest__Option_Cross"
           />
           <div class="BallotVerifierContest__Option_Crosses" v-else>
-            <OptionCheckbox v-for="(_, i) in parsedOption.count" :key="`cross-${i}`"/>
+            <OptionCheckbox
+              v-for="(_, i) in parsedOption.count"
+              :key="`cross-${i}`"
+            />
           </div>
         </div>
       </div>
@@ -51,14 +59,17 @@
 <script lang="ts">
 import useConfigStore from "@/stores/useConfigStore";
 import OptionCheckbox from "@/components/OptionCheckbox.vue";
-import type {PropType} from "vue";
-import {defineComponent} from "vue";
-import type {ContestSelection, SelectionPile} from "@aion-dk/js-client/dist/lib/av_client/types";
-import type {FullContestContent} from "@/Types";
+import type { PropType } from "vue";
+import { defineComponent } from "vue";
+import type {
+  ContestSelection,
+  SelectionPile,
+} from "@aion-dk/js-client/dist/lib/av_client/types";
+import type { FullContestContent } from "@/Types";
 
 export default defineComponent({
-  name: 'BallotVerifierContest',
-  components: {OptionCheckbox},
+  name: "BallotVerifierContest",
+  components: { OptionCheckbox },
   props: {
     contestSelection: {
       type: Object as PropType<ContestSelection>,
@@ -67,7 +78,7 @@ export default defineComponent({
     index: {
       type: Number,
       required: true,
-    }
+    },
   },
   computed: {
     configStore() {
@@ -80,26 +91,39 @@ export default defineComponent({
       return this.contest.markingType.voteVariation === "ranked";
     },
     isMultipleCrossesPerVote() {
-      return 1 < (this.contest.markingType.votesAllowedPerOption || this.contest.votesAllowedPerOption || 1);
-    }
+      return (
+        1 <
+        (this.contest.markingType.votesAllowedPerOption ||
+          this.contest.votesAllowedPerOption ||
+          1)
+      );
+    },
   },
   methods: {
     parseOptions(pile: SelectionPile) {
-      let talliedReferences = pile.optionSelections.reduce((tally: any, option) => {
-        tally[option.reference] = 1 + (tally[option.reference] || 0);
+      let talliedReferences = pile.optionSelections.reduce(
+        (tally: any, option) => {
+          tally[option.reference] = 1 + (tally[option.reference] || 0);
 
-        return tally;
-      }, {})
-      return Object.entries(talliedReferences).map(([optionReference, count], index) => {
-        const optionContent = this.configStore.getContestOption(this.contest.reference, optionReference)
+          return tally;
+        },
+        {}
+      );
+      return Object.entries(talliedReferences).map(
+        ([optionReference, count], index) => {
+          const optionContent = this.configStore.getContestOption(
+            this.contest.reference,
+            optionReference
+          );
 
-        return {
-          title: optionContent.title[this.$i18n.locale],
-          count: count,
-          rank: this.isRanked ? index + 1 : 0,
-          image: optionContent.image,
-        };
-      })
+          return {
+            title: optionContent.title[this.$i18n.locale],
+            count: count,
+            rank: this.isRanked ? index + 1 : 0,
+            image: optionContent.image,
+          };
+        }
+      );
     },
   },
 });
@@ -157,7 +181,7 @@ export default defineComponent({
   margin: 1rem;
 }
 
-.BallotVerifierContest__Option_Title{
+.BallotVerifierContest__Option_Title {
   grid-area: title;
   align-self: center;
   font-size: 1.25rem;

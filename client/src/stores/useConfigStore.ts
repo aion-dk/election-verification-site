@@ -1,8 +1,11 @@
-import {defineStore} from "pinia";
-import {computed, ref} from "vue";
-import {api} from "@/lib/api";
-import type {Election, ElectionStatus, FullOptionContent} from "@/Types";
-import type {ContestContent, LatestConfigItems, OptionContent,} from "@aion-dk/js-client/dist/lib/av_client/types";
+import { defineStore } from "pinia";
+import { computed, ref } from "vue";
+import { api } from "@/lib/api";
+import type { Election, ElectionStatus, FullOptionContent } from "@/Types";
+import type {
+  ContestContent,
+  LatestConfigItems,
+} from "@aion-dk/js-client/dist/lib/av_client/types";
 
 export default defineStore("useConfigStore", () => {
   const boardSlug = ref<string>(null);
@@ -28,12 +31,17 @@ export default defineStore("useConfigStore", () => {
     return latestConfig.value.contestConfigs[contestReference].content;
   };
 
-  const flattenChildren = (option: FullOptionContent, maxDepth=100) => {
-    if(maxDepth <= 0) throw new Error("MAX RECURSION DEPTH FOR flattenChildren REACHED");
+  const flattenChildren = (option: FullOptionContent, maxDepth = 100) => {
+    if (maxDepth <= 0)
+      throw new Error("MAX RECURSION DEPTH FOR flattenChildren REACHED");
 
-    const result = [option]
+    const result = [option];
     if (option.children)
-      result.push(...option.children.flatMap((children) => flattenChildren(children, maxDepth-1)));
+      result.push(
+        ...option.children.flatMap((children) =>
+          flattenChildren(children, maxDepth - 1)
+        )
+      );
 
     return result;
   };
@@ -42,12 +50,9 @@ export default defineStore("useConfigStore", () => {
     contestReference: string,
     optionReference: string
   ): FullOptionContent => {
-    return latestConfig.value
-      .contestConfigs[contestReference]
-      .content
-      .options
-      .flatMap(option => flattenChildren(option))
-      .find(option => option.reference === optionReference);
+    return latestConfig.value.contestConfigs[contestReference].content.options
+      .flatMap((option) => flattenChildren(option))
+      .find((option) => option.reference === optionReference);
   };
 
   const loadConfig = async (slug: string) => {

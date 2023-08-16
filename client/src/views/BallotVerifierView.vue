@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
 import router from "../router";
-import {onMounted, ref} from "vue";
-import {useRoute} from "vue-router";
+import { onMounted, ref } from "vue";
+import { useRoute } from "vue-router";
 import useVerificationStore from "../stores/useVerificationStore";
 import Timedown from "@/components/Timedown.vue";
 import ContentLayout from "@/components/ContentLayout.vue";
@@ -64,10 +64,10 @@ onMounted(redirectUnlessPairingCode);
           </p>
 
           <BallotVerifierContest
-              v-for="(contestSelection, index) in verificationStore.ballot"
-              :key="contestSelection.reference"
-              :contest-selection="contestSelection"
-              :index="index"
+            v-for="(contestSelection, index) in verificationStore.ballot"
+            :key="contestSelection.reference"
+            :contest-selection="contestSelection"
+            :index="index"
           />
 
           <AVButton
