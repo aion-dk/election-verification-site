@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
-import useLocaleStore from "../stores/useLocaleStore";
 import router from "../router";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
+import i18n from "../lib/i18n"
 import useVerificationStore from "../stores/useVerificationStore";
 import Timedown from "@/components/Timedown.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
 
-const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
 const route = useRoute();
@@ -52,7 +51,7 @@ const parsedOption = (
 
   const option: any = {
     title: configStore.getContestOption(contest.reference, selection.reference)
-      .title[localeStore.locale],
+      .title[i18n.global.locale],
   };
 
   if (isRanked) option.rank = index + 1;
@@ -194,15 +193,15 @@ onMounted(redirectUnlessPairingCode);
       <template v-slot:help>
         <div v-if="verificationStore.ballot">
           <AVIcon
-            icon="rectangle-list"
+            icon="check"
             class="BallotVerifier__Help_Icon text-contrast"
             aria-hidden="true"
           />
           <h3 class="BallotVerifier__Help_Title text-contrast">
-            {{ $t("views.verifier.inprogress.help.p1.title") }}
+            {{ $t("views.verifier.spoiled.help.p1.title") }}
           </h3>
           <p class="BallotVerifier__Help_Description text-contrast">
-            {{ $t("views.verifier.inprogress.help.p1.description") }}
+            {{ $t("views.verifier.spoiled.help.p1.description") }}
           </p>
         </div>
 

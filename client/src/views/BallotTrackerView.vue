@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
 import useBallotStore from "../stores/useBallotStore";
-import useLocaleStore from "../stores/useLocaleStore";
+import i18n from "../lib/i18n";
 import { ref, computed, onMounted } from "vue";
 import BallotActivityList from "../components/BallotActivityList.vue";
 import ContentLayout from "../components/ContentLayout.vue";
@@ -9,7 +9,6 @@ import TrackedBallotManager from "../components/TrackedBallotManager.vue";
 import router from "../router";
 import type { Ballot } from "../Types";
 
-const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
 const ballot = ref<Ballot>(null);
@@ -19,7 +18,7 @@ const periodicedTrackingCode = computed(() => {
 });
 
 const cancel = () => {
-  router.push(`/${localeStore.locale}/${configStore.boardSlug}/track`);
+  router.push(`/${i18n.global.locale}/${configStore.boardSlug}/track`);
 };
 
 onMounted(() => (ballot.value = ballotStore.ballot));

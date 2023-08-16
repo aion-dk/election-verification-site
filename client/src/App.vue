@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { watch, ref, onMounted } from "vue";
 import { RouterView, useRoute } from "vue-router";
-import useLocaleStore from "./stores/useLocaleStore";
 import useConfigStore from "./stores/useConfigStore";
 import useBallotStore from "./stores/useBallotStore";
 import { useConferenceConnector } from "./lib/conferenceServices";
@@ -16,7 +15,6 @@ import { defaultTheme } from "./assets/theme";
 
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
-const localeStore = useLocaleStore();
 const route = useRoute();
 const isLoaded = ref(false);
 const electionName = ref("");
@@ -37,27 +35,22 @@ onMounted(async () => {
   isLoaded.value = true;
 });
 
-watch(route, async (newRoute) => {
-  localeStore.setLocale(newRoute.params.locale.toString());
-});
-
 function updateLocale(newLocale: Locale) {
   const newUrl = route.fullPath.replace(
-    `/${localeStore.locale}/`,
+    `/${i18n.global.locale}/`,
     `/${newLocale}/`
   );
 
   router.replace(newUrl);
   setLocale(newLocale);
-  localeStore.setLocale(newLocale);
 }
 
 function setTitle() {
-  const title = ["DBAS", configStore.election.title[localeStore.locale]].filter(
+  const title = ["DBAS", configStore.election.title[i18n.global.locale]].filter(
     (s) => s
   );
   if (window.top) window.top.document.title = title.join(" - ");
-  electionName.value = configStore.election.title[localeStore.locale];
+  electionName.value = configStore.election.title[i18n.global.locale];
 }
 
 const setConfigurations = async (slug: string) => {
@@ -137,7 +130,7 @@ const setTheme = async (conferenceClient: any) => {
     <Header
       :election="configStore.election"
       :electionName="electionName"
-      :locale="localeStore.locale"
+      :locale="$i18n.locale"
       @changeLocale="updateLocale"
     />
     <main class="DBAS__Content" id="main">
