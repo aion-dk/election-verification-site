@@ -3,7 +3,7 @@ import useConfigStore from "../stores/useConfigStore";
 import router from "../router";
 import { onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
-import i18n from "../lib/i18n"
+import i18n from "../lib/i18n";
 import useVerificationStore from "../stores/useVerificationStore";
 import Timedown from "@/components/Timedown.vue";
 import ContentLayout from "../components/ContentLayout.vue";

@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
+import i18n from "../lib/i18n";
 import router from "../router";
 const configStore = useConfigStore();
-import i18n from "../lib/i18n"
 
 const goToVerifier = () => {
   router.push(`/${i18n.global.locale}/${configStore.boardSlug}/verify`);

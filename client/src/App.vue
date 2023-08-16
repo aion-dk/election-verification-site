@@ -46,7 +46,7 @@ function updateLocale(newLocale: Locale) {
 }
 
 function setTitle() {
-  const title = ["DBAS", configStore.election.title[i18n.global.locale]].filter(
+  const title = ["EVS", configStore.election.title[i18n.global.locale]].filter(
     (s) => s
   );
   if (window.top) window.top.document.title = title.join(" - ");

@@ -8,7 +8,7 @@ import BoardItem from "../components/BoardItem.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
 import router from "@/router";
-import i18n from "../lib/i18n"
+import i18n from "../lib/i18n";
 
 const route = useRoute();
 const configStore = useConfigStore();
