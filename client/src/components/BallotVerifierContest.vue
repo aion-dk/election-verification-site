@@ -166,6 +166,8 @@ export default defineComponent({
 }
 
 .BallotVerifierContest__Option {
+  position: relative;
+  z-index: 10;
   display: grid;
   grid-template-areas: "image title cross" "crosses crosses crosses";
   grid-template-columns: auto 1fr auto;
