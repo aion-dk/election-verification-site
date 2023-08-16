@@ -117,15 +117,15 @@ onMounted(redirectUnlessPairingCode);
       <template v-slot:help>
         <div v-if="verificationStore.ballot">
           <AVIcon
-            icon="rectangle-list"
+            icon="check"
             class="BallotVerifier__Help_Icon text-contrast"
             aria-hidden="true"
           />
           <h3 class="BallotVerifier__Help_Title text-contrast">
-            {{ $t("views.verifier.inprogress.help.p1.title") }}
+            {{ $t("views.verifier.spoiled.help.p1.title") }}
           </h3>
           <p class="BallotVerifier__Help_Description text-contrast">
-            {{ $t("views.verifier.inprogress.help.p1.description") }}
+            {{ $t("views.verifier.spoiled.help.p1.description") }}
           </p>
         </div>
 

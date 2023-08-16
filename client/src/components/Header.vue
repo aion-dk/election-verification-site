@@ -5,11 +5,9 @@ import DropDown from "./DropDown.vue";
 import i18n from "../lib/i18n";
 import type { DropdownOption } from "@/Types";
 import useConfigStore from "../stores/useConfigStore";
-import useLocaleStore from "../stores/useLocaleStore";
 
 const { t } = i18n.global;
 const configStore = useConfigStore();
-const localeStore = useLocaleStore();
 const contactUrl = ref(null);
 
 const props = defineProps({
@@ -49,10 +47,10 @@ const setLocale = (newLocale: string) => {
   emit("changeLocale", newLocale);
 };
 
-watch(localeStore, () => {
+watch(i18n, () => {
   contactUrl.value =
     configStore.electionStatus?.electionVerificationSite?.contactUrl[
-      localeStore.locale
+      i18n.global.locale
     ];
 });
 
@@ -60,7 +58,7 @@ onMounted(() => {
   if (configStore.electionStatus?.electionVerificationSite?.contactUrl)
     contactUrl.value =
       configStore.electionStatus?.electionVerificationSite?.contactUrl[
-        localeStore.locale
+        i18n.global.locale
       ];
 });
 </script>

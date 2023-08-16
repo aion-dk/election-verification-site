@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
-import useLocaleStore from "../stores/useLocaleStore";
+import i18n from "../lib/i18n";
 import router from "../router";
 const configStore = useConfigStore();
-const localeStore = useLocaleStore();
 
 const goToVerifier = () => {
-  router.push(`/${localeStore.locale}/${configStore.boardSlug}/verify`);
+  router.push(`/${i18n.global.locale}/${configStore.boardSlug}/verify`);
 };
 const goToTracker = () => {
-  router.push(`/${localeStore.locale}/${configStore.boardSlug}/track`);
+  router.push(`/${i18n.global.locale}/${configStore.boardSlug}/track`);
 };
 </script>
 
@@ -24,7 +23,7 @@ const goToTracker = () => {
 
       <div class="Welcome__Description_Desktop_Container">
         <h2 class="Welcome__Description_Desktop_Subtitle">
-          {{ configStore.election.title[localeStore.locale] }}
+          {{ configStore.election.title[$i18n.locale] }}
         </h2>
 
         <p class="Welcome__Description_Desktop_About">
