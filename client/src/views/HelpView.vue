@@ -4,10 +4,8 @@ import MainIcon from "../components/MainIcon.vue";
 import ExpandableSection from "../components/ExpandableSection.vue";
 import { onMounted, ref, watch } from "vue";
 import i18n from "../lib/i18n";
-import useLocaleStore from "../stores/useLocaleStore";
 import useConfigStore from "../stores/useConfigStore";
 
-const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const ballotTesterQuestions = ref(null);
 const ballotTrackerQuestions = ref(null);
@@ -46,13 +44,13 @@ const updateQuestions = (locale: string) => {
   ).views.faq.questions.other;
 };
 
-watch(localeStore, () => {
-  updateQuestions(localeStore.locale);
+watch(i18n, () => {
+  updateQuestions(i18n.global.locale);
   loadTab(currentTab.value);
 });
 
 onMounted(() => {
-  updateQuestions(localeStore.locale);
+  updateQuestions(i18n.global.locale);
   switchTab("tester");
 });
 </script>

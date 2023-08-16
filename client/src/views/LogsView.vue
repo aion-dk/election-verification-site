@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import { options } from "../lib/api";
-import useLocaleStore from "../stores/useLocaleStore";
 import useConfigStore from "../stores/useConfigStore";
 import useBoardStore from "../stores/useBoardStore";
 import { onMounted, ref, watch } from "vue";
@@ -9,9 +8,9 @@ import BoardItem from "../components/BoardItem.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
 import router from "@/router";
+import i18n from "../lib/i18n";
 
 const route = useRoute();
-const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const boardStore = useBoardStore();
 const configItemsOnly = ref<boolean>(false);
@@ -61,7 +60,7 @@ const loadPage = (page: number) => {
 
 const navigate = (page: number) => {
   router.push(
-    `/${localeStore.locale}/${configStore.boardSlug}/logs/${page.toString()}`
+    `/${i18n.global.locale}/${configStore.boardSlug}/logs/${page.toString()}`
   );
 };
 
