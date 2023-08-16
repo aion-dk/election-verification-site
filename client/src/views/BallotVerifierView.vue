@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
-import useLocaleStore from "../stores/useLocaleStore";
 import router from "../router";
 import {onMounted, ref} from "vue";
 import {useRoute} from "vue-router";
@@ -10,7 +9,6 @@ import ContentLayout from "@/components/ContentLayout.vue";
 import MainIcon from "@/components/MainIcon.vue";
 import BallotVerifierContest from "@/components/BallotVerifierContest.vue";
 
-const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
 const route = useRoute();
