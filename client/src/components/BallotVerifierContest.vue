@@ -204,10 +204,10 @@ export default defineComponent({
 }
 .BallotVerifierContest__Option_Crosses {
   grid-area: crosses;
-  padding: 0.5rem 1rem;
+  padding: 1rem;
   background-color: #f8f9fa;
   border-top: #dddddd 1px solid;
-  justify-content: end;
+  direction: rtl;
   display: grid;
   grid-template-columns: repeat(auto-fit, 30px);
   gap: 0.5rem;
