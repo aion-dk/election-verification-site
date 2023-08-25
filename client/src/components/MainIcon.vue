@@ -32,9 +32,16 @@ defineProps({
     opacity: 0.05;
     font-size: 20rem;
     position: absolute;
-    right: 3rem;
     top: 3rem;
     color: var(--av-theme-background);
+  }
+
+  html[dir=ltr] .MainIcon {
+    right: 3rem;
+  }
+
+  html[dir=rtl] .MainIcon {
+    left: 3rem;
   }
 }
 </style>
