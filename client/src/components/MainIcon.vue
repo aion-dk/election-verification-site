@@ -36,11 +36,11 @@ defineProps({
     color: var(--av-theme-background);
   }
 
-  html[dir=ltr] .MainIcon {
+  html[dir="ltr"] .MainIcon {
     right: 3rem;
   }
 
-  html[dir=rtl] .MainIcon {
+  html[dir="rtl"] .MainIcon {
     left: 3rem;
   }
 }

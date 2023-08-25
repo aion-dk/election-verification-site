@@ -123,12 +123,12 @@ defineProps({
   color: var(--slate-600);
 }
 
-html[dir=ltr] .BallotActivity__Icon {
-  margin-right: 0.5rem
+html[dir="ltr"] .BallotActivity__Icon {
+  margin-right: 0.5rem;
 }
 
-html[dir=rtl] .BallotActivity__Icon {
-  margin-left: 0.5rem
+html[dir="rtl"] .BallotActivity__Icon {
+  margin-left: 0.5rem;
 }
 
 .BallotActivity__Label {

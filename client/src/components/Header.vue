@@ -228,11 +228,11 @@ onMounted(() => {
   border: none;
 }
 
-html[dir=ltr] .Header__Locales {
+html[dir="ltr"] .Header__Locales {
   padding: 1rem 0 1rem 1rem;
 }
 
-html[dir=rtl] .Header__Locales {
+html[dir="rtl"] .Header__Locales {
   padding: 1rem 1rem 1rem 0;
 }
 

@@ -121,11 +121,11 @@ const classes = computed(() => {
   color: var(--slate-800);
 }
 
-html[dir=ltr] .BoardItem__Type {
+html[dir="ltr"] .BoardItem__Type {
   padding: 0 3rem 0 0;
 }
 
-html[dir=ltr] .BoardItem__Type {
+html[dir="rtl"] .BoardItem__Type {
   padding: 0 0 0 3rem;
 }
 
@@ -165,11 +165,11 @@ html[dir=ltr] .BoardItem__Type {
   color: var(--slate-600);
 }
 
-html[dir=ltr] .BoardItem__InlineIcon {
+html[dir="ltr"] .BoardItem__InlineIcon {
   margin-right: 0.5rem;
 }
 
-html[dir=rtl] .BoardItem__InlineIcon {
+html[dir="rtl"] .BoardItem__InlineIcon {
   margin-left: 0.5rem;
 }
 

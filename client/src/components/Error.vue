@@ -32,11 +32,11 @@ defineProps({
   z-index: 40;
 }
 
-html[dir=ltr] .Error {
+html[dir="ltr"] .Error {
   text-align: left;
 }
 
-html[dir=rtl] .Error {
+html[dir="rtl"] .Error {
   text-align: right;
 }
 
@@ -45,14 +45,13 @@ html[dir=rtl] .Error {
   color: white;
 }
 
-html[dir=ltr] .Error__Icon_Overrides {
+html[dir="ltr"] .Error__Icon_Overrides {
   margin-right: 0.5rem;
 }
 
-html[dir=rtl] .Error__Icon_Overrides {
+html[dir="rtl"] .Error__Icon_Overrides {
   margin-left: 0.5rem;
 }
-
 
 .Error__Description {
   margin: 0.5rem 0 0 0;

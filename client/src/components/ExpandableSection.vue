@@ -80,11 +80,11 @@ const toggle = () => {
   cursor: pointer;
 }
 
-html[dir=ltr] .ExpandableSection__Expander {
+html[dir="ltr"] .ExpandableSection__Expander {
   right: 1rem;
 }
 
-html[dir=rtl] .ExpandableSection__Expander {
+html[dir="rtl"] .ExpandableSection__Expander {
   left: 1rem;
 }
 

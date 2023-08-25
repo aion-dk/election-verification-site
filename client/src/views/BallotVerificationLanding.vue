@@ -13,7 +13,9 @@ const error = ref(null);
 const disabled = ref(false);
 const verificationCode = ref(null);
 const steps = [1, 2, 3, 4, 5];
-const isRtl = computed(() => document.getElementsByTagName("html")[0].dir === "rtl");
+const isRtl = computed(
+  () => document.getElementsByTagName("html")[0].dir === "rtl"
+);
 
 onMounted(() => {
   verificationStore.reset();

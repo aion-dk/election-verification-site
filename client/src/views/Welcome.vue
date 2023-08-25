@@ -326,11 +326,13 @@ const goToTracker = () => {
     margin: 0;
   }
 
-  html[dir=ltr] .Welcome__Description_Desktop_Title, html[dir=ltr] .Welcome__Description_Desktop_Subtitle {
+  html[dir="ltr"] .Welcome__Description_Desktop_Title,
+  html[dir="ltr"] .Welcome__Description_Desktop_Subtitle {
     padding: 0 0 0 5rem;
   }
 
-  html[dir=rtl] .Welcome__Description_Desktop_Title, html[dir=rtl] .Welcome__Description_Desktop_Subtitle {
+  html[dir="rtl"] .Welcome__Description_Desktop_Title,
+  html[dir="rtl"] .Welcome__Description_Desktop_Subtitle {
     padding: 0 5rem 0 0;
   }
 
@@ -373,11 +375,11 @@ const goToTracker = () => {
     height: 10rem;
   }
 
-  html[dir=ltr] .Welcome__Card_Icon {
+  html[dir="ltr"] .Welcome__Card_Icon {
     margin: 0 3rem 0 0;
   }
 
-  html[dir=rtl] .Welcome__Card_Icon {
+  html[dir="rtl"] .Welcome__Card_Icon {
     margin: 0 0 0 3rem;
   }
 
