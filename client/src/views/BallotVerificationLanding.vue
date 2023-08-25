@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import useVerificationStore from "../stores/useVerificationStore";
 import useConfigStore from "../stores/useConfigStore";
 import router from "../router";
@@ -13,6 +13,9 @@ const error = ref(null);
 const disabled = ref(false);
 const verificationCode = ref(null);
 const steps = [1, 2, 3, 4, 5];
+const isRtl = computed(
+  () => document.getElementsByTagName("html")[0].dir === "rtl"
+);
 
 onMounted(() => {
   verificationStore.reset();
@@ -104,7 +107,8 @@ watch(verificationStore, async (newStore) => {
             name="initiate-verification"
             id="initiate-verification"
             :disabled="disabled || !verificationCode"
-            iconLeft
+            :iconLeft="!isRtl"
+            :iconRight="isRtl"
             fullWidth
             icon="fingerprint"
             @click="initiateVerification"

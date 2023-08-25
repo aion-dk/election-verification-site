@@ -190,7 +190,6 @@ onMounted(redirectUnlessPairingCode);
   color: var(--slate-800);
   margin: 0.5rem 0 1.5rem 0;
   font-weight: 800;
-  text-align: center;
   font-size: 2.5rem;
 }
 
@@ -360,27 +359,38 @@ onMounted(redirectUnlessPairingCode);
     font-size: 3.5rem;
     margin: 0 0 1rem 0;
     width: 100%;
-    text-align: left;
     font-weight: 800;
   }
 
-  .BallotVerifier__Title_Secondary {
+  html[dir="ltr"] .BallotVerifier__Title,
+  .BallotVerifier__Title_Secondary,
+  .BallotVerifier__Description,
+  .BallotVerifier__Secondary_Description,
+  .BallotVerifier__Code {
     text-align: left;
+  }
+
+  html[dir="rtl"] .BallotVerifier__Title,
+  .BallotVerifier__Title_Secondary,
+  .BallotVerifier__Description,
+  .BallotVerifier__Secondary_Description,
+  .BallotVerifier__Code {
+    text-align: right;
+  }
+
+  .BallotVerifier__Title_Secondary {
     align-self: flex-start;
   }
 
   .BallotVerifier__Description {
-    text-align: left;
     width: 100%;
   }
 
   .BallotVerifier__Secondary_Description {
-    text-align: left;
     width: 100%;
   }
 
   .BallotVerifier__Code {
-    text-align: left;
     width: 100%;
     font-size: 4rem;
     margin: 3rem 0;

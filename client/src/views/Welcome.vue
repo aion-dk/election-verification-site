@@ -223,6 +223,7 @@ const goToTracker = () => {
   color: var(--slate-700);
   text-align: center;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .Welcome__Description_Desktop {
@@ -323,7 +324,16 @@ const goToTracker = () => {
     font-weight: 600;
     color: var(--slate-800);
     margin: 0;
+  }
+
+  html[dir="ltr"] .Welcome__Description_Desktop_Title,
+  html[dir="ltr"] .Welcome__Description_Desktop_Subtitle {
     padding: 0 0 0 5rem;
+  }
+
+  html[dir="rtl"] .Welcome__Description_Desktop_Title,
+  html[dir="rtl"] .Welcome__Description_Desktop_Subtitle {
+    padding: 0 5rem 0 0;
   }
 
   .Welcome__Description_Desktop_Subtitle {
@@ -331,7 +341,6 @@ const goToTracker = () => {
     font-weight: 600;
     color: var(--slate-600);
     margin: 0;
-    padding: 0 0 0 5rem;
   }
 
   .Welcome__Description_Desktop_About {
@@ -366,8 +375,12 @@ const goToTracker = () => {
     height: 10rem;
   }
 
-  .Welcome__Card_Icon {
+  html[dir="ltr"] .Welcome__Card_Icon {
     margin: 0 3rem 0 0;
+  }
+
+  html[dir="rtl"] .Welcome__Card_Icon {
+    margin: 0 0 0 3rem;
   }
 
   .Welcome__About div {

@@ -172,6 +172,7 @@ onMounted(() => {
   display: flex;
   align-items: center;
   text-decoration: none;
+  gap: 1rem;
 }
 
 .Header__Logo {
@@ -179,7 +180,6 @@ onMounted(() => {
 }
 
 .Header__Text {
-  margin-left: 1rem;
   display: flex;
   flex-direction: column;
   gap: 0;
@@ -226,7 +226,14 @@ onMounted(() => {
   font-weight: 400;
   color: var(--slate-700);
   border: none;
+}
+
+html[dir="ltr"] .Header__Locales {
   padding: 1rem 0 1rem 1rem;
+}
+
+html[dir="rtl"] .Header__Locales {
+  padding: 1rem 1rem 1rem 0;
 }
 
 .Header__Locales:hover {
