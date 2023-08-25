@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { watch, ref, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { RouterView, useRoute } from "vue-router";
 import useConfigStore from "./stores/useConfigStore";
 import useBallotStore from "./stores/useBallotStore";
