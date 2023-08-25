@@ -11,37 +11,6 @@ const i18n = createI18n({
   locale: locale,
   fallbackLocale: "en",
   warnHtmlInMessage: "off",
-  datetimeFormats: {
-    en: {
-      short: {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-      },
-      long: {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        weekday: "short",
-        hour: "numeric",
-        minute: "numeric",
-      },
-    },
-    da: {
-      short: {
-        year: "numeric",
-        day: "numeric",
-      },
-      long: {
-        year: "numeric",
-        month: "short",
-        day: "numeric",
-        weekday: "short",
-        hour: "numeric",
-        minute: "numeric",
-      },
-    },
-  },
 });
 
 export function setLocale(locale: Locale) {

@@ -77,8 +77,15 @@ const toggle = () => {
   justify-content: center;
   position: absolute;
   top: calc(1rem - 1px);
-  right: 1rem;
   cursor: pointer;
+}
+
+html[dir=ltr] .ExpandableSection__Expander {
+  right: 1rem;
+}
+
+html[dir=rtl] .ExpandableSection__Expander {
+  left: 1rem;
 }
 
 @media only screen and (min-width: 48rem) {

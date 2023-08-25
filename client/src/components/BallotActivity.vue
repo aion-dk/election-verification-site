@@ -37,7 +37,7 @@ defineProps({
 
         <p
           class="BallotActivity__Author"
-          :aria-label="$t('components.board_item.aria_labels.author')"
+          :aria-label="$t('components.board_item.aria_labels.activity_author')"
         >
           <AVIcon icon="user" class="BallotActivity__Icon" aria-hidden="true" />
           <span>
@@ -120,8 +120,15 @@ defineProps({
 }
 
 .BallotActivity__Icon {
-  margin-right: 0.5rem;
   color: var(--slate-600);
+}
+
+html[dir=ltr] .BallotActivity__Icon {
+  margin-right: 0.5rem
+}
+
+html[dir=rtl] .BallotActivity__Icon {
+  margin-left: 0.5rem
 }
 
 .BallotActivity__Label {
