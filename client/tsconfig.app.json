@@ -4,7 +4,6 @@
   "exclude": ["src/**/*.spec.js"],
   "compilerOptions": {
     "strictNullChecks": false,
-    "moduleResolution": "node",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
