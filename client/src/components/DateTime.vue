@@ -1,8 +1,18 @@
 <script lang="ts" setup>
 import moment from "moment";
-import "moment/min/locales";
+import "moment/dist/locale/es";
+import "moment/dist/locale/ar";
+import "moment/dist/locale/fi";
+import "moment/dist/locale/da";
+import "moment/dist/locale/de";
+import "moment/dist/locale/fr";
+import "moment/dist/locale/sv";
+import "moment/dist/locale/is";
+import "moment/dist/locale/ru";
+import "moment/dist/locale/nl";
 import "moment-timezone";
-import { ref } from "vue";
+import { ref, computed } from "vue";
+import i18n from "../lib/i18n";
 
 const props = defineProps({
   dateTime: {
@@ -20,32 +30,21 @@ const props = defineProps({
   },
 });
 
+const date: any = computed(() => moment(new Date(props.dateTime)).tz(props.timeZone).locale(i18n.global.locale))
+const relative = computed(() => date.value.fromNow())
+const absolute = computed(() => date.value.format("LLLL zz"))
+
 const value = ref(
   props.format === "absolute"
-    ? absolute(props.dateTime)
-    : relative(props.dateTime)
+    ? absolute
+    : relative
 );
+
 const label = ref(
   props.format === "absolute"
-    ? relative(props.dateTime)
-    : absolute(props.dateTime)
+    ? relative
+    : absolute
 );
-
-function relative(date: any) {
-  return moment
-    .parseZone(date)
-    .tz(props.timeZone)
-    .locale(window.navigator.language)
-    .fromNow();
-}
-
-function absolute(date: any) {
-  return moment
-    .parseZone(date)
-    .tz(props.timeZone)
-    .locale(window.navigator.language)
-    .format("LLLL zz");
-}
 </script>
 
 <template>
