@@ -2,15 +2,18 @@ import { expect, test } from "vitest";
 import { mount } from "@vue/test-utils";
 import DateTime from "./DateTime.vue";
 
+const date = new Date();
+date.setHours(date.getHours() - 5);
+
 const props: any = {
-  dateTime: new Date().toISOString(),
+  dateTime: date.toISOString(),
   timeZone: "CET",
 };
 const options = { props };
 
 test("displays relative time", async () => {
   const wrapper = mount(DateTime, options);
-  expect(wrapper.text()).toContain("now");
+  expect(wrapper.text()).toContain("hours ago");
 });
 
 test("displays absolute time", async () => {
