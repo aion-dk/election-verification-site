@@ -30,7 +30,7 @@ const props = defineProps({
   },
 });
 
-const date: any = computed(() =>
+const date = computed(() =>
   moment(new Date(props.dateTime)).tz(props.timeZone).locale(i18n.global.locale)
 );
 const relative = computed(() => date.value.fromNow());
