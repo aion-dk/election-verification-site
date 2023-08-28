@@ -30,21 +30,14 @@ const props = defineProps({
   },
 });
 
-const date: any = computed(() => moment(new Date(props.dateTime)).tz(props.timeZone).locale(i18n.global.locale))
-const relative = computed(() => date.value.fromNow())
-const absolute = computed(() => date.value.format("LLLL zz"))
-
-const value = ref(
-  props.format === "absolute"
-    ? absolute
-    : relative
+const date: any = computed(() =>
+  moment(new Date(props.dateTime)).tz(props.timeZone).locale(i18n.global.locale)
 );
+const relative = computed(() => date.value.fromNow());
+const absolute = computed(() => date.value.format("LLLL zz"));
 
-const label = ref(
-  props.format === "absolute"
-    ? relative
-    : absolute
-);
+const value = ref(props.format === "absolute" ? absolute : relative);
+const label = ref(props.format === "absolute" ? relative : absolute);
 </script>
 
 <template>
