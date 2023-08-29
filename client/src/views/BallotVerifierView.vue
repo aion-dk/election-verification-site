@@ -363,18 +363,18 @@ onMounted(redirectUnlessPairingCode);
   }
 
   html[dir="ltr"] .BallotVerifier__Title,
-  .BallotVerifier__Title_Secondary,
-  .BallotVerifier__Description,
-  .BallotVerifier__Secondary_Description,
-  .BallotVerifier__Code {
+  html[dir="ltr"] .BallotVerifier__Title_Secondary,
+  html[dir="ltr"] .BallotVerifier__Description,
+  html[dir="ltr"] .BallotVerifier__Secondary_Description,
+  html[dir="ltr"] .BallotVerifier__Code {
     text-align: left;
   }
 
   html[dir="rtl"] .BallotVerifier__Title,
-  .BallotVerifier__Title_Secondary,
-  .BallotVerifier__Description,
-  .BallotVerifier__Secondary_Description,
-  .BallotVerifier__Code {
+  html[dir="rtl"] .BallotVerifier__Title_Secondary,
+  html[dir="rtl"] .BallotVerifier__Description,
+  html[dir="rtl"] .BallotVerifier__Secondary_Description,
+  html[dir="rtl"] .BallotVerifier__Code {
     text-align: right;
   }
 
