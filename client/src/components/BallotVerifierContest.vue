@@ -1,24 +1,33 @@
 <template>
   <div class="BallotVerifierContest">
-    <h3 class="BallotVerifierContest__Title"> {{ contest.title[$i18n.locale] }} </h3>
+    <h3 class="BallotVerifierContest__Title">
+      {{ contest.title[$i18n.locale] }}
+    </h3>
     <p v-if="contest.question" v-text="contest.question[$i18n.locale]" />
     <div
       v-for="(pile, pIndex) in contestSelection.piles"
       class="BallotVerifierContest__Pile"
       :key="pIndex"
     >
-      <div
-        class="BallotVerifierContest__Header"
-      >
+      <div class="BallotVerifierContest__Header">
         <span>
-          {{ `${$t('views.verifier.spoiled.ballot_selection')} ${pIndex + 1}/${contestSelection.piles.length}` }}
+          {{
+            `${$t("views.verifier.spoiled.ballot_selection")} ${pIndex + 1}/${
+              contestSelection.piles.length
+            }`
+          }}
         </span>
         <strong>
-          <span>{{ `${$t('views.verifier.spoiled.assigned')} ${pile.multiplier}` }}</span>
+          <span>{{
+            `${$t("views.verifier.spoiled.assigned")} ${pile.multiplier}`
+          }}</span>
         </strong>
       </div>
       <div class="BallotVerifierContest__Options">
-        <div v-if="pile.optionSelections.length === 0" class="BallotVerifierContest__Option">
+        <div
+          v-if="pile.optionSelections.length === 0"
+          class="BallotVerifierContest__Option"
+        >
           <div class="BallotVerifierContest__Option_Title">
             {{ $t("views.verifier.blank_pile") }}
           </div>
