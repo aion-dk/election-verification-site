@@ -1,9 +1,6 @@
 <template>
   <div class="BallotVerifierContest">
-    <h3
-      class="BallotVerifierContest__Title"
-      v-text="`${index + 1}. ${contest.title[$i18n.locale]}`"
-    />
+    <h3 class="BallotVerifierContest__Title"> {{ contest.title[$i18n.locale] }} </h3>
     <p v-if="contest.question" v-text="contest.question[$i18n.locale]" />
     <div
       v-for="(pile, pIndex) in contestSelection.piles"
@@ -11,21 +8,22 @@
       :key="pIndex"
     >
       <div
-        v-if="contestSelection.piles.length > 1"
         class="BallotVerifierContest__Header"
       >
+        <span>
+          {{ `${$t('views.verifier.spoiled.ballot_selection')} ${pIndex + 1}/${contestSelection.piles.length}` }}
+        </span>
         <strong>
-          <span v-t="'views.verifier.spoiled.ballot_selection'" />
-          <span v-text="`${pIndex + 1}/${contestSelection.piles.length}`" />
+          <span>{{ `${$t('views.verifier.spoiled.assigned')} ${pile.multiplier}` }}</span>
         </strong>
-        <span
-          v-text="`${$t('views.verifier.spoiled.assigned')} ${pile.multiplier}`"
-        />
       </div>
       <div class="BallotVerifierContest__Options">
-        <p v-if="pile.optionSelections.length === 0">
-          {{ $t("views.verifier.blank_pile") }}
-        </p>
+        <div v-if="pile.optionSelections.length === 0" class="BallotVerifierContest__Option">
+          <div class="BallotVerifierContest__Option_Title">
+            {{ $t("views.verifier.blank_pile") }}
+          </div>
+          <OptionCheckbox class="BallotVerifierContest__Option_Cross" />
+        </div>
         <div
           class="BallotVerifierContest__Option"
           v-else
@@ -128,12 +126,14 @@ export default defineComponent({
   },
 });
 </script>
+
 <style lang="scss">
 .BallotVerifierContest__Title {
-  font-size: 1.375rem;
+  font-size: 1.75rem;
   font-weight: 600;
   color: var(--slate-800);
   margin-bottom: 1rem;
+  text-align: center;
 }
 
 .BallotVerifierContest__Title + p {
@@ -143,6 +143,8 @@ export default defineComponent({
 
 .BallotVerifierContest__Pile {
   margin-bottom: 1rem;
+  position: relative;
+  z-index: 10;
 }
 
 .BallotVerifierContest__Header {
