@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import BallotActivity from "./BallotActivity.vue";
-import { ref } from 'vue';
+import { ref } from "vue";
 
 const isRtl = ref(document.getElementsByTagName("html")[0].dir === "rtl");
 
