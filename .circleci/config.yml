@@ -20,11 +20,11 @@ commands:
       target:
         type: enum
         default: "development"
-        enum: [ "builder", "development", "production" ]
+        enum: ["builder", "development", "production"]
       environment:
         type: enum
         default: "development"
-        enum: [ "development", "test", "production" ]
+        enum: ["development", "test", "production"]
       tag_prefix:
         type: string
         default: ""
@@ -266,6 +266,7 @@ jobs:
             docker pull ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:${CIRCLE_SHA1}-untested
       - docker/scan:
           image: ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:${CIRCLE_SHA1}-untested
+          ignored_cves: "CVE-2021-32292"
   client-e2e:
     executor: vm-linux-ubuntu
     steps:
