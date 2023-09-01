@@ -42,6 +42,7 @@ function updateLocale(newLocale: Locale) {
 
   router.replace(newUrl);
   setLocale(newLocale);
+  setTitle();
 }
 
 function setTitle() {
