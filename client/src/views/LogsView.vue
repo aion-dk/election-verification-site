@@ -16,7 +16,9 @@ const boardStore = useBoardStore();
 const configItemsOnly = ref<boolean>(false);
 const disableFirst = ref<boolean>(true);
 const disableLast = ref<boolean>(false);
-const isRtl = computed(() => document.getElementsByTagName("html")[0].dir === "rtl");
+const isRtl = computed(
+  () => document.getElementsByTagName("html")[0].dir === "rtl"
+);
 
 watch(configStore, () => loadPage(currentPage()));
 watch(route, () => {

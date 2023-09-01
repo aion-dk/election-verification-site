@@ -2,7 +2,9 @@
 import BallotActivity from "./BallotActivity.vue";
 import { computed } from "vue";
 
-const isRtl = computed(() => document.getElementsByTagName("html")[0].dir === "rtl");
+const isRtl = computed(
+  () => document.getElementsByTagName("html")[0].dir === "rtl"
+);
 
 defineProps({
   activities: {

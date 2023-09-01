@@ -15,7 +15,9 @@ const error = ref(null);
 const disabled = ref(false);
 const steps = [1, 2];
 
-const isRtl = computed(() => document.getElementsByTagName("html")[0].dir === "rtl");
+const isRtl = computed(
+  () => document.getElementsByTagName("html")[0].dir === "rtl"
+);
 
 const lookupBallot = async (event: Event) => {
   event.preventDefault();
