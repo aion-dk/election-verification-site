@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import useConfigStore from "../stores/useConfigStore";
 import useBallotStore from "../stores/useBallotStore";
 import i18n from "../lib/i18n";
@@ -15,7 +15,7 @@ const error = ref(null);
 const disabled = ref(false);
 const steps = [1, 2];
 
-const isRtl = ref(document.getElementsByTagName("html")[0].dir === "rtl");
+const isRtl = computed(() => document.getElementsByTagName("html")[0].dir === "rtl");
 
 const lookupBallot = async (event: Event) => {
   event.preventDefault();

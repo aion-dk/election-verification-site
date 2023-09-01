@@ -2,7 +2,7 @@
 import { options } from "../lib/api";
 import useConfigStore from "../stores/useConfigStore";
 import useBoardStore from "../stores/useBoardStore";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import BoardItem from "../components/BoardItem.vue";
 import ContentLayout from "../components/ContentLayout.vue";
@@ -16,7 +16,7 @@ const boardStore = useBoardStore();
 const configItemsOnly = ref<boolean>(false);
 const disableFirst = ref<boolean>(true);
 const disableLast = ref<boolean>(false);
-const isRtl = ref(document.getElementsByTagName("html")[0].dir === "rtl");
+const isRtl = computed(() => document.getElementsByTagName("html")[0].dir === "rtl");
 
 watch(configStore, () => loadPage(currentPage()));
 watch(route, () => {
