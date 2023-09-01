@@ -1,5 +1,8 @@
 <script lang="ts" setup>
 import BallotActivity from "./BallotActivity.vue";
+import { ref } from 'vue';
+
+const isRtl = ref(document.getElementsByTagName("html")[0].dir === "rtl");
 
 defineProps({
   activities: {
@@ -14,7 +17,7 @@ defineProps({
     <ul class="BallotActivitiesList__ColumnDescriptions" aria-hidden="true">
       <li class="BallotActivitiesList__ColumnDescriptions--event">
         <span class="BallotActivitiesList__Tooltip">
-          <tooltip hover placement="right">
+          <tooltip hover :placement="isRtl ? 'left' : 'right'">
             <template #default>
               {{ $t("components.ballot_activity_list.type") }}
               <AVIcon
@@ -39,7 +42,7 @@ defineProps({
       </li>
       <li class="BallotActivitiesList__ColumnDescriptions--actor">
         <span class="BallotActivitiesList__Tooltip">
-          <tooltip hover placement="right">
+          <tooltip hover :placement="isRtl ? 'left' : 'right'">
             <template #default>
               {{ $t("components.ballot_activity_list.actor") }}
               <AVIcon

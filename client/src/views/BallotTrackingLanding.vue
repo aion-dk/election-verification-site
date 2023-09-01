@@ -15,6 +15,8 @@ const error = ref(null);
 const disabled = ref(false);
 const steps = [1, 2];
 
+const isRtl = ref(document.getElementsByTagName("html")[0].dir === "rtl");
+
 const lookupBallot = async (event: Event) => {
   event.preventDefault();
   event.stopPropagation();
@@ -78,15 +80,13 @@ const lookupBallot = async (event: Event) => {
             name="initiate-verification"
             id="initiate-verification"
             :disabled="disabled || !trackingCode"
-            iconLeft
             fullWidth
-            icon="fingerprint"
             @click="lookupBallot"
             class="TrackingLanding__Button_Overrides"
           />
         </form>
         <p class="TrackingLanding__Tooltip">
-          <tooltip hover placement="right">
+          <tooltip hover :placement="isRtl ? 'left' : 'right'">
             <template #default>
               <AVIcon
                 icon="circle-question"
@@ -184,8 +184,12 @@ const lookupBallot = async (event: Event) => {
   cursor: help;
 }
 
-.TrackingLanding__Tooltip_Icon {
+html[dir="ltr"] .TrackingLanding__Tooltip_Icon {
   margin-right: 0.5rem;
+}
+
+html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
+  margin-left: 0.5rem;
 }
 
 .TrackingLanding__Step {
