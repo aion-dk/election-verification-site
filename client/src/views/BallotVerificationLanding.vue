@@ -107,16 +107,13 @@ watch(verificationStore, async (newStore) => {
             name="initiate-verification"
             id="initiate-verification"
             :disabled="disabled || !verificationCode"
-            :iconLeft="!isRtl"
-            :iconRight="isRtl"
             fullWidth
-            icon="fingerprint"
             @click="initiateVerification"
             class="VerificationLanding__Button_Overrides"
           />
         </form>
         <p class="VerificationLanding__Tooltip">
-          <tooltip hover placement="right">
+          <tooltip hover :placement="isRtl ? 'left' : 'right'">
             <template #default>
               <AVIcon
                 icon="circle-question"
@@ -217,8 +214,12 @@ watch(verificationStore, async (newStore) => {
   cursor: help;
 }
 
-.VerificationLanding__Tooltip_Icon {
+html[dir="ltr"] .VerificationLanding__Tooltip_Icon {
   margin-right: 0.5rem;
+}
+
+html[dir="rtl"] .VerificationLanding__Tooltip_Icon {
+  margin-left: 0.5rem;
 }
 
 .VerificationLanding__Step {

@@ -2,7 +2,7 @@
 import { options } from "../lib/api";
 import useConfigStore from "../stores/useConfigStore";
 import useBoardStore from "../stores/useBoardStore";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import BoardItem from "../components/BoardItem.vue";
 import ContentLayout from "../components/ContentLayout.vue";
@@ -16,6 +16,9 @@ const boardStore = useBoardStore();
 const configItemsOnly = ref<boolean>(false);
 const disableFirst = ref<boolean>(true);
 const disableLast = ref<boolean>(false);
+const isRtl = computed(
+  () => document.getElementsByTagName("html")[0].dir === "rtl"
+);
 
 watch(configStore, () => loadPage(currentPage()));
 watch(route, () => {
@@ -101,7 +104,7 @@ onMounted(() => loadPage(currentPage()));
       <ul class="LogsView__ColumnDescriptions">
         <li class="LogsView__ColumnDescriptions--event">
           <span class="LogsView__Tooltip">
-            <tooltip hover placement="right">
+            <tooltip hover :placement="isRtl ? 'left' : 'right'">
               <template #default>
                 {{ $t("views.logs.headers.type") }}
                 <AVIcon
@@ -121,27 +124,12 @@ onMounted(() => loadPage(currentPage()));
         </li>
         <li class="LogsView__ColumnDescriptions--time">
           <span class="LogsView__Tooltip">
-            <tooltip hover placement="right">
-              <template #default>
-                {{ $t("views.logs.headers.time") }}
-                <AVIcon
-                  icon="circle-question"
-                  class="LogsView__Tooltip_Icon"
-                  aria-hidden="true"
-                />
-              </template>
-
-              <template #content>
-                <span id="tracking-code-tooltip">
-                  {{ $t("views.logs.headers.time_tooltip") }}
-                </span>
-              </template>
-            </tooltip>
+            {{ $t("views.logs.headers.time") }}
           </span>
         </li>
         <li class="LogsView__ColumnDescriptions--actor">
           <span class="LogsView__Tooltip">
-            <tooltip hover placement="right">
+            <tooltip hover :placement="isRtl ? 'left' : 'right'">
               <template #default>
                 {{ $t("views.logs.headers.actor") }}
                 <AVIcon

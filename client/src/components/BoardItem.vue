@@ -82,7 +82,7 @@ const classes = computed(() => {
             aria-hidden="true"
           />
           <span class="BoardItem__Label">{{
-            $t("components.board_item.activity_author")
+            $t("components.board_item.author")
           }}</span>
           <span>{{ $t(`components.board_item.${item.type}.author`) }}</span>
         </p>

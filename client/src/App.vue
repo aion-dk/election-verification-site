@@ -17,7 +17,6 @@ const ballotStore = useBallotStore();
 const configStore = useConfigStore();
 const route = useRoute();
 const isLoaded = ref(false);
-const electionName = ref("");
 
 onMounted(async () => {
   const slug = route.params.electionSlug.toString();
@@ -43,6 +42,7 @@ function updateLocale(newLocale: Locale) {
 
   router.replace(newUrl);
   setLocale(newLocale);
+  setTitle();
 }
 
 function setTitle() {
@@ -50,7 +50,6 @@ function setTitle() {
     (s) => s
   );
   if (window.top) window.top.document.title = title.join(" - ");
-  electionName.value = configStore.election.title[i18n.global.locale];
 }
 
 const setConfigurations = async (slug: string) => {
@@ -129,7 +128,7 @@ const setTheme = async (conferenceClient: any) => {
 
     <Header
       :election="configStore.election"
-      :electionName="electionName"
+      :electionName="configStore.election.title[$i18n.locale]"
       :locale="$i18n.locale"
       @changeLocale="updateLocale"
     />
