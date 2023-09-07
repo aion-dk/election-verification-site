@@ -30,6 +30,7 @@ defineProps({
   padding: 1.5rem 2rem;
   margin-bottom: 2rem;
   z-index: 40;
+  width: 100%;
 }
 
 html[dir="ltr"] .Error {

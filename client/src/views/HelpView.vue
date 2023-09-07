@@ -293,7 +293,7 @@ onMounted(() => {
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .HelpView__Title {
     padding-top: 5rem;
     text-align: left;
@@ -310,7 +310,7 @@ onMounted(() => {
   }
 }
 
-@media only screen and (min-width: 120rem) and (min-height: 68rem) {
+@media only screen and (min-width: 120rem) {
   .HelpView__Title {
     font-size: 3.5rem;
   }

@@ -349,12 +349,11 @@ onMounted(redirectUnlessPairingCode);
   }
 
   .BallotVerifier__Button_Overrides {
-    max-width: fit-content;
     margin-top: 3rem !important;
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .BallotVerifier__Title {
     font-size: 3.5rem;
     margin: 0 0 1rem 0;

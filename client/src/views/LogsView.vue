@@ -355,6 +355,7 @@ html[dir="rtl"] .RTL_Rotation {
   font-size: 0.75rem !important;
   padding: 0.5rem 0.8rem !important;
   margin-top: 2rem;
+  margin-bottom: 1rem;
   align-self: center;
 }
 
@@ -403,7 +404,7 @@ html[dir="rtl"] .RTL_Rotation {
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .LogsView__Title {
     font-size: 3.5rem;
   }
@@ -437,7 +438,7 @@ html[dir="rtl"] .RTL_Rotation {
   }
 }
 
-@media only screen and (min-width: 120rem) and (min-height: 68rem) {
+@media only screen and (min-width: 120rem) {
   .LogsView__Title {
     font-size: 3.5rem;
   }

@@ -165,6 +165,7 @@ body {
 .DBAS__Loading_Page {
   width: 100vw;
   height: 100dvh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -174,9 +175,13 @@ body {
 .DBAS {
   display: flex;
   flex-direction: column;
+  height: 100dvh;
+  height: 100vh;
+  width: 100vw;
 }
 
 .DBAS__Content {
+  height: calc(100dvh - 70px);
   height: calc(100vh - 70px);
   margin-top: 70px;
 }
@@ -204,8 +209,9 @@ body {
   margin-left: 2rem;
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .DBAS__Loading_Page {
+    height: 100dvh;
     height: 100vh;
   }
 }
