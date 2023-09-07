@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, onBeforeUnmount, ref } from "vue";
 import { RouterLink } from "vue-router";
 import DropDown from "./DropDown.vue";
 import i18n from "../lib/i18n";
@@ -8,7 +8,7 @@ import useConfigStore from "../stores/useConfigStore";
 
 const { t } = i18n.global;
 const configStore = useConfigStore();
-const contactUrl = ref(null);
+const contactUrl = computed(() => configStore.electionStatus?.electionVerificationSite?.contactUrl[i18n.global.locale] || null);
 
 const props = defineProps({
   locale: {
@@ -47,20 +47,15 @@ const setLocale = (newLocale: string) => {
   emit("changeLocale", newLocale);
 };
 
-watch(i18n, () => {
-  contactUrl.value =
-    configStore.electionStatus?.electionVerificationSite?.contactUrl[
-      i18n.global.locale
-    ];
-});
+const onResize = () => isMenuOpened.value = false;
 
 onMounted(() => {
-  if (configStore.electionStatus?.electionVerificationSite?.contactUrl)
-    contactUrl.value =
-      configStore.electionStatus?.electionVerificationSite?.contactUrl[
-        i18n.global.locale
-      ];
+  window.addEventListener('resize', onResize);
 });
+
+onBeforeUnmount(() => {
+  window.removeEventListener('resize', onResize);
+})
 </script>
 
 <template>
