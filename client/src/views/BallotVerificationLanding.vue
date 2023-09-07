@@ -244,7 +244,7 @@ html[dir="rtl"] .VerificationLanding__Tooltip_Icon {
   font-size: 1.5rem;
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .VerificationLanding__Action_Container {
     width: 30rem;
   }
@@ -298,7 +298,7 @@ html[dir="rtl"] .VerificationLanding__Tooltip_Icon {
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 68rem) {
+@media only screen and (min-width: 80rem) {
   .VerificationLanding__Help_Footer {
     font-size: 1.75rem;
   }
@@ -313,7 +313,7 @@ html[dir="rtl"] .VerificationLanding__Tooltip_Icon {
   }
 }
 
-@media only screen and (min-width: 120rem) and (min-height: 90rem) {
+@media only screen and (min-width: 120rem) {
   .VerificationLanding__Help_Footer {
     font-size: 2.25rem;
   }

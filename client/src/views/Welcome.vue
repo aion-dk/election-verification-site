@@ -276,12 +276,14 @@ const goToTracker = () => {
     margin-bottom: 1.25rem;
   }
 
+.Welcome__About {
+  padding-bottom: 5rem; /* 2 spacing + 3 footer */
+}
+
   .Welcome__Brand_Logo {
     width: 30%;
   }
-}
 
-@media only screen and (min-width: 48rem) and (min-height: 68rem) {
   .Welcome__Brand_Logo {
     display: none;
   }
@@ -298,7 +300,7 @@ const goToTracker = () => {
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .Welcome__Description_Desktop {
     padding: 5rem;
     display: flex;
@@ -385,12 +387,13 @@ const goToTracker = () => {
 
   .Welcome__About div {
     display: flex;
+    /* margin: 0 1rem 3rem 1rem; */
     margin: 0 1rem 1rem 1rem;
     padding: 0 6em;
   }
 }
 
-@media only screen and (min-width: 120rem) and (min-height: 68rem) {
+@media only screen and (min-width: 120rem) {
   .Welcome__Description_Desktop {
     padding: 8rem 20rem;
   }

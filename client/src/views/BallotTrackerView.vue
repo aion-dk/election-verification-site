@@ -130,7 +130,7 @@ onMounted(() => (ballot.value = ballotStore.ballot));
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .BallotTracker__Description.expand {
     text-align: left;
   }

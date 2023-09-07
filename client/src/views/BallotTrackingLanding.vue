@@ -212,7 +212,7 @@ html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
   border-radius: 999px;
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .TrackingLanding__Action_Container {
     width: 30rem;
   }
@@ -258,14 +258,14 @@ html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 68rem) {
+@media only screen and (min-width: 80rem) {
   .TrackingLanding__Step_Index {
     width: 1.75rem;
     height: 1.75rem;
   }
 }
 
-@media only screen and (min-width: 120rem) and (min-height: 90rem) {
+@media only screen and (min-width: 120rem) {
   .TrackingLanding__Step_Index {
     width: 2rem;
     height: 2rem;

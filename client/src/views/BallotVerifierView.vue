@@ -354,7 +354,14 @@ onMounted(redirectUnlessPairingCode);
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 60rem) {
+  .BallotVerifier__Button_Overrides {
+    max-width: fit-content;
+    margin-bottom: 3rem !important;
+  }
+}
+
+@media only screen and (min-width: 80rem) {
   .BallotVerifier__Title {
     font-size: 3.5rem;
     margin: 0 0 1rem 0;
