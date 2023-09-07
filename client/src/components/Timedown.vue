@@ -58,8 +58,9 @@ onMounted(() => {
 .Timedown {
   background-color: var(--slate-100);
   width: 100%;
-  z-index: 90;
+  z-index: 50;
   padding-bottom: 0.25rem;
+  position: fixed;
 }
 
 .Timedown__Progress {

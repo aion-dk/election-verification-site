@@ -349,15 +349,7 @@ onMounted(redirectUnlessPairingCode);
   }
 
   .BallotVerifier__Button_Overrides {
-    max-width: fit-content;
     margin-top: 3rem !important;
-  }
-}
-
-@media only screen and (min-width: 60rem) {
-  .BallotVerifier__Button_Overrides {
-    max-width: fit-content;
-    margin-bottom: 3rem !important;
   }
 }
 

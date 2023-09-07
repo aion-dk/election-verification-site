@@ -51,15 +51,15 @@ defineProps({
 <style scoped>
 .ContentLayout {
   display: flex;
-  width: 100vw;
-  height: 100%;
+  height: calc(100dvh - 70px);
+  top: 70px;
+  position: fixed;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
   background-color: var(--slate-100);
   padding: 1rem 1rem 3rem 1rem;
-
-  border: solid red 1px;
 }
 
 .ContentLayout__Action {
@@ -72,7 +72,7 @@ defineProps({
 }
 
 .ContentLayout__Breadcrumb {
-  margin: -0.5rem 0 1rem 0;
+  margin: 0 0 1rem 0;
   width: 100%;
 }
 
@@ -113,7 +113,7 @@ defineProps({
   display: block;
   width: 40%;
   height: auto;
-  margin-bottom: 18dvh; /* Makes it work in safari w/o ruining the exp for the rest of the browsers */
+  margin-bottom: 3rem;
 }
 
 .ContentLayout__Help_Title {
@@ -139,7 +139,7 @@ defineProps({
   }
 
   .ContentLayout__Breadcrumb {
-    margin: -1.5rem 0 1rem 0;
+    margin: -.5rem 0 1rem 0;
   }
 
   .ContentLayout__Brand_Logo {

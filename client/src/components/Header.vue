@@ -285,11 +285,6 @@ html[dir="rtl"] .Header__Locales {
     object-fit: contain;
     display: block;
   }
-
-  .Header__Locales {
-    font-size: 1.5rem;
-    margin: 1rem 0;
-  }
 }
 
 @media only screen and (min-width: 80rem) {

@@ -147,7 +147,7 @@ const goToTracker = () => {
 
 <style type="text/css" scoped>
 .Welcome {
-  height: 100%;
+  height: calc(100dvh - 70px);
   width: 100%;
   overflow-y: auto;
 }
@@ -263,7 +263,7 @@ const goToTracker = () => {
   display: block;
   width: 40%;
   height: auto;
-  margin-bottom: 18dvh;
+  margin-bottom: 3rem;
 }
 
 @media only screen and (min-width: 48rem) {
@@ -275,10 +275,6 @@ const goToTracker = () => {
   .Welcome__Button_Overrides {
     margin-bottom: 1.25rem;
   }
-
-.Welcome__About {
-  padding-bottom: 5rem; /* 2 spacing + 3 footer */
-}
 
   .Welcome__Brand_Logo {
     width: 30%;
@@ -387,9 +383,8 @@ const goToTracker = () => {
 
   .Welcome__About div {
     display: flex;
-    /* margin: 0 1rem 3rem 1rem; */
-    margin: 0 1rem 1rem 1rem;
-    padding: 0 6em;
+    margin: 0 1rem 3rem 1rem;
+    padding: 0 6rem;
   }
 }
 
@@ -399,6 +394,7 @@ const goToTracker = () => {
   }
 
   .Welcome__About div {
+    margin: 0 1rem 0 1rem;
     padding: 0 20rem 5rem 20rem;
   }
 

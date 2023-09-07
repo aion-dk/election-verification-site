@@ -175,6 +175,9 @@ body {
 .DBAS {
   display: flex;
   flex-direction: column;
+  height: 100dvh;
+  height: 100vh;
+  width: 100vw;
 }
 
 .DBAS__Content {
