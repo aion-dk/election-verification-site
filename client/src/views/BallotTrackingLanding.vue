@@ -237,11 +237,6 @@ html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
     text-align: left;
   }
 
-  .TrackingLanding__Step_Index {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
   .TrackingLanding__TrackingCode {
     border-radius: 14px;
     height: 3.25rem;
@@ -256,9 +251,7 @@ html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
     border-radius: 14px !important;
     margin-bottom: 1rem !important;
   }
-}
 
-@media only screen and (min-width: 80rem) {
   .TrackingLanding__Step_Index {
     width: 1.75rem;
     height: 1.75rem;

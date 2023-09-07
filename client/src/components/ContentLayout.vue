@@ -139,7 +139,7 @@ defineProps({
   }
 
   .ContentLayout__Breadcrumb {
-    margin: -.5rem 0 1rem 0;
+    margin: -0.5rem 0 1rem 0;
   }
 
   .ContentLayout__Brand_Logo {

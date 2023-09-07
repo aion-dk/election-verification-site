@@ -8,7 +8,12 @@ import useConfigStore from "../stores/useConfigStore";
 
 const { t } = i18n.global;
 const configStore = useConfigStore();
-const contactUrl = computed(() => configStore.electionStatus?.electionVerificationSite?.contactUrl[i18n.global.locale] || null);
+const contactUrl = computed(
+  () =>
+    configStore.electionStatus?.electionVerificationSite?.contactUrl[
+      i18n.global.locale
+    ] || null
+);
 
 const props = defineProps({
   locale: {
@@ -47,15 +52,15 @@ const setLocale = (newLocale: string) => {
   emit("changeLocale", newLocale);
 };
 
-const onResize = () => isMenuOpened.value = false;
+const onResize = () => (isMenuOpened.value = false);
 
 onMounted(() => {
-  window.addEventListener('resize', onResize);
+  window.addEventListener("resize", onResize);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener('resize', onResize);
-})
+  window.removeEventListener("resize", onResize);
+});
 </script>
 
 <template>
@@ -163,9 +168,9 @@ onBeforeUnmount(() => {
 </template>
 
 <style type="text/css" scoped>
-  .Header__Navbar_Overrides {
-    padding-left: 1.5rem !important;
-  }
+.Header__Navbar_Overrides {
+  padding-left: 1.5rem !important;
+}
 
 .Header__Election_Info {
   display: flex;

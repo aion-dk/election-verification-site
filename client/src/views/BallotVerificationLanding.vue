@@ -269,19 +269,6 @@ html[dir="rtl"] .VerificationLanding__Tooltip_Icon {
     text-align: left;
   }
 
-  .VerificationLanding__Help_Footer {
-    font-size: 1.25rem;
-  }
-
-  .VerificationLanding__Step_Index {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  .VerificationLanding__Step_Text {
-    margin: 0.5rem 0 0 0;
-  }
-
   .VerificationLanding__TrackingCode {
     border-radius: 14px;
     height: 3.25rem;
@@ -296,9 +283,7 @@ html[dir="rtl"] .VerificationLanding__Tooltip_Icon {
     border-radius: 14px !important;
     margin-bottom: 1rem !important;
   }
-}
 
-@media only screen and (min-width: 80rem) {
   .VerificationLanding__Help_Footer {
     font-size: 1.75rem;
   }
