@@ -112,7 +112,13 @@ const cancel = () => {
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
+  .BallotManager {
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 90rem) {
   .BallotManager {
     margin-bottom: -3rem;
   }

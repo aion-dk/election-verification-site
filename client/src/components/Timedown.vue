@@ -58,9 +58,9 @@ onMounted(() => {
 .Timedown {
   background-color: var(--slate-100);
   width: 100%;
-  z-index: 90;
-  margin-top: 82px;
+  z-index: 50;
   padding-bottom: 0.25rem;
+  position: fixed;
 }
 
 .Timedown__Progress {
@@ -84,7 +84,7 @@ onMounted(() => {
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .Timedown {
     background-color: white;
     width: calc(100% - 32rem);
@@ -92,9 +92,9 @@ onMounted(() => {
   }
 }
 
-@media only screen and (min-width: 120rem) and (min-height: 68rem) {
+@media only screen and (min-width: 120rem) {
   .Timedown {
-    width: calc(100% - 38rem);
+    width: calc(100% - 42rem);
   }
 }
 </style>

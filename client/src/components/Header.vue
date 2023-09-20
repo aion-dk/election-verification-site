@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, onBeforeUnmount, ref } from "vue";
 import { RouterLink } from "vue-router";
 import DropDown from "./DropDown.vue";
 import i18n from "../lib/i18n";
@@ -8,7 +8,12 @@ import useConfigStore from "../stores/useConfigStore";
 
 const { t } = i18n.global;
 const configStore = useConfigStore();
-const contactUrl = ref(null);
+const contactUrl = computed(
+  () =>
+    configStore.electionStatus?.electionVerificationSite?.contactUrl[
+      i18n.global.locale
+    ] || null
+);
 
 const props = defineProps({
   locale: {
@@ -47,19 +52,14 @@ const setLocale = (newLocale: string) => {
   emit("changeLocale", newLocale);
 };
 
-watch(i18n, () => {
-  contactUrl.value =
-    configStore.electionStatus?.electionVerificationSite?.contactUrl[
-      i18n.global.locale
-    ];
-});
+const onResize = () => (isMenuOpened.value = false);
 
 onMounted(() => {
-  if (configStore.electionStatus?.electionVerificationSite?.contactUrl)
-    contactUrl.value =
-      configStore.electionStatus?.electionVerificationSite?.contactUrl[
-        i18n.global.locale
-      ];
+  window.addEventListener("resize", onResize);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("resize", onResize);
 });
 </script>
 
@@ -168,6 +168,10 @@ onMounted(() => {
 </template>
 
 <style type="text/css" scoped>
+.Header__Navbar_Overrides {
+  padding-left: 1.5rem !important;
+}
+
 .Header__Election_Info {
   display: flex;
   align-items: center;
@@ -226,6 +230,7 @@ onMounted(() => {
   font-weight: 400;
   color: var(--slate-700);
   border: none;
+  background-color: white;
 }
 
 html[dir="ltr"] .Header__Locales {
@@ -258,7 +263,7 @@ html[dir="rtl"] .Header__Locales {
   display: none;
 }
 
-@media only screen and (min-width: 48rem) and (min-height: 50rem) {
+@media only screen and (min-width: 48rem) {
   .Header__Link {
     font-size: 1.2rem;
     margin: 0.5rem 0;
@@ -273,35 +278,19 @@ html[dir="rtl"] .Header__Locales {
     font-size: 1.2rem;
     margin: 0.5rem 0;
   }
-}
 
-@media only screen and (min-width: 48rem) and (min-height: 68rem) {
   .Header__Logo {
     height: 3rem;
     max-width: 12rem;
     object-fit: contain;
     display: block;
   }
-
-  .Header__Link {
-    font-size: 1.5rem;
-    margin: 1rem 0;
-  }
-
-  .Header__Link:first-of-type {
-    font-size: 1.5rem;
-    margin: 0 0 1rem 0;
-  }
-
-  .Header__Locales {
-    font-size: 1.5rem;
-    margin: 1rem 0;
-  }
 }
 
 @media only screen and (min-width: 80rem) {
   .Header__Navbar_Overrides {
     padding-right: 1.5rem !important;
+    padding-left: 1rem !important;
   }
 
   .Header__Hamburger_Btn {

@@ -51,8 +51,10 @@ defineProps({
 <style scoped>
 .ContentLayout {
   display: flex;
-  width: 100vw;
-  height: 100%;
+  height: calc(100dvh - 70px);
+  top: 70px;
+  position: fixed;
+  width: 100%;
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
@@ -70,7 +72,7 @@ defineProps({
 }
 
 .ContentLayout__Breadcrumb {
-  margin: -0.5rem 0 1rem 0;
+  margin: 0 0 1rem 0;
   width: 100%;
 }
 
@@ -87,7 +89,6 @@ defineProps({
 
 .ContentLayout__Help {
   width: 100%;
-  padding: 1rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -112,7 +113,7 @@ defineProps({
   display: block;
   width: 40%;
   height: auto;
-  margin-bottom: 2rem;
+  margin-bottom: 3rem;
 }
 
 .ContentLayout__Help_Title {
@@ -133,16 +134,16 @@ defineProps({
     padding: 4rem;
   }
 
-  .ContentLayout__Brand_Logo {
-    width: 30%;
-  }
-
   .ContentLayout__Help_Title {
     font-size: 1.8rem;
   }
 
   .ContentLayout__Breadcrumb {
-    margin: -1.5rem 0 1rem 0;
+    margin: -0.5rem 0 1rem 0;
+  }
+
+  .ContentLayout__Brand_Logo {
+    display: none;
   }
 }
 
@@ -156,16 +157,10 @@ defineProps({
   }
 }
 
-@media only screen and (min-width: 48rem) and (min-height: 68rem) {
-  .ContentLayout__Brand_Logo {
-    display: none;
-  }
-}
-
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .ContentLayout {
     flex-direction: row;
-    padding: 0 0 3rem 0;
+    padding: 0;
     overflow: hidden;
   }
 
@@ -182,6 +177,7 @@ defineProps({
     height: 100%;
     padding: 5rem 3rem;
     justify-content: flex-start;
+    overflow-y: auto;
   }
 
   .ContentLayout__Help_Container {
@@ -204,22 +200,17 @@ defineProps({
   }
 }
 
-@media only screen and (min-width: 120rem) and (min-height: 68rem) {
+@media only screen and (min-width: 120rem) {
   .ContentLayout__Action {
-    width: calc(100% - 38rem);
+    width: calc(100% - 42rem);
   }
 
   .ContentLayout__Help {
-    width: 38rem;
+    width: 42rem;
   }
 
   .ContentLayout__Help_Container {
-    padding: 5rem 4rem;
-    gap: 2rem;
-  }
-
-  .ContentLayout__Help_Title {
-    font-size: 3rem;
+    padding: 4rem 3rem;
   }
 }
 </style>
