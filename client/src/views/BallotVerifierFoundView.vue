@@ -6,9 +6,9 @@ const route = useRoute();
 import { onMounted, ref, watch } from "vue";
 import useVerificationStore from "../stores/useVerificationStore";
 import TrackedBallotManager from "../components/TrackedBallotManager.vue";
-import ContentLayout from "@/components/ContentLayout.vue";
-import MainIcon from "@/components/MainIcon.vue";
-import i18n from "@/lib/i18n";
+import ContentLayout from "../components/ContentLayout.vue";
+import MainIcon from "../components/MainIcon.vue";
+import i18n from "../lib/i18n";
 
 const verificationStore = useVerificationStore();
 const configStore = useConfigStore();
