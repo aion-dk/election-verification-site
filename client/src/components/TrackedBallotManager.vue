@@ -4,10 +4,6 @@ defineProps({
     type: String,
     required: true,
   },
-  periodicedTrackingCode: {
-    type: String,
-    required: true,
-  },
 });
 
 const emits = defineEmits(["cancel"]);
