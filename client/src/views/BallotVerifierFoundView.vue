@@ -8,12 +8,10 @@ import useVerificationStore from "../stores/useVerificationStore";
 import TrackedBallotManager from "../components/TrackedBallotManager.vue";
 import ContentLayout from "@/components/ContentLayout.vue";
 import MainIcon from "@/components/MainIcon.vue";
-import i18n from '@/lib/i18n'
+import i18n from "@/lib/i18n";
 
 const verificationStore = useVerificationStore();
 const configStore = useConfigStore();
-const error = ref(null);
-const disabled = ref(false);
 const steps = [1, 2, 3, 4, 5];
 const verificationCode = ref(null);
 
@@ -37,9 +35,8 @@ watch(verificationStore, async (store) => {
 });
 
 onMounted(async () => {
-  verificationCode.value = route.params.verificationCode.toString()
-  if(!verificationStore.ballot) {
-
+  verificationCode.value = route.params.verificationCode.toString();
+  if (!verificationStore.ballot) {
     try {
       verificationStore.reset();
       await verificationStore.setupAVVerifier(configStore.boardSlug);
@@ -47,14 +44,11 @@ onMounted(async () => {
       await verificationStore.findBallot(verificationCode.value);
 
       verificationStore.generatePairingCode();
-
     } catch (e) {
       console.error(e);
-      disabled.value = false;
       await router.push({
         name: "BallotVerificationLanding",
       });
-      error.value = "verify.invalid_code";
     }
   }
 
@@ -63,13 +57,14 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="VerificationFound"  aria-flowto="tracking-code">
+  <div class="VerificationFound" aria-flowto="tracking-code">
     <ContentLayout
       :help-title="$t('views.verification.help.title')"
       :help-title-strong="$t('views.verification.help.title_strong')"
       :logo="configStore.electionStatus?.theme?.logo"
-      :breadcrumb="`${$t('header.verification')} / ${$t('breadcrumbs.ballot_found')}` "
-
+      :breadcrumb="`${$t('header.verification')} / ${$t(
+        'breadcrumbs.ballot_found'
+      )}`"
     >
       <template v-slot:action>
         <TrackedBallotManager
@@ -84,7 +79,6 @@ onMounted(async () => {
         <p class="VerificationFound__Description">
           {{ $t("views.verifier.found.description") }}
         </p>
-        <Error v-if="error" :errorPath="error" />
       </template>
       <template v-slot:help>
         <div
@@ -99,12 +93,12 @@ onMounted(async () => {
           />
         </div>
         <span class="VerificationFound__Help_Footer text-contrast">{{
-            $t(`views.verification.help.footer`)
-          }}</span>
+          $t(`views.verification.help.footer`)
+        }}</span>
       </template>
     </ContentLayout>
   </div>
-´
+  ´
 </template>
 
 <style scoped>
@@ -112,7 +106,6 @@ onMounted(async () => {
   width: 100vw;
   height: 100%;
 }
-
 
 .VerificationFound__Title {
   text-align: center;
@@ -201,6 +194,5 @@ onMounted(async () => {
     margin: 2rem 0 1rem 0;
     font-size: 1.2rem;
   }
-
 }
 </style>

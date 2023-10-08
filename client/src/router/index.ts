@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 import Welcome from "../views/Welcome.vue";
 import BallotTrackerView from "../views/BallotTrackerView.vue";
 import BallotVerifierView from "../views/BallotVerifierView.vue";
-import BallotVerifierFoundView from "../views/BallotVerifierFoundView.vue"
+import BallotVerifierFoundView from "../views/BallotVerifierFoundView.vue";
 import MissingSlugView from "../views/MissingSlugView.vue";
 import BallotVerificationLanding from "../views/BallotVerificationLanding.vue";
 import LogsView from "../views/LogsView.vue";
