@@ -8,6 +8,10 @@ executors:
   vm-linux-ubuntu:
     machine:
       image: ubuntu-2204:2022.04.2
+      docker_layer_caching: true
+  vm-linux-ubuntu-nocache:
+    machine:
+      image: ubuntu-2204:2022.04.2
 
 commands:
   build-image:
@@ -51,11 +55,8 @@ commands:
           VAR_SSH_KEY: PULL_SSH_KEY
       - run:
           name: Build Docker image
-          environment:
-            DOCKER_BUILDKIT: "1"
-            BUILDKIT_PROGRESS: "plain"
           command: |
-            docker build << parameters.docker_context >> --target=<< parameters.target >> -t << parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1} --ssh default --build-arg RAILS_ENV="<< parameters.environment >>" --build-arg NODE_ENV="<< parameters.environment >>" --build-arg SECRET_KEY_BASE="${RANDOM}"
+            docker build << parameters.docker_context >> --target=<< parameters.target >> -t << parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1} --ssh default 
       - run:
           name: Push untested docker image
           command: |
@@ -249,7 +250,7 @@ jobs:
           environment: "production"
           docker_context: "./client"
   scan-client:
-    executor: vm-linux-ubuntu
+    executor: vm-linux-ubuntu-nocache
     environment:
       ECR_REGISTRY_ID: "534003348933"
     steps:
@@ -268,7 +269,7 @@ jobs:
           image: ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:${CIRCLE_SHA1}-untested
           ignored_cves: "CVE-2021-32292,"
   client-e2e:
-    executor: vm-linux-ubuntu
+    executor: vm-linux-ubuntu-nocache
     steps:
       - run-e2e: &client-service-aws
           service_name: "election-verification-site"
@@ -276,22 +277,22 @@ jobs:
           aws_access_key_id: "${AWS_ACCESS_KEY_ID}"
           aws_secret_access_key: "${AWS_SECRET_ACCESS_KEY}"
   client-component:
-    executor: vm-linux-ubuntu
+    executor: vm-linux-ubuntu-nocache
     steps:
       - run-component:
           <<: *client-service-aws
   client-linting:
-    executor: vm-linux-ubuntu
+    executor: vm-linux-ubuntu-nocache
     steps:
       - run-linting:
           <<: *client-service-aws
   tag-tested-client-image-dev:
-    executor: vm-linux-ubuntu
+    executor: vm-linux-ubuntu-nocache
     steps:
       - tag-tested-image:
           <<: *client-service-aws
   tag-tested-client-image-prod:
-    executor: vm-linux-ubuntu
+    executor: vm-linux-ubuntu-nocache
     steps:
       - tag-tested-image:
           <<: *client-service-aws
