@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM 534003348933.dkr.ecr.eu-west-1.amazonaws.com/nodejs:19-dev-latest as builder
+FROM 534003348933.dkr.ecr.eu-west-1.amazonaws.com/nodejs:19-dev-latest as development
 
 WORKDIR /usr/src/app
 
@@ -10,9 +10,6 @@ RUN npm ci \
 
 COPY . .
 
-FROM builder as development
+FROM 534003348933.dkr.ecr.eu-west-1.amazonaws.com/nodejs:19-latest as production
 
 COPY . .
-
-
-FROM builder as production

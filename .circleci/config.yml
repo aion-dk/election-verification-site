@@ -227,7 +227,7 @@ commands:
 
 jobs:
   lint-dockerfile-client:
-    executor: vm-linux-ubuntu
+    executor: vm-linux-ubuntu-nocache
     steps:
       - docker/lint:
           dockerfile: ./client/Dockerfile
