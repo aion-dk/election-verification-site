@@ -109,6 +109,44 @@ commands:
             docker push ${ECR_REGISTRY}/<< parameters.service_name >>:<< parameters.tag_prefix >>latest
             docker push ${ECR_REGISTRY}/<< parameters.service_name >>:<< parameters.tag_prefix >>main
             docker push ${ECR_REGISTRY}/<< parameters.service_name >>:<< parameters.tag_prefix >>"$(date "+%d-%m-%Y")"
+  tag-final-tested-image:
+    parameters:
+      service_name:
+        type: string
+      ecr_registry_id:
+        type: string
+        default: "534003348933"
+      aws_access_key_id:
+        type: string
+      aws_secret_access_key:
+        type: string
+    steps:
+      - run:
+          name: Set environment variables
+          command: |
+            echo 'export AWS_ACCESS_KEY_ID="<< parameters.aws_access_key_id >>"' >> "$BASH_ENV"
+            echo 'export AWS_SECRET_ACCESS_KEY="<< parameters.aws_secret_access_key >>"' >> "$BASH_ENV"
+            echo 'export ECR_REGISTRY_ID="<< parameters.ecr_registry_id >>"' >> "$BASH_ENV"
+            echo 'export ECR_REGISTRY="${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com"' >> "$BASH_ENV"
+      - aws-ecr/ecr-login:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-cli-version: latest
+          public-registry: false
+          region: eu-west-1
+          registry-id: ECR_REGISTRY_ID
+      - run:
+          name: Pull the images for tagging
+          command: |
+            docker pull ${ECR_REGISTRY}/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}
+      - run:
+          name: Tag image
+          command: |
+            docker tag ${ECR_REGISTRY}/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1} ${ECR_REGISTRY}/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_TAG}
+      - run:
+          name: Push image
+          command: |
+            docker push ${ECR_REGISTRY}/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_TAG}
   run-e2e:
     parameters:
       service_name:
@@ -297,6 +335,12 @@ jobs:
       - tag-tested-image:
           <<: *client-service-aws
           tag_prefix: ""
+  tag-final-client-image-prod:
+    executor: vm-linux-ubuntu-nocache
+    steps:
+      - tag-tested-image:
+          <<: *client-service-aws
+          tag_prefix: ""
 
 workflows:
   everything:
@@ -349,3 +393,14 @@ workflows:
             - scan-client
           context:
             - "ECR-RW"
+      - tag-final-client-image-prod:
+          requires:
+            - tag-tested-client-image-prod
+          context:
+            - "ECR-RW"
+          filters:
+            #triggers only on semver tags
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v([0-9]|[1-9][0-9]*)\.([0-9]|[1-9][0-9]*)\.([0-9]|[1-9][0-9])+(?:-(sc|rc).*)?$/
