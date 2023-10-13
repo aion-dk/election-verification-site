@@ -93,7 +93,7 @@ commands:
           registry-id: ECR_REGISTRY_ID
       - docker/tag-push:
           service: election-verification-site
-          pull-tag: << parameters.tag_prefix >>-"${CIRCLE_SHA1}"-untested
+          pull-tag: << parameters.tag_prefix >>"${CIRCLE_SHA1}"-untested
           push-tags: main,latest,${CIRCLE_SHA1}
   tag-final-tested-image:
     parameters:
@@ -123,7 +123,7 @@ commands:
           registry-id: ECR_REGISTRY_ID
       - docker/tag-push:
           service: election-verification-site
-          pull-tag: << parameters.tag_prefix >>-"${CIRCLE_SHA1}"
+          pull-tag: << parameters.tag_prefix >>"${CIRCLE_SHA1}"
           push-tags: ${CIRCLE_TAG}
   run-e2e:
     parameters:
