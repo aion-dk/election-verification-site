@@ -13,6 +13,11 @@ executors:
     machine:
       image: ubuntu-2204:2022.04.2
 
+filters: 
+  - &always
+    tags:
+      only: /.*/
+
 commands:
   build-image:
     parameters:
@@ -323,39 +328,46 @@ jobs:
 workflows:
   everything:
     jobs:
-      - lint-dockerfile-client
+      - lint-dockerfile-client:
+          filters: *always
       - build-image-development-client:
           context:
             - "GIT"
             - "ECR-RW"
           requires:
             - lint-dockerfile-client
+          filters: *always
       - build-image-production-client:
           context:
             - "GIT"
             - "ECR-RW"
           requires:
             - lint-dockerfile-client
+          filters: *always
       - scan-client:
           requires:
             - build-image-production-client
           context:
             - "ECR-RW"
+          filters: *always
       - client-e2e:
           requires:
             - build-image-development-client
           context:
             - "ECR-RW"
+          filters: *always
       - client-component:
           requires:
             - build-image-development-client
           context:
             - "ECR-RW"
+          filters: *always
       - client-linting:
           requires:
             - build-image-development-client
           context:
             - "ECR-RW"
+          filters: *always
       - tag-tested-client-image-dev:
           requires:
             - client-e2e
@@ -363,6 +375,7 @@ workflows:
             - client-linting
           context:
             - "ECR-RW"
+          filters: *always
       - tag-tested-client-image-prod:
           requires:
             - client-e2e
@@ -371,6 +384,7 @@ workflows:
             - scan-client
           context:
             - "ECR-RW"
+          filters: *always
       - tag-final-client-image-prod:
           requires:
             - tag-tested-client-image-prod
