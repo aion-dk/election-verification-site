@@ -153,6 +153,11 @@ export const fallbackMessages = {
           author: "Voter",
           info: "Voter and Digital Ballot Box have exchanged cryptographic information establishing trust.",
         },
+        VoterSessionAdjudicationItem: {
+          type: "Voter session adjudication",
+          author: "Election Official",
+          info: "A registered voter session has been adjudicated.",
+        },
         aria_labels: {
           activity_type: "Activity",
           activity_registered: "Activity registered at",
@@ -203,6 +208,11 @@ export const fallbackMessages = {
           type: "Sign in",
           author: "You",
           details: "You have authenticated yourself and signed in.",
+        },
+        VoterSessionAdjudicationItem: {
+          type: "Session adjudication",
+          author: "Election Official",
+          details: "Your session has been adjudicated.",
         },
       },
       tracked_ballot_manager: {
