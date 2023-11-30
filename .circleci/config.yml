@@ -320,10 +320,20 @@ jobs:
           tag_prefix: ""
   tag-final-client-image-prod:
     executor: vm-linux-ubuntu-nocache
+    environment:
+      ECR_REGISTRY_ID: '534003348933'
     steps:
-      - tag-tested-image:
-          <<: *client-service-aws
-          tag_prefix: ""
+      - aws-ecr/ecr-login:
+          aws-access-key-id: AWS_ACCESS_KEY_ID
+          aws-secret-access-key: AWS_SECRET_ACCESS_KEY
+          aws-cli-version: latest
+          public-registry: false
+          region: eu-west-1
+          registry-id: ECR_REGISTRY_ID
+      - docker/tag-push:
+          service: election-verification-site
+          pull-tag: ${CIRCLE_SHA1}
+          push-tags: ${CIRCLE_TAG}
 
 workflows:
   everything:
