@@ -11,7 +11,7 @@ import VuePopper from "@kalimahapps/vue-popper";
 
 const app = createApp(App);
 
-app.use(UILibrary.default);
+app.use(UILibrary.default, i18n);
 app.use(createPinia());
 app.use(router);
 app.use(i18n);

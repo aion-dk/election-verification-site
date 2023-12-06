@@ -31,7 +31,11 @@
           <div class="BallotVerifierContest__Option_Title">
             {{ $t("views.verifier.blank_pile") }}
           </div>
-          <OptionCheckbox class="BallotVerifierContest__Option_Cross" />
+          <AVOptionCheckbox
+            :checked="true"
+            :disabled="true"
+            class="BallotVerifierContest__Option_Cross"
+          />
         </div>
         <div
           class="BallotVerifierContest__Option"
@@ -47,14 +51,18 @@
           <div class="BallotVerifierContest__Option_Title">
             {{ parsedOption.title }}
           </div>
-          <OptionCheckbox
+          <AVOptionCheckbox
             v-if="!isMultipleCrossesPerVote"
             :rank="parsedOption.rank"
+            :checked="true"
+            :disabled="true"
             class="BallotVerifierContest__Option_Cross"
           />
           <div class="BallotVerifierContest__Option_Crosses" v-else>
-            <OptionCheckbox
+            <AVOptionCheckbox
               v-for="(_, i) in parsedOption.count"
+              :checked="true"
+              :disabled="true"
               :key="`cross-${i}`"
             />
           </div>
@@ -65,7 +73,6 @@
 </template>
 <script lang="ts">
 import useConfigStore from "@/stores/useConfigStore";
-import OptionCheckbox from "@/components/OptionCheckbox.vue";
 import type { PropType } from "vue";
 import { defineComponent } from "vue";
 import type {
@@ -76,7 +83,6 @@ import type { FullContestContent } from "@/Types";
 
 export default defineComponent({
   name: "BallotVerifierContest",
-  components: { OptionCheckbox },
   props: {
     contestSelection: {
       type: Object as PropType<ContestSelection>,
