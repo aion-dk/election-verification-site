@@ -37,7 +37,6 @@ watch(verificationStore, async (store) => {
 onMounted(async () => {
   verificationCode.value = route.params.verificationCode.toString();
   if (!verificationStore.ballotAddress) {
-    console.log("ewfwe");
     try {
       verificationStore.reset();
       await verificationStore.setupAVVerifier(configStore.boardSlug);
