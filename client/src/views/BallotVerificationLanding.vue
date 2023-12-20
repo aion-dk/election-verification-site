@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 import useVerificationStore from "../stores/useVerificationStore";
 import useConfigStore from "../stores/useConfigStore";
 import router from "../router";
@@ -13,6 +13,9 @@ const error = ref(null);
 const disabled = ref(false);
 const verificationCode = ref(null);
 const steps = [1, 2, 3, 4, 5];
+const isRtl = computed(
+  () => document.getElementsByTagName("html")[0].dir === "rtl"
+);
 
 onMounted(() => {
   verificationStore.reset();
@@ -104,15 +107,13 @@ watch(verificationStore, async (newStore) => {
             name="initiate-verification"
             id="initiate-verification"
             :disabled="disabled || !verificationCode"
-            iconLeft
             fullWidth
-            icon="fingerprint"
             @click="initiateVerification"
             class="VerificationLanding__Button_Overrides"
           />
         </form>
         <p class="VerificationLanding__Tooltip">
-          <tooltip hover placement="right">
+          <tooltip hover :placement="isRtl ? 'left' : 'right'">
             <template #default>
               <AVIcon
                 icon="circle-question"
@@ -213,8 +214,12 @@ watch(verificationStore, async (newStore) => {
   cursor: help;
 }
 
-.VerificationLanding__Tooltip_Icon {
+html[dir="ltr"] .VerificationLanding__Tooltip_Icon {
   margin-right: 0.5rem;
+}
+
+html[dir="rtl"] .VerificationLanding__Tooltip_Icon {
+  margin-left: 0.5rem;
 }
 
 .VerificationLanding__Step {
@@ -239,7 +244,7 @@ watch(verificationStore, async (newStore) => {
   font-size: 1.5rem;
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .VerificationLanding__Action_Container {
     width: 30rem;
   }
@@ -264,19 +269,6 @@ watch(verificationStore, async (newStore) => {
     text-align: left;
   }
 
-  .VerificationLanding__Help_Footer {
-    font-size: 1.25rem;
-  }
-
-  .VerificationLanding__Step_Index {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  .VerificationLanding__Step_Text {
-    margin: 0.5rem 0 0 0;
-  }
-
   .VerificationLanding__TrackingCode {
     border-radius: 14px;
     height: 3.25rem;
@@ -291,9 +283,7 @@ watch(verificationStore, async (newStore) => {
     border-radius: 14px !important;
     margin-bottom: 1rem !important;
   }
-}
 
-@media only screen and (min-width: 80rem) and (min-height: 68rem) {
   .VerificationLanding__Help_Footer {
     font-size: 1.75rem;
   }
@@ -308,7 +298,7 @@ watch(verificationStore, async (newStore) => {
   }
 }
 
-@media only screen and (min-width: 120rem) and (min-height: 90rem) {
+@media only screen and (min-width: 120rem) {
   .VerificationLanding__Help_Footer {
     font-size: 2.25rem;
   }

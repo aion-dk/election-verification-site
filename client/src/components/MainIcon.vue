@@ -18,6 +18,7 @@ defineProps({
   position: static;
   color: var(--av-theme-background);
   margin-bottom: 0.5rem;
+  pointer-events: none;
 }
 
 @media only screen and (min-width: 48rem) {
@@ -31,9 +32,16 @@ defineProps({
     opacity: 0.05;
     font-size: 20rem;
     position: absolute;
-    right: 3rem;
     top: 3rem;
     color: var(--av-theme-background);
+  }
+
+  html[dir="ltr"] .MainIcon {
+    right: 3rem;
+  }
+
+  html[dir="rtl"] .MainIcon {
+    left: 3rem;
   }
 }
 </style>

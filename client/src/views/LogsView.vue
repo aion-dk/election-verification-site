@@ -1,22 +1,24 @@
 <script setup lang="ts">
 import { options } from "../lib/api";
-import useLocaleStore from "../stores/useLocaleStore";
 import useConfigStore from "../stores/useConfigStore";
 import useBoardStore from "../stores/useBoardStore";
-import { onMounted, ref, watch } from "vue";
+import { onMounted, ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
 import BoardItem from "../components/BoardItem.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
 import router from "@/router";
+import i18n from "../lib/i18n";
 
 const route = useRoute();
-const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const boardStore = useBoardStore();
 const configItemsOnly = ref<boolean>(false);
 const disableFirst = ref<boolean>(true);
 const disableLast = ref<boolean>(false);
+const isRtl = computed(
+  () => document.getElementsByTagName("html")[0].dir === "rtl"
+);
 
 watch(configStore, () => loadPage(currentPage()));
 watch(route, () => {
@@ -61,7 +63,7 @@ const loadPage = (page: number) => {
 
 const navigate = (page: number) => {
   router.push(
-    `/${localeStore.locale}/${configStore.boardSlug}/logs/${page.toString()}`
+    `/${i18n.global.locale}/${configStore.boardSlug}/logs/${page.toString()}`
   );
 };
 
@@ -102,7 +104,7 @@ onMounted(() => loadPage(currentPage()));
       <ul class="LogsView__ColumnDescriptions">
         <li class="LogsView__ColumnDescriptions--event">
           <span class="LogsView__Tooltip">
-            <tooltip hover placement="right">
+            <tooltip hover :placement="isRtl ? 'left' : 'right'">
               <template #default>
                 {{ $t("views.logs.headers.type") }}
                 <AVIcon
@@ -122,27 +124,12 @@ onMounted(() => loadPage(currentPage()));
         </li>
         <li class="LogsView__ColumnDescriptions--time">
           <span class="LogsView__Tooltip">
-            <tooltip hover placement="right">
-              <template #default>
-                {{ $t("views.logs.headers.time") }}
-                <AVIcon
-                  icon="circle-question"
-                  class="LogsView__Tooltip_Icon"
-                  aria-hidden="true"
-                />
-              </template>
-
-              <template #content>
-                <span id="tracking-code-tooltip">
-                  {{ $t("views.logs.headers.time_tooltip") }}
-                </span>
-              </template>
-            </tooltip>
+            {{ $t("views.logs.headers.time") }}
           </span>
         </li>
         <li class="LogsView__ColumnDescriptions--actor">
           <span class="LogsView__Tooltip">
-            <tooltip hover placement="right">
+            <tooltip hover :placement="isRtl ? 'left' : 'right'">
               <template #default>
                 {{ $t("views.logs.headers.actor") }}
                 <AVIcon
@@ -169,65 +156,71 @@ onMounted(() => loadPage(currentPage()));
       />
 
       <div class="LogsView__Pagination">
-        <button
-          :aria-label="$t('views.logs.aria_labels.first_page')"
-          :class="{
-            LogsView__PageLink: true,
-            LogsView__PageLink_Disabled: disableFirst,
-          }"
-          :disabled="disableFirst"
-          @click="navigate(1)"
-        >
-          <div class="LogsView__Icon_Set">
+        <div class="RTL_Rotation">
+          <button
+            :aria-label="$t('views.logs.aria_labels.first_page')"
+            :class="{
+              LogsView__PageLink: true,
+              LogsView__PageLink_Disabled: disableFirst,
+            }"
+            :disabled="disableFirst"
+            @click="navigate(1)"
+          >
+            <div class="LogsView__Icon_Set">
+              <AVIcon icon="chevron-left" aria-hidden="true" />
+              <AVIcon icon="chevron-left" aria-hidden="true" />
+            </div>
+          </button>
+
+          <button
+            :aria-label="$t('views.logs.aria_labels.prev_page')"
+            :class="{
+              LogsView__PageLink: true,
+              LogsView__PageLink_Disabled: disableFirst,
+            }"
+            :disabled="disableFirst"
+            @click="navigate(boardStore.meta.prev_page)"
+          >
             <AVIcon icon="chevron-left" aria-hidden="true" />
-            <AVIcon icon="chevron-left" aria-hidden="true" />
-          </div>
-        </button>
+          </button>
+        </div>
 
-        <button
-          :aria-label="$t('views.logs.aria_labels.prev_page')"
-          :class="{
-            LogsView__PageLink: true,
-            LogsView__PageLink_Disabled: disableFirst,
-          }"
-          :disabled="disableFirst"
-          @click="navigate(boardStore.meta.prev_page)"
-        >
-          <AVIcon icon="chevron-left" aria-hidden="true" />
-        </button>
+        <div>
+          <span class="LogsView__PageLink">{{ boardStore.currentPage }}</span>
+          <span class="LogsView__PageLink">/</span>
+          <span class="LogsView__PageLink">{{
+            boardStore.meta.total_pages
+          }}</span>
+        </div>
 
-        <span class="LogsView__PageLink">{{ boardStore.currentPage }}</span>
-        <span class="LogsView__PageLink">/</span>
-        <span class="LogsView__PageLink">{{
-          boardStore.meta.total_pages
-        }}</span>
-
-        <button
-          :aria-label="$t('views.logs.aria_labels.next_page')"
-          :class="{
-            LogsView__PageLink: true,
-            LogsView__PageLink_Disabled: disableLast,
-          }"
-          :disabled="disableLast"
-          @click="navigate(boardStore.meta.next_page)"
-        >
-          <AVIcon icon="chevron-right" aria-hidden="true" />
-        </button>
-
-        <button
-          :aria-label="$t('views.logs.aria_labels.last_page')"
-          :class="{
-            LogsView__PageLink: true,
-            LogsView__PageLink_Disabled: disableLast,
-          }"
-          :disabled="disableLast"
-          @click="navigate(boardStore.meta.total_pages)"
-        >
-          <div class="LogsView__Icon_Set">
+        <div class="RTL_Rotation">
+          <button
+            :aria-label="$t('views.logs.aria_labels.next_page')"
+            :class="{
+              LogsView__PageLink: true,
+              LogsView__PageLink_Disabled: disableLast,
+            }"
+            :disabled="disableLast"
+            @click="navigate(boardStore.meta.next_page)"
+          >
             <AVIcon icon="chevron-right" aria-hidden="true" />
-            <AVIcon icon="chevron-right" aria-hidden="true" />
-          </div>
-        </button>
+          </button>
+
+          <button
+            :aria-label="$t('views.logs.aria_labels.last_page')"
+            :class="{
+              LogsView__PageLink: true,
+              LogsView__PageLink_Disabled: disableLast,
+            }"
+            :disabled="disableLast"
+            @click="navigate(boardStore.meta.total_pages)"
+          >
+            <div class="LogsView__Icon_Set">
+              <AVIcon icon="chevron-right" aria-hidden="true" />
+              <AVIcon icon="chevron-right" aria-hidden="true" />
+            </div>
+          </button>
+        </div>
       </div>
 
       <AVButton
@@ -314,14 +307,29 @@ input[type="checkbox"] {
   margin: 1rem 0 0 0;
 }
 
-.LogsView__Icon_Set > svg:first-of-type {
+html[dir="ltr"] .LogsView__Icon_Set > svg:first-of-type {
   margin-right: -4px;
+}
+
+html[dir="rtl"] .LogsView__Icon_Set > svg:first-of-type {
+  margin-left: -4px;
+}
+
+.RTL_Rotation {
+  display: flex;
+  gap: 1rem;
+}
+
+html[dir="rtl"] .RTL_Rotation {
+  transform: rotate(180deg);
+  flex-direction: row-reverse;
 }
 
 .LogsView__PageLink {
   color: var(--slate-800);
   background: none;
   border: none;
+  cursor: pointer;
 }
 
 .LogsView__PageLink_Disabled {
@@ -347,6 +355,7 @@ input[type="checkbox"] {
   font-size: 0.75rem !important;
   padding: 0.5rem 0.8rem !important;
   margin-top: 2rem;
+  margin-bottom: 1rem;
   align-self: center;
 }
 
@@ -395,7 +404,7 @@ input[type="checkbox"] {
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .LogsView__Title {
     font-size: 3.5rem;
   }
@@ -429,7 +438,7 @@ input[type="checkbox"] {
   }
 }
 
-@media only screen and (min-width: 120rem) and (min-height: 68rem) {
+@media only screen and (min-width: 120rem) {
   .LogsView__Title {
     font-size: 3.5rem;
   }

@@ -118,8 +118,15 @@ const classes = computed(() => {
   font-weight: 600;
   font-size: 1rem;
   margin: 0 0 1rem 0;
-  padding: 0 3rem 0 0;
   color: var(--slate-800);
+}
+
+html[dir="ltr"] .BoardItem__Type {
+  padding: 0 3rem 0 0;
+}
+
+html[dir="rtl"] .BoardItem__Type {
+  padding: 0 0 0 3rem;
 }
 
 .BoardItem__Date {
@@ -155,8 +162,15 @@ const classes = computed(() => {
 }
 
 .BoardItem__InlineIcon {
-  margin-right: 0.5rem;
   color: var(--slate-600);
+}
+
+html[dir="ltr"] .BoardItem__InlineIcon {
+  margin-right: 0.5rem;
+}
+
+html[dir="rtl"] .BoardItem__InlineIcon {
+  margin-left: 0.5rem;
 }
 
 .BoardItem__Label {

@@ -8,11 +8,17 @@ const neededStrings = JSON.stringify(fallbackMessages.en);
 const messages = { en: JSON.parse(neededStrings) };
 
 const i18n = createI18n({ messages });
+const stubs = {
+  DateTime: {
+    template: "<span />",
+  },
+};
 
 test("includes item type", async () => {
   const wrapper = mount(BoardItem, {
     global: {
       plugins: [i18n],
+      stubs,
     },
     props: {
       item: {
@@ -29,6 +35,7 @@ test("includes item author", async () => {
   const wrapper = mount(BoardItem, {
     global: {
       plugins: [i18n],
+      stubs,
     },
     props: {
       item: {

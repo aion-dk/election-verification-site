@@ -1,15 +1,14 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
-import useLocaleStore from "../stores/useLocaleStore";
+import i18n from "../lib/i18n";
 import router from "../router";
 const configStore = useConfigStore();
-const localeStore = useLocaleStore();
 
 const goToVerifier = () => {
-  router.push(`/${localeStore.locale}/${configStore.boardSlug}/verify`);
+  router.push(`/${i18n.global.locale}/${configStore.boardSlug}/verify`);
 };
 const goToTracker = () => {
-  router.push(`/${localeStore.locale}/${configStore.boardSlug}/track`);
+  router.push(`/${i18n.global.locale}/${configStore.boardSlug}/track`);
 };
 </script>
 
@@ -24,7 +23,7 @@ const goToTracker = () => {
 
       <div class="Welcome__Description_Desktop_Container">
         <h2 class="Welcome__Description_Desktop_Subtitle">
-          {{ configStore.election.title[localeStore.locale] }}
+          {{ configStore.election.title[$i18n.locale] }}
         </h2>
 
         <p class="Welcome__Description_Desktop_About">
@@ -148,7 +147,7 @@ const goToTracker = () => {
 
 <style type="text/css" scoped>
 .Welcome {
-  height: 100%;
+  height: calc(100dvh - 70px);
   width: 100%;
   overflow-y: auto;
 }
@@ -224,6 +223,7 @@ const goToTracker = () => {
   color: var(--slate-700);
   text-align: center;
   margin-bottom: 2rem;
+  width: 100%;
 }
 
 .Welcome__Description_Desktop {
@@ -263,7 +263,7 @@ const goToTracker = () => {
   display: block;
   width: 40%;
   height: auto;
-  margin-bottom: 18dvh;
+  margin-bottom: 3rem;
 }
 
 @media only screen and (min-width: 48rem) {
@@ -279,9 +279,7 @@ const goToTracker = () => {
   .Welcome__Brand_Logo {
     width: 30%;
   }
-}
 
-@media only screen and (min-width: 48rem) and (min-height: 68rem) {
   .Welcome__Brand_Logo {
     display: none;
   }
@@ -298,7 +296,7 @@ const goToTracker = () => {
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .Welcome__Description_Desktop {
     padding: 5rem;
     display: flex;
@@ -324,7 +322,16 @@ const goToTracker = () => {
     font-weight: 600;
     color: var(--slate-800);
     margin: 0;
+  }
+
+  html[dir="ltr"] .Welcome__Description_Desktop_Title,
+  html[dir="ltr"] .Welcome__Description_Desktop_Subtitle {
     padding: 0 0 0 5rem;
+  }
+
+  html[dir="rtl"] .Welcome__Description_Desktop_Title,
+  html[dir="rtl"] .Welcome__Description_Desktop_Subtitle {
+    padding: 0 5rem 0 0;
   }
 
   .Welcome__Description_Desktop_Subtitle {
@@ -332,7 +339,6 @@ const goToTracker = () => {
     font-weight: 600;
     color: var(--slate-600);
     margin: 0;
-    padding: 0 0 0 5rem;
   }
 
   .Welcome__Description_Desktop_About {
@@ -367,23 +373,28 @@ const goToTracker = () => {
     height: 10rem;
   }
 
-  .Welcome__Card_Icon {
+  html[dir="ltr"] .Welcome__Card_Icon {
     margin: 0 3rem 0 0;
+  }
+
+  html[dir="rtl"] .Welcome__Card_Icon {
+    margin: 0 0 0 3rem;
   }
 
   .Welcome__About div {
     display: flex;
-    margin: 0 1rem 1rem 1rem;
-    padding: 0 6em;
+    margin: 0 1rem 3rem 1rem;
+    padding: 0 6rem;
   }
 }
 
-@media only screen and (min-width: 120rem) and (min-height: 68rem) {
+@media only screen and (min-width: 120rem) {
   .Welcome__Description_Desktop {
     padding: 8rem 20rem;
   }
 
   .Welcome__About div {
+    margin: 0 1rem 0 1rem;
     padding: 0 20rem 5rem 20rem;
   }
 

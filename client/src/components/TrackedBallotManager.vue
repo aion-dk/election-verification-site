@@ -4,10 +4,6 @@ defineProps({
     type: String,
     required: true,
   },
-  periodicedTrackingCode: {
-    type: String,
-    required: true,
-  },
 });
 
 const emits = defineEmits(["cancel"]);
@@ -112,7 +108,13 @@ const cancel = () => {
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
+  .BallotManager {
+    margin-bottom: 0;
+  }
+}
+
+@media only screen and (min-width: 90rem) {
   .BallotManager {
     margin-bottom: -3rem;
   }
