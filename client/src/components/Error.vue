@@ -29,8 +29,16 @@ defineProps({
   color: white;
   padding: 1.5rem 2rem;
   margin-bottom: 2rem;
-  text-align: left;
   z-index: 40;
+  width: 100%;
+}
+
+html[dir="ltr"] .Error {
+  text-align: left;
+}
+
+html[dir="rtl"] .Error {
+  text-align: right;
 }
 
 .Error__Title {
@@ -38,8 +46,12 @@ defineProps({
   color: white;
 }
 
-.Error__Icon_Overrides {
+html[dir="ltr"] .Error__Icon_Overrides {
   margin-right: 0.5rem;
+}
+
+html[dir="rtl"] .Error__Icon_Overrides {
+  margin-left: 0.5rem;
 }
 
 .Error__Description {

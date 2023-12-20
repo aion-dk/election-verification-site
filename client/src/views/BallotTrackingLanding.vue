@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, computed } from "vue";
 import useConfigStore from "../stores/useConfigStore";
 import useBallotStore from "../stores/useBallotStore";
-import useLocaleStore from "../stores/useLocaleStore";
+import i18n from "../lib/i18n";
 import router from "../router";
 import Error from "../components/Error.vue";
 import ContentLayout from "../components/ContentLayout.vue";
@@ -10,11 +10,14 @@ import MainIcon from "../components/MainIcon.vue";
 
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
-const localeStore = useLocaleStore();
 const trackingCode = ref(null);
 const error = ref(null);
 const disabled = ref(false);
 const steps = [1, 2];
+
+const isRtl = computed(
+  () => document.getElementsByTagName("html")[0].dir === "rtl"
+);
 
 const lookupBallot = async (event: Event) => {
   event.preventDefault();
@@ -28,7 +31,7 @@ const lookupBallot = async (event: Event) => {
 
   if (ballotStore.ballot?.status) {
     router.push(
-      `/${localeStore.locale}/${configStore.boardSlug}/track/${trackingCode.value}`
+      `/${i18n.global.locale}/${configStore.boardSlug}/track/${trackingCode.value}`
     );
   } else {
     error.value = "track.invalid_code";
@@ -79,15 +82,13 @@ const lookupBallot = async (event: Event) => {
             name="initiate-verification"
             id="initiate-verification"
             :disabled="disabled || !trackingCode"
-            iconLeft
             fullWidth
-            icon="fingerprint"
             @click="lookupBallot"
             class="TrackingLanding__Button_Overrides"
           />
         </form>
         <p class="TrackingLanding__Tooltip">
-          <tooltip hover placement="right">
+          <tooltip hover :placement="isRtl ? 'left' : 'right'">
             <template #default>
               <AVIcon
                 icon="circle-question"
@@ -185,8 +186,12 @@ const lookupBallot = async (event: Event) => {
   cursor: help;
 }
 
-.TrackingLanding__Tooltip_Icon {
+html[dir="ltr"] .TrackingLanding__Tooltip_Icon {
   margin-right: 0.5rem;
+}
+
+html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
+  margin-left: 0.5rem;
 }
 
 .TrackingLanding__Step {
@@ -207,7 +212,7 @@ const lookupBallot = async (event: Event) => {
   border-radius: 999px;
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .TrackingLanding__Action_Container {
     width: 30rem;
   }
@@ -232,11 +237,6 @@ const lookupBallot = async (event: Event) => {
     text-align: left;
   }
 
-  .TrackingLanding__Step_Index {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
   .TrackingLanding__TrackingCode {
     border-radius: 14px;
     height: 3.25rem;
@@ -251,16 +251,14 @@ const lookupBallot = async (event: Event) => {
     border-radius: 14px !important;
     margin-bottom: 1rem !important;
   }
-}
 
-@media only screen and (min-width: 80rem) and (min-height: 68rem) {
   .TrackingLanding__Step_Index {
     width: 1.75rem;
     height: 1.75rem;
   }
 }
 
-@media only screen and (min-width: 120rem) and (min-height: 90rem) {
+@media only screen and (min-width: 120rem) {
   .TrackingLanding__Step_Index {
     width: 2rem;
     height: 2rem;

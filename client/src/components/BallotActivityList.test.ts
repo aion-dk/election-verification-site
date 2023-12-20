@@ -22,10 +22,17 @@ const i18n = createI18n({
   },
 });
 
+const stubs = {
+  DateTime: {
+    template: "<span />",
+  },
+};
+
 test("that BallotActivityList mounts", async () => {
   const wrapper = mount(BallotActivityList, {
     global: {
       plugins: [i18n],
+      stubs,
     },
     props: {
       activities: [],
@@ -40,6 +47,7 @@ test("that activities are listed", async () => {
   const wrapper = mount(BallotActivityList, {
     global: {
       plugins: [i18n],
+      stubs,
     },
     props: {
       activities: [

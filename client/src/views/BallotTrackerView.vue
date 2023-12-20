@@ -1,25 +1,20 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
 import useBallotStore from "../stores/useBallotStore";
-import useLocaleStore from "../stores/useLocaleStore";
-import { ref, computed, onMounted } from "vue";
+import i18n from "../lib/i18n";
+import { ref, onMounted } from "vue";
 import BallotActivityList from "../components/BallotActivityList.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import TrackedBallotManager from "../components/TrackedBallotManager.vue";
 import router from "../router";
 import type { Ballot } from "../Types";
 
-const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
 const ballot = ref<Ballot>(null);
 
-const periodicedTrackingCode = computed(() => {
-  return ballotStore.ballot?.trackingCode?.split("")?.join(". ");
-});
-
 const cancel = () => {
-  router.push(`/${localeStore.locale}/${configStore.boardSlug}/track`);
+  router.push(`/${i18n.global.locale}/${configStore.boardSlug}/track`);
 };
 
 onMounted(() => (ballot.value = ballotStore.ballot));
@@ -36,7 +31,6 @@ onMounted(() => (ballot.value = ballotStore.ballot));
       <template v-slot:action>
         <TrackedBallotManager
           :tracking-code="ballot.trackingCode"
-          :periodiced-tracking-code="periodicedTrackingCode"
           @cancel="cancel"
         />
 
@@ -131,7 +125,7 @@ onMounted(() => (ballot.value = ballotStore.ballot));
   }
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .BallotTracker__Description.expand {
     text-align: left;
   }

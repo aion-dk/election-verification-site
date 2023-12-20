@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import { watch, ref, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import { RouterView, useRoute } from "vue-router";
-import useLocaleStore from "./stores/useLocaleStore";
 import useConfigStore from "./stores/useConfigStore";
 import useBallotStore from "./stores/useBallotStore";
 import { useConferenceConnector } from "./lib/conferenceServices";
@@ -16,10 +15,8 @@ import { defaultTheme } from "./assets/theme";
 
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
-const localeStore = useLocaleStore();
 const route = useRoute();
 const isLoaded = ref(false);
-const electionName = ref("");
 
 onMounted(async () => {
   const slug = route.params.electionSlug.toString();
@@ -37,27 +34,22 @@ onMounted(async () => {
   isLoaded.value = true;
 });
 
-watch(route, async (newRoute) => {
-  localeStore.setLocale(newRoute.params.locale.toString());
-});
-
 function updateLocale(newLocale: Locale) {
   const newUrl = route.fullPath.replace(
-    `/${localeStore.locale}/`,
+    `/${i18n.global.locale}/`,
     `/${newLocale}/`
   );
 
   router.replace(newUrl);
   setLocale(newLocale);
-  localeStore.setLocale(newLocale);
+  setTitle();
 }
 
 function setTitle() {
-  const title = ["DBAS", configStore.election.title[localeStore.locale]].filter(
+  const title = ["EVS", configStore.election.title[i18n.global.locale]].filter(
     (s) => s
   );
   if (window.top) window.top.document.title = title.join(" - ");
-  electionName.value = configStore.election.title[localeStore.locale];
 }
 
 const setConfigurations = async (slug: string) => {
@@ -136,8 +128,8 @@ const setTheme = async (conferenceClient: any) => {
 
     <Header
       :election="configStore.election"
-      :electionName="electionName"
-      :locale="localeStore.locale"
+      :electionName="configStore.election.title[$i18n.locale]"
+      :locale="$i18n.locale"
       @changeLocale="updateLocale"
     />
     <main class="DBAS__Content" id="main">
@@ -173,6 +165,7 @@ body {
 .DBAS__Loading_Page {
   width: 100vw;
   height: 100dvh;
+  height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -182,9 +175,13 @@ body {
 .DBAS {
   display: flex;
   flex-direction: column;
+  height: 100dvh;
+  height: 100vh;
+  width: 100vw;
 }
 
 .DBAS__Content {
+  height: calc(100dvh - 70px);
   height: calc(100vh - 70px);
   margin-top: 70px;
 }
@@ -212,8 +209,9 @@ body {
   margin-left: 2rem;
 }
 
-@media only screen and (min-width: 80rem) and (min-height: 45rem) {
+@media only screen and (min-width: 80rem) {
   .DBAS__Loading_Page {
+    height: 100dvh;
     height: 100vh;
   }
 }
