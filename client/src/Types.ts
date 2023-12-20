@@ -1,6 +1,9 @@
 import type {
   ContestConfig,
+  ContestContent,
   LocalString,
+  MarkingType,
+  OptionContent,
 } from "@aion-dk/js-client/dist/lib/av_client/types";
 
 export type Election = any;
@@ -51,6 +54,7 @@ export interface ElectionStatus {
   description: LocalString;
   mode: "demo" | "production" | "disabled";
   trustMode: "verifiable" | "trusted";
+  electionVerificationSite?: any;
   enabledLocales: string[];
   readyForVoting: boolean;
   boardSlug: string;
@@ -75,3 +79,22 @@ export interface Theme {
 }
 
 export type Locale = "en" | "da";
+
+export interface FullOptionContent extends OptionContent {
+  url?: LocalString;
+  videoUrl?: LocalString;
+  image?: string;
+  selectable?: boolean;
+  exclusive?: boolean;
+  voteLimit?: number;
+  children?: FullOptionContent[];
+}
+
+export interface FullMarkingType extends MarkingType {
+  votesAllowedPerOption?: number;
+}
+
+export interface FullContestContent extends ContestContent {
+  markingType: FullMarkingType;
+  votesAllowedPerOption?: number;
+}

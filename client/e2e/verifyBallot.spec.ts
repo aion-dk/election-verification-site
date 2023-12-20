@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { latestConfig, translations } from "./mocks";
+import { latestConfig, status } from "./mocks";
 
 test("verifying a ballot", async ({ page }) => {
   // Mock Network calls
@@ -15,23 +15,22 @@ test("verifying a ballot", async ({ page }) => {
       });
     }
 
-    // Intercept Translation calls
-    if (url.indexOf("/translations") > 0) {
+    // Intercept Status calls
+    if (url.indexOf("/status") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
-        body: JSON.stringify(translations),
+        body: JSON.stringify(status),
       });
     }
 
     return route.continue();
   });
 
-  await page.goto("/en/us3");
-  await expect(page.locator("h1")).toHaveText("Funny Election");
-  await page.getByPlaceholder("Verification code").fill("5ksv8Ee");
-  await page.getByRole("button", { name: "Verify my ballot" }).click();
-  // await expect(page.toHaveContent("pairing code"))
+  await page.goto("/en/us3/verify");
+  await expect(page.locator("h3")).toHaveText("Ballot Tester");
+  await page.getByPlaceholder("Testing code").fill("5ksv8Ee");
+  await page.getByRole("button", { name: "Start the Test" }).click();
 });
 
 test("verifying with an invalid verification code", async ({ page }) => {
@@ -57,24 +56,24 @@ test("verifying with an invalid verification code", async ({ page }) => {
       });
     }
 
-    // Intercept Translation calls
-    if (url.indexOf("/translations") > 0) {
+    // Intercept Status calls
+    if (url.indexOf("/status") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
-        body: JSON.stringify(translations),
+        body: JSON.stringify(status),
       });
     }
 
     return route.continue();
   });
 
-  await page.goto("/en/us3");
-  await expect(page.locator("h1")).toHaveText("Funny Election");
-  await page.getByPlaceholder("Verification code").fill("invalid-code");
-  await page.getByRole("button", { name: "Verify my ballot" }).click();
+  await page.goto("/en/us3/verify");
+  await expect(page.locator("h3")).toHaveText("Ballot Tester");
+  await page.getByPlaceholder("Testing code").fill("invalid-code");
+  await page.getByRole("button", { name: "Start the Test" }).click();
   await expect(page.locator(".Error__Title")).toContainText(
-    "Invalid verification code"
+    "Testing code not found"
   );
-  await page.getByPlaceholder("Verification code").fill("invalid-code");
+  await page.getByPlaceholder("Testing code").fill("invalid-code");
 });

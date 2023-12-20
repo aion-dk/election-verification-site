@@ -3,7 +3,7 @@ FROM 534003348933.dkr.ecr.eu-west-1.amazonaws.com/nodejs:19-dev-latest as builde
 
 WORKDIR /usr/src/app
 
-COPY --link package.json package-lock.json ./
+COPY package.json package-lock.json ./
 
 RUN npm ci \
   && npx playwright install --with-deps

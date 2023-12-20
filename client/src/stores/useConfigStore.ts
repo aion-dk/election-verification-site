@@ -1,11 +1,10 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
-import { api } from "../lib/api";
-import type { Election, ElectionStatus } from "../Types";
+import { computed, ref } from "vue";
+import { api } from "@/lib/api";
+import type { Election, ElectionStatus, FullOptionContent } from "@/Types";
 import type {
   ContestContent,
   LatestConfigItems,
-  OptionContent,
 } from "@aion-dk/js-client/dist/lib/av_client/types";
 
 export default defineStore("useConfigStore", () => {
@@ -32,13 +31,28 @@ export default defineStore("useConfigStore", () => {
     return latestConfig.value.contestConfigs[contestReference].content;
   };
 
+  const flattenChildren = (option: FullOptionContent, maxDepth = 100) => {
+    if (maxDepth <= 0)
+      throw new Error("MAX RECURSION DEPTH FOR flattenChildren REACHED");
+
+    const result = [option];
+    if (option.children)
+      result.push(
+        ...option.children.flatMap((children) =>
+          flattenChildren(children, maxDepth - 1)
+        )
+      );
+
+    return result;
+  };
+
   const getContestOption = (
     contestReference: string,
     optionReference: string
-  ): OptionContent => {
-    return latestConfig.value.contestConfigs[
-      contestReference
-    ].content.options.find((o) => o.reference === optionReference);
+  ): FullOptionContent => {
+    return latestConfig.value.contestConfigs[contestReference].content.options
+      .flatMap((option) => flattenChildren(option))
+      .find((option) => option.reference === optionReference);
   };
 
   const loadConfig = async (slug: string) => {
@@ -55,11 +69,11 @@ export default defineStore("useConfigStore", () => {
     });
   };
 
-  const setElectionStatus = async (newStatus: ElectionStatus) => {
+  const setElectionStatus = (newStatus: ElectionStatus) => {
     electionStatus.value = newStatus;
   };
 
-  const setElectionTheme = async (newTheme: string) => {
+  const setElectionTheme = (newTheme: string) => {
     electionTheme.value = newTheme;
   };
 

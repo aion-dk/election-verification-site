@@ -6,10 +6,6 @@ import type { Ballot } from "../Types";
 export default defineStore("useBallotStore", () => {
   const ballot = ref<Ballot>(null);
 
-  const setBallot = (newBallot: Ballot) => {
-    ballot.value = newBallot;
-  };
-
   function resetBallot() {
     ballot.value = null;
   }
@@ -33,5 +29,5 @@ export default defineStore("useBallotStore", () => {
     }
   }
 
-  return { ballot, setBallot, loadBallot };
+  return { ballot, loadBallot };
 });

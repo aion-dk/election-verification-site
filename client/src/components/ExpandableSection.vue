@@ -13,12 +13,12 @@ const props = defineProps({
 const _expanded = ref(props.expanded);
 const _label = ref(t("components.board_item.expand"));
 
-function toggle() {
+const toggle = () => {
   _expanded.value = !_expanded.value;
   _label.value = _expanded.value
     ? t("components.board_item.collapse")
     : t("components.board_item.expand");
-}
+};
 </script>
 
 <template>
@@ -28,6 +28,7 @@ function toggle() {
     :class="{
       ['ExpandableSection--expanded']: _expanded,
     }"
+    role="button"
   >
     <div class="ExpandableSection__Line" v-if="!_expanded">
       <slot name="collapsed"></slot>
@@ -38,9 +39,9 @@ function toggle() {
     </div>
 
     <button class="ExpandableSection__Expander" :aria-label="_label">
-      <font-awesome-icon v-if="_expanded" icon="fa-solid fa-minus" />
+      <AVIcon v-if="_expanded" icon="minus" aria-hidden="true" />
 
-      <font-awesome-icon v-else icon="fa-solid fa-plus" />
+      <AVIcon v-else icon="plus" aria-hidden="true" />
     </button>
   </div>
 </template>
@@ -48,45 +49,52 @@ function toggle() {
 <style type="text/css" scoped>
 .ExpandableSection {
   display: flex;
-  border: solid 1px #dee2e6;
+  border: solid 1px var(--slate-200);
   border-radius: 12px;
-  padding: 16px;
-  margin-bottom: 20px;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
   flex-direction: column;
   position: relative;
+  background-color: white;
+  z-index: 10;
   cursor: pointer;
-}
-
-.ExpandableSection:hover,
-.ExpandableSection:focus-within {
-  background-color: rgba(0, 0, 0, 10%);
-}
-.ExpandableSection:focus-within {
-  outline: #317be7 2px solid;
 }
 
 .ExpandableSection__Line {
   display: flex;
-}
-
-@media (max-width: 992px) {
-  .ExpandableSection__Line {
-    flex-direction: column;
-  }
+  flex-direction: column;
 }
 
 .ExpandableSection__Expander {
-  background-color: #343a40;
-  border-radius: 100%;
-  height: 24px;
-  width: 24px;
-  display: grid;
-  place-content: center;
+  background-color: white;
+  border: solid 1px var(--slate-600);
+  color: var(--slate-600);
+  border-radius: 99px;
+  height: 1.5rem;
+  width: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: absolute;
-  top: 16px;
-  right: 16px;
+  top: calc(1rem - 1px);
   cursor: pointer;
-  color: #fff;
-  border: none;
+}
+
+html[dir="ltr"] .ExpandableSection__Expander {
+  right: 1rem;
+}
+
+html[dir="rtl"] .ExpandableSection__Expander {
+  left: 1rem;
+}
+
+@media only screen and (min-width: 48rem) {
+  .ExpandableSection__Line {
+    flex-direction: row;
+  }
+
+  .ExpandableSection {
+    margin-bottom: 1rem;
+  }
 }
 </style>

@@ -1,48 +1,46 @@
+<script lang="ts" setup>
+import avlogo from "../assets/avlogo.svg";
+</script>
+
 <template>
-  <section class="Footer">
+  <footer class="Footer">
+    <span class="Footer__Text">{{ $t("footer.technology_by") }}</span>
     <a href="https://assemblyvoting.com" target="_blank">
-      <span class="Footer__Text">Technology by</span>
       <img
         class="Footer__Image"
-        src="/av-logo-horizontal.png"
-        alt="Assembly Voting Logo"
+        :src="avlogo"
+        :alt="$t('footer.av_img_alt')"
+        loading="lazy"
       />
     </a>
-  </section>
+  </footer>
 </template>
 
 <style type="text/css" scoped>
 .Footer {
-  box-sizing: border-box;
-  background-color: #fff;
-  font-family: "Open Sans";
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  line-height: 20px;
-  padding: 10px;
-  font-weight: 400;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  background-color: rgba(30, 41, 59, 0.7);
+  backdrop-filter: blur(2px);
+  width: 100vw;
+  height: 3rem;
+  position: fixed;
   bottom: 0;
   left: 0;
-  width: 100%;
-}
-
-.Footer a {
-  text-decoration: none;
-  color: initial;
   display: flex;
+  justify-content: center;
   align-items: center;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+  z-index: 90;
 }
 
 .Footer__Text {
-  font-size: 12px;
+  color: white;
+  font-size: 0.75rem;
+  margin-right: 0.25rem;
 }
 
 .Footer__Image {
-  max-height: 20px;
-  margin-left: 4px;
-  width: 125px;
-  height: 20px;
+  max-height: 2rem;
+  padding-top: 2px;
+  height: auto;
 }
 </style>

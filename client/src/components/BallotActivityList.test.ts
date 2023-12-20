@@ -8,7 +8,6 @@ const i18n = createI18n({
     en: {
       components: {
         ballot_activity_list: {
-          title: "Fun activities",
           type: "Item type",
           time: "Item time",
           actor: "Item actor",
@@ -23,16 +22,22 @@ const i18n = createI18n({
   },
 });
 
+const stubs = {
+  DateTime: {
+    template: "<span />",
+  },
+};
+
 test("that BallotActivityList mounts", async () => {
   const wrapper = mount(BallotActivityList, {
     global: {
       plugins: [i18n],
+      stubs,
     },
     props: {
       activities: [],
     },
   });
-  expect(wrapper.text()).toContain("Fun activities");
   expect(wrapper.text()).toContain("Item type");
   expect(wrapper.text()).toContain("Item time");
   expect(wrapper.text()).toContain("Item actor");
@@ -42,6 +47,7 @@ test("that activities are listed", async () => {
   const wrapper = mount(BallotActivityList, {
     global: {
       plugins: [i18n],
+      stubs,
     },
     props: {
       activities: [
