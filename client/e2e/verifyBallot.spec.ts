@@ -48,7 +48,9 @@ test("verifying with an invalid verification code", async ({ page }) => {
     }
 
     // Intercept DBB verification lookup call
-    if (url.indexOf("organisation_slug/election_slug/verification/vote_track") > 0) {
+    if (
+      url.indexOf("organisation_slug/election_slug/verification/vote_track") > 0
+    ) {
       return route.fulfill({
         status: 404,
         contentType: "application/json",

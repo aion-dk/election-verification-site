@@ -96,8 +96,10 @@ export const status = {
     boardSlug: "board_slug",
     boardUrl: "http://dbb:3003/board_slug",
     dbasUrl: "http://localhost:3010",
-    electionClientUrl: "http://localhost:9080/e/organisation_slug/election_slug",
-    statisticsClientUrl: "http://localhost:5173/organisation_slug/election_slug",
+    electionClientUrl:
+      "http://localhost:9080/e/organisation_slug/election_slug",
+    statisticsClientUrl:
+      "http://localhost:5173/organisation_slug/election_slug",
     hide_dbas: false,
     hideBenaloh: false,
   },
