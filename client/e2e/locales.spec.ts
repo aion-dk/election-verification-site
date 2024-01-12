@@ -7,7 +7,7 @@ test("changing locale", async ({ page, isMobile }) => {
     const url = route.request().url();
 
     // Intercept DBB latest config calls
-    if (url.indexOf("us3/configuration/latest_config") > 0) {
+    if (url.indexOf("board_slug/configuration/latest_config") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -27,7 +27,7 @@ test("changing locale", async ({ page, isMobile }) => {
     return route.continue();
   });
 
-  await page.goto("/en/us3");
+  await page.goto("/en/organisation_slug/election_slug");
 
   if (isMobile) {
     await page.locator(".Header__Hamburger_Btn").click();

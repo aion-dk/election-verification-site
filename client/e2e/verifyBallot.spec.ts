@@ -7,7 +7,7 @@ test("verifying a ballot", async ({ page }) => {
     const url = route.request().url();
 
     // Intercept DBB latest config calls
-    if (url.indexOf("us3/configuration/latest_config") > 0) {
+    if (url.indexOf("board_slug/configuration/latest_config") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -27,7 +27,7 @@ test("verifying a ballot", async ({ page }) => {
     return route.continue();
   });
 
-  await page.goto("/en/us3/verify");
+  await page.goto("/en/organisation_slug/election_slug/verify");
   await expect(page.locator("h3")).toHaveText("Ballot Tester");
   await page.getByPlaceholder("Testing code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Start the Test" }).click();
@@ -39,7 +39,7 @@ test("verifying with an invalid verification code", async ({ page }) => {
     const url = route.request().url();
 
     // Intercept DBB latest config calls
-    if (url.indexOf("us3/configuration/latest_config") > 0) {
+    if (url.indexOf("board_slug/configuration/latest_config") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -48,7 +48,7 @@ test("verifying with an invalid verification code", async ({ page }) => {
     }
 
     // Intercept DBB verification lookup call
-    if (url.indexOf("us3/verification/vote_track") > 0) {
+    if (url.indexOf("organisation_slug/election_slug/verification/vote_track") > 0) {
       return route.fulfill({
         status: 404,
         contentType: "application/json",
@@ -68,7 +68,7 @@ test("verifying with an invalid verification code", async ({ page }) => {
     return route.continue();
   });
 
-  await page.goto("/en/us3/verify");
+  await page.goto("/en/organisation_slug/election_slug/verify");
   await expect(page.locator("h3")).toHaveText("Ballot Tester");
   await page.getByPlaceholder("Testing code").fill("invalid-code");
   await page.getByRole("button", { name: "Start the Test" }).click();

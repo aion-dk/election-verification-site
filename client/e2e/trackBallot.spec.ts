@@ -7,7 +7,7 @@ test("tracking a ballot", async ({ page }) => {
     const url = route.request().url();
 
     // Intercept DBB latest config calls
-    if (url.indexOf("us3/configuration/latest_config") > 0) {
+    if (url.indexOf("board_slug/configuration/latest_config") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -16,7 +16,7 @@ test("tracking a ballot", async ({ page }) => {
     }
 
     // Intercept DBB ballot status calls
-    if (url.indexOf("us3/ballot_status") > 0) {
+    if (url.indexOf("board_slug/ballot_status") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -36,7 +36,7 @@ test("tracking a ballot", async ({ page }) => {
     return route.continue();
   });
 
-  await page.goto("/en/us3/track");
+  await page.goto("/en/organisation_slug/election_slug/track");
   await expect(page.locator("h3")).toHaveText("Ballot Tracker");
   await page.getByPlaceholder("Tracking code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Track my ballot" }).click();
@@ -51,7 +51,7 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
     const url = route.request().url();
 
     // Intercept DBB latest config calls
-    if (url.indexOf("us3/configuration/latest_config") > 0) {
+    if (url.indexOf("board_slug/configuration/latest_config") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -60,7 +60,7 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
     }
 
     // Intercept DBB ballot status calls
-    if (url.indexOf("us3/ballot_status") > 0) {
+    if (url.indexOf("board_slug/ballot_status") > 0) {
       return route.fulfill({
         status: 404,
         contentType: "application/json",
@@ -80,7 +80,7 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
     return route.continue();
   });
 
-  await page.goto("/en/us3/track");
+  await page.goto("/en/organisation_slug/election_slug/track");
   await expect(page.locator("h3")).toHaveText("Ballot Tracker");
   await page.getByPlaceholder("Tracking code").fill("abcdef");
   await page.getByRole("button", { name: "Track my ballot" }).click();

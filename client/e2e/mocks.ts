@@ -77,7 +77,8 @@ export const boardItemsPage2 = {
 export const status = {
   election: {
     id: 2,
-    slug: "93b0d474",
+    slug: "election_slug",
+    organisation_slug: "organisation_slug",
     title: {
       en: "Funny Election",
       es: "Elección divertida",
@@ -92,11 +93,11 @@ export const status = {
     trustMode: "verifiable",
     enabledLocales: ["en", "da", "de", "es"],
     readyForVoting: true,
-    boardSlug: "voting_93b0d474",
-    boardUrl: "http://dbb:3003/voting_93b0d474",
+    boardSlug: "board_slug",
+    boardUrl: "http://dbb:3003/board_slug",
     dbasUrl: "http://localhost:3010",
-    electionClientUrl: "http://localhost:9080/#/e/voting/93b0d474",
-    statisticsClientUrl: "http://localhost:5173/voting/93b0d474",
+    electionClientUrl: "http://localhost:9080/e/organisation_slug/election_slug",
+    statisticsClientUrl: "http://localhost:5173/organisation_slug/election_slug",
     hide_dbas: false,
     hideBenaloh: false,
   },
