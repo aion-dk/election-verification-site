@@ -12,7 +12,7 @@ test("downloading logs", async ({ page, isMobile }) => {
     const url = route.request().url();
 
     // Intercept DBB latest config calls
-    if (url.indexOf("us3/configuration/latest_config") > 0) {
+    if (url.indexOf("board_slug/configuration/latest_config") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -21,7 +21,7 @@ test("downloading logs", async ({ page, isMobile }) => {
     }
 
     // Intercept download request
-    if (url.indexOf("us3/download_log") > 0) {
+    if (url.indexOf("board_slug/download_log") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/octet-stream",
@@ -41,7 +41,7 @@ test("downloading logs", async ({ page, isMobile }) => {
     return route.continue();
   });
 
-  await page.goto("/en/us3");
+  await page.goto("/en/organisation_slug/election_slug");
   if (isMobile) {
     await page.locator(".Header__Hamburger_Btn").click();
   }
@@ -65,7 +65,7 @@ test("traversing board items", async ({ page, isMobile }) => {
     const url = route.request().url();
 
     // Intercept DBB latest config calls
-    if (url.indexOf("us3/configuration/latest_config") > 0) {
+    if (url.indexOf("board_slug/configuration/latest_config") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/json",
@@ -74,7 +74,7 @@ test("traversing board items", async ({ page, isMobile }) => {
     }
 
     // Intercept page 1 of the board
-    if (url.indexOf("us3/board?page=1") > 0) {
+    if (url.indexOf("board_slug/board?page=1") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/octet-stream",
@@ -83,7 +83,7 @@ test("traversing board items", async ({ page, isMobile }) => {
     }
 
     // Intercept page 2 of the board
-    if (url.indexOf("us3/board?page=2") > 0) {
+    if (url.indexOf("board_slug/board?page=2") > 0) {
       return route.fulfill({
         status: 200,
         contentType: "application/octet-stream",
@@ -103,7 +103,7 @@ test("traversing board items", async ({ page, isMobile }) => {
     return route.continue();
   });
 
-  await page.goto("/en/us3");
+  await page.goto("/en/organisation_slug/election_slug");
   if (isMobile) {
     await page.locator(".Header__Hamburger_Btn").click();
   }

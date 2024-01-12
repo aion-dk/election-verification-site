@@ -2,13 +2,20 @@
 import useConfigStore from "../stores/useConfigStore";
 import i18n from "../lib/i18n";
 import router from "../router";
+import { useRoute } from "vue-router";
+
 const configStore = useConfigStore();
+const route = useRoute();
 
 const goToVerifier = () => {
-  router.push(`/${i18n.global.locale}/${configStore.boardSlug}/verify`);
+  router.push(
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`
+  );
 };
 const goToTracker = () => {
-  router.push(`/${i18n.global.locale}/${configStore.boardSlug}/track`);
+  router.push(
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`
+  );
 };
 </script>
 

@@ -3,8 +3,8 @@ import { ref } from "vue";
 import useAVVerifier from "../lib/useAVVerifier";
 
 export default defineStore("verificationStore", () => {
-  const setupAVVerifier = async (electionSlug: string) => {
-    avVerifier.value = await useAVVerifier(electionSlug);
+  const setupAVVerifier = async (boardSlug: string) => {
+    avVerifier.value = await useAVVerifier(boardSlug);
   };
 
   const avVerifier = ref(null);

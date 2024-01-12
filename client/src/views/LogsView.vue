@@ -63,7 +63,9 @@ const loadPage = (page: number) => {
 
 const navigate = (page: number) => {
   router.push(
-    `/${i18n.global.locale}/${configStore.boardSlug}/logs/${page.toString()}`
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${
+      route.params.electionSlug
+    }/logs/${page.toString()}`
   );
 };
 

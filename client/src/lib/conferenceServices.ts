@@ -14,9 +14,10 @@ const conferenceApi = ref<AxiosInstance>(
 
 const currentTranslationsData: any = ref(null);
 
-export function useConferenceConnector(slug: string) {
-  const parsedSlug = slug.replace("_", "/");
-
+export function useConferenceConnector(
+  organisationSlug: string,
+  electionSlug: string
+) {
   conferenceApi.value.interceptors.response.use(
     responseHandler,
     responseErrorHandler
@@ -25,18 +26,20 @@ export function useConferenceConnector(slug: string) {
   return {
     conferenceClient: {
       async getStatus() {
-        const status = await conferenceApi.value.get(`/${parsedSlug}/status`);
+        const status = await conferenceApi.value.get(
+          `/${organisationSlug}/${electionSlug}/status`
+        );
         return (status as any).election as ElectionStatusResponse;
       },
       async getStylingData() {
         return (await conferenceApi.value.get(
-          `/${parsedSlug}/theme`
+          `/${organisationSlug}/${electionSlug}/theme`
         )) as string;
       },
       async getTranslationsData(locale: string) {
         if (!currentTranslationsData.value) {
           currentTranslationsData.value = await conferenceApi.value.get(
-            `/${parsedSlug}/translations`
+            `/${organisationSlug}/${electionSlug}/translations`
           );
         }
 

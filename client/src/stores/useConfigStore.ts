@@ -15,8 +15,8 @@ export default defineStore("useConfigStore", () => {
   const electionStatus = ref<ElectionStatus | null>(null);
   const electionTheme = ref<string>(null);
 
-  const setSlug = (newSlug: string) => {
-    boardSlug.value = newSlug;
+  const setBoardSlug = (newBoardSlug: string) => {
+    boardSlug.value = newBoardSlug;
   };
 
   const setLatestConfig = (newConfig: LatestConfigItems) => {
@@ -55,18 +55,15 @@ export default defineStore("useConfigStore", () => {
       .find((option) => option.reference === optionReference);
   };
 
-  const loadConfig = async (slug: string) => {
-    if (boardSlug.value == slug) return;
+  const loadConfig = async () => {
+    const { data } = await api.get(
+      `${boardSlug.value}/configuration/latest_config`
+    );
 
-    const { data } = await api.get(`${slug}/configuration/latest_config`);
-    setSlug(slug);
     setLatestConfig({
       ...data.items,
     });
-    setElection({
-      ...latestConfig.value?.electionConfig.content,
-      slug: boardSlug.value,
-    });
+    setElection({ ...latestConfig.value?.electionConfig.content });
   };
 
   const setElectionStatus = (newStatus: ElectionStatus) => {
@@ -89,5 +86,6 @@ export default defineStore("useConfigStore", () => {
     setElectionStatus,
     electionTheme,
     setElectionTheme,
+    setBoardSlug,
   };
 });
