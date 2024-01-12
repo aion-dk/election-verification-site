@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, onMounted, onBeforeUnmount, ref } from "vue";
-import { RouterLink } from "vue-router";
+import { RouterLink, useRoute } from "vue-router";
 import DropDown from "./DropDown.vue";
 import i18n from "../lib/i18n";
 import type { DropdownOption } from "@/Types";
@@ -8,6 +8,7 @@ import useConfigStore from "../stores/useConfigStore";
 
 const { t } = i18n.global;
 const configStore = useConfigStore();
+const route = useRoute();
 const contactUrl = computed(
   () =>
     configStore.electionStatus?.electionVerificationSite?.contactUrl[
@@ -67,7 +68,7 @@ onBeforeUnmount(() => {
   <AVNavbar class="Header__Navbar_Overrides">
     <RouterLink
       class="Header__Election_Info"
-      :to="`/${locale}/${election.slug}`"
+      :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}`"
     >
       <img
         v-if="configStore.electionStatus?.theme?.logo"
@@ -92,7 +93,7 @@ onBeforeUnmount(() => {
       <RouterLink
         class="Header__Link"
         role="menuitem"
-        :to="`/${locale}/${election.slug}/verify`"
+        :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`"
         @click="toggleMenu"
       >
         {{ $t("header.verification") }}
@@ -101,7 +102,7 @@ onBeforeUnmount(() => {
       <RouterLink
         class="Header__Link"
         role="menuitem"
-        :to="`/${locale}/${election.slug}/track`"
+        :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`"
         @click="toggleMenu"
       >
         {{ $t("header.tracking") }}
@@ -110,7 +111,7 @@ onBeforeUnmount(() => {
       <RouterLink
         role="menuitem"
         class="Header__Link"
-        :to="`/${locale}/${election.slug}/logs`"
+        :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/logs`"
         @click="toggleMenu"
       >
         {{ $t("header.logs") }}
@@ -119,7 +120,7 @@ onBeforeUnmount(() => {
       <RouterLink
         role="menuitem"
         class="Header__Link"
-        :to="`/${locale}/${election.slug}/help`"
+        :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/help`"
         @click="toggleMenu"
       >
         {{ $t("header.help") }}

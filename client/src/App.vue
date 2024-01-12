@@ -19,9 +19,9 @@ const route = useRoute();
 const isLoaded = ref(false);
 
 onMounted(async () => {
-  const slug = route.params.electionSlug.toString();
-  await configStore.loadConfig(slug);
-  await setConfigurations(slug);
+  const organisationSlug = route.params.organisationSlug.toString();
+  const electionSlug = route.params.electionSlug.toString();
+  await setConfigurations(organisationSlug, electionSlug);
   setTitle();
 
   if (route.params.trackingCode) {
@@ -52,8 +52,10 @@ function setTitle() {
   if (window.top) window.top.document.title = title.join(" - ");
 }
 
-const setConfigurations = async (slug: string) => {
-  const { conferenceClient } = useConferenceConnector(slug);
+const setConfigurations = async (organisationSlug: string, electionSlug: string) => {
+  const { conferenceClient } = useConferenceConnector(organisationSlug, electionSlug);
+  configStore.setBoardSlug((await conferenceClient.getStatus()).boardSlug);
+  await configStore.loadConfig();
   await setLanguage(conferenceClient);
   await setTheme(conferenceClient);
 };

@@ -8,13 +8,15 @@ import ContentLayout from "../components/ContentLayout.vue";
 import TrackedBallotManager from "../components/TrackedBallotManager.vue";
 import router from "../router";
 import type { Ballot } from "../Types";
+import { useRoute } from "vue-router";
 
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
+const route = useRoute();
 const ballot = ref<Ballot>(null);
 
 const cancel = () => {
-  router.push(`/${i18n.global.locale}/${configStore.boardSlug}/track`);
+  router.push(`/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`);
 };
 
 onMounted(() => (ballot.value = ballotStore.ballot));

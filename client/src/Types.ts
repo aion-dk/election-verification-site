@@ -33,6 +33,7 @@ export class HttpError extends Error {
 }
 
 export interface ElectionStatusResponse {
+  boardSlug: string;
   activeSlide?: any;
   contests?: ContestConfig[];
   election: ElectionStatus;
