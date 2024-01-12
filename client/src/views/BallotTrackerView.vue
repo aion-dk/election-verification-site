@@ -16,7 +16,9 @@ const route = useRoute();
 const ballot = ref<Ballot>(null);
 
 const cancel = () => {
-  router.push(`/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`);
+  router.push(
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`
+  );
 };
 
 onMounted(() => (ballot.value = ballotStore.ballot));

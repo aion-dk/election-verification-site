@@ -8,10 +8,14 @@ const configStore = useConfigStore();
 const route = useRoute();
 
 const goToVerifier = () => {
-  router.push(`/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`);
+  router.push(
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`
+  );
 };
 const goToTracker = () => {
-  router.push(`/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`);
+  router.push(
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`
+  );
 };
 </script>
 

@@ -14,7 +14,10 @@ const conferenceApi = ref<AxiosInstance>(
 
 const currentTranslationsData: any = ref(null);
 
-export function useConferenceConnector(organisationSlug: string, electionSlug: string) {
+export function useConferenceConnector(
+  organisationSlug: string,
+  electionSlug: string
+) {
   conferenceApi.value.interceptors.response.use(
     responseHandler,
     responseErrorHandler
@@ -23,7 +26,9 @@ export function useConferenceConnector(organisationSlug: string, electionSlug: s
   return {
     conferenceClient: {
       async getStatus() {
-        const status = await conferenceApi.value.get(`/${organisationSlug}/${electionSlug}/status`);
+        const status = await conferenceApi.value.get(
+          `/${organisationSlug}/${electionSlug}/status`
+        );
         return (status as any).election as ElectionStatusResponse;
       },
       async getStylingData() {

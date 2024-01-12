@@ -56,12 +56,14 @@ export default defineStore("useConfigStore", () => {
   };
 
   const loadConfig = async () => {
-    const { data } = await api.get(`${boardSlug.value}/configuration/latest_config`);
+    const { data } = await api.get(
+      `${boardSlug.value}/configuration/latest_config`
+    );
 
     setLatestConfig({
       ...data.items,
     });
-    setElection({...latestConfig.value?.electionConfig.content});
+    setElection({ ...latestConfig.value?.electionConfig.content });
   };
 
   const setElectionStatus = (newStatus: ElectionStatus) => {

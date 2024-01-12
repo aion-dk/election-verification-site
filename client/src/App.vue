@@ -52,8 +52,14 @@ function setTitle() {
   if (window.top) window.top.document.title = title.join(" - ");
 }
 
-const setConfigurations = async (organisationSlug: string, electionSlug: string) => {
-  const { conferenceClient } = useConferenceConnector(organisationSlug, electionSlug);
+const setConfigurations = async (
+  organisationSlug: string,
+  electionSlug: string
+) => {
+  const { conferenceClient } = useConferenceConnector(
+    organisationSlug,
+    electionSlug
+  );
   configStore.setBoardSlug((await conferenceClient.getStatus()).boardSlug);
   await configStore.loadConfig();
   await setLanguage(conferenceClient);

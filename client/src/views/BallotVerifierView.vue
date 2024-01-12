@@ -29,7 +29,9 @@ const restart = () => {
   router.push({ name: "Welcome" });
 };
 const cancel = () => {
-  router.push(`/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`);
+  router.push(
+    `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`
+  );
 };
 
 onMounted(redirectUnlessPairingCode);
