@@ -46,9 +46,10 @@ function updateLocale(newLocale: Locale) {
 }
 
 function setTitle() {
-  const title = ["EVS", configStore.election.title[i18n.global.locale]].filter(
-    (s) => s
-  );
+  const title = [
+    configStore.election.title[i18n.global.locale],
+    "Verification Site",
+  ].filter((s) => s);
   if (window.top) window.top.document.title = title.join(" - ");
 }
 
