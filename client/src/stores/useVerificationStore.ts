@@ -3,11 +3,12 @@ import { ref } from "vue";
 import useAVVerifier from "../lib/useAVVerifier";
 
 export default defineStore("verificationStore", () => {
-  const setupAVVerifier = async (electionSlug: string) => {
-    avVerifier.value = await useAVVerifier(electionSlug);
+  const setupAVVerifier = async (boardSlug: string) => {
+    avVerifier.value = await useAVVerifier(boardSlug);
   };
 
   const avVerifier = ref(null);
+  const ballotAddress = ref(null);
   const pairingCode = ref(null);
   const ballot = ref(null);
 
@@ -19,10 +20,12 @@ export default defineStore("verificationStore", () => {
   function reset() {
     pairingCode.value = null;
     ballot.value = null;
+    ballotAddress.value = null;
   }
 
   async function findBallot(verificationCode: string) {
-    return await avVerifier.value.findBallot(verificationCode);
+    ballotAddress.value = await avVerifier.value.findBallot(verificationCode);
+    return ballotAddress.value;
   }
 
   async function generatePairingCode() {
@@ -38,6 +41,7 @@ export default defineStore("verificationStore", () => {
     findBallot,
     pairingCode,
     ballot,
+    ballotAddress,
     reset,
   };
 });

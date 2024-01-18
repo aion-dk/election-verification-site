@@ -36,7 +36,7 @@ watch(verificationStore, async (store) => {
 
 onMounted(async () => {
   verificationCode.value = route.params.verificationCode.toString();
-  if (!verificationStore.ballot) {
+  if (!verificationStore.ballotAddress) {
     try {
       verificationStore.reset();
       await verificationStore.setupAVVerifier(configStore.boardSlug);

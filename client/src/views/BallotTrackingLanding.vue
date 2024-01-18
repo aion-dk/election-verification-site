@@ -7,9 +7,11 @@ import router from "../router";
 import Error from "../components/Error.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
+import { useRoute } from "vue-router";
 
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
+const route = useRoute();
 const trackingCode = ref(null);
 const error = ref(null);
 const disabled = ref(false);
@@ -31,7 +33,7 @@ const lookupBallot = async (event: Event) => {
 
   if (ballotStore.ballot?.status) {
     router.push(
-      `/${i18n.global.locale}/${configStore.boardSlug}/track/${trackingCode.value}`
+      `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode.value}`
     );
   } else {
     error.value = "track.invalid_code";
