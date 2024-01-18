@@ -1,6 +1,6 @@
 import { createI18n } from "vue-i18n";
 import { nextTick } from "vue";
-import type { Locale, DefineLocaleMessage } from 'vue-i18n';
+import type { Locale, DefineLocaleMessage } from "vue-i18n";
 
 let locale: Locale = "en";
 const rtlLanguages: Locale[] = [

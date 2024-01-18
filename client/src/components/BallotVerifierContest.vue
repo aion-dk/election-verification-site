@@ -15,7 +15,6 @@
         :pile-index="pileIndex"
         :total-piles="contestSelection.piles.length"
         active-state="summary"
-        
       />
     </div>
   </div>
@@ -25,9 +24,7 @@
 import useConfigStore from "@/stores/useConfigStore";
 import type { PropType } from "vue";
 import { defineComponent } from "vue";
-import type {
-  ContestSelection,
-} from "@aion-dk/js-client/dist/lib/av_client/types";
+import type { ContestSelection } from "@aion-dk/js-client/dist/lib/av_client/types";
 import type { FullContestContent } from "@/Types";
 
 export default defineComponent({

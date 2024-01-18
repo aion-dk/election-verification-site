@@ -5,7 +5,7 @@ import type {
   MarkingType,
   OptionContent,
 } from "@aion-dk/js-client/dist/lib/av_client/types";
-import type { DefineLocaleMessage, Locale } from 'vue-i18n';
+import type { DefineLocaleMessage, Locale } from "vue-i18n";
 
 export type Election = any;
 
