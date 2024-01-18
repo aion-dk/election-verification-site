@@ -1,9 +1,9 @@
 import { createI18n } from "vue-i18n";
 import { nextTick } from "vue";
-import type { Locale } from "../Types";
+import type { Locale, DefineLocaleMessage } from 'vue-i18n';
 
-let locale = "en";
-const rtlLanguages = [
+let locale: Locale = "en";
+const rtlLanguages: Locale[] = [
   "ar",
   "dv",
   "fa",
@@ -35,7 +35,7 @@ export function setLocale(locale: Locale) {
 }
 
 export function loadLocaleMessages(locale: string, messages: object) {
-  i18n.global.setLocaleMessage(locale, messages as any);
+  i18n.global.setLocaleMessage(locale, messages as DefineLocaleMessage);
 
   return nextTick();
 }
