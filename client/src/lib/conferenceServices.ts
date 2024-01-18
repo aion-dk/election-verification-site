@@ -3,7 +3,12 @@ import { ref } from "vue";
 import { responseErrorHandler, responseHandler } from "./axiosConfig";
 import config from "./config";
 
-import type { ElectionStatusResponse } from "../Types";
+import type {
+  ElectionStatusResponse,
+  CurrentTranslations,
+  SpreadableDLM,
+} from "../Types";
+import type { Locale } from "vue-i18n";
 import type { AxiosInstance } from "axios";
 
 const conferenceApi = ref<AxiosInstance>(
@@ -12,7 +17,7 @@ const conferenceApi = ref<AxiosInstance>(
   })
 );
 
-const currentTranslationsData: any = ref(null);
+const currentTranslationsData = ref<CurrentTranslations>(null);
 
 export function useConferenceConnector(
   organisationSlug: string,
@@ -36,15 +41,25 @@ export function useConferenceConnector(
           `/${organisationSlug}/${electionSlug}/theme`
         )) as string;
       },
-      async getTranslationsData(locale: string) {
+      async getTranslationsData(locale: Locale) {
         if (!currentTranslationsData.value) {
           currentTranslationsData.value = await conferenceApi.value.get(
             `/${organisationSlug}/${electionSlug}/translations`
           );
         }
 
-        return currentTranslationsData.value?.translations[locale].js
-          .election_verification_site;
+        const evsTranslations = {
+          ...(currentTranslationsData.value?.translations[locale].js
+            .election_verification_site as SpreadableDLM),
+          js: {
+            components: {
+              ...(currentTranslationsData.value?.translations[locale].js
+                .components as SpreadableDLM),
+            },
+          },
+        };
+
+        return evsTranslations;
       },
     },
   };

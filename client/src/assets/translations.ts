@@ -1,4 +1,6 @@
-export const fallbackMessages = {
+import type { SpreadableDLM } from "../Types";
+
+export const fallbackMessages: SpreadableDLM = {
   en: {
     locales: {
       en: "English",
