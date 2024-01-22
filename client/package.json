@@ -20,7 +20,7 @@
   },
   "dependencies": {
     "@aion-dk/js-client": "^3.1.20",
-    "@assemblyvoting/ui-library": "^3.0.16",
+    "@assemblyvoting/ui-library": "^3.0.17",
     "@kalimahapps/vue-popper": "^1.1.6",
     "@pinia/testing": "^0.0.15",
     "@playwright/test": "^1.32.3",
