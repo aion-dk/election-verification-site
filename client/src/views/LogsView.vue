@@ -386,6 +386,7 @@ html[dir="rtl"] .RTL_Rotation {
 .LogsView__Board_Link code {
   font-size: 0.95rem;
   user-select: all;
+  margin-left: 3px;
 }
 
 @media only screen and (min-width: 48rem) {
