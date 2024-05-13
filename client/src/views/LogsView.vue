@@ -244,7 +244,7 @@ onMounted(() => loadPage(currentPage()));
       />
 
       <p class="LogsView__Board_Link">
-        Eller kopier linket: <code>{{ boardLink }}</code>
+        {{ $t('views.logs.board_link') }}<code>{{ boardLink }}</code>
       </p>
     </template>
     <template v-slot:help>
