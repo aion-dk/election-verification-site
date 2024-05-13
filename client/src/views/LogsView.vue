@@ -32,6 +32,10 @@ watch(route, () => {
 });
 watch(configItemsOnly, () => loadPage(1));
 
+const dbbLink = computed(() => {
+  return `${options.baseURL}/${configStore.boardSlug}`
+});
+
 const currentPage = () => {
   return parseInt(
     (route.params.page || boardStore.currentPage || 1).toString(),
@@ -70,8 +74,12 @@ const navigate = (page: number) => {
 };
 
 const downloadLog = () => {
-  window.location.href = `${options.baseURL}/${configStore.boardSlug}/download_log`;
+  window.location.href = `${dbbLink.value}/download_log`;
 };
+
+const boardLink = computed(() => {
+  return `${dbbLink.value}/board`;
+});
 onMounted(() => loadPage(currentPage()));
 </script>
 
@@ -234,6 +242,10 @@ onMounted(() => loadPage(currentPage()));
         icon="download"
         :label="$t('views.logs.download_button')"
       />
+
+      <p class="LogsView__Board_Link">
+        {{ $t('views.logs.board_link') }}<code>{{ boardLink }}</code>
+      </p>
     </template>
     <template v-slot:help>
       <h3 class="LogsView__Help_Title text-contrast">
@@ -363,6 +375,18 @@ html[dir="rtl"] .RTL_Rotation {
 
 .LogsView__Tooltip {
   cursor: help;
+}
+
+.LogsView__Board_Link {
+  text-align: center;
+  width: 100%;
+  margin: 0;
+}
+
+.LogsView__Board_Link code {
+  font-size: 0.95rem;
+  user-select: all;
+  margin-left: 3px;
 }
 
 @media only screen and (min-width: 48rem) {
