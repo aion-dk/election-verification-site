@@ -77,6 +77,10 @@ const downloadLog = () => {
   window.location.href = `${dbbLink.value}/download_log`;
 };
 
+const downloadAttachments = () => {
+  window.location.href = `${dbbLink.value}/download_attachmets`
+}
+
 const boardLink = computed(() => {
   return `${dbbLink.value}/board`;
 });
@@ -242,6 +246,15 @@ onMounted(() => loadPage(currentPage()));
         icon="download"
         :label="$t('views.logs.download_button')"
       />
+      <AVButton
+        @click="downloadAttachments"
+        size="small"
+        type="neutral"
+        class="LogsView__Button_Overrides"
+        iconLeft
+        icon="download"
+        :label="$t('views.logs.download_attachments')"
+      />
 
       <p class="LogsView__Board_Link">
         {{ $t('views.logs.board_link') }}<code>{{ boardLink }}</code>
@@ -368,9 +381,13 @@ html[dir="rtl"] .RTL_Rotation {
 .LogsView__Button_Overrides {
   font-size: 0.75rem !important;
   padding: 0.5rem 0.8rem !important;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  margin: 0;
+  margin-top: 1rem;
   align-self: center;
+}
+
+.LogsView__Button_Overrides:first-of-type {
+  margin-top: 2rem;
 }
 
 .LogsView__Tooltip {
@@ -381,6 +398,9 @@ html[dir="rtl"] .RTL_Rotation {
   text-align: center;
   width: 100%;
   margin: 0;
+  margin-top: 1rem;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .LogsView__Board_Link code {
@@ -426,6 +446,11 @@ html[dir="rtl"] .RTL_Rotation {
   .LogsView__Button_Overrides {
     font-size: 0.875rem !important;
     padding: 0.5rem 1.5rem !important;
+    margin: 0;
+    margin-top: 1rem;
+  }
+
+  .LogsView__Button_Overrides:first-of-type {
     margin-top: 4rem;
   }
 }
