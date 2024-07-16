@@ -21,6 +21,16 @@ const isRtl = computed(
   () => document.getElementsByTagName("html")[0].dir === "rtl"
 );
 
+const parseReceipt = async (event: Event) => {
+  event.preventDefault();
+  event.stopPropagation();
+
+  const fileInput = document.getElementById("receipt-file") as HTMLInputElement;
+  const file = fileInput.files?.[0];
+
+  console.log("PDF file", file)
+}
+
 const lookupBallot = async (event: Event) => {
   event.preventDefault();
   event.stopPropagation();
@@ -63,7 +73,9 @@ const lookupBallot = async (event: Event) => {
       </p>
       <Error v-if="error" :errorPath="error" />
       <div class="TrackingLanding__Action_Container">
-        <form @submit="lookupBallot">
+        <!-- Tracking code lookup -->
+        <div class="TrackingLanding__ActionItem">
+          <form @submit="lookupBallot">
           <input
             :disabled="disabled"
             type="text"
@@ -88,26 +100,67 @@ const lookupBallot = async (event: Event) => {
             @click="lookupBallot"
             class="TrackingLanding__Button_Overrides"
           />
-        </form>
-        <p class="TrackingLanding__Tooltip">
-          <tooltip hover :placement="isRtl ? 'left' : 'right'">
-            <template #default>
-              <AVIcon
-                icon="circle-question"
-                class="TrackingLanding__Tooltip_Icon"
-                aria-hidden="true"
-              />
-              <span>{{ $t("views.tracking.tooltip_helper") }}</span>
-              <span :aria-label="$t('views.tracking.tooltip_text')"> </span>
-            </template>
+          </form>
+          <p class="TrackingLanding__Tooltip">
+            <tooltip hover :placement="isRtl ? 'left' : 'right'">
+              <template #default>
+                <AVIcon
+                  icon="circle-question"
+                  class="TrackingLanding__Tooltip_Icon"
+                  aria-hidden="true"
+                />
+                <span>{{ $t("views.tracking.tooltip_helper") }}</span>
+                <span :aria-label="$t('views.tracking.tooltip_text')"> </span>
+              </template>
 
-            <template #content>
-              <span id="tracking-code-tooltip">
-                {{ $t("views.tracking.tooltip_text") }}
-              </span>
-            </template>
-          </tooltip>
-        </p>
+              <template #content>
+                <span id="tracking-code-tooltip">
+                  {{ $t("views.tracking.tooltip_text") }}
+                </span>
+              </template>
+            </tooltip>
+          </p>
+        </div>
+
+        <!-- Receipt upload -->
+        <div class="TrackingLanding__ActionItem">
+          <form @submit="parseReceipt">
+          <input
+            type="file"
+            name="receipt-file"
+            id="receipt-file"
+            data-1p-ignore
+          />
+          <AVButton
+            :label="$t('views.receipt.button')"
+            type="neutral"
+            name="initiate-verification"
+            id="initiate-verification"
+            fullWidth
+            @click="parseReceipt"
+            class="TrackingLanding__Button_Overrides"
+          />
+          </form>
+          <p class="TrackingLanding__Tooltip">
+            <tooltip hover :placement="isRtl ? 'left' : 'right'">
+              <template #default>
+                <AVIcon
+                  icon="circle-question"
+                  class="TrackingLanding__Tooltip_Icon"
+                  aria-hidden="true"
+                />
+                <span>{{ $t("views.receipt.tooltip_helper") }}</span>
+                <span :aria-label="$t('views.receipt.tooltip_text')"> </span>
+              </template>
+
+              <template #content>
+                <span id="receipt-tooltip">
+                  {{ $t("views.receipt.tooltip_text") }}
+                </span>
+              </template>
+            </tooltip>
+          </p>
+        </div>
       </div>
     </template>
     <template v-slot:help>
@@ -128,13 +181,18 @@ const lookupBallot = async (event: Event) => {
 
 <style scoped>
 .TrackingLanding__Action_Container {
+  display: flex;
+  width: 100%;
+}
+
+.TrackingLanding__Action_Item {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.TrackingLanding__Action_Container form {
+.TrackingLanding__Action_Item form {
   width: 100%;
 }
 
@@ -215,8 +273,12 @@ html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
 }
 
 @media only screen and (min-width: 80rem) {
-  .TrackingLanding__Action_Container {
+  .TrackingLanding__ActionItem {
     width: 30rem;
+  }
+
+  .TrackingLanding__Action_Container .TrackingLanding__ActionItem:first-child {
+    margin-right: 2rem;
   }
 
   .TrackingLanding__Title {
