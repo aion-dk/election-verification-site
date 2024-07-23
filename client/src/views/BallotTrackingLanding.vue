@@ -8,6 +8,8 @@ import Error from "../components/Error.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
 import { useRoute } from "vue-router";
+import config from "../lib/config";
+import PDFExtractor from "../lib/PDFExtractor";
 
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
@@ -21,6 +23,27 @@ const isRtl = computed(
   () => document.getElementsByTagName("html")[0].dir === "rtl"
 );
 
+const extractPDFText = async (pdf: File) => {
+  const formData = new FormData();
+  formData.append("pdf", pdf);
+
+  try {
+    const response = await fetch(
+      // `${config.dbbUrl}/utils/parse_pdf`,
+      'http://localhost:3003/utils/parse_pdf',
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    return await response.text();
+  } catch (e) {
+    console.error(e)
+    error.value = "receipt.invalid_receipt";
+  }
+}
+
 const parseReceipt = async (event: Event) => {
   event.preventDefault();
   event.stopPropagation();
@@ -28,7 +51,18 @@ const parseReceipt = async (event: Event) => {
   const fileInput = document.getElementById("receipt-file") as HTMLInputElement;
   const file = fileInput.files?.[0];
 
-  console.log("PDF file", file)
+  // FileReader api
+  const reader = new FileReader();
+  reader.onload = async () => {
+    if (file) {
+      const text = await extractPDFText(file);
+      const pdfExtractor = new PDFExtractor(text);
+      console.log("Address", pdfExtractor.address())
+      console.log("Voter signature", pdfExtractor.voterSignature())
+      console.log("DBB signature", pdfExtractor.dbbSignature())
+    }
+  };
+  reader.readAsBinaryString(file);
 }
 
 const lookupBallot = async (event: Event) => {
