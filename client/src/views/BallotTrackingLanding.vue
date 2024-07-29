@@ -2,6 +2,7 @@
 import { ref, computed } from "vue";
 import useConfigStore from "../stores/useConfigStore";
 import useBallotStore from "../stores/useBallotStore";
+import useVerificationStore from "../stores/useVerificationStore";
 import i18n from "../lib/i18n";
 import router from "../router";
 import Error from "../components/Error.vue";
@@ -11,6 +12,7 @@ import { useRoute } from "vue-router";
 import config from "../lib/config";
 import PDFExtractor from "../lib/PDFExtractor";
 
+const verificationStore = useVerificationStore();
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
 const route = useRoute();
@@ -48,6 +50,8 @@ const parseReceipt = async (event: Event) => {
   event.preventDefault();
   event.stopPropagation();
 
+  await verificationStore.setupAVVerifier(configStore.boardSlug);
+
   const fileInput = document.getElementById("receipt-file") as HTMLInputElement;
   const file = fileInput.files?.[0];
 
@@ -57,9 +61,10 @@ const parseReceipt = async (event: Event) => {
     if (file) {
       const text = await extractPDFText(file);
       const pdfExtractor = new PDFExtractor(text);
-      console.log("Address", pdfExtractor.address())
-      console.log("Voter signature", pdfExtractor.voterSignature())
-      console.log("DBB signature", pdfExtractor.dbbSignature())
+      const receipt = pdfExtractor.receipt()
+      const receiptValid = verificationStore.isReceiptValid(receipt)
+
+      console.log("valid Receipt", receiptValid)
     }
   };
   reader.readAsBinaryString(file);

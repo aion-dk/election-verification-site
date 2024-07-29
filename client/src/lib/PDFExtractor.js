@@ -5,6 +5,10 @@ export default class PDFExtractor {
     this.json = JSON.parse(atob(b64Signature));
   }
 
+  receipt() {
+    return this.json
+  }
+
   address() {
     return this.json.address
   }

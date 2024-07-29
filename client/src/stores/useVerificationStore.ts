@@ -35,6 +35,12 @@ export default defineStore("verificationStore", () => {
     decryptWhenAvailable();
   }
 
+  function isReceiptValid(receipt: string) {
+
+    avVerifier.value.isReceiptValid(receipt)
+    return true
+  }
+
   return {
     generatePairingCode,
     setupAVVerifier,
@@ -43,5 +49,6 @@ export default defineStore("verificationStore", () => {
     ballot,
     ballotAddress,
     reset,
+    isReceiptValid
   };
 });
