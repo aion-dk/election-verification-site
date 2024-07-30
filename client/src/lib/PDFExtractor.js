@@ -1,27 +1,13 @@
 export default class PDFExtractor {
   constructor(text) {
     this.text = text
-    const b64Signature = this.text.match(/DBBsignature:(.+)/)[1];
-    this.json = JSON.parse(atob(b64Signature));
   }
 
   receipt() {
-    return this.json
+    return this.text.match(/Receiptdata:(.+)/)[1]
   }
 
-  address() {
-    return this.json.address
-  }
-
-  voterSignature() {
-    return this.json.voter_signature
-  }
-
-  dbbSignature() {
-    return this.json.dbb_signature
-  }
-
-  shortAddress() {
+  trackingCode() {
     return this.text.match(/codeforballottracker(.{7})/)[1]
   }
 }

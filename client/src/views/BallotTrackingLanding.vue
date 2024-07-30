@@ -62,7 +62,9 @@ const parseReceipt = async (event: Event) => {
       const text = await extractPDFText(file);
       const pdfExtractor = new PDFExtractor(text);
       const receipt = pdfExtractor.receipt()
-      const receiptValid = verificationStore.isReceiptValid(receipt)
+      const trackingCode = pdfExtractor.trackingCode();
+
+      const receiptValid = verificationStore.isReceiptValid(receipt, trackingCode)
 
       console.log("valid Receipt", receiptValid)
     }

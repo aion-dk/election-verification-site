@@ -35,9 +35,14 @@ export default defineStore("verificationStore", () => {
     decryptWhenAvailable();
   }
 
-  function isReceiptValid(receipt: string) {
+  function isReceiptValid(receipt: string, trackingCode: string) {
+    try {
+      avVerifier.value.validateReceipt(receipt, trackingCode)
+    } catch (err) {
+      console.error(err.message)
+      return false
+    }
 
-    avVerifier.value.isReceiptValid(receipt)
     return true
   }
 
