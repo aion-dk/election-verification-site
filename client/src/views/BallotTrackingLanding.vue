@@ -9,8 +9,7 @@ import Error from "../components/Error.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
 import { useRoute } from "vue-router";
-import config from "../lib/config";
-import PDFExtractor from "../lib/PDFExtractor";
+import {ReceiptPDFExtractor} from "../lib/receiptPDFExtractor";
 
 const verificationStore = useVerificationStore();
 const configStore = useConfigStore();
@@ -25,27 +24,6 @@ const isRtl = computed(
   () => document.getElementsByTagName("html")[0].dir === "rtl"
 );
 
-const extractPDFText = async (pdf: File) => {
-  const formData = new FormData();
-  formData.append("pdf", pdf);
-
-  try {
-    const response = await fetch(
-      // `${config.dbbUrl}/utils/parse_pdf`,
-      'http://localhost:3003/utils/parse_pdf',
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
-
-    return await response.text();
-  } catch (e) {
-    console.error(e)
-    error.value = "receipt.invalid_receipt";
-  }
-}
-
 const parseReceipt = async (event: Event) => {
   event.preventDefault();
   event.stopPropagation();
@@ -59,13 +37,15 @@ const parseReceipt = async (event: Event) => {
   const reader = new FileReader();
   reader.onload = async () => {
     if (file) {
-      const text = await extractPDFText(file);
-      const pdfExtractor = new PDFExtractor(text);
-      const receipt = pdfExtractor.receipt()
-      const trackingCode = pdfExtractor.trackingCode();
+      const receiptExtractor = new ReceiptPDFExtractor(file)
+      await receiptExtractor.parsePDF()
+      const receipt = receiptExtractor.receipt()
+      console.log("receipt", receipt)
+
+      const trackingCode = receiptExtractor.trackingCode();
+      console.log("tracking code", trackingCode)
 
       const receiptValid = verificationStore.isReceiptValid(receipt, trackingCode)
-
       console.log("valid Receipt", receiptValid)
     }
   };
