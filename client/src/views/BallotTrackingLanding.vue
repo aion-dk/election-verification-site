@@ -33,23 +33,18 @@ const parseReceipt = async (event: Event) => {
   const fileInput = document.getElementById("receipt-file") as HTMLInputElement;
   const file = fileInput.files?.[0];
 
-  // FileReader api
-  const reader = new FileReader();
-  reader.onload = async () => {
-    if (file) {
-      const receiptExtractor = new ReceiptPDFExtractor(file)
-      await receiptExtractor.parsePDF()
-      const receipt = receiptExtractor.receipt()
-      console.log("receipt", receipt)
+  if (file) {
+    const receiptExtractor = new ReceiptPDFExtractor(file)
+    await receiptExtractor.extract().catch((reason) => {
+      console.error(reason)
+    })
 
-      const trackingCode = receiptExtractor.trackingCode();
-      console.log("tracking code", trackingCode)
+    console.log("receipt: ", receiptExtractor.receipt)
+    console.log("tracking code: ", receiptExtractor.trackingCode)
 
-      const receiptValid = verificationStore.isReceiptValid(receipt, trackingCode)
-      console.log("valid Receipt", receiptValid)
-    }
-  };
-  reader.readAsBinaryString(file);
+    const receiptValid = verificationStore.isReceiptValid(receiptExtractor.receipt, receiptExtractor.trackingCode)
+    console.log("valid receipt: ", receiptValid)
+  }
 }
 
 const lookupBallot = async (event: Event) => {
