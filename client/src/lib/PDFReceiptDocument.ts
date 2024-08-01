@@ -12,11 +12,11 @@ export class PDFReceiptDocument extends PDFDocument {
       reader.readAsArrayBuffer(file);
       reader.onload = async () => {
         try {
-          const buffer: ArrayBuffer = reader.result;
-          const bytes = new Uint8Array(buffer);
+          const bytes = new Uint8Array(reader.result as ArrayBuffer);
           const context = await PDFParser.forBytesWithOptions(
             bytes
           ).parseDocument();
+          // @ts-ignore: Calls a constructor that is private
           const pdfReceiptDoc = new PDFReceiptDocument(
             context,
             ignoreEncryption,
