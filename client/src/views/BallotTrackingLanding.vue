@@ -34,7 +34,7 @@ const parseReceipt = async (event: Event) => {
   const file = fileInput.files?.[0];
 
   if (file) {
-    const pdfReceiptDoc = await PDFReceiptDocument.loadReceipt(file)
+    const pdfReceiptDoc:PDFReceiptDocument = await PDFReceiptDocument.loadReceipt(file)
 
     const receipt = pdfReceiptDoc.getReceipt()
     console.log("receipt: " + receipt)

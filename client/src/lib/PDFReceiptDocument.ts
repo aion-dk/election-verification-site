@@ -1,6 +1,11 @@
 import {PDFDocument, PDFName, PDFParser} from "pdf-lib";
 
 export class PDFReceiptDocument extends PDFDocument{
+
+  private constructor(context: PDFContext, ignoreEncryption: boolean, updateMetadata: boolean) {
+    super(context, ignoreEncryption, updateMetadata)
+  }
+
   static async loadReceipt(file: File) {
     const ignoreEncryption = false
     const updateMetadata = false
@@ -15,7 +20,7 @@ export class PDFReceiptDocument extends PDFDocument{
           const context = await PDFParser.forBytesWithOptions(bytes).parseDocument();
           const pdfReceiptDoc = new PDFReceiptDocument(context, ignoreEncryption, updateMetadata);
           resolve(pdfReceiptDoc)
-        } catch (err) {
+        } catch (err: Error) {
           reject(err.message)
           return
         }
