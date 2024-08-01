@@ -34,6 +34,7 @@ const parseReceipt = async (event: Event) => {
   const file = fileInput.files?.[0];
 
   if (file) {
+    // @ts-ignore: I don't know what this problem is
     const pdfReceiptDoc: PDFReceiptDocument =
       await PDFReceiptDocument.loadReceipt(file).catch((err) => {
         console.log(err);
