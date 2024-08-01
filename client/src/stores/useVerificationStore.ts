@@ -37,14 +37,14 @@ export default defineStore("verificationStore", () => {
 
   function isReceiptValid(receipt: string, trackingCode: string) {
     try {
-      avVerifier.value.validateReceipt(receipt, trackingCode)
+      avVerifier.value.validateReceipt(receipt, trackingCode);
     } catch (err) {
       // TODO: Catch AvClientError to mark the receipt invalid. You can use error messages to display the problem.
-      console.error(err.message)
-      return false
+      console.error(err.message);
+      return false;
     }
 
-    return true
+    return true;
   }
 
   return {
@@ -55,6 +55,6 @@ export default defineStore("verificationStore", () => {
     ballot,
     ballotAddress,
     reset,
-    isReceiptValid
+    isReceiptValid,
   };
 });

@@ -1,14 +1,17 @@
-import {PDFDocument, PDFName, PDFParser, PDFContext} from "pdf-lib";
+import { PDFDocument, PDFName, PDFParser, PDFContext } from "pdf-lib";
 
-export class PDFReceiptDocument extends PDFDocument{
-
-  private constructor(context: PDFContext, ignoreEncryption: boolean, updateMetadata: boolean) {
-    super(context, ignoreEncryption, updateMetadata)
+export class PDFReceiptDocument extends PDFDocument {
+  private constructor(
+    context: PDFContext,
+    ignoreEncryption: boolean,
+    updateMetadata: boolean
+  ) {
+    super(context, ignoreEncryption, updateMetadata);
   }
 
   static async loadReceipt(file: File) {
-    const ignoreEncryption = false
-    const updateMetadata = false
+    const ignoreEncryption = false;
+    const updateMetadata = false;
 
     return new Promise((resolve, reject) => {
       // FileReader api
@@ -17,22 +20,28 @@ export class PDFReceiptDocument extends PDFDocument{
       reader.onload = async () => {
         try {
           const bytes = new Uint8Array(reader.result);
-          const context = await PDFParser.forBytesWithOptions(bytes).parseDocument();
-          const pdfReceiptDoc = new PDFReceiptDocument(context, ignoreEncryption, updateMetadata);
-          resolve(pdfReceiptDoc)
+          const context = await PDFParser.forBytesWithOptions(
+            bytes
+          ).parseDocument();
+          const pdfReceiptDoc = new PDFReceiptDocument(
+            context,
+            ignoreEncryption,
+            updateMetadata
+          );
+          resolve(pdfReceiptDoc);
         } catch (err: Error) {
-          reject(err.message)
-          return
+          reject(err.message);
+          return;
         }
-      }
+      };
       reader.onerror = () => {
-        reject("Could not load receipt file")
-      }
-    })
+        reject("Could not load receipt file");
+      };
+    });
   }
 
   public getReceipt(): string | undefined {
-    const receiptName = PDFName.of('Receipt')
+    const receiptName = PDFName.of("Receipt");
     // @ts-ignore: Calling a private method from PDFDocument
     const receipt = this.getInfoDict().lookup(receiptName);
     if (!receipt) return undefined;
@@ -40,7 +49,7 @@ export class PDFReceiptDocument extends PDFDocument{
   }
 
   public getTrackingCode(): string | undefined {
-    const trackingCodeName = PDFName.of('TrackingCode')
+    const trackingCodeName = PDFName.of("TrackingCode");
     // @ts-ignore: Calling a private method from PDFDocument
     const trackingCode = this.getInfoDict().lookup(trackingCodeName);
     if (!trackingCode) return undefined;

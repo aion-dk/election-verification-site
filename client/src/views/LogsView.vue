@@ -33,7 +33,7 @@ watch(route, () => {
 watch(configItemsOnly, () => loadPage(1));
 
 const dbbLink = computed(() => {
-  return `${options.baseURL}/${configStore.boardSlug}`
+  return `${options.baseURL}/${configStore.boardSlug}`;
 });
 
 const currentPage = () => {
@@ -78,8 +78,8 @@ const downloadLog = () => {
 };
 
 const downloadAttachments = () => {
-  window.location.href = `${dbbLink.value}/download_attachmets`
-}
+  window.location.href = `${dbbLink.value}/download_attachmets`;
+};
 
 const boardLink = computed(() => {
   return `${dbbLink.value}/board`;
@@ -257,7 +257,7 @@ onMounted(() => loadPage(currentPage()));
       />
 
       <p class="LogsView__Board_Link">
-        {{ $t('views.logs.board_link') }}<code>{{ boardLink }}</code>
+        {{ $t("views.logs.board_link") }}<code>{{ boardLink }}</code>
       </p>
     </template>
     <template v-slot:help>

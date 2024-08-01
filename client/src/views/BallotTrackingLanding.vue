@@ -9,7 +9,7 @@ import Error from "../components/Error.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
 import { useRoute } from "vue-router";
-import {PDFReceiptDocument} from "@/lib/PDFReceiptDocument";
+import { PDFReceiptDocument } from "@/lib/PDFReceiptDocument";
 
 const verificationStore = useVerificationStore();
 const configStore = useConfigStore();
@@ -34,18 +34,22 @@ const parseReceipt = async (event: Event) => {
   const file = fileInput.files?.[0];
 
   if (file) {
-    const pdfReceiptDoc:PDFReceiptDocument = await PDFReceiptDocument.loadReceipt(file)
+    const pdfReceiptDoc: PDFReceiptDocument =
+      await PDFReceiptDocument.loadReceipt(file);
 
-    const receipt = pdfReceiptDoc.getReceipt()
-    console.log("receipt: " + receipt)
+    const receipt = pdfReceiptDoc.getReceipt();
+    console.log("receipt: " + receipt);
 
-    const trackingCode = pdfReceiptDoc.getTrackingCode()
-    console.log("tracking code: " + trackingCode)
+    const trackingCode = pdfReceiptDoc.getTrackingCode();
+    console.log("tracking code: " + trackingCode);
 
-    const receiptValid = verificationStore.isReceiptValid(receipt, trackingCode)
-    console.log("valid receipt: ", receiptValid)
+    const receiptValid = verificationStore.isReceiptValid(
+      receipt,
+      trackingCode
+    );
+    console.log("valid receipt: ", receiptValid);
   }
-}
+};
 
 const lookupBallot = async (event: Event) => {
   event.preventDefault();
@@ -92,30 +96,30 @@ const lookupBallot = async (event: Event) => {
         <!-- Tracking code lookup -->
         <div class="TrackingLanding__ActionItem">
           <form @submit="lookupBallot">
-          <input
-            :disabled="disabled"
-            type="text"
-            name="verification-code"
-            id="verification-code"
-            :placeholder="$t('views.tracking.placeholder')"
-            v-model="trackingCode"
-            :class="{
-              TrackingLanding__TrackingCode: true,
-              TrackingLanding__TrackingCode_Error: error,
-            }"
-            data-1p-ignore
-            v-focus
-          />
-          <AVButton
-            :label="$t('views.tracking.button')"
-            type="neutral"
-            name="initiate-verification"
-            id="initiate-verification"
-            :disabled="disabled || !trackingCode"
-            fullWidth
-            @click="lookupBallot"
-            class="TrackingLanding__Button_Overrides"
-          />
+            <input
+              :disabled="disabled"
+              type="text"
+              name="verification-code"
+              id="verification-code"
+              :placeholder="$t('views.tracking.placeholder')"
+              v-model="trackingCode"
+              :class="{
+                TrackingLanding__TrackingCode: true,
+                TrackingLanding__TrackingCode_Error: error,
+              }"
+              data-1p-ignore
+              v-focus
+            />
+            <AVButton
+              :label="$t('views.tracking.button')"
+              type="neutral"
+              name="initiate-verification"
+              id="initiate-verification"
+              :disabled="disabled || !trackingCode"
+              fullWidth
+              @click="lookupBallot"
+              class="TrackingLanding__Button_Overrides"
+            />
           </form>
           <p class="TrackingLanding__Tooltip">
             <tooltip hover :placement="isRtl ? 'left' : 'right'">
@@ -141,21 +145,21 @@ const lookupBallot = async (event: Event) => {
         <!-- Receipt upload -->
         <div class="TrackingLanding__ActionItem">
           <form @submit="parseReceipt">
-          <input
-            type="file"
-            name="receipt-file"
-            id="receipt-file"
-            data-1p-ignore
-          />
-          <AVButton
-            :label="$t('views.receipt.button')"
-            type="neutral"
-            name="initiate-verification"
-            id="initiate-verification"
-            fullWidth
-            @click="parseReceipt"
-            class="TrackingLanding__Button_Overrides"
-          />
+            <input
+              type="file"
+              name="receipt-file"
+              id="receipt-file"
+              data-1p-ignore
+            />
+            <AVButton
+              :label="$t('views.receipt.button')"
+              type="neutral"
+              name="initiate-verification"
+              id="initiate-verification"
+              fullWidth
+              @click="parseReceipt"
+              class="TrackingLanding__Button_Overrides"
+            />
           </form>
           <p class="TrackingLanding__Tooltip">
             <tooltip hover :placement="isRtl ? 'left' : 'right'">
