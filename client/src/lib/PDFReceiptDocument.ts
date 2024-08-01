@@ -1,14 +1,7 @@
-import { PDFDocument, PDFName, PDFParser, PDFContext } from "pdf-lib";
+import { PDFDocument, PDFName, PDFParser } from "pdf-lib";
 
+// @ts-ignore: Extends a class that has a private constructor
 export class PDFReceiptDocument extends PDFDocument {
-  private constructor(
-    context: PDFContext,
-    ignoreEncryption: boolean,
-    updateMetadata: boolean
-  ) {
-    super(context, ignoreEncryption, updateMetadata);
-  }
-
   static async loadReceipt(file: File) {
     const ignoreEncryption = false;
     const updateMetadata = false;
@@ -19,7 +12,8 @@ export class PDFReceiptDocument extends PDFDocument {
       reader.readAsArrayBuffer(file);
       reader.onload = async () => {
         try {
-          const bytes = new Uint8Array(reader.result);
+          const buffer: ArrayBuffer = reader.result;
+          const bytes = new Uint8Array(buffer);
           const context = await PDFParser.forBytesWithOptions(
             bytes
           ).parseDocument();
