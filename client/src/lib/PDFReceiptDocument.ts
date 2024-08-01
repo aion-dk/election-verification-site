@@ -29,9 +29,8 @@ export class PDFReceiptDocument extends PDFDocument {
             updateMetadata
           );
           resolve(pdfReceiptDoc);
-        } catch (err: Error) {
-          reject(err.message);
-          return;
+        } catch (err) {
+          reject((err as Error).message);
         }
       };
       reader.onerror = () => {
