@@ -1,4 +1,4 @@
-import {PDFDocument, PDFName, PDFParser} from "pdf-lib";
+import {PDFDocument, PDFName, PDFParser, PDFContext} from "pdf-lib";
 
 export class PDFReceiptDocument extends PDFDocument{
 
@@ -33,6 +33,7 @@ export class PDFReceiptDocument extends PDFDocument{
 
   public getReceipt(): string | undefined {
     const receiptName = PDFName.of('Receipt')
+    // @ts-ignore: Calling a private method from PDFDocument
     const receipt = this.getInfoDict().lookup(receiptName);
     if (!receipt) return undefined;
     return receipt.decodeText();
@@ -40,6 +41,7 @@ export class PDFReceiptDocument extends PDFDocument{
 
   public getTrackingCode(): string | undefined {
     const trackingCodeName = PDFName.of('TrackingCode')
+    // @ts-ignore: Calling a private method from PDFDocument
     const trackingCode = this.getInfoDict().lookup(trackingCodeName);
     if (!trackingCode) return undefined;
     return trackingCode.decodeText();
