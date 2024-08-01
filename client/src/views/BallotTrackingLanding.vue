@@ -9,7 +9,7 @@ import Error from "../components/Error.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
 import { useRoute } from "vue-router";
-import {ReceiptPDFExtractor} from "../lib/receiptPDFExtractor";
+import {PDFReceiptDocument} from "@/lib/PDFReceiptDocument";
 
 const verificationStore = useVerificationStore();
 const configStore = useConfigStore();
@@ -34,15 +34,15 @@ const parseReceipt = async (event: Event) => {
   const file = fileInput.files?.[0];
 
   if (file) {
-    const receiptExtractor = new ReceiptPDFExtractor(file)
-    await receiptExtractor.extract().catch((reason) => {
-      console.error(reason)
-    })
+    const pdfReceiptDoc = await PDFReceiptDocument.loadReceipt(file)
 
-    console.log("receipt: ", receiptExtractor.receipt)
-    console.log("tracking code: ", receiptExtractor.trackingCode)
+    const receipt = pdfReceiptDoc.getReceipt()
+    console.log("receipt: " + receipt)
 
-    const receiptValid = verificationStore.isReceiptValid(receiptExtractor.receipt, receiptExtractor.trackingCode)
+    const trackingCode = pdfReceiptDoc.getTrackingCode()
+    console.log("tracking code: " + trackingCode)
+
+    const receiptValid = verificationStore.isReceiptValid(receipt, trackingCode)
     console.log("valid receipt: ", receiptValid)
   }
 }
