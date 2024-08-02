@@ -1,4 +1,4 @@
-import { PDFDict, PDFDocument, PDFName, PDFParser } from "pdf-lib";
+import { PDFDict, PDFDocument, PDFName, PDFParser, PDFHexString } from "pdf-lib";
 
 // @ts-ignore: Extends a class that has a private constructor
 export class PDFReceiptDocument extends PDFDocument {
