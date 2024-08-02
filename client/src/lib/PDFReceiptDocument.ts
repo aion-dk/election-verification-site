@@ -2,11 +2,11 @@ import { PDFDocument, PDFName, PDFParser } from "pdf-lib";
 
 // @ts-ignore: Extends a class that has a private constructor
 export class PDFReceiptDocument extends PDFDocument {
-  static async loadReceipt(file: File) {
+  static async loadReceipt(file: File): Promise<PDFReceiptDocument> {
     const ignoreEncryption = false;
     const updateMetadata = false;
 
-    return new Promise((resolve, reject) => {
+    return new Promise<PDFReceiptDocument>((resolve, reject) => {
       // FileReader api
       const reader = new FileReader();
       reader.readAsArrayBuffer(file);
