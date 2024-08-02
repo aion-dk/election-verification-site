@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import {ref, computed, onMounted} from "vue";
 import useConfigStore from "../stores/useConfigStore";
 import useBallotStore from "../stores/useBallotStore";
-import useVerificationStore from "../stores/useVerificationStore";
+import useReceiptStore from "@/stores/useReceiptStore";
 import i18n from "../lib/i18n";
 import router from "../router";
 import Error from "../components/Error.vue";
@@ -11,7 +11,7 @@ import MainIcon from "../components/MainIcon.vue";
 import { useRoute } from "vue-router";
 import { PDFReceiptDocument } from "@/lib/PDFReceiptDocument";
 
-const verificationStore = useVerificationStore();
+const receiptStore = useReceiptStore();
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
 const route = useRoute();
@@ -24,33 +24,40 @@ const isRtl = computed(
   () => document.getElementsByTagName("html")[0].dir === "rtl"
 );
 
+onMounted(() => (receiptStore.reset()));
+
 const parseReceipt = async (event: Event) => {
   event.preventDefault();
   event.stopPropagation();
 
-  await verificationStore.setupAVVerifier(configStore.boardSlug);
+  await receiptStore.setupAVVerifier(configStore.boardSlug);
 
   const fileInput = document.getElementById("receipt-file") as HTMLInputElement;
   const file = fileInput.files?.[0];
 
   if (file) {
     // @ts-ignore: I don't know what this problem is
-    const pdfReceiptDoc: PDFReceiptDocument =
-      await PDFReceiptDocument.loadReceipt(file).catch((err) => {
-        console.log(err);
-      });
+    PDFReceiptDocument.loadReceipt(file).then((pdfReceiptDoc: PDFReceiptDocument) => {
+      const receipt = pdfReceiptDoc.getReceipt();
+      const receiptTrackingCode = pdfReceiptDoc.getTrackingCode();
 
-    const receipt = pdfReceiptDoc.getReceipt();
-    console.log("receipt: " + receipt);
+      if (receipt == null || receiptTrackingCode == null) {
+        error.value = "receipt.invalid_file_format";
+        return
+      }
 
-    const trackingCode = pdfReceiptDoc.getTrackingCode();
-    console.log("tracking code: " + trackingCode);
-
-    const receiptValid = verificationStore.isReceiptValid(
-      receipt,
-      trackingCode
-    );
-    console.log("valid receipt: ", receiptValid);
+      receiptStore.validateReceipt(receipt, receiptTrackingCode)
+      if (receiptStore.receiptValid) {
+        trackingCode.value = receiptTrackingCode
+        lookupBallot(event)
+      } else {
+        router.push(
+            `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
+        );
+      }
+    }).catch(() => {
+      error.value = "receipt.invalid_file_format";
+    });
   }
 };
 
@@ -69,7 +76,13 @@ const lookupBallot = async (event: Event) => {
       `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode.value}`
     );
   } else {
-    error.value = "track.invalid_code";
+    if (receiptStore.receiptValid) {
+      router.push(
+          `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
+      );
+    } else {
+      error.value = "track.invalid_code";
+    }
   }
 
   disabled.value = false;

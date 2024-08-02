@@ -8,6 +8,7 @@ import BallotVerificationLanding from "../views/BallotVerificationLanding.vue";
 import LogsView from "../views/LogsView.vue";
 import HelpView from "../views/HelpView.vue";
 import BallotTrackingLanding from "../views/BallotTrackingLanding.vue";
+import ReceiptErrorView from "../views/ReceiptErrorView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -34,6 +35,11 @@ const router = createRouter({
       name: "BallotTrackerView",
       path: "/:locale/:organisationSlug/:electionSlug/track/:trackingCode",
       component: BallotTrackerView,
+    },
+    {
+      name: "ReceiptErrorView",
+      path: "/:locale/:organisationSlug/:electionSlug/receipt_error",
+      component: ReceiptErrorView,
     },
     {
       name: "BallotVerificationLanding",
