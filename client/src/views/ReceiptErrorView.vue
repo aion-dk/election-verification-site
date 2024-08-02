@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, onMounted} from "vue";
+import { ref, onMounted } from "vue";
 import useConfigStore from "../stores/useConfigStore";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
@@ -34,7 +34,6 @@ onMounted(() => (receiptValid.value = receiptStore.receiptValid));
         {{ "ballot not found but receipt valid" }}
       </h3>
     </template>
-
   </ContentLayout>
 </template>
 

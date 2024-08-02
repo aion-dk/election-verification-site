@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import {ref, computed, onMounted} from "vue";
+import { ref, computed, onMounted } from "vue";
 import useConfigStore from "../stores/useConfigStore";
 import useBallotStore from "../stores/useBallotStore";
 import useReceiptStore from "@/stores/useReceiptStore";
@@ -24,7 +24,7 @@ const isRtl = computed(
   () => document.getElementsByTagName("html")[0].dir === "rtl"
 );
 
-onMounted(() => (receiptStore.reset()));
+onMounted(() => receiptStore.reset());
 
 const parseReceipt = async (event: Event) => {
   event.preventDefault();
@@ -37,27 +37,29 @@ const parseReceipt = async (event: Event) => {
 
   if (file) {
     // @ts-ignore: I don't know what this problem is
-    PDFReceiptDocument.loadReceipt(file).then((pdfReceiptDoc: PDFReceiptDocument) => {
-      const receipt = pdfReceiptDoc.getReceipt();
-      const receiptTrackingCode = pdfReceiptDoc.getTrackingCode();
+    PDFReceiptDocument.loadReceipt(file)
+      .then((pdfReceiptDoc: PDFReceiptDocument) => {
+        const receipt = pdfReceiptDoc.getReceipt();
+        const receiptTrackingCode = pdfReceiptDoc.getTrackingCode();
 
-      if (receipt == null || receiptTrackingCode == null) {
-        error.value = "receipt.invalid_file_format";
-        return
-      }
+        if (receipt == null || receiptTrackingCode == null) {
+          error.value = "receipt.invalid_file_format";
+          return;
+        }
 
-      receiptStore.validateReceipt(receipt, receiptTrackingCode)
-      if (receiptStore.receiptValid) {
-        trackingCode.value = receiptTrackingCode
-        lookupBallot(event)
-      } else {
-        router.push(
+        receiptStore.validateReceipt(receipt, receiptTrackingCode);
+        if (receiptStore.receiptValid) {
+          trackingCode.value = receiptTrackingCode;
+          lookupBallot(event);
+        } else {
+          router.push(
             `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
-        );
-      }
-    }).catch(() => {
-      error.value = "receipt.invalid_file_format";
-    });
+          );
+        }
+      })
+      .catch(() => {
+        error.value = "receipt.invalid_file_format";
+      });
   }
 };
 
@@ -78,7 +80,7 @@ const lookupBallot = async (event: Event) => {
   } else {
     if (receiptStore.receiptValid) {
       router.push(
-          `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
+        `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
       );
     } else {
       error.value = "track.invalid_code";
