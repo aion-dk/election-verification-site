@@ -9,9 +9,6 @@ import {
 // @ts-ignore: Extends a class that has a private constructor
 export class PDFReceiptDocument extends PDFDocument {
   static async loadReceipt(file: File): Promise<PDFReceiptDocument> {
-    const ignoreEncryption = false;
-    const updateMetadata = false;
-
     return new Promise<PDFReceiptDocument>((resolve, reject) => {
       // FileReader api
       const reader = new FileReader();
@@ -25,16 +22,16 @@ export class PDFReceiptDocument extends PDFDocument {
           // @ts-ignore: Calls a constructor that is private
           const pdfReceiptDoc = new PDFReceiptDocument(
             context,
-            ignoreEncryption,
-            updateMetadata
+            false,  // ignoreEncryption,
+            false   // updateMetadata
           );
           resolve(pdfReceiptDoc);
         } catch (err) {
           reject(err);
         }
       };
-      reader.onerror = () => {
-        reject("Could not load receipt file");
+      reader.onerror = (err) => {
+        reject(err);
       };
     });
   }
