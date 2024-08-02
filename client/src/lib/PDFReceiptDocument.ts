@@ -1,4 +1,4 @@
-import { PDFDocument, PDFName, PDFParser } from "pdf-lib";
+import { PDFDict, PDFDocument, PDFName, PDFParser } from "pdf-lib";
 
 // @ts-ignore: Extends a class that has a private constructor
 export class PDFReceiptDocument extends PDFDocument {
@@ -34,9 +34,10 @@ export class PDFReceiptDocument extends PDFDocument {
   }
 
   public getReceipt(): string | undefined {
-    const receiptName = PDFName.of("Receipt");
-    // @ts-ignore: Calling a private method from PDFDocument
-    const receipt = this.getInfoDict().lookup(receiptName);
+    const infoRef = this.context.trailerInfo.Info;
+    const infoDict = this.context.lookup(infoRef) as PDFDict;
+    const receipt = infoDict.lookup(PDFName.of("Receipt"));
+
     if (!receipt) return undefined;
     return receipt.decodeText();
   }
