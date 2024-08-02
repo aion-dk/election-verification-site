@@ -24,7 +24,7 @@ export class PDFReceiptDocument extends PDFDocument {
           );
           resolve(pdfReceiptDoc);
         } catch (err) {
-          reject((err as Error).message);
+          reject(err);
         }
       };
       reader.onerror = () => {
