@@ -36,7 +36,7 @@ export class PDFReceiptDocument extends PDFDocument {
   public getReceipt(): string | undefined {
     const infoRef = this.context.trailerInfo.Info;
     const infoDict = this.context.lookup(infoRef) as PDFDict;
-    const receipt = infoDict.lookup(PDFName.of("Receipt"));
+    const receipt = infoDict.lookup(PDFName.of("Receipt")) as PDFHexString;
 
     if (!receipt) return undefined;
     return receipt.decodeText();
