@@ -1,4 +1,10 @@
-import { PDFDict, PDFDocument, PDFName, PDFParser, PDFHexString } from "pdf-lib";
+import {
+  PDFDict,
+  PDFDocument,
+  PDFName,
+  PDFParser,
+  PDFHexString,
+} from "pdf-lib";
 
 // @ts-ignore: Extends a class that has a private constructor
 export class PDFReceiptDocument extends PDFDocument {
@@ -43,9 +49,12 @@ export class PDFReceiptDocument extends PDFDocument {
   }
 
   public getTrackingCode(): string | undefined {
-    const trackingCodeName = PDFName.of("TrackingCode");
-    // @ts-ignore: Calling a private method from PDFDocument
-    const trackingCode = this.getInfoDict().lookup(trackingCodeName);
+    const infoRef = this.context.trailerInfo.Info;
+    const infoDict = this.context.lookup(infoRef) as PDFDict;
+    const trackingCode = infoDict.lookup(
+      PDFName.of("TrackingCode")
+    ) as PDFHexString;
+
     if (!trackingCode) return undefined;
     return trackingCode.decodeText();
   }
