@@ -1,4 +1,4 @@
-import {PDFDocument, PDFName} from "pdf-lib";
+import {PDFDict, PDFDocument, PDFHexString, PDFName} from "pdf-lib";
 
 export class ReceiptPDFExtractor {
   private readonly file: File
@@ -15,29 +15,27 @@ export class ReceiptPDFExtractor {
       const reader = new FileReader();
       reader.readAsArrayBuffer(this.file);
       reader.onload = async () => {
-        let pdfDoc
         try {
-          pdfDoc = await PDFDocument.load(reader.result, {updateMetadata: false})
+          const pdfDoc = await PDFDocument.load(reader.result, {updateMetadata: false})
+
+          const infoRef = pdfDoc.context.trailerInfo.Info;
+          const infoDict = pdfDoc.context.lookup(infoRef) as PDFDict;
+
+          const receipt = infoDict.lookup(PDFName.of("Receipt")) as PDFHexString;
+          const trackingCode = infoDict.lookup(PDFName.of("TrackingCode")) as PDFHexString;
+
+          if (receipt == null || trackingCode == null) {
+            reject("Invalid receipt file")
+            return
+          }
+
+          this.receipt = receipt.decodeText()
+          this.trackingCode = trackingCode.decodeText()
+
+          resolve()
         } catch (err) {
-          reject(err.message)
-          return
+          reject(err)
         }
-
-        const receiptName = PDFName.of('Receipt')
-        const receipt = pdfDoc.getInfoDict().lookup(receiptName)
-
-        const trackingCodeName = PDFName.of('TrackingCode')
-        const trackingCode = pdfDoc.getInfoDict().lookup(trackingCodeName)
-
-        if (receipt == null || trackingCode == null) {
-          reject("Invalid receipt file")
-          return
-        }
-
-        this.receipt = receipt.decodeText()
-        this.trackingCode = trackingCode.decodeText()
-
-        resolve()
       }
       reader.onerror = () => {
         reject("Could not load receipt file")
