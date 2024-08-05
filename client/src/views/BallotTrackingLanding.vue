@@ -9,7 +9,7 @@ import Error from "../components/Error.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
 import { useRoute } from "vue-router";
-import {ReceiptPDFExtractor} from "../lib/receiptPDFExtractor";
+import { ReceiptPDFExtractor } from "../lib/receiptPDFExtractor";
 
 const receiptStore = useReceiptStore();
 const configStore = useConfigStore();
@@ -36,21 +36,26 @@ const parseReceipt = async (event: Event) => {
   const file = fileInput.files?.[0];
 
   if (file) {
-    const receiptExtractor = new ReceiptPDFExtractor(file)
-    await receiptExtractor.extract().catch(() => {
-      error.value = "receipt.invalid_file_format";
-      return;
-    })
-
-    receiptStore.validateReceipt(receiptExtractor.receipt, receiptExtractor.trackingCode);
-    if (receiptStore.receiptValid) {
-      trackingCode.value = receiptExtractor.trackingCode;
-      await lookupBallot(event);
-    } else {
-      router.push(
-          `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
-      );
-    }
+    const receiptExtractor = new ReceiptPDFExtractor(file);
+    await receiptExtractor
+      .extract()
+      .then(() => {
+        receiptStore.validateReceipt(
+          receiptExtractor.receipt,
+          receiptExtractor.trackingCode
+        );
+        if (receiptStore.receiptValid) {
+          trackingCode.value = receiptExtractor.trackingCode;
+          lookupBallot(event);
+        } else {
+          router.push(
+            `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
+          );
+        }
+      })
+      .catch(() => {
+        error.value = "receipt.invalid_file_format";
+      });
   }
 };
 

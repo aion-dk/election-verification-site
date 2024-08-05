@@ -1,45 +1,50 @@
-import {PDFDict, PDFDocument, PDFHexString, PDFName} from "pdf-lib";
+import { PDFDict, PDFDocument, PDFHexString, PDFName } from "pdf-lib";
 
 export class ReceiptPDFExtractor {
-  private readonly file: File
-  public receipt: string
-  public trackingCode: string
+  private readonly file: File;
+  public receipt: string;
+  public trackingCode: string;
 
   constructor(file: File) {
-    this.file = file
+    this.file = file;
   }
 
-  public async extract() {
-    return new Promise((resolve, reject) => {
+  public async extract(): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
       // FileReader api
       const reader = new FileReader();
-      reader.readAsArrayBuffer(this.file);
       reader.onload = async () => {
         try {
-          const pdfDoc = await PDFDocument.load(reader.result, {updateMetadata: false})
+          const pdfDoc = await PDFDocument.load(reader.result, {
+            updateMetadata: false,
+          });
 
           const infoRef = pdfDoc.context.trailerInfo.Info;
           const infoDict = pdfDoc.context.lookup(infoRef) as PDFDict;
 
-          const receipt = infoDict.lookup(PDFName.of("Receipt")) as PDFHexString;
-          const trackingCode = infoDict.lookup(PDFName.of("TrackingCode")) as PDFHexString;
+          const receipt = infoDict.lookup(
+            PDFName.of("Receipt")
+          ) as PDFHexString;
+          const trackingCode = infoDict.lookup(
+            PDFName.of("TrackingCode")
+          ) as PDFHexString;
 
           if (receipt == null || trackingCode == null) {
-            reject("Invalid receipt file")
-            return
+            reject("Invalid receipt file");
           }
 
-          this.receipt = receipt.decodeText()
-          this.trackingCode = trackingCode.decodeText()
+          this.receipt = receipt.decodeText();
+          this.trackingCode = trackingCode.decodeText();
 
-          resolve()
+          resolve();
         } catch (err) {
-          reject(err)
+          reject(err);
         }
-      }
+      };
       reader.onerror = () => {
-        reject("Could not load receipt file")
-      }
-    })
+        reject("Could not load receipt file");
+      };
+      reader.readAsArrayBuffer(this.file);
+    });
   }
 }
