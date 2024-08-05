@@ -9,7 +9,7 @@ import Error from "../components/Error.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
 import { useRoute } from "vue-router";
-import { PDFReceiptDocument } from "@/lib/PDFReceiptDocument";
+import {ReceiptPDFExtractor} from "../lib/receiptPDFExtractor";
 
 const receiptStore = useReceiptStore();
 const configStore = useConfigStore();
@@ -36,30 +36,21 @@ const parseReceipt = async (event: Event) => {
   const file = fileInput.files?.[0];
 
   if (file) {
-    // @ts-ignore: I don't know what this problem is
-    PDFReceiptDocument.loadReceipt(file)
-      .then((pdfReceiptDoc: PDFReceiptDocument) => {
-        const receipt = pdfReceiptDoc.getReceipt();
-        const receiptTrackingCode = pdfReceiptDoc.getTrackingCode();
+    const receiptExtractor = new ReceiptPDFExtractor(file)
+    await receiptExtractor.extract().catch(() => {
+      error.value = "receipt.invalid_file_format";
+      return;
+    })
 
-        if (receipt == null || receiptTrackingCode == null) {
-          error.value = "receipt.invalid_file_format";
-          return;
-        }
-
-        receiptStore.validateReceipt(receipt, receiptTrackingCode);
-        if (receiptStore.receiptValid) {
-          trackingCode.value = receiptTrackingCode;
-          lookupBallot(event);
-        } else {
-          router.push(
-            `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
-          );
-        }
-      })
-      .catch(() => {
-        error.value = "receipt.invalid_file_format";
-      });
+    receiptStore.validateReceipt(receiptExtractor.receipt, receiptExtractor.trackingCode);
+    if (receiptStore.receiptValid) {
+      trackingCode.value = receiptExtractor.trackingCode;
+      await lookupBallot(event);
+    } else {
+      router.push(
+          `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
+      );
+    }
   }
 };
 
