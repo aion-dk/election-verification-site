@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch, computed } from "vue";
+import { ref, onMounted, watch } from "vue";
 import useVerificationStore from "../stores/useVerificationStore";
 import useConfigStore from "../stores/useConfigStore";
 import router from "../router";
@@ -13,16 +13,13 @@ const error = ref(null);
 const disabled = ref(false);
 const verificationCode = ref(null);
 const steps = [1, 2, 3, 4, 5];
-const isRtl = computed(
-  () => document.getElementsByTagName("html")[0].dir === "rtl"
-);
 
 onMounted(() => {
   verificationStore.reset();
   verificationStore.setupAVVerifier(configStore.boardSlug);
 
   (
-    document.querySelector(".Welcome__TrackingCode") as HTMLInputElement
+    document.querySelector("#verification-code") as HTMLInputElement
   )?.focus();
 });
 
@@ -86,53 +83,30 @@ watch(verificationStore, async (newStore) => {
       </p>
       <Error v-if="error" :errorPath="error" />
       <div class="VerificationLanding__Action_Container">
-        <form @submit="initiateVerification">
-          <input
-            :disabled="disabled"
-            type="text"
-            name="verification-code"
-            id="verification-code"
-            :placeholder="$t('views.verification.placeholder')"
-            v-model="verificationCode"
-            :class="{
-              VerificationLanding__TrackingCode: true,
-              VerificationLanding__TrackingCode_Error: error,
-            }"
-            data-1p-ignore
-            v-focus
-          />
+
+        <AVTextInput
+          id="verification-code"
+          v-model="verificationCode"
+          :placeholder="$t('views.verification.placeholder')"
+          :disabled="disabled"
+          input-label="Testing code"
+          :error="error"
+          :tooltip-text="$t('views.verification.tooltip_text')"
+        />
+
           <AVButton
             :label="$t('views.verification.button')"
             type="neutral"
             name="initiate-verification"
             id="initiate-verification"
             :disabled="disabled || !verificationCode"
-            fullWidth
+            full-width
             @click="initiateVerification"
             class="VerificationLanding__Button_Overrides"
           />
-        </form>
-        <p class="VerificationLanding__Tooltip">
-          <tooltip hover :placement="isRtl ? 'left' : 'right'">
-            <template #default>
-              <AVIcon
-                icon="circle-question"
-                class="VerificationLanding__Tooltip_Icon"
-                aria-hidden="true"
-              />
-              <span>{{ $t("views.verification.tooltip_helper") }}</span>
-              <span :aria-label="$t('views.verification.tooltip_text')"> </span>
-            </template>
-
-            <template #content>
-              <span id="tracking-code-tooltip">
-                {{ $t("views.verification.tooltip_text") }}
-              </span>
-            </template>
-          </tooltip>
-        </p>
       </div>
     </template>
+
     <template v-slot:help>
       <div
         v-for="step in steps"
@@ -156,12 +130,9 @@ watch(verificationStore, async (newStore) => {
 .VerificationLanding__Action_Container {
   width: 100%;
   display: flex;
+  gap: 1rem;
   flex-direction: column;
   align-items: center;
-}
-
-.VerificationLanding__Action_Container form {
-  width: 100%;
 }
 
 .VerificationLanding__Title {
@@ -186,40 +157,10 @@ watch(verificationStore, async (newStore) => {
   text-align: center;
 }
 
-.VerificationLanding__TrackingCode {
-  color: black;
-  border: solid 1px var(--slate-500);
-  border-radius: 12px;
-  box-sizing: border-box;
-  width: 100%;
-  height: 2.75rem;
-  line-height: 2.75rem;
-  text-align: center;
-  padding: 0 1.5rem;
-  font-size: 1rem;
-  margin-bottom: 1rem;
-}
-
-.VerificationLanding__TrackingCode_Error {
-  border: 2px solid var(--av-theme-danger-background);
-}
-
 .VerificationLanding__Button_Overrides {
   background-color: var(--av-theme-background) !important;
   border-color: var(--av-theme-background) !important;
   color: var(--av-theme-text) !important;
-}
-
-.VerificationLanding__Tooltip {
-  cursor: help;
-}
-
-html[dir="ltr"] .VerificationLanding__Tooltip_Icon {
-  margin-right: 0.5rem;
-}
-
-html[dir="rtl"] .VerificationLanding__Tooltip_Icon {
-  margin-left: 0.5rem;
 }
 
 .VerificationLanding__Step {
@@ -267,14 +208,6 @@ html[dir="rtl"] .VerificationLanding__Tooltip_Icon {
   .VerificationLanding__Description {
     margin-bottom: 3rem;
     text-align: left;
-  }
-
-  .VerificationLanding__TrackingCode {
-    border-radius: 14px;
-    height: 3.25rem;
-    line-height: 3.25rem;
-    font-size: 1.125rem;
-    margin-bottom: 1.125rem;
   }
 
   .VerificationLanding__Button_Overrides {

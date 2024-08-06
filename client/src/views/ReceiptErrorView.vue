@@ -1,60 +1,102 @@
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import useConfigStore from "../stores/useConfigStore";
-import ContentLayout from "../components/ContentLayout.vue";
-import MainIcon from "../components/MainIcon.vue";
+import { computed } from "vue";
+import useConfigStore from "@/stores/useConfigStore";
+import ContentLayout from "@/components/ContentLayout.vue";
+import MainIcon from "@/components/MainIcon.vue";
+import Error from "@/components/Error.vue";
 import useReceiptStore from "@/stores/useReceiptStore";
+import i18n from "@/lib/i18n";
+import router from "@/router";
+import { useRoute } from "vue-router";
 
 const configStore = useConfigStore();
 const receiptStore = useReceiptStore();
-const receiptValid = ref(null);
+const route = useRoute();
+const steps = [1, 2];
 
-onMounted(() => (receiptValid.value = receiptStore.receiptValid));
+const translationPath = computed(() => receiptStore.receiptValid ? "vote_not_found" : "receipt_invalid");
+
+const contactUrl = computed(
+  () =>
+    configStore.electionStatus?.electionVerificationSite?.contactUrl[
+      i18n.global.locale
+    ] || null
+);
+
+const navigate = (url: string, external = false) => external ? window.location.href = url : router.push(url);
+
+const buttons = computed(() => {
+  return {
+    primary: {
+      visible: true,
+      label: !receiptStore.receiptValid || (receiptStore.receiptValid && contactUrl.value)
+        ? i18n.global.t(`views.receipt_error.${translationPath.value}.primary_action`)
+        : i18n.global.t(`views.receipt_error.${translationPath.value}.secondary_action`),
+      url: receiptStore.receiptValid
+          ? contactUrl.value
+            ? contactUrl.value
+            : `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`
+        : `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`,
+    },
+    secondary: {
+      visible: !receiptStore.receiptValid || (receiptStore.receiptValid && contactUrl.value),
+      label: i18n.global.t(`views.receipt_error.${translationPath.value}.secondary_action`),
+      url: `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`,
+    },
+  }
+});
 </script>
 
 <template>
   <ContentLayout
-    :help-title="$t('views.receipt_error.help.title')"
-    :help-title-strong="$t('views.receipt_error.help.title_strong')"
+    :help-title="$t('views.tracking.help.title')"
+    :help-title-strong="$t('views.tracking.help.title_strong')"
     :logo="configStore.electionStatus?.theme?.logo"
   >
     <template v-slot:action>
-      <MainIcon icon="magnifying-glass" />
-      <h3 class="TrackingLanding__Title">
-        {{ $t("views.receipt_error.title") }}
+      <MainIcon :icon="receiptStore.receiptValid ? 'circle-xmark' : 'file-circle-xmark'" />
+      <h3 class="ReceiptError__Title">
+        {{ $t(`views.receipt_error.${translationPath}.title`) }}
       </h3>
-      <h4 class="TrackingLanding__Subtitle">
-        {{ $t("views.receipt_error.subtitle") }}
-        <strong>{{ $t("views.receipt_error.subtitle_strong") }}</strong>
-      </h4>
-      <p class="TrackingLanding__Description">
-        {{ $t("views.receipt_error.description") }}
-      </p>
-      <h3 class="TrackingLanding__Title" v-if="receiptValid">
-        {{ "ballot not found but receipt valid" }}
-      </h3>
+
+      <Error :errorPath="`receipt.${translationPath}`" />
+      <div class="ReceiptError__Buttons">
+        <AVButton
+          v-if="buttons.primary.visible"
+          type="primary"
+          :label="buttons.primary.label"
+          class="ReceiptError__Button_Overrides ReceiptError__Primary_Button_Overrides"
+          @click="navigate(buttons.primary.url, receiptStore.receiptValid && contactUrl)"
+        />
+
+        <AVButton
+          v-if="buttons.secondary.visible"
+          type="secondary"
+          :label="buttons.secondary.label"
+          class="ReceiptError__Button_Overrides ReceiptError__Secondary_Button_Overrides"
+          @click="navigate(buttons.secondary.url)"
+        />
+      </div>
+    </template>
+
+    <template v-slot:help>
+      <div
+        v-for="step in steps"
+        :key="`verification-step-${step}`"
+        class="ReceiptError__Step"
+      >
+        <span class="ReceiptError__Step_Index">{{ step }}</span>
+        <p
+          v-html="$t(`views.tracking.help.steps.step_${step}`)"
+          class="ReceiptError__Step_Text text-contrast"
+        />
+      </div>
     </template>
   </ContentLayout>
 </template>
 
 <style scoped>
-.TrackingLanding__Action_Container {
-  display: flex;
-  width: 100%;
-}
-
-.TrackingLanding__Action_Item {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.TrackingLanding__Action_Item form {
-  width: 100%;
-}
-
-.TrackingLanding__Title {
+.ReceiptError__Title {
   font-size: 2.5rem;
   font-weight: 600;
   color: var(--slate-800);
@@ -62,63 +104,33 @@ onMounted(() => (receiptValid.value = receiptStore.receiptValid));
   text-align: center;
 }
 
-.TrackingLanding__Subtitle {
-  color: var(--slate-700);
-  font-size: 1.75rem;
-  font-weight: 500;
-  margin: 0 0 1rem 0;
-  text-align: center;
-}
-
-.TrackingLanding__Description {
-  color: var(--slate-700);
-  margin: 0 0 1.5rem 0;
-  text-align: center;
-}
-
-.TrackingLanding__TrackingCode {
-  color: black;
-  border: solid 1px var(--slate-500);
-  border-radius: 12px;
-  box-sizing: border-box;
+.ReceiptError__Buttons {
   width: 100%;
-  height: 2.75rem;
-  line-height: 2.75rem;
-  text-align: center;
-  padding: 0 1.5rem;
-  font-size: 1rem;
-  margin-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
-.TrackingLanding__TrackingCode_Error {
-  border: 2px solid var(--av-theme-danger-background);
-}
-
-.TrackingLanding__Button_Overrides {
+.ReceiptError__Primary_Button_Overrides {
+  width: 100%;
   background-color: var(--av-theme-background) !important;
   border-color: var(--av-theme-background) !important;
   color: var(--av-theme-text) !important;
 }
 
-.TrackingLanding__Tooltip {
-  cursor: help;
+.ReceiptError__Secondary_Button_Overrides {
+  width: 100%;
+  border-color: var(--av-theme-background) !important;
+  color: var(--av-theme-background) !important;
 }
 
-html[dir="ltr"] .TrackingLanding__Tooltip_Icon {
-  margin-right: 0.5rem;
-}
-
-html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
-  margin-left: 0.5rem;
-}
-
-.TrackingLanding__Step {
+.ReceiptError__Step {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-.TrackingLanding__Step_Index {
+.ReceiptError__Step_Index {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -131,15 +143,16 @@ html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
 }
 
 @media only screen and (min-width: 80rem) {
-  .TrackingLanding__ActionItem {
+  .ReceiptError__Buttons {
+    flex-direction: row;
+    width: 50%;
+  }
+
+  .ReceiptError__ActionItem {
     width: 30rem;
   }
 
-  .TrackingLanding__Action_Container .TrackingLanding__ActionItem:first-child {
-    margin-right: 2rem;
-  }
-
-  .TrackingLanding__Title {
+  .ReceiptError__Title {
     font-size: 3.5rem;
     padding-top: 4rem;
     margin-bottom: 1.5rem;
@@ -147,34 +160,14 @@ html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
     text-align: left;
   }
 
-  .TrackingLanding__Subtitle {
-    font-size: 2.25rem;
-    margin-bottom: 2rem;
-    display: block;
-    text-align: left;
-  }
-
-  .TrackingLanding__Description {
-    margin-bottom: 3rem;
-    text-align: left;
-  }
-
-  .TrackingLanding__TrackingCode {
-    border-radius: 14px;
-    height: 3.25rem;
-    line-height: 3.25rem;
-    font-size: 1.125rem;
-    margin-bottom: 1.125rem;
-  }
-
-  .TrackingLanding__Button_Overrides {
+  .ReceiptError__Button_Overrides {
     font-size: 1.125rem !important;
     padding: 0.75rem 2.75rem !important;
     border-radius: 14px !important;
     margin-bottom: 1rem !important;
   }
 
-  .TrackingLanding__Step_Index {
+  .ReceiptError__Step_Index {
     width: 1.75rem;
     height: 1.75rem;
   }

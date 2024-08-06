@@ -9,7 +9,7 @@ const messages = { en: JSON.parse(neededStrings) };
 const i18n = createI18n({ messages });
 
 test("renders correctly", async () => {
-  const wrapper = mount(ContentLayout, {
+  const wrapper = mount(ContentLayout.vue, {
     props: {
       helpTitle: "title",
       helpTitleStrong: "strong",

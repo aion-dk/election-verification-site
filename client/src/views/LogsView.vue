@@ -16,9 +16,6 @@ const boardStore = useBoardStore();
 const configItemsOnly = ref<boolean>(false);
 const disableFirst = ref<boolean>(true);
 const disableLast = ref<boolean>(false);
-const isRtl = computed(
-  () => document.getElementsByTagName("html")[0].dir === "rtl"
-);
 
 watch(configStore, () => loadPage(currentPage()));
 watch(route, () => {
@@ -117,49 +114,23 @@ onMounted(() => loadPage(currentPage()));
 
       <ul class="LogsView__ColumnDescriptions">
         <li class="LogsView__ColumnDescriptions--event">
-          <span class="LogsView__Tooltip">
-            <tooltip hover :placement="isRtl ? 'left' : 'right'">
-              <template #default>
-                {{ $t("views.logs.headers.type") }}
-                <AVIcon
-                  icon="circle-question"
-                  class="LogsView__Tooltip_Icon"
-                  aria-hidden="true"
-                />
-              </template>
-
-              <template #content>
-                <span id="tracking-code-tooltip">
-                  {{ $t("views.logs.headers.type_tooltip") }}
-                </span>
-              </template>
-            </tooltip>
-          </span>
+          <AVTooltip
+            :content="$t('views.logs.headers.type_tooltip')"
+            :text="$t('views.logs.headers.type')"
+            icon="circle-question"
+            position="right"
+          />
         </li>
         <li class="LogsView__ColumnDescriptions--time">
-          <span class="LogsView__Tooltip">
-            {{ $t("views.logs.headers.time") }}
-          </span>
+          {{ $t("views.logs.headers.time") }}
         </li>
         <li class="LogsView__ColumnDescriptions--actor">
-          <span class="LogsView__Tooltip">
-            <tooltip hover :placement="isRtl ? 'left' : 'right'">
-              <template #default>
-                {{ $t("views.logs.headers.actor") }}
-                <AVIcon
-                  icon="circle-question"
-                  class="LogsView__Tooltip_Icon"
-                  aria-hidden="true"
-                />
-              </template>
-
-              <template #content>
-                <span id="tracking-code-tooltip">
-                  {{ $t("views.logs.headers.actor_tooltip") }}
-                </span>
-              </template>
-            </tooltip>
-          </span>
+          <AVTooltip
+            :content="$t('views.logs.headers.actor_tooltip')"
+            :text="$t('views.logs.headers.actor')"
+            icon="circle-question"
+            position="right"
+          />
         </li>
       </ul>
 
@@ -428,9 +399,8 @@ html[dir="rtl"] .RTL_Rotation {
     margin: 1rem 0;
     display: flex;
     width: 100%;
-    font-size: 0.75rem;
     padding-inline-start: 0;
-    color: var(--slate-600);
+    color: var(--slate-800);
   }
 
   .LogsView__ColumnDescriptions--event {

@@ -6,9 +6,6 @@ import i18n from "./lib/i18n";
 import * as UILibrary from "@assemblyvoting/ui-library";
 import "@assemblyvoting/ui-library/styles";
 
-// @ts-ignore
-import VuePopper from "@kalimahapps/vue-popper";
-
 const app = createApp(App);
 
 app.use(UILibrary.default, i18n);
@@ -21,8 +18,6 @@ app.directive("focus", {
     el.focus();
   },
 });
-
-app.component("tooltip", VuePopper);
 
 router.isReady().then(() => {
   app.mount("#dbas-client");
