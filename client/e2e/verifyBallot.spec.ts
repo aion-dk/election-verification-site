@@ -72,10 +72,10 @@ test("verifying with an invalid verification code", async ({ page }) => {
 
   await page.goto("/en/organisation_slug/election_slug/verify");
   await expect(page.locator("h3")).toHaveText("Ballot Tester");
-  await page.getByPlaceholder("Testing code").fill("invalid-code");
+  await page.locator("#verification-code").fill("invalid-code");
   await page.getByRole("button", { name: "Start the Test" }).click();
   await expect(page.locator(".Error__Title")).toContainText(
     "Testing code not found"
   );
-  await page.getByPlaceholder("Testing code").fill("invalid-code");
+  await page.locator("#verification-code").fill("invalid-code");
 });

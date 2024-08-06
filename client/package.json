@@ -19,9 +19,8 @@
     "lint:ci": "eslint ./src/**/*"
   },
   "dependencies": {
-    "@aion-dk/js-client": "^3.1.20",
-    "@assemblyvoting/ui-library": "^3.0.17",
-    "@kalimahapps/vue-popper": "^1.1.6",
+    "@aion-dk/js-client": "4.2.0",
+    "@assemblyvoting/ui-library": "^3.1.23",
     "@pinia/testing": "^0.0.15",
     "@playwright/test": "^1.32.3",
     "@rushstack/eslint-patch": "^1.1.4",
@@ -41,6 +40,7 @@
     "eslint-plugin-vue": "^9.9.0",
     "jsdom": "^20.0.3",
     "npm-run-all": "^4.1.5",
+    "pdf-lib": "^1.17.1",
     "pinia": "^2.0.33",
     "prettier": "^2.7.1",
     "sass": "^1.59.3",

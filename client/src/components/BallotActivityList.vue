@@ -1,10 +1,5 @@
 <script lang="ts" setup>
 import BallotActivity from "./BallotActivity.vue";
-import { computed } from "vue";
-
-const isRtl = computed(
-  () => document.getElementsByTagName("html")[0].dir === "rtl"
-);
 
 defineProps({
   activities: {
@@ -18,49 +13,23 @@ defineProps({
   <div class="BallotActivitiesList" role="log">
     <ul class="BallotActivitiesList__ColumnDescriptions" aria-hidden="true">
       <li class="BallotActivitiesList__ColumnDescriptions--event">
-        <span class="BallotActivitiesList__Tooltip">
-          <tooltip hover :placement="isRtl ? 'left' : 'right'">
-            <template #default>
-              {{ $t("components.ballot_activity_list.type") }}
-              <AVIcon
-                icon="circle-question"
-                class="BallotActivitiesList__Tooltip_Icon"
-                aria-hidden="true"
-              />
-            </template>
-
-            <template #content>
-              <span id="tracking-code-tooltip">
-                {{ $t("components.ballot_activity_list.type_tooltip") }}
-              </span>
-            </template>
-          </tooltip>
-        </span>
+        <AVTooltip
+          :content="$t('components.ballot_activity_list.type_tooltip')"
+          :text="$t('components.ballot_activity_list.type')"
+          icon="circle-question"
+          position="right"
+        />
       </li>
       <li class="BallotActivitiesList__ColumnDescriptions--time">
-        <span class="BallotActivitiesList__Tooltip" style="cursor: default">
-          {{ $t("components.ballot_activity_list.time") }}
-        </span>
+        {{ $t("components.ballot_activity_list.time") }}
       </li>
       <li class="BallotActivitiesList__ColumnDescriptions--actor">
-        <span class="BallotActivitiesList__Tooltip">
-          <tooltip hover :placement="isRtl ? 'left' : 'right'">
-            <template #default>
-              {{ $t("components.ballot_activity_list.actor") }}
-              <AVIcon
-                icon="circle-question"
-                class="BallotActivitiesList__Tooltip_Icon"
-                aria-hidden="true"
-              />
-            </template>
-
-            <template #content>
-              <span id="tracking-code-tooltip">
-                {{ $t("components.ballot_activity_list.actor_tooltip") }}
-              </span>
-            </template>
-          </tooltip>
-        </span>
+        <AVTooltip
+          :content="$t('components.ballot_activity_list.actor_tooltip')"
+          :text="$t('components.ballot_activity_list.actor')"
+          icon="circle-question"
+          position="right"
+        />
       </li>
     </ul>
 
@@ -79,7 +48,6 @@ defineProps({
 
 .BallotActivitiesList h4 {
   color: var(--slate-800);
-  font-size: 1.25rem;
   margin: 0 0 1.5rem 0;
   text-align: center;
 }
@@ -93,18 +61,13 @@ defineProps({
   }
 }
 
-.BallotActivitiesList__Tooltip {
-  cursor: help;
-}
-
 @media only screen and (min-width: 48rem) {
   .BallotActivitiesList__ColumnDescriptions {
     list-style: none;
     margin: 1rem 0;
     display: flex;
-    font-size: 0.75rem;
     padding-inline-start: 0;
-    color: var(--slate-600);
+    color: var(--slate-800);
   }
 
   .BallotActivitiesList__ColumnDescriptions--time,

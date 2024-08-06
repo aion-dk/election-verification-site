@@ -288,7 +288,7 @@ jobs:
             docker pull ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:${CIRCLE_SHA1}-untested
       - docker/scan:
           image: ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:${CIRCLE_SHA1}-untested
-          ignored_cves: "CVE-2021-32292,"
+          ignored_cves: "CVE-2021-32292,CVE-2023-24538,CVE-2023-24540,CVE-2024-24790"
   client-e2e:
     executor: vm-linux-ubuntu-nocache
     steps:

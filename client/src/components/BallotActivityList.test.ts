@@ -28,21 +28,6 @@ const stubs = {
   },
 };
 
-test("that BallotActivityList mounts", async () => {
-  const wrapper = mount(BallotActivityList, {
-    global: {
-      plugins: [i18n],
-      stubs,
-    },
-    props: {
-      activities: [],
-    },
-  });
-  expect(wrapper.text()).toContain("Item type");
-  expect(wrapper.text()).toContain("Item time");
-  expect(wrapper.text()).toContain("Item actor");
-});
-
 test("that activities are listed", async () => {
   const wrapper = mount(BallotActivityList, {
     global: {

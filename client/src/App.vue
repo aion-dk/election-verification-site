@@ -204,10 +204,6 @@ body {
   --vue-popper-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.15);
 }
 
-.Tooltip {
-  cursor: help;
-}
-
 .DBAS_SkipToContentLink {
   position: absolute;
   margin-top: -6rem;

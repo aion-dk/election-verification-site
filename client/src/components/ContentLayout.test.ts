@@ -9,6 +9,7 @@ const messages = { en: JSON.parse(neededStrings) };
 const i18n = createI18n({ messages });
 
 test("renders correctly", async () => {
+  // @ts-ignore
   const wrapper = mount(ContentLayout, {
     props: {
       helpTitle: "title",

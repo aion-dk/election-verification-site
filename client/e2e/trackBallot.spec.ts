@@ -38,11 +38,11 @@ test("tracking a ballot", async ({ page }) => {
 
   await page.goto("/en/organisation_slug/election_slug/track");
   await expect(page.locator("h3")).toHaveText("Ballot Tracker");
-  await page.getByPlaceholder("Tracking code").fill("5ksv8Ee");
+  await page.locator("#tracking-code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Track my ballot" }).click();
   await page.locator(".ExpandableSection__Expander").first().click();
   await page.getByRole("button", { name: "Cancel tracking 5ksv8Ee" }).click();
-  await page.getByPlaceholder("Tracking code").fill("5ksv8Ee");
+  await page.locator("#tracking-code").fill("5ksv8Ee");
 });
 
 test("tracking a non-existing ballot shows an error", async ({ page }) => {
@@ -82,10 +82,10 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
 
   await page.goto("/en/organisation_slug/election_slug/track");
   await expect(page.locator("h3")).toHaveText("Ballot Tracker");
-  await page.getByPlaceholder("Tracking code").fill("abcdef");
+  await page.locator("#tracking-code").fill("abcdef");
   await page.getByRole("button", { name: "Track my ballot" }).click();
   await expect(page.locator(".Error__Title")).toContainText(
     "Tracking code not found"
   );
-  await page.getByPlaceholder("Tracking code").fill("hijklm");
+  await page.locator("#tracking-code").fill("hijklm");
 });

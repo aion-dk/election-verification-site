@@ -1,32 +1,31 @@
 <script setup lang="ts">
-import { ref, computed } from "vue";
+import { ref, onMounted, computed } from "vue";
 import useConfigStore from "../stores/useConfigStore";
 import useBallotStore from "../stores/useBallotStore";
+import useReceiptStore from "@/stores/useReceiptStore";
 import i18n from "../lib/i18n";
 import router from "../router";
 import Error from "../components/Error.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import MainIcon from "../components/MainIcon.vue";
 import { useRoute } from "vue-router";
+import { ReceiptPDFExtractor } from "../lib/receiptPDFExtractor";
 
+const receiptStore = useReceiptStore();
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
 const route = useRoute();
 const trackingCode = ref(null);
+const receipt = ref(null);
 const error = ref(null);
-const disabled = ref(false);
 const steps = [1, 2];
 
-const isRtl = computed(
-  () => document.getElementsByTagName("html")[0].dir === "rtl"
-);
+onMounted(() => {
+  receiptStore.reset();
+  (document.querySelector("#tracking-code") as HTMLInputElement)?.focus();
+});
 
-const lookupBallot = async (event: Event) => {
-  event.preventDefault();
-  event.stopPropagation();
-  disabled.value = true;
-  error.value = null;
-
+const lookupBallot = async () => {
   if (trackingCode.value && configStore.boardSlug) {
     await ballotStore.loadBallot(trackingCode.value, configStore.boardSlug);
   }
@@ -36,11 +35,59 @@ const lookupBallot = async (event: Event) => {
       `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode.value}`
     );
   } else {
-    error.value = "track.invalid_code";
+    if (receiptStore.receiptValid) {
+      router.push(
+        `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
+      );
+    } else {
+      error.value = "track.invalid_code";
+    }
   }
-
-  disabled.value = false;
 };
+
+const updateReceipt = async (files: File[]) => {
+  if (!files.length) {
+    receipt.value = null;
+    trackingCode.value = null;
+    error.value = null;
+  } else {
+    receipt.value = files[0];
+    await receiptStore.setupAVVerifier(configStore.boardSlug);
+    const receiptExtractor = new ReceiptPDFExtractor(receipt.value);
+
+    await receiptExtractor
+      .extract()
+      .then(() => {
+        receiptStore.validateReceipt(
+          receiptExtractor.receipt,
+          receiptExtractor.trackingCode
+        );
+
+        if (receiptStore.receiptValid) {
+          trackingCode.value = receiptExtractor.trackingCode;
+          lookupBallot();
+        } else {
+          router.push(
+            `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
+          );
+        }
+      })
+      .catch(() => {
+        error.value = "receipt.invalid_file_format";
+      });
+  }
+};
+
+const receiptInputDisabled = computed(() => !!trackingCode.value);
+
+const trackingInputDisabled = computed(() => !!receipt.value);
+
+const button = computed(() => {
+  return {
+    label: i18n.global.t("views.tracking.button"),
+    disabled: !trackingCode.value && !receipt.value,
+  };
+});
 </script>
 
 <template>
@@ -63,53 +110,41 @@ const lookupBallot = async (event: Event) => {
       </p>
       <Error v-if="error" :errorPath="error" />
       <div class="TrackingLanding__Action_Container">
-        <form @submit="lookupBallot">
-          <input
-            :disabled="disabled"
-            type="text"
-            name="verification-code"
-            id="verification-code"
-            :placeholder="$t('views.tracking.placeholder')"
-            v-model="trackingCode"
-            :class="{
-              TrackingLanding__TrackingCode: true,
-              TrackingLanding__TrackingCode_Error: error,
-            }"
-            data-1p-ignore
-            v-focus
+        <div class="TrackingLanding__ActionItem">
+          <AVFileInput
+            id="receipt-file"
+            :input-label="$t('views.tracking.receipt_input_label')"
+            :tooltip-text="$t('views.tracking.receipt_input_tooltip')"
+            accept=".pdf"
+            :error="error"
+            :disabled="receiptInputDisabled"
+            :show-preview="false"
+            @update="updateReceipt"
           />
+
+          <AVTextInput
+            id="tracking-code"
+            v-model="trackingCode"
+            :input-label="$t('views.tracking.tracking_input_label')"
+            :tooltip-text="$t('views.tracking.tracking_input_tooltip')"
+            :placeholder="$t('views.tracking.tracking_input_placeholder')"
+            :error="error"
+            :disabled="trackingInputDisabled"
+          />
+
           <AVButton
-            :label="$t('views.tracking.button')"
+            :label="button.label"
             type="neutral"
-            name="initiate-verification"
-            id="initiate-verification"
-            :disabled="disabled || !trackingCode"
-            fullWidth
+            id="initiate-tracking"
+            full-width
             @click="lookupBallot"
+            :disabled="button.disabled"
             class="TrackingLanding__Button_Overrides"
           />
-        </form>
-        <p class="TrackingLanding__Tooltip">
-          <tooltip hover :placement="isRtl ? 'left' : 'right'">
-            <template #default>
-              <AVIcon
-                icon="circle-question"
-                class="TrackingLanding__Tooltip_Icon"
-                aria-hidden="true"
-              />
-              <span>{{ $t("views.tracking.tooltip_helper") }}</span>
-              <span :aria-label="$t('views.tracking.tooltip_text')"> </span>
-            </template>
-
-            <template #content>
-              <span id="tracking-code-tooltip">
-                {{ $t("views.tracking.tooltip_text") }}
-              </span>
-            </template>
-          </tooltip>
-        </p>
+        </div>
       </div>
     </template>
+
     <template v-slot:help>
       <div
         v-for="step in steps"
@@ -128,14 +163,16 @@ const lookupBallot = async (event: Event) => {
 
 <style scoped>
 .TrackingLanding__Action_Container {
-  width: 100%;
   display: flex;
-  flex-direction: column;
-  align-items: center;
+  width: 100%;
 }
 
-.TrackingLanding__Action_Container form {
+.TrackingLanding__ActionItem {
   width: 100%;
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+  align-items: center;
 }
 
 .TrackingLanding__Title {
@@ -184,18 +221,6 @@ const lookupBallot = async (event: Event) => {
   color: var(--av-theme-text) !important;
 }
 
-.TrackingLanding__Tooltip {
-  cursor: help;
-}
-
-html[dir="ltr"] .TrackingLanding__Tooltip_Icon {
-  margin-right: 0.5rem;
-}
-
-html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
-  margin-left: 0.5rem;
-}
-
 .TrackingLanding__Step {
   display: flex;
   flex-direction: column;
@@ -215,8 +240,12 @@ html[dir="rtl"] .TrackingLanding__Tooltip_Icon {
 }
 
 @media only screen and (min-width: 80rem) {
-  .TrackingLanding__Action_Container {
+  .TrackingLanding__ActionItem {
     width: 30rem;
+  }
+
+  .TrackingLanding__Action_Container .TrackingLanding__ActionItem:first-child {
+    margin-right: 2rem;
   }
 
   .TrackingLanding__Title {
