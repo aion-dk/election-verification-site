@@ -22,9 +22,7 @@ const steps = [1, 2];
 
 onMounted(() => {
   receiptStore.reset();
-  (
-    document.querySelector("#tracking-code") as HTMLInputElement
-  )?.focus();
+  (document.querySelector("#tracking-code") as HTMLInputElement)?.focus();
 });
 
 const lookupBallot = async () => {
@@ -62,9 +60,9 @@ const updateReceipt = async (files: File[]) => {
       .then(() => {
         receiptStore.validateReceipt(
           receiptExtractor.receipt,
-          receiptExtractor.trackingCode,
+          receiptExtractor.trackingCode
         );
-  
+
         if (receiptStore.receiptValid) {
           trackingCode.value = receiptExtractor.trackingCode;
           lookupBallot();
@@ -86,9 +84,9 @@ const trackingInputDisabled = computed(() => !!receipt.value);
 
 const button = computed(() => {
   return {
-    label: i18n.global.t('views.tracking.button'),
+    label: i18n.global.t("views.tracking.button"),
     disabled: !trackingCode.value && !receipt.value,
-  }
+  };
 });
 </script>
 
@@ -115,8 +113,8 @@ const button = computed(() => {
         <div class="TrackingLanding__ActionItem">
           <AVFileInput
             id="receipt-file"
-            input-label="Upload your vote receipt"
-            :tooltip-text="`Vote receipt was either send to your email address or you had the option to download it on the election page after you submitted your ballot`"
+            :input-label="$t('views.tracking.receipt_input_label')"
+            :tooltip-text="$t('views.tracking.receipt_input_tooltip')"
             accept=".pdf"
             :error="error"
             :disabled="receiptInputDisabled"
@@ -127,9 +125,9 @@ const button = computed(() => {
           <AVTextInput
             id="tracking-code"
             v-model="trackingCode"
-            input-label="or write your tracking code below"
-            :tooltip-text="$t('views.tracking.tooltip_text')"
-            :placeholder="$t('views.tracking.placeholder')"
+            :input-label="$t('views.tracking.tracking_input_label')"
+            :tooltip-text="$t('views.tracking.tracking_input_tooltip')"
+            :placeholder="$t('views.tracking.tracking_input_placeholder')"
             :error="error"
             :disabled="trackingInputDisabled"
           />

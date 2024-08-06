@@ -46,10 +46,6 @@ const label = ref(props.format === "absolute" ? relative : absolute);
 
 <template>
   <span class="DateTime" :aria-label="label">
-    <AVTooltip
-      :content="label"
-      :text="value"
-      position="top"
-    />
+    <AVTooltip :content="label" :text="value" position="top" />
   </span>
 </template>

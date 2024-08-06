@@ -18,9 +18,7 @@ onMounted(() => {
   verificationStore.reset();
   verificationStore.setupAVVerifier(configStore.boardSlug);
 
-  (
-    document.querySelector("#verification-code") as HTMLInputElement
-  )?.focus();
+  (document.querySelector("#verification-code") as HTMLInputElement)?.focus();
 });
 
 const initiateVerification = async (event: Event) => {
@@ -83,7 +81,6 @@ watch(verificationStore, async (newStore) => {
       </p>
       <Error v-if="error" :errorPath="error" />
       <div class="VerificationLanding__Action_Container">
-
         <AVTextInput
           id="verification-code"
           v-model="verificationCode"
@@ -94,16 +91,16 @@ watch(verificationStore, async (newStore) => {
           :tooltip-text="$t('views.verification.tooltip_text')"
         />
 
-          <AVButton
-            :label="$t('views.verification.button')"
-            type="neutral"
-            name="initiate-verification"
-            id="initiate-verification"
-            :disabled="disabled || !verificationCode"
-            full-width
-            @click="initiateVerification"
-            class="VerificationLanding__Button_Overrides"
-          />
+        <AVButton
+          :label="$t('views.verification.button')"
+          type="neutral"
+          name="initiate-verification"
+          id="initiate-verification"
+          :disabled="disabled || !verificationCode"
+          full-width
+          @click="initiateVerification"
+          class="VerificationLanding__Button_Overrides"
+        />
       </div>
     </template>
 

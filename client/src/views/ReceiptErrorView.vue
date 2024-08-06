@@ -14,7 +14,9 @@ const receiptStore = useReceiptStore();
 const route = useRoute();
 const steps = [1, 2];
 
-const translationPath = computed(() => receiptStore.receiptValid ? "vote_not_found" : "receipt_invalid");
+const translationPath = computed(() =>
+  receiptStore.receiptValid ? "vote_not_found" : "receipt_invalid"
+);
 
 const contactUrl = computed(
   () =>
@@ -23,27 +25,38 @@ const contactUrl = computed(
     ] || null
 );
 
-const navigate = (url: string, external = false) => external ? window.location.href = url : router.push(url);
+const navigate = (url: string, external = false) =>
+  external ? (window.location.href = url) : router.push(url);
 
 const buttons = computed(() => {
   return {
     primary: {
       visible: true,
-      label: !receiptStore.receiptValid || (receiptStore.receiptValid && contactUrl.value)
-        ? i18n.global.t(`views.receipt_error.${translationPath.value}.primary_action`)
-        : i18n.global.t(`views.receipt_error.${translationPath.value}.secondary_action`),
+      label:
+        !receiptStore.receiptValid ||
+        (receiptStore.receiptValid && contactUrl.value)
+          ? i18n.global.t(
+              `views.receipt_error.${translationPath.value}.primary_action`
+            )
+          : i18n.global.t(
+              `views.receipt_error.${translationPath.value}.secondary_action`
+            ),
       url: receiptStore.receiptValid
+        ? contactUrl.value
           ? contactUrl.value
-            ? contactUrl.value
-            : `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`
+          : `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`
         : `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`,
     },
     secondary: {
-      visible: !receiptStore.receiptValid || (receiptStore.receiptValid && contactUrl.value),
-      label: i18n.global.t(`views.receipt_error.${translationPath.value}.secondary_action`),
+      visible:
+        !receiptStore.receiptValid ||
+        (receiptStore.receiptValid && contactUrl.value),
+      label: i18n.global.t(
+        `views.receipt_error.${translationPath.value}.secondary_action`
+      ),
       url: `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`,
     },
-  }
+  };
 });
 </script>
 
@@ -54,7 +67,9 @@ const buttons = computed(() => {
     :logo="configStore.electionStatus?.theme?.logo"
   >
     <template v-slot:action>
-      <MainIcon :icon="receiptStore.receiptValid ? 'circle-xmark' : 'file-circle-xmark'" />
+      <MainIcon
+        :icon="receiptStore.receiptValid ? 'circle-xmark' : 'file-circle-xmark'"
+      />
       <h3 class="ReceiptError__Title">
         {{ $t(`views.receipt_error.${translationPath}.title`) }}
       </h3>
@@ -66,7 +81,12 @@ const buttons = computed(() => {
           type="primary"
           :label="buttons.primary.label"
           class="ReceiptError__Button_Overrides ReceiptError__Primary_Button_Overrides"
-          @click="navigate(buttons.primary.url, receiptStore.receiptValid && contactUrl)"
+          @click="
+            navigate(
+              buttons.primary.url,
+              receiptStore.receiptValid && contactUrl
+            )
+          "
         />
 
         <AVButton
