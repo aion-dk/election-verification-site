@@ -87,7 +87,7 @@ watch(verificationStore, async (newStore) => {
           :placeholder="$t('views.verification.placeholder')"
           :disabled="disabled"
           input-label="Testing code"
-          :error="error"
+          :error="!!error"
           :tooltip-text="$t('views.verification.tooltip_text')"
         />
 

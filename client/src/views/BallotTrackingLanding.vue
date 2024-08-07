@@ -116,7 +116,7 @@ const button = computed(() => {
             :input-label="$t('views.tracking.receipt_input_label')"
             :tooltip-text="$t('views.tracking.receipt_input_tooltip')"
             accept=".pdf"
-            :error="error"
+            :error="!!error"
             :disabled="receiptInputDisabled"
             :show-preview="false"
             @update="updateReceipt"
@@ -128,7 +128,7 @@ const button = computed(() => {
             :input-label="$t('views.tracking.tracking_input_label')"
             :tooltip-text="$t('views.tracking.tracking_input_tooltip')"
             :placeholder="$t('views.tracking.tracking_input_placeholder')"
-            :error="error"
+            :error="!!error"
             :disabled="trackingInputDisabled"
           />
 
