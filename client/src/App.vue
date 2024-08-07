@@ -142,7 +142,9 @@ const setTheme = async (conferenceClient: any) => {
       @changeLocale="updateLocale"
     />
     <main class="DBAS__Content" id="main">
-      <RouterView :key="`${route.fullPath}-${configStore.pageRefreshIterator}`" />
+      <RouterView
+        :key="`${route.fullPath}-${configStore.pageRefreshIterator}`"
+      />
     </main>
     <Footer />
   </div>
