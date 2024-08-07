@@ -14,6 +14,7 @@ export default defineStore("useConfigStore", () => {
   const bcTimeout = computed(() => election.value?.content?.bcTimeout);
   const electionStatus = ref<ElectionStatus | null>(null);
   const electionTheme = ref<string>(null);
+  const pageRefreshIterator = ref<number>(0);
 
   const setBoardSlug = (newBoardSlug: string) => {
     boardSlug.value = newBoardSlug;
@@ -74,6 +75,8 @@ export default defineStore("useConfigStore", () => {
     electionTheme.value = newTheme;
   };
 
+  const pageReloaded = () => pageRefreshIterator.value++;
+
   return {
     latestConfig,
     boardSlug,
@@ -87,5 +90,7 @@ export default defineStore("useConfigStore", () => {
     electionTheme,
     setElectionTheme,
     setBoardSlug,
+    pageRefreshIterator,
+    pageReloaded,
   };
 });

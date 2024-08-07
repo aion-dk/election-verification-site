@@ -2,9 +2,9 @@
 import { computed, onMounted, onBeforeUnmount, ref } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import DropDown from "./DropDown.vue";
-import i18n from "../lib/i18n";
+import i18n from "@/lib/i18n";
 import type { DropdownOption } from "@/Types";
-import useConfigStore from "../stores/useConfigStore";
+import useConfigStore from "@/stores/useConfigStore";
 
 const { t } = i18n.global;
 const configStore = useConfigStore();
@@ -34,6 +34,7 @@ const props = defineProps({
 const isMenuOpened = ref<boolean>(false);
 
 const toggleMenu = () => {
+  configStore.pageReloaded();
   isMenuOpened.value = !isMenuOpened.value;
 };
 
