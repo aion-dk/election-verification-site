@@ -1,44 +1,39 @@
 <script setup lang="ts">
-import { options } from "../lib/api";
-import useConfigStore from "../stores/useConfigStore";
-import useBoardStore from "../stores/useBoardStore";
+import { options } from "@/lib/api";
+import useConfigStore from "@/stores/useConfigStore";
+import useBoardStore from "@/stores/useBoardStore";
 import { onMounted, ref, watch, computed } from "vue";
 import { useRoute } from "vue-router";
-import BoardItem from "../components/BoardItem.vue";
-import ContentLayout from "../components/ContentLayout.vue";
-import MainIcon from "../components/MainIcon.vue";
+import BoardItem from "@/components/BoardItem.vue";
+import ContentLayout from "@/components/ContentLayout.vue";
+import MainIcon from "@/components/MainIcon.vue";
 import router from "@/router";
-import i18n from "../lib/i18n";
+import i18n from "@/lib/i18n";
 
 const route = useRoute();
 const configStore = useConfigStore();
 const boardStore = useBoardStore();
 const configItemsOnly = ref<boolean>(false);
-const disableFirst = ref<boolean>(true);
-const disableLast = ref<boolean>(false);
 
-watch(configStore, () => loadPage(currentPage()));
-watch(route, () => {
-  route.params.page === "1"
-    ? (disableFirst.value = true)
-    : (disableFirst.value = false);
-  route.params.page === boardStore.meta.total_pages.toString()
-    ? (disableLast.value = true)
-    : (disableLast.value = false);
-  loadPage(currentPage());
-});
+const boardLink = computed(() => `${dbbLink.value}/board`);
+
+const disableFirst = computed(() => !boardStore.meta.prev_page);
+
+const disableLast = computed(() => !boardStore.meta.next_page);
+
+watch(configStore, () => loadPage(currentPage.value));
+
+watch(route, () => loadPage(currentPage.value));
+
 watch(configItemsOnly, () => loadPage(1));
 
 const dbbLink = computed(() => {
   return `${options.baseURL}/${configStore.boardSlug}`;
 });
 
-const currentPage = () => {
-  return parseInt(
-    (route.params.page || boardStore.currentPage || 1).toString(),
-    10
-  );
-};
+const currentPage = computed(() =>
+  parseInt((route.params.page || boardStore.currentPage || 1).toString(), 10)
+);
 
 const filter = () => {
   if (!configItemsOnly.value) return [];
@@ -78,10 +73,7 @@ const downloadAttachments = () => {
   window.location.href = `${dbbLink.value}/download_attachmets`;
 };
 
-const boardLink = computed(() => {
-  return `${dbbLink.value}/board`;
-});
-onMounted(() => loadPage(currentPage()));
+onMounted(() => loadPage(currentPage.value));
 </script>
 
 <template>

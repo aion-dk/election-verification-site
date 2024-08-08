@@ -2,9 +2,9 @@
 import { computed, onMounted, onBeforeUnmount, ref } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import DropDown from "./DropDown.vue";
-import i18n from "../lib/i18n";
+import i18n from "@/lib/i18n";
 import type { DropdownOption } from "@/Types";
-import useConfigStore from "../stores/useConfigStore";
+import useConfigStore from "@/stores/useConfigStore";
 
 const { t } = i18n.global;
 const configStore = useConfigStore();
@@ -33,7 +33,8 @@ const props = defineProps({
 
 const isMenuOpened = ref<boolean>(false);
 
-const toggleMenu = () => {
+const toggleMenu = (force = false) => {
+  if (force) configStore.pageReloaded();
   isMenuOpened.value = !isMenuOpened.value;
 };
 
@@ -94,7 +95,7 @@ onBeforeUnmount(() => {
         class="Header__Link"
         role="menuitem"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`"
-        @click="toggleMenu"
+        @click="toggleMenu(true)"
       >
         {{ $t("header.verification") }}
       </RouterLink>
@@ -103,7 +104,7 @@ onBeforeUnmount(() => {
         class="Header__Link"
         role="menuitem"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`"
-        @click="toggleMenu"
+        @click="toggleMenu(true)"
       >
         {{ $t("header.tracking") }}
       </RouterLink>
@@ -112,7 +113,7 @@ onBeforeUnmount(() => {
         role="menuitem"
         class="Header__Link"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/logs`"
-        @click="toggleMenu"
+        @click="toggleMenu()"
       >
         {{ $t("header.logs") }}
       </RouterLink>
@@ -121,7 +122,7 @@ onBeforeUnmount(() => {
         role="menuitem"
         class="Header__Link"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/help`"
-        @click="toggleMenu"
+        @click="toggleMenu()"
       >
         {{ $t("header.help") }}
       </RouterLink>
@@ -150,7 +151,7 @@ onBeforeUnmount(() => {
           ? $t('header.close_menu_aria_label')
           : $t('header.open_menu_aria_label')
       "
-      @click="toggleMenu"
+      @click="toggleMenu()"
     >
       <AVIcon
         v-if="isMenuOpened"

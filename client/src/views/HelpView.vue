@@ -1,18 +1,20 @@
 <script setup lang="ts">
-import ContentLayout from "../components/ContentLayout.vue";
-import MainIcon from "../components/MainIcon.vue";
-import ExpandableSection from "../components/ExpandableSection.vue";
-import { onMounted, ref, watch } from "vue";
-import i18n from "../lib/i18n";
-import useConfigStore from "../stores/useConfigStore";
+import ContentLayout from "@/components/ContentLayout.vue";
+import MainIcon from "@/components/MainIcon.vue";
+import ExpandableSection from "@/components/ExpandableSection.vue";
+import { onMounted, ref, watch, computed } from "vue";
+import i18n from "@/lib/i18n";
+import useConfigStore from "@/stores/useConfigStore";
+import type { Locale, DefineLocaleMessage } from "vue-i18n";
 
 const configStore = useConfigStore();
-const ballotTesterQuestions = ref(null);
-const ballotTrackerQuestions = ref(null);
-const logsQuestions = ref(null);
-const otherQuestions = ref(null);
+const ballotTesterQuestions = ref<DefineLocaleMessage>(null);
+const ballotTrackerQuestions = ref<DefineLocaleMessage>(null);
+const logsQuestions = ref<DefineLocaleMessage>(null);
+const otherQuestions = ref<DefineLocaleMessage>(null);
 const currentQuestions = ref(null);
 const currentTab = ref<Tabs>(null);
+const currentLocale = computed(() => i18n.global.locale);
 
 type Tabs = "tester" | "tracker" | "logs" | "other";
 
@@ -29,7 +31,7 @@ const loadTab = (newTab: Tabs) => {
   if (newTab === "other") currentQuestions.value = otherQuestions.value;
 };
 
-const updateQuestions = (locale: string) => {
+const updateQuestions = (locale: Locale) => {
   ballotTesterQuestions.value = (
     i18n.global.getLocaleMessage(locale) as any
   ).views.faq.questions.ballot_tester;
@@ -44,13 +46,13 @@ const updateQuestions = (locale: string) => {
   ).views.faq.questions.other;
 };
 
-watch(i18n, () => {
-  updateQuestions(i18n.global.locale);
+watch(currentLocale, () => {
+  updateQuestions(currentLocale.value);
   loadTab(currentTab.value);
 });
 
 onMounted(() => {
-  updateQuestions(i18n.global.locale);
+  updateQuestions(currentLocale.value);
   switchTab("tester");
 });
 </script>
