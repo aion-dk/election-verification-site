@@ -33,8 +33,8 @@ const props = defineProps({
 
 const isMenuOpened = ref<boolean>(false);
 
-const toggleMenu = () => {
-  configStore.pageReloaded();
+const toggleMenu = (force = false) => {
+  if (force) configStore.pageReloaded();
   isMenuOpened.value = !isMenuOpened.value;
 };
 
@@ -95,7 +95,7 @@ onBeforeUnmount(() => {
         class="Header__Link"
         role="menuitem"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`"
-        @click="toggleMenu"
+        @click="toggleMenu(true)"
       >
         {{ $t("header.verification") }}
       </RouterLink>
@@ -104,7 +104,7 @@ onBeforeUnmount(() => {
         class="Header__Link"
         role="menuitem"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`"
-        @click="toggleMenu"
+        @click="toggleMenu(true)"
       >
         {{ $t("header.tracking") }}
       </RouterLink>
@@ -113,7 +113,7 @@ onBeforeUnmount(() => {
         role="menuitem"
         class="Header__Link"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/logs`"
-        @click="toggleMenu"
+        @click="toggleMenu()"
       >
         {{ $t("header.logs") }}
       </RouterLink>
@@ -122,7 +122,7 @@ onBeforeUnmount(() => {
         role="menuitem"
         class="Header__Link"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/help`"
-        @click="toggleMenu"
+        @click="toggleMenu()"
       >
         {{ $t("header.help") }}
       </RouterLink>
@@ -151,7 +151,7 @@ onBeforeUnmount(() => {
           ? $t('header.close_menu_aria_label')
           : $t('header.open_menu_aria_label')
       "
-      @click="toggleMenu"
+      @click="toggleMenu()"
     >
       <AVIcon
         v-if="isMenuOpened"
