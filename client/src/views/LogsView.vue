@@ -31,10 +31,9 @@ const dbbLink = computed(() => {
   return `${options.baseURL}/${configStore.boardSlug}`;
 });
 
-const currentPage = computed(() => parseInt(
-  (route.params.page || boardStore.currentPage || 1).toString(),
-  10
-));
+const currentPage = computed(() =>
+  parseInt((route.params.page || boardStore.currentPage || 1).toString(), 10)
+);
 
 const filter = () => {
   if (!configItemsOnly.value) return [];
