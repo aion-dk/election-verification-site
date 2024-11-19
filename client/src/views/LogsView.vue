@@ -70,7 +70,7 @@ const downloadLog = () => {
 };
 
 const downloadAttachments = () => {
-  window.location.href = `${dbbLink.value}/download_attachmets`;
+  window.location.href = `${dbbLink.value}/download_attachments`;
 };
 
 onMounted(() => loadPage(currentPage.value));
