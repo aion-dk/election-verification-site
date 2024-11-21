@@ -18,10 +18,17 @@ const i18n = createI18n({
   },
 });
 
+const stubs = {
+  DateTime: {
+    template: "<span />",
+  },
+};
+
 test("BallotActivity mounts", async () => {
   const wrapper = mount(BallotActivity, {
     global: {
       plugins: [i18n],
+      stubs,
     },
     props: {
       activity: {

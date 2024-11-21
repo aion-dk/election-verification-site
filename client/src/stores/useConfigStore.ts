@@ -1,11 +1,10 @@
 import { defineStore } from "pinia";
-import { ref, computed } from "vue";
-import { api } from "../lib/api";
-import type { Election, ElectionStatus } from "../Types";
+import { computed, ref } from "vue";
+import { api } from "@/lib/api";
+import type { Election, ElectionStatus, FullOptionContent } from "@/Types";
 import type {
   ContestContent,
   LatestConfigItems,
-  OptionContent,
 } from "@assemblyvoting/js-client/dist/lib/av_client/types";
 
 export default defineStore("useConfigStore", () => {
@@ -15,9 +14,10 @@ export default defineStore("useConfigStore", () => {
   const bcTimeout = computed(() => election.value?.content?.bcTimeout);
   const electionStatus = ref<ElectionStatus | null>(null);
   const electionTheme = ref<string>(null);
+  const pageRefreshIterator = ref<number>(0);
 
-  const setSlug = (newSlug: string) => {
-    boardSlug.value = newSlug;
+  const setBoardSlug = (newBoardSlug: string) => {
+    boardSlug.value = newBoardSlug;
   };
 
   const setLatestConfig = (newConfig: LatestConfigItems) => {
@@ -32,36 +32,50 @@ export default defineStore("useConfigStore", () => {
     return latestConfig.value.contestConfigs[contestReference].content;
   };
 
+  const flattenChildren = (option: FullOptionContent, maxDepth = 100) => {
+    if (maxDepth <= 0)
+      throw new Error("MAX RECURSION DEPTH FOR flattenChildren REACHED");
+
+    const result = [option];
+    if (option.children)
+      result.push(
+        ...option.children.flatMap((children) =>
+          flattenChildren(children, maxDepth - 1)
+        )
+      );
+
+    return result;
+  };
+
   const getContestOption = (
     contestReference: string,
     optionReference: string
-  ): OptionContent => {
-    return latestConfig.value.contestConfigs[
-      contestReference
-    ].content.options.find((o) => o.reference === optionReference);
+  ): FullOptionContent => {
+    return latestConfig.value.contestConfigs[contestReference].content.options
+      .flatMap((option) => flattenChildren(option))
+      .find((option) => option.reference === optionReference);
   };
 
-  const loadConfig = async (slug: string) => {
-    if (boardSlug.value == slug) return;
+  const loadConfig = async () => {
+    const { data } = await api.get(
+      `${boardSlug.value}/configuration/latest_config`
+    );
 
-    const { data } = await api.get(`${slug}/configuration/latest_config`);
-    setSlug(slug);
     setLatestConfig({
       ...data.items,
     });
-    setElection({
-      ...latestConfig.value?.electionConfig.content,
-      slug: boardSlug.value,
-    });
+    setElection({ ...latestConfig.value?.electionConfig.content });
   };
 
-  const setElectionStatus = async (newStatus: ElectionStatus) => {
+  const setElectionStatus = (newStatus: ElectionStatus) => {
     electionStatus.value = newStatus;
   };
 
-  const setElectionTheme = async (newTheme: string) => {
+  const setElectionTheme = (newTheme: string) => {
     electionTheme.value = newTheme;
   };
+
+  const pageReloaded = () => pageRefreshIterator.value++;
 
   return {
     latestConfig,
@@ -75,5 +89,8 @@ export default defineStore("useConfigStore", () => {
     setElectionStatus,
     electionTheme,
     setElectionTheme,
+    setBoardSlug,
+    pageRefreshIterator,
+    pageReloaded,
   };
 });

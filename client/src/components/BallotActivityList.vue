@@ -11,17 +11,25 @@ defineProps({
 
 <template>
   <div class="BallotActivitiesList" role="log">
-    <h3>{{ $t("components.ballot_activity_list.title") }}</h3>
-
     <ul class="BallotActivitiesList__ColumnDescriptions" aria-hidden="true">
       <li class="BallotActivitiesList__ColumnDescriptions--event">
-        {{ $t("components.ballot_activity_list.type") }}
+        <AVTooltip
+          :content="$t('components.ballot_activity_list.type_tooltip')"
+          :text="$t('components.ballot_activity_list.type')"
+          icon="circle-question"
+          position="right"
+        />
       </li>
       <li class="BallotActivitiesList__ColumnDescriptions--time">
         {{ $t("components.ballot_activity_list.time") }}
       </li>
       <li class="BallotActivitiesList__ColumnDescriptions--actor">
-        {{ $t("components.ballot_activity_list.actor") }}
+        <AVTooltip
+          :content="$t('components.ballot_activity_list.actor_tooltip')"
+          :text="$t('components.ballot_activity_list.actor')"
+          icon="circle-question"
+          position="right"
+        />
       </li>
     </ul>
 
@@ -34,17 +42,18 @@ defineProps({
 </template>
 
 <style type="text/css" scoped>
-.BallotActivitiesList h3 {
-  padding: 20px 16px;
-  margin: 0;
+.BallotActivitiesList {
+  width: 100%;
+}
+
+.BallotActivitiesList h4 {
+  color: var(--slate-800);
+  margin: 0 0 1.5rem 0;
+  text-align: center;
 }
 
 .BallotActivitiesList__ColumnDescriptions {
-  list-style: none;
-  padding: 16px;
-  margin: 0;
-  display: flex;
-  font-size: 14px;
+  display: none;
 }
 @media (max-width: 992px) {
   .BallotActivitiesList__ColumnDescriptions {
@@ -52,11 +61,23 @@ defineProps({
   }
 }
 
-.BallotActivitiesList__ColumnDescriptions--time {
-  width: 150px;
-}
+@media only screen and (min-width: 48rem) {
+  .BallotActivitiesList__ColumnDescriptions {
+    list-style: none;
+    margin: 1rem 0;
+    display: flex;
+    padding-inline-start: 0;
+    color: var(--slate-800);
+  }
 
-.BallotActivitiesList__ColumnDescriptions--event {
-  width: 205px;
+  .BallotActivitiesList__ColumnDescriptions--time,
+  .BallotActivitiesList__ColumnDescriptions--event,
+  .BallotActivitiesList__ColumnDescriptions--actor {
+    width: 30%;
+  }
+
+  .BallotActivitiesList__ColumnDescriptions--event {
+    margin-left: 1rem;
+  }
 }
 </style>

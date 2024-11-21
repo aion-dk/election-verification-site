@@ -1,155 +1,151 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
 import useBallotStore from "../stores/useBallotStore";
-import useLocaleStore from "../stores/useLocaleStore";
-import CompactHeader from "../components/CompactHeader.vue";
-import Infobox from "../components/Infobox.vue";
-import { ref, watch, computed, onMounted } from "vue";
+import i18n from "../lib/i18n";
+import { ref, onMounted } from "vue";
 import BallotActivityList from "../components/BallotActivityList.vue";
+import ContentLayout from "../components/ContentLayout.vue";
+import TrackedBallotManager from "../components/TrackedBallotManager.vue";
 import router from "../router";
-import { useRoute } from "vue-router";
 import type { Ballot } from "../Types";
+import { useRoute } from "vue-router";
 
-const route = useRoute();
-const localeStore = useLocaleStore();
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
+const route = useRoute();
 const ballot = ref<Ballot>(null);
-const periodicedTrackingCode = computed(() => {
-  return ballotStore.ballot?.trackingCode?.split("")?.join(". ");
-});
 
-watch(ballotStore, () => setBallot());
-watch(route, () => setBallot());
+const cancel = () => {
+  router.push(
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`
+  );
+};
 
-function setBallot() {
-  ballot.value = ballotStore.ballot;
-}
-
-function cancel() {
-  router.push(`/${localeStore.locale}/${configStore.boardSlug}`);
-}
-
-onMounted(() => setBallot());
+onMounted(() => (ballot.value = ballotStore.ballot));
 </script>
 
 <template>
   <div class="BallotTracker" v-if="ballot" aria-flowto="tracking-code">
-    <CompactHeader
-      :election="configStore.election"
-      :locale="localeStore.locale"
-    />
-
-    <div class="BallotTracker__Row">
-      <Infobox class="BallotTracker__Infobox" id="infobox">
-        <h2>{{ $t("views.tracker.info.title") }}</h2>
-        <p>{{ $t("views.tracker.info.description") }}</p>
-      </Infobox>
-
-      <Infobox class="BallotTracker__TrackingCode" role="alertdialog">
-        <h3 role="alert" id="tracking-code" aria-flowto="infobox">
-          <span>{{ $t("views.tracker.currently_tracking") }}</span>
-          <code :aria-label="periodicedTrackingCode">
-            {{ ballot.trackingCode }}
-          </code>
-        </h3>
-        <button
-          class="BallotTracker__Cancel"
-          @click="cancel"
-          data-testid="cancel"
-          :aria-label="
-            $t('views.tracker.cancel_cross_label', {
-              trackingCode: ballot.trackingCode,
-            })
-          "
-        >
-          ×
-        </button>
-      </Infobox>
-    </div>
-
-    <Infobox class="BallotTracker__StatusInfo">
-      <h3>{{ $t(`views.tracker.status_map.${ballot.status}.title`) }}</h3>
-      <p>{{ $t(`views.tracker.status_map.${ballot.status}.description`) }}</p>
-    </Infobox>
-
-    <div
-      class="BallotTracker__Row BallotTracker__Row--stacked"
-      v-if="ballot.activities.length"
+    <ContentLayout
+      :help-title="$t('views.tracker.help.title')"
+      :help-title-strong="$t('views.tracker.help.title_strong')"
+      :breadcrumb="$t('views.tracker.title')"
+      :logo="configStore.electionStatus?.theme?.logo"
     >
-      <BallotActivityList :activities="ballot.activities" />
-    </div>
+      <template v-slot:action>
+        <TrackedBallotManager
+          :tracking-code="ballot.trackingCode"
+          @cancel="cancel"
+        />
+
+        <h3 class="BallotTracker__Title">
+          {{ $t("views.tracker.info.title") }}
+        </h3>
+        <p class="BallotTracker__Description">
+          {{ $t("views.tracker.info.description") }}
+        </p>
+        <p class="BallotTracker__Description expand">
+          {{ $t("views.tracker.info.extended_description") }}
+        </p>
+
+        <BallotActivityList
+          v-if="ballot.activities.length"
+          :activities="ballot.activities"
+        />
+      </template>
+
+      <template v-slot:help>
+        <div class="BallotTracker__Info">
+          <p class="BallotTracker__Info_Title text-contrast">
+            {{ $t("views.tracker.help.p1.title") }}
+          </p>
+          <p class="BallotTracker__Info_Text text-contrast">
+            {{ $t("views.tracker.help.p1.text1") }}
+          </p>
+          <p class="BallotTracker__Info_Text text-contrast">
+            {{ $t("views.tracker.help.p1.text2") }}
+          </p>
+        </div>
+
+        <div class="BallotTracker__Info">
+          <p class="BallotTracker__Info_Title_Small text-contrast">
+            {{ $t("views.tracker.help.p2.title") }}
+          </p>
+          <p class="BallotTracker__Info_Text text-contrast">
+            {{ $t("views.tracker.help.p2.text") }}
+          </p>
+        </div>
+      </template>
+    </ContentLayout>
   </div>
 </template>
 
 <style type="text/css" scoped>
 .BallotTracker {
-  font-family: "Open Sans", sans-serif;
+  width: 100vw;
+  height: 100%;
 }
 
-.BallotTracker__Row {
-  display: flex;
-  gap: var(--av-padding);
-  margin-bottom: var(--av-margin-bottom);
-}
-
-.BallotTracker__Row--stacked {
-  flex-direction: column;
-}
-
-.BallotTracker__TrackingCode {
-  flex-grow: 1;
+.BallotTracker__Title {
   text-align: center;
+  font-size: 2.5rem;
+  color: var(--slate-800);
+  margin: 0 0 1rem 0;
+  font-weight: 800;
+}
+
+.BallotTracker__Description {
+  margin: 0 0 2rem 0;
+  line-height: 2rem;
+  color: var(--slate-700);
+  text-align: center;
+}
+
+.BallotTracker__Description.expand {
+  display: none;
+}
+
+.BallotTracker__Info {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  position: relative;
 }
 
-.BallotTracker__Infobox {
-  max-width: 350px;
-}
-
-.BallotTracker__TrackingCode h3 {
-  padding: 0;
-  margin: 0;
-}
-
-.BallotTracker__TrackingCode code {
-  font-size: 40px;
-  font-family: "Red Hat Mono", monospace;
-  letter-spacing: 5px;
-}
-
-.BallotTracker__TrackingCode h3 span {
-  color: #6c757d;
+.BallotTracker__Info_Title {
+  text-align: center;
+  font-size: 1.6rem;
   font-weight: 600;
-  display: block;
-  margin-bottom: 20px;
 }
 
-.BallotTracker__StatusInfo h3 {
-  font-size: 24px;
+.BallotTracker__Info_Title_Small {
+  font-size: 1.3rem;
+  font-weight: 600;
 }
 
-.BallotTracker__Cancel {
-  border: none;
-  background: transparent;
-  position: absolute;
-  top: 0;
-  right: 8px;
-  font-size: 40px;
-  cursor: pointer;
-  color: #adb5bd;
+@media only screen and (min-width: 48rem) {
+  .BallotTracker__Description.expand {
+    display: block;
+    margin-bottom: 4rem;
+  }
 }
 
-@media (max-width: 992px) {
-  .BallotTracker__Row {
-    flex-direction: column-reverse;
+@media only screen and (min-width: 80rem) {
+  .BallotTracker__Description.expand {
+    text-align: left;
   }
 
-  .BallotTracker__Infobox {
-    max-width: unset;
+  .BallotTracker__Title {
+    text-align: left;
+    font-size: 3.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .BallotTracker__Description {
+    text-align: left;
+  }
+
+  .BallotTracker__Info_Text {
+    font-size: 1.2rem;
   }
 }
 </style>

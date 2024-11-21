@@ -2,11 +2,13 @@ import { createWebHistory, createRouter } from "vue-router";
 import Welcome from "../views/Welcome.vue";
 import BallotTrackerView from "../views/BallotTrackerView.vue";
 import BallotVerifierView from "../views/BallotVerifierView.vue";
+import BallotVerifierFoundView from "../views/BallotVerifierFoundView.vue";
 import MissingSlugView from "../views/MissingSlugView.vue";
+import BallotVerificationLanding from "../views/BallotVerificationLanding.vue";
 import LogsView from "../views/LogsView.vue";
 import HelpView from "../views/HelpView.vue";
-import AboutView from "../views/AboutView.vue";
-import BallotVerifierFound from "@/views/BallotVerifierFound.vue";
+import BallotTrackingLanding from "../views/BallotTrackingLanding.vue";
+import ReceiptErrorView from "../views/ReceiptErrorView.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -21,42 +23,52 @@ const router = createRouter({
     },
     {
       name: "Welcome",
-      path: "/:locale/:electionSlug",
+      path: "/:locale/:organisationSlug/:electionSlug",
       component: Welcome,
     },
     {
+      name: "BallotTrackingLanding",
+      path: "/:locale/:organisationSlug/:electionSlug/track",
+      component: BallotTrackingLanding,
+    },
+    {
       name: "BallotTrackerView",
-      path: "/:locale/:electionSlug/track/:trackingCode",
+      path: "/:locale/:organisationSlug/:electionSlug/track/:trackingCode",
       component: BallotTrackerView,
     },
     {
+      name: "ReceiptErrorView",
+      path: "/:locale/:organisationSlug/:electionSlug/receipt_error",
+      component: ReceiptErrorView,
+    },
+    {
+      name: "BallotVerificationLanding",
+      path: "/:locale/:organisationSlug/:electionSlug/verify",
+      component: BallotVerificationLanding,
+    },
+    {
       name: "BallotVerifierView",
-      path: "/:locale/:electionSlug/verify/:pairingCode",
+      path: "/:locale/:organisationSlug/:electionSlug/verify/:pairingCode",
       component: BallotVerifierView,
     },
     {
       name: "BallotVerifierFound",
-      path: "/:locale/:electionSlug/verify/:verificationCode/found",
-      component: BallotVerifierFound,
+      path: "/:locale/:organisationSlug/:electionSlug/verify/:verificationCode/found",
+      component: BallotVerifierFoundView,
     },
     {
       name: "LogsView",
-      path: "/:locale/:electionSlug/logs",
+      path: "/:locale/:organisationSlug/:electionSlug/logs",
       component: LogsView,
     },
     {
-      path: "/:locale/:electionSlug/logs/:page",
+      path: "/:locale/:organisationSlug/:electionSlug/logs/:page",
       component: LogsView,
     },
     {
       name: "HelpView",
-      path: "/:locale/:electionSlug/help",
+      path: "/:locale/:organisationSlug/:electionSlug/help",
       component: HelpView,
-    },
-    {
-      name: "AboutView",
-      path: "/:locale/:electionSlug/about",
-      component: AboutView,
     },
   ],
 });

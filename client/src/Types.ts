@@ -1,7 +1,11 @@
 import type {
   ContestConfig,
+  ContestContent,
   LocalString,
+  MarkingType,
+  OptionContent,
 } from "@assemblyvoting/js-client/dist/lib/av_client/types";
+import type { DefineLocaleMessage, Locale } from "vue-i18n";
 
 export type Election = any;
 
@@ -30,6 +34,7 @@ export class HttpError extends Error {
 }
 
 export interface ElectionStatusResponse {
+  boardSlug: string;
   activeSlide?: any;
   contests?: ContestConfig[];
   election: ElectionStatus;
@@ -51,6 +56,7 @@ export interface ElectionStatus {
   description: LocalString;
   mode: "demo" | "production" | "disabled";
   trustMode: "verifiable" | "trusted";
+  electionVerificationSite?: any;
   enabledLocales: string[];
   readyForVoting: boolean;
   boardSlug: string;
@@ -74,4 +80,31 @@ export interface Theme {
   splash: string | null;
 }
 
-export type Locale = "en" | "da";
+export interface FullOptionContent extends OptionContent {
+  url?: LocalString;
+  videoUrl?: LocalString;
+  image?: string;
+  selectable?: boolean;
+  exclusive?: boolean;
+  voteLimit?: number;
+  children?: FullOptionContent[];
+}
+
+export interface FullMarkingType extends MarkingType {
+  votesAllowedPerOption?: number;
+}
+
+export interface FullContestContent extends ContestContent {
+  markingType: FullMarkingType;
+  votesAllowedPerOption?: number;
+}
+
+export interface CurrentTranslations {
+  translations: {
+    [locale: Locale]: {
+      js: DefineLocaleMessage;
+    };
+  };
+}
+
+export type SpreadableDLM = { [key: string]: any };

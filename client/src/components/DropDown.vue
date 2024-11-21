@@ -4,8 +4,8 @@ import type { DropdownOption } from "@/Types";
 
 const emit = defineEmits(["change"]);
 
-const selectEmit = (event: any) => {
-  emit("change", event.target.value);
+const selectEmit = (event: Event) => {
+  emit("change", (event.target as HTMLSelectElement).value);
 };
 
 defineProps({
@@ -21,7 +21,7 @@ defineProps({
 </script>
 
 <template>
-  <select :disabled="disabled" @change="(event) => selectEmit(event)">
+  <select :disabled="disabled" @change="selectEmit">
     <option
       v-for="option in options"
       :value="option.value"
