@@ -22,10 +22,10 @@
     jwt-decode "^3.1.2"
     xml-js "^1.6.11"
 
-"@assemblyvoting/js-client@4.0.0-alpha.1":
-  version "4.0.0-alpha.1"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-4.0.0-alpha.1.tgz#889ecba30eff9398b63679c9c1ba41a3fec8be31"
-  integrity sha512-G7d2wIXKtOVX8pHDW32Ky8aYV3DJSJjQAC86STuFYMwO+IJI3fezSEZmtyeBXwn/7IJqPnluXyiqOajX0bQg4w==
+"@assemblyvoting/js-client@4.0.0-alpha.2":
+  version "4.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-4.0.0-alpha.2.tgz#99e60123b4d462d7d958a47020001b2ee4122aa8"
+  integrity sha512-gOhKEFHki+4cSW8DNxxFtTXORS4e2RH+cu1EjK7q2OD27vVFQm3DX68fls3ComDtgOR8uxIlwEMR/YinXmSNKQ==
   dependencies:
     "@noble/hashes" "^1.3.1"
     axios "^1.6.0"
