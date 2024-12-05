@@ -343,7 +343,7 @@ workflows:
             - "GIT"
           prep-bundle: false
           prep-yarn: true
-          project-base-path: "client"
+          base-path: "client"
           filters: *always
       - lint-dockerfile-client:
           filters: *always
