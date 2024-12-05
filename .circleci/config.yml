@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   aws-ecr: circleci/aws-ecr@8.2.1
-  docker: assemblyvoting/docker@dev:c11335623c07a70a6701ac3949563a06552a69a1
+  docker: assemblyvoting/docker@dev:36271179fd8fbcd8f4a46c36acd92a7a42238492
 
 executors:
   vm-linux-ubuntu:
