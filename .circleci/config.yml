@@ -344,6 +344,7 @@ workflows:
           prep-bundle: false
           prep-yarn: false
           prep-npm: false
+          working-dir: "app/client"
           filters: *always
       - lint-dockerfile-client:
           filters: *always
