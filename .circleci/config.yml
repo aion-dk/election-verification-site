@@ -341,8 +341,9 @@ workflows:
       - docker/license-checker:
           context:
             - "GIT"
-          prep-npm: false
+          prep-bundle: false
           prep-yarn: false
+          prep-npm: false
           filters: *always
       - lint-dockerfile-client:
           filters: *always
