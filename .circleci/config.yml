@@ -2,7 +2,7 @@ version: 2.1
 
 orbs:
   aws-ecr: circleci/aws-ecr@8.2.1
-  docker: assemblyvoting/docker@dev:5cb0eabfaa5582374f92e8066bab0f0eec024ff9
+  docker: assemblyvoting/docker@dev:4d97be53bcf752182c956ca38e8e05dad34856d1
 
 executors:
   vm-linux-ubuntu:
@@ -343,8 +343,8 @@ workflows:
             - "GIT"
           prep-bundle: false
           prep-yarn: false
-          prep-npm: false
-          working-dir: "app"
+          prep-npm: true
+          working-dir: "app/client"
           filters: *always
       - lint-dockerfile-client:
           filters: *always
