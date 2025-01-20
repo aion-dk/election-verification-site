@@ -19,8 +19,8 @@
     "lint:ci": "eslint ./src/**/*"
   },
   "dependencies": {
-    "@aion-dk/js-client": "4.2.0",
-    "@assemblyvoting/ui-library": "^3.1.24",
+    "@aion-dk/js-client": "^4.4.0",
+    "@assemblyvoting/ui-library": "^3.5.1",
     "@pinia/testing": "^0.0.15",
     "@playwright/test": "^1.32.3",
     "@rushstack/eslint-patch": "^1.1.4",
