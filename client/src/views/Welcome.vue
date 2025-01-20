@@ -9,12 +9,12 @@ const route = useRoute();
 
 const goToVerifier = () => {
   router.push(
-    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`,
   );
 };
 const goToTracker = () => {
   router.push(
-    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`,
   );
 };
 </script>

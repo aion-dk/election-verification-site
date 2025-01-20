@@ -1,4 +1,4 @@
-import { resolve } from 'path';
+import { resolve } from "path";
 
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -11,8 +11,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      '@': resolve('src'),
-      vue: resolve('node_modules/vue'),
+      "@": resolve("src"),
+      vue: resolve("node_modules/vue"),
     },
   },
   server: {

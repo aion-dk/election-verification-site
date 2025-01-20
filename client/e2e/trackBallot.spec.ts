@@ -85,7 +85,7 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
   await page.locator("#tracking-code").fill("abcdef");
   await page.getByRole("button", { name: "Track my ballot" }).click();
   await expect(page.locator(".Error__Title")).toContainText(
-    "Tracking code not found"
+    "Tracking code not found",
   );
   await page.locator("#tracking-code").fill("hijklm");
 });

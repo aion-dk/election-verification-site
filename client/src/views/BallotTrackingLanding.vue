@@ -32,12 +32,12 @@ const lookupBallot = async () => {
 
   if (ballotStore.ballot?.status) {
     router.push(
-      `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode.value}`
+      `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode.value}`,
     );
   } else {
     if (receiptStore.receiptValid) {
       router.push(
-        `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
+        `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
       );
     } else {
       error.value = "track.invalid_code";
@@ -60,7 +60,7 @@ const updateReceipt = async (files: File[]) => {
       .then(() => {
         receiptStore.validateReceipt(
           receiptExtractor.receipt,
-          receiptExtractor.trackingCode
+          receiptExtractor.trackingCode,
         );
 
         if (receiptStore.receiptValid) {
@@ -68,7 +68,7 @@ const updateReceipt = async (files: File[]) => {
           lookupBallot();
         } else {
           router.push(
-            `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
+            `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
           );
         }
       })

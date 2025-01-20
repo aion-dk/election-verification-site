@@ -63,7 +63,7 @@ onMounted(async () => {
       :help-title-strong="$t('views.verification.help.title_strong')"
       :logo="configStore.electionStatus?.theme?.logo"
       :breadcrumb="`${$t('header.verification')} / ${$t(
-        'breadcrumbs.ballot_found'
+        'breadcrumbs.ballot_found',
       )}`"
     >
       <template v-slot:action>

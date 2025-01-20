@@ -19,8 +19,8 @@ const decrementSeconds = () => {
 };
 
 const msToTimeLeft = (ms: number) => {
-  let min = Math.floor(ms / 60000);
-  let sec = Number.parseInt(((ms % 60000) / 1000).toFixed(0));
+  const min = Math.floor(ms / 60000);
+  const sec = Number.parseInt(((ms % 60000) / 1000).toFixed(0));
   return min + ":" + (sec < 10 ? "0" : "") + sec;
 };
 
@@ -28,7 +28,7 @@ const secondsLeft = ref(props.currentSeconds);
 const interval = ref(null);
 const miliseconds = computed(() => secondsLeft.value * 1000);
 const percentageWidth = computed(
-  () => (secondsLeft.value / props.maxSeconds) * 100
+  () => (secondsLeft.value / props.maxSeconds) * 100,
 );
 const style = computed(() => {
   return `

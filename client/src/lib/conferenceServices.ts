@@ -14,37 +14,37 @@ import type { AxiosInstance } from "axios";
 const conferenceApi = ref<AxiosInstance>(
   axios.create({
     baseURL: config.conferenceUrl,
-  })
+  }),
 );
 
 const currentTranslationsData = ref<CurrentTranslations>(null);
 
 export function useConferenceConnector(
   organisationSlug: string,
-  electionSlug: string
+  electionSlug: string,
 ) {
   conferenceApi.value.interceptors.response.use(
     responseHandler,
-    responseErrorHandler
+    responseErrorHandler,
   );
 
   return {
     conferenceClient: {
       async getStatus() {
         const status = await conferenceApi.value.get(
-          `/${organisationSlug}/${electionSlug}/status`
+          `/${organisationSlug}/${electionSlug}/status`,
         );
         return (status as any).election as ElectionStatusResponse;
       },
       async getStylingData() {
         return (await conferenceApi.value.get(
-          `/${organisationSlug}/${electionSlug}/theme`
+          `/${organisationSlug}/${electionSlug}/theme`,
         )) as string;
       },
       async getTranslationsData(locale: Locale) {
         if (!currentTranslationsData.value) {
           currentTranslationsData.value = await conferenceApi.value.get(
-            `/${organisationSlug}/${electionSlug}/translations`
+            `/${organisationSlug}/${electionSlug}/translations`,
           );
         }
 

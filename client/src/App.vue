@@ -27,7 +27,7 @@ onMounted(async () => {
   if (route.params.trackingCode) {
     await ballotStore.loadBallot(
       route.params.trackingCode.toString(),
-      configStore.boardSlug
+      configStore.boardSlug,
     );
   }
 
@@ -37,7 +37,7 @@ onMounted(async () => {
 function updateLocale(newLocale: Locale) {
   const newUrl = route.fullPath.replace(
     `/${i18n.global.locale}/`,
-    `/${newLocale}/`
+    `/${newLocale}/`,
   );
 
   router.replace(newUrl);
@@ -55,11 +55,11 @@ function setTitle() {
 
 const setConfigurations = async (
   organisationSlug: string,
-  electionSlug: string
+  electionSlug: string,
 ) => {
   const { conferenceClient } = useConferenceConnector(
     organisationSlug,
-    electionSlug
+    electionSlug,
   );
   configStore.setBoardSlug((await conferenceClient.getStatus()).boardSlug);
   await configStore.loadConfig();
@@ -69,7 +69,7 @@ const setConfigurations = async (
 
 const setLanguage = async (conferenceClient: any) => {
   let browserLocale: Locale = navigator.languages.find((locale: Locale) =>
-    i18n.global.availableLocales.includes(locale)
+    i18n.global.availableLocales.includes(locale),
   );
 
   if (browserLocale) setLocale(browserLocale);
@@ -81,10 +81,10 @@ const setLanguage = async (conferenceClient: any) => {
       ? paramLocale
       : null;
     let browserLocale = navigator.languages.find((locale) =>
-      configStore.election.locales.includes(locale)
+      configStore.election.locales.includes(locale),
     );
     setLocale(
-      preferredLocale || browserLocale || configStore.election.locales[0]
+      preferredLocale || browserLocale || configStore.election.locales[0],
     );
 
     for (let i = 0; i < configStore.election.locales.length; i++) {
@@ -121,7 +121,7 @@ const setTheme = async (conferenceClient: any) => {
         .catch((err: Error) => {
           console.error(err);
           themeStylingTag.innerHTML = defaultTheme;
-        })
+        }),
     );
     document.head.appendChild(themeStylingTag);
   }

@@ -40,8 +40,8 @@ export default defineStore("useConfigStore", () => {
     if (option.children)
       result.push(
         ...option.children.flatMap((children) =>
-          flattenChildren(children, maxDepth - 1)
-        )
+          flattenChildren(children, maxDepth - 1),
+        ),
       );
 
     return result;
@@ -49,7 +49,7 @@ export default defineStore("useConfigStore", () => {
 
   const getContestOption = (
     contestReference: string,
-    optionReference: string
+    optionReference: string,
   ): FullOptionContent => {
     return latestConfig.value.contestConfigs[contestReference].content.options
       .flatMap((option) => flattenChildren(option))
@@ -58,7 +58,7 @@ export default defineStore("useConfigStore", () => {
 
   const loadConfig = async () => {
     const { data } = await api.get(
-      `${boardSlug.value}/configuration/latest_config`
+      `${boardSlug.value}/configuration/latest_config`,
     );
 
     setLatestConfig({
