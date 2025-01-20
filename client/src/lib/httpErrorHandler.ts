@@ -17,7 +17,7 @@ export default (error: any) => {
       const statusCode = response?.status;
       if (statusCode === 404) {
         console.log(
-          "The requested resource does not exist or has been deleted"
+          "The requested resource does not exist or has been deleted",
         );
       } else if (statusCode === 401) {
         console.log("Please login to access this resource");

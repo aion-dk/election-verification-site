@@ -32,7 +32,7 @@ const dbbLink = computed(() => {
 });
 
 const currentPage = computed(() =>
-  parseInt((route.params.page || boardStore.currentPage || 1).toString(), 10)
+  parseInt((route.params.page || boardStore.currentPage || 1).toString(), 10),
 );
 
 const filter = () => {
@@ -61,7 +61,7 @@ const navigate = (page: number) => {
   router.push(
     `/${i18n.global.locale}/${route.params.organisationSlug}/${
       route.params.electionSlug
-    }/logs/${page.toString()}`
+    }/logs/${page.toString()}`,
   );
 };
 

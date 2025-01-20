@@ -30,7 +30,7 @@ const restart = () => {
 };
 const cancel = () => {
   router.push(
-    `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`
+    `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`,
   );
 };
 

@@ -13,7 +13,7 @@ const contactUrl = computed(
   () =>
     configStore.electionStatus?.electionVerificationSite?.contactUrl[
       i18n.global.locale
-    ] || null
+    ] || null,
 );
 
 const props = defineProps({

@@ -15,14 +15,14 @@ const route = useRoute();
 const steps = [1, 2];
 
 const translationPath = computed(() =>
-  receiptStore.receiptValid ? "vote_not_found" : "receipt_invalid"
+  receiptStore.receiptValid ? "vote_not_found" : "receipt_invalid",
 );
 
 const contactUrl = computed(
   () =>
     configStore.electionStatus?.electionVerificationSite?.contactUrl[
       i18n.global.locale
-    ] || null
+    ] || null,
 );
 
 const navigate = (url: string, external = false) =>
@@ -36,10 +36,10 @@ const buttons = computed(() => {
         !receiptStore.receiptValid ||
         (receiptStore.receiptValid && contactUrl.value)
           ? i18n.global.t(
-              `views.receipt_error.${translationPath.value}.primary_action`
+              `views.receipt_error.${translationPath.value}.primary_action`,
             )
           : i18n.global.t(
-              `views.receipt_error.${translationPath.value}.secondary_action`
+              `views.receipt_error.${translationPath.value}.secondary_action`,
             ),
       url: receiptStore.receiptValid
         ? contactUrl.value
@@ -52,7 +52,7 @@ const buttons = computed(() => {
         !receiptStore.receiptValid ||
         (receiptStore.receiptValid && contactUrl.value),
       label: i18n.global.t(
-        `views.receipt_error.${translationPath.value}.secondary_action`
+        `views.receipt_error.${translationPath.value}.secondary_action`,
       ),
       url: `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`,
     },
@@ -84,7 +84,7 @@ const buttons = computed(() => {
           @click="
             navigate(
               buttons.primary.url,
-              receiptStore.receiptValid && contactUrl
+              receiptStore.receiptValid && contactUrl,
             )
           "
         />

@@ -1,5 +1,4 @@
 {
-  "extends": "@vue/tsconfig/tsconfig.node.json",
   "include": [
     "vite.config.*",
     "vitest.config.*",
@@ -7,7 +6,6 @@
     "playwright.config.*"
   ],
   "compilerOptions": {
-    "types": ["node"],
-    "ignoreDeprecations": "5.0"
+    "types": ["node"]
   }
 }

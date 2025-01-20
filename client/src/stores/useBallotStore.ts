@@ -23,7 +23,7 @@ export default defineStore("useBallotStore", () => {
         status: res.status,
         activities: (res.activities as any).reverse(),
       };
-    } catch (e) {
+    } catch (_e) {
       console.log("Unable to find ballot", trackingCode);
       resetBallot();
     }
