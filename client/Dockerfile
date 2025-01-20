@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM 534003348933.dkr.ecr.eu-west-1.amazonaws.com/nodejs:19-dev-latest as builder
+FROM node:22-bullseye-slim as builder
 
 WORKDIR /usr/src/app
 

@@ -24,8 +24,6 @@
     "@pinia/testing": "^0.0.15",
     "@playwright/test": "^1.32.3",
     "@rushstack/eslint-patch": "^1.1.4",
-    "@types/jsdom": "^20.0.1",
-    "@types/node": "^18.11.9",
     "@typescript-eslint/eslint-plugin": "^5.54.0",
     "@typescript-eslint/parser": "^5.54.0",
     "@vitejs/plugin-vue": "^5.1.4",
@@ -54,6 +52,8 @@
     "vue-tsc": "^1.0.9"
   },
   "devDependencies": {
+    "@types/jsdom": "^21.1.7",
+    "@types/node": "^22.10.7",
     "eslint": "^8.39.0",
     "eslint-plugin-json": "^3.1.0"
   }
