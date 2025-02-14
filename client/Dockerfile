@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
 
-RUN yarn ci \
+RUN yarn \
   && npx playwright install --with-deps
 
 COPY . .
