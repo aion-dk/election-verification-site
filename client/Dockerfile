@@ -3,9 +3,9 @@ FROM node:22-bullseye-slim as builder
 
 WORKDIR /usr/src/app
 
-COPY package.json package-lock.json ./
+COPY package.json yarn.lock ./
 
-RUN npm ci \
+RUN yarn ci \
   && npx playwright install --with-deps
 
 COPY . .
