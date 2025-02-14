@@ -156,8 +156,9 @@ html[dir="rtl"] .BoardItem__Type {
 .BoardItem__Meaning_Expanded code {
   font-size: 1rem;
   color: var(--slate-700);
-  font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas",
-    "Liberation Mono", "Courier New", monospace;
+  font-family:
+    "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono",
+    "Courier New", monospace;
   font-weight: 400;
 }
 

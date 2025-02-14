@@ -218,8 +218,9 @@ onMounted(redirectUnlessPairingCode);
 .BallotVerifier__Code {
   font-size: 2.25rem;
   color: var(--slate-900);
-  font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas",
-    "Liberation Mono", "Courier New", monospace;
+  font-family:
+    "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono",
+    "Courier New", monospace;
   text-align: center;
   display: block;
   letter-spacing: 0.5rem;
