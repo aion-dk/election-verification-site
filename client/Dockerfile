@@ -5,7 +5,7 @@ WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
 
-RUN yarn install --frozen-lockfile \
+RUN yarn install --frozen-lockfile && yarn cache clean \
   && npx playwright install --with-deps
 
 COPY . .
