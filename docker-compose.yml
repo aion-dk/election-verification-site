@@ -10,7 +10,7 @@ services:
     volumes:
       - "./client:/usr/src/app"
       - "/usr/src/app/node_modules"
-    command: "npm run dev"
+    command: "yarn dev"
     ports:
       - "3010:3010"
     environment:
