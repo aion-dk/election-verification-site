@@ -13,7 +13,9 @@ export default defineConfig({
     alias: {
       "@": resolve("src"),
       vue: resolve("node_modules/vue"),
-      bootstrap: resolve("node_modules/@assemblyvoting/electa-ui/dist/src/bootstrap"),
+      bootstrap: resolve(
+        "node_modules/@assemblyvoting/electa-ui/dist/src/bootstrap",
+      ),
     },
   },
   server: {
