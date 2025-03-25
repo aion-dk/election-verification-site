@@ -21,7 +21,7 @@
   },
   "dependencies": {
     "@aion-dk/js-client": "^4.4.0",
-    "@assemblyvoting/ui-library": "^3.5.1",
+    "@assemblyvoting/electa-ui": "^4.1.4",
     "axios": "^1.7.9",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.1",
