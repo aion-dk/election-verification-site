@@ -3,8 +3,9 @@ import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
 import i18n from "./lib/i18n";
-import * as UILibrary from "@assemblyvoting/ui-library";
-import "@assemblyvoting/ui-library/styles";
+import "./stylesheets/frontend.scss";
+import * as UILibrary from "@assemblyvoting/electa-ui"; // Imports components
+import "@assemblyvoting/electa-ui/styles"; // Imports styles
 
 const app = createApp(App);
 

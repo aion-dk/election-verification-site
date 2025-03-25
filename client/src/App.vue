@@ -130,7 +130,7 @@ const setTheme = async (conferenceClient: any) => {
 
 <template>
   <div v-if="!isLoaded" class="DBAS__Loading_Page">
-    <AVSpinner size="xlarge" color="neutral" />
+    <AVSpinner size="lg" color="dark" />
   </div>
   <div class="DBAS" v-if="isLoaded">
     <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a>
