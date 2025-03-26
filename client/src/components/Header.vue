@@ -66,7 +66,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <AVNavbar class="Header__Navbar_Overrides">
+  <div class="Header__Navbar">
     <RouterLink
       class="Header__Election_Info"
       :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}`"
@@ -166,12 +166,25 @@ onBeforeUnmount(() => {
         aria-hidden="true"
       />
     </button>
-  </AVNavbar>
+  </div>
 </template>
 
 <style type="text/css" scoped>
-.Header__Navbar_Overrides {
+.Header__Navbar {
   padding-left: 1.5rem !important;
+  padding-right: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background-color: white;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 70px;
+  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.15);
 }
 
 .Header__Election_Info {
