@@ -81,15 +81,24 @@ watch(verificationStore, async (newStore) => {
       </p>
       <Error v-if="error" :errorPath="error" />
       <div class="VerificationLanding__Action_Container">
-        <AVTextInput
-          id="verification-code"
-          v-model="verificationCode"
-          :placeholder="$t('views.verification.placeholder')"
-          :disabled="disabled"
-          input-label="Testing code"
-          :error="!!error"
-          :tooltip-text="$t('views.verification.tooltip_text')"
-        />
+        <div class="mb-3 w-100">
+          <label for="verification-code" class="form-label">
+            {{ $t("views.verification.placeholder") }}
+            <AVIcon
+              icon="circle-question"
+              class="text-gray-600 cursor-help"
+              v-tooltip="$t('views.verification.tooltip_text')"
+            />
+          </label>
+          <input
+            type="text"
+            v-model="verificationCode"
+            :disabled="disabled"
+            class="form-control p-3 fs-5 rounded-3"
+            id="verification-code"
+            :placeholder="$t('views.verification.placeholder')"
+          />
+        </div>
 
         <button
           class="btn btn-theme w-100 rounded-3 VerificationLanding__Button"
