@@ -8,33 +8,41 @@ import Timedown from "@/components/Timedown.vue";
 import ContentLayout from "@/components/ContentLayout.vue";
 import MainIcon from "@/components/MainIcon.vue";
 import BallotVerifierContest from "@/components/BallotVerifierContest.vue";
+import { Modal } from "@assemblyvoting/electa-ui";
 
 const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
 const route = useRoute();
 const showAlert = ref<boolean>(false);
-const showModal = ref<boolean>(false);
+const modal = ref<any>(null);
 
 const redirectUnlessPairingCode = () => {
   if (!verificationStore.pairingCode) cancel();
 };
 
 const setModal = () => {
-  showModal.value = true;
+  modal.value.show();
 };
+
 const setAlert = () => {
   showAlert.value = true;
 };
+
 const restart = () => {
+  modal.value.hide();
   router.push({ name: "Welcome" });
 };
+
 const cancel = () => {
   router.push(
     `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`,
   );
 };
 
-onMounted(redirectUnlessPairingCode);
+onMounted(() => {
+  redirectUnlessPairingCode();
+  modal.value = new Modal("#expiredModal");
+});
 </script>
 
 <template>
@@ -147,31 +155,38 @@ onMounted(redirectUnlessPairingCode);
       </template>
     </ContentLayout>
 
-    <AVModal
-      v-if="showModal"
-      :aria-labelled-by="$t('views.verifier.inprogress.modal.labelled_by')"
-      modal-active
-      class="Modal__Overrides"
+    <div
+      class="modal fade"
+      id="expiredModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="expiredModalLabel"
+      aria-hidden="true"
     >
-      <div class="Modal__Inner">
-        <AVIcon icon="clock-rotate-left" class="Modal__Icon" />
-        <h6 class="Modal__Title">
-          {{ $t("views.verifier.inprogress.modal.title") }}
-        </h6>
-        <p class="Modal__Text">
-          {{ $t("views.verifier.inprogress.modal.description") }}
-        </p>
-        <button
-          class="btn btn-theme w-100 rounded-3"
-          type="button"
-          name="restart-process"
-          id="restart-process"
-          @click="restart"
-        >
-          {{ $t("views.verifier.inprogress.modal.button") }}
-        </button>
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body vstack align-items-center pt-5 pb-3">
+            <AVIcon icon="clock-rotate-left" class="Modal__Icon" />
+            <h6 id="expiredModalLabel" class="Modal__Title">
+              {{ $t("views.verifier.inprogress.modal.title") }}
+            </h6>
+            <p class="Modal__Text">
+              {{ $t("views.verifier.inprogress.modal.description") }}
+            </p>
+            <button
+              class="btn btn-theme w-100 rounded-3"
+              type="button"
+              name="restart-process"
+              id="restart-process"
+              @click="restart"
+            >
+              {{ $t("views.verifier.inprogress.modal.button") }}
+            </button>
+          </div>
+        </div>
       </div>
-    </AVModal>
+    </div>
   </div>
 </template>
 
@@ -269,17 +284,6 @@ onMounted(redirectUnlessPairingCode);
   text-align: center;
 }
 
-.Modal__Overrides {
-  padding: 0 1rem !important;
-}
-
-.Modal__Inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .Modal__Icon {
   color: var(--slate-800);
   height: 3rem;
@@ -339,9 +343,6 @@ onMounted(redirectUnlessPairingCode);
     text-align: left;
   }
 
-  .Modal__Inner {
-    width: 28rem;
-  }
   .BallotVerifier__Button {
     margin-top: 3rem !important;
   }
