@@ -72,15 +72,15 @@ onMounted(redirectUnlessPairingCode);
             :index="index"
           />
 
-          <AVButton
-            :label="$t('views.verifier.spoiled.finish')"
-            type="neutral"
+          <button
+            class="btn btn-theme w-100 rounded-3 BallotVerifier__Button"
+            type="button"
             name="finish-session"
             id="finish-session"
-            fullWidth
-            class="BallotVerifier__Button_Overrides"
             @click="restart"
-          />
+          >
+            {{ $t("views.verifier.spoiled.finish") }}
+          </button>
         </div>
 
         <div v-else class="BallotVerifier__Content">
@@ -161,15 +161,15 @@ onMounted(redirectUnlessPairingCode);
         <p class="Modal__Text">
           {{ $t("views.verifier.inprogress.modal.description") }}
         </p>
-        <AVButton
-          :label="$t('views.verifier.inprogress.modal.button')"
-          type="neutral"
+        <button
+          class="btn btn-theme w-100 rounded-3"
+          type="button"
           name="restart-process"
           id="restart-process"
-          fullWidth
           @click="restart"
-          class="Modal__Button_Overrides"
-        />
+        >
+          {{ $t("views.verifier.inprogress.modal.button") }}
+        </button>
       </div>
     </AVModal>
   </div>
@@ -300,11 +300,6 @@ onMounted(redirectUnlessPairingCode);
   text-align: center;
 }
 
-.Modal__Button_Overrides {
-  border-color: var(--av-theme-background) !important;
-  background-color: var(--av-theme-background) !important;
-}
-
 .BallotVerifier__Contest_Title + p {
   margin-bottom: 1rem;
   font-weight: 600;
@@ -314,11 +309,8 @@ onMounted(redirectUnlessPairingCode);
   margin: 0;
 }
 
-.BallotVerifier__Button_Overrides {
+.BallotVerifier__Button {
   margin: 2rem 0 0 0 !important;
-  background-color: var(--av-theme-background) !important;
-  border-color: var(--av-theme-background) !important;
-  color: var(--av-theme-text) !important;
 }
 
 @media only screen and (min-width: 48rem) {
@@ -350,8 +342,7 @@ onMounted(redirectUnlessPairingCode);
   .Modal__Inner {
     width: 28rem;
   }
-
-  .BallotVerifier__Button_Overrides {
+  .BallotVerifier__Button {
     margin-top: 3rem !important;
   }
 }
@@ -406,7 +397,7 @@ onMounted(redirectUnlessPairingCode);
     font-size: 1.2rem;
   }
 
-  .BallotVerifier__Button_Overrides {
+  .BallotVerifier__Button {
     max-width: fit-content;
     align-self: flex-start;
     margin-top: 3rem !important;

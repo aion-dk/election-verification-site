@@ -200,24 +200,25 @@ onMounted(() => loadPage(currentPage.value));
         </div>
       </div>
 
-      <AVButton
-        @click="downloadLog"
-        size="small"
-        type="neutral"
-        class="LogsView__Button_Overrides"
-        iconLeft
-        icon="download"
-        :label="$t('views.logs.download_button')"
-      />
-      <AVButton
-        @click="downloadAttachments"
-        size="small"
-        type="neutral"
-        class="LogsView__Button_Overrides"
-        iconLeft
-        icon="download"
-        :label="$t('views.logs.download_attachments')"
-      />
+      <div class="vstack pt-3 gap-2 w-100 align-items-center">
+        <button
+          class="btn btn-sm btn-theme rounded-3 LogsView__Button"
+          type="button"
+          @click="downloadLog"
+        >
+          <AVIcon icon="download" />
+          {{ $t("views.logs.download_button") }}
+        </button>
+
+        <button
+          class="btn btn-sm btn-theme rounded-3 LogsView__Button"
+          type="button"
+          @click="downloadAttachments"
+        >
+          <AVIcon icon="download" />
+          {{ $t("views.logs.download_attachments") }}
+        </button>
+      </div>
 
       <p class="LogsView__Board_Link">
         {{ $t("views.logs.board_link") }}<code>{{ boardLink }}</code>
@@ -341,16 +342,8 @@ html[dir="rtl"] .RTL_Rotation {
   margin: 0;
 }
 
-.LogsView__Button_Overrides {
-  font-size: 0.75rem !important;
-  padding: 0.5rem 0.8rem !important;
-  margin: 0;
-  margin-top: 1rem;
-  align-self: center;
-}
-
-.LogsView__Button_Overrides:first-of-type {
-  margin-top: 2rem;
+.LogsView__Button {
+  padding: 0.3rem 0.75rem;
 }
 
 .LogsView__Tooltip {
@@ -404,17 +397,6 @@ html[dir="rtl"] .RTL_Rotation {
   .LogsView__ColumnDescriptions--actor {
     width: 30%;
   }
-
-  .LogsView__Button_Overrides {
-    font-size: 0.875rem !important;
-    padding: 0.5rem 1.5rem !important;
-    margin: 0;
-    margin-top: 1rem;
-  }
-
-  .LogsView__Button_Overrides:first-of-type {
-    margin-top: 4rem;
-  }
 }
 
 @media only screen and (min-width: 80rem) {
@@ -444,11 +426,6 @@ html[dir="rtl"] .RTL_Rotation {
   .LogsView__Help_Description:not(.LogsView__Help_Description:last-of-type) {
     margin-bottom: 0.5rem;
   }
-
-  .LogsView__Button_Overrides {
-    font-size: 1rem !important;
-    padding: 0.6rem 2rem !important;
-  }
 }
 
 @media only screen and (min-width: 120rem) {
@@ -462,11 +439,6 @@ html[dir="rtl"] .RTL_Rotation {
 
   .LogsView__Help_Description {
     font-size: 1.2rem;
-  }
-
-  .LogsView__Button_Overrides {
-    font-size: 1.125rem !important;
-    padding: 0.75rem 2.75rem !important;
   }
 }
 </style>

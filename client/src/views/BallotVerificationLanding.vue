@@ -91,16 +91,16 @@ watch(verificationStore, async (newStore) => {
           :tooltip-text="$t('views.verification.tooltip_text')"
         />
 
-        <AVButton
-          :label="$t('views.verification.button')"
-          type="neutral"
+        <button
+          class="btn btn-theme w-100 rounded-3 VerificationLanding__Button"
+          type="button"
           name="initiate-verification"
           id="initiate-verification"
           :disabled="disabled || !verificationCode"
-          full-width
           @click="initiateVerification"
-          class="VerificationLanding__Button_Overrides"
-        />
+        >
+          {{ $t("views.verification.button") }}
+        </button>
       </div>
     </template>
 
@@ -154,12 +154,6 @@ watch(verificationStore, async (newStore) => {
   text-align: center;
 }
 
-.VerificationLanding__Button_Overrides {
-  background-color: var(--av-theme-background) !important;
-  border-color: var(--av-theme-background) !important;
-  color: var(--av-theme-text) !important;
-}
-
 .VerificationLanding__Step {
   display: flex;
   flex-direction: column;
@@ -207,7 +201,7 @@ watch(verificationStore, async (newStore) => {
     text-align: left;
   }
 
-  .VerificationLanding__Button_Overrides {
+  .VerificationLanding__Button {
     font-size: 1.125rem !important;
     padding: 0.75rem 2.75rem !important;
     border-radius: 14px !important;

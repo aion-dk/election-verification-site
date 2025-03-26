@@ -171,8 +171,8 @@ onBeforeUnmount(() => {
 
 <style type="text/css" scoped>
 .Header__Navbar {
-  padding-left: 1.5rem !important;
-  padding-right: 0.5rem;
+  padding-right: 1.5rem;
+  padding-left: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
