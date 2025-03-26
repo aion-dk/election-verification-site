@@ -8,33 +8,41 @@ import Timedown from "@/components/Timedown.vue";
 import ContentLayout from "@/components/ContentLayout.vue";
 import MainIcon from "@/components/MainIcon.vue";
 import BallotVerifierContest from "@/components/BallotVerifierContest.vue";
+import { Modal } from "@assemblyvoting/electa-ui";
 
 const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
 const route = useRoute();
 const showAlert = ref<boolean>(false);
-const showModal = ref<boolean>(false);
+const modal = ref<any>(null);
 
 const redirectUnlessPairingCode = () => {
   if (!verificationStore.pairingCode) cancel();
 };
 
 const setModal = () => {
-  showModal.value = true;
+  modal.value.show();
 };
+
 const setAlert = () => {
   showAlert.value = true;
 };
+
 const restart = () => {
+  modal.value.hide();
   router.push({ name: "Welcome" });
 };
+
 const cancel = () => {
   router.push(
     `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`,
   );
 };
 
-onMounted(redirectUnlessPairingCode);
+onMounted(() => {
+  redirectUnlessPairingCode();
+  modal.value = new Modal("#expiredModal");
+});
 </script>
 
 <template>
@@ -72,15 +80,15 @@ onMounted(redirectUnlessPairingCode);
             :index="index"
           />
 
-          <AVButton
-            :label="$t('views.verifier.spoiled.finish')"
-            type="neutral"
+          <button
+            class="btn btn-theme w-100 rounded-3 BallotVerifier__Button"
+            type="button"
             name="finish-session"
             id="finish-session"
-            fullWidth
-            class="BallotVerifier__Button_Overrides"
             @click="restart"
-          />
+          >
+            {{ $t("views.verifier.spoiled.finish") }}
+          </button>
         </div>
 
         <div v-else class="BallotVerifier__Content">
@@ -147,31 +155,38 @@ onMounted(redirectUnlessPairingCode);
       </template>
     </ContentLayout>
 
-    <AVModal
-      v-if="showModal"
-      :aria-labelled-by="$t('views.verifier.inprogress.modal.labelled_by')"
-      modal-active
-      class="Modal__Overrides"
+    <div
+      class="modal fade"
+      id="expiredModal"
+      data-bs-backdrop="static"
+      data-bs-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="expiredModalLabel"
+      aria-hidden="true"
     >
-      <div class="Modal__Inner">
-        <AVIcon icon="clock-rotate-left" class="Modal__Icon" />
-        <h6 class="Modal__Title">
-          {{ $t("views.verifier.inprogress.modal.title") }}
-        </h6>
-        <p class="Modal__Text">
-          {{ $t("views.verifier.inprogress.modal.description") }}
-        </p>
-        <AVButton
-          :label="$t('views.verifier.inprogress.modal.button')"
-          type="neutral"
-          name="restart-process"
-          id="restart-process"
-          fullWidth
-          @click="restart"
-          class="Modal__Button_Overrides"
-        />
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-body vstack align-items-center pt-5 pb-3">
+            <AVIcon icon="clock-rotate-left" class="Modal__Icon" />
+            <h6 id="expiredModalLabel" class="Modal__Title">
+              {{ $t("views.verifier.inprogress.modal.title") }}
+            </h6>
+            <p class="Modal__Text">
+              {{ $t("views.verifier.inprogress.modal.description") }}
+            </p>
+            <button
+              class="btn btn-theme w-100 rounded-3"
+              type="button"
+              name="restart-process"
+              id="restart-process"
+              @click="restart"
+            >
+              {{ $t("views.verifier.inprogress.modal.button") }}
+            </button>
+          </div>
+        </div>
       </div>
-    </AVModal>
+    </div>
   </div>
 </template>
 
@@ -269,17 +284,6 @@ onMounted(redirectUnlessPairingCode);
   text-align: center;
 }
 
-.Modal__Overrides {
-  padding: 0 1rem !important;
-}
-
-.Modal__Inner {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-
 .Modal__Icon {
   color: var(--slate-800);
   height: 3rem;
@@ -300,11 +304,6 @@ onMounted(redirectUnlessPairingCode);
   text-align: center;
 }
 
-.Modal__Button_Overrides {
-  border-color: var(--av-theme-background) !important;
-  background-color: var(--av-theme-background) !important;
-}
-
 .BallotVerifier__Contest_Title + p {
   margin-bottom: 1rem;
   font-weight: 600;
@@ -314,11 +313,8 @@ onMounted(redirectUnlessPairingCode);
   margin: 0;
 }
 
-.BallotVerifier__Button_Overrides {
+.BallotVerifier__Button {
   margin: 2rem 0 0 0 !important;
-  background-color: var(--av-theme-background) !important;
-  border-color: var(--av-theme-background) !important;
-  color: var(--av-theme-text) !important;
 }
 
 @media only screen and (min-width: 48rem) {
@@ -347,11 +343,7 @@ onMounted(redirectUnlessPairingCode);
     text-align: left;
   }
 
-  .Modal__Inner {
-    width: 28rem;
-  }
-
-  .BallotVerifier__Button_Overrides {
+  .BallotVerifier__Button {
     margin-top: 3rem !important;
   }
 }
@@ -406,7 +398,7 @@ onMounted(redirectUnlessPairingCode);
     font-size: 1.2rem;
   }
 
-  .BallotVerifier__Button_Overrides {
+  .BallotVerifier__Button {
     max-width: fit-content;
     align-self: flex-start;
     margin-top: 3rem !important;

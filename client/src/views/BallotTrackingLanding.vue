@@ -122,25 +122,35 @@ const button = computed(() => {
             @update="updateReceipt"
           />
 
-          <AVTextInput
-            id="tracking-code"
-            v-model="trackingCode"
-            :input-label="$t('views.tracking.tracking_input_label')"
-            :tooltip-text="$t('views.tracking.tracking_input_tooltip')"
-            :placeholder="$t('views.tracking.tracking_input_placeholder')"
-            :error="!!error"
-            :disabled="trackingInputDisabled"
-          />
+          <div class="mb-3 w-100">
+            <label for="tracking-code" class="form-label">
+              {{ $t("views.tracking.tracking_input_label") }}
+              <AVIcon
+                icon="circle-question"
+                class="text-gray-600 cursor-help"
+                v-tooltip="$t('views.tracking.tracking_input_tooltip')"
+              />
+            </label>
+            <input
+              type="text"
+              v-model="trackingCode"
+              class="form-control p-3 fs-5 rounded-3"
+              id="tracking-code"
+              :placeholder="$t('views.tracking.tracking_input_placeholder')"
+              :disabled="trackingInputDisabled"
+            />
+          </div>
 
-          <AVButton
-            :label="button.label"
-            type="neutral"
+          <button
+            class="btn btn-theme w-100 rounded-3 TrackingLanding__Button"
+            type="button"
+            name="initiate-tracking"
             id="initiate-tracking"
-            full-width
-            @click="lookupBallot"
             :disabled="button.disabled"
-            class="TrackingLanding__Button_Overrides"
-          />
+            @click="lookupBallot"
+          >
+            {{ button.label }}
+          </button>
         </div>
       </div>
     </template>
@@ -215,12 +225,6 @@ const button = computed(() => {
   border: 2px solid var(--av-theme-danger-background);
 }
 
-.TrackingLanding__Button_Overrides {
-  background-color: var(--av-theme-background) !important;
-  border-color: var(--av-theme-background) !important;
-  color: var(--av-theme-text) !important;
-}
-
 .TrackingLanding__Step {
   display: flex;
   flex-direction: column;
@@ -276,7 +280,7 @@ const button = computed(() => {
     margin-bottom: 1.125rem;
   }
 
-  .TrackingLanding__Button_Overrides {
+  .TrackingLanding__Button {
     font-size: 1.125rem !important;
     padding: 0.75rem 2.75rem !important;
     border-radius: 14px !important;

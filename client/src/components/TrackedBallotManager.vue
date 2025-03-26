@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps({
   trackingCode: {
-    type: String,
+    type: [String, null],
     required: true,
   },
 });

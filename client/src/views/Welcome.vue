@@ -52,7 +52,9 @@ const goToTracker = () => {
 
     <section class="Welcome__Content">
       <div class="Welcome__Heading_Content">
-        <AVCard class="Welcome__Card_Overrides Welcome__Card_Desktop">
+        <div
+          class="Welcome__Card Welcome__Card_Overrides Welcome__Card_Desktop"
+        >
           <div class="Welcome__Card_Item">
             <AVIcon
               icon="envelope-open-text"
@@ -66,15 +68,15 @@ const goToTracker = () => {
               <p class="Welcome__Card_Description">
                 {{ $t("views.welcome.ballot_tester.description") }}
               </p>
-              <AVButton
-                :label="$t('views.welcome.ballot_tester.button')"
-                type="neutral"
+              <button
+                class="btn btn-theme w-100 rounded-3 Welcome__Button"
+                type="button"
                 name="test-ballot"
                 id="test-ballot"
-                fullWidth
                 @click="goToVerifier"
-                class="Welcome__Button_Overrides"
-              />
+              >
+                {{ $t("views.welcome.ballot_tester.button") }}
+              </button>
             </div>
           </div>
 
@@ -93,18 +95,18 @@ const goToTracker = () => {
               <p class="Welcome__Card_Description">
                 {{ $t("views.welcome.ballot_tracker.description") }}
               </p>
-              <AVButton
-                :label="$t('views.welcome.ballot_tracker.button')"
-                type="neutral"
+              <button
+                class="btn btn-theme w-100 rounded-3 Welcome__Button"
+                type="button"
                 name="track-ballot"
                 id="track-ballot"
-                fullWidth
                 @click="goToTracker"
-                class="Welcome__Button_Overrides"
-              />
+              >
+                {{ $t("views.welcome.ballot_tracker.button") }}
+              </button>
             </div>
           </div>
-        </AVCard>
+        </div>
       </div>
     </section>
 
@@ -112,34 +114,34 @@ const goToTracker = () => {
       <h4 class="Welcome__About_Title">
         {{ $t("views.welcome.about.title") }}
       </h4>
-      <AVCard class="Welcome__Description">
+      <div class="Welcome__Card Welcome__Description">
         <p>{{ $t("views.welcome.description") }}</p>
-      </AVCard>
+      </div>
       <div>
-        <AVCard class="Welcome__Card_Overrides">
+        <div class="Welcome__Card Welcome__Card_Overrides">
           <h5 class="Welcome__About_Subtitle">
             {{ $t("views.welcome.about.ballot_tester") }}
           </h5>
           <p class="Welcome__About_Description">
             {{ $t("views.welcome.about.ballot_tester_text") }}
           </p>
-        </AVCard>
-        <AVCard class="Welcome__Card_Overrides">
+        </div>
+        <div class="Welcome__Card Welcome__Card_Overrides">
           <h5 class="Welcome__About_Subtitle">
             {{ $t("views.welcome.about.ballot_tracker") }}
           </h5>
           <p class="Welcome__About_Description">
             {{ $t("views.welcome.about.ballot_tracker_text") }}
           </p>
-        </AVCard>
-        <AVCard class="Welcome__Card_Overrides">
+        </div>
+        <div class="Welcome__Card Welcome__Card_Overrides">
           <h5 class="Welcome__About_Subtitle">
             {{ $t("views.welcome.about.audit_log") }}
           </h5>
           <p class="Welcome__About_Description">
             {{ $t("views.welcome.about.audit_log_text") }}
           </p>
-        </AVCard>
+        </div>
       </div>
 
       <img
@@ -157,6 +159,16 @@ const goToTracker = () => {
   height: calc(100dvh - 70px);
   width: 100%;
   overflow-y: auto;
+}
+
+.Welcome__Card {
+  background-color: white;
+  border: solid 1px var(--gray-200);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  box-sizing:;
+  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.05);
 }
 
 .Welcome__Gradient {
@@ -218,10 +230,9 @@ const goToTracker = () => {
   text-align: center;
 }
 
-.Welcome__Button_Overrides {
-  color: var(--av-theme-text) !important;
-  background-color: var(--av-theme-background) !important;
-  border-color: var(--av-theme-background) !important;
+.Welcome__Button {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 
 .Welcome__Description {
@@ -279,7 +290,7 @@ const goToTracker = () => {
     margin: 6rem 0;
   }
 
-  .Welcome__Button_Overrides {
+  .Welcome__Button {
     margin-bottom: 1.25rem;
   }
 
@@ -426,7 +437,7 @@ const goToTracker = () => {
     max-width: 40rem;
   }
 
-  .Welcome__Button_Overrides {
+  .Welcome__Button {
     font-size: 1.25rem !important;
   }
 

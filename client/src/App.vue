@@ -68,19 +68,19 @@ const setConfigurations = async (
 };
 
 const setLanguage = async (conferenceClient: any) => {
-  let browserLocale: Locale = navigator.languages.find((locale: Locale) =>
+  const browserLocale: Locale = navigator.languages.find((locale: Locale) =>
     i18n.global.availableLocales.includes(locale),
   );
 
   if (browserLocale) setLocale(browserLocale);
 
-  let paramLocale = router.currentRoute.value.params.locale?.toString();
+  const paramLocale = router.currentRoute.value.params.locale?.toString();
 
   if (configStore.election.locales) {
-    let preferredLocale = configStore.election.locales.includes(paramLocale)
+    const preferredLocale = configStore.election.locales.includes(paramLocale)
       ? paramLocale
       : null;
-    let browserLocale = navigator.languages.find((locale) =>
+    const browserLocale = navigator.languages.find((locale) =>
       configStore.election.locales.includes(locale),
     );
     setLocale(
@@ -130,7 +130,7 @@ const setTheme = async (conferenceClient: any) => {
 
 <template>
   <div v-if="!isLoaded" class="DBAS__Loading_Page">
-    <AVSpinner size="xlarge" color="neutral" />
+    <AVSpinner size="lg" color="dark" />
   </div>
   <div class="DBAS" v-if="isLoaded">
     <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a>

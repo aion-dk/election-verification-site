@@ -76,26 +76,28 @@ const buttons = computed(() => {
 
       <Error :errorPath="`receipt.${translationPath}`" />
       <div class="ReceiptError__Buttons">
-        <AVButton
+        <button
           v-if="buttons.primary.visible"
-          type="primary"
-          :label="buttons.primary.label"
-          class="ReceiptError__Button_Overrides ReceiptError__Primary_Button_Overrides"
+          class="btn btn-theme w-100 rounded-3 ReceiptError__Button"
+          type="button"
           @click="
             navigate(
               buttons.primary.url,
               receiptStore.receiptValid && contactUrl,
             )
           "
-        />
+        >
+          {{ buttons.primary.label }}
+        </button>
 
-        <AVButton
+        <button
           v-if="buttons.secondary.visible"
-          type="secondary"
-          :label="buttons.secondary.label"
-          class="ReceiptError__Button_Overrides ReceiptError__Secondary_Button_Overrides"
+          class="btn btn-theme-outline w-100 rounded-3 ReceiptError__Button"
+          type="button"
           @click="navigate(buttons.secondary.url)"
-        />
+        >
+          {{ buttons.secondary.label }}
+        </button>
       </div>
     </template>
 
@@ -129,13 +131,6 @@ const buttons = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-.ReceiptError__Primary_Button_Overrides {
-  width: 100%;
-  background-color: var(--av-theme-background) !important;
-  border-color: var(--av-theme-background) !important;
-  color: var(--av-theme-text) !important;
 }
 
 .ReceiptError__Secondary_Button_Overrides {
@@ -180,7 +175,7 @@ const buttons = computed(() => {
     text-align: left;
   }
 
-  .ReceiptError__Button_Overrides {
+  .ReceiptError__Button {
     font-size: 1.125rem !important;
     padding: 0.75rem 2.75rem !important;
     border-radius: 14px !important;
