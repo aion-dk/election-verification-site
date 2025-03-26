@@ -14,6 +14,7 @@
         :selection-pile="selectionPile"
         :pile-index="pileIndex"
         :total-piles="contestSelection.piles.length"
+        style="z-index: 90"
         active-state="summary"
       />
     </div>
