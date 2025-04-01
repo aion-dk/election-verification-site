@@ -188,7 +188,7 @@ body {
 
 .popper-content-wrapper {
   max-width: 25rem;
-  --vue-popper-bg: var(--gray-800);
+  --vue-popper-bg: var(--bs-gray-800);
   --vue-popper-padding: 1rem;
   --vue-popper-text-color: white;
   --vue-popper-border-radius: 0px;

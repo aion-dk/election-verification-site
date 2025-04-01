@@ -208,12 +208,12 @@ onBeforeUnmount(() => {
   font-weight: 600;
   font-size: 1.2rem;
   line-height: 1.25rem;
-  color: var(--gray-800);
+  color: var(--bs-gray-800);
 }
 
 .Header__Subtitle {
   font-size: 1rem;
-  color: var(--gray-700);
+  color: var(--bs-gray-700);
 }
 
 .Header__Hamburger_Btn {
@@ -225,7 +225,7 @@ onBeforeUnmount(() => {
   font-size: 1.5rem;
   width: 50px;
   height: 50px;
-  color: var(--gray-800);
+  color: var(--bs-gray-800);
 }
 
 .Header__Link {
@@ -233,17 +233,17 @@ onBeforeUnmount(() => {
   font-size: 1.125rem;
   font-weight: 400;
   text-decoration: none;
-  color: var(--gray-700);
+  color: var(--bs-gray-700);
 }
 
 .Header__Link:hover {
-  color: var(--gray-900);
+  color: var(--bs-gray-900);
 }
 
 .Header__Locales {
   font-size: 1.125rem;
   font-weight: 400;
-  color: var(--gray-700);
+  color: var(--bs-gray-700);
   border: none;
   background-color: white;
 }
@@ -257,7 +257,7 @@ html[dir="rtl"] .Header__Locales {
 }
 
 .Header__Locales:hover {
-  color: var(--gray-900);
+  color: var(--bs-gray-900);
 }
 
 .Header__Links {
@@ -348,11 +348,11 @@ html[dir="rtl"] .Header__Locales {
   }
 
   .Header__Link:hover {
-    color: var(--gray-900);
+    color: var(--bs-gray-900);
   }
 
   .Header__Locales:hover {
-    color: var(--gray-900);
+    color: var(--bs-gray-900);
   }
 }
 </style>

@@ -58,6 +58,7 @@ const cancel = () => {
 }
 
 .BallotManager__Tracking_Code {
+  color: var(--bs-gray-800);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,14 +66,14 @@ const cancel = () => {
 }
 
 .BallotManager__Tracking_Icon {
-  color: var(--gray-800);
+  color: var(--bs-gray-800);
   width: 0.75rem;
   height: 0.75rem;
 }
 
 .BallotManager__Tracking_Text {
   font-size: 0.6rem;
-  color: var(--gray-700);
+  color: var(--bs-gray-700);
   margin: 0;
 }
 
@@ -83,7 +84,7 @@ const cancel = () => {
 }
 
 .BallotManager__Tracking_Line {
-  border-bottom: 2px solid var(--gray-700);
+  border-bottom: 2px solid var(--bs-gray-700);
   border-radius: 99px;
   width: 100%;
   margin: 0.25rem 0 0 0;

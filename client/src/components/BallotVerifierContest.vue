@@ -51,7 +51,7 @@ export default defineComponent({
 .BallotVerifierContest__Title {
   font-size: 1.75rem;
   font-weight: 600;
-  color: var(--gray-800);
+  color: var(--bs-gray-800);
   margin-bottom: 1rem;
   text-align: center;
 }

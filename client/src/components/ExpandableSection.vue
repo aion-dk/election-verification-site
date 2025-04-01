@@ -49,7 +49,7 @@ const toggle = () => {
 <style type="text/css" scoped>
 .ExpandableSection {
   display: flex;
-  border: solid 1px var(--gray-200);
+  border: solid 1px var(--bs-gray-200);
   border-radius: 12px;
   padding: 1rem;
   margin-bottom: 0.5rem;
@@ -67,8 +67,8 @@ const toggle = () => {
 
 .ExpandableSection__Expander {
   background-color: white;
-  border: solid 1px var(--gray-600);
-  color: var(--gray-600);
+  border: solid 1px var(--bs-gray-600);
+  color: var(--bs-gray-600);
   border-radius: 99px;
   height: 1.5rem;
   width: 1.5rem;

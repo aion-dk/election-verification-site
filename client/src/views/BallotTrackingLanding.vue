@@ -196,13 +196,13 @@ const button = computed(() => {
 .TrackingLanding__Title {
   font-size: 2.5rem;
   font-weight: 600;
-  color: var(--gray-800);
+  color: var(--bs-gray-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
 }
 
 .TrackingLanding__Subtitle {
-  color: var(--gray-700);
+  color: var(--bs-gray-700);
   font-size: 1.75rem;
   font-weight: 500;
   margin: 0 0 1rem 0;
@@ -210,14 +210,14 @@ const button = computed(() => {
 }
 
 .TrackingLanding__Description {
-  color: var(--gray-700);
+  color: var(--bs-gray-700);
   margin: 0 0 1.5rem 0;
   text-align: center;
 }
 
 .TrackingLanding__TrackingCode {
   color: black;
-  border: solid 1px var(--gray-500);
+  border: solid 1px var(--bs-gray-500);
   border-radius: 12px;
   box-sizing: border-box;
   width: 100%;

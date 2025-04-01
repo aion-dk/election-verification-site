@@ -163,7 +163,7 @@ const goToTracker = () => {
 
 .Welcome__Card {
   background-color: white;
-  border: solid 1px var(--gray-200);
+  border: solid 1px var(--bs-gray-200);
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
@@ -206,7 +206,7 @@ const goToTracker = () => {
   width: 60%;
   border-radius: 99px;
   height: 0.25rem;
-  background-color: var(--gray-300);
+  background-color: var(--bs-gray-300);
   margin: 3rem 0;
 }
 
@@ -219,14 +219,14 @@ const goToTracker = () => {
 .Welcome__Card_Title {
   font-weight: 600;
   font-size: 1.5rem;
-  color: var(--gray-800);
+  color: var(--bs-gray-800);
   margin: 1rem 0;
   text-align: center;
 }
 
 .Welcome__Card_Description {
   margin: 0 0 1.5rem 0;
-  color: var(--gray-700);
+  color: var(--bs-gray-700);
   text-align: center;
 }
 
@@ -238,7 +238,7 @@ const goToTracker = () => {
 .Welcome__Description {
   padding: 2rem;
   background-color: white;
-  color: var(--gray-700);
+  color: var(--bs-gray-700);
   text-align: center;
   margin-bottom: 2rem;
   width: 100%;
@@ -258,21 +258,21 @@ const goToTracker = () => {
 }
 
 .Welcome__About_Title {
-  color: var(--gray-800);
+  color: var(--bs-gray-800);
   font-size: 1.75rem;
   font-weight: 600;
   margin: 0.5rem 0 2rem 0;
 }
 
 .Welcome__About_Subtitle {
-  color: var(--gray-700);
+  color: var(--bs-gray-700);
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 1rem 0;
 }
 
 .Welcome__About_Description {
-  color: var(--gray-700);
+  color: var(--bs-gray-700);
   margin: 0;
   text-align: center;
 }
@@ -338,7 +338,7 @@ const goToTracker = () => {
   .Welcome__Description_Desktop_Title {
     font-size: 3rem;
     font-weight: 600;
-    color: var(--gray-800);
+    color: var(--bs-gray-800);
     margin: 0;
   }
 
@@ -355,12 +355,12 @@ const goToTracker = () => {
   .Welcome__Description_Desktop_Subtitle {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--gray-600);
+    color: var(--bs-gray-600);
     margin: 0;
   }
 
   .Welcome__Description_Desktop_About {
-    color: var(--gray-700);
+    color: var(--bs-gray-700);
     margin: 0;
     padding: 0 5rem 0 0;
   }
