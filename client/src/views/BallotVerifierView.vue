@@ -204,7 +204,7 @@ onMounted(() => {
 
 .BallotVerifier__Title {
   text-align: center;
-  color: var(--slate-800);
+  color: var(--gray-800);
   margin: 0.5rem 0 1.5rem 0;
   font-weight: 800;
   font-size: 2.5rem;
@@ -221,18 +221,18 @@ onMounted(() => {
 .BallotVerifier__Description {
   margin: 0 0 1rem 0;
   text-align: center;
-  color: var(--slate-700);
+  color: var(--gray-700);
 }
 
 .BallotVerifier__Secondary_Description {
   margin: 2rem 0 1rem 0;
   text-align: center;
-  color: var(--slate-700);
+  color: var(--gray-700);
 }
 
 .BallotVerifier__Code {
   font-size: 2.25rem;
-  color: var(--slate-900);
+  color: var(--gray-900);
   font-family:
     "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono",
     "Courier New", monospace;
@@ -285,21 +285,21 @@ onMounted(() => {
 }
 
 .Modal__Icon {
-  color: var(--slate-800);
+  color: var(--gray-800);
   height: 3rem;
   width: 3rem;
 }
 
 .Modal__Title {
   font-size: 1.625rem;
-  color: var(--slate-700);
+  color: var(--gray-700);
   margin: 1rem 0;
   font-weight: 600;
   text-align: center;
 }
 
 .Modal__Text {
-  color: var(--slate-700);
+  color: var(--gray-700);
   margin: 1rem 0 2rem 0;
   text-align: center;
 }
@@ -320,7 +320,7 @@ onMounted(() => {
 @media only screen and (min-width: 48rem) {
   .BallotVerifier__Title_Secondary {
     display: block;
-    color: var(--slate-700);
+    color: var(--gray-700);
     font-size: 1.75rem;
     font-weight: 600;
     margin: 0 0 1rem 0;

@@ -94,7 +94,7 @@ defineProps({
 
 <style type="text/css" scoped>
 .BallotActivity__RegisteredAt {
-  color: var(--slate-800);
+  color: var(--gray-800);
   width: 100%;
   margin: 0 0 0.5rem 0;
 }
@@ -105,22 +105,22 @@ defineProps({
   font-size: 1rem;
   margin: 0 0 1rem 0;
   padding: 0;
-  color: var(--slate-800);
+  color: var(--gray-800);
 }
 
 .BallotActivity__Author {
-  color: var(--slate-800);
+  color: var(--gray-800);
   width: 100%;
   margin: 0 0 0 0;
 }
 
 .BallotActivity__Meaning {
-  color: var(--slate-800);
+  color: var(--gray-800);
   margin: 0.5rem 0 0 0;
 }
 
 .BallotActivity__Icon {
-  color: var(--slate-600);
+  color: var(--gray-600);
 }
 
 html[dir="ltr"] .BallotActivity__Icon {
@@ -132,7 +132,7 @@ html[dir="rtl"] .BallotActivity__Icon {
 }
 
 .BallotActivity__Label {
-  color: var(--slate-600);
+  color: var(--gray-600);
   font-weight: 200;
 }
 

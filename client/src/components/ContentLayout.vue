@@ -58,7 +58,7 @@ defineProps({
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
-  background-color: var(--slate-100);
+  background-color: var(--gray-100);
   padding: 1rem 1rem 3rem 1rem;
 }
 
@@ -93,7 +93,7 @@ defineProps({
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--slate-100);
+  background-color: var(--gray-100);
 }
 
 .ContentLayout__Help_Container {

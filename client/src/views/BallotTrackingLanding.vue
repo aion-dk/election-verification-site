@@ -111,16 +111,25 @@ const button = computed(() => {
       <Error v-if="error" :errorPath="error" />
       <div class="TrackingLanding__Action_Container">
         <div class="TrackingLanding__ActionItem">
-          <AVFileInput
-            id="receipt-file"
-            :input-label="$t('views.tracking.receipt_input_label')"
-            :tooltip-text="$t('views.tracking.receipt_input_tooltip')"
-            accept=".pdf"
-            :error="!!error"
-            :disabled="receiptInputDisabled"
-            :show-preview="false"
-            @update="updateReceipt"
-          />
+
+          <div class="mb-3 w-100">
+            <label for="receipt-file" class="form-label">
+              {{ $t("views.tracking.receipt_input_label") }}
+              <AVIcon
+                icon="circle-question"
+                class="text-gray-600 cursor-help"
+                v-tooltip="$t('views.tracking.receipt_input_tooltip')"
+              />
+            </label>
+            <AVFileInput
+              id="receipt-file"
+              accept=".pdf"
+              :error="!!error"
+              :disabled="receiptInputDisabled"
+              :show-preview="false"
+              @update="updateReceipt"
+            />
+          </div>
 
           <div class="mb-3 w-100">
             <label for="tracking-code" class="form-label">
@@ -188,13 +197,13 @@ const button = computed(() => {
 .TrackingLanding__Title {
   font-size: 2.5rem;
   font-weight: 600;
-  color: var(--slate-800);
+  color: var(--gray-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
 }
 
 .TrackingLanding__Subtitle {
-  color: var(--slate-700);
+  color: var(--gray-700);
   font-size: 1.75rem;
   font-weight: 500;
   margin: 0 0 1rem 0;
@@ -202,14 +211,14 @@ const button = computed(() => {
 }
 
 .TrackingLanding__Description {
-  color: var(--slate-700);
+  color: var(--gray-700);
   margin: 0 0 1.5rem 0;
   text-align: center;
 }
 
 .TrackingLanding__TrackingCode {
   color: black;
-  border: solid 1px var(--slate-500);
+  border: solid 1px var(--gray-500);
   border-radius: 12px;
   box-sizing: border-box;
   width: 100%;

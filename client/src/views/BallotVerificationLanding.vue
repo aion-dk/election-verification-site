@@ -144,13 +144,13 @@ watch(verificationStore, async (newStore) => {
 .VerificationLanding__Title {
   font-size: 2.5rem;
   font-weight: 600;
-  color: var(--slate-800);
+  color: var(--gray-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
 }
 
 .VerificationLanding__Subtitle {
-  color: var(--slate-700);
+  color: var(--gray-700);
   font-size: 1.75rem;
   font-weight: 500;
   margin: 0 0 1rem 0;
@@ -158,7 +158,7 @@ watch(verificationStore, async (newStore) => {
 }
 
 .VerificationLanding__Description {
-  color: var(--slate-700);
+  color: var(--gray-700);
   margin: 0 0 1.5rem 0;
   text-align: center;
 }

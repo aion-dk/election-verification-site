@@ -121,7 +121,7 @@ const buttons = computed(() => {
 .ReceiptError__Title {
   font-size: 2.5rem;
   font-weight: 600;
-  color: var(--slate-800);
+  color: var(--gray-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
 }
