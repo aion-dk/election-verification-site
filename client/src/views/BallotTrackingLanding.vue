@@ -111,7 +111,6 @@ const button = computed(() => {
       <Error v-if="error" :errorPath="error" />
       <div class="TrackingLanding__Action_Container">
         <div class="TrackingLanding__ActionItem">
-
           <div class="mb-3 w-100">
             <label for="receipt-file" class="form-label">
               {{ $t("views.tracking.receipt_input_label") }}
