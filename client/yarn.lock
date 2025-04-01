@@ -24,10 +24,10 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@assemblyvoting/electa-ui@^4.1.4":
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-4.1.4.tgz#cb0af629f804f8790f9d3cddacfb9013a28f3b3e"
-  integrity sha512-r8JK0PAAYciFcidqmi9biPbnIJ1mdX39kbWyV1Khb93u59+UrU2Pq3ULV1oYeJaQDH/yn5E42R3en+F4zby9AQ==
+"@assemblyvoting/electa-ui@4.1.5-beta.3":
+  version "4.1.5-beta.3"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-4.1.5-beta.3.tgz#4ad735640aefb18a79550b9fa8d04d560abf923c"
+  integrity sha512-5xyi/utbiEFQTSiuRt8wj/HwZqBsZ7JLFG4xfDqecEcR2cLI9aM9FKv6cypCkaagvjX76lbyUmR/SBZa/8UOZA==
   dependencies:
     "@aion-dk/js-client" "^4.4.1"
     "@fortawesome/fontawesome-svg-core" "^6.7.2"
@@ -1306,6 +1306,11 @@ boolbase@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
+
+bootstrap@^5.3.3:
+  version "5.3.3"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.3.tgz#de35e1a765c897ac940021900fcbb831602bac38"
+  integrity sha512-8HLCdWgyoMguSO9o+aH+iuZ+aht+mzW0u3HIMzVu7Srrpv7EBBxTnrFlSCskwdY1+EOFQSm7uMJhNQHkdPcmjg==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
