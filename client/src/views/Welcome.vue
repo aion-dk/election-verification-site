@@ -52,7 +52,9 @@ const goToTracker = () => {
 
     <section class="Welcome__Content">
       <div class="Welcome__Heading_Content">
-        <AVCard class="Welcome__Card_Overrides Welcome__Card_Desktop">
+        <div
+          class="Welcome__Card Welcome__Card_Overrides Welcome__Card_Desktop"
+        >
           <div class="Welcome__Card_Item">
             <AVIcon
               icon="envelope-open-text"
@@ -66,15 +68,15 @@ const goToTracker = () => {
               <p class="Welcome__Card_Description">
                 {{ $t("views.welcome.ballot_tester.description") }}
               </p>
-              <AVButton
-                :label="$t('views.welcome.ballot_tester.button')"
-                type="neutral"
+              <button
+                class="btn btn-theme w-100 rounded-3 Welcome__Button"
+                type="button"
                 name="test-ballot"
                 id="test-ballot"
-                fullWidth
                 @click="goToVerifier"
-                class="Welcome__Button_Overrides"
-              />
+              >
+                {{ $t("views.welcome.ballot_tester.button") }}
+              </button>
             </div>
           </div>
 
@@ -93,18 +95,18 @@ const goToTracker = () => {
               <p class="Welcome__Card_Description">
                 {{ $t("views.welcome.ballot_tracker.description") }}
               </p>
-              <AVButton
-                :label="$t('views.welcome.ballot_tracker.button')"
-                type="neutral"
+              <button
+                class="btn btn-theme w-100 rounded-3 Welcome__Button"
+                type="button"
                 name="track-ballot"
                 id="track-ballot"
-                fullWidth
                 @click="goToTracker"
-                class="Welcome__Button_Overrides"
-              />
+              >
+                {{ $t("views.welcome.ballot_tracker.button") }}
+              </button>
             </div>
           </div>
-        </AVCard>
+        </div>
       </div>
     </section>
 
@@ -112,34 +114,34 @@ const goToTracker = () => {
       <h4 class="Welcome__About_Title">
         {{ $t("views.welcome.about.title") }}
       </h4>
-      <AVCard class="Welcome__Description">
+      <div class="Welcome__Card Welcome__Description">
         <p>{{ $t("views.welcome.description") }}</p>
-      </AVCard>
+      </div>
       <div>
-        <AVCard class="Welcome__Card_Overrides">
+        <div class="Welcome__Card Welcome__Card_Overrides">
           <h5 class="Welcome__About_Subtitle">
             {{ $t("views.welcome.about.ballot_tester") }}
           </h5>
           <p class="Welcome__About_Description">
             {{ $t("views.welcome.about.ballot_tester_text") }}
           </p>
-        </AVCard>
-        <AVCard class="Welcome__Card_Overrides">
+        </div>
+        <div class="Welcome__Card Welcome__Card_Overrides">
           <h5 class="Welcome__About_Subtitle">
             {{ $t("views.welcome.about.ballot_tracker") }}
           </h5>
           <p class="Welcome__About_Description">
             {{ $t("views.welcome.about.ballot_tracker_text") }}
           </p>
-        </AVCard>
-        <AVCard class="Welcome__Card_Overrides">
+        </div>
+        <div class="Welcome__Card Welcome__Card_Overrides">
           <h5 class="Welcome__About_Subtitle">
             {{ $t("views.welcome.about.audit_log") }}
           </h5>
           <p class="Welcome__About_Description">
             {{ $t("views.welcome.about.audit_log_text") }}
           </p>
-        </AVCard>
+        </div>
       </div>
 
       <img
@@ -157,6 +159,16 @@ const goToTracker = () => {
   height: calc(100dvh - 70px);
   width: 100%;
   overflow-y: auto;
+}
+
+.Welcome__Card {
+  background-color: white;
+  border: solid 1px var(--bs-gray-200);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  box-sizing:;
+  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.05);
 }
 
 .Welcome__Gradient {
@@ -194,7 +206,7 @@ const goToTracker = () => {
   width: 60%;
   border-radius: 99px;
   height: 0.25rem;
-  background-color: var(--slate-300);
+  background-color: var(--bs-gray-300);
   margin: 3rem 0;
 }
 
@@ -207,27 +219,26 @@ const goToTracker = () => {
 .Welcome__Card_Title {
   font-weight: 600;
   font-size: 1.5rem;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   margin: 1rem 0;
   text-align: center;
 }
 
 .Welcome__Card_Description {
   margin: 0 0 1.5rem 0;
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   text-align: center;
 }
 
-.Welcome__Button_Overrides {
-  color: var(--av-theme-text) !important;
-  background-color: var(--av-theme-background) !important;
-  border-color: var(--av-theme-background) !important;
+.Welcome__Button {
+  padding-top: 0.625rem;
+  padding-bottom: 0.625rem;
 }
 
 .Welcome__Description {
   padding: 2rem;
   background-color: white;
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   text-align: center;
   margin-bottom: 2rem;
   width: 100%;
@@ -247,21 +258,21 @@ const goToTracker = () => {
 }
 
 .Welcome__About_Title {
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   font-size: 1.75rem;
   font-weight: 600;
   margin: 0.5rem 0 2rem 0;
 }
 
 .Welcome__About_Subtitle {
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   font-size: 1.25rem;
   font-weight: 600;
   margin: 0 0 1rem 0;
 }
 
 .Welcome__About_Description {
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   margin: 0;
   text-align: center;
 }
@@ -279,7 +290,7 @@ const goToTracker = () => {
     margin: 6rem 0;
   }
 
-  .Welcome__Button_Overrides {
+  .Welcome__Button {
     margin-bottom: 1.25rem;
   }
 
@@ -327,7 +338,7 @@ const goToTracker = () => {
   .Welcome__Description_Desktop_Title {
     font-size: 3rem;
     font-weight: 600;
-    color: var(--slate-800);
+    color: var(--bs-gray-800);
     margin: 0;
   }
 
@@ -344,12 +355,12 @@ const goToTracker = () => {
   .Welcome__Description_Desktop_Subtitle {
     font-size: 2rem;
     font-weight: 600;
-    color: var(--slate-600);
+    color: var(--bs-gray-600);
     margin: 0;
   }
 
   .Welcome__Description_Desktop_About {
-    color: var(--slate-700);
+    color: var(--bs-gray-700);
     margin: 0;
     padding: 0 5rem 0 0;
   }
@@ -426,7 +437,7 @@ const goToTracker = () => {
     max-width: 40rem;
   }
 
-  .Welcome__Button_Overrides {
+  .Welcome__Button {
     font-size: 1.25rem !important;
   }
 

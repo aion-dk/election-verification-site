@@ -14,6 +14,7 @@
         :selection-pile="selectionPile"
         :pile-index="pileIndex"
         :total-piles="contestSelection.piles.length"
+        style="z-index: 90"
         active-state="summary"
       />
     </div>
@@ -50,7 +51,7 @@ export default defineComponent({
 .BallotVerifierContest__Title {
   font-size: 1.75rem;
   font-weight: 600;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   margin-bottom: 1rem;
   text-align: center;
 }

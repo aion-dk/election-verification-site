@@ -200,24 +200,25 @@ onMounted(() => loadPage(currentPage.value));
         </div>
       </div>
 
-      <AVButton
-        @click="downloadLog"
-        size="small"
-        type="neutral"
-        class="LogsView__Button_Overrides"
-        iconLeft
-        icon="download"
-        :label="$t('views.logs.download_button')"
-      />
-      <AVButton
-        @click="downloadAttachments"
-        size="small"
-        type="neutral"
-        class="LogsView__Button_Overrides"
-        iconLeft
-        icon="download"
-        :label="$t('views.logs.download_attachments')"
-      />
+      <div class="vstack pt-3 gap-2 w-100 align-items-center">
+        <button
+          class="btn btn-sm btn-theme rounded-3 LogsView__Button"
+          type="button"
+          @click="downloadLog"
+        >
+          <AVIcon icon="download" />
+          {{ $t("views.logs.download_button") }}
+        </button>
+
+        <button
+          class="btn btn-sm btn-theme rounded-3 LogsView__Button"
+          type="button"
+          @click="downloadAttachments"
+        >
+          <AVIcon icon="download" />
+          {{ $t("views.logs.download_attachments") }}
+        </button>
+      </div>
 
       <p class="LogsView__Board_Link">
         {{ $t("views.logs.board_link") }}<code>{{ boardLink }}</code>
@@ -250,7 +251,7 @@ onMounted(() => loadPage(currentPage.value));
 .LogsView__Title {
   font-size: 2.5rem;
   font-weight: 600;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
 }
@@ -260,7 +261,7 @@ onMounted(() => loadPage(currentPage.value));
 }
 
 .LogsView__Description {
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   margin: 0 0 1.5rem 0;
   text-align: center;
 }
@@ -271,12 +272,12 @@ onMounted(() => loadPage(currentPage.value));
   padding: 0.75rem;
   border-radius: 12px;
   font-weight: 600;
-  color: var(--slate-900);
+  color: var(--bs-gray-900);
   margin: 0 0 2rem 0;
 }
 
 .LogsView__Configuration_Only:has(input[type="checkbox"]:checked) {
-  border: 2px solid var(--slate-600);
+  border: 2px solid var(--bs-gray-600);
 }
 
 input[type="checkbox"] {
@@ -316,7 +317,7 @@ html[dir="rtl"] .RTL_Rotation {
 }
 
 .LogsView__PageLink {
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   background: none;
   border: none;
   cursor: pointer;
@@ -341,16 +342,8 @@ html[dir="rtl"] .RTL_Rotation {
   margin: 0;
 }
 
-.LogsView__Button_Overrides {
-  font-size: 0.75rem !important;
-  padding: 0.5rem 0.8rem !important;
-  margin: 0;
-  margin-top: 1rem;
-  align-self: center;
-}
-
-.LogsView__Button_Overrides:first-of-type {
-  margin-top: 2rem;
+.LogsView__Button {
+  padding: 0.3rem 0.75rem;
 }
 
 .LogsView__Tooltip {
@@ -379,7 +372,7 @@ html[dir="rtl"] .RTL_Rotation {
 
   .LogsView__Subtitle {
     display: flex;
-    color: var(--slate-700);
+    color: var(--bs-gray-700);
     font-size: 1.75rem;
     font-weight: 600;
     margin: 0 0 1rem 0;
@@ -392,7 +385,7 @@ html[dir="rtl"] .RTL_Rotation {
     display: flex;
     width: 100%;
     padding-inline-start: 0;
-    color: var(--slate-800);
+    color: var(--bs-gray-800);
   }
 
   .LogsView__ColumnDescriptions--event {
@@ -403,17 +396,6 @@ html[dir="rtl"] .RTL_Rotation {
   .LogsView__ColumnDescriptions--time,
   .LogsView__ColumnDescriptions--actor {
     width: 30%;
-  }
-
-  .LogsView__Button_Overrides {
-    font-size: 0.875rem !important;
-    padding: 0.5rem 1.5rem !important;
-    margin: 0;
-    margin-top: 1rem;
-  }
-
-  .LogsView__Button_Overrides:first-of-type {
-    margin-top: 4rem;
   }
 }
 
@@ -444,11 +426,6 @@ html[dir="rtl"] .RTL_Rotation {
   .LogsView__Help_Description:not(.LogsView__Help_Description:last-of-type) {
     margin-bottom: 0.5rem;
   }
-
-  .LogsView__Button_Overrides {
-    font-size: 1rem !important;
-    padding: 0.6rem 2rem !important;
-  }
 }
 
 @media only screen and (min-width: 120rem) {
@@ -462,11 +439,6 @@ html[dir="rtl"] .RTL_Rotation {
 
   .LogsView__Help_Description {
     font-size: 1.2rem;
-  }
-
-  .LogsView__Button_Overrides {
-    font-size: 1.125rem !important;
-    padding: 0.75rem 2.75rem !important;
   }
 }
 </style>

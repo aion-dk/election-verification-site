@@ -68,19 +68,19 @@ const setConfigurations = async (
 };
 
 const setLanguage = async (conferenceClient: any) => {
-  let browserLocale: Locale = navigator.languages.find((locale: Locale) =>
+  const browserLocale: Locale = navigator.languages.find((locale: Locale) =>
     i18n.global.availableLocales.includes(locale),
   );
 
   if (browserLocale) setLocale(browserLocale);
 
-  let paramLocale = router.currentRoute.value.params.locale?.toString();
+  const paramLocale = router.currentRoute.value.params.locale?.toString();
 
   if (configStore.election.locales) {
-    let preferredLocale = configStore.election.locales.includes(paramLocale)
+    const preferredLocale = configStore.election.locales.includes(paramLocale)
       ? paramLocale
       : null;
-    let browserLocale = navigator.languages.find((locale) =>
+    const browserLocale = navigator.languages.find((locale) =>
       configStore.election.locales.includes(locale),
     );
     setLocale(
@@ -130,7 +130,7 @@ const setTheme = async (conferenceClient: any) => {
 
 <template>
   <div v-if="!isLoaded" class="DBAS__Loading_Page">
-    <AVSpinner size="xlarge" color="neutral" />
+    <AVSpinner size="lg" color="dark" />
   </div>
   <div class="DBAS" v-if="isLoaded">
     <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a>
@@ -156,17 +156,6 @@ const setTheme = async (conferenceClient: any) => {
 }
 
 body {
-  /* Neutral colors from AV design system */
-  --slate-100: #f7f7f7;
-  --slate-200: #e9ecef;
-  --slate-300: #dee2e6;
-  --slate-400: #ced4da;
-  --slate-500: #adb5bd;
-  --slate-600: #6c757d;
-  --slate-700: #495057;
-  --slate-800: #343a40;
-  --slate-900: #212529;
-
   font-family: "Open Sans", sans-serif;
   overflow: hidden;
   padding: 0;
@@ -199,7 +188,7 @@ body {
 
 .popper-content-wrapper {
   max-width: 25rem;
-  --vue-popper-bg: var(--slate-800);
+  --vue-popper-bg: var(--bs-gray-800);
   --vue-popper-padding: 1rem;
   --vue-popper-text-color: white;
   --vue-popper-border-radius: 0px;

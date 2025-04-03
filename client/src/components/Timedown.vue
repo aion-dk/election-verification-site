@@ -56,7 +56,7 @@ onMounted(() => {
 
 <style type="text/css" scoped>
 .Timedown {
-  background-color: var(--slate-100);
+  background-color: var(--bs-gray-100);
   width: 100%;
   z-index: 50;
   padding-bottom: 0.25rem;
@@ -73,7 +73,7 @@ onMounted(() => {
 }
 
 .Timedown__Text {
-  color: var(--slate-600);
+  color: var(--bs-gray-600);
   font-size: 0.8rem;
   padding: 0.5rem 0.5rem 1.5rem 0.5rem;
 }

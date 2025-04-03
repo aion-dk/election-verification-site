@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host",
+    "dev:docker": "vite --force --host",
     "build": "run-p type-check build-only",
     "preview": "vite preview",
     "test:unit": "vitest --environment jsdom --root src/",
@@ -21,7 +22,7 @@
   },
   "dependencies": {
     "@aion-dk/js-client": "^4.4.0",
-    "@assemblyvoting/ui-library": "^3.5.1",
+    "@assemblyvoting/electa-ui": "^4.1.5",
     "axios": "^1.8.2",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.1",

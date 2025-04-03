@@ -47,7 +47,7 @@ defineProps({
 }
 
 .BallotActivitiesList h4 {
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   margin: 0 0 1.5rem 0;
   text-align: center;
 }
@@ -67,7 +67,7 @@ defineProps({
     margin: 1rem 0;
     display: flex;
     padding-inline-start: 0;
-    color: var(--slate-800);
+    color: var(--bs-gray-800);
   }
 
   .BallotActivitiesList__ColumnDescriptions--time,
