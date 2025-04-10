@@ -5,207 +5,207 @@ export const offlineMessages: SpreadableDLM = {
     js: {
       components: {
         AVSpinner: {
-          loading: "جاري التحميل..."
-        }
+          loading: "جاري التحميل...",
+        },
       },
       accessibility: {
-        skip_to_content: "انتقل إلى المحتوى الرئيسي"
+        skip_to_content: "انتقل إلى المحتوى الرئيسي",
       },
-    }
+    },
   },
   ca: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Carregant..."
-        }
+          loading: "Carregant...",
+        },
       },
       accessibility: {
-        skip_to_content: "Vés al contingut principal"
+        skip_to_content: "Vés al contingut principal",
       },
-    }
+    },
   },
   cy: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Wrthi'n llwytho..."
-        }
+          loading: "Wrthi'n llwytho...",
+        },
       },
       accessibility: {
-        skip_to_content: "Neidio i'r prif gynnwys"
+        skip_to_content: "Neidio i'r prif gynnwys",
       },
-    }
+    },
   },
   da: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Indlæser..."
-        }
+          loading: "Indlæser...",
+        },
       },
       accessibility: {
-        skip_to_content: "Spring til hovedindhold"
+        skip_to_content: "Spring til hovedindhold",
       },
-    }
+    },
   },
   de: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Wird geladen..."
-        }
+          loading: "Wird geladen...",
+        },
       },
       accessibility: {
-        skip_to_content: "Zum Hauptinhalt springen"
+        skip_to_content: "Zum Hauptinhalt springen",
       },
-    }
+    },
   },
   en: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Loading..."
-        }
+          loading: "Loading...",
+        },
       },
       accessibility: {
-        skip_to_content: "Skip to main content"
+        skip_to_content: "Skip to main content",
       },
-    }
+    },
   },
   es: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Cargando..."
-        }
+          loading: "Cargando...",
+        },
       },
       accessibility: {
-        skip_to_content: "Ir al contenido principal"
+        skip_to_content: "Ir al contenido principal",
       },
-    }
+    },
   },
   fi: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Ladataan..."
-        }
+          loading: "Ladataan...",
+        },
       },
       accessibility: {
-        skip_to_content: "Siirry pääsisältöön"
+        skip_to_content: "Siirry pääsisältöön",
       },
-    }
+    },
   },
   fr: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Chargement en cours…"
-        }
+          loading: "Chargement en cours…",
+        },
       },
       accessibility: {
-        skip_to_content: "Accéder au contenu principal"
+        skip_to_content: "Accéder au contenu principal",
       },
-    }
+    },
   },
   is: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Hleður..."
-        }
+          loading: "Hleður...",
+        },
       },
       accessibility: {
-        skip_to_content: "Fara í aðalefni"
+        skip_to_content: "Fara í aðalefni",
       },
-    }
+    },
   },
   it: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Caricamento in corso..."
-        }
+          loading: "Caricamento in corso...",
+        },
       },
       accessibility: {
-        skip_to_content: "Vai al contenuto principale"
+        skip_to_content: "Vai al contenuto principale",
       },
-    }
+    },
   },
   nl: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Bezig met laden..."
-        }
+          loading: "Bezig met laden...",
+        },
       },
       accessibility: {
-        skip_to_content: "Ga naar de hoofdinhoud"
+        skip_to_content: "Ga naar de hoofdinhoud",
       },
-    }
+    },
   },
   pl: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Ładowanie..."
-        }
+          loading: "Ładowanie...",
+        },
       },
       accessibility: {
-        skip_to_content: "Przejdź do treści głównej"
+        skip_to_content: "Przejdź do treści głównej",
       },
-    }
+    },
   },
   pt: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Carregando..."
-        }
+          loading: "Carregando...",
+        },
       },
       accessibility: {
-        skip_to_content: "Ir para o conteúdo principal"
+        skip_to_content: "Ir para o conteúdo principal",
       },
-    }
+    },
   },
   ro: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Încărcare..."
-        }
+          loading: "Încărcare...",
+        },
       },
       accessibility: {
-        skip_to_content: "Treci la conținutul principal"
+        skip_to_content: "Treci la conținutul principal",
       },
-    }
+    },
   },
   ru: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Загрузка..."
-        }
+          loading: "Загрузка...",
+        },
       },
       accessibility: {
-        skip_to_content: "Перейти к основному содержанию"
+        skip_to_content: "Перейти к основному содержанию",
       },
-    }
+    },
   },
   sv: {
     js: {
       components: {
         AVSpinner: {
-          loading: "Belastning..."
-        }
+          loading: "Belastning...",
+        },
       },
       accessibility: {
-        skip_to_content: "Hoppa till huvudinnehållet"
+        skip_to_content: "Hoppa till huvudinnehållet",
       },
-    }
+    },
   },
-}
+};
 
 export const fallbackMessages: SpreadableDLM = {
   en: {

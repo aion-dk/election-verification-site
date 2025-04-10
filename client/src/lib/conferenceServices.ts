@@ -59,7 +59,7 @@ export function useConferenceConnector(
             accessibility: {
               ...(currentTranslationsData.value?.translations[locale].js
                 .accessibility as SpreadableDLM),
-            }
+            },
           },
         };
 
