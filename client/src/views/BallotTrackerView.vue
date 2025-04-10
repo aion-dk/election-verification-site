@@ -25,7 +25,7 @@ onMounted(() => (ballot.value = ballotStore.ballot));
 </script>
 
 <template>
-  <div class="BallotTracker" v-if="ballot" aria-flowto="tracking-code">
+  <div class="BallotTracker" v-if="ballot" aria-flowto="current-tracking-code">
     <ContentLayout
       :help-title="$t('views.tracker.help.title')"
       :help-title-strong="$t('views.tracker.help.title_strong')"

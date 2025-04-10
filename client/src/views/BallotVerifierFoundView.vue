@@ -57,7 +57,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="VerificationFound" aria-flowto="tracking-code">
+  <div class="VerificationFound" aria-flowto="current-tracking-code">
     <ContentLayout
       :help-title="$t('views.verification.help.title')"
       :help-title-strong="$t('views.verification.help.title_strong')"
