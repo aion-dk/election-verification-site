@@ -39,8 +39,6 @@ export const fallbackMessages: SpreadableDLM = {
         de: "Auf Deutsch umstellen",
       },
       election_logo_alt: "Election logo",
-      open_menu_aria_label: "Open menu",
-      close_menu_aria_label: "Close menu",
     },
     footer: {
       technology_by: "Technology by",
@@ -603,8 +601,6 @@ export const fallbackMessages: SpreadableDLM = {
         de: "Auf Deutsch umstellen",
       },
       election_logo_alt: "Logo de la elección",
-      open_menu_aria_label: "Abrir menú",
-      close_menu_aria_label: "Cerrar menú",
     },
   },
 };
