@@ -34,7 +34,6 @@ const props = defineProps({
 const isMenuOpened = ref<boolean>(false);
 
 const toggleMenu = (force = false) => {
-  console.log("triggered");
   if (force) configStore.pageReloaded();
   isMenuOpened.value = !isMenuOpened.value;
 };
