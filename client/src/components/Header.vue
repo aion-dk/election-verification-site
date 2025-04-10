@@ -75,7 +75,6 @@ onBeforeUnmount(() => {
       <img
         v-if="configStore.electionStatus?.theme?.logo"
         class="Header__Logo"
-        aria-hidden="true"
         :src="configStore.electionStatus?.theme?.logo"
         :alt="$t('header.election_logo_alt')"
         loading="lazy"
@@ -86,7 +85,7 @@ onBeforeUnmount(() => {
       </div>
     </RouterLink>
 
-    <div
+    <nav
       class="Header__Links"
       :class="{
         Header__Show: !isMenuOpened,
@@ -95,7 +94,6 @@ onBeforeUnmount(() => {
       <RouterLink
         class="Header__Link"
         activeClass="active"
-        role="menuitem"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`"
         @click="toggleMenu(true)"
       >
@@ -105,7 +103,6 @@ onBeforeUnmount(() => {
       <RouterLink
         class="Header__Link"
         activeClass="active"
-        role="menuitem"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`"
         @click="toggleMenu(true)"
       >
@@ -113,7 +110,6 @@ onBeforeUnmount(() => {
       </RouterLink>
 
       <RouterLink
-        role="menuitem"
         class="Header__Link"
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/logs`"
@@ -123,7 +119,6 @@ onBeforeUnmount(() => {
       </RouterLink>
 
       <RouterLink
-        role="menuitem"
         class="Header__Link"
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/help`"
@@ -134,7 +129,6 @@ onBeforeUnmount(() => {
 
       <a
         v-if="contactUrl"
-        role="menuitem"
         class="Header__Link"
         :href="contactUrl"
         target="_blank"
@@ -148,7 +142,7 @@ onBeforeUnmount(() => {
         :options="availableLocales"
         @change="(value) => setLocale(value)"
       />
-    </div>
+    </nav>
 
     <div class="Header__Hamburger_Btn">
       <AVAnimatedMenuButton
