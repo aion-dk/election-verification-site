@@ -1,5 +1,6 @@
 import { test } from "@playwright/test";
 import { latestConfig, status } from "./mocks";
+import analyzeAccesibility from "./accessibility";
 
 test("changing locale", async ({ page, isMobile }) => {
   // Mock Network calls
@@ -29,10 +30,14 @@ test("changing locale", async ({ page, isMobile }) => {
 
   await page.goto("/en/organisation_slug/election_slug");
 
+  await analyzeAccesibility(page);
+
   if (isMobile) {
     await page.locator(".Header__Hamburger_Btn").click();
+    await analyzeAccesibility(page);
   }
   await page.locator(".Header__Locales").selectOption("es");
+  await analyzeAccesibility(page);
   await page.getByRole("link", { name: "Testeo de Boleta" }).click();
   if (isMobile) {
     await page.locator(".Header__Hamburger_Btn").click();
