@@ -1,5 +1,212 @@
 import type { SpreadableDLM } from "../Types";
 
+export const offlineMessages: SpreadableDLM = {
+  ar: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "جاري التحميل..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "انتقل إلى المحتوى الرئيسي"
+      },
+    }
+  },
+  ca: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Carregant..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Vés al contingut principal"
+      },
+    }
+  },
+  cy: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Wrthi'n llwytho..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Neidio i'r prif gynnwys"
+      },
+    }
+  },
+  da: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Indlæser..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Spring til hovedindhold"
+      },
+    }
+  },
+  de: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Wird geladen..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Zum Hauptinhalt springen"
+      },
+    }
+  },
+  en: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Loading..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Skip to main content"
+      },
+    }
+  },
+  es: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Cargando..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Ir al contenido principal"
+      },
+    }
+  },
+  fi: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Ladataan..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Siirry pääsisältöön"
+      },
+    }
+  },
+  fr: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Chargement en cours…"
+        }
+      },
+      accessibility: {
+        skip_to_content: "Accéder au contenu principal"
+      },
+    }
+  },
+  is: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Hleður..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Fara í aðalefni"
+      },
+    }
+  },
+  it: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Caricamento in corso..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Vai al contenuto principale"
+      },
+    }
+  },
+  nl: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Bezig met laden..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Ga naar de hoofdinhoud"
+      },
+    }
+  },
+  pl: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Ładowanie..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Przejdź do treści głównej"
+      },
+    }
+  },
+  pt: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Carregando..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Ir para o conteúdo principal"
+      },
+    }
+  },
+  ro: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Încărcare..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Treci la conținutul principal"
+      },
+    }
+  },
+  ru: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Загрузка..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Перейти к основному содержанию"
+      },
+    }
+  },
+  sv: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Belastning..."
+        }
+      },
+      accessibility: {
+        skip_to_content: "Hoppa till huvudinnehållet"
+      },
+    }
+  },
+}
+
 export const fallbackMessages: SpreadableDLM = {
   en: {
     locales: {
