@@ -14,6 +14,11 @@ test("displays correctly", async () => {
     props,
     global: {
       plugins: [i18n],
+      stubs: {
+        AVIcon: {
+          template: "<span />",
+        },
+      },
     },
   });
 

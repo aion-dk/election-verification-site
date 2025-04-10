@@ -22,6 +22,9 @@ const stubs = {
   DateTime: {
     template: "<span />",
   },
+  AVIcon: {
+    template: "<span />",
+  },
 };
 
 test("BallotActivity mounts", async () => {

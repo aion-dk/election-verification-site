@@ -26,6 +26,12 @@ const stubs = {
   DateTime: {
     template: "<span />",
   },
+  AVTooltip: {
+    template: "<span />",
+  },
+  AVIcon: {
+    template: "<span />",
+  },
 };
 
 test("that activities are listed", async () => {
