@@ -217,10 +217,10 @@ export const fallbackMessages: SpreadableDLM = {
       },
       tracked_ballot_manager: {
         currently_tracking: "You are currently tracking",
-        cancel_cross_label: "Cancel tracking %{trackingCode}",
+        cancel_cross_label: "Cancel tracking {trackingCode}",
       },
       timedown: {
-        expire_text: "The passkey will expire in %{time}",
+        expire_text: "The passkey will expire in {time}",
         alert: {
           title: "You are running out of time.",
           text: "Please confirm the passkeys match on the voting page before your session expires. If your session expires, you will need to re-seal your ballot and start over with a new testing code.",
