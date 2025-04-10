@@ -45,7 +45,7 @@ test("downloading logs", async ({ page, isMobile }) => {
   if (isMobile) {
     await page.locator(".Header__Hamburger_Btn").click();
   }
-  await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
+  await page.getByRole("link", { name: "Election Activity Log" }).click();
 
   if (!isMobile) {
     // The waitForEvent("download") method does not work in safari mobile so I'll skip it for now in mobile.
@@ -107,7 +107,7 @@ test("traversing board items", async ({ page, isMobile }) => {
   if (isMobile) {
     await page.locator(".Header__Hamburger_Btn").click();
   }
-  await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
+  await page.getByRole("link", { name: "Election Activity Log" }).click();
 
   // Page 1
   await page.getByText("Rejected affidavit").click();
