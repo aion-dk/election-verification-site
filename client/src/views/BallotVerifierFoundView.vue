@@ -63,7 +63,7 @@ onMounted(async () => {
       :help-title-strong="$t('views.verification.help.title_strong')"
       :logo="configStore.electionStatus?.theme?.logo"
       :breadcrumb="`${$t('header.verification')} / ${$t(
-        'breadcrumbs.ballot_found'
+        'breadcrumbs.ballot_found',
       )}`"
     >
       <template v-slot:action>
@@ -110,7 +110,7 @@ onMounted(async () => {
 .VerificationFound__Title {
   text-align: center;
   font-size: 2.5rem;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   margin: 0 0 1rem 0;
   font-weight: 800;
 }
@@ -118,12 +118,12 @@ onMounted(async () => {
 .VerificationFound__Description {
   margin: 0 0 2rem 0;
   line-height: 2rem;
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   text-align: center;
 }
 
 .VerificationFound__Description {
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   margin: 0 0 1.5rem 0;
   text-align: center;
 }

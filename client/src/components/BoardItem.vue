@@ -118,7 +118,7 @@ const classes = computed(() => {
   font-weight: 600;
   font-size: 1rem;
   margin: 0 0 1rem 0;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
 }
 
 html[dir="ltr"] .BoardItem__Type {
@@ -130,13 +130,13 @@ html[dir="rtl"] .BoardItem__Type {
 }
 
 .BoardItem__Date {
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   width: 100%;
   margin: 0 0 0.5rem 0;
 }
 
 .BoardItem__Author {
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   width: 100%;
   margin: 0;
 }
@@ -155,14 +155,15 @@ html[dir="rtl"] .BoardItem__Type {
 
 .BoardItem__Meaning_Expanded code {
   font-size: 1rem;
-  color: var(--slate-700);
-  font-family: "SFMono-Regular", "Menlo", "Monaco", "Consolas",
-    "Liberation Mono", "Courier New", monospace;
+  color: var(--bs-gray-700);
+  font-family:
+    "SFMono-Regular", "Menlo", "Monaco", "Consolas", "Liberation Mono",
+    "Courier New", monospace;
   font-weight: 400;
 }
 
 .BoardItem__InlineIcon {
-  color: var(--slate-600);
+  color: var(--bs-gray-600);
 }
 
 html[dir="ltr"] .BoardItem__InlineIcon {
@@ -174,7 +175,7 @@ html[dir="rtl"] .BoardItem__InlineIcon {
 }
 
 .BoardItem__Label {
-  color: var(--slate-600);
+  color: var(--bs-gray-600);
   font-weight: 200;
 }
 

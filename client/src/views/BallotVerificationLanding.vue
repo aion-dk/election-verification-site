@@ -81,26 +81,35 @@ watch(verificationStore, async (newStore) => {
       </p>
       <Error v-if="error" :errorPath="error" />
       <div class="VerificationLanding__Action_Container">
-        <AVTextInput
-          id="verification-code"
-          v-model="verificationCode"
-          :placeholder="$t('views.verification.placeholder')"
-          :disabled="disabled"
-          input-label="Testing code"
-          :error="!!error"
-          :tooltip-text="$t('views.verification.tooltip_text')"
-        />
+        <div class="mb-3 w-100">
+          <label for="verification-code" class="form-label">
+            {{ $t("views.verification.placeholder") }}
+            <AVIcon
+              icon="circle-question"
+              class="text-gray-600 cursor-help"
+              v-tooltip="$t('views.verification.tooltip_text')"
+            />
+          </label>
+          <input
+            type="text"
+            v-model="verificationCode"
+            :disabled="disabled"
+            class="form-control p-3 fs-5 rounded-3"
+            id="verification-code"
+            :placeholder="$t('views.verification.placeholder')"
+          />
+        </div>
 
-        <AVButton
-          :label="$t('views.verification.button')"
-          type="neutral"
+        <button
+          class="btn btn-theme w-100 rounded-3 VerificationLanding__Button"
+          type="button"
           name="initiate-verification"
           id="initiate-verification"
           :disabled="disabled || !verificationCode"
-          full-width
           @click="initiateVerification"
-          class="VerificationLanding__Button_Overrides"
-        />
+        >
+          {{ $t("views.verification.button") }}
+        </button>
       </div>
     </template>
 
@@ -135,13 +144,13 @@ watch(verificationStore, async (newStore) => {
 .VerificationLanding__Title {
   font-size: 2.5rem;
   font-weight: 600;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
 }
 
 .VerificationLanding__Subtitle {
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   font-size: 1.75rem;
   font-weight: 500;
   margin: 0 0 1rem 0;
@@ -149,15 +158,9 @@ watch(verificationStore, async (newStore) => {
 }
 
 .VerificationLanding__Description {
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   margin: 0 0 1.5rem 0;
   text-align: center;
-}
-
-.VerificationLanding__Button_Overrides {
-  background-color: var(--av-theme-background) !important;
-  border-color: var(--av-theme-background) !important;
-  color: var(--av-theme-text) !important;
 }
 
 .VerificationLanding__Step {
@@ -207,7 +210,7 @@ watch(verificationStore, async (newStore) => {
     text-align: left;
   }
 
-  .VerificationLanding__Button_Overrides {
+  .VerificationLanding__Button {
     font-size: 1.125rem !important;
     padding: 0.75rem 2.75rem !important;
     border-radius: 14px !important;

@@ -17,7 +17,7 @@ const ballot = ref<Ballot>(null);
 
 const cancel = () => {
   router.push(
-    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`,
   );
 };
 
@@ -89,7 +89,7 @@ onMounted(() => (ballot.value = ballotStore.ballot));
 .BallotTracker__Title {
   text-align: center;
   font-size: 2.5rem;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   margin: 0 0 1rem 0;
   font-weight: 800;
 }
@@ -97,7 +97,7 @@ onMounted(() => (ballot.value = ballotStore.ballot));
 .BallotTracker__Description {
   margin: 0 0 2rem 0;
   line-height: 2rem;
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   text-align: center;
 }
 

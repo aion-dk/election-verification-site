@@ -32,12 +32,12 @@ const lookupBallot = async () => {
 
   if (ballotStore.ballot?.status) {
     router.push(
-      `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode.value}`
+      `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode.value}`,
     );
   } else {
     if (receiptStore.receiptValid) {
       router.push(
-        `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
+        `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
       );
     } else {
       error.value = "track.invalid_code";
@@ -60,7 +60,7 @@ const updateReceipt = async (files: File[]) => {
       .then(() => {
         receiptStore.validateReceipt(
           receiptExtractor.receipt,
-          receiptExtractor.trackingCode
+          receiptExtractor.trackingCode,
         );
 
         if (receiptStore.receiptValid) {
@@ -68,7 +68,7 @@ const updateReceipt = async (files: File[]) => {
           lookupBallot();
         } else {
           router.push(
-            `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`
+            `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
           );
         }
       })
@@ -111,36 +111,54 @@ const button = computed(() => {
       <Error v-if="error" :errorPath="error" />
       <div class="TrackingLanding__Action_Container">
         <div class="TrackingLanding__ActionItem">
-          <AVFileInput
-            id="receipt-file"
-            :input-label="$t('views.tracking.receipt_input_label')"
-            :tooltip-text="$t('views.tracking.receipt_input_tooltip')"
-            accept=".pdf"
-            :error="!!error"
-            :disabled="receiptInputDisabled"
-            :show-preview="false"
-            @update="updateReceipt"
-          />
+          <div class="mb-3 w-100">
+            <label for="receipt-file" class="form-label">
+              {{ $t("views.tracking.receipt_input_label") }}
+              <AVIcon
+                icon="circle-question"
+                class="text-gray-600 cursor-help"
+                v-tooltip="$t('views.tracking.receipt_input_tooltip')"
+              />
+            </label>
+            <AVFileInput
+              id="receipt-file"
+              accept=".pdf"
+              :error="!!error"
+              :disabled="receiptInputDisabled"
+              :show-preview="false"
+              @update="updateReceipt"
+            />
+          </div>
 
-          <AVTextInput
-            id="tracking-code"
-            v-model="trackingCode"
-            :input-label="$t('views.tracking.tracking_input_label')"
-            :tooltip-text="$t('views.tracking.tracking_input_tooltip')"
-            :placeholder="$t('views.tracking.tracking_input_placeholder')"
-            :error="!!error"
-            :disabled="trackingInputDisabled"
-          />
+          <div class="mb-3 w-100">
+            <label for="tracking-code" class="form-label">
+              {{ $t("views.tracking.tracking_input_label") }}
+              <AVIcon
+                icon="circle-question"
+                class="text-gray-600 cursor-help"
+                v-tooltip="$t('views.tracking.tracking_input_tooltip')"
+              />
+            </label>
+            <input
+              type="text"
+              v-model="trackingCode"
+              class="form-control p-3 fs-5 rounded-3"
+              id="tracking-code"
+              :placeholder="$t('views.tracking.tracking_input_placeholder')"
+              :disabled="trackingInputDisabled"
+            />
+          </div>
 
-          <AVButton
-            :label="button.label"
-            type="neutral"
+          <button
+            class="btn btn-theme w-100 rounded-3 TrackingLanding__Button"
+            type="button"
+            name="initiate-tracking"
             id="initiate-tracking"
-            full-width
-            @click="lookupBallot"
             :disabled="button.disabled"
-            class="TrackingLanding__Button_Overrides"
-          />
+            @click="lookupBallot"
+          >
+            {{ button.label }}
+          </button>
         </div>
       </div>
     </template>
@@ -178,13 +196,13 @@ const button = computed(() => {
 .TrackingLanding__Title {
   font-size: 2.5rem;
   font-weight: 600;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
 }
 
 .TrackingLanding__Subtitle {
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   font-size: 1.75rem;
   font-weight: 500;
   margin: 0 0 1rem 0;
@@ -192,14 +210,14 @@ const button = computed(() => {
 }
 
 .TrackingLanding__Description {
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   margin: 0 0 1.5rem 0;
   text-align: center;
 }
 
 .TrackingLanding__TrackingCode {
   color: black;
-  border: solid 1px var(--slate-500);
+  border: solid 1px var(--bs-gray-500);
   border-radius: 12px;
   box-sizing: border-box;
   width: 100%;
@@ -213,12 +231,6 @@ const button = computed(() => {
 
 .TrackingLanding__TrackingCode_Error {
   border: 2px solid var(--av-theme-danger-background);
-}
-
-.TrackingLanding__Button_Overrides {
-  background-color: var(--av-theme-background) !important;
-  border-color: var(--av-theme-background) !important;
-  color: var(--av-theme-text) !important;
 }
 
 .TrackingLanding__Step {
@@ -276,7 +288,7 @@ const button = computed(() => {
     margin-bottom: 1.125rem;
   }
 
-  .TrackingLanding__Button_Overrides {
+  .TrackingLanding__Button {
     font-size: 1.125rem !important;
     padding: 0.75rem 2.75rem !important;
     border-radius: 14px !important;

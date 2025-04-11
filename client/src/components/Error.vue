@@ -26,7 +26,7 @@ defineProps({
 <style type="text/css" scoped>
 .Error {
   background-color: var(--av-theme-danger-background);
-  color: white;
+  color: var(--av-theme-danger-text);
   padding: 1.5rem 2rem;
   margin-bottom: 2rem;
   z-index: 40;
@@ -43,7 +43,7 @@ html[dir="rtl"] .Error {
 
 .Error__Title {
   font-weight: 600;
-  color: white;
+  color: var(--av-theme-danger-text);
 }
 
 html[dir="ltr"] .Error__Icon_Overrides {

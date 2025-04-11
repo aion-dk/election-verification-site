@@ -10,14 +10,12 @@ const slots = {
 const options = { props, slots };
 
 test("displays the collapsed text", async () => {
-  // @ts-ignore
   const wrapper = mount(ExpandableSection, options);
   expect(wrapper.text()).toContain("Collapsed text");
 });
 
 test("displays the expanded text", async () => {
   props.expanded = true;
-  // @ts-ignore
   const wrapper = mount(ExpandableSection, options);
   expect(wrapper.text()).toContain("Expanded text");
 });
