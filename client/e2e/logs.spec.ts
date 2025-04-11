@@ -1,4 +1,5 @@
 import { test } from "@playwright/test";
+import analyzeAccesibility from "./accessibility";
 import {
   latestConfig,
   boardItemsPage1,
@@ -42,10 +43,13 @@ test("downloading logs", async ({ page, isMobile }) => {
   });
 
   await page.goto("/en/organisation_slug/election_slug");
+  await analyzeAccesibility(page);
   if (isMobile) {
     await page.locator(".Header__Hamburger_Btn").click();
+    await analyzeAccesibility(page);
   }
-  await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
+  await page.getByRole("link", { name: "Election Activity Log" }).click();
+  await analyzeAccesibility(page);
 
   if (!isMobile) {
     // The waitForEvent("download") method does not work in safari mobile so I'll skip it for now in mobile.
@@ -104,19 +108,25 @@ test("traversing board items", async ({ page, isMobile }) => {
   });
 
   await page.goto("/en/organisation_slug/election_slug");
+  await analyzeAccesibility(page);
   if (isMobile) {
     await page.locator(".Header__Hamburger_Btn").click();
+    await analyzeAccesibility(page);
   }
-  await page.getByRole("menuitem", { name: "Election Activity Log" }).click();
+  await page.getByRole("link", { name: "Election Activity Log" }).click();
+  await analyzeAccesibility(page);
 
   // Page 1
   await page.getByText("Rejected affidavit").click();
   await page.getByText("Accepted affidavit").click();
+  await analyzeAccesibility(page);
 
   // Page 2
   await page.getByRole("button", { name: "Next page" }).click();
+  await analyzeAccesibility(page);
   await page.getByText("Voter session").click();
   await page.getByText("Ballot cast").click();
+  await analyzeAccesibility(page);
 
   // Page 1 again
   await page.getByRole("button", { name: "Previous page" }).click();

@@ -6,10 +6,13 @@ import { fallbackMessages } from "../assets/translations";
 
 const neededStrings = JSON.stringify(fallbackMessages.en);
 const messages = { en: JSON.parse(neededStrings) };
-
 const i18n = createI18n({ messages });
+
 const stubs = {
   DateTime: {
+    template: "<span />",
+  },
+  AVIcon: {
     template: "<span />",
   },
 };

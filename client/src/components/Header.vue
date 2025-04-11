@@ -74,7 +74,6 @@ onBeforeUnmount(() => {
       <img
         v-if="configStore.electionStatus?.theme?.logo"
         class="Header__Logo"
-        aria-hidden="true"
         :src="configStore.electionStatus?.theme?.logo"
         :alt="$t('header.election_logo_alt')"
         loading="lazy"
@@ -85,7 +84,7 @@ onBeforeUnmount(() => {
       </div>
     </RouterLink>
 
-    <div
+    <nav
       class="Header__Links"
       :class="{
         Header__Show: !isMenuOpened,
@@ -93,7 +92,7 @@ onBeforeUnmount(() => {
     >
       <RouterLink
         class="Header__Link"
-        role="menuitem"
+        activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`"
         @click="toggleMenu(true)"
       >
@@ -102,7 +101,7 @@ onBeforeUnmount(() => {
 
       <RouterLink
         class="Header__Link"
-        role="menuitem"
+        activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`"
         @click="toggleMenu(true)"
       >
@@ -110,8 +109,8 @@ onBeforeUnmount(() => {
       </RouterLink>
 
       <RouterLink
-        role="menuitem"
         class="Header__Link"
+        activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/logs`"
         @click="toggleMenu()"
       >
@@ -119,8 +118,8 @@ onBeforeUnmount(() => {
       </RouterLink>
 
       <RouterLink
-        role="menuitem"
         class="Header__Link"
+        activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/help`"
         @click="toggleMenu()"
       >
@@ -129,7 +128,6 @@ onBeforeUnmount(() => {
 
       <a
         v-if="contactUrl"
-        role="menuitem"
         class="Header__Link"
         :href="contactUrl"
         target="_blank"
@@ -143,29 +141,16 @@ onBeforeUnmount(() => {
         :options="availableLocales"
         @change="(value) => setLocale(value)"
       />
+    </nav>
+
+    <div class="Header__Hamburger_Btn">
+      <AVAnimatedMenuButton
+        variant="cross"
+        theme="light"
+        class="bg-white"
+        v-model:is-opened="isMenuOpened"
+      />
     </div>
-    <button
-      class="Header__Hamburger_Btn"
-      :aria-label="
-        isMenuOpened
-          ? $t('header.close_menu_aria_label')
-          : $t('header.open_menu_aria_label')
-      "
-      @click="toggleMenu()"
-    >
-      <AVIcon
-        v-if="isMenuOpened"
-        icon="xmark"
-        class="Header__Hamburger_Icon"
-        aria-hidden="true"
-      />
-      <AVIcon
-        v-else
-        icon="bars"
-        class="Header__Hamburger_Icon"
-        aria-hidden="true"
-      />
-    </button>
   </div>
 </template>
 
@@ -217,15 +202,7 @@ onBeforeUnmount(() => {
 }
 
 .Header__Hamburger_Btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: none;
-  font-size: 1.5rem;
-  width: 50px;
-  height: 50px;
-  color: var(--bs-gray-800);
+  display: block;
 }
 
 .Header__Link {
@@ -234,6 +211,11 @@ onBeforeUnmount(() => {
   font-weight: 400;
   text-decoration: none;
   color: var(--bs-gray-700);
+
+  &.active {
+    font-weight: 600;
+    color: var(--bs-gray-800);
+  }
 }
 
 .Header__Link:hover {

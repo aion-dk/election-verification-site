@@ -16,7 +16,9 @@ const cancel = () => {
 <template>
   <div class="BallotManager">
     <div class="BallotManager__Tracking_Container">
-      <code class="BallotManager__Tracking_Code">{{ trackingCode }}</code>
+      <code class="BallotManager__Tracking_Code" id="current-tracking-code">{{
+        trackingCode
+      }}</code>
       <button
         class="BallotManager__Cancel"
         @click="cancel"

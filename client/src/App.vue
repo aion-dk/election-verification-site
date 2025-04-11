@@ -46,9 +46,10 @@ function updateLocale(newLocale: Locale) {
 }
 
 function setTitle() {
+  const siteTitle = i18n.global.messages[i18n.global.locale].site_title;
   const title = [
     configStore.election.title[i18n.global.locale],
-    "Verification Site",
+    siteTitle,
   ].filter((s) => s);
   if (window.top) window.top.document.title = title.join(" - ");
 }
@@ -133,7 +134,9 @@ const setTheme = async (conferenceClient: any) => {
     <AVSpinner size="lg" color="dark" />
   </div>
   <div class="DBAS" v-if="isLoaded">
-    <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a>
+    <a href="#main" class="DBAS_SkipToContentLink">
+      {{ $t("js.accessibility.skip_to_content") }}
+    </a>
 
     <Header
       :election="configStore.election"
