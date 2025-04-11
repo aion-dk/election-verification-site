@@ -1,4 +1,4 @@
-import { AVClient } from "@aion-dk/js-client";
+import { AVClient } from "@assemblyvoting/js-client";
 import config from "./config";
 
 export default async function useAVClient(slug: string) {
