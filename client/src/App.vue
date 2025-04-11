@@ -134,7 +134,7 @@ const setTheme = async (conferenceClient: any) => {
     <AVSpinner size="lg" color="dark" />
   </div>
   <div class="DBAS" v-if="isLoaded">
-    <a href="#main_content" class="DBAS_SkipToContentLink">
+    <a href="#main_content" class="visually-hidden-focusable">
       {{ $t("js.accessibility.skip_to_content") }}
     </a>
 
@@ -196,16 +196,6 @@ body {
   --vue-popper-text-color: white;
   --vue-popper-border-radius: 0px;
   --vue-popper-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.15);
-}
-
-.DBAS_SkipToContentLink {
-  position: fixed;
-  margin-top: -2rem;
-}
-
-.DBAS_SkipToContentLink:focus {
-  margin-top: 6rem;
-  margin-left: 2rem;
 }
 
 @media only screen and (min-width: 80rem) {
