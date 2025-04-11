@@ -134,7 +134,7 @@ const setTheme = async (conferenceClient: any) => {
     <AVSpinner size="lg" color="dark" />
   </div>
   <div class="DBAS" v-if="isLoaded">
-    <a href="#main" class="DBAS_SkipToContentLink">
+    <a href="#main_content" class="visually-hidden-focusable">
       {{ $t("js.accessibility.skip_to_content") }}
     </a>
 
@@ -144,7 +144,7 @@ const setTheme = async (conferenceClient: any) => {
       :locale="$i18n.locale"
       @changeLocale="updateLocale"
     />
-    <main class="DBAS__Content" id="main">
+    <main class="DBAS__Content">
       <RouterView
         :key="`${route.fullPath}-${configStore.pageRefreshIterator}`"
       />
@@ -196,16 +196,6 @@ body {
   --vue-popper-text-color: white;
   --vue-popper-border-radius: 0px;
   --vue-popper-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.15);
-}
-
-.DBAS_SkipToContentLink {
-  position: absolute;
-  margin-top: -6rem;
-}
-
-.DBAS_SkipToContentLink:focus {
-  margin-top: 6rem;
-  margin-left: 2rem;
 }
 
 @media only screen and (min-width: 80rem) {
