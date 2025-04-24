@@ -50,7 +50,7 @@ const goToTracker = () => {
       />
     </div>
 
-    <section class="Welcome__Content">
+    <section id="main_content" class="Welcome__Content">
       <div class="Welcome__Heading_Content">
         <div
           class="Welcome__Card Welcome__Card_Overrides Welcome__Card_Desktop"
