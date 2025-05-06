@@ -2,17 +2,6 @@
 # yarn lockfile v1
 
 
-"@aion-dk/js-client@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.0.tgz#643f6025baddfa6b0b1b78dce4da969e2d760e7c"
-  integrity sha512-VAn6XupqGuaBd6NTYiFK0ud8Zl8UsQ96ILH1/33RTU5AY6dj4lbZRZsGfbcE/lz1ZPYK3kRAN1SQSDGYsb5mqQ==
-  dependencies:
-    axios "^1.7.9"
-    base-x "^5.0.0"
-    buffer "^6.0.3"
-    jwt-decode "^4.0.0"
-    xml-js "^1.6.11"
-
 "@aion-dk/js-client@^4.4.1":
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.1.tgz#d27eb15d9b83d8654179d3d8dea5d2bb97e1efe3"
@@ -38,6 +27,19 @@
     motion "^12.4.7"
     vue "^3.5.13"
     vue-i18n "^11.1.2"
+
+"@assemblyvoting/js-client@4.0.0-alpha.7":
+  version "4.0.0-alpha.7"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-4.0.0-alpha.7.tgz#c28f7cff28b36555d27f77c67840af8268e651bd"
+  integrity sha512-58YKGE4JDSxlXJwlUq7GBkmeq/FDi9CLptaXa8mb6XQxlDpetErkt/10Hw/7TLAiR9bQNxmna1bHysdApYxIng==
+  dependencies:
+    "@noble/hashes" "^1.3.1"
+    axios "^1.6.0"
+    base-x "^4.0.0"
+    buffer "^6.0.3"
+    jwt-decode "^3.1.2"
+    sjcl-with-all "^1.0.8"
+    xml-js "^1.6.11"
 
 "@axe-core/playwright@^4.10.1":
   version "4.10.1"
@@ -402,6 +404,11 @@
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/@jridgewell/sourcemap-codec/-/sourcemap-codec-1.5.0.tgz#3188bcb273a414b0d215fd22a58540b989b9409a"
   integrity sha512-gv3ZRaISU3fjPAgNsriBRqGWQL6quFx04YMPW/zD8XMLsU32mhCCbfbO6KZFLjvYpCZ8zyDEgqsgf+PwPaM7GQ==
+
+"@noble/hashes@^1.3.1":
+  version "1.7.1"
+  resolved "https://registry.yarnpkg.com/@noble/hashes/-/hashes-1.7.1.tgz#5738f6d765710921e7a751e00c20ae091ed8db0f"
+  integrity sha512-B8XBPsn4vT/KJAGqDzbwztd+6Yte3P4V7iafm24bxgDe/mlRuK6xmWPuCNrKt2vDafZ8MfJLlchDG/vYafQEjQ==
 
 "@nodelib/fs.scandir@2.1.5":
   version "2.1.5"
@@ -1170,6 +1177,15 @@ available-typed-arrays@^1.0.7:
   dependencies:
     possible-typed-array-names "^1.0.0"
 
+axios@^1.6.0:
+  version "1.8.4"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.8.4.tgz#78990bb4bc63d2cae072952d374835950a82f447"
+  integrity sha512-eBSYY4Y68NNlHbHBMdeDmKNtDgXWhQsJcGqzO3iLUM0GraQFSS9cVgPX5I9b3lbdFKyYoAEGAZF1DwhTaljNAw==
+  dependencies:
+    follow-redirects "^1.15.6"
+    form-data "^4.0.0"
+    proxy-from-env "^1.1.0"
+
 axe-core@~4.10.2:
   version "4.10.3"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.10.3.tgz#04145965ac7894faddbac30861e5d8f11bfd14fc"
@@ -1188,6 +1204,11 @@ balanced-match@^1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/balanced-match/-/balanced-match-1.0.2.tgz#e83e3a7e3f300b34cb9d87f615fa0cbf357690ee"
   integrity sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==
+
+base-x@^4.0.0:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/base-x/-/base-x-4.0.1.tgz#817fb7b57143c501f649805cb247617ad016a885"
+  integrity sha512-uAZ8x6r6S3aUM9rbHGVOIsR15U/ZSc82b3ymnCPsT45Gk1DDvhDPdIgB5MrhirZWt+5K0EEPQH985kNqZgNPFw==
 
 base-x@^5.0.0:
   version "5.0.1"
@@ -2554,6 +2575,11 @@ just-extend@^6.2.0:
   resolved "https://registry.yarnpkg.com/just-extend/-/just-extend-6.2.0.tgz#b816abfb3d67ee860482e7401564672558163947"
   integrity sha512-cYofQu2Xpom82S6qD778jBDpwvvy39s1l/hrYij2u9AMdQcGRpaBu6kY4mVhuno5kJVi1DAz4aiphA2WI1/OAw==
 
+jwt-decode@^3.1.2:
+  version "3.1.2"
+  resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-3.1.2.tgz#3fb319f3675a2df0c2895c8f5e9fa4b67b04ed59"
+  integrity sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==
+
 jwt-decode@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/jwt-decode/-/jwt-decode-4.0.0.tgz#2270352425fd413785b2faf11f6e755c5151bd4b"
@@ -3347,6 +3373,11 @@ sinon@^15.2.0:
     diff "^5.1.0"
     nise "^5.1.4"
     supports-color "^7.2.0"
+
+sjcl-with-all@^1.0.8:
+  version "1.0.8"
+  resolved "https://registry.yarnpkg.com/sjcl-with-all/-/sjcl-with-all-1.0.8.tgz#a5814708065d58605c85005edd5c1be274ef9313"
+  integrity sha512-bPO15hskif7tpu/LpAQgnJgZESsYOIHrNSxgZ7nM4rbF9rOtt6rm4ECQaFvY5/JLay5lhi2YIaLcD4xJJgY29w==
 
 "source-map-js@>=0.6.2 <2.0.0", source-map-js@^1.0.2, source-map-js@^1.2.0, source-map-js@^1.2.1:
   version "1.2.1"

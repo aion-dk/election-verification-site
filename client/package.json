@@ -21,7 +21,7 @@
     "lint:ci": "eslint ./src/**/*"
   },
   "dependencies": {
-    "@aion-dk/js-client": "^4.4.0",
+    "@assemblyvoting/js-client": "4.0.0-alpha.7",
     "@assemblyvoting/electa-ui": "^4.1.8",
     "axios": "^1.8.2",
     "date-fns": "^2.30.0",
