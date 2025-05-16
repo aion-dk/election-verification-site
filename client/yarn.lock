@@ -13,10 +13,10 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@aion-dk/js-client@^4.4.1":
-  version "4.4.1"
-  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.1.tgz#d27eb15d9b83d8654179d3d8dea5d2bb97e1efe3"
-  integrity sha512-U9duLEq396xhT616qXdRGAIAOiA0wdgQ89uwc8fDhFCb5g1ht0o9EyS1iED/aX2Bp/0P0bbduYwzGOaoZHXS8Q==
+"@aion-dk/js-client@^4.4.3":
+  version "4.4.3"
+  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.3.tgz#725439f9a051c051c9b1406434725c921e8c146c"
+  integrity sha512-vTC6IuAzONroGA6rRr6aAFULv2H0FW9a354LRjyjuFR6873ATFniyXlACGuhjeqDd/8U2Kru+H4Rtq3t2cBB/g==
   dependencies:
     axios "^1.7.9"
     base-x "^5.0.0"
@@ -24,12 +24,12 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@assemblyvoting/electa-ui@^4.1.8":
-  version "4.1.8"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-4.1.8.tgz#b83c8977fe40c5819d5873dd165bfcd74b1ce51e"
-  integrity sha512-gCY920GxxVvkQsKL4vXCtMrVDpwocAnepSB5UJhbA5MKKKRot13fTUwmVlVbXOnX5KSzC/rKq9//qTC6qri+bw==
+"@assemblyvoting/electa-ui@^4.2.0":
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-4.2.0.tgz#a52d02f088f553024c5e5eeb52fb1a5ddc034a86"
+  integrity sha512-Z2qjHrO4DWkZOHspdIeBLqS4s7m4RloHPYSwqgEBKY+Yg9DdzhedkrxCOZ19TR9WeyHEIEjfM1NXb/0k5kuNxw==
   dependencies:
-    "@aion-dk/js-client" "^4.4.1"
+    "@aion-dk/js-client" "^4.4.3"
     "@fortawesome/fontawesome-svg-core" "^6.7.2"
     "@fortawesome/free-brands-svg-icons" "^6.7.2"
     "@fortawesome/free-solid-svg-icons" "^6.7.2"
@@ -1203,6 +1203,11 @@ boolbase@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
+
+bootstrap@^5.3.3:
+  version "5.3.6"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.6.tgz#fbd91ebaff093f5b191a1c01a8c866d24f9fa6e1"
+  integrity sha512-jX0GAcRzvdwISuvArXn3m7KZscWWFAf1MKBcnzaN02qWMb3jpMoUX4/qgeiGzqyIb4ojulRzs89UCUmGcFSzTA==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
