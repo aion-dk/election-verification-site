@@ -248,8 +248,8 @@ export const fallbackMessages: SpreadableDLM = {
       election_logo_alt: "Election logo",
     },
     footer: {
-      technology_by: "Technology by",
-      av_img_alt: "Assembly Voting Logo",
+      powered_by: "Powered by",
+      av_img_alt: "Lumi global logo",
     },
     components: {
       board_item: {
