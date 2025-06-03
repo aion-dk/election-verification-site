@@ -73,7 +73,7 @@ onMounted(() => {
 }
 
 .Timedown__Text {
-  color: var(--bs-gray-600);
+  color: var(--bs-gray-700);
   font-size: 0.8rem;
   padding: 0.5rem 0.5rem 1.5rem 0.5rem;
 }
