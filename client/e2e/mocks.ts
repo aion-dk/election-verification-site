@@ -9,6 +9,11 @@ export const latestConfig = {
         },
       },
     },
+    genesisConfig: {
+      content: {
+        eaCurveName: "secp256k1",
+      },
+    }
   },
 };
 
