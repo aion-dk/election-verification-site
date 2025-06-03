@@ -13,7 +13,7 @@ export const latestConfig = {
       content: {
         eaCurveName: "secp256k1",
       },
-    }
+    },
   },
 };
 
