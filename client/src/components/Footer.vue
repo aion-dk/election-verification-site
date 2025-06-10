@@ -4,7 +4,7 @@ import avlogo from "../assets/avlogo.svg";
 
 <template>
   <footer class="Footer">
-    <span class="Footer__Text">{{ $t("footer.technology_by") }}</span>
+    <span class="Footer__Text">{{ $t("footer.powered_by") }}</span>
     <a href="https://assemblyvoting.com" target="_blank">
       <img
         class="Footer__Image"
