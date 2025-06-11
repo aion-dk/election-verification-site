@@ -1,4 +1,4 @@
-import { AVVerifier } from "@aion-dk/js-client";
+import { AVVerifier } from "@assemblyvoting/js-client";
 import config from "./config";
 
 export default async function useAVVerifier(slug: string) {

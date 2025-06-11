@@ -16,7 +16,7 @@ export default defineStore("useBallotStore", () => {
 
     try {
       const avClient = await useAVClient(boardSlug);
-      const res = await avClient.checkBallotStatus(trackingCode);
+      const res = await avClient.value?.checkBallotStatus(trackingCode);
 
       ballot.value = {
         trackingCode: trackingCode,
