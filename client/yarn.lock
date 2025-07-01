@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@aion-dk/js-client@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.0.tgz#643f6025baddfa6b0b1b78dce4da969e2d760e7c"
-  integrity sha512-VAn6XupqGuaBd6NTYiFK0ud8Zl8UsQ96ILH1/33RTU5AY6dj4lbZRZsGfbcE/lz1ZPYK3kRAN1SQSDGYsb5mqQ==
+"@aion-dk/js-client@^4.4.5":
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.5.tgz#c60e850a9826620cd80324b5ed1bf96a2e95e8ad"
+  integrity sha512-2UelxdPVEZLKa5v/8HUzBqOsW6EuMQGLKj6N8Szc9hS68Wr5mwh2wBBVTYTO8pj2V3dlamYcMYmDpzkzpkEvCw==
   dependencies:
     axios "^1.7.9"
     base-x "^5.0.0"
@@ -13,27 +13,16 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@aion-dk/js-client@^4.4.3":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.3.tgz#725439f9a051c051c9b1406434725c921e8c146c"
-  integrity sha512-vTC6IuAzONroGA6rRr6aAFULv2H0FW9a354LRjyjuFR6873ATFniyXlACGuhjeqDd/8U2Kru+H4Rtq3t2cBB/g==
+"@assemblyvoting/electa-ui@5.0.0-beta.12":
+  version "5.0.0-beta.12"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.0.0-beta.12.tgz#276a43be92744dd1f6a5d0f34a3b99e6dc281024"
+  integrity sha512-QpKlRtFX0nUxy7BdqAyjil1agPkL80vAAkZ/sbVGNS5lspSVH4aV45u30u3/g4IHk/sPilkauoPomYUq92+tLQ==
   dependencies:
-    axios "^1.7.9"
-    base-x "^5.0.0"
-    buffer "^6.0.3"
-    jwt-decode "^4.0.0"
-    xml-js "^1.6.11"
-
-"@assemblyvoting/electa-ui@5.0.0-beta.0":
-  version "5.0.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.0.0-beta.0.tgz#5fcd53659ffb300976555acb957083f29a185f70"
-  integrity sha512-BYMQ5NJ5tx4W4xUUEctbAz8p2YYdrM4S9s1MtteKIg4b2/nGWNKTUNQmeNTYdpwF4+PBGAtOmTFoVvGy34kDMA==
-  dependencies:
-    "@aion-dk/js-client" "^4.4.3"
     "@fortawesome/fontawesome-svg-core" "^6.7.2"
     "@fortawesome/free-brands-svg-icons" "^6.7.2"
     "@fortawesome/free-solid-svg-icons" "^6.7.2"
     "@popperjs/core" "^2.11.8"
+    bootstrap "^5.3.6"
     floating-vue "^5.2.2"
     motion "^12.4.7"
     vue "^3.5.13"
@@ -1205,9 +1194,9 @@ boolbase@^1.0.0:
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
 
 bootstrap@^5.3.6:
-  version "5.3.6"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.6.tgz#fbd91ebaff093f5b191a1c01a8c866d24f9fa6e1"
-  integrity sha512-jX0GAcRzvdwISuvArXn3m7KZscWWFAf1MKBcnzaN02qWMb3jpMoUX4/qgeiGzqyIb4ojulRzs89UCUmGcFSzTA==
+  version "5.3.7"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.7.tgz#8640065036124d961d885d80b5945745e1154d90"
+  integrity sha512-7KgiD8UHjfcPBHEpDNg+zGz8L3LqR3GVwqZiBRFX04a1BCArZOz1r2kjly2HQ0WokqTO0v1nF+QAt8dsW4lKlw==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
