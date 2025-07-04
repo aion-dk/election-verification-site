@@ -21,8 +21,9 @@
     "lint:ci": "eslint ./src/**/*"
   },
   "dependencies": {
-    "@aion-dk/js-client": "^4.4.0",
-    "@assemblyvoting/electa-ui": "^4.2.0",
+    "@aion-dk/js-client": "^4.4.5",
+    "@assemblyvoting/electa-ui": "^5.0.0",
+    "add": "^2.0.6",
     "axios": "^1.8.2",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.1",
@@ -35,7 +36,8 @@
     "vue": "^3.5.13",
     "vue-i18n": "^11.1.3",
     "vue-router": "^4.5.0",
-    "vue-tsc": "^2.2.8"
+    "vue-tsc": "^2.2.8",
+    "yarn": "^1.22.22"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.10.1",

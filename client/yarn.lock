@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@aion-dk/js-client@^4.4.0":
-  version "4.4.0"
-  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.0.tgz#643f6025baddfa6b0b1b78dce4da969e2d760e7c"
-  integrity sha512-VAn6XupqGuaBd6NTYiFK0ud8Zl8UsQ96ILH1/33RTU5AY6dj4lbZRZsGfbcE/lz1ZPYK3kRAN1SQSDGYsb5mqQ==
+"@aion-dk/js-client@^4.4.5":
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.5.tgz#c60e850a9826620cd80324b5ed1bf96a2e95e8ad"
+  integrity sha512-2UelxdPVEZLKa5v/8HUzBqOsW6EuMQGLKj6N8Szc9hS68Wr5mwh2wBBVTYTO8pj2V3dlamYcMYmDpzkzpkEvCw==
   dependencies:
     axios "^1.7.9"
     base-x "^5.0.0"
@@ -13,27 +13,16 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@aion-dk/js-client@^4.4.3":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.3.tgz#725439f9a051c051c9b1406434725c921e8c146c"
-  integrity sha512-vTC6IuAzONroGA6rRr6aAFULv2H0FW9a354LRjyjuFR6873ATFniyXlACGuhjeqDd/8U2Kru+H4Rtq3t2cBB/g==
+"@assemblyvoting/electa-ui@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.0.0.tgz#d8ad82413bde30417db4096b53c15431ac72c224"
+  integrity sha512-2VgYYDAn8Z+urdAuAbkAQohuns8w1XTb70FNFH9zGXl/lLoaufBmu8rRwVvsxtydTaFLRiZB39Bmy0eah3m8OA==
   dependencies:
-    axios "^1.7.9"
-    base-x "^5.0.0"
-    buffer "^6.0.3"
-    jwt-decode "^4.0.0"
-    xml-js "^1.6.11"
-
-"@assemblyvoting/electa-ui@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-4.2.0.tgz#a52d02f088f553024c5e5eeb52fb1a5ddc034a86"
-  integrity sha512-Z2qjHrO4DWkZOHspdIeBLqS4s7m4RloHPYSwqgEBKY+Yg9DdzhedkrxCOZ19TR9WeyHEIEjfM1NXb/0k5kuNxw==
-  dependencies:
-    "@aion-dk/js-client" "^4.4.3"
     "@fortawesome/fontawesome-svg-core" "^6.7.2"
     "@fortawesome/free-brands-svg-icons" "^6.7.2"
     "@fortawesome/free-solid-svg-icons" "^6.7.2"
     "@popperjs/core" "^2.11.8"
+    bootstrap "^5.3.6"
     floating-vue "^5.2.2"
     motion "^12.4.7"
     vue "^3.5.13"
@@ -1071,6 +1060,11 @@ acorn@^8.1.0, acorn@^8.11.0, acorn@^8.14.0, acorn@^8.8.1, acorn@^8.9.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.14.0.tgz#063e2c70cac5fb4f6467f0b11152e04c682795b0"
   integrity sha512-cl669nCJTZBsL97OF4kUQm5g5hC2uihk0NxY3WENAC0TYdILVkAyHymAntgxGkl7K+t0cXIrH5siy5S4XkFycA==
 
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+  integrity sha512-j5QzrmsokwWWp6kUcJQySpbG+xfOBqqKnup3OIk1pz+kB/80SLorZ9V8zHFLO92Lcd+hbvq8bT+zOGoPkmBV0Q==
+
 agent-base@6:
   version "6.0.2"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-6.0.2.tgz#49fff58577cfee3f37176feab4c22e00f86d7f77"
@@ -1204,10 +1198,10 @@ boolbase@^1.0.0:
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
 
-bootstrap@^5.3.3:
-  version "5.3.6"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.6.tgz#fbd91ebaff093f5b191a1c01a8c866d24f9fa6e1"
-  integrity sha512-jX0GAcRzvdwISuvArXn3m7KZscWWFAf1MKBcnzaN02qWMb3jpMoUX4/qgeiGzqyIb4ojulRzs89UCUmGcFSzTA==
+bootstrap@^5.3.6:
+  version "5.3.7"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.7.tgz#8640065036124d961d885d80b5945745e1154d90"
+  integrity sha512-7KgiD8UHjfcPBHEpDNg+zGz8L3LqR3GVwqZiBRFX04a1BCArZOz1r2kjly2HQ0WokqTO0v1nF+QAt8dsW4lKlw==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -4025,6 +4019,11 @@ xmlchars@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/xmlchars/-/xmlchars-2.2.0.tgz#060fe1bcb7f9c76fe2a17db86a9bc3ab894210cb"
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
+
+yarn@^1.22.22:
+  version "1.22.22"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.22.tgz#ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+  integrity sha512-prL3kGtyG7o9Z9Sv8IPfBNrWTDmXB4Qbes8A9rEzt6wkJV8mUvoirjU0Mp3GGAU06Y0XQyA3/2/RQFVuK7MTfg==
 
 yocto-queue@^0.1.0:
   version "0.1.0"
