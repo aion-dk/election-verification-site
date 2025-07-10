@@ -13,10 +13,10 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@assemblyvoting/electa-ui@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.0.0.tgz#d8ad82413bde30417db4096b53c15431ac72c224"
-  integrity sha512-2VgYYDAn8Z+urdAuAbkAQohuns8w1XTb70FNFH9zGXl/lLoaufBmu8rRwVvsxtydTaFLRiZB39Bmy0eah3m8OA==
+"@assemblyvoting/electa-ui@^5.0.1-beta.2":
+  version "5.0.1-beta.2"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.0.1-beta.2.tgz#ea864fbeab0f46557dfe72136ee04d99abfcdf30"
+  integrity sha512-DCZ1XIboJd31QnOFOia3Q1WadewPuc0MdF44GkQV625bWs0LjzIjOX6JvplqBLSz+DKXmfllBQzYDk0qAyFViw==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^6.7.2"
     "@fortawesome/free-brands-svg-icons" "^6.7.2"
