@@ -22,8 +22,7 @@
   },
   "dependencies": {
     "@aion-dk/js-client": "^4.4.5",
-    "@assemblyvoting/electa-ui": "^5.0.0",
-    "add": "^2.0.6",
+    "@assemblyvoting/electa-ui": "^5.0.1",
     "axios": "^1.8.2",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.1",
@@ -69,5 +68,6 @@
         "axios"
       ]
     }
-  }
+  },
+  "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }
