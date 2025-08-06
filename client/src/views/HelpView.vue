@@ -148,7 +148,7 @@ onMounted(() => {
           </template>
 
           <template v-slot:expanded>
-            <h3 class="HelpView__FAQ_Title">{{ question.title }}</h3>
+            <h3 class="HelpView__FAQ_Title mb-3">{{ question.title }}</h3>
             <p
               v-for="(p, i) in question.paragraphs"
               :key="`${i}-${p}`"

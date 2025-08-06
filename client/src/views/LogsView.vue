@@ -268,12 +268,15 @@ onMounted(() => loadPage(currentPage.value));
 
 .LogsView__Configuration_Only {
   display: flex;
+  align-items: center;
+  gap: 0.5rem;
   border: 2px solid transparent;
   padding: 0.75rem;
   border-radius: 12px;
   font-weight: 600;
   color: var(--bs-gray-900);
   margin: 0 0 2rem 0;
+  cursor: pointer;
 }
 
 .LogsView__Configuration_Only:has(input[type="checkbox"]:checked) {

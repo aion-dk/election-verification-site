@@ -2,17 +2,6 @@
 # yarn lockfile v1
 
 
-"@aion-dk/js-client@^4.4.3":
-  version "4.4.3"
-  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.3.tgz#725439f9a051c051c9b1406434725c921e8c146c"
-  integrity sha512-vTC6IuAzONroGA6rRr6aAFULv2H0FW9a354LRjyjuFR6873ATFniyXlACGuhjeqDd/8U2Kru+H4Rtq3t2cBB/g==
-  dependencies:
-    axios "^1.7.9"
-    base-x "^5.0.0"
-    buffer "^6.0.3"
-    jwt-decode "^4.0.0"
-    xml-js "^1.6.11"
-
 "@assemblyvoting/av-crypto@~1.0.2":
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/@assemblyvoting/av-crypto/-/av-crypto-1.0.2.tgz#819615ea8aa91cc1a2235b1f9f7454d398ea4956"
@@ -21,25 +10,25 @@
     "@noble/hashes" "^1.3.1"
     sjcl-with-all "^1.0.8"
 
-"@assemblyvoting/electa-ui@^4.2.0":
-  version "4.2.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-4.2.0.tgz#a52d02f088f553024c5e5eeb52fb1a5ddc034a86"
-  integrity sha512-Z2qjHrO4DWkZOHspdIeBLqS4s7m4RloHPYSwqgEBKY+Yg9DdzhedkrxCOZ19TR9WeyHEIEjfM1NXb/0k5kuNxw==
+"@assemblyvoting/electa-ui@^5.0.1":
+  version "5.0.2"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.0.2.tgz#2a80b23c6d46a233c64a674020243156604685fc"
+  integrity sha512-L4hcX2vU1IYirUAIMXVaLFhSxNl0GYuNKaz2XLeYoeE6Sza/huTmpChaual2O3DoF5Nn/htI9lNPVOFj+pyC4w==
   dependencies:
-    "@aion-dk/js-client" "^4.4.3"
     "@fortawesome/fontawesome-svg-core" "^6.7.2"
     "@fortawesome/free-brands-svg-icons" "^6.7.2"
     "@fortawesome/free-solid-svg-icons" "^6.7.2"
     "@popperjs/core" "^2.11.8"
+    bootstrap "^5.3.6"
     floating-vue "^5.2.2"
     motion "^12.4.7"
     vue "^3.5.13"
-    vue-i18n "^11.1.2"
+    vue-i18n "^11.1.10"
 
-"@assemblyvoting/js-client@4.0.0-alpha.12":
-  version "4.0.0-alpha.12"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-4.0.0-alpha.12.tgz#e80ed6f6123df0360045afb21ccec1f1ae669760"
-  integrity sha512-2dedFrAfTLoy4T/0m/UjWHRidndAu61/ha5ilX76LlzPP1CHeat9PAU2M+mMRqpX7RBhZjsTyJF3od7IPWtyYQ==
+"@assemblyvoting/js-client@5.0.0-rc.2":
+  version "5.0.0-rc.2"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.0.0-rc.2.tgz#bb4aa1eef6ee76c594d52389352f2a068f770500"
+  integrity sha512-U4erOzl0iawyScvytGesXLjti+bj+Uz8IOAZ3uwsd3HmE+XqfsV9xSPNEHZhrzZVxW3DnloBTSw8e7PnIDmWJA==
   dependencies:
     "@assemblyvoting/av-crypto" "~1.0.2"
     axios "^1.7.9"
@@ -353,47 +342,26 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/retry/-/retry-0.4.1.tgz#9a96ce501bc62df46c4031fbd970e3cc6b10f07b"
   integrity sha512-c7hNEllBlenFTHBky65mhq8WD2kbN9Q6gk0bTk8lSBvc554jpXSkST1iePudpt7+A/AQvuHs9EMqjHDXMY1lrA==
 
-"@intlify/core-base@11.1.2":
-  version "11.1.2"
-  resolved "https://registry.yarnpkg.com/@intlify/core-base/-/core-base-11.1.2.tgz#f924d60a94b6ab5222848ff0af678c461a1b6a7d"
-  integrity sha512-nmG512G8QOABsserleechwHGZxzKSAlggGf9hQX0nltvSwyKNVuB/4o6iFeG2OnjXK253r8p8eSDOZf8PgFdWw==
+"@intlify/core-base@11.1.10":
+  version "11.1.10"
+  resolved "https://registry.yarnpkg.com/@intlify/core-base/-/core-base-11.1.10.tgz#4731748992bc6d8e723ca6c2cc5aa5a4c90cf7a5"
+  integrity sha512-JhRb40hD93Vk0BgMgDc/xMIFtdXPHoytzeK6VafBNOj6bb6oUZrGamXkBKecMsmGvDQQaPRGG2zpa25VCw8pyw==
   dependencies:
-    "@intlify/message-compiler" "11.1.2"
-    "@intlify/shared" "11.1.2"
+    "@intlify/message-compiler" "11.1.10"
+    "@intlify/shared" "11.1.10"
 
-"@intlify/core-base@11.1.3":
-  version "11.1.3"
-  resolved "https://registry.yarnpkg.com/@intlify/core-base/-/core-base-11.1.3.tgz#8625126383334ef69262e0a99659db3e63bfc80c"
-  integrity sha512-cMuHunYO7LE80azTitcvEbs1KJmtd6g7I5pxlApV3Jo547zdO3h31/0uXpqHc+Y3RKt1wo2y68RGSx77Z1klyA==
+"@intlify/message-compiler@11.1.10":
+  version "11.1.10"
+  resolved "https://registry.yarnpkg.com/@intlify/message-compiler/-/message-compiler-11.1.10.tgz#ff5c92c311cd72144126f5c128912adb4e911207"
+  integrity sha512-TABl3c8tSLWbcD+jkQTyBhrnW251dzqW39MPgEUCsd69Ua3ceoimsbIzvkcPzzZvt1QDxNkenMht+5//V3JvLQ==
   dependencies:
-    "@intlify/message-compiler" "11.1.3"
-    "@intlify/shared" "11.1.3"
-
-"@intlify/message-compiler@11.1.2":
-  version "11.1.2"
-  resolved "https://registry.yarnpkg.com/@intlify/message-compiler/-/message-compiler-11.1.2.tgz#711af9421fa8c0339501eb67fa90ebe00cbd3725"
-  integrity sha512-T/xbNDzi+Yv0Qn2Dfz2CWCAJiwNgU5d95EhhAEf4YmOgjCKktpfpiUSmLcBvK1CtLpPQ85AMMQk/2NCcXnNj1g==
-  dependencies:
-    "@intlify/shared" "11.1.2"
+    "@intlify/shared" "11.1.10"
     source-map-js "^1.0.2"
 
-"@intlify/message-compiler@11.1.3":
-  version "11.1.3"
-  resolved "https://registry.yarnpkg.com/@intlify/message-compiler/-/message-compiler-11.1.3.tgz#61079227a263d01ab368c99ce26883e150cb4bdd"
-  integrity sha512-7rbqqpo2f5+tIcwZTAG/Ooy9C8NDVwfDkvSeDPWUPQW+Dyzfw2o9H103N5lKBxO7wxX9dgCDjQ8Umz73uYw3hw==
-  dependencies:
-    "@intlify/shared" "11.1.3"
-    source-map-js "^1.0.2"
-
-"@intlify/shared@11.1.2":
-  version "11.1.2"
-  resolved "https://registry.yarnpkg.com/@intlify/shared/-/shared-11.1.2.tgz#d780bc8eb4e3c3ef8a3e45c421f0f5ecf59651f2"
-  integrity sha512-dF2iMMy8P9uKVHV/20LA1ulFLL+MKSbfMiixSmn6fpwqzvix38OIc7ebgnFbBqElvghZCW9ACtzKTGKsTGTWGA==
-
-"@intlify/shared@11.1.3":
-  version "11.1.3"
-  resolved "https://registry.yarnpkg.com/@intlify/shared/-/shared-11.1.3.tgz#1a4ed11a0efcaf95b56e0d01d0ee54d01bcd3019"
-  integrity sha512-pTFBgqa/99JRA2H1qfyqv97MKWJrYngXBA/I0elZcYxvJgcCw3mApAoPW3mJ7vx3j+Ti0FyKUFZ4hWxdjKaxvA==
+"@intlify/shared@11.1.10":
+  version "11.1.10"
+  resolved "https://registry.yarnpkg.com/@intlify/shared/-/shared-11.1.10.tgz#d869aa8fbc1aa307f26a58848fea6df3c9785b6f"
+  integrity sha512-6ZW/f3Zzjxfa1Wh0tYQI5pLKUtU+SY7l70pEG+0yd0zjcsYcK0EBt6Fz30Dy0tZhEqemziQQy2aNU3GJzyrMUA==
 
 "@isaacs/cliui@^8.0.2":
   version "8.0.2"
@@ -1217,6 +1185,11 @@ boolbase@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/boolbase/-/boolbase-1.0.0.tgz#68dff5fbe60c51eb37725ea9e3ed310dcc1e776e"
   integrity sha512-JZOSA7Mo9sNGB8+UjSgzdLtokWAky1zbztM3WRLCbZ70/3cTANmQmOdR7y2g+J0e2WXywy1yS468tY+IruqEww==
+
+bootstrap@^5.3.6:
+  version "5.3.7"
+  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-5.3.7.tgz#8640065036124d961d885d80b5945745e1154d90"
+  integrity sha512-7KgiD8UHjfcPBHEpDNg+zGz8L3LqR3GVwqZiBRFX04a1BCArZOz1r2kjly2HQ0WokqTO0v1nF+QAt8dsW4lKlw==
 
 brace-expansion@^1.1.7:
   version "1.1.11"
@@ -3842,22 +3815,13 @@ vue-eslint-parser@^9.4.3:
     lodash "^4.17.21"
     semver "^7.3.6"
 
-vue-i18n@^11.1.2:
-  version "11.1.2"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-11.1.2.tgz#187ded4132027a58045cb7ab7e65756575045bca"
-  integrity sha512-MfdkdKGUHN+jkkaMT5Zbl4FpRmN7kfelJIwKoUpJ32ONIxdFhzxZiLTVaAXkAwvH3y9GmWpoiwjDqbPIkPIMFA==
+vue-i18n@^11.1.10:
+  version "11.1.10"
+  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-11.1.10.tgz#04578ea4213f96c37939a08f516a648a6d0b84a1"
+  integrity sha512-C+IwnSg8QDSOAox0gdFYP5tsKLx5jNWxiawNoiNB/Tw4CReXmM1VJMXbduhbrEzAFLhreqzfDocuSVjGbxQrag==
   dependencies:
-    "@intlify/core-base" "11.1.2"
-    "@intlify/shared" "11.1.2"
-    "@vue/devtools-api" "^6.5.0"
-
-vue-i18n@^11.1.3:
-  version "11.1.3"
-  resolved "https://registry.yarnpkg.com/vue-i18n/-/vue-i18n-11.1.3.tgz#831f622ef0a73993e6f08d953e5a3bde9bae3484"
-  integrity sha512-Pcylh9z9S5+CJAqgbRZ3EKxFIBIrtY5YUppU722GIT65+Nukm0TCqiQegZnNLCZkXGthxe0cpqj0AoM51H+6Gw==
-  dependencies:
-    "@intlify/core-base" "11.1.3"
-    "@intlify/shared" "11.1.3"
+    "@intlify/core-base" "11.1.10"
+    "@intlify/shared" "11.1.10"
     "@vue/devtools-api" "^6.5.0"
 
 vue-resize@^2.0.0-alpha.1:
@@ -4041,6 +4005,11 @@ xmlchars@^2.2.0:
   version "2.2.0"
   resolved "https://registry.yarnpkg.com/xmlchars/-/xmlchars-2.2.0.tgz#060fe1bcb7f9c76fe2a17db86a9bc3ab894210cb"
   integrity sha512-JZnDKK8B0RCDw84FNdDAIpZK+JuJw+s7Lz8nksI7SIuU3UXJJslUthsi+uWBUYOwPFwW7W7PRLRfUKpxjtjFCw==
+
+yarn@^1.22.22:
+  version "1.22.22"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.22.22.tgz#ac34549e6aa8e7ead463a7407e1c7390f61a6610"
+  integrity sha512-prL3kGtyG7o9Z9Sv8IPfBNrWTDmXB4Qbes8A9rEzt6wkJV8mUvoirjU0Mp3GGAU06Y0XQyA3/2/RQFVuK7MTfg==
 
 yocto-queue@^0.1.0:
   version "0.1.0"
