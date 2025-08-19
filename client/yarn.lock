@@ -13,11 +13,14 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@assemblyvoting/electa-ui@^5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.0.3.tgz#aaccf623e60efb4aa1385aeb44769a416e65c2f6"
-  integrity sha512-YlYNO0ZuBXLXVfxZFdJk5X+K3wdA3KdJnXzRa0tKf+mAoSWTSk5PL6ZPAA4Cj3NHXfCswze4dH/rTl/bzsa1iQ==
+"@assemblyvoting/electa-ui@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.1.0.tgz#5b8a7d516e655748e1388399e98dabd65402d2e0"
+  integrity sha512-Wouv3fxiSJkMgmroacSMh6xkI78/EJTIZgNf+xfAYnW42+Gb518Ajj5QuYsSS4Qi/4wy2KuYoWh11oLuZL3FLA==
   dependencies:
+    "@fontsource/open-sans" "^5.2.6"
+    "@fontsource/pt-mono" "^5.2.6"
+    "@fontsource/rubik" "^5.2.6"
     "@fortawesome/fontawesome-svg-core" "^6.7.2"
     "@fortawesome/free-brands-svg-icons" "^6.7.2"
     "@fortawesome/free-solid-svg-icons" "^6.7.2"
@@ -278,6 +281,21 @@
   version "0.2.9"
   resolved "https://registry.yarnpkg.com/@floating-ui/utils/-/utils-0.2.9.tgz#50dea3616bc8191fb8e112283b49eaff03e78429"
   integrity sha512-MDWhGtE+eHw5JW7lq4qhc5yRLS11ERl1c7Z6Xd0a58DozHES6EnNNwUWbMiG4J9Cgj053Bhk8zvlhFYKVhULwg==
+
+"@fontsource/open-sans@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/open-sans/-/open-sans-5.2.6.tgz#e3f4db69f294426ac22c9a7dd2118c2b26ea5992"
+  integrity sha512-mnfnUmBWQ+J220gqbibbzmKcc1kawV+lb3/Pspzu+Opnxza12oUffIg0ufG8g+3j1fnSznEWgyNV40MjtmJj6g==
+
+"@fontsource/pt-mono@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/pt-mono/-/pt-mono-5.2.6.tgz#c68390597525838703aaa2e5bebb3e5d66b3eb70"
+  integrity sha512-GvbqJLD3UQTjTXOCt5nFDj96hNY14OmgjJpMdtxZwvtwLmKAgxET+/2SNUC2lw+SrSyTF6mUM9owmNv0E/s0+Q==
+
+"@fontsource/rubik@^5.2.6":
+  version "5.2.6"
+  resolved "https://registry.yarnpkg.com/@fontsource/rubik/-/rubik-5.2.6.tgz#b4d9ae06a36abf46108c6132e64f994c1bcf667a"
+  integrity sha512-KNY87CIXAzmKMfL8gnQV0nbePn9g/kG3tF4GJoUEASSz+ECFWYoPir8TSySblYfXTInDL/kHJm6CMrrEW/U/ZA==
 
 "@fortawesome/fontawesome-common-types@6.7.2":
   version "6.7.2"
