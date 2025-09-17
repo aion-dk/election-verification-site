@@ -13,10 +13,10 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@assemblyvoting/electa-ui@^5.1.0":
-  version "5.1.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.1.0.tgz#5b8a7d516e655748e1388399e98dabd65402d2e0"
-  integrity sha512-Wouv3fxiSJkMgmroacSMh6xkI78/EJTIZgNf+xfAYnW42+Gb518Ajj5QuYsSS4Qi/4wy2KuYoWh11oLuZL3FLA==
+"@assemblyvoting/electa-ui@^5.2.0":
+  version "5.2.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.2.0.tgz#3722515794128a0026ea4ee2142193cfb45bddbb"
+  integrity sha512-DVR2gkmAcSihdTAbah6eE1JpHW2OvsJGkKpGNB8HxifVYuft8ifhjbKQ1fCc7bcZ+OR9hkPH0tbppbjzw5qlaw==
   dependencies:
     "@fontsource/open-sans" "^5.2.6"
     "@fontsource/pt-mono" "^5.2.6"
