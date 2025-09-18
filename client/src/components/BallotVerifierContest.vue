@@ -15,6 +15,7 @@
         :pile-index="pileIndex"
         :total-piles="contestSelection.piles.length"
         :gallery-mode="contest.mode === 'gallery'"
+        :show-options-description="contest.displayDescriptionOnSummary"
         style="z-index: 90"
         active-state="summary"
       />

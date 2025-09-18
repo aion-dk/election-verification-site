@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@aion-dk/js-client@^4.4.5":
-  version "4.4.5"
-  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.5.tgz#c60e850a9826620cd80324b5ed1bf96a2e95e8ad"
-  integrity sha512-2UelxdPVEZLKa5v/8HUzBqOsW6EuMQGLKj6N8Szc9hS68Wr5mwh2wBBVTYTO8pj2V3dlamYcMYmDpzkzpkEvCw==
+"@aion-dk/js-client@^4.4.10":
+  version "4.4.10"
+  resolved "https://registry.yarnpkg.com/@aion-dk/js-client/-/js-client-4.4.10.tgz#79b5cd1203a705dca040c02b653e9bbf255f3c00"
+  integrity sha512-FLIdCw3BxmbCXxWW+MeATPNAOkUx3JpyaS504F9FMlsYWgip2HWZu3yHfDRwgjy4ubFQzYrAcUEIk5Vmrh7a5g==
   dependencies:
     axios "^1.7.9"
     base-x "^5.0.0"
@@ -13,10 +13,10 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@assemblyvoting/electa-ui@^5.2.0":
-  version "5.2.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.2.0.tgz#3722515794128a0026ea4ee2142193cfb45bddbb"
-  integrity sha512-DVR2gkmAcSihdTAbah6eE1JpHW2OvsJGkKpGNB8HxifVYuft8ifhjbKQ1fCc7bcZ+OR9hkPH0tbppbjzw5qlaw==
+"@assemblyvoting/electa-ui@^5.2.2":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.2.2.tgz#ba0e46fac4f43f064b9e9196a967a489cffd4ae8"
+  integrity sha512-/5sJbOTCHiLrWtm7nqE4dsjstky/VkCcaph2Mv6R7v2tJfiGSAK6V0B5n8+99BYuEWUjRHzDhXrJRrS0zxPK7Q==
   dependencies:
     "@fontsource/open-sans" "^5.2.6"
     "@fontsource/pt-mono" "^5.2.6"
