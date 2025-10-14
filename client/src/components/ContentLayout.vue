@@ -29,7 +29,11 @@ defineProps({
         <slot name="action" />
       </div>
     </section>
-    <aside class="ContentLayout__Help" tabindex="0" :aria-label="$t('accessibility.help')">
+    <aside
+      class="ContentLayout__Help"
+      tabindex="0"
+      :aria-label="$t('accessibility.help')"
+    >
       <h5 class="ContentLayout__Help_Title">
         {{ helpTitle }}<strong>{{ helpTitleStrong }}</strong>
       </h5>
