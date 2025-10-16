@@ -112,14 +112,14 @@ const button = computed(() => {
       <div class="TrackingLanding__Action_Container">
         <div class="TrackingLanding__ActionItem">
           <div class="mb-3 w-100">
-            <label for="receipt-file" class="form-label">
+            <p class="form-label">
               {{ $t("views.tracking.receipt_input_label") }}
               <AVIcon
                 icon="circle-question"
                 class="text-gray-600 cursor-help"
                 v-tooltip="$t('views.tracking.receipt_input_tooltip')"
               />
-            </label>
+            </p>
             <AVFileInput
               id="receipt-file"
               accept=".pdf"

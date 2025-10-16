@@ -68,7 +68,10 @@ onMounted(() => {
       <h2 class="HelpView__Title">{{ $t("views.faq.title") }}</h2>
       <p class="HelpView__Description">{{ $t("views.faq.description") }}</p>
 
-      <nav class="HelpView__Category_Navigation">
+      <nav
+        class="HelpView__Category_Navigation"
+        :aria-label="$t('accessibility.faq_navigation')"
+      >
         <button
           :class="{
             HelpView__Category_Button: true,

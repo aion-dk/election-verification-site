@@ -86,6 +86,7 @@ onBeforeUnmount(() => {
 
     <nav
       class="Header__Links"
+      :aria-label="$t('accessibility.main_navigation')"
       :class="{
         Header__Show: !isMenuOpened,
       }"
