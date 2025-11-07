@@ -28,10 +28,10 @@
     vue "^3.5.13"
     vue-i18n "^11.1.10"
 
-"@assemblyvoting/js-client@5.0.0-rc.3":
-  version "5.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.0.0-rc.3.tgz#9ed0738c70025e9d7b9b5ef29a6ccc57987c6d68"
-  integrity sha512-S9JCk2ivr/B9R61D/H5VoV1unErtwi9S4OWdVL1yuQhj+t+DLo2yUtaCilF3F8V57cIe0e1W48hxeO8OPm6EGQ==
+"@assemblyvoting/js-client@5.0.0-rc.4":
+  version "5.0.0-rc.4"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.0.0-rc.4.tgz#cf8f27e718b824216db4674f0c9ad8199fc0db86"
+  integrity sha512-JA1jaQnE/BnudwjUiheN/45sCJCY3zmICnhIptR7E8cyVqmTds7ZFdSe9PW5yS/8Z4h3NWloYg1f/EHUw23D0w==
   dependencies:
     "@assemblyvoting/av-crypto" "~1.1.0"
     axios "^1.7.9"
