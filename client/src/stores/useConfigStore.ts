@@ -5,7 +5,7 @@ import type { Election, ElectionStatus, FullOptionContent } from "@/Types";
 import type {
   ContestContent,
   LatestConfigItems,
-} from "@aion-dk/js-client/dist/lib/av_client/types";
+} from "@assemblyvoting/js-client/dist/lib/av_client/types";
 
 export default defineStore("useConfigStore", () => {
   const boardSlug = ref<string>(null);
