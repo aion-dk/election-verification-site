@@ -23,10 +23,10 @@ export class ReceiptPDFExtractor {
           const infoDict = pdfDoc.context.lookup(infoRef) as PDFDict;
 
           const receipt = infoDict.lookup(
-            PDFName.of("Receipt")
+            PDFName.of("Receipt"),
           ) as PDFHexString;
           const trackingCode = infoDict.lookup(
-            PDFName.of("TrackingCode")
+            PDFName.of("TrackingCode"),
           ) as PDFHexString;
 
           if (receipt == null || trackingCode == null) {

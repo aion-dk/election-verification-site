@@ -1,6 +1,7 @@
 import { createI18n } from "vue-i18n";
 import { nextTick } from "vue";
 import type { Locale, DefineLocaleMessage } from "vue-i18n";
+import { offlineMessages } from "@/assets/translations";
 
 let locale: Locale = "en";
 const rtlLanguages: Locale[] = [
@@ -22,6 +23,7 @@ const i18n = createI18n({
   locale: locale,
   fallbackLocale: "en",
   warnHtmlInMessage: "off",
+  messages: offlineMessages,
 });
 
 export function setLocale(locale: Locale) {

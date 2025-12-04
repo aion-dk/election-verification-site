@@ -68,7 +68,10 @@ onMounted(() => {
       <h2 class="HelpView__Title">{{ $t("views.faq.title") }}</h2>
       <p class="HelpView__Description">{{ $t("views.faq.description") }}</p>
 
-      <nav class="HelpView__Category_Navigation">
+      <nav
+        class="HelpView__Category_Navigation"
+        :aria-label="$t('accessibility.faq_navigation')"
+      >
         <button
           :class="{
             HelpView__Category_Button: true,
@@ -148,7 +151,7 @@ onMounted(() => {
           </template>
 
           <template v-slot:expanded>
-            <h3 class="HelpView__FAQ_Title">{{ question.title }}</h3>
+            <h3 class="HelpView__FAQ_Title mb-3">{{ question.title }}</h3>
             <p
               v-for="(p, i) in question.paragraphs"
               :key="`${i}-${p}`"
@@ -178,13 +181,13 @@ onMounted(() => {
 .HelpView__Title {
   font-size: 2.5rem;
   font-weight: 600;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
 }
 
 .HelpView__Description {
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   margin: 0 0 1.5rem 0;
   text-align: center;
 }
@@ -221,7 +224,7 @@ onMounted(() => {
 
 .HelpView__Category_Button:hover:not(.HelpView__Category_Button_Active)
   > .HelpView__Category_Icon {
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
 }
 
 .HelpView__Category_Button:last-of-type {
@@ -229,21 +232,21 @@ onMounted(() => {
 }
 
 .HelpView__Category_Icon {
-  color: var(--slate-600);
+  color: var(--bs-gray-600);
   width: 2rem;
   height: 2rem;
   margin: 0 1rem 0 0;
 }
 
 .HelpView__Category_Label {
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   font-size: 1.25rem;
 }
 
 .HelpView__Divider {
   width: 100%;
   height: 2px;
-  background-color: var(--slate-300);
+  background-color: var(--bs-gray-300);
   margin: 2rem 0;
 }
 
@@ -262,13 +265,13 @@ onMounted(() => {
 .HelpView__FAQ_Title {
   margin: 0;
   padding: 0 2rem 0 0;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   font-weight: 600;
   font-size: 1.125rem;
 }
 
 .HelpView__FAQ_Text {
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
 }
 
 .HelpView__FAQ_Text:last-of-type {

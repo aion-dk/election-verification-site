@@ -13,7 +13,7 @@ const contactUrl = computed(
   () =>
     configStore.electionStatus?.electionVerificationSite?.contactUrl[
       i18n.global.locale
-    ] || null
+    ] || null,
 );
 
 const props = defineProps({
@@ -66,7 +66,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <AVNavbar class="Header__Navbar_Overrides">
+  <div class="Header__Navbar">
     <RouterLink
       class="Header__Election_Info"
       :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}`"
@@ -74,7 +74,6 @@ onBeforeUnmount(() => {
       <img
         v-if="configStore.electionStatus?.theme?.logo"
         class="Header__Logo"
-        aria-hidden="true"
         :src="configStore.electionStatus?.theme?.logo"
         :alt="$t('header.election_logo_alt')"
         loading="lazy"
@@ -85,15 +84,16 @@ onBeforeUnmount(() => {
       </div>
     </RouterLink>
 
-    <div
+    <nav
       class="Header__Links"
+      :aria-label="$t('accessibility.main_navigation')"
       :class="{
         Header__Show: !isMenuOpened,
       }"
     >
       <RouterLink
         class="Header__Link"
-        role="menuitem"
+        activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`"
         @click="toggleMenu(true)"
       >
@@ -102,7 +102,7 @@ onBeforeUnmount(() => {
 
       <RouterLink
         class="Header__Link"
-        role="menuitem"
+        activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`"
         @click="toggleMenu(true)"
       >
@@ -110,8 +110,8 @@ onBeforeUnmount(() => {
       </RouterLink>
 
       <RouterLink
-        role="menuitem"
         class="Header__Link"
+        activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/logs`"
         @click="toggleMenu()"
       >
@@ -119,8 +119,8 @@ onBeforeUnmount(() => {
       </RouterLink>
 
       <RouterLink
-        role="menuitem"
         class="Header__Link"
+        activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/help`"
         @click="toggleMenu()"
       >
@@ -129,7 +129,6 @@ onBeforeUnmount(() => {
 
       <a
         v-if="contactUrl"
-        role="menuitem"
         class="Header__Link"
         :href="contactUrl"
         target="_blank"
@@ -143,35 +142,35 @@ onBeforeUnmount(() => {
         :options="availableLocales"
         @change="(value) => setLocale(value)"
       />
+    </nav>
+
+    <div class="Header__Hamburger_Btn">
+      <AVAnimatedMenuButton
+        variant="cross"
+        theme="light"
+        class="bg-white"
+        v-model:is-opened="isMenuOpened"
+      />
     </div>
-    <button
-      class="Header__Hamburger_Btn"
-      :aria-label="
-        isMenuOpened
-          ? $t('header.close_menu_aria_label')
-          : $t('header.open_menu_aria_label')
-      "
-      @click="toggleMenu()"
-    >
-      <AVIcon
-        v-if="isMenuOpened"
-        icon="xmark"
-        class="Header__Hamburger_Icon"
-        aria-hidden="true"
-      />
-      <AVIcon
-        v-else
-        icon="bars"
-        class="Header__Hamburger_Icon"
-        aria-hidden="true"
-      />
-    </button>
-  </AVNavbar>
+  </div>
 </template>
 
 <style type="text/css" scoped>
-.Header__Navbar_Overrides {
-  padding-left: 1.5rem !important;
+.Header__Navbar {
+  padding-right: 1.5rem;
+  padding-left: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 50;
+  background-color: white;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 70px;
+  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.15);
 }
 
 .Header__Election_Info {
@@ -195,24 +194,16 @@ onBeforeUnmount(() => {
   font-weight: 600;
   font-size: 1.2rem;
   line-height: 1.25rem;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
 }
 
 .Header__Subtitle {
   font-size: 1rem;
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
 }
 
 .Header__Hamburger_Btn {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: none;
-  background: none;
-  font-size: 1.5rem;
-  width: 50px;
-  height: 50px;
-  color: var(--slate-800);
+  display: block;
 }
 
 .Header__Link {
@@ -220,17 +211,22 @@ onBeforeUnmount(() => {
   font-size: 1.125rem;
   font-weight: 400;
   text-decoration: none;
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
+
+  &.active {
+    font-weight: 600;
+    color: var(--bs-gray-800);
+  }
 }
 
 .Header__Link:hover {
-  color: var(--slate-900);
+  color: var(--bs-gray-900);
 }
 
 .Header__Locales {
   font-size: 1.125rem;
   font-weight: 400;
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   border: none;
   background-color: white;
 }
@@ -244,7 +240,7 @@ html[dir="rtl"] .Header__Locales {
 }
 
 .Header__Locales:hover {
-  color: var(--slate-900);
+  color: var(--bs-gray-900);
 }
 
 .Header__Links {
@@ -335,11 +331,11 @@ html[dir="rtl"] .Header__Locales {
   }
 
   .Header__Link:hover {
-    color: var(--slate-900);
+    color: var(--bs-gray-900);
   }
 
   .Header__Locales:hover {
-    color: var(--slate-900);
+    color: var(--bs-gray-900);
   }
 }
 </style>

@@ -1,5 +1,212 @@
 import type { SpreadableDLM } from "../Types";
 
+export const offlineMessages: SpreadableDLM = {
+  ar: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "جاري التحميل...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "انتقل إلى المحتوى الرئيسي",
+      },
+    },
+  },
+  ca: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Carregant...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Vés al contingut principal",
+      },
+    },
+  },
+  cy: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Wrthi'n llwytho...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Neidio i'r prif gynnwys",
+      },
+    },
+  },
+  da: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Indlæser...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Spring til hovedindhold",
+      },
+    },
+  },
+  de: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Wird geladen...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Zum Hauptinhalt springen",
+      },
+    },
+  },
+  en: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Loading...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Skip to main content",
+      },
+    },
+  },
+  es: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Cargando...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Ir al contenido principal",
+      },
+    },
+  },
+  fi: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Ladataan...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Siirry pääsisältöön",
+      },
+    },
+  },
+  fr: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Chargement en cours…",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Accéder au contenu principal",
+      },
+    },
+  },
+  is: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Hleður...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Fara í aðalefni",
+      },
+    },
+  },
+  it: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Caricamento in corso...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Vai al contenuto principale",
+      },
+    },
+  },
+  nl: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Bezig met laden...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Ga naar de hoofdinhoud",
+      },
+    },
+  },
+  pl: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Ładowanie...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Przejdź do treści głównej",
+      },
+    },
+  },
+  pt: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Carregando...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Ir para o conteúdo principal",
+      },
+    },
+  },
+  ro: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Încărcare...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Treci la conținutul principal",
+      },
+    },
+  },
+  ru: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Загрузка...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Перейти к основному содержанию",
+      },
+    },
+  },
+  sv: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Belastning...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Hoppa till huvudinnehållet",
+      },
+    },
+  },
+};
+
 export const fallbackMessages: SpreadableDLM = {
   en: {
     locales: {
@@ -39,12 +246,10 @@ export const fallbackMessages: SpreadableDLM = {
         de: "Auf Deutsch umstellen",
       },
       election_logo_alt: "Election logo",
-      open_menu_aria_label: "Open menu",
-      close_menu_aria_label: "Close menu",
     },
     footer: {
-      technology_by: "Technology by",
-      av_img_alt: "Assembly Voting Logo",
+      powered_by: "Powered by",
+      av_img_alt: "Lumi global logo",
     },
     components: {
       board_item: {
@@ -219,10 +424,10 @@ export const fallbackMessages: SpreadableDLM = {
       },
       tracked_ballot_manager: {
         currently_tracking: "You are currently tracking",
-        cancel_cross_label: "Cancel tracking %{trackingCode}",
+        cancel_cross_label: "Cancel tracking {trackingCode}",
       },
       timedown: {
-        expire_text: "The passkey will expire in %{time}",
+        expire_text: "The passkey will expire in {time}",
         alert: {
           title: "You are running out of time.",
           text: "Please confirm the passkeys match on the voting page before your session expires. If your session expires, you will need to re-seal your ballot and start over with a new testing code.",
@@ -603,8 +808,6 @@ export const fallbackMessages: SpreadableDLM = {
         de: "Auf Deutsch umstellen",
       },
       election_logo_alt: "Logo de la elección",
-      open_menu_aria_label: "Abrir menú",
-      close_menu_aria_label: "Cerrar menú",
     },
   },
 };

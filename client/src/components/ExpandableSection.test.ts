@@ -7,17 +7,22 @@ const slots = {
   collapsed: "Collapsed text",
   expanded: "Expanded text",
 };
-const options = { props, slots };
+const global = {
+  stubs: {
+    AVIcon: {
+      template: "<span />",
+    },
+  },
+};
+const options = { props, slots, global };
 
 test("displays the collapsed text", async () => {
-  // @ts-ignore
   const wrapper = mount(ExpandableSection, options);
   expect(wrapper.text()).toContain("Collapsed text");
 });
 
 test("displays the expanded text", async () => {
   props.expanded = true;
-  // @ts-ignore
   const wrapper = mount(ExpandableSection, options);
   expect(wrapper.text()).toContain("Expanded text");
 });

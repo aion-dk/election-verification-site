@@ -1,7 +1,7 @@
 <script setup lang="ts">
 defineProps({
   trackingCode: {
-    type: String,
+    type: [String, null],
     required: true,
   },
 });
@@ -16,7 +16,9 @@ const cancel = () => {
 <template>
   <div class="BallotManager">
     <div class="BallotManager__Tracking_Container">
-      <code class="BallotManager__Tracking_Code">{{ trackingCode }}</code>
+      <code class="BallotManager__Tracking_Code" id="current-tracking-code">{{
+        trackingCode
+      }}</code>
       <button
         class="BallotManager__Cancel"
         @click="cancel"
@@ -58,6 +60,7 @@ const cancel = () => {
 }
 
 .BallotManager__Tracking_Code {
+  color: var(--bs-gray-800);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -65,14 +68,14 @@ const cancel = () => {
 }
 
 .BallotManager__Tracking_Icon {
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   width: 0.75rem;
   height: 0.75rem;
 }
 
 .BallotManager__Tracking_Text {
   font-size: 0.6rem;
-  color: var(--slate-700);
+  color: var(--bs-gray-700);
   margin: 0;
 }
 
@@ -83,7 +86,7 @@ const cancel = () => {
 }
 
 .BallotManager__Tracking_Line {
-  border-bottom: 2px solid var(--slate-700);
+  border-bottom: 2px solid var(--bs-gray-700);
   border-radius: 99px;
   width: 100%;
   margin: 0.25rem 0 0 0;

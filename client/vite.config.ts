@@ -1,4 +1,4 @@
-import { fileURLToPath, URL } from "node:url";
+import { resolve } from "path";
 
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
@@ -11,7 +11,11 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      "@": fileURLToPath(new URL("./src", import.meta.url)),
+      "@": resolve("src"),
+      vue: resolve("node_modules/vue"),
+      bootstrap: resolve(
+        "node_modules/@assemblyvoting/electa-ui/dist/src/bootstrap",
+      ),
     },
   },
   server: {

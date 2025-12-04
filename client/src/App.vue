@@ -27,7 +27,7 @@ onMounted(async () => {
   if (route.params.trackingCode) {
     await ballotStore.loadBallot(
       route.params.trackingCode.toString(),
-      configStore.boardSlug
+      configStore.boardSlug,
     );
   }
 
@@ -37,7 +37,7 @@ onMounted(async () => {
 function updateLocale(newLocale: Locale) {
   const newUrl = route.fullPath.replace(
     `/${i18n.global.locale}/`,
-    `/${newLocale}/`
+    `/${newLocale}/`,
   );
 
   router.replace(newUrl);
@@ -46,20 +46,21 @@ function updateLocale(newLocale: Locale) {
 }
 
 function setTitle() {
+  const siteTitle = i18n.global.messages[i18n.global.locale].site_title;
   const title = [
     configStore.election.title[i18n.global.locale],
-    "Verification Site",
+    siteTitle,
   ].filter((s) => s);
   if (window.top) window.top.document.title = title.join(" - ");
 }
 
 const setConfigurations = async (
   organisationSlug: string,
-  electionSlug: string
+  electionSlug: string,
 ) => {
   const { conferenceClient } = useConferenceConnector(
     organisationSlug,
-    electionSlug
+    electionSlug,
   );
   configStore.setBoardSlug((await conferenceClient.getStatus()).boardSlug);
   await configStore.loadConfig();
@@ -68,23 +69,23 @@ const setConfigurations = async (
 };
 
 const setLanguage = async (conferenceClient: any) => {
-  let browserLocale: Locale = navigator.languages.find((locale: Locale) =>
-    i18n.global.availableLocales.includes(locale)
+  const browserLocale: Locale = navigator.languages.find((locale: Locale) =>
+    i18n.global.availableLocales.includes(locale),
   );
 
   if (browserLocale) setLocale(browserLocale);
 
-  let paramLocale = router.currentRoute.value.params.locale?.toString();
+  const paramLocale = router.currentRoute.value.params.locale?.toString();
 
   if (configStore.election.locales) {
-    let preferredLocale = configStore.election.locales.includes(paramLocale)
+    const preferredLocale = configStore.election.locales.includes(paramLocale)
       ? paramLocale
       : null;
-    let browserLocale = navigator.languages.find((locale) =>
-      configStore.election.locales.includes(locale)
+    const browserLocale = navigator.languages.find((locale) =>
+      configStore.election.locales.includes(locale),
     );
     setLocale(
-      preferredLocale || browserLocale || configStore.election.locales[0]
+      preferredLocale || browserLocale || configStore.election.locales[0],
     );
 
     for (let i = 0; i < configStore.election.locales.length; i++) {
@@ -121,7 +122,7 @@ const setTheme = async (conferenceClient: any) => {
         .catch((err: Error) => {
           console.error(err);
           themeStylingTag.innerHTML = defaultTheme;
-        })
+        }),
     );
     document.head.appendChild(themeStylingTag);
   }
@@ -130,10 +131,12 @@ const setTheme = async (conferenceClient: any) => {
 
 <template>
   <div v-if="!isLoaded" class="DBAS__Loading_Page">
-    <AVSpinner size="xlarge" color="neutral" />
+    <AVSpinner size="lg" color="dark" />
   </div>
   <div class="DBAS" v-if="isLoaded">
-    <a href="#main" class="DBAS_SkipToContentLink">Skip to main content</a>
+    <a href="#main_content" class="visually-hidden-focusable">
+      {{ $t("js.accessibility.skip_to_content") }}
+    </a>
 
     <Header
       :election="configStore.election"
@@ -141,7 +144,7 @@ const setTheme = async (conferenceClient: any) => {
       :locale="$i18n.locale"
       @changeLocale="updateLocale"
     />
-    <main class="DBAS__Content" id="main">
+    <main class="DBAS__Content">
       <RouterView
         :key="`${route.fullPath}-${configStore.pageRefreshIterator}`"
       />
@@ -156,17 +159,6 @@ const setTheme = async (conferenceClient: any) => {
 }
 
 body {
-  /* Neutral colors from AV design system */
-  --slate-100: #f7f7f7;
-  --slate-200: #e9ecef;
-  --slate-300: #dee2e6;
-  --slate-400: #ced4da;
-  --slate-500: #adb5bd;
-  --slate-600: #6c757d;
-  --slate-700: #495057;
-  --slate-800: #343a40;
-  --slate-900: #212529;
-
   font-family: "Open Sans", sans-serif;
   overflow: hidden;
   padding: 0;
@@ -199,21 +191,11 @@ body {
 
 .popper-content-wrapper {
   max-width: 25rem;
-  --vue-popper-bg: var(--slate-800);
+  --vue-popper-bg: var(--bs-gray-800);
   --vue-popper-padding: 1rem;
   --vue-popper-text-color: white;
   --vue-popper-border-radius: 0px;
   --vue-popper-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.15);
-}
-
-.DBAS_SkipToContentLink {
-  position: absolute;
-  margin-top: -6rem;
-}
-
-.DBAS_SkipToContentLink:focus {
-  margin-top: 6rem;
-  margin-left: 2rem;
 }
 
 @media only screen and (min-width: 80rem) {

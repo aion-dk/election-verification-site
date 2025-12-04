@@ -9,7 +9,7 @@ See also the DEV-GUIDELINES.md file for more details about the application struc
 To build the application for production, run the following command:
 
 ```bash
-npm run build
+yarn build
 ```
 
 Then serve the resulting `dist` folder in a static file server such as NGINX.

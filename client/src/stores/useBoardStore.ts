@@ -1,4 +1,4 @@
-import type { LatestConfigurationConfig } from "@aion-dk/js-client/dist/lib/av_client/types";
+import type { LatestConfigurationConfig } from "@assemblyvoting/js-client/dist/lib/av_client/types";
 import { defineStore } from "pinia";
 import { ref, reactive } from "vue";
 import { api } from "@/lib/api";

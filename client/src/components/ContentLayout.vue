@@ -21,7 +21,7 @@ defineProps({
 
 <template>
   <div class="ContentLayout">
-    <section class="ContentLayout__Action">
+    <section id="main_content" class="ContentLayout__Action">
       <p v-if="breadcrumb" class="ContentLayout__Breadcrumb">
         {{ breadcrumb }}
       </p>
@@ -29,7 +29,11 @@ defineProps({
         <slot name="action" />
       </div>
     </section>
-    <aside class="ContentLayout__Help">
+    <aside
+      class="ContentLayout__Help"
+      tabindex="0"
+      :aria-label="$t('accessibility.help')"
+    >
       <h5 class="ContentLayout__Help_Title">
         {{ helpTitle }}<strong>{{ helpTitleStrong }}</strong>
       </h5>
@@ -58,7 +62,7 @@ defineProps({
   flex-direction: column;
   align-items: center;
   overflow-y: auto;
-  background-color: var(--slate-100);
+  background-color: var(--bs-gray-100);
   padding: 1rem 1rem 3rem 1rem;
 }
 
@@ -93,7 +97,7 @@ defineProps({
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: var(--slate-100);
+  background-color: var(--bs-gray-100);
 }
 
 .ContentLayout__Help_Container {

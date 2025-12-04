@@ -15,14 +15,14 @@ const route = useRoute();
 const steps = [1, 2];
 
 const translationPath = computed(() =>
-  receiptStore.receiptValid ? "vote_not_found" : "receipt_invalid"
+  receiptStore.receiptValid ? "vote_not_found" : "receipt_invalid",
 );
 
 const contactUrl = computed(
   () =>
     configStore.electionStatus?.electionVerificationSite?.contactUrl[
       i18n.global.locale
-    ] || null
+    ] || null,
 );
 
 const navigate = (url: string, external = false) =>
@@ -36,10 +36,10 @@ const buttons = computed(() => {
         !receiptStore.receiptValid ||
         (receiptStore.receiptValid && contactUrl.value)
           ? i18n.global.t(
-              `views.receipt_error.${translationPath.value}.primary_action`
+              `views.receipt_error.${translationPath.value}.primary_action`,
             )
           : i18n.global.t(
-              `views.receipt_error.${translationPath.value}.secondary_action`
+              `views.receipt_error.${translationPath.value}.secondary_action`,
             ),
       url: receiptStore.receiptValid
         ? contactUrl.value
@@ -52,7 +52,7 @@ const buttons = computed(() => {
         !receiptStore.receiptValid ||
         (receiptStore.receiptValid && contactUrl.value),
       label: i18n.global.t(
-        `views.receipt_error.${translationPath.value}.secondary_action`
+        `views.receipt_error.${translationPath.value}.secondary_action`,
       ),
       url: `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`,
     },
@@ -76,26 +76,28 @@ const buttons = computed(() => {
 
       <Error :errorPath="`receipt.${translationPath}`" />
       <div class="ReceiptError__Buttons">
-        <AVButton
+        <button
           v-if="buttons.primary.visible"
-          type="primary"
-          :label="buttons.primary.label"
-          class="ReceiptError__Button_Overrides ReceiptError__Primary_Button_Overrides"
+          class="btn btn-theme w-100 rounded-3 ReceiptError__Button"
+          type="button"
           @click="
             navigate(
               buttons.primary.url,
-              receiptStore.receiptValid && contactUrl
+              receiptStore.receiptValid && contactUrl,
             )
           "
-        />
+        >
+          {{ buttons.primary.label }}
+        </button>
 
-        <AVButton
+        <button
           v-if="buttons.secondary.visible"
-          type="secondary"
-          :label="buttons.secondary.label"
-          class="ReceiptError__Button_Overrides ReceiptError__Secondary_Button_Overrides"
+          class="btn btn-theme-outline w-100 rounded-3 ReceiptError__Button"
+          type="button"
           @click="navigate(buttons.secondary.url)"
-        />
+        >
+          {{ buttons.secondary.label }}
+        </button>
       </div>
     </template>
 
@@ -119,7 +121,7 @@ const buttons = computed(() => {
 .ReceiptError__Title {
   font-size: 2.5rem;
   font-weight: 600;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   margin: 0.5rem 0 1rem 0;
   text-align: center;
 }
@@ -129,13 +131,6 @@ const buttons = computed(() => {
   display: flex;
   flex-direction: column;
   gap: 1rem;
-}
-
-.ReceiptError__Primary_Button_Overrides {
-  width: 100%;
-  background-color: var(--av-theme-background) !important;
-  border-color: var(--av-theme-background) !important;
-  color: var(--av-theme-text) !important;
 }
 
 .ReceiptError__Secondary_Button_Overrides {
@@ -180,7 +175,7 @@ const buttons = computed(() => {
     text-align: left;
   }
 
-  .ReceiptError__Button_Overrides {
+  .ReceiptError__Button {
     font-size: 1.125rem !important;
     padding: 0.75rem 2.75rem !important;
     border-radius: 14px !important;

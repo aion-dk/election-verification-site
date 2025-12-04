@@ -4,8 +4,8 @@ import avlogo from "../assets/avlogo.svg";
 
 <template>
   <footer class="Footer">
-    <span class="Footer__Text">{{ $t("footer.technology_by") }}</span>
-    <a href="https://assemblyvoting.com" target="_blank">
+    <span class="Footer__Text">{{ $t("footer.powered_by") }}</span>
+    <a href="https://www.lumiglobal.com/" target="_blank">
       <img
         class="Footer__Image"
         :src="avlogo"
@@ -18,8 +18,8 @@ import avlogo from "../assets/avlogo.svg";
 
 <style type="text/css" scoped>
 .Footer {
-  background-color: rgba(30, 41, 59, 0.7);
-  backdrop-filter: blur(2px);
+  background: rgba(var(--bs-primary-rgb), 0.85);
+  backdrop-filter: blur(4px);
   width: 100vw;
   height: 3rem;
   position: fixed;

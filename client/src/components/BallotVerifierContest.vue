@@ -14,6 +14,9 @@
         :selection-pile="selectionPile"
         :pile-index="pileIndex"
         :total-piles="contestSelection.piles.length"
+        :gallery-mode="contest.mode === 'gallery'"
+        :show-options-description="contest.displayDescriptionOnSummary"
+        style="z-index: 90"
         active-state="summary"
       />
     </div>
@@ -24,7 +27,7 @@
 import useConfigStore from "@/stores/useConfigStore";
 import type { PropType } from "vue";
 import { defineComponent } from "vue";
-import type { ContestSelection } from "@aion-dk/js-client/dist/lib/av_client/types";
+import type { ContestSelection } from "@assemblyvoting/js-client/dist/lib/av_client/types";
 import type { FullContestContent } from "@/Types";
 
 export default defineComponent({
@@ -50,7 +53,7 @@ export default defineComponent({
 .BallotVerifierContest__Title {
   font-size: 1.75rem;
   font-weight: 600;
-  color: var(--slate-800);
+  color: var(--bs-gray-800);
   margin-bottom: 1rem;
   text-align: center;
 }

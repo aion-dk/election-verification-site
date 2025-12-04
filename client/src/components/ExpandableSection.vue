@@ -38,18 +38,18 @@ const toggle = () => {
       <slot name="expanded"></slot>
     </div>
 
-    <button class="ExpandableSection__Expander" :aria-label="_label">
+    <span class="ExpandableSection__Expander" :aria-label="_label">
       <AVIcon v-if="_expanded" icon="minus" aria-hidden="true" />
 
       <AVIcon v-else icon="plus" aria-hidden="true" />
-    </button>
+    </span>
   </div>
 </template>
 
 <style type="text/css" scoped>
 .ExpandableSection {
   display: flex;
-  border: solid 1px var(--slate-200);
+  border: solid 1px var(--bs-gray-200);
   border-radius: 12px;
   padding: 1rem;
   margin-bottom: 0.5rem;
@@ -67,8 +67,8 @@ const toggle = () => {
 
 .ExpandableSection__Expander {
   background-color: white;
-  border: solid 1px var(--slate-600);
-  color: var(--slate-600);
+  border: solid 1px var(--bs-gray-600);
+  color: var(--bs-gray-600);
   border-radius: 99px;
   height: 1.5rem;
   width: 1.5rem;

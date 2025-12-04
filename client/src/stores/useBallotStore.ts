@@ -16,14 +16,14 @@ export default defineStore("useBallotStore", () => {
 
     try {
       const avClient = await useAVClient(boardSlug);
-      const res = await avClient.checkBallotStatus(trackingCode);
+      const res = await avClient.value?.checkBallotStatus(trackingCode);
 
       ballot.value = {
         trackingCode: trackingCode,
         status: res.status,
         activities: (res.activities as any).reverse(),
       };
-    } catch (e) {
+    } catch (_e) {
       console.log("Unable to find ballot", trackingCode);
       resetBallot();
     }

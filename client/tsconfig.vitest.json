@@ -2,8 +2,10 @@
   "extends": "./tsconfig.app.json",
   "exclude": [],
   "compilerOptions": {
-    "ignoreDeprecations": "5.0",
     "lib": [],
+    "module": "ESNext",
+    "target": "ES2015",
+    "moduleResolution": "Node",
     "types": ["node", "jsdom"]
   }
 }

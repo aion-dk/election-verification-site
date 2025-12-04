@@ -21,7 +21,11 @@ defineProps({
 </script>
 
 <template>
-  <select :disabled="disabled" @change="selectEmit">
+  <select
+    :disabled="disabled"
+    :aria-label="$t('header.change_locale.label')"
+    @change="selectEmit"
+  >
     <option
       v-for="option in options"
       :value="option.value"
