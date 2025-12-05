@@ -317,7 +317,7 @@ export const fallbackMessages: SpreadableDLM = {
         ConfigConfirmationItem: {
           type: "Config confirmation",
           author: "Election Official",
-          info: "Election committee has been confirmed prior configuration",
+          info: "Election committee has confirmed prior configuration",
         },
         ContestConfigItem: {
           type: "Contest config",
