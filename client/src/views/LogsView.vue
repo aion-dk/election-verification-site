@@ -14,6 +14,8 @@ const route = useRoute();
 const configStore = useConfigStore();
 const boardStore = useBoardStore();
 const configItemsOnly = ref<boolean>(false);
+const hidePendingItems = ref<boolean>(false);
+const isLoaded = ref<boolean>(false);
 
 const boardLink = computed(() => `${dbbLink.value}/board`);
 
@@ -26,6 +28,7 @@ watch(configStore, () => loadPage(currentPage.value));
 watch(route, () => loadPage(currentPage.value));
 
 watch(configItemsOnly, () => loadPage(1));
+watch(hidePendingItems, () => loadPage(1));
 
 const dbbLink = computed(() => {
   return `${options.baseURL}/${configStore.boardSlug}`;
@@ -39,21 +42,26 @@ const filter = () => {
   if (!configItemsOnly.value) return [];
 
   return [
+    "ElectionCommitteeConfigItem",
     "VoterAuthorizationConfigItem",
     "VotingRoundConfigItem",
     "ThresholdConfigItem",
     "BallotConfigItem",
-    "ContestConfigItem ",
-    "ContestConfigItem ",
-    "SegmentsConfigItem ",
-    "ElectionConfigItem ",
+    "ContestConfigItem",
+    "SegmentsConfigItem",
+    "ElectionConfigItem",
     "GenesisItem",
   ];
 };
 
-const loadPage = (page: number) => {
+const loadPage = async (page: number) => {
   if (configStore.boardSlug) {
-    boardStore.loadPage(configStore.boardSlug, page, filter());
+    await boardStore.loadPage(
+      configStore.boardSlug,
+      page,
+      filter(),
+      hidePendingItems.value,
+    );
   }
 };
 
@@ -73,7 +81,13 @@ const downloadAttachments = () => {
   window.location.href = `${dbbLink.value}/download_attachments`;
 };
 
-onMounted(() => loadPage(currentPage.value));
+onMounted(async () => {
+  try {
+    await loadPage(currentPage.value);
+  } finally {
+    isLoaded.value = true;
+  }
+});
 </script>
 
 <template>
@@ -94,15 +108,28 @@ onMounted(() => loadPage(currentPage.value));
         {{ $t("views.logs.description") }}
       </p>
 
-      <label class="LogsView__Configuration_Only">
-        <input
-          type="checkbox"
-          name="config-items-only"
-          :value="true"
-          v-model="configItemsOnly"
-        />
-        {{ $t("views.logs.config_only") }}
-      </label>
+      <div class="hstack gap-2 align-items-center">
+        <label class="LogsView__Configuration_Only">
+          <input
+            type="checkbox"
+            name="config-items-only"
+            v-model="configItemsOnly"
+          />
+          {{ $t("views.logs.config_only") }}
+        </label>
+
+        <label
+          class="LogsView__Configuration_Only"
+          v-if="configStore.usesElectionCommittee"
+        >
+          <input
+            type="checkbox"
+            name="hide-pending-items"
+            v-model="hidePendingItems"
+          />
+          {{ $t("views.logs.hide_pending_items") }}
+        </label>
+      </div>
 
       <ul class="LogsView__ColumnDescriptions">
         <li class="LogsView__ColumnDescriptions--event">
@@ -126,103 +153,111 @@ onMounted(() => loadPage(currentPage.value));
         </li>
       </ul>
 
-      <BoardItem
-        v-for="(item, key) in boardStore.items"
-        :key="key"
-        :item="item"
-      />
+      <TransitionGroup
+        v-if="isLoaded"
+        tag="div"
+        name="list"
+        class="position-relative w-100"
+      >
+        <BoardItem
+          :item="item"
+          v-for="item in boardStore.items"
+          :key="item.address"
+        />
+        <div key="pagination" class="LogsView__Pagination">
+          <div class="RTL_Rotation">
+            <button
+              :aria-label="$t('views.logs.aria_labels.first_page')"
+              :class="{
+                LogsView__PageLink: true,
+                LogsView__PageLink_Disabled: disableFirst,
+              }"
+              :disabled="disableFirst"
+              @click="navigate(1)"
+            >
+              <div class="LogsView__Icon_Set">
+                <AVIcon icon="chevron-left" aria-hidden="true" />
+                <AVIcon icon="chevron-left" aria-hidden="true" />
+              </div>
+            </button>
 
-      <div class="LogsView__Pagination">
-        <div class="RTL_Rotation">
-          <button
-            :aria-label="$t('views.logs.aria_labels.first_page')"
-            :class="{
-              LogsView__PageLink: true,
-              LogsView__PageLink_Disabled: disableFirst,
-            }"
-            :disabled="disableFirst"
-            @click="navigate(1)"
-          >
-            <div class="LogsView__Icon_Set">
+            <button
+              :aria-label="$t('views.logs.aria_labels.prev_page')"
+              :class="{
+                LogsView__PageLink: true,
+                LogsView__PageLink_Disabled: disableFirst,
+              }"
+              :disabled="disableFirst"
+              @click="navigate(boardStore.meta.prev_page)"
+            >
               <AVIcon icon="chevron-left" aria-hidden="true" />
-              <AVIcon icon="chevron-left" aria-hidden="true" />
-            </div>
-          </button>
+            </button>
+          </div>
 
-          <button
-            :aria-label="$t('views.logs.aria_labels.prev_page')"
-            :class="{
-              LogsView__PageLink: true,
-              LogsView__PageLink_Disabled: disableFirst,
-            }"
-            :disabled="disableFirst"
-            @click="navigate(boardStore.meta.prev_page)"
-          >
-            <AVIcon icon="chevron-left" aria-hidden="true" />
-          </button>
-        </div>
+          <div>
+            <span class="LogsView__PageLink">{{ boardStore.currentPage }}</span>
+            <span class="LogsView__PageLink">/</span>
+            <span class="LogsView__PageLink">{{
+              boardStore.meta.total_pages
+            }}</span>
+          </div>
 
-        <div>
-          <span class="LogsView__PageLink">{{ boardStore.currentPage }}</span>
-          <span class="LogsView__PageLink">/</span>
-          <span class="LogsView__PageLink">{{
-            boardStore.meta.total_pages
-          }}</span>
-        </div>
-
-        <div class="RTL_Rotation">
-          <button
-            :aria-label="$t('views.logs.aria_labels.next_page')"
-            :class="{
-              LogsView__PageLink: true,
-              LogsView__PageLink_Disabled: disableLast,
-            }"
-            :disabled="disableLast"
-            @click="navigate(boardStore.meta.next_page)"
-          >
-            <AVIcon icon="chevron-right" aria-hidden="true" />
-          </button>
-
-          <button
-            :aria-label="$t('views.logs.aria_labels.last_page')"
-            :class="{
-              LogsView__PageLink: true,
-              LogsView__PageLink_Disabled: disableLast,
-            }"
-            :disabled="disableLast"
-            @click="navigate(boardStore.meta.total_pages)"
-          >
-            <div class="LogsView__Icon_Set">
+          <div class="RTL_Rotation">
+            <button
+              :aria-label="$t('views.logs.aria_labels.next_page')"
+              :class="{
+                LogsView__PageLink: true,
+                LogsView__PageLink_Disabled: disableLast,
+              }"
+              :disabled="disableLast"
+              @click="navigate(boardStore.meta.next_page)"
+            >
               <AVIcon icon="chevron-right" aria-hidden="true" />
-              <AVIcon icon="chevron-right" aria-hidden="true" />
-            </div>
-          </button>
+            </button>
+
+            <button
+              :aria-label="$t('views.logs.aria_labels.last_page')"
+              :class="{
+                LogsView__PageLink: true,
+                LogsView__PageLink_Disabled: disableLast,
+              }"
+              :disabled="disableLast"
+              @click="navigate(boardStore.meta.total_pages)"
+            >
+              <div class="LogsView__Icon_Set">
+                <AVIcon icon="chevron-right" aria-hidden="true" />
+                <AVIcon icon="chevron-right" aria-hidden="true" />
+              </div>
+            </button>
+          </div>
         </div>
-      </div>
 
-      <div class="vstack pt-3 gap-2 w-100 align-items-center">
-        <button
-          class="btn btn-sm btn-theme rounded-3 LogsView__Button"
-          type="button"
-          @click="downloadLog"
-        >
-          <AVIcon icon="download" />
-          {{ $t("views.logs.download_button") }}
-        </button>
+        <div key="download-links">
+          <div class="vstack pt-3 gap-2 w-100 align-items-center">
+            <button
+              class="btn btn-sm btn-theme rounded-3 LogsView__Button"
+              type="button"
+              @click="downloadLog"
+            >
+              <AVIcon icon="download" />
+              {{ $t("views.logs.download_button") }}
+            </button>
 
-        <button
-          class="btn btn-sm btn-theme rounded-3 LogsView__Button"
-          type="button"
-          @click="downloadAttachments"
-        >
-          <AVIcon icon="download" />
-          {{ $t("views.logs.download_attachments") }}
-        </button>
-      </div>
+            <button
+              class="btn btn-sm btn-theme rounded-3 LogsView__Button"
+              type="button"
+              @click="downloadAttachments"
+            >
+              <AVIcon icon="download" />
+              {{ $t("views.logs.download_attachments") }}
+            </button>
+          </div>
 
-      <p class="LogsView__Board_Link">
-        {{ $t("views.logs.board_link") }}<code>{{ boardLink }}</code>
-      </p>
+          <p class="LogsView__Board_Link">
+            {{ $t("views.logs.board_link") }}<code>{{ boardLink }}</code>
+          </p>
+        </div>
+      </TransitionGroup>
     </template>
     <template v-slot:help>
       <h3 class="LogsView__Help_Title text-contrast">
@@ -247,7 +282,7 @@ onMounted(() => loadPage(currentPage.value));
   </ContentLayout>
 </template>
 
-<style type="text/css" scoped>
+<style scoped>
 .LogsView__Title {
   font-size: 2.5rem;
   font-weight: 600;
@@ -298,7 +333,7 @@ input[type="checkbox"] {
   align-items: center;
   justify-content: space-between;
   width: 12rem;
-  margin: 1rem 0 0 0;
+  margin: 1rem auto 0 auto;
 }
 
 html[dir="ltr"] .LogsView__Icon_Set > svg:first-of-type {
@@ -366,6 +401,20 @@ html[dir="rtl"] .RTL_Rotation {
   font-size: 0.95rem;
   user-select: all;
   margin-left: 3px;
+}
+
+.list-move,
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.5s ease;
+}
+.list-enter-from,
+.list-leave-to {
+  opacity: 0;
+}
+.list-leave-active {
+  position: absolute;
+  width: 100%;
 }
 
 @media only screen and (min-width: 48rem) {

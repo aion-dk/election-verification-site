@@ -309,6 +309,16 @@ export const fallbackMessages: SpreadableDLM = {
           author: "Election Official",
           info: "Voter authorization has been configured",
         },
+        ElectionCommitteeConfigItem: {
+          type: "Election committee config",
+          author: "Election Official",
+          info: "Election committee has been configured",
+        },
+        ConfigConfirmationItem: {
+          type: "Config confirmation",
+          author: "Election Official",
+          info: "Election committee has confirmed prior configuration",
+        },
         ContestConfigItem: {
           type: "Contest config",
           author: "Election Official",
@@ -589,13 +599,13 @@ export const fallbackMessages: SpreadableDLM = {
           "All election activities are listed in this election activity log. You can go through it or download the whole activity log at the bottom of the page.",
         download_button: "Download the full election activity log (json)",
         config_only: "Configuration items only",
+        hide_pending_items: "Hide pending",
         headers: {
           type: "Activity type",
-          type_tooltip: "Soon...",
+          type_tooltip: "Type of the activity recorded on Digital Ballot Box",
           time: "Date and time",
-          time_tooltip: "Soon...",
           actor: "Actor",
-          actor_tooltip: "Soon...",
+          actor_tooltip: "Source of the activity type",
         },
         help: {
           title: "What are the ",
