@@ -79,7 +79,7 @@ export default defineStore("useConfigStore", () => {
 
   const usesElectionCommittee = computed((): boolean => {
     return latestConfig.value.genesisConfig.content.electionCommittee ?? false;
-  })
+  });
 
   return {
     latestConfig,

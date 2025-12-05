@@ -51,12 +51,17 @@ const filter = () => {
     "SegmentsConfigItem",
     "ElectionConfigItem",
     "GenesisItem",
-  ]
+  ];
 };
 
 const loadPage = async (page: number) => {
   if (configStore.boardSlug) {
-    await boardStore.loadPage(configStore.boardSlug, page, filter(), hidePendingItems.value);
+    await boardStore.loadPage(
+      configStore.boardSlug,
+      page,
+      filter(),
+      hidePendingItems.value,
+    );
   }
 };
 
@@ -106,18 +111,21 @@ onMounted(async () => {
       <div class="hstack gap-2 align-items-center">
         <label class="LogsView__Configuration_Only">
           <input
-              type="checkbox"
-              name="config-items-only"
-              v-model="configItemsOnly"
+            type="checkbox"
+            name="config-items-only"
+            v-model="configItemsOnly"
           />
           {{ $t("views.logs.config_only") }}
         </label>
 
-        <label class="LogsView__Configuration_Only" v-if="configStore.usesElectionCommittee">
+        <label
+          class="LogsView__Configuration_Only"
+          v-if="configStore.usesElectionCommittee"
+        >
           <input
-              type="checkbox"
-              name="hide-pending-items"
-              v-model="hidePendingItems"
+            type="checkbox"
+            name="hide-pending-items"
+            v-model="hidePendingItems"
           />
           {{ $t("views.logs.hide_pending_items") }}
         </label>
@@ -145,18 +153,27 @@ onMounted(async () => {
         </li>
       </ul>
 
-      <TransitionGroup v-if="isLoaded" tag="div" name="list" class="position-relative w-100">
-        <BoardItem :item="item"  v-for="item in boardStore.items" :key="item.address"/>
+      <TransitionGroup
+        v-if="isLoaded"
+        tag="div"
+        name="list"
+        class="position-relative w-100"
+      >
+        <BoardItem
+          :item="item"
+          v-for="item in boardStore.items"
+          :key="item.address"
+        />
         <div key="pagination" class="LogsView__Pagination">
           <div class="RTL_Rotation">
             <button
-                :aria-label="$t('views.logs.aria_labels.first_page')"
-                :class="{
-              LogsView__PageLink: true,
-              LogsView__PageLink_Disabled: disableFirst,
-            }"
-                :disabled="disableFirst"
-                @click="navigate(1)"
+              :aria-label="$t('views.logs.aria_labels.first_page')"
+              :class="{
+                LogsView__PageLink: true,
+                LogsView__PageLink_Disabled: disableFirst,
+              }"
+              :disabled="disableFirst"
+              @click="navigate(1)"
             >
               <div class="LogsView__Icon_Set">
                 <AVIcon icon="chevron-left" aria-hidden="true" />
@@ -165,13 +182,13 @@ onMounted(async () => {
             </button>
 
             <button
-                :aria-label="$t('views.logs.aria_labels.prev_page')"
-                :class="{
-              LogsView__PageLink: true,
-              LogsView__PageLink_Disabled: disableFirst,
-            }"
-                :disabled="disableFirst"
-                @click="navigate(boardStore.meta.prev_page)"
+              :aria-label="$t('views.logs.aria_labels.prev_page')"
+              :class="{
+                LogsView__PageLink: true,
+                LogsView__PageLink_Disabled: disableFirst,
+              }"
+              :disabled="disableFirst"
+              @click="navigate(boardStore.meta.prev_page)"
             >
               <AVIcon icon="chevron-left" aria-hidden="true" />
             </button>
@@ -181,31 +198,31 @@ onMounted(async () => {
             <span class="LogsView__PageLink">{{ boardStore.currentPage }}</span>
             <span class="LogsView__PageLink">/</span>
             <span class="LogsView__PageLink">{{
-                boardStore.meta.total_pages
-              }}</span>
+              boardStore.meta.total_pages
+            }}</span>
           </div>
 
           <div class="RTL_Rotation">
             <button
-                :aria-label="$t('views.logs.aria_labels.next_page')"
-                :class="{
-              LogsView__PageLink: true,
-              LogsView__PageLink_Disabled: disableLast,
-            }"
-                :disabled="disableLast"
-                @click="navigate(boardStore.meta.next_page)"
+              :aria-label="$t('views.logs.aria_labels.next_page')"
+              :class="{
+                LogsView__PageLink: true,
+                LogsView__PageLink_Disabled: disableLast,
+              }"
+              :disabled="disableLast"
+              @click="navigate(boardStore.meta.next_page)"
             >
               <AVIcon icon="chevron-right" aria-hidden="true" />
             </button>
 
             <button
-                :aria-label="$t('views.logs.aria_labels.last_page')"
-                :class="{
-              LogsView__PageLink: true,
-              LogsView__PageLink_Disabled: disableLast,
-            }"
-                :disabled="disableLast"
-                @click="navigate(boardStore.meta.total_pages)"
+              :aria-label="$t('views.logs.aria_labels.last_page')"
+              :class="{
+                LogsView__PageLink: true,
+                LogsView__PageLink_Disabled: disableLast,
+              }"
+              :disabled="disableLast"
+              @click="navigate(boardStore.meta.total_pages)"
             >
               <div class="LogsView__Icon_Set">
                 <AVIcon icon="chevron-right" aria-hidden="true" />
@@ -218,18 +235,18 @@ onMounted(async () => {
         <div key="download-links">
           <div class="vstack pt-3 gap-2 w-100 align-items-center">
             <button
-                class="btn btn-sm btn-theme rounded-3 LogsView__Button"
-                type="button"
-                @click="downloadLog"
+              class="btn btn-sm btn-theme rounded-3 LogsView__Button"
+              type="button"
+              @click="downloadLog"
             >
               <AVIcon icon="download" />
               {{ $t("views.logs.download_button") }}
             </button>
 
             <button
-                class="btn btn-sm btn-theme rounded-3 LogsView__Button"
-                type="button"
-                @click="downloadAttachments"
+              class="btn btn-sm btn-theme rounded-3 LogsView__Button"
+              type="button"
+              @click="downloadAttachments"
             >
               <AVIcon icon="download" />
               {{ $t("views.logs.download_attachments") }}
@@ -241,7 +258,6 @@ onMounted(async () => {
           </p>
         </div>
       </TransitionGroup>
-
     </template>
     <template v-slot:help>
       <h3 class="LogsView__Help_Title text-contrast">
