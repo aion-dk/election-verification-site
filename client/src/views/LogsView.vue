@@ -77,8 +77,11 @@ const downloadAttachments = () => {
 };
 
 onMounted(async () => {
-  await loadPage(currentPage.value);
-  isLoaded.value = true;
+  try {
+    await loadPage(currentPage.value);
+  } finally {
+    isLoaded.value = true;
+  }
 });
 </script>
 
