@@ -10,11 +10,12 @@ export default defineStore("boardStore", () => {
   const currentPage = ref<number>(null);
   const currentFilter = ref<string[]>([]);
 
-  const loadPage = async (slug: string, page: number, filter: string[]) => {
+  const loadPage = async (slug: string, page: number, filter: string[], hidePending: boolean = false) => {
     if (currentPage.value === page && filter == currentFilter.value) return;
 
     let url = `/${slug}/board?page=${page}`;
-    filter.map((f) => (url = `${url}&filter[]=${f}`));
+    filter.forEach((f) => (url = `${url}&filter[type][]=${f}`));
+    url += `&filter[hide_pending]=${hidePending}`;
     const { data } = await api.get(url);
 
     items.value = data.items;
@@ -26,5 +27,5 @@ export default defineStore("boardStore", () => {
     currentPage.value = page;
   };
 
-  return { items, meta, loadPage, currentPage, currentFilter };
+  return { items, meta, loadPage: loadPage, currentPage, currentFilter };
 });
