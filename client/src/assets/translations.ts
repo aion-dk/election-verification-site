@@ -355,6 +355,11 @@ export const fallbackMessages: SpreadableDLM = {
           author: "Voter",
           info: "A voter has authenticated",
         },
+        WriteInConclusionItem: {
+          type: "Write in conclusion item",
+          author: "Election official",
+          info: "Register how the write ins have been handled when calculating the result",
+        },
         BallotCryptogramsItem: {
           type: "Ballot cryptogram",
           author: "Voter",
