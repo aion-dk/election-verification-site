@@ -23,7 +23,7 @@
   "dependencies": {
     "@assemblyvoting/electa-ui": "^5.3.11",
     "@assemblyvoting/js-client": "^5.1.5",
-    "axios": "^1.12.0",
+    "axios": "^1.13.5",
     "date-fns": "^2.30.0",
     "date-fns-tz": "^2.0.1",
     "jsdom": "^20.0.3",
