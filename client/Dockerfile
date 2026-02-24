@@ -14,7 +14,7 @@ FROM builder AS development
 
 RUN npx playwright install --with-deps
 
-FROM nginx:1.27-alpine AS production
+FROM nginx:1.29-alpine AS production
 # Copy the built app only (Vite default output directory is "dist")
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
 ENV VITE_DBB_URL=""
