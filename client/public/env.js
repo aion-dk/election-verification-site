@@ -3,5 +3,5 @@ window.__APP_CONFIG__ = {
   VITE_DBB_URL: "",
   VITE_LOGO_URL: "",
   VITE_CONTACT_URL: "",
-  VITE_CONFERENCE_URL: ""
+  VITE_CONFERENCE_URL: "",
 };
