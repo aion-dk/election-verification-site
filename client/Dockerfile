@@ -24,5 +24,7 @@ ENV VITE_CONFERENCE_URL=""
 COPY docker-entrypoint.sh /docker-entrypoint.d/40-write-env-js.sh
 RUN chmod +x /docker-entrypoint.d/40-write-env-js.sh
 
+COPY nginx.conf /etc/nginx/nginx.conf
+
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
