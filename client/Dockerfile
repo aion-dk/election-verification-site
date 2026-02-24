@@ -21,10 +21,8 @@ ENV VITE_DBB_URL=""
 ENV VITE_LOGO_URL=""
 ENV VITE_CONTACT_URL=""
 ENV VITE_CONFERENCE_URL=""
-COPY docker-entrypoint.sh /docker-entrypoint.sh
-RUN chmod +x /docker-entrypoint.sh
-
-ENTRYPOINT ["/docker-entrypoint.sh"]
+COPY docker-entrypoint.sh /docker-entrypoint.d/40-write-env-js.sh
+RUN chmod +x /docker-entrypoint.d/40-write-env-js.sh
 
 EXPOSE 80
 CMD ["nginx", "-g", "daemon off;"]
