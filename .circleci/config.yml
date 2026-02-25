@@ -13,10 +13,17 @@ executors:
     machine:
       image: ubuntu-2204:current
 
-filters: 
-  - &always
-    tags:
+filters:
+  - &commit_only
+    branches:
       only: /.*/
+    tags:
+      ignore: /.*/
+  - &release_only
+    branches:
+      ignore: /.*/
+    tags:
+      only: /^v([0-9]|[1-9][0-9]*)\.([0-9]|[1-9][0-9]*)\.([0-9]|[1-9][0-9])+(?:-(sc|rc).*)?$/
 
 commands:
   build-image:
@@ -339,45 +346,45 @@ workflows:
   everything:
     jobs:
       - lint-dockerfile-client:
-          filters: *always
+          filters: *commit_only
       - build-image-development-client:
           context:
             - "GIT"
             - "ECR-RW"
           requires:
             - lint-dockerfile-client
-          filters: *always
+          filters: *commit_only
       - build-image-production-client:
           context:
             - "GIT"
             - "ECR-RW"
           requires:
             - lint-dockerfile-client
-          filters: *always
+          filters: *commit_only
       - scan-client:
           requires:
             - build-image-production-client
           context:
             - "ECR-RW"
-          filters: *always
+          filters: *commit_only
       - client-e2e:
           requires:
             - build-image-development-client
           context:
             - "ECR-RW"
-          filters: *always
+          filters: *commit_only
       - client-component:
           requires:
             - build-image-development-client
           context:
             - "ECR-RW"
-          filters: *always
+          filters: *commit_only
       - client-linting:
           requires:
             - build-image-development-client
           context:
             - "ECR-RW"
-          filters: *always
+          filters: *commit_only
       - tag-tested-client-image-dev:
           requires:
             - client-e2e
@@ -385,7 +392,7 @@ workflows:
             - client-linting
           context:
             - "ECR-RW"
-          filters: *always
+          filters: *commit_only
       - tag-tested-client-image-prod:
           requires:
             - client-e2e
@@ -394,15 +401,10 @@ workflows:
             - scan-client
           context:
             - "ECR-RW"
-          filters: *always
+          filters: *commit_only
+  tag-final-image:
+    jobs:
       - tag-final-client-image-prod:
-          requires:
-            - tag-tested-client-image-prod
           context:
             - "ECR-RW"
-          filters:
-            #triggers only on semver tags
-            branches:
-              ignore: /.*/
-            tags:
-              only: /^v([0-9]|[1-9][0-9]*)\.([0-9]|[1-9][0-9]*)\.([0-9]|[1-9][0-9])+(?:-(sc|rc).*)?$/
+          filters: *release_only
