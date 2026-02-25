@@ -99,7 +99,7 @@ commands:
       - docker/tag-push:
           service: election-verification-site
           pull-tag: << parameters.tag_prefix >>"${CIRCLE_SHA1}"-untested
-          push-tags: main,latest,${CIRCLE_SHA1}
+          push-tags: main,latest,<< parameters.tag_prefix >>"${CIRCLE_SHA1}"
   tag-final-tested-image:
     parameters:
       service_name:
