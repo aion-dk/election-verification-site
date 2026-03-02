@@ -13,6 +13,9 @@ executors:
   vm-linux-ubuntu-nocache:
     machine:
       image: ubuntu-2204:current
+  license-checker-node22:
+    docker:
+      - image: public.ecr.aws/assembly-voting/license-checker-image:ruby-latest-node22
 
 filters:
   - &commit_only
@@ -25,7 +28,9 @@ filters:
       ignore: /.*/
     tags:
       only: /^v([0-9]|[1-9][0-9]*)\.([0-9]|[1-9][0-9]*)\.([0-9]|[1-9][0-9])+(?:-(sc|rc).*)?$/
-
+  - &always
+    tags:
+      only: /.*/
 commands:
   ecr-login:
     steps:
@@ -248,6 +253,12 @@ jobs:
 workflows:
   everything:
     jobs:
+      - docker/license-checker:
+          context:
+            - 'GIT'
+          filters: *always
+          prep-yarn: true
+          executor: license-checker-node22
       - lint-dockerfile-client:
           filters: *commit_only
       - build-image-development-client:
