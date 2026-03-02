@@ -1,79 +1,48 @@
 ---
+- - :name_project
+  - election-client
+  - &1
+    :who: tech@assemblyvoting.com
+    :why:
+    :versions: []
+    :when: 2025-01-31 09:39:02.344871000 Z
 - - :permit
   - MIT
-  - :who: 
-    :why: 
-    :versions: []
-    :when: 2024-12-03 15:34:28.481230549 Z
+  - *1
+- - :permit
+  - MIT*
+  - *1
 - - :permit
   - Simplified BSD
-  - :who: 
-    :why: 
-    :versions: []
-    :when: 2024-12-03 15:36:39.661140364 Z
-- - :permit
-  - ruby
-  - :who: 
-    :why: 
-    :versions: []
-    :when: 2024-12-03 15:36:48.577053591 Z
-- - :permit
-  - Apache 2.0
-  - :who: 
-    :why: 
-    :versions: []
-    :when: 2024-12-03 15:36:56.097687656 Z
-- - :permit
-  - ISC
-  - :who: 
-    :why: 
-    :versions: []
-    :when: 2024-12-03 15:37:32.491020458 Z
+  - *1
 - - :permit
   - New BSD
-  - :who: 
-    :why: 
+  - *1
+- - :permit
+  - BSD Zero Clause License
+  - *1
+- - :permit
+  - Apache 2.0
+  - *1
+- - :permit
+  - ISC
+  - *1
+- - :permit
+  - BlueOak-1.0.0
+  - *1
+- - :permit
+  - CC-BY-4.0
+  - :who: tech@assemblyvoting.com
+    :why: Fontawesome. Licensing attribution comments embedded on corresponding files.
     :versions: []
-    :when: 2024-12-03 15:38:11.066292247 Z
-- - :approve
-  - asymmetric_token
-  - :who: 
-    :why: Private gem managed by AV
+    :when: 2025-01-31 09:39:02.344871000 Z
+- - :permit
+  - Python-2.0
+  - *1
+- - :permit
+  - SIL OPEN FONT LICENSE Version 1.1
+  - &3
+    :who: tech@assemblyvoting.com
+    :why: Local fonts to avoid calling Google's API.
     :versions: []
-    :when: 2024-12-03 15:51:02.886957355 Z
-- - :name_project
-  - Digital Ballot Box
-  - :who: 
-    :why: 
-    :versions: []
-    :when: 2024-12-03 16:39:35.747815282 Z
-- - :approve
-  - asymmetric_token
-  - :who: TECH
-    :why: Private gem managed by AV
-    :versions: []
-    :when: 2024-12-03 16:46:36.494622452 Z
-- - :approve
-  - brakeman
-  - :who: TECH
-    :why: MIT license
-    :versions: []
-    :when: 2024-12-04 10:08:39.848549369 Z
-- - :approve
-  - ttfunk
-  - :who: TECH
-    :why: 
-    :versions: []
-    :when: 2024-12-04 10:10:24.858118407 Z
-- - :approve
-  - bundler-audit
-  - :who: TECH
-    :why: Used for CI/CD
-    :versions: []
-    :when: 2024-12-04 10:10:47.317873741 Z
-- - :unapprove
-  - asymmetric_token
-  - :who: 
-    :why: 
-    :versions: []
-    :when: 2024-12-05 09:14:32.468857728 Z
+    :when: 2025-08-19 11:30:00.344871000 Z
