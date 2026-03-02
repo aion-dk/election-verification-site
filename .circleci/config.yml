@@ -259,7 +259,7 @@ workflows:
           filters: *always
           prep-yarn: true
           executor: license-checker-node22
-          app-dir: ./client
+          base-path: ./client
       - lint-dockerfile-client:
           filters: *commit_only
       - build-image-development-client:
