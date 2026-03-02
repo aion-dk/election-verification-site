@@ -46,3 +46,6 @@
     :why: Local fonts to avoid calling Google's API.
     :versions: []
     :when: 2025-08-19 11:30:00.344871000 Z
+- - :permit
+  - Mozilla Public License 2.0
+  - *1
