@@ -13,9 +13,9 @@ executors:
   vm-linux-ubuntu-nocache:
     machine:
       image: ubuntu-2204:current
-  license-checker-node22:
+  license-checker-node24:
     docker:
-      - image: public.ecr.aws/assembly-voting/license-checker-image:ruby-latest-node22
+      - image: public.ecr.aws/assembly-voting/license-checker-image:ruby-latest-node24
 
 filters:
   - &commit_only
@@ -258,7 +258,7 @@ workflows:
             - 'GIT'
           filters: *always
           prep-yarn: true
-          executor: license-checker-node22
+          executor: license-checker-node24
           base-path: ./client
       - lint-dockerfile-client:
           filters: *commit_only
