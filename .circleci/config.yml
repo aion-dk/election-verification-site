@@ -216,6 +216,7 @@ jobs:
     environment:
       ECR_REGISTRY_ID: "534003348933"
     steps:
+      - checkout
       - ecr-login
       - run:
           name: Pull the image for scanning
