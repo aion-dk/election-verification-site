@@ -77,6 +77,10 @@ export default defineStore("useConfigStore", () => {
 
   const pageReloaded = () => pageRefreshIterator.value++;
 
+  const usesElectionCommittee = computed((): boolean => {
+    return latestConfig.value.genesisConfig.content.electionCommittee ?? false;
+  });
+
   return {
     latestConfig,
     boardSlug,
@@ -92,5 +96,6 @@ export default defineStore("useConfigStore", () => {
     setBoardSlug,
     pageRefreshIterator,
     pageReloaded,
+    usesElectionCommittee,
   };
 });

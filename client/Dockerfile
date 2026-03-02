@@ -1,18 +1,30 @@
 # syntax=docker/dockerfile:1
-FROM node:22-bullseye-slim as builder
+FROM node:24-bullseye-slim AS builder
 
 WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
-
-RUN yarn install --frozen-lockfile && yarn cache clean \
-  && npx playwright install --with-deps
+RUN yarn install --frozen-lockfile && yarn cache clean
 
 COPY . .
 
-FROM builder as development
+RUN yarn build
 
-COPY . .
+FROM builder AS development
 
+RUN npx playwright install --with-deps
 
-FROM builder as production
+FROM nginx:1.29-alpine AS production
+# Copy the built app only (Vite default output directory is "dist")
+COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
+ENV VITE_DBB_URL=""
+ENV VITE_LOGO_URL=""
+ENV VITE_CONTACT_URL=""
+ENV VITE_CONFERENCE_URL=""
+COPY docker-entrypoint.sh /docker-entrypoint.d/40-write-env-js.sh
+RUN chmod +x /docker-entrypoint.d/40-write-env-js.sh
+
+COPY nginx.conf /etc/nginx/nginx.conf
+
+EXPOSE 8080
+CMD ["nginx", "-g", "daemon off;"]
