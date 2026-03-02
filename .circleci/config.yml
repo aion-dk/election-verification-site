@@ -101,24 +101,6 @@ commands:
           service: election-verification-site
           pull-tag: << parameters.tag_prefix >>"${CIRCLE_SHA1}"-untested
           push-tags: main,latest,<< parameters.tag_prefix >>"${CIRCLE_SHA1}"
-  tag-final-tested-image:
-    parameters:
-      service_name:
-        type: string
-      ecr_registry_id:
-        type: string
-        default: "534003348933"
-    steps:
-      - run:
-          name: Set environment variables
-          command: |
-            echo 'export ECR_REGISTRY_ID="<< parameters.ecr_registry_id >>"' >> "$BASH_ENV"
-            echo 'export ECR_REGISTRY="${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com"' >> "$BASH_ENV"
-      - ecr-login
-      - docker/tag-push:
-          service: election-verification-site
-          pull-tag: << parameters.tag_prefix >>"${CIRCLE_SHA1}"
-          push-tags: ${CIRCLE_TAG}
   run-e2e:
     parameters:
       service_name:
