@@ -13,6 +13,9 @@ executors:
   vm-linux-ubuntu-nocache:
     machine:
       image: ubuntu-2204:current
+  license-checker-node24:
+    docker:
+      - image: public.ecr.aws/assembly-voting/license-checker-image:ruby-latest-node24
 
 filters:
   - &commit_only
@@ -25,7 +28,9 @@ filters:
       ignore: /.*/
     tags:
       only: /^v([0-9]|[1-9][0-9]*)\.([0-9]|[1-9][0-9]*)\.([0-9]|[1-9][0-9])+(?:-(sc|rc).*)?$/
-
+  - &always
+    tags:
+      only: /.*/
 commands:
   ecr-login:
     steps:
@@ -101,24 +106,6 @@ commands:
           service: election-verification-site
           pull-tag: << parameters.tag_prefix >>"${CIRCLE_SHA1}"-untested
           push-tags: main,latest,<< parameters.tag_prefix >>"${CIRCLE_SHA1}"
-  tag-final-tested-image:
-    parameters:
-      service_name:
-        type: string
-      ecr_registry_id:
-        type: string
-        default: "534003348933"
-    steps:
-      - run:
-          name: Set environment variables
-          command: |
-            echo 'export ECR_REGISTRY_ID="<< parameters.ecr_registry_id >>"' >> "$BASH_ENV"
-            echo 'export ECR_REGISTRY="${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com"' >> "$BASH_ENV"
-      - ecr-login
-      - docker/tag-push:
-          service: election-verification-site
-          pull-tag: << parameters.tag_prefix >>"${CIRCLE_SHA1}"
-          push-tags: ${CIRCLE_TAG}
   run-e2e:
     parameters:
       service_name:
@@ -266,6 +253,13 @@ jobs:
 workflows:
   everything:
     jobs:
+      - docker/license-checker:
+          context:
+            - 'GIT'
+          filters: *always
+          prep-yarn: true
+          executor: license-checker-node24
+          base-path: ./client
       - lint-dockerfile-client:
           filters: *commit_only
       - build-image-development-client:
