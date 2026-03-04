@@ -2,7 +2,7 @@
 import { ref, computed } from "vue";
 import i18n from "../lib/i18n";
 import { intlFormatDistance } from "date-fns";
-import { utcToZonedTime } from "date-fns-tz";
+import { toZonedTime } from "date-fns-tz";
 
 const props = defineProps({
   dateTime: {
@@ -20,7 +20,7 @@ const props = defineProps({
   },
 });
 
-const date = computed(() => utcToZonedTime(props.dateTime, props.timeZone));
+const date = computed(() => toZonedTime(props.dateTime, props.timeZone));
 
 const absolute = computed(() => {
   return new Date(date.value).toLocaleString(i18n.global.locale, {
