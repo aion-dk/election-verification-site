@@ -42,10 +42,10 @@
     "@noble/hashes" "^1.8.0"
     sjcl-with-all "^1.0.8"
 
-"@assemblyvoting/electa-ui@^5.4.0":
-  version "5.4.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.4.0.tgz#c529870de4c9149fa28971836ad4408cce2f48fe"
-  integrity sha512-TRgdX4ZOAgD2mNhZt/ThljTuSd2lWCzTUuPYKaS9PlZsKg0t3lJe+NpPIJ9f5RXzcSIMYEprJXbdl2zU5pWB9Q==
+"@assemblyvoting/electa-ui@^5.4.2":
+  version "5.4.2"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.4.2.tgz#069934c3261f7fc7b5514a559002190fc0d9ebea"
+  integrity sha512-KHNRfqhb9cV1en9g05A1rCeBs7dtHbE47WWUPD6plKVqSRiEHguwaKYc0uL+7B3aZcrK5jv+7AE4kXUyXQPYnA==
   dependencies:
     "@fontsource/open-sans" "^5.2.7"
     "@fontsource/pt-mono" "^5.2.8"
