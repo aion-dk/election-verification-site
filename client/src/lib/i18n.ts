@@ -20,14 +20,14 @@ const url = new URL(window.location.href);
 if (url.pathname.split("/")[1]) locale = url.pathname.split("/")[1];
 
 const i18n = createI18n({
+  legacy: false,
   locale: locale,
   fallbackLocale: "en",
-  warnHtmlInMessage: "off",
   messages: offlineMessages,
 });
 
 export function setLocale(locale: Locale) {
-  i18n.global.locale = locale;
+  i18n.global.locale.value = locale;
 
   document.getElementsByTagName("html")[0].lang = locale;
 

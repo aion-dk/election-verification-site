@@ -3,10 +3,11 @@ import ContentLayout from "@/components/ContentLayout.vue";
 import MainIcon from "@/components/MainIcon.vue";
 import ExpandableSection from "@/components/ExpandableSection.vue";
 import { onMounted, ref, watch, computed } from "vue";
-import i18n from "@/lib/i18n";
+import { useI18n } from "vue-i18n";
 import useConfigStore from "@/stores/useConfigStore";
 import type { Locale, DefineLocaleMessage } from "vue-i18n";
 
+const i18n = useI18n();
 const configStore = useConfigStore();
 const ballotTesterQuestions = ref<DefineLocaleMessage>(null);
 const ballotTrackerQuestions = ref<DefineLocaleMessage>(null);
@@ -14,7 +15,7 @@ const logsQuestions = ref<DefineLocaleMessage>(null);
 const otherQuestions = ref<DefineLocaleMessage>(null);
 const currentQuestions = ref(null);
 const currentTab = ref<Tabs>(null);
-const currentLocale = computed(() => i18n.global.locale);
+const currentLocale = computed(() => i18n.locale.value);
 
 type Tabs = "tester" | "tracker" | "logs" | "other";
 
@@ -33,16 +34,16 @@ const loadTab = (newTab: Tabs) => {
 
 const updateQuestions = (locale: Locale) => {
   ballotTesterQuestions.value = (
-    i18n.global.getLocaleMessage(locale) as any
+    i18n.getLocaleMessage(locale) as any
   ).views.faq.questions.ballot_tester;
   ballotTrackerQuestions.value = (
-    i18n.global.getLocaleMessage(locale) as any
+    i18n.getLocaleMessage(locale) as any
   ).views.faq.questions.ballot_tracker;
   logsQuestions.value = (
-    i18n.global.getLocaleMessage(locale) as any
+    i18n.getLocaleMessage(locale) as any
   ).views.faq.questions.logs;
   otherQuestions.value = (
-    i18n.global.getLocaleMessage(locale) as any
+    i18n.getLocaleMessage(locale) as any
   ).views.faq.questions.other;
 };
 
@@ -156,9 +157,8 @@ onMounted(() => {
               v-for="(p, i) in question.paragraphs"
               :key="`${i}-${p}`"
               class="HelpView__FAQ_Text"
-            >
-              {{ p }}
-            </p>
+              v-html="p"
+            ></p>
           </template>
         </ExpandableSection>
       </div>
