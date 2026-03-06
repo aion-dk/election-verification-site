@@ -21,4 +21,17 @@ export default defineConfig({
   server: {
     port: 3010,
   },
+  css: {
+    preprocessorOptions: {
+      scss: {
+        silenceDeprecations: [
+          "color-functions",
+          "global-builtin",
+          "import",
+          "abs-percent",
+          "if-function",
+        ],
+      },
+    },
+  },
 });

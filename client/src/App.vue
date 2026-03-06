@@ -8,11 +8,12 @@ import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import router from "./router";
 import { loadLocaleMessages, setLocale } from "./lib/i18n";
-import i18n from "./lib/i18n";
+import { useI18n } from "vue-i18n";
 import type { Locale } from "vue-i18n";
 import { fallbackMessages } from "./assets/translations";
 import { defaultTheme } from "./assets/theme";
 
+const i18n = useI18n();
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
 const route = useRoute();
@@ -36,7 +37,7 @@ onMounted(async () => {
 
 function updateLocale(newLocale: Locale) {
   const newUrl = route.fullPath.replace(
-    `/${i18n.global.locale}/`,
+    `/${i18n.locale.value}/`,
     `/${newLocale}/`,
   );
 
@@ -46,9 +47,9 @@ function updateLocale(newLocale: Locale) {
 }
 
 function setTitle() {
-  const siteTitle = i18n.global.messages[i18n.global.locale].site_title;
+  const siteTitle = i18n.messages.value[i18n.locale.value].site_title;
   const title = [
-    configStore.election.title[i18n.global.locale],
+    configStore.election.title[i18n.locale.value],
     siteTitle,
   ].filter((s) => s);
   if (window.top) window.top.document.title = title.join(" - ");
@@ -70,7 +71,7 @@ const setConfigurations = async (
 
 const setLanguage = async (conferenceClient: any) => {
   const browserLocale: Locale = navigator.languages.find((locale: Locale) =>
-    i18n.global.availableLocales.includes(locale),
+    i18n.availableLocales.includes(locale),
   );
 
   if (browserLocale) setLocale(browserLocale);

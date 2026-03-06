@@ -52,3 +52,9 @@
 - - :permit
   - (MIT AND Zlib)
   - *1
+- - :permit
+  - MIT-0
+  - *1
+- - :permit
+  - CC0 1.0 Universal
+  - *1

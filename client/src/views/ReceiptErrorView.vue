@@ -5,10 +5,11 @@ import ContentLayout from "@/components/ContentLayout.vue";
 import MainIcon from "@/components/MainIcon.vue";
 import Error from "@/components/Error.vue";
 import useReceiptStore from "@/stores/useReceiptStore";
-import i18n from "@/lib/i18n";
+import { useI18n } from "vue-i18n";
 import router from "@/router";
 import { useRoute } from "vue-router";
 
+const i18n = useI18n();
 const configStore = useConfigStore();
 const receiptStore = useReceiptStore();
 const route = useRoute();
@@ -21,7 +22,7 @@ const translationPath = computed(() =>
 const contactUrl = computed(
   () =>
     configStore.electionStatus?.electionVerificationSite?.contactUrl[
-      i18n.global.locale
+      i18n.locale.value
     ] || null,
 );
 
@@ -35,26 +36,26 @@ const buttons = computed(() => {
       label:
         !receiptStore.receiptValid ||
         (receiptStore.receiptValid && contactUrl.value)
-          ? i18n.global.t(
+          ? i18n.t(
               `views.receipt_error.${translationPath.value}.primary_action`,
             )
-          : i18n.global.t(
+          : i18n.t(
               `views.receipt_error.${translationPath.value}.secondary_action`,
             ),
       url: receiptStore.receiptValid
         ? contactUrl.value
           ? contactUrl.value
-          : `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`
-        : `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`,
+          : `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}`
+        : `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}/track`,
     },
     secondary: {
       visible:
         !receiptStore.receiptValid ||
         (receiptStore.receiptValid && contactUrl.value),
-      label: i18n.global.t(
+      label: i18n.t(
         `views.receipt_error.${translationPath.value}.secondary_action`,
       ),
-      url: `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}`,
+      url: `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}`,
     },
   };
 });
