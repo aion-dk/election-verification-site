@@ -2,17 +2,18 @@
 import { computed, onMounted, onBeforeUnmount, ref } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import DropDown from "./DropDown.vue";
-import i18n from "@/lib/i18n";
+import { useI18n } from "vue-i18n";
 import type { DropdownOption } from "@/Types";
 import useConfigStore from "@/stores/useConfigStore";
 
-const { t } = i18n.global;
+const i18n = useI18n();
+const { t } = i18n;
 const configStore = useConfigStore();
 const route = useRoute();
 const contactUrl = computed(
   () =>
     configStore.electionStatus?.electionVerificationSite?.contactUrl[
-      i18n.global.locale
+      i18n.locale.value
     ] || null,
 );
 
