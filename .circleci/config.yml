@@ -211,7 +211,8 @@ jobs:
             docker pull ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:${CIRCLE_SHA1}-untested
       - docker/scan:
           image: ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:${CIRCLE_SHA1}-untested
-          ignored_cves: ""
+          # CVE-2026-22184 we cannot fix this until there's a new version of the nginx:alpine image we're currently using.
+          ignored_cves: 'CVE-2026-22184'
   client-e2e:
     executor: vm-linux-ubuntu-nocache
     steps:
