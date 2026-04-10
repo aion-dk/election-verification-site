@@ -42,10 +42,10 @@
     "@noble/hashes" "^1.8.0"
     sjcl-with-all "^1.0.8"
 
-"@assemblyvoting/electa-ui@5.5.0-beta.5":
-  version "5.5.0-beta.5"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.5.0-beta.5.tgz#09b59cddd6a71e87bf67f3c296f067b9f13ea791"
-  integrity sha512-UJnAm+F4+zEz1VjW0QZAYobv7z6Razb3QQSBHmxepQHJ4jq9oBex7/6HUJX4D4ZKHCilH7YGHyj5beZfq849KA==
+"@assemblyvoting/electa-ui@^5.5.0":
+  version "5.5.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.5.0.tgz#3181587433ffc850ff908cc0b0ece267ada97f85"
+  integrity sha512-8POtjhvXN70HFFp9Nwk1ZVkJBJ9tRAtfOQWTUvGOeojUGJupZ8w6dPprkAqjoDG6qJFKLjLv69kud30c2sqGvw==
   dependencies:
     "@fontsource/open-sans" "^5.2.7"
     "@fontsource/pt-mono" "^5.2.8"
@@ -60,10 +60,10 @@
     vue "^3.5.29"
     vue-i18n "^11.2.8"
 
-"@assemblyvoting/js-client@5.3.0-beta.4":
-  version "5.3.0-beta.4"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.3.0-beta.4.tgz#1b7ed03cd0620a676047485a7d360f292ebd7c4c"
-  integrity sha512-RaR8x6O1B1sxDn/cgsbQu9c3HRtaHq3bO0d445Xm8piX3JB++II6yacWd1MhhiuePHSJb+jxktZUcL7ulCbICw==
+"@assemblyvoting/js-client@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-5.3.0.tgz#a71a2123772bccbd434d1582aad2b9ec502979b5"
+  integrity sha512-zAl8N2VEA+TknPohkxWlVEMJLVCv9xZF6U1fKp5aPCjT2ZoAPURAEWS+0TtkgXFp5lFi2o3UExTugPNUwGQLhw==
   dependencies:
     "@assemblyvoting/av-crypto" "^1.1.1"
     axios "^1.13.6"
