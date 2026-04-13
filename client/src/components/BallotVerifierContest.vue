@@ -14,10 +14,6 @@
         :selection-pile="selectionPile"
         :pile-index="pileIndex"
         :total-piles="contestSelection.piles.length"
-        :gallery-mode="contest.mode === 'gallery'"
-        :show-options-description="contest.displayDescriptionOnSummary"
-        :counter-interface="contest.multipleVotingInterface === 'counter'"
-        :is-quadratic="contest.markingType.quadraticVoting"
         style="z-index: 90"
         active-state="summary"
       />
