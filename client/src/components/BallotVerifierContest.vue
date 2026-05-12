@@ -28,10 +28,10 @@
 import useConfigStore from "@/stores/useConfigStore";
 import type { PropType } from "vue";
 import { defineComponent } from "vue";
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import type {
   ContestSelection,
   ContestContent,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   SupportedLocale,
 } from "@/Types";
 
