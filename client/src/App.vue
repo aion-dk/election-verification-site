@@ -147,7 +147,7 @@ const setTheme = async (conferenceClient: any) => {
       :electionName="
         configStore.election.title[$i18n.locale as SupportedLocale]
       "
-      :locale="$i18n.locale"
+      :locale="$i18n.locale as SupportedLocale"
       @changeLocale="updateLocale"
     />
     <main class="DBAS__Content">

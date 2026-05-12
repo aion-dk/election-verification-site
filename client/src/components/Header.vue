@@ -1,9 +1,13 @@
 <script lang="ts" setup>
-import { computed, onMounted, onBeforeUnmount, ref } from "vue";
+import { computed, onMounted, onBeforeUnmount, ref, type PropType } from "vue";
 import { RouterLink, useRoute } from "vue-router";
 import DropDown from "./DropDown.vue";
 import { useI18n } from "vue-i18n";
-import type { DropdownOption } from "@/Types";
+import type {
+  DropdownOption,
+  SupportedLocale,
+  ElectionConfigContent,
+} from "@/Types";
 import useConfigStore from "@/stores/useConfigStore";
 
 const i18n = useI18n();
@@ -13,17 +17,17 @@ const route = useRoute();
 const contactUrl = computed(
   () =>
     configStore.electionStatus?.electionVerificationSite?.contactUrl[
-      i18n.locale.value
+      i18n.locale.value as SupportedLocale
     ] || null,
 );
 
 const props = defineProps({
   locale: {
-    type: String,
+    type: String as PropType<SupportedLocale>,
     required: true,
   },
   election: {
-    type: Object,
+    type: Object as PropType<ElectionConfigContent>,
     required: true,
   },
   electionName: {
@@ -95,19 +99,10 @@ onBeforeUnmount(() => {
       <RouterLink
         class="Header__Link"
         activeClass="active"
-        :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`"
+        :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/find`"
         @click="toggleMenu(true)"
       >
-        {{ $t("header.verification") }}
-      </RouterLink>
-
-      <RouterLink
-        class="Header__Link"
-        activeClass="active"
-        :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`"
-        @click="toggleMenu(true)"
-      >
-        {{ $t("header.tracking") }}
+        {{ $t("header.find") }}
       </RouterLink>
 
       <RouterLink
