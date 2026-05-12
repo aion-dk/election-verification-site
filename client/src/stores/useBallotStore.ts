@@ -1,10 +1,10 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import useAVClient from "../lib/useAVClient";
-import type { Ballot } from "../Types";
+import type { EVSBallot } from "../Types";
 
 export default defineStore("useBallotStore", () => {
-  const ballot = ref<Ballot>(null);
+  const ballot = ref<EVSBallot>(null);
 
   function resetBallot() {
     ballot.value = null;

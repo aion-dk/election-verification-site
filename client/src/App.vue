@@ -12,6 +12,7 @@ import { useI18n } from "vue-i18n";
 import type { Locale } from "vue-i18n";
 import { fallbackMessages } from "./assets/translations";
 import { defaultTheme } from "./assets/theme";
+import { SupportedLocale } from "@/Types";
 
 const i18n = useI18n();
 const ballotStore = useBallotStore();
@@ -49,7 +50,7 @@ function updateLocale(newLocale: Locale) {
 function setTitle() {
   const siteTitle = i18n.messages.value[i18n.locale.value].site_title;
   const title = [
-    configStore.election.title[i18n.locale.value],
+    configStore.election.title[i18n.locale.value as SupportedLocale],
     siteTitle,
   ].filter((s) => s);
   if (window.top) window.top.document.title = title.join(" - ");
@@ -79,11 +80,13 @@ const setLanguage = async (conferenceClient: any) => {
   const paramLocale = router.currentRoute.value.params.locale?.toString();
 
   if (configStore.election.locales) {
-    const preferredLocale = configStore.election.locales.includes(paramLocale)
+    const preferredLocale = configStore.election.locales.includes(
+      paramLocale as SupportedLocale,
+    )
       ? paramLocale
       : null;
-    const browserLocale = navigator.languages.find((locale) =>
-      configStore.election.locales.includes(locale),
+    const browserLocale = navigator.languages.find((locale: string) =>
+      configStore.election.locales.includes(locale as SupportedLocale),
     );
     setLocale(
       preferredLocale || browserLocale || configStore.election.locales[0],
@@ -141,7 +144,9 @@ const setTheme = async (conferenceClient: any) => {
 
     <Header
       :election="configStore.election"
-      :electionName="configStore.election.title[$i18n.locale]"
+      :electionName="
+        configStore.election.title[$i18n.locale as SupportedLocale]
+      "
       :locale="$i18n.locale"
       @changeLocale="updateLocale"
     />

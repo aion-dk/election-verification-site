@@ -1,8 +1,7 @@
-import type { LatestConfigurationConfig } from "@assemblyvoting/js-client/dist/lib/av_client/types";
 import { defineStore } from "pinia";
 import { ref, reactive } from "vue";
 import { api } from "@/lib/api";
-import type { Meta } from "@/Types";
+import type { Meta, LatestConfigurationConfig } from "@/Types";
 
 export default defineStore("boardStore", () => {
   const items = ref<LatestConfigurationConfig[]>([]);
