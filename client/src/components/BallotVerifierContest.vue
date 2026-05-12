@@ -1,9 +1,12 @@
 <template>
   <div class="BallotVerifierContest">
     <h3 class="BallotVerifierContest__Title">
-      {{ contest.title[$i18n.locale] }}
+      {{ contest.title[$i18n.locale as SupportedLocale] }}
     </h3>
-    <p v-if="contest.question" v-text="contest.question[$i18n.locale]" />
+    <p
+      v-if="contest.question"
+      v-text="contest.question[$i18n.locale as SupportedLocale]"
+    ></p>
     <div
       v-for="(selectionPile, pileIndex) in contestSelection.piles"
       :key="JSON.stringify(selectionPile)"
@@ -25,8 +28,12 @@
 import useConfigStore from "@/stores/useConfigStore";
 import type { PropType } from "vue";
 import { defineComponent } from "vue";
-import type { ContestSelection } from "@assemblyvoting/js-client/dist/lib/av_client/types";
-import type { FullContestContent } from "@/Types";
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import type {
+  ContestSelection,
+  ContestContent,
+  SupportedLocale,
+} from "@/Types";
 
 export default defineComponent({
   name: "BallotVerifierContest",
@@ -40,7 +47,7 @@ export default defineComponent({
     configStore() {
       return useConfigStore();
     },
-    contest(): FullContestContent {
+    contest(): ContestContent {
       return this.configStore.getContest(this.contestSelection.reference);
     },
   },

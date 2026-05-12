@@ -7,13 +7,13 @@ import BallotActivityList from "../components/BallotActivityList.vue";
 import ContentLayout from "../components/ContentLayout.vue";
 import TrackedBallotManager from "../components/TrackedBallotManager.vue";
 import router from "../router";
-import type { Ballot } from "../Types";
+import type { EVSBallot } from "../Types";
 import { useRoute } from "vue-router";
 
 const configStore = useConfigStore();
 const ballotStore = useBallotStore();
 const route = useRoute();
-const ballot = ref<Ballot>(null);
+const ballot = ref<EVSBallot>(null);
 
 const cancel = () => {
   router.push(

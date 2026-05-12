@@ -1,15 +1,12 @@
-import type {
-  ContestConfig,
-  ContestContent,
-  LocalString,
-  MarkingType,
-  OptionContent,
-} from "@assemblyvoting/js-client/dist/lib/av_client/types";
+export type * from "@assemblyvoting/types";
+import type { ElectionStatusResponse } from "@assemblyvoting/types";
 import type { DefineLocaleMessage, Locale } from "vue-i18n";
 
-export type Election = any;
-
-export type Ballot = any;
+export interface EVSBallot {
+  activities: string[];
+  trackingCode: string;
+  status: string;
+}
 
 export interface Meta {
   current_page?: number;
@@ -33,72 +30,6 @@ export class HttpError extends Error {
   }
 }
 
-export interface ElectionStatusResponse {
-  boardSlug: string;
-  activeSlide?: any;
-  contests?: ContestConfig[];
-  election: ElectionStatus;
-  slides?: any[];
-  VoterCounts?: VoterCounts;
-}
-
-export interface VoterCounts {
-  activeEligibles: number;
-  activeEligiblesOrVoted: number;
-  activeVoters: number;
-  totalVoters: number;
-}
-
-export interface ElectionStatus {
-  id: number;
-  slug: string;
-  title: LocalString;
-  description: LocalString;
-  mode: "demo" | "production" | "disabled";
-  trustMode: "verifiable" | "trusted";
-  electionVerificationSite?: any;
-  enabledLocales: string[];
-  readyForVoting: boolean;
-  boardSlug: string;
-  boardUrl: string;
-  dbasUrl: string;
-  redirect?: any;
-  userModules?: any;
-  voterCountsConfig?: VoterCounts;
-  theme?: Theme;
-  electionCodeTexts: any[];
-  streamUrl?: string | null;
-  hide_dbas: boolean;
-  hideBenaloh: boolean;
-}
-
-export interface Theme {
-  color: string;
-  danger: string;
-  logo: string | null;
-  background: string | null;
-  splash: string | null;
-}
-
-export interface FullOptionContent extends OptionContent {
-  url?: LocalString;
-  videoUrl?: LocalString;
-  image?: string;
-  selectable?: boolean;
-  exclusive?: boolean;
-  voteLimit?: number;
-  children?: FullOptionContent[];
-}
-
-export interface FullMarkingType extends MarkingType {
-  votesAllowedPerOption?: number;
-}
-
-export interface FullContestContent extends ContestContent {
-  markingType: FullMarkingType;
-  votesAllowedPerOption?: number;
-}
-
 export interface CurrentTranslations {
   translations: {
     [locale: Locale]: {
@@ -108,3 +39,7 @@ export interface CurrentTranslations {
 }
 
 export type SpreadableDLM = { [key: string]: any };
+
+export interface ExtendedElectionStatusResponse extends ElectionStatusResponse {
+  boardSlug: string;
+}

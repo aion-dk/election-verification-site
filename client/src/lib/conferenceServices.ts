@@ -4,11 +4,11 @@ import { responseErrorHandler, responseHandler } from "./axiosConfig";
 import config from "./config";
 
 import type {
-  ElectionStatusResponse,
+  ExtendedElectionStatusResponse,
   CurrentTranslations,
   SpreadableDLM,
+  SupportedLocale,
 } from "../Types";
-import type { Locale } from "vue-i18n";
 import type { AxiosInstance } from "axios";
 
 const conferenceApi = ref<AxiosInstance>(
@@ -34,14 +34,14 @@ export function useConferenceConnector(
         const status = await conferenceApi.value.get(
           `/${organisationSlug}/${electionSlug}/status`,
         );
-        return (status as any).election as ElectionStatusResponse;
+        return (status as any).election as ExtendedElectionStatusResponse;
       },
       async getStylingData() {
         return (await conferenceApi.value.get(
           `/${organisationSlug}/${electionSlug}/theme`,
         )) as string;
       },
-      async getTranslationsData(locale: Locale) {
+      async getTranslationsData(locale: SupportedLocale) {
         if (!currentTranslationsData.value) {
           currentTranslationsData.value = await conferenceApi.value.get(
             `/${organisationSlug}/${electionSlug}/translations`,

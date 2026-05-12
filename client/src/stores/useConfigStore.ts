@@ -1,18 +1,20 @@
 import { defineStore } from "pinia";
 import { computed, ref } from "vue";
 import { api } from "@/lib/api";
-import type { Election, ElectionStatus, FullOptionContent } from "@/Types";
 import type {
+  ElectionConfigContent,
+  BasicElectionStatus,
+  OptionContent,
   ContestContent,
   LatestConfigItems,
-} from "@assemblyvoting/js-client/dist/lib/av_client/types";
+} from "@/Types";
 
 export default defineStore("useConfigStore", () => {
   const boardSlug = ref<string>(null);
   const latestConfig = ref<LatestConfigItems | null>(null);
-  const election = ref<Election | null>(null);
-  const bcTimeout = computed(() => election.value?.content?.bcTimeout);
-  const electionStatus = ref<ElectionStatus | null>(null);
+  const election = ref<ElectionConfigContent | null>(null);
+  const bcTimeout = computed(() => election.value?.bcTimeout);
+  const electionStatus = ref<BasicElectionStatus | null>(null);
   const electionTheme = ref<string>(null);
   const pageRefreshIterator = ref<number>(0);
 
@@ -24,7 +26,7 @@ export default defineStore("useConfigStore", () => {
     latestConfig.value = newConfig;
   };
 
-  const setElection = (newElection: Election) => {
+  const setElection = (newElection: ElectionConfigContent) => {
     election.value = newElection;
   };
 
@@ -32,7 +34,7 @@ export default defineStore("useConfigStore", () => {
     return latestConfig.value.contestConfigs[contestReference].content;
   };
 
-  const flattenChildren = (option: FullOptionContent, maxDepth = 100) => {
+  const flattenChildren = (option: OptionContent, maxDepth = 100) => {
     if (maxDepth <= 0)
       throw new Error("MAX RECURSION DEPTH FOR flattenChildren REACHED");
 
@@ -50,7 +52,7 @@ export default defineStore("useConfigStore", () => {
   const getContestOption = (
     contestReference: string,
     optionReference: string,
-  ): FullOptionContent => {
+  ): OptionContent => {
     return latestConfig.value.contestConfigs[contestReference].content.options
       .flatMap((option) => flattenChildren(option))
       .find((option) => option.reference === optionReference);
@@ -67,7 +69,7 @@ export default defineStore("useConfigStore", () => {
     setElection({ ...latestConfig.value?.electionConfig.content });
   };
 
-  const setElectionStatus = (newStatus: ElectionStatus) => {
+  const setElectionStatus = (newStatus: BasicElectionStatus) => {
     electionStatus.value = newStatus;
   };
 
