@@ -60,10 +60,8 @@
     vue "^3.5.29"
     vue-i18n "^11.2.8"
 
-"@assemblyvoting/js-client@^6.0.0":
+"@assemblyvoting/js-client@file:../../../../js-client":
   version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-6.0.0.tgz#340a845e9672a10631e1035546ac8e779e640811"
-  integrity sha512-ecNK10dQhESf2IGHPqApyCXSMHVYnhigB7SEnmX77RIQKVWtewYtmzFmeSLzY7gmIiB+2xn0AyeEURBjaAXuQA==
   dependencies:
     "@assemblyvoting/av-crypto" "^1.1.1"
     axios "^1.13.6"

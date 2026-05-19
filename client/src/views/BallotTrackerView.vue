@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
-import useBallotStore from "../stores/useBallotStore";
 import i18n from "../lib/i18n";
 import { ref, onMounted } from "vue";
 import BallotActivityList from "../components/BallotActivityList.vue";
@@ -9,11 +8,13 @@ import TrackedBallotManager from "../components/TrackedBallotManager.vue";
 import router from "../router";
 import type { EVSBallot } from "../Types";
 import { useRoute } from "vue-router";
+import useVerificationStore from "@/stores/useVerificationStore";
 
 const configStore = useConfigStore();
-const ballotStore = useBallotStore();
+const verificationStore = useVerificationStore();
 const route = useRoute();
 const ballot = ref<EVSBallot>(null);
+const unifiedCode = ref(null);
 
 const cancel = () => {
   router.push(
@@ -21,7 +22,10 @@ const cancel = () => {
   );
 };
 
-onMounted(() => (ballot.value = ballotStore.ballot));
+onMounted(() => {
+  ballot.value = verificationStore.ballotStatus;
+  unifiedCode.value = route.params.trackingCode.toString();
+});
 </script>
 
 <template>
@@ -34,7 +38,7 @@ onMounted(() => (ballot.value = ballotStore.ballot));
     >
       <template v-slot:action>
         <TrackedBallotManager
-          :tracking-code="ballot.trackingCode"
+          :tracking-code="unifiedCode"
           @cancel="cancel"
         />
 

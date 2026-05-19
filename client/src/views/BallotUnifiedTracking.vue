@@ -9,7 +9,6 @@ import ContentLayout from "@/components/ContentLayout.vue";
 import MainIcon from "@/components/MainIcon.vue";
 
 import useConfigStore from "@/stores/useConfigStore";
-// import useBallotStore from "@/stores/useBallotStore";
 import useReceiptStore from "@/stores/useReceiptStore";
 import useVerificationStore from "@/stores/useVerificationStore";
 import router from "@/router";
@@ -17,7 +16,6 @@ import router from "@/router";
 const { t, locale } = useI18n();
 const receiptStore = useReceiptStore();
 const configStore = useConfigStore();
-// const ballotStore = useBallotStore();
 const verificationStore = useVerificationStore();
 const route = useRoute();
 
@@ -41,6 +39,9 @@ const button = computed(() => {
 });
 
 const updateReceipt = async (files: File[]) => {
+  console.log("update receipt called !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
+
   if (!files.length) {
     receipt.value = null;
     unifiedCode.value = null;
@@ -74,20 +75,53 @@ const updateReceipt = async (files: File[]) => {
 };
 
 const lookupBallot = async () => {
-  // Check if it's a verification or tracking code and redirect the user to the correct flow;
-  // Look at the lookupBallot() method on BallotTrackingLanding.vue
-  // and initiateVerification() method on BallotVerificationLanding.vue
+  error.value = null;
+
+  try {
+    await verificationStore.findBallot(unifiedCode.value);
+    verificationStore.generatePairingCode();
+
+    setTimeout(async () => {
+      if (verificationStore.pairingCode || verificationStore.trackingCode) return;
+
+      await router.push({
+        name: "BallotVerifierFound",
+        params: {
+          verificationCode: unifiedCode.value,
+        },
+      });
+    }, 2000);
+  } catch (e) {
+    console.error(e);
+    error.value = "verify.invalid_code";
+  }
 };
 
-watch(verificationStore, async (newStore) => {
-  if (!newStore.pairingCode) return;
+async function checkForPairingCode(store: any) {
+  if (!store.pairingCode) return;
 
   await router.push({
     name: "BallotVerifierView",
     params: {
-      pairingCode: newStore.pairingCode,
+      pairingCode: store.pairingCode,
     },
   });
+}
+
+async function checkForTrackingCode(store: any) {
+  if (!store.trackingCode) return;
+
+  await verificationStore.loadBallotStatus();
+  if (verificationStore.ballotStatus?.status) {
+    await router.push(
+        `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${store.ballotCode}`,
+    );
+  }
+}
+
+watch(verificationStore, async (newStore) => {
+  await checkForPairingCode(newStore);
+  await checkForTrackingCode(newStore);
 });
 
 onMounted(() => {

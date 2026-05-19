@@ -13,7 +13,7 @@ const route = useRoute();
 const verificationStore = useVerificationStore();
 const configStore = useConfigStore();
 const steps = [1, 2, 3, 4, 5];
-const verificationCode = ref(null);
+const ballotCode = ref(null);
 
 async function checkForPairingCode(store: any) {
   if (!store.pairingCode) return;
@@ -26,22 +26,34 @@ async function checkForPairingCode(store: any) {
   });
 }
 
+async function checkForTrackingCode(store: any) {
+  if (!store.trackingCode) return;
+
+  await verificationStore.loadBallotStatus();
+  if (verificationStore.ballotStatus?.status) {
+    await router.push(
+        `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${ballotCode.value}`,
+    );
+  }
+}
+
 const cancel = () => {
   router.push(`/${i18n.global.locale}/${configStore.boardSlug}/verify`);
 };
 
 watch(verificationStore, async (store) => {
   await checkForPairingCode(store);
+  await checkForTrackingCode(store);
 });
 
 onMounted(async () => {
-  verificationCode.value = route.params.verificationCode.toString();
+  ballotCode.value = route.params.verificationCode.toString();
   if (!verificationStore.ballotAddress) {
     try {
       verificationStore.reset();
       await verificationStore.setupAVVerifier(configStore.boardSlug);
 
-      await verificationStore.findBallot(verificationCode.value);
+      await verificationStore.findBallot(ballotCode.value);
 
       verificationStore.generatePairingCode();
     } catch (e) {
@@ -68,7 +80,7 @@ onMounted(async () => {
     >
       <template v-slot:action>
         <TrackedBallotManager
-          :tracking-code="verificationCode"
+          :tracking-code="ballotCode"
           @cancel="cancel"
         />
 
