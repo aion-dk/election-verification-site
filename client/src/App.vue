@@ -64,7 +64,13 @@ const setConfigurations = async (
     organisationSlug,
     electionSlug,
   );
+
   configStore.setBoardSlug((await conferenceClient.getStatus()).boardSlug);
+
+  const conferenceResponse = await conferenceClient.getStatus();
+
+  console.log("conferenceResponse", conferenceResponse);
+
   await configStore.loadConfig();
   await setLanguage(conferenceClient);
   await setTheme(conferenceClient);
@@ -92,10 +98,9 @@ const setLanguage = async (conferenceClient: any) => {
       preferredLocale || browserLocale || configStore.election.locales[0],
     );
 
-    for (let i = 0; i < configStore.election.locales.length; i++) {
-      const locale = configStore.election.locales[i];
+    for (const locale of configStore.election.locales) {
       const response = await conferenceClient
-        .getTranslationsData(configStore.election.locales[i])
+        .getTranslationsData(locale)
         .catch((err: Error) => {
           console.error(err);
         });
@@ -108,6 +113,9 @@ const setLanguage = async (conferenceClient: any) => {
 };
 
 const setTheme = async (conferenceClient: any) => {
+  const tempCSS = await conferenceClient.getStylingData();
+  // console.log("temp css", tempCSS);
+
   if (!configStore.electionStatus || !configStore.electionTheme) {
     // Setting Splash Image
     const status = await conferenceClient
@@ -211,3 +219,4 @@ body {
   }
 }
 </style>
+

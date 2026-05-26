@@ -43,3 +43,10 @@ export type SpreadableDLM = { [key: string]: any };
 export interface ExtendedElectionStatusResponse extends ElectionStatusResponse {
   boardSlug: string;
 }
+
+export interface CustomCosmetics {
+  hideElectionClientFooter?: boolean;
+  useWideScrollbar?: boolean;
+  votingSteps?: any;
+  footerHtml?: string;
+}
