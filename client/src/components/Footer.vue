@@ -55,6 +55,7 @@ console.log(customFooterHtml);
 }
 
 .Footer--custom {
+  height: auto;
   justify-content: flex-start;
   align-items: flex-start;
   padding: 1rem;
