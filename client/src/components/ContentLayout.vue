@@ -1,5 +1,10 @@
 <script setup lang="ts">
 defineProps({
+  id: {
+    type: String,
+    required: false,
+    default: "",
+  },
   helpTitle: {
     type: String,
     required: true,
@@ -20,7 +25,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="ContentLayout">
+  <div :id="id" class="ContentLayout">
     <section id="main_content" class="ContentLayout__Action" tabindex="0">
       <p v-if="breadcrumb" class="ContentLayout__Breadcrumb">
         {{ breadcrumb }}
