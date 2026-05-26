@@ -73,6 +73,7 @@ onBeforeUnmount(() => {
       :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}`"
     >
       <img
+        id="header-logo"
         v-if="configStore.electionStatus?.theme?.logo"
         class="Header__Logo"
         :src="configStore.electionStatus?.theme?.logo"
