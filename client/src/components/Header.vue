@@ -76,6 +76,7 @@ onBeforeUnmount(() => {
         v-if="configStore.electionStatus?.theme?.logo"
         class="Header__Logo"
         :src="configStore.electionStatus?.theme?.logo"
+        style="height: 2.4rem; max-width: 11rem; width: auto; object-fit: scale-down"
         :alt="$t('header.election_logo_alt')"
         loading="lazy"
       />
