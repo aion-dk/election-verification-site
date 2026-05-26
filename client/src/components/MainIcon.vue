@@ -1,4 +1,6 @@
 <script setup lang="ts">
+defineOptions({ inheritAttrs: false });
+
 defineProps({
   icon: {
     type: String,
@@ -8,7 +10,11 @@ defineProps({
 </script>
 
 <template>
-  <AVIcon :icon="icon" class="MainIcon" aria-hidden="true" />
+  <span v-bind="$attrs">
+    <span id="main-icon">
+      <AVIcon :icon="icon" class="MainIcon" aria-hidden="true" />
+    </span>
+  </span>
 </template>
 
 <style scoped>
