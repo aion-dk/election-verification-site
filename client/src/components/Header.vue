@@ -139,6 +139,7 @@ onBeforeUnmount(() => {
       </a>
 
       <DropDown
+        id="localizationDropdownMenu"
         class="Header__Locales"
         :options="availableLocales"
         @change="(value) => setLocale(value)"
@@ -230,6 +231,13 @@ onBeforeUnmount(() => {
   color: var(--bs-gray-700);
   border: none;
   background-color: white;
+}
+
+:deep(.Header__Locales select) {
+  border: none;
+  background: transparent;
+  appearance: none;
+  padding: 0.3rem 1rem;
 }
 
 html[dir="ltr"] .Header__Locales {

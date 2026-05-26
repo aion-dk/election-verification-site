@@ -113,8 +113,6 @@ const setLanguage = async (conferenceClient: any) => {
 };
 
 const setTheme = async (conferenceClient: any) => {
-  const tempCSS = await conferenceClient.getStylingData();
-  // console.log("temp css", tempCSS);
 
   if (!configStore.electionStatus || !configStore.electionTheme) {
     // Setting Splash Image
