@@ -19,7 +19,7 @@ const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
 const route = useRoute();
 
-const unifiedCode = ref(null);
+const ballotCode = ref(null);
 
 const receipt = ref(null);
 
@@ -27,14 +27,14 @@ const error = ref(null);
 
 const steps = ref([1, 2]);
 
-const receiptInputDisabled = computed(() => !!unifiedCode.value);
+const receiptInputDisabled = computed(() => !!ballotCode.value);
 
 const mainInputDisabled = computed(() => !!receipt.value);
 
 const button = computed(() => {
   return {
     label: t("views.ballot_finder.button"),
-    disabled: !unifiedCode.value && !receipt.value,
+    disabled: !ballotCode.value && !receipt.value,
   };
 });
 
@@ -44,7 +44,7 @@ const updateReceipt = async (files: File[]) => {
 
   if (!files.length) {
     receipt.value = null;
-    unifiedCode.value = null;
+    ballotCode.value = null;
     error.value = null;
   } else {
     receipt.value = files[0];
@@ -60,7 +60,7 @@ const updateReceipt = async (files: File[]) => {
         );
 
         if (receiptStore.receiptValid) {
-          unifiedCode.value = receiptExtractor.trackingCode;
+          ballotCode.value = receiptExtractor.trackingCode;
           lookupBallot();
         } else {
           router.push(
@@ -78,7 +78,7 @@ const lookupBallot = async () => {
   error.value = null;
 
   try {
-    await verificationStore.findBallot(unifiedCode.value);
+    await verificationStore.findBallot(ballotCode.value);
     verificationStore.generatePairingCode();
 
     setTimeout(async () => {
@@ -87,7 +87,7 @@ const lookupBallot = async () => {
       await router.push({
         name: "BallotVerifierFound",
         params: {
-          verificationCode: unifiedCode.value,
+          verificationCode: ballotCode.value,
         },
       });
     }, 2000);
@@ -161,7 +161,7 @@ onMounted(() => {
             </label>
             <input
               type="text"
-              v-model="unifiedCode"
+              v-model="ballotCode"
               class="form-control p-3 fs-5 rounded-3"
               id="unified-code"
               :placeholder="t('views.ballot_finder.input_placeholder')"
