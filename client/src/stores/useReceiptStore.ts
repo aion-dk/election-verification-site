@@ -10,14 +10,16 @@ export default defineStore("receiptStore", () => {
 
   const avVerifier = ref(null);
   const receiptValid = ref(null);
+  const trackingCodeMatching = ref(null);
 
   function reset() {
     receiptValid.value = null;
+    trackingCodeMatching.value = null;
   }
 
-  function validateReceipt(receipt: string, trackingCode: string) {
+  function validateReceipt(receipt: string) {
     try {
-      avVerifier.value.validateReceipt(receipt, trackingCode);
+      avVerifier.value.validateReceipt(receipt);
       receiptValid.value = true;
     } catch (err) {
       // TODO: Catch AvClientError to mark the receipt invalid. You can use error messages to display the problem.
@@ -26,10 +28,22 @@ export default defineStore("receiptStore", () => {
     }
   }
 
+  function validateTrackingCode(receipt: string, trackingCode: string) {
+    try {
+      avVerifier.value.validateReceiptTrackingCode(receipt, trackingCode);
+      trackingCodeMatching.value = true;
+    } catch (err) {
+      console.error(err);
+      trackingCodeMatching.value = false;
+    }
+  }
+
   return {
     receiptValid,
+    trackingCodeMatching,
     reset,
     setupAVVerifier,
     validateReceipt,
+    validateTrackingCode,
   };
 });

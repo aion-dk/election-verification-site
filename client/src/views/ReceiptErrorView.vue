@@ -16,7 +16,8 @@ const route = useRoute();
 const steps = [1, 2];
 
 const translationPath = computed(() =>
-  receiptStore.receiptValid ? "vote_not_found" : "receipt_invalid",
+  // TODO: this needs to be tested
+  (receiptStore.receiptValid && receiptStore.trackingCodeMatching) ? "vote_not_found" : "receipt_invalid",
 );
 
 const contactUrl = computed(

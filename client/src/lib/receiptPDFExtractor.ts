@@ -4,6 +4,7 @@ export class ReceiptPDFExtractor {
   private readonly file: File;
   public receipt: string;
   public trackingCode: string;
+  public ballotCode: string;
 
   constructor(file: File) {
     this.file = file;
@@ -28,13 +29,17 @@ export class ReceiptPDFExtractor {
           const trackingCode = infoDict.lookup(
             PDFName.of("TrackingCode"),
           ) as PDFHexString;
+          const ballotCode = infoDict.lookup(
+            PDFName.of("BallotCode"),
+          ) as PDFHexString;
 
-          if (receipt == null || trackingCode == null) {
+          if (receipt == null || (trackingCode == null && ballotCode == null)) {
             reject("Invalid receipt file");
           }
 
           this.receipt = receipt.decodeText();
-          this.trackingCode = trackingCode.decodeText();
+          this.trackingCode = trackingCode?.decodeText();
+          this.ballotCode = ballotCode?.decodeText();
 
           resolve();
         } catch (err) {

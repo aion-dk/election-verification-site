@@ -29,6 +29,11 @@ export default defineStore("verificationStore", () => {
     ballotStatus.value = null;
   }
 
+  // TODO: this needs to be tested to see that it woks even if "hardcoded" a tracking code
+  function setTrackingCode(code: string) {
+    trackingCode.value = code;
+  }
+
   async function findBallot(verificationCode: string) {
     ballotCode.value = verificationCode;
     ballotAddress.value = await avVerifier.value.findBallot(verificationCode);
@@ -85,5 +90,6 @@ export default defineStore("verificationStore", () => {
     trackingCode,
     ballotStatus,
     reset,
+    setTrackingCode
   };
 });
