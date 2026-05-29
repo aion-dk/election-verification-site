@@ -30,7 +30,7 @@ onMounted(async () => {
       await verificationStore.setupAVVerifier(configStore.boardSlug);
       await verificationStore.findBallot(ballotCode.value);
 
-      verificationStore.pollForCastBallot();
+      await verificationStore.pollForCastBallot();
     } catch (e) {
       console.error(e);
       await router.push({
