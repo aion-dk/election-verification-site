@@ -14,7 +14,7 @@ const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
 const route = useRoute();
 const ballot = ref<EVSBallot>(null);
-const unifiedCode = ref(null);
+const ballotCode = ref(null);
 
 const cancel = () => {
   router.push(
@@ -22,9 +22,25 @@ const cancel = () => {
   );
 };
 
-onMounted(() => {
+onMounted(async () => {
+  ballotCode.value = route.params.trackingCode.toString();
+  if (!verificationStore.trackingCode) {
+    try {
+      verificationStore.reset();
+      await verificationStore.setupAVVerifier(configStore.boardSlug);
+      await verificationStore.findBallot(ballotCode.value);
+
+      verificationStore.pollForCastBallot();
+    } catch (e) {
+      console.error(e);
+      await router.push({
+        name: "BallotVerificationLanding",
+      });
+    }
+  }
+
+  await verificationStore.loadBallotStatus();
   ballot.value = verificationStore.ballotStatus;
-  unifiedCode.value = route.params.trackingCode.toString();
 });
 </script>
 
@@ -38,7 +54,7 @@ onMounted(() => {
     >
       <template v-slot:action>
         <TrackedBallotManager
-          :tracking-code="unifiedCode"
+          :tracking-code="ballotCode"
           @cancel="cancel"
         />
 

@@ -26,13 +26,6 @@ onMounted(async () => {
   await setConfigurations(organisationSlug, electionSlug);
   setTitle();
 
-  if (route.params.trackingCode) {
-    await ballotStore.loadBallot(
-      route.params.trackingCode.toString(),
-      configStore.boardSlug,
-    );
-  }
-
   isLoaded.value = true;
 });
 

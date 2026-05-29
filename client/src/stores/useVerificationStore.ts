@@ -49,6 +49,15 @@ export default defineStore("verificationStore", () => {
     }
   }
 
+  async function pollForCastBallot() {
+    const [decision, address] = await avVerifier.value.pollForBallotDecision();
+     if (decision === "cast") {
+       trackingCode.value = address;
+     } else {
+        throw new Error("Unexpected status from pollForSpoilRequest: " + decision);
+    }
+  }
+
   async function loadBallotStatus() {
     try {
       const res = await avVerifier.value.checkBallotStatus(trackingCode.value);
@@ -68,6 +77,7 @@ export default defineStore("verificationStore", () => {
     setupAVVerifier,
     findBallot,
     loadBallotStatus,
+    pollForCastBallot,
     pairingCode,
     ballot,
     ballotAddress,

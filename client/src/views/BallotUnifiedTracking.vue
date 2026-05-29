@@ -111,12 +111,9 @@ async function checkForPairingCode(store: any) {
 async function checkForTrackingCode(store: any) {
   if (!store.trackingCode) return;
 
-  await verificationStore.loadBallotStatus();
-  if (verificationStore.ballotStatus?.status) {
-    await router.push(
-        `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${store.ballotCode}`,
-    );
-  }
+  await router.push(
+      `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${store.ballotCode}`,
+  );
 }
 
 watch(verificationStore, async (newStore) => {

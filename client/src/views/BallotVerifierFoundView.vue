@@ -29,12 +29,9 @@ async function checkForPairingCode(store: any) {
 async function checkForTrackingCode(store: any) {
   if (!store.trackingCode) return;
 
-  await verificationStore.loadBallotStatus();
-  if (verificationStore.ballotStatus?.status) {
-    await router.push(
-        `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${ballotCode.value}`,
-    );
-  }
+  await router.push(
+      `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${ballotCode.value}`,
+  );
 }
 
 const cancel = () => {
