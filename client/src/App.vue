@@ -2,7 +2,6 @@
 import { ref, onMounted } from "vue";
 import { RouterView, useRoute } from "vue-router";
 import useConfigStore from "./stores/useConfigStore";
-import useBallotStore from "./stores/useBallotStore";
 import { useConferenceConnector } from "./lib/conferenceServices";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
@@ -15,7 +14,6 @@ import { defaultTheme } from "./assets/theme";
 import { SupportedLocale } from "@/Types";
 
 const i18n = useI18n();
-const ballotStore = useBallotStore();
 const configStore = useConfigStore();
 const route = useRoute();
 const isLoaded = ref(false);
