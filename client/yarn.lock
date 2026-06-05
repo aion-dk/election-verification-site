@@ -42,10 +42,10 @@
     "@noble/hashes" "^1.8.0"
     sjcl-with-all "^1.0.8"
 
-"@assemblyvoting/electa-ui@^5.6.0":
-  version "5.6.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.6.0.tgz#3aa901806f1fd3fe00f6955c6b583304f5921007"
-  integrity sha512-gU0Q5x1WUgRRxVbYRM1XqDT4EM+bB6rCN6EzWmyn5sPu4i/bjezlOZID1KHiq+L+KtOfJ8PshZ/BMa4zPmvZrA==
+"@assemblyvoting/electa-ui@^5.6.2-beta.11":
+  version "5.6.2-beta.11"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.6.2-beta.11.tgz#1e3881d78dc7843ba87decf23754e56db90f7e3d"
+  integrity sha512-d8A06Fy2ou0vrhrqMlJPCm2lqG/IZJa7w+jmrmZ8HfUCY3DvJ0KeTal/qKZRLFghWC7ma/46JDrgSuJLkxXJzA==
   dependencies:
     "@fontsource/open-sans" "^5.2.7"
     "@fontsource/pt-mono" "^5.2.8"
@@ -60,10 +60,10 @@
     vue "^3.5.29"
     vue-i18n "^11.2.8"
 
-"@assemblyvoting/js-client@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-6.0.0.tgz#340a845e9672a10631e1035546ac8e779e640811"
-  integrity sha512-ecNK10dQhESf2IGHPqApyCXSMHVYnhigB7SEnmX77RIQKVWtewYtmzFmeSLzY7gmIiB+2xn0AyeEURBjaAXuQA==
+"@assemblyvoting/js-client@^6.1.0":
+  version "6.2.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-6.2.0.tgz#287a3d5db1a4bbbc95242466698295c8e884d776"
+  integrity sha512-tBhdilIdE4OgIcacEy+odKHQR2SNyZ4hYRjtGqKDdbfqRP/lvAAgl3zyEL0pES2UEGjTyvf1NLCzeIOAITMo8w==
   dependencies:
     "@assemblyvoting/av-crypto" "^1.1.1"
     axios "^1.13.6"
@@ -72,10 +72,10 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@assemblyvoting/types@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.0.tgz#e62cead4802122329cb86085b22dbcfbe6340917"
-  integrity sha512-NlevEP/feI/LzAywywfoe0E2cJ0JKlF9Sii9X42T06R5DqTbdPFyqM2RqCoixmkCWc+JIk5psU+2XkfnHT5wgw==
+"@assemblyvoting/types@^1.0.1":
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.6.tgz#d9969ffcf22d01788f8b9ceff8f214a4929d6971"
+  integrity sha512-igYESo5H7Q2zIzN89RT7G/zb+sQ9DH2QhdGb0xmANRJSLNUv1+JQVSNcgsC6mEW0d1ztEcg6eq6+b0+jpfyVsg==
 
 "@axe-core/playwright@^4.10.1":
   version "4.11.1"

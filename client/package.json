@@ -21,8 +21,8 @@
     "lint:ci": "eslint ./src/**/*"
   },
   "dependencies": {
-    "@assemblyvoting/electa-ui": "^5.6.0",
-    "@assemblyvoting/js-client": "^6.0.0",
+    "@assemblyvoting/electa-ui": "^5.6.2-beta.11",
+    "@assemblyvoting/js-client": "^6.1.0",
     "axios": "^1.15.2",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
@@ -38,7 +38,7 @@
     "vue-tsc": "^3.2.5"
   },
   "devDependencies": {
-    "@assemblyvoting/types": "^1.0.0",
+    "@assemblyvoting/types": "^1.0.1",
     "@axe-core/playwright": "^4.10.1",
     "@pinia/testing": "^1.0.3",
     "@playwright/test": "^1.49.1",

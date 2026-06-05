@@ -60,10 +60,6 @@ const setConfigurations = async (
 
   configStore.setBoardSlug((await conferenceClient.getStatus()).boardSlug);
 
-  const conferenceResponse = await conferenceClient.getStatus();
-
-  console.log("conferenceResponse", conferenceResponse);
-
   await configStore.loadConfig();
   await setLanguage(conferenceClient);
   await setTheme(conferenceClient);

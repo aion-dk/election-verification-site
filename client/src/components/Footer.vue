@@ -14,11 +14,6 @@ const customFooterHtml = computed(() => {
   const raw = cosmetics?.footerHtml?.trim() || null;
   return raw ? DOMPurify.sanitize(raw) : null;
 });
-
-console.log(customFooterHtml);
-
-
-
 </script>
 
 <template>
