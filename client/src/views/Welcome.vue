@@ -20,26 +20,26 @@ const goToTracker = () => {
 </script>
 
 <template>
-  <div class="Welcome">
-    <div class="Welcome__Description_Desktop">
-      <div class="Welcome__Description_Desktop_Container">
-        <h1 class="Welcome__Description_Desktop_Title">
+  <div class="Welcome" id="welcome">
+    <div class="Welcome__Description_Desktop" id="welcome-description-desktop">
+      <div class="Welcome__Description_Desktop_Container" id="welcome-desktop-title-container">
+        <h1 class="Welcome__Description_Desktop_Title" id="welcome-desktop-title">
           {{ $t("views.welcome.title") }}
         </h1>
       </div>
 
-      <div class="Welcome__Description_Desktop_Container">
-        <h2 class="Welcome__Description_Desktop_Subtitle">
+      <div class="Welcome__Description_Desktop_Container" id="welcome-desktop-subtitle-container">
+        <h2 class="Welcome__Description_Desktop_Subtitle" id="welcome-desktop-subtitle">
           {{ configStore.election.title[$i18n.locale] }}
         </h2>
 
-        <p class="Welcome__Description_Desktop_About">
+        <p class="Welcome__Description_Desktop_About" id="welcome-desktop-about">
           {{ $t("views.welcome.description") }}
         </p>
       </div>
     </div>
 
-    <div class="Welcome__Gradient theme-gradient">
+    <div class="Welcome__Gradient theme-gradient" id="welcome-gradient">
       <img
         v-if="configStore.electionStatus?.theme?.splash"
         :src="configStore.electionStatus?.theme?.splash"
@@ -47,25 +47,28 @@ const goToTracker = () => {
         class="Welcome__Splash"
         loading="lazy"
         aria-hidden="true"
+        id="welcome-splash"
       />
     </div>
 
     <section id="main_content" class="Welcome__Content">
-      <div class="Welcome__Heading_Content">
+      <div class="Welcome__Heading_Content" id="welcome-heading-content">
         <div
           class="Welcome__Card Welcome__Card_Overrides Welcome__Card_Desktop"
+          id="welcome-cards"
         >
-          <div class="Welcome__Card_Item">
+          <div class="Welcome__Card_Item" id="welcome-tester-card-item">
             <AVIcon
               icon="envelope-open-text"
               class="Welcome__Card_Icon"
               aria-hidden="true"
+              id="welcome-tester-icon"
             />
-            <div>
-              <h3 class="Welcome__Card_Title">
+            <div id="welcome-tester-card-content">
+              <h3 class="Welcome__Card_Title" id="welcome-tester-title">
                 {{ $t("views.welcome.ballot_tester.title") }}
               </h3>
-              <p class="Welcome__Card_Description">
+              <p class="Welcome__Card_Description" id="welcome-tester-description">
                 {{ $t("views.welcome.ballot_tester.description") }}
               </p>
               <button
@@ -80,19 +83,20 @@ const goToTracker = () => {
             </div>
           </div>
 
-          <div class="Welcome__Card_Line" />
+          <div class="Welcome__Card_Line" id="welcome-card-divider" />
 
-          <div class="Welcome__Card_Item">
+          <div class="Welcome__Card_Item" id="welcome-tracker-card-item">
             <AVIcon
               icon="magnifying-glass"
               class="Welcome__Card_Icon"
               aria-hidden="true"
+              id="welcome-tracker-icon"
             />
-            <div>
-              <h3 class="Welcome__Card_Title">
+            <div id="welcome-tracker-card-content">
+              <h3 class="Welcome__Card_Title" id="welcome-tracker-title">
                 {{ $t("views.welcome.ballot_tracker.title") }}
               </h3>
-              <p class="Welcome__Card_Description">
+              <p class="Welcome__Card_Description" id="welcome-tracker-description">
                 {{ $t("views.welcome.ballot_tracker.description") }}
               </p>
               <button
@@ -110,35 +114,35 @@ const goToTracker = () => {
       </div>
     </section>
 
-    <section class="Welcome__About">
-      <h4 class="Welcome__About_Title">
+    <section class="Welcome__About" id="welcome-about">
+      <h4 class="Welcome__About_Title" id="welcome-about-title">
         {{ $t("views.welcome.about.title") }}
       </h4>
-      <div class="Welcome__Card Welcome__Description">
-        <p>{{ $t("views.welcome.description") }}</p>
+      <div class="Welcome__Card Welcome__Description" id="welcome-about-description">
+        <p id="welcome-about-description-text">{{ $t("views.welcome.description") }}</p>
       </div>
-      <div>
-        <div class="Welcome__Card Welcome__Card_Overrides">
-          <h5 class="Welcome__About_Subtitle">
+      <div id="welcome-about-cards">
+        <div class="Welcome__Card Welcome__Card_Overrides" id="welcome-about-tester-card">
+          <h5 class="Welcome__About_Subtitle" id="welcome-about-tester-subtitle">
             {{ $t("views.welcome.about.ballot_tester") }}
           </h5>
-          <p class="Welcome__About_Description">
+          <p class="Welcome__About_Description" id="welcome-about-tester-text">
             {{ $t("views.welcome.about.ballot_tester_text") }}
           </p>
         </div>
-        <div class="Welcome__Card Welcome__Card_Overrides">
-          <h5 class="Welcome__About_Subtitle">
+        <div class="Welcome__Card Welcome__Card_Overrides" id="welcome-about-tracker-card">
+          <h5 class="Welcome__About_Subtitle" id="welcome-about-tracker-subtitle">
             {{ $t("views.welcome.about.ballot_tracker") }}
           </h5>
-          <p class="Welcome__About_Description">
+          <p class="Welcome__About_Description" id="welcome-about-tracker-text">
             {{ $t("views.welcome.about.ballot_tracker_text") }}
           </p>
         </div>
-        <div class="Welcome__Card Welcome__Card_Overrides">
-          <h5 class="Welcome__About_Subtitle">
+        <div class="Welcome__Card Welcome__Card_Overrides" id="welcome-about-audit-card">
+          <h5 class="Welcome__About_Subtitle" id="welcome-about-audit-subtitle">
             {{ $t("views.welcome.about.audit_log") }}
           </h5>
-          <p class="Welcome__About_Description">
+          <p class="Welcome__About_Description" id="welcome-about-audit-text">
             {{ $t("views.welcome.about.audit_log_text") }}
           </p>
         </div>
@@ -149,6 +153,7 @@ const goToTracker = () => {
         class="Welcome__Brand_Logo"
         :src="configStore.electionStatus?.theme?.logo"
         :alt="$t('header.election_logo_alt')"
+        id="welcome-brand-logo"
       />
     </section>
   </div>
@@ -167,7 +172,6 @@ const goToTracker = () => {
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  box-sizing:;
   box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.05);
 }
 
@@ -285,17 +289,8 @@ const goToTracker = () => {
 }
 
 @media only screen and (min-width: 48rem) {
-  .Welcome__Card_Line {
-    width: 80%;
-    margin: 6rem 0;
-  }
-
   .Welcome__Button {
     margin-bottom: 1.25rem;
-  }
-
-  .Welcome__Brand_Logo {
-    width: 30%;
   }
 
   .Welcome__Brand_Logo {
