@@ -2,6 +2,17 @@ export type * from "@assemblyvoting/types";
 import type { ElectionStatusResponse } from "@assemblyvoting/types";
 import type { DefineLocaleMessage, Locale } from "vue-i18n";
 
+declare module "@assemblyvoting/types" {
+  interface VotingPortal {
+    tabName?: Record<string, string>;
+    faviconUrl?: string;
+  }
+
+  interface BasicElectionStatus {
+    votingPortal?: VotingPortal;
+  }
+}
+
 export interface EVSBallot {
   activities: string[];
   trackingCode: string;
