@@ -8,16 +8,17 @@ defineProps({
 </script>
 
 <template>
-  <div class="Error">
-    <span class="Error__Title">
+  <div class="Error" :id="`error-${errorPath}`">
+    <span class="Error__Title" :id="`error-title-${errorPath}`">
       <AVIcon
         icon="triangle-exclamation"
         class="Error__Icon_Overrides"
         aria-hidden="true"
+        :id="`error-icon-${errorPath}`"
       />
-      <span>{{ $t(`errors.${errorPath}.title`) }}</span>
+      <span :id="`error-title-text-${errorPath}`">{{ $t(`errors.${errorPath}.title`) }}</span>
     </span>
-    <p class="Error__Description">
+    <p class="Error__Description" :id="`error-description-${errorPath}`">
       {{ $t(`errors.${errorPath}.description`) }}
     </p>
   </div>

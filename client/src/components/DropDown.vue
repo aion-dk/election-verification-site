@@ -31,12 +31,14 @@ defineProps({
       :disabled="disabled"
       :aria-label="$t('header.change_locale.label')"
       @change="selectEmit"
+      :id="`${id}-select`"
     >
       <option
         v-for="option in options"
         :value="option.value"
         :key="option.value"
         :selected="option.selected"
+        :id="`${id}-option-${option.value}`"
       >
         {{ option.display || option.value }}
       </option>
@@ -46,6 +48,6 @@ defineProps({
 
 <style type="text/css" scoped>
 select {
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
 }
 </style>

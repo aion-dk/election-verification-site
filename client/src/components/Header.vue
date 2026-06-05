@@ -67,10 +67,11 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="Header__Navbar">
+  <div class="Header__Navbar" id="header-navbar">
     <RouterLink
       class="Header__Election_Info"
       :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}`"
+      id="header-election-info-link"
     >
       <img
         id="header-logo"
@@ -81,9 +82,9 @@ onBeforeUnmount(() => {
         :alt="$t('header.election_logo_alt')"
         loading="lazy"
       />
-      <div class="Header__Text">
-        <span class="Header__Title">{{ $t("header.dbas") }}</span>
-        <span class="Header__Subtitle">{{ electionName }}</span>
+      <div class="Header__Text" id="header-text">
+        <span class="Header__Title" id="header-title">{{ $t("header.dbas") }}</span>
+        <span class="Header__Subtitle" id="header-subtitle">{{ electionName }}</span>
       </div>
     </RouterLink>
 
@@ -93,12 +94,14 @@ onBeforeUnmount(() => {
       :class="{
         Header__Show: !isMenuOpened,
       }"
+      id="header-nav"
     >
       <RouterLink
         class="Header__Link"
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`"
         @click="toggleMenu(true)"
+        id="header-link-verification"
       >
         {{ $t("header.verification") }}
       </RouterLink>
@@ -108,6 +111,7 @@ onBeforeUnmount(() => {
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`"
         @click="toggleMenu(true)"
+        id="header-link-tracking"
       >
         {{ $t("header.tracking") }}
       </RouterLink>
@@ -117,6 +121,7 @@ onBeforeUnmount(() => {
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/logs`"
         @click="toggleMenu()"
+        id="header-link-logs"
       >
         {{ $t("header.logs") }}
       </RouterLink>
@@ -126,6 +131,7 @@ onBeforeUnmount(() => {
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/help`"
         @click="toggleMenu()"
+        id="header-link-help"
       >
         {{ $t("header.help") }}
       </RouterLink>
@@ -135,6 +141,7 @@ onBeforeUnmount(() => {
         class="Header__Link"
         :href="contactUrl"
         target="_blank"
+        id="header-link-contact"
       >
         {{ $t("header.contact") }}
         <AVIcon icon="arrow-up-right-from-square" aria-hidden="true" />
@@ -148,12 +155,13 @@ onBeforeUnmount(() => {
       />
     </nav>
 
-    <div class="Header__Hamburger_Btn">
+    <div class="Header__Hamburger_Btn" id="header-hamburger-btn">
       <AVAnimatedMenuButton
         variant="cross"
         theme="light"
         class="bg-white"
         v-model:is-opened="isMenuOpened"
+        id="header-hamburger-menu-button"
       />
     </div>
   </div>
@@ -313,7 +321,6 @@ html[dir="rtl"] .Header__Locales {
   }
 
   .Header__Links {
-    display: block;
     position: static;
     display: flex;
     flex-direction: row;
