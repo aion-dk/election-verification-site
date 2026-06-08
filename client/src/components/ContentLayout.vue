@@ -26,7 +26,7 @@ defineProps({
 
 <template>
   <div :id="id" class="ContentLayout">
-    <section id="main_content" class="ContentLayout__Action">
+    <section id="main_content" class="ContentLayout__Action" tabindex="-1">
       <p v-if="breadcrumb" class="ContentLayout__Breadcrumb" id="content-layout-breadcrumb">
         {{ breadcrumb }}
       </p>

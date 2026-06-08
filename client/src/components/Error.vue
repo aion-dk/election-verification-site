@@ -1,24 +1,26 @@
 <script lang="ts" setup>
-defineProps({
+const props = defineProps({
   errorPath: {
     type: String,
     required: true,
   },
 });
+
+const safeId = (prefix: string) => `${prefix}-${props.errorPath.replace(/\./g, '-')}`;
 </script>
 
 <template>
-  <div class="Error" :id="`error-${errorPath}`">
-    <span class="Error__Title" :id="`error-title-${errorPath}`">
+  <div class="Error" :id="safeId('error')">
+    <span class="Error__Title" :id="safeId('error-title')">
       <AVIcon
         icon="triangle-exclamation"
         class="Error__Icon_Overrides"
         aria-hidden="true"
-        :id="`error-icon-${errorPath}`"
+        :id="safeId('error-icon')"
       />
-      <span :id="`error-title-text-${errorPath}`">{{ $t(`errors.${errorPath}.title`) }}</span>
+      <span :id="safeId('error-title-text')">{{ $t(`errors.${errorPath}.title`) }}</span>
     </span>
-    <p class="Error__Description" :id="`error-description-${errorPath}`">
+    <p class="Error__Description" :id="safeId('error-description')">
       {{ $t(`errors.${errorPath}.description`) }}
     </p>
   </div>

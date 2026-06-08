@@ -11,7 +11,7 @@ defineProps({
 
 <template>
   <span v-bind="$attrs">
-    <span id="main-icon">
+    <span class="main-icon">
       <AVIcon :icon="icon" class="MainIcon" aria-hidden="true" />
     </span>
   </span>

@@ -17,11 +17,11 @@ const customFooterHtml = computed(() => {
 </script>
 
 <template>
-  <footer id="base-footer" :class="customFooterHtml ? 'Footer Footer--custom Footer__Text' : 'Footer'">
+  <footer id="base-footer" :class="customFooterHtml ? 'Footer Footer--custom' : 'Footer'">
     <div v-if="customFooterHtml" v-html="customFooterHtml" id="footer-custom-content" />
     <div v-else class="Footer__Content" id="footer-content">
       <span class="Footer__Text" id="footer-powered-by">{{ $t("footer.powered_by") }}</span>
-      <a href="https://www.lumiglobal.com/" target="_blank" id="footer-av-link">
+      <a href="https://www.lumiglobal.com/" target="_blank" rel="noopener noreferrer" id="footer-av-link">
         <img
           class="Footer__Image"
           :src="avlogo"

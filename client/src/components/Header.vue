@@ -141,6 +141,7 @@ onBeforeUnmount(() => {
         class="Header__Link"
         :href="contactUrl"
         target="_blank"
+        rel="noopener noreferrer"
         id="header-link-contact"
       >
         {{ $t("header.contact") }}
