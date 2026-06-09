@@ -67,8 +67,12 @@ onMounted(() => {
   >
     <template v-slot:action>
       <MainIcon icon="circle-question" id="help-main-icon" />
-      <h2 class="HelpView__Title" id="help-title">{{ $t("views.faq.title") }}</h2>
-      <p class="HelpView__Description" id="help-description">{{ $t("views.faq.description") }}</p>
+      <h2 class="HelpView__Title" id="help-title">
+        {{ $t("views.faq.title") }}
+      </h2>
+      <p class="HelpView__Description" id="help-description">
+        {{ $t("views.faq.description") }}
+      </p>
 
       <nav
         class="HelpView__Category_Navigation"

@@ -1,6 +1,12 @@
 <template>
-  <div class="BallotVerifierContest" :id="`ballot-verifier-contest-${contestSelection.reference}`">
-    <h3 class="BallotVerifierContest__Title" :id="`contest-title-${contestSelection.reference}`">
+  <div
+    class="BallotVerifierContest"
+    :id="`ballot-verifier-contest-${contestSelection.reference}`"
+  >
+    <h3
+      class="BallotVerifierContest__Title"
+      :id="`contest-title-${contestSelection.reference}`"
+    >
       {{ contest.title[$i18n.locale as SupportedLocale] }}
     </h3>
     <p

@@ -102,13 +102,18 @@ const button = computed(() => {
       </h3>
       <h4 class="TrackingLanding__Subtitle" id="tracking-subtitle">
         {{ $t("views.tracking.subtitle") }}
-        <strong id="tracking-subtitle-strong">{{ $t("views.tracking.subtitle_strong") }}</strong>
+        <strong id="tracking-subtitle-strong">{{
+          $t("views.tracking.subtitle_strong")
+        }}</strong>
       </h4>
       <p class="TrackingLanding__Description" id="tracking-description">
         {{ $t("views.tracking.description") }}
       </p>
       <Error v-if="error" :errorPath="error" id="tracking-error" />
-      <div class="TrackingLanding__Action_Container" id="tracking-action-container">
+      <div
+        class="TrackingLanding__Action_Container"
+        id="tracking-action-container"
+      >
         <div class="TrackingLanding__ActionItem" id="tracking-action-item">
           <div class="mb-3 w-100" id="tracking-receipt-container">
             <p class="form-label" id="tracking-receipt-label">
@@ -131,7 +136,11 @@ const button = computed(() => {
           </div>
 
           <div class="mb-3 w-100" id="tracking-code-container">
-            <label for="tracking-code" class="form-label" id="tracking-code-label">
+            <label
+              for="tracking-code"
+              class="form-label"
+              id="tracking-code-label"
+            >
               {{ $t("views.tracking.tracking_input_label") }}
               <AVIcon
                 icon="circle-question"
@@ -171,7 +180,11 @@ const button = computed(() => {
         class="TrackingLanding__Step"
         :id="`tracking-step-${step}`"
       >
-        <span class="TrackingLanding__Step_Index" :id="`tracking-step-index-${step}`">{{ step }}</span>
+        <span
+          class="TrackingLanding__Step_Index"
+          :id="`tracking-step-index-${step}`"
+          >{{ step }}</span
+        >
         <p
           v-html="$t(`views.tracking.help.steps.step_${step}`)"
           class="TrackingLanding__Step_Text text-contrast"

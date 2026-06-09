@@ -22,8 +22,18 @@ function submitForm(event: Event) {
   </p>
 
   <form @submit="submitForm" id="missing-slug-form">
-    <input type="text" name="election-slug" id="election-slug" v-model="_electionSlug" />
+    <input
+      type="text"
+      name="election-slug"
+      id="election-slug"
+      v-model="_electionSlug"
+    />
 
-    <input type="submit" name="submit-election-slug" id="submit-election-slug" value="Continue" />
+    <input
+      type="submit"
+      name="submit-election-slug"
+      id="submit-election-slug"
+      value="Continue"
+    />
   </form>
 </template>

@@ -63,9 +63,16 @@ onMounted(() => {
       :logo="configStore.electionStatus?.theme?.logo"
     >
       <template v-slot:action>
-        <div v-if="verificationStore.ballot" class="BallotVerifier__Content" id="verifier-spoiled-content">
+        <div
+          v-if="verificationStore.ballot"
+          class="BallotVerifier__Content"
+          id="verifier-spoiled-content"
+        >
           <MainIcon icon="spell-check" id="verifier-spoiled-icon" />
-          <h3 class="BallotVerifier__Title_Secondary" id="verifier-spoiled-title">
+          <h3
+            class="BallotVerifier__Title_Secondary"
+            id="verifier-spoiled-title"
+          >
             {{ $t("views.verifier.spoiled.title") }}
           </h3>
           <p class="BallotVerifier__Title" id="verifier-spoiled-description">
@@ -80,7 +87,6 @@ onMounted(() => {
             :key="contestSelection.reference"
             :contest-selection="contestSelection"
             :index="index"
-            :id="`verifier-contest-${index}`"
           />
 
           <button
@@ -94,13 +100,25 @@ onMounted(() => {
           </button>
         </div>
 
-        <div v-else class="BallotVerifier__Content" id="verifier-inprogress-content">
+        <div
+          v-else
+          class="BallotVerifier__Content"
+          id="verifier-inprogress-content"
+        >
           <MainIcon icon="asterisk" id="verifier-inprogress-icon" />
-          <h3 class="BallotVerifier__Title BallotVerifier__Title_Passkey" id="verifier-inprogress-title">
+          <h3
+            class="BallotVerifier__Title BallotVerifier__Title_Passkey"
+            id="verifier-inprogress-title"
+          >
             {{ $t("views.verifier.inprogress.title") }}
           </h3>
 
-          <div v-if="showAlert" class="BallotVerifier__Alert" role="alert" id="verifier-alert">
+          <div
+            v-if="showAlert"
+            class="BallotVerifier__Alert"
+            role="alert"
+            id="verifier-alert"
+          >
             <AVIcon
               icon="triangle-exclamation"
               class="BallotVerifier__Alert_Icon"
@@ -108,22 +126,32 @@ onMounted(() => {
               id="verifier-alert-icon"
             />
             <div id="verifier-alert-content">
-              <span class="BallotVerifier__Alert_Title" id="verifier-alert-title">{{
-                $t("components.timedown.alert.title")
-              }}</span>
-              <span class="BallotVerifier__Alert_Text" id="verifier-alert-text">{{
-                $t("components.timedown.alert.text")
-              }}</span>
+              <span
+                class="BallotVerifier__Alert_Title"
+                id="verifier-alert-title"
+                >{{ $t("components.timedown.alert.title") }}</span
+              >
+              <span
+                class="BallotVerifier__Alert_Text"
+                id="verifier-alert-text"
+                >{{ $t("components.timedown.alert.text") }}</span
+              >
             </div>
           </div>
 
-          <p class="BallotVerifier__Description" id="verifier-inprogress-description">
+          <p
+            class="BallotVerifier__Description"
+            id="verifier-inprogress-description"
+          >
             {{ $t("views.verifier.inprogress.description") }}
           </p>
           <code class="BallotVerifier__Code" id="verifier-pairing-code">{{
             verificationStore.pairingCode
           }}</code>
-          <p class="BallotVerifier__Secondary_Description" id="verifier-inprogress-secondary-description">
+          <p
+            class="BallotVerifier__Secondary_Description"
+            id="verifier-inprogress-secondary-description"
+          >
             {{ $t("views.verifier.inprogress.secondary_description") }}
           </p>
         </div>
@@ -136,10 +164,16 @@ onMounted(() => {
             aria-hidden="true"
             id="verifier-spoiled-help-icon"
           />
-          <h3 class="BallotVerifier__Help_Title text-contrast" id="verifier-spoiled-help-title">
+          <h3
+            class="BallotVerifier__Help_Title text-contrast"
+            id="verifier-spoiled-help-title"
+          >
             {{ $t("views.verifier.spoiled.help.p1.title") }}
           </h3>
-          <p class="BallotVerifier__Help_Description text-contrast" id="verifier-spoiled-help-description">
+          <p
+            class="BallotVerifier__Help_Description text-contrast"
+            id="verifier-spoiled-help-description"
+          >
             {{ $t("views.verifier.spoiled.help.p1.description") }}
           </p>
         </div>
@@ -151,10 +185,16 @@ onMounted(() => {
             aria-hidden="true"
             id="verifier-inprogress-help-icon"
           />
-          <h3 class="BallotVerifier__Help_Title text-contrast" id="verifier-inprogress-help-title">
+          <h3
+            class="BallotVerifier__Help_Title text-contrast"
+            id="verifier-inprogress-help-title"
+          >
             {{ $t("views.verifier.inprogress.help.p1.title") }}
           </h3>
-          <p class="BallotVerifier__Help_Description text-contrast" id="verifier-inprogress-help-description">
+          <p
+            class="BallotVerifier__Help_Description text-contrast"
+            id="verifier-inprogress-help-description"
+          >
             {{ $t("views.verifier.inprogress.help.p1.description") }}
           </p>
         </div>
@@ -170,10 +210,20 @@ onMounted(() => {
       aria-labelledby="expiredModalLabel"
       aria-hidden="true"
     >
-      <div class="modal-dialog modal-dialog-centered" id="verifier-modal-dialog">
+      <div
+        class="modal-dialog modal-dialog-centered"
+        id="verifier-modal-dialog"
+      >
         <div class="modal-content" id="verifier-modal-content">
-          <div class="modal-body vstack align-items-center pt-5 pb-3" id="verifier-modal-body">
-            <AVIcon icon="clock-rotate-left" class="Modal__Icon" id="verifier-modal-icon" />
+          <div
+            class="modal-body vstack align-items-center pt-5 pb-3"
+            id="verifier-modal-body"
+          >
+            <AVIcon
+              icon="clock-rotate-left"
+              class="Modal__Icon"
+              id="verifier-modal-icon"
+            />
             <h6 id="expiredModalLabel" class="Modal__Title">
               {{ $t("views.verifier.inprogress.modal.title") }}
             </h6>

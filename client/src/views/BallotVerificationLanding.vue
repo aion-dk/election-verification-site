@@ -75,15 +75,24 @@ watch(verificationStore, async (newStore) => {
       </h3>
       <h4 class="VerificationLanding__Subtitle" id="verification-subtitle">
         {{ $t("views.verification.subtitle") }}
-        <strong id="verification-subtitle-strong">{{ $t("views.verification.subtitle_strong") }}</strong>
+        <strong id="verification-subtitle-strong">{{
+          $t("views.verification.subtitle_strong")
+        }}</strong>
       </h4>
       <p class="VerificationLanding__Description" id="verification-description">
         {{ $t("views.verification.description") }}
       </p>
       <Error v-if="error" :errorPath="error" id="verification-error" />
-      <div class="VerificationLanding__Action_Container" id="verification-action-container">
+      <div
+        class="VerificationLanding__Action_Container"
+        id="verification-action-container"
+      >
         <div class="mb-3 w-100" id="verification-input-container">
-          <label for="verification-code" class="form-label" id="verification-code-label">
+          <label
+            for="verification-code"
+            class="form-label"
+            id="verification-code-label"
+          >
             {{ $t("views.verification.placeholder") }}
             <AVIcon
               icon="circle-question"
@@ -122,16 +131,22 @@ watch(verificationStore, async (newStore) => {
         class="VerificationLanding__Step"
         :id="`verification-step-${step}`"
       >
-        <span class="VerificationLanding__Step_Index" :id="`verification-step-index-${step}`">{{ step }}</span>
+        <span
+          class="VerificationLanding__Step_Index"
+          :id="`verification-step-index-${step}`"
+          >{{ step }}</span
+        >
         <p
           v-html="$t(`views.verification.help.steps.step_${step}`)"
           class="VerificationLanding__Step_Text text-contrast"
           :id="`verification-step-text-${step}`"
         />
       </div>
-      <span class="VerificationLanding__Help_Footer text-contrast" id="verification-help-footer">{{
-        $t(`views.verification.help.footer`)
-      }}</span>
+      <span
+        class="VerificationLanding__Help_Footer text-contrast"
+        id="verification-help-footer"
+        >{{ $t(`views.verification.help.footer`) }}</span
+      >
     </template>
   </ContentLayout>
 </template>

@@ -158,18 +158,16 @@ describe("useElectionBranding", () => {
         faviconUrl: "/custom-election-favicon.ico",
       });
 
-      const faviconLink = document.querySelector<HTMLLinkElement>(
-        "link[rel*='icon']",
-      );
+      const faviconLink =
+        document.querySelector<HTMLLinkElement>("link[rel*='icon']");
       expect(faviconLink?.href).toContain("/custom-election-favicon.ico");
     });
 
     it("uses default favicon when no custom favicon configured", () => {
       mountWithBranding({});
 
-      const faviconLink = document.querySelector<HTMLLinkElement>(
-        "link[rel*='icon']",
-      );
+      const faviconLink =
+        document.querySelector<HTMLLinkElement>("link[rel*='icon']");
       expect(faviconLink?.href).toContain("/favicon.ico");
     });
 
@@ -183,9 +181,8 @@ describe("useElectionBranding", () => {
         faviconUrl: "/updated-favicon.ico",
       });
 
-      const faviconLink = document.querySelector<HTMLLinkElement>(
-        "link[rel*='icon']",
-      );
+      const faviconLink =
+        document.querySelector<HTMLLinkElement>("link[rel*='icon']");
       expect(faviconLink?.href).toContain("/updated-favicon.ico");
     });
 
@@ -194,9 +191,8 @@ describe("useElectionBranding", () => {
         faviconUrl: "/new-favicon.ico",
       });
 
-      const faviconLink = document.querySelector<HTMLLinkElement>(
-        "link[rel*='icon']",
-      );
+      const faviconLink =
+        document.querySelector<HTMLLinkElement>("link[rel*='icon']");
       expect(faviconLink).not.toBeNull();
       expect(faviconLink?.rel).toBe("icon");
       expect(faviconLink?.href).toContain("/new-favicon.ico");
@@ -207,9 +203,8 @@ describe("useElectionBranding", () => {
         faviconUrl: "/custom-favicon.ico",
       });
 
-      const faviconLink = document.querySelector<HTMLLinkElement>(
-        "link[rel*='icon']",
-      );
+      const faviconLink =
+        document.querySelector<HTMLLinkElement>("link[rel*='icon']");
       const originalHref = faviconLink!.href;
 
       branding.updateFavicon();
@@ -226,9 +221,8 @@ describe("useElectionBranding", () => {
 
       branding.resetBranding();
 
-      const faviconLink = document.querySelector<HTMLLinkElement>(
-        "link[rel*='icon']",
-      );
+      const faviconLink =
+        document.querySelector<HTMLLinkElement>("link[rel*='icon']");
       expect(faviconLink?.href).toContain("/favicon.ico");
     });
   });

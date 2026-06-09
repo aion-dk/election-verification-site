@@ -27,10 +27,17 @@ defineProps({
 <template>
   <div :id="id" class="ContentLayout">
     <section id="main_content" class="ContentLayout__Action" tabindex="-1">
-      <p v-if="breadcrumb" class="ContentLayout__Breadcrumb" id="content-layout-breadcrumb">
+      <p
+        v-if="breadcrumb"
+        class="ContentLayout__Breadcrumb"
+        id="content-layout-breadcrumb"
+      >
         {{ breadcrumb }}
       </p>
-      <div class="ContentLayout__Mobile_Wrapper" id="content-layout-mobile-wrapper">
+      <div
+        class="ContentLayout__Mobile_Wrapper"
+        id="content-layout-mobile-wrapper"
+      >
         <slot name="action" />
       </div>
     </section>
@@ -41,10 +48,16 @@ defineProps({
       tabindex="0"
     >
       <h5 class="ContentLayout__Help_Title" id="content-layout-help-title">
-        {{ helpTitle }}<strong id="content-layout-help-title-strong">{{ helpTitleStrong }}</strong>
+        {{ helpTitle
+        }}<strong id="content-layout-help-title-strong">{{
+          helpTitleStrong
+        }}</strong>
       </h5>
 
-      <div class="ContentLayout__Help_Container" id="content-layout-help-container">
+      <div
+        class="ContentLayout__Help_Container"
+        id="content-layout-help-container"
+      >
         <slot name="help" />
       </div>
       <img

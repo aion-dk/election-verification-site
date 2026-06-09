@@ -10,9 +10,7 @@ export function useElectionBranding() {
 
   const currentFaviconUrl = ref<string>("");
 
-  const votingPortal = computed(
-    () => configStore.electionStatus?.votingPortal,
-  );
+  const votingPortal = computed(() => configStore.electionStatus?.votingPortal);
 
   const getTabName = (locale: SupportedLocale): string | null => {
     const tabNameTranslations = votingPortal.value?.tabName;

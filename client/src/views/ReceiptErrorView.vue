@@ -36,7 +36,8 @@ const navigate = (url: string, external = false) => {
 
 const buttons = computed(() => {
   const primaryUrl = receiptStore.receiptValid
-    ? (contactUrl.value ?? `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}`)
+    ? (contactUrl.value ??
+      `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}`)
     : `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}/track`;
 
   return {
@@ -82,7 +83,10 @@ const buttons = computed(() => {
         {{ $t(`views.receipt_error.${translationPath}.title`) }}
       </h3>
 
-      <Error :errorPath="`receipt.${translationPath}`" id="receipt-error-message" />
+      <Error
+        :errorPath="`receipt.${translationPath}`"
+        id="receipt-error-message"
+      />
       <div class="ReceiptError__Buttons" id="receipt-error-buttons">
         <button
           v-if="buttons.primary.visible"
@@ -118,7 +122,11 @@ const buttons = computed(() => {
         class="ReceiptError__Step"
         :id="`receipt-error-step-${step}`"
       >
-        <span class="ReceiptError__Step_Index" :id="`receipt-error-step-index-${step}`">{{ step }}</span>
+        <span
+          class="ReceiptError__Step_Index"
+          :id="`receipt-error-step-index-${step}`"
+          >{{ step }}</span
+        >
         <p
           v-html="$t(`views.tracking.help.steps.step_${step}`)"
           class="ReceiptError__Step_Text text-contrast"

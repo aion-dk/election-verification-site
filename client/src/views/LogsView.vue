@@ -35,7 +35,10 @@ const dbbLink = computed(() => {
 });
 
 const currentPage = computed(() =>
-  Number.parseInt((route.params.page || boardStore.currentPage || 1).toString(), 10),
+  Number.parseInt(
+    (route.params.page || boardStore.currentPage || 1).toString(),
+    10,
+  ),
 );
 
 const filter = () => {
@@ -168,7 +171,6 @@ onMounted(async () => {
           :item="item"
           v-for="item in boardStore.items"
           :key="item.address"
-          :id="`logs-board-item-${item.address}`"
         />
         <div key="pagination" class="LogsView__Pagination" id="logs-pagination">
           <div class="RTL_Rotation" id="logs-pagination-left">
@@ -203,7 +205,9 @@ onMounted(async () => {
           </div>
 
           <div id="logs-page-numbers">
-            <span class="LogsView__PageLink" id="logs-current-page">{{ boardStore.currentPage }}</span>
+            <span class="LogsView__PageLink" id="logs-current-page">{{
+              boardStore.currentPage
+            }}</span>
             <span class="LogsView__PageLink" id="logs-page-separator">/</span>
             <span class="LogsView__PageLink" id="logs-total-pages">{{
               boardStore.meta.total_pages
@@ -243,7 +247,10 @@ onMounted(async () => {
         </div>
 
         <div key="download-links" id="logs-download-links">
-          <div class="vstack pt-3 gap-2 w-100 align-items-center" id="logs-download-buttons">
+          <div
+            class="vstack pt-3 gap-2 w-100 align-items-center"
+            id="logs-download-buttons"
+          >
             <button
               class="btn btn-sm btn-theme rounded-3 LogsView__Button"
               type="button"
@@ -266,7 +273,8 @@ onMounted(async () => {
           </div>
 
           <p class="LogsView__Board_Link" id="logs-board-link">
-            {{ $t("views.logs.board_link") }}<code id="logs-board-link-code">{{ boardLink }}</code>
+            {{ $t("views.logs.board_link")
+            }}<code id="logs-board-link-code">{{ boardLink }}</code>
           </p>
         </div>
       </TransitionGroup>
@@ -275,19 +283,28 @@ onMounted(async () => {
       <h3 class="LogsView__Help_Title text-contrast" id="logs-help-p1-question">
         {{ $t("views.logs.help.p1.question") }}
       </h3>
-      <p class="LogsView__Help_Description text-contrast" id="logs-help-p1-answer">
+      <p
+        class="LogsView__Help_Description text-contrast"
+        id="logs-help-p1-answer"
+      >
         {{ $t("views.logs.help.p1.answer") }}
       </p>
       <h3 class="LogsView__Help_Title text-contrast" id="logs-help-p2-question">
         {{ $t("views.logs.help.p2.question") }}
       </h3>
-      <p class="LogsView__Help_Description text-contrast" id="logs-help-p2-answer">
+      <p
+        class="LogsView__Help_Description text-contrast"
+        id="logs-help-p2-answer"
+      >
         {{ $t("views.logs.help.p2.answer") }}
       </p>
       <h3 class="LogsView__Help_Title text-contrast" id="logs-help-p3-question">
         {{ $t("views.logs.help.p3.question") }}
       </h3>
-      <p class="LogsView__Help_Description text-contrast" id="logs-help-p3-answer">
+      <p
+        class="LogsView__Help_Description text-contrast"
+        id="logs-help-p3-answer"
+      >
         {{ $t("views.logs.help.p3.answer") }}
       </p>
     </template>

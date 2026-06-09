@@ -57,7 +57,11 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="VerificationFound" aria-flowto="current-tracking-code" id="ballot-verifier-found">
+  <div
+    class="VerificationFound"
+    aria-flowto="current-tracking-code"
+    id="ballot-verifier-found"
+  >
     <ContentLayout
       id="verifier-found-content-layout"
       :help-title="$t('views.verification.help.title')"
@@ -78,7 +82,10 @@ onMounted(async () => {
         <h3 class="VerificationFound__Title" id="verifier-found-title">
           {{ $t("views.verifier.found.title") }}
         </h3>
-        <p class="VerificationFound__Description" id="verifier-found-description">
+        <p
+          class="VerificationFound__Description"
+          id="verifier-found-description"
+        >
           {{ $t("views.verifier.found.description") }}
         </p>
       </template>
@@ -89,16 +96,22 @@ onMounted(async () => {
           class="VerificationFound__Step"
           :id="`verifier-found-step-${step}`"
         >
-          <span class="VerificationFound__Step_Index" :id="`verifier-found-step-index-${step}`">{{ step }}</span>
+          <span
+            class="VerificationFound__Step_Index"
+            :id="`verifier-found-step-index-${step}`"
+            >{{ step }}</span
+          >
           <p
             v-html="$t(`views.verification.help.steps.step_${step}`)"
             class="VerificationFound__Step_Text text-contrast"
             :id="`verifier-found-step-text-${step}`"
           />
         </div>
-        <span class="VerificationFound__Help_Footer text-contrast" id="verifier-found-help-footer">{{
-          $t(`views.verification.help.footer`)
-        }}</span>
+        <span
+          class="VerificationFound__Help_Footer text-contrast"
+          id="verifier-found-help-footer"
+          >{{ $t(`views.verification.help.footer`) }}</span
+        >
       </template>
     </ContentLayout>
   </div>

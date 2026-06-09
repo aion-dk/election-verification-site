@@ -22,18 +22,33 @@ const goToTracker = () => {
 <template>
   <div class="Welcome" id="welcome">
     <div class="Welcome__Description_Desktop" id="welcome-description-desktop">
-      <div class="Welcome__Description_Desktop_Container" id="welcome-desktop-title-container">
-        <h1 class="Welcome__Description_Desktop_Title" id="welcome-desktop-title">
+      <div
+        class="Welcome__Description_Desktop_Container"
+        id="welcome-desktop-title-container"
+      >
+        <h1
+          class="Welcome__Description_Desktop_Title"
+          id="welcome-desktop-title"
+        >
           {{ $t("views.welcome.title") }}
         </h1>
       </div>
 
-      <div class="Welcome__Description_Desktop_Container" id="welcome-desktop-subtitle-container">
-        <h2 class="Welcome__Description_Desktop_Subtitle" id="welcome-desktop-subtitle">
+      <div
+        class="Welcome__Description_Desktop_Container"
+        id="welcome-desktop-subtitle-container"
+      >
+        <h2
+          class="Welcome__Description_Desktop_Subtitle"
+          id="welcome-desktop-subtitle"
+        >
           {{ configStore.election.title[$i18n.locale] }}
         </h2>
 
-        <p class="Welcome__Description_Desktop_About" id="welcome-desktop-about">
+        <p
+          class="Welcome__Description_Desktop_About"
+          id="welcome-desktop-about"
+        >
           {{ $t("views.welcome.description") }}
         </p>
       </div>
@@ -68,7 +83,10 @@ const goToTracker = () => {
               <h3 class="Welcome__Card_Title" id="welcome-tester-title">
                 {{ $t("views.welcome.ballot_tester.title") }}
               </h3>
-              <p class="Welcome__Card_Description" id="welcome-tester-description">
+              <p
+                class="Welcome__Card_Description"
+                id="welcome-tester-description"
+              >
                 {{ $t("views.welcome.ballot_tester.description") }}
               </p>
               <button
@@ -96,7 +114,10 @@ const goToTracker = () => {
               <h3 class="Welcome__Card_Title" id="welcome-tracker-title">
                 {{ $t("views.welcome.ballot_tracker.title") }}
               </h3>
-              <p class="Welcome__Card_Description" id="welcome-tracker-description">
+              <p
+                class="Welcome__Card_Description"
+                id="welcome-tracker-description"
+              >
                 {{ $t("views.welcome.ballot_tracker.description") }}
               </p>
               <button
@@ -118,27 +139,47 @@ const goToTracker = () => {
       <h4 class="Welcome__About_Title" id="welcome-about-title">
         {{ $t("views.welcome.about.title") }}
       </h4>
-      <div class="Welcome__Card Welcome__Description" id="welcome-about-description">
-        <p id="welcome-about-description-text">{{ $t("views.welcome.description") }}</p>
+      <div
+        class="Welcome__Card Welcome__Description"
+        id="welcome-about-description"
+      >
+        <p id="welcome-about-description-text">
+          {{ $t("views.welcome.description") }}
+        </p>
       </div>
       <div id="welcome-about-cards">
-        <div class="Welcome__Card Welcome__Card_Overrides" id="welcome-about-tester-card">
-          <h5 class="Welcome__About_Subtitle" id="welcome-about-tester-subtitle">
+        <div
+          class="Welcome__Card Welcome__Card_Overrides"
+          id="welcome-about-tester-card"
+        >
+          <h5
+            class="Welcome__About_Subtitle"
+            id="welcome-about-tester-subtitle"
+          >
             {{ $t("views.welcome.about.ballot_tester") }}
           </h5>
           <p class="Welcome__About_Description" id="welcome-about-tester-text">
             {{ $t("views.welcome.about.ballot_tester_text") }}
           </p>
         </div>
-        <div class="Welcome__Card Welcome__Card_Overrides" id="welcome-about-tracker-card">
-          <h5 class="Welcome__About_Subtitle" id="welcome-about-tracker-subtitle">
+        <div
+          class="Welcome__Card Welcome__Card_Overrides"
+          id="welcome-about-tracker-card"
+        >
+          <h5
+            class="Welcome__About_Subtitle"
+            id="welcome-about-tracker-subtitle"
+          >
             {{ $t("views.welcome.about.ballot_tracker") }}
           </h5>
           <p class="Welcome__About_Description" id="welcome-about-tracker-text">
             {{ $t("views.welcome.about.ballot_tracker_text") }}
           </p>
         </div>
-        <div class="Welcome__Card Welcome__Card_Overrides" id="welcome-about-audit-card">
+        <div
+          class="Welcome__Card Welcome__Card_Overrides"
+          id="welcome-about-audit-card"
+        >
           <h5 class="Welcome__About_Subtitle" id="welcome-about-audit-subtitle">
             {{ $t("views.welcome.about.audit_log") }}
           </h5>

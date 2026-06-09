@@ -62,11 +62,17 @@ const classes = computed(() => {
       </template>
 
       <template v-slot:expanded>
-        <p class="BoardItem__Type BoardItem__Type_Expanded" :id="`board-item-type-expanded-${item.address}`">
+        <p
+          class="BoardItem__Type BoardItem__Type_Expanded"
+          :id="`board-item-type-expanded-${item.address}`"
+        >
           {{ $t(`components.board_item.${item.type}.type`) }}
         </p>
 
-        <p class="BoardItem__Date BoardItem__Date_Expanded" :id="`board-item-date-expanded-${item.address}`">
+        <p
+          class="BoardItem__Date BoardItem__Date_Expanded"
+          :id="`board-item-date-expanded-${item.address}`"
+        >
           <AVIcon
             icon="clock"
             class="BoardItem__InlineIcon"
@@ -78,7 +84,10 @@ const classes = computed(() => {
           <DateTime :date-time="item.registeredAt" format="absolute" />
         </p>
 
-        <p class="BoardItem__Author BoardItem__Author_Expanded" :id="`board-item-author-expanded-${item.address}`">
+        <p
+          class="BoardItem__Author BoardItem__Author_Expanded"
+          :id="`board-item-author-expanded-${item.address}`"
+        >
           <AVIcon
             icon="user"
             class="BoardItem__InlineIcon"
@@ -90,10 +99,16 @@ const classes = computed(() => {
           <span>{{ $t(`components.board_item.${item.type}.author`) }}</span>
         </p>
 
-        <p class="BoardItem__Meaning_Expanded BoardItem__Label" :id="`board-item-meaning-label-${item.address}`">
+        <p
+          class="BoardItem__Meaning_Expanded BoardItem__Label"
+          :id="`board-item-meaning-label-${item.address}`"
+        >
           {{ $t("components.board_item.meaning") }}
         </p>
-        <p class="BoardItem__Meaning_Expanded" :id="`board-item-meaning-text-${item.address}`">
+        <p
+          class="BoardItem__Meaning_Expanded"
+          :id="`board-item-meaning-text-${item.address}`"
+        >
           {{ $t(`components.board_item.${item.type}.info`) }}
         </p>
 

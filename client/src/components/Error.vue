@@ -6,7 +6,8 @@ const props = defineProps({
   },
 });
 
-const safeId = (prefix: string) => `${prefix}-${props.errorPath.replace(/\./g, '-')}`;
+const safeId = (prefix: string) =>
+  `${prefix}-${props.errorPath.replace(/\./g, "-")}`;
 </script>
 
 <template>
@@ -18,7 +19,9 @@ const safeId = (prefix: string) => `${prefix}-${props.errorPath.replace(/\./g, '
         aria-hidden="true"
         :id="safeId('error-icon')"
       />
-      <span :id="safeId('error-title-text')">{{ $t(`errors.${errorPath}.title`) }}</span>
+      <span :id="safeId('error-title-text')">{{
+        $t(`errors.${errorPath}.title`)
+      }}</span>
     </span>
     <p class="Error__Description" :id="safeId('error-description')">
       {{ $t(`errors.${errorPath}.description`) }}

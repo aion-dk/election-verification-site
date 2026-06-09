@@ -77,13 +77,17 @@ onBeforeUnmount(() => {
         id="header-logo"
         v-if="configStore.electionStatus?.theme?.logo"
         class="Header__Logo"
-         :src="configStore.electionStatus?.theme?.logo"
+        :src="configStore.electionStatus?.theme?.logo"
         :alt="$t('header.election_logo_alt')"
         loading="lazy"
       />
       <div class="Header__Text" id="header-text">
-        <span class="Header__Title" id="header-title">{{ $t("header.dbas") }}</span>
-        <span class="Header__Subtitle" id="header-subtitle">{{ electionName }}</span>
+        <span class="Header__Title" id="header-title">{{
+          $t("header.dbas")
+        }}</span>
+        <span class="Header__Subtitle" id="header-subtitle">{{
+          electionName
+        }}</span>
       </div>
     </RouterLink>
 

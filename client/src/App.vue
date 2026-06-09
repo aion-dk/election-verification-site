@@ -102,7 +102,6 @@ const setLanguage = async (conferenceClient: any) => {
 };
 
 const setTheme = async (conferenceClient: any) => {
-
   if (!configStore.electionStatus || !configStore.electionTheme) {
     // Setting Splash Image
     const status = await conferenceClient
@@ -206,4 +205,3 @@ body {
   }
 }
 </style>
-

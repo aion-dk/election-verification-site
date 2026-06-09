@@ -50,7 +50,10 @@ defineProps({
       </template>
 
       <template v-slot:expanded>
-        <p class="BallotActivity__Type BallotActivity__Type_Expanded" :id="`ballot-activity-type-expanded-${activity.type}`">
+        <p
+          class="BallotActivity__Type BallotActivity__Type_Expanded"
+          :id="`ballot-activity-type-expanded-${activity.type}`"
+        >
           {{ $t(`components.ballot_activity.${activity.type}.type`) }}
         </p>
 
@@ -69,7 +72,10 @@ defineProps({
           <DateTime :date-time="activity.registered_at" format="long" />
         </p>
 
-        <p class="BallotActivity__Author BallotActivity__Author_Expanded" :id="`ballot-activity-author-expanded-${activity.type}`">
+        <p
+          class="BallotActivity__Author BallotActivity__Author_Expanded"
+          :id="`ballot-activity-author-expanded-${activity.type}`"
+        >
           <AVIcon icon="user" class="BallotActivity__Icon" aria-hidden="true" />
           <span class="BallotActivity__Label">{{
             $t("components.ballot_activity.author")
@@ -77,7 +83,10 @@ defineProps({
           {{ $t(`components.ballot_activity.${activity.type}.author`) }}
         </p>
 
-        <p class="BallotActivity__Meaning" :id="`ballot-activity-meaning-label-${activity.type}`">
+        <p
+          class="BallotActivity__Meaning"
+          :id="`ballot-activity-meaning-label-${activity.type}`"
+        >
           <AVIcon
             icon="circle-info"
             class="BallotActivity__Icon"
@@ -88,7 +97,10 @@ defineProps({
           }}</span>
         </p>
 
-        <p class="BallotActivity__Meaning" :id="`ballot-activity-meaning-text-${activity.type}`">
+        <p
+          class="BallotActivity__Meaning"
+          :id="`ballot-activity-meaning-text-${activity.type}`"
+        >
           {{ $t(`components.ballot_activity.${activity.type}.details`) }}
         </p>
       </template>
