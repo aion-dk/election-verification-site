@@ -31,14 +31,14 @@ defineProps({
       :disabled="disabled"
       :aria-label="$t('header.change_locale.label')"
       @change="selectEmit"
-      :id="`${id}-select`"
+      :id="id ? `${id}-select` : undefined"
     >
       <option
         v-for="option in options"
         :value="option.value"
         :key="option.value"
         :selected="option.selected"
-        :id="`${id}-option-${option.value}`"
+        :id="id ? `${id}-option-${option.value}` : undefined"
       >
         {{ option.display || option.value }}
       </option>

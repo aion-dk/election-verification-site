@@ -12,7 +12,14 @@ const { electionStatus } = storeToRefs(configStore);
 const customFooterHtml = computed(() => {
   const cosmetics = electionStatus.value?.cosmetics as CustomCosmetics | undefined;
   const raw = cosmetics?.footerHtml?.trim() || null;
-  return raw ? DOMPurify.sanitize(raw) : null;
+  if (!raw) return null;
+  const sanitized = DOMPurify.sanitize(raw);
+  const template = document.createElement("template");
+  template.innerHTML = sanitized;
+  template.content.querySelectorAll("a[target='_blank']").forEach((a) => {
+    a.setAttribute("rel", "noopener noreferrer");
+  });
+  return template.innerHTML;
 });
 </script>
 

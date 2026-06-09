@@ -77,8 +77,7 @@ onBeforeUnmount(() => {
         id="header-logo"
         v-if="configStore.electionStatus?.theme?.logo"
         class="Header__Logo"
-        :src="configStore.electionStatus?.theme?.logo"
-        style="height: 2.4rem; max-width: 11rem; width: auto; object-fit: scale-down"
+         :src="configStore.electionStatus?.theme?.logo"
         :alt="$t('header.election_logo_alt')"
         loading="lazy"
       />
@@ -195,6 +194,8 @@ onBeforeUnmount(() => {
 
 .Header__Logo {
   display: none;
+  width: auto;
+  object-fit: scale-down;
 }
 
 .Header__Text {
@@ -298,8 +299,8 @@ html[dir="rtl"] .Header__Locales {
   }
 
   .Header__Logo {
-    height: 3rem;
-    max-width: 12rem;
+    height: 2.4rem;
+    max-width: 11rem;
     object-fit: contain;
     display: block;
   }
@@ -316,7 +317,8 @@ html[dir="rtl"] .Header__Locales {
   }
 
   .Header__Logo {
-    height: 3rem;
+    height: 2.4rem;
+    max-width: 11rem;
     object-fit: contain;
     display: block;
   }
