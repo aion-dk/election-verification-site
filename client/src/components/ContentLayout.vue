@@ -25,7 +25,7 @@ defineProps({
 </script>
 
 <template>
-  <div :id="id" class="ContentLayout">
+  <div :id="id || undefined" class="ContentLayout">
     <section id="main_content" class="ContentLayout__Action" tabindex="-1">
       <p
         v-if="breadcrumb"

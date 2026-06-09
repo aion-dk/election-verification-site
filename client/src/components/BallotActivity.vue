@@ -7,17 +7,21 @@ defineProps({
     type: Object,
     required: true,
   },
+  index: {
+    type: Number,
+    required: true,
+  },
 });
 </script>
 
 <template>
-  <div class="BallotActivity" :id="`ballot-activity-${activity.type}`">
-    <ExpandableSection :id="`ballot-activity-section-${activity.type}`">
+  <div class="BallotActivity" :id="`ballot-activity-${index}`">
+    <ExpandableSection :id="`ballot-activity-section-${index}`">
       <template v-slot:collapsed>
         <p
           class="BallotActivity__Type"
           :aria-label="$t('components.board_item.aria_labels.activity_type')"
-          :id="`ballot-activity-type-${activity.type}`"
+          :id="`ballot-activity-type-${index}`"
         >
           {{ $t(`components.ballot_activity.${activity.type}.type`) }}
         </p>
@@ -27,7 +31,7 @@ defineProps({
           :aria-label="
             $t('components.board_item.aria_labels.activity_registered')
           "
-          :id="`ballot-activity-registered-at-${activity.type}`"
+          :id="`ballot-activity-registered-at-${index}`"
         >
           <AVIcon
             icon="clock"
@@ -40,7 +44,7 @@ defineProps({
         <p
           class="BallotActivity__Author"
           :aria-label="$t('components.board_item.aria_labels.activity_author')"
-          :id="`ballot-activity-author-${activity.type}`"
+          :id="`ballot-activity-author-${index}`"
         >
           <AVIcon icon="user" class="BallotActivity__Icon" aria-hidden="true" />
           <span>
@@ -52,14 +56,14 @@ defineProps({
       <template v-slot:expanded>
         <p
           class="BallotActivity__Type BallotActivity__Type_Expanded"
-          :id="`ballot-activity-type-expanded-${activity.type}`"
+          :id="`ballot-activity-type-expanded-${index}`"
         >
           {{ $t(`components.ballot_activity.${activity.type}.type`) }}
         </p>
 
         <p
           class="BallotActivity__RegisteredAt BallotActivity__RegisteredAt_Expanded"
-          :id="`ballot-activity-registered-at-expanded-${activity.type}`"
+          :id="`ballot-activity-registered-at-expanded-${index}`"
         >
           <AVIcon
             icon="clock"
@@ -74,7 +78,7 @@ defineProps({
 
         <p
           class="BallotActivity__Author BallotActivity__Author_Expanded"
-          :id="`ballot-activity-author-expanded-${activity.type}`"
+          :id="`ballot-activity-author-expanded-${index}`"
         >
           <AVIcon icon="user" class="BallotActivity__Icon" aria-hidden="true" />
           <span class="BallotActivity__Label">{{
@@ -85,7 +89,7 @@ defineProps({
 
         <p
           class="BallotActivity__Meaning"
-          :id="`ballot-activity-meaning-label-${activity.type}`"
+          :id="`ballot-activity-meaning-label-${index}`"
         >
           <AVIcon
             icon="circle-info"
@@ -99,7 +103,7 @@ defineProps({
 
         <p
           class="BallotActivity__Meaning"
-          :id="`ballot-activity-meaning-text-${activity.type}`"
+          :id="`ballot-activity-meaning-text-${index}`"
         >
           {{ $t(`components.ballot_activity.${activity.type}.details`) }}
         </p>

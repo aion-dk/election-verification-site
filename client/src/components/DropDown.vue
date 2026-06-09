@@ -26,7 +26,7 @@ defineProps({
 </script>
 
 <template>
-  <div :id="id" class="Dropdown__Container">
+  <div :id="id || undefined" class="Dropdown__Container">
     <select
       :disabled="disabled"
       :aria-label="$t('header.change_locale.label')"

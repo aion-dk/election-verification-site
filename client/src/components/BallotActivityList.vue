@@ -48,6 +48,7 @@ defineProps({
 
     <BallotActivity
       :activity="activity"
+      :index="Number(key)"
       v-for="(activity, key) in activities"
       :key="key"
     />
