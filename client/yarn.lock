@@ -42,11 +42,12 @@
     "@noble/hashes" "^1.8.0"
     sjcl-with-all "^1.0.8"
 
-"@assemblyvoting/electa-ui@^5.6.2-beta.11":
-  version "5.6.2-beta.11"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.6.2-beta.11.tgz#1e3881d78dc7843ba87decf23754e56db90f7e3d"
-  integrity sha512-d8A06Fy2ou0vrhrqMlJPCm2lqG/IZJa7w+jmrmZ8HfUCY3DvJ0KeTal/qKZRLFghWC7ma/46JDrgSuJLkxXJzA==
+"@assemblyvoting/electa-ui@5.6.5-beta.1":
+  version "5.6.5-beta.1"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/electa-ui/-/electa-ui-5.6.5-beta.1.tgz#a7b42d3a5ed9d2c161080eabc91433c1a972461a"
+  integrity sha512-vF2QFf3FxsI9XwsX2yuLN+WRCblWLGg4fouqjwZoLQiylFzhH6piZeRIQuVlPc1phgDnZ7jIybR+ud0md1wD2w==
   dependencies:
+    "@assemblyvoting/types" "^1.0.6"
     "@fontsource/open-sans" "^5.2.7"
     "@fontsource/pt-mono" "^5.2.8"
     "@fontsource/rubik" "^5.2.8"
@@ -72,7 +73,7 @@
     jwt-decode "^4.0.0"
     xml-js "^1.6.11"
 
-"@assemblyvoting/types@^1.0.1":
+"@assemblyvoting/types@^1.0.1", "@assemblyvoting/types@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.6.tgz#d9969ffcf22d01788f8b9ceff8f214a4929d6971"
   integrity sha512-igYESo5H7Q2zIzN89RT7G/zb+sQ9DH2QhdGb0xmANRJSLNUv1+JQVSNcgsC6mEW0d1ztEcg6eq6+b0+jpfyVsg==

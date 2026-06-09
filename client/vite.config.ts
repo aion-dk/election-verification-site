@@ -5,7 +5,6 @@ import vue from "@vitejs/plugin-vue";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [vue()],
   define: {
     __VUE_PROD_HYDRATION_MISMATCH_DETAILS__: true,
   },
@@ -21,6 +20,7 @@ export default defineConfig({
   server: {
     port: 3010,
   },
+  plugins: [vue()],
   css: {
     preprocessorOptions: {
       scss: {
