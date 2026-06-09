@@ -9,7 +9,7 @@ executors:
   vm-linux-ubuntu:
     machine:
       image: ubuntu-2204:current
-      docker_layer_caching: true
+      docker_layer_caching: false
   vm-linux-ubuntu-nocache:
     machine:
       image: ubuntu-2204:current
