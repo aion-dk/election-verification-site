@@ -38,6 +38,7 @@ defineProps({
       id="help-content-aside"
       class="ContentLayout__Help"
       :aria-label="$t('accessibility.help')"
+      tabindex="0"
     >
       <h5 class="ContentLayout__Help_Title" id="content-layout-help-title">
         {{ helpTitle }}<strong id="content-layout-help-title-strong">{{ helpTitleStrong }}</strong>
