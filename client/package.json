@@ -38,7 +38,7 @@
     "vue-tsc": "^3.3.4"
   },
   "devDependencies": {
-    "@assemblyvoting/types": "^1.0.1",
+    "@assemblyvoting/types": "^1.0.6",
     "@axe-core/playwright": "^4.11.3",
     "@pinia/testing": "^1.0.3",
     "@playwright/test": "^1.60.0",
