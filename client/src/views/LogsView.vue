@@ -35,7 +35,10 @@ const dbbLink = computed(() => {
 });
 
 const currentPage = computed(() =>
-  parseInt((route.params.page || boardStore.currentPage || 1).toString(), 10),
+  Number.parseInt(
+    (route.params.page || boardStore.currentPage || 1).toString(),
+    10,
+  ),
 );
 
 const filter = () => {
@@ -74,11 +77,11 @@ const navigate = (page: number) => {
 };
 
 const downloadLog = () => {
-  window.location.href = `${dbbLink.value}/download_log`;
+  globalThis.location.href = `${dbbLink.value}/download_log`;
 };
 
 const downloadAttachments = () => {
-  window.location.href = `${dbbLink.value}/download_attachments`;
+  globalThis.location.href = `${dbbLink.value}/download_attachments`;
 };
 
 onMounted(async () => {
@@ -92,27 +95,29 @@ onMounted(async () => {
 
 <template>
   <ContentLayout
+    id="logs-view"
     :help-title="$t('views.logs.help.title')"
     :help-title-strong="$t('views.logs.help.title_strong')"
     :logo="configStore.electionStatus?.theme?.logo"
   >
     <template v-slot:action>
-      <MainIcon icon="square-poll-vertical" />
-      <h3 class="LogsView__Subtitle">
+      <MainIcon icon="square-poll-vertical" id="logs-main-icon" />
+      <h3 class="LogsView__Subtitle" id="logs-subtitle">
         {{ $t("views.logs.subtitle") }}
       </h3>
-      <h4 class="LogsView__Title">
+      <h4 class="LogsView__Title" id="logs-title">
         {{ $t("views.logs.title") }}
       </h4>
-      <p class="LogsView__Description">
+      <p class="LogsView__Description" id="logs-description">
         {{ $t("views.logs.description") }}
       </p>
 
-      <div class="hstack gap-2 align-items-center">
-        <label class="LogsView__Configuration_Only">
+      <div class="hstack gap-2 align-items-center" id="logs-filters-container">
+        <label class="LogsView__Configuration_Only" id="logs-config-only-label">
           <input
             type="checkbox"
             name="config-items-only"
+            id="logs-config-only-checkbox"
             v-model="configItemsOnly"
           />
           {{ $t("views.logs.config_only") }}
@@ -120,19 +125,21 @@ onMounted(async () => {
 
         <label
           class="LogsView__Configuration_Only"
+          id="logs-hide-pending-label"
           v-if="configStore.usesElectionCommittee"
         >
           <input
             type="checkbox"
             name="hide-pending-items"
+            id="logs-hide-pending-checkbox"
             v-model="hidePendingItems"
           />
           {{ $t("views.logs.hide_pending_items") }}
         </label>
       </div>
 
-      <ul class="LogsView__ColumnDescriptions">
-        <li class="LogsView__ColumnDescriptions--event">
+      <ul class="LogsView__ColumnDescriptions" id="logs-column-descriptions">
+        <li class="LogsView__ColumnDescriptions--event" id="logs-column-event">
           <AVTooltip
             :content="$t('views.logs.headers.type_tooltip')"
             :text="$t('views.logs.headers.type')"
@@ -140,10 +147,10 @@ onMounted(async () => {
             position="right"
           />
         </li>
-        <li class="LogsView__ColumnDescriptions--time">
+        <li class="LogsView__ColumnDescriptions--time" id="logs-column-time">
           {{ $t("views.logs.headers.time") }}
         </li>
-        <li class="LogsView__ColumnDescriptions--actor">
+        <li class="LogsView__ColumnDescriptions--actor" id="logs-column-actor">
           <AVTooltip
             :content="$t('views.logs.headers.actor_tooltip')"
             :text="$t('views.logs.headers.actor')"
@@ -158,14 +165,15 @@ onMounted(async () => {
         tag="div"
         name="list"
         class="position-relative w-100"
+        id="logs-transition-group"
       >
         <BoardItem
           :item="item"
           v-for="item in boardStore.items"
           :key="item.address"
         />
-        <div key="pagination" class="LogsView__Pagination">
-          <div class="RTL_Rotation">
+        <div key="pagination" class="LogsView__Pagination" id="logs-pagination">
+          <div class="RTL_Rotation" id="logs-pagination-left">
             <button
               :aria-label="$t('views.logs.aria_labels.first_page')"
               :class="{
@@ -174,6 +182,7 @@ onMounted(async () => {
               }"
               :disabled="disableFirst"
               @click="navigate(1)"
+              id="logs-first-page"
             >
               <div class="LogsView__Icon_Set">
                 <AVIcon icon="chevron-left" aria-hidden="true" />
@@ -189,20 +198,23 @@ onMounted(async () => {
               }"
               :disabled="disableFirst"
               @click="navigate(boardStore.meta.prev_page)"
+              id="logs-prev-page"
             >
               <AVIcon icon="chevron-left" aria-hidden="true" />
             </button>
           </div>
 
-          <div>
-            <span class="LogsView__PageLink">{{ boardStore.currentPage }}</span>
-            <span class="LogsView__PageLink">/</span>
-            <span class="LogsView__PageLink">{{
+          <div id="logs-page-numbers">
+            <span class="LogsView__PageLink" id="logs-current-page">{{
+              boardStore.currentPage
+            }}</span>
+            <span class="LogsView__PageLink" id="logs-page-separator">/</span>
+            <span class="LogsView__PageLink" id="logs-total-pages">{{
               boardStore.meta.total_pages
             }}</span>
           </div>
 
-          <div class="RTL_Rotation">
+          <div class="RTL_Rotation" id="logs-pagination-right">
             <button
               :aria-label="$t('views.logs.aria_labels.next_page')"
               :class="{
@@ -211,6 +223,7 @@ onMounted(async () => {
               }"
               :disabled="disableLast"
               @click="navigate(boardStore.meta.next_page)"
+              id="logs-next-page"
             >
               <AVIcon icon="chevron-right" aria-hidden="true" />
             </button>
@@ -223,6 +236,7 @@ onMounted(async () => {
               }"
               :disabled="disableLast"
               @click="navigate(boardStore.meta.total_pages)"
+              id="logs-last-page"
             >
               <div class="LogsView__Icon_Set">
                 <AVIcon icon="chevron-right" aria-hidden="true" />
@@ -232,12 +246,16 @@ onMounted(async () => {
           </div>
         </div>
 
-        <div key="download-links">
-          <div class="vstack pt-3 gap-2 w-100 align-items-center">
+        <div key="download-links" id="logs-download-links">
+          <div
+            class="vstack pt-3 gap-2 w-100 align-items-center"
+            id="logs-download-buttons"
+          >
             <button
               class="btn btn-sm btn-theme rounded-3 LogsView__Button"
               type="button"
               @click="downloadLog"
+              id="logs-download-log"
             >
               <AVIcon icon="download" />
               {{ $t("views.logs.download_button") }}
@@ -247,35 +265,46 @@ onMounted(async () => {
               class="btn btn-sm btn-theme rounded-3 LogsView__Button"
               type="button"
               @click="downloadAttachments"
+              id="logs-download-attachments"
             >
               <AVIcon icon="download" />
               {{ $t("views.logs.download_attachments") }}
             </button>
           </div>
 
-          <p class="LogsView__Board_Link">
-            {{ $t("views.logs.board_link") }}<code>{{ boardLink }}</code>
+          <p class="LogsView__Board_Link" id="logs-board-link">
+            {{ $t("views.logs.board_link")
+            }}<code id="logs-board-link-code">{{ boardLink }}</code>
           </p>
         </div>
       </TransitionGroup>
     </template>
     <template v-slot:help>
-      <h3 class="LogsView__Help_Title text-contrast">
+      <h3 class="LogsView__Help_Title text-contrast" id="logs-help-p1-question">
         {{ $t("views.logs.help.p1.question") }}
       </h3>
-      <p class="LogsView__Help_Description text-contrast">
+      <p
+        class="LogsView__Help_Description text-contrast"
+        id="logs-help-p1-answer"
+      >
         {{ $t("views.logs.help.p1.answer") }}
       </p>
-      <h3 class="LogsView__Help_Title text-contrast">
+      <h3 class="LogsView__Help_Title text-contrast" id="logs-help-p2-question">
         {{ $t("views.logs.help.p2.question") }}
       </h3>
-      <p class="LogsView__Help_Description text-contrast">
+      <p
+        class="LogsView__Help_Description text-contrast"
+        id="logs-help-p2-answer"
+      >
         {{ $t("views.logs.help.p2.answer") }}
       </p>
-      <h3 class="LogsView__Help_Title text-contrast">
+      <h3 class="LogsView__Help_Title text-contrast" id="logs-help-p3-question">
         {{ $t("views.logs.help.p3.question") }}
       </h3>
-      <p class="LogsView__Help_Description text-contrast">
+      <p
+        class="LogsView__Help_Description text-contrast"
+        id="logs-help-p3-answer"
+      >
         {{ $t("views.logs.help.p3.answer") }}
       </p>
     </template>

@@ -13,18 +13,20 @@ import type { Locale } from "vue-i18n";
 import { fallbackMessages } from "./assets/translations";
 import { defaultTheme } from "./assets/theme";
 import { SupportedLocale } from "@/Types";
+import { useElectionBranding } from "@/composables/useElectionBranding";
 
 const i18n = useI18n();
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
 const route = useRoute();
 const isLoaded = ref(false);
+const { updateDocumentTitle } = useElectionBranding();
 
 onMounted(async () => {
   const organisationSlug = route.params.organisationSlug.toString();
   const electionSlug = route.params.electionSlug.toString();
   await setConfigurations(organisationSlug, electionSlug);
-  setTitle();
+  updateDocumentTitle(i18n.locale.value as SupportedLocale);
 
   if (route.params.trackingCode) {
     await ballotStore.loadBallot(
@@ -44,16 +46,7 @@ function updateLocale(newLocale: Locale) {
 
   router.replace(newUrl);
   setLocale(newLocale);
-  setTitle();
-}
-
-function setTitle() {
-  const siteTitle = i18n.messages.value[i18n.locale.value].site_title;
-  const title = [
-    configStore.election.title[i18n.locale.value as SupportedLocale],
-    siteTitle,
-  ].filter((s) => s);
-  if (window.top) window.top.document.title = title.join(" - ");
+  updateDocumentTitle(newLocale as SupportedLocale);
 }
 
 const setConfigurations = async (
@@ -64,7 +57,9 @@ const setConfigurations = async (
     organisationSlug,
     electionSlug,
   );
+
   configStore.setBoardSlug((await conferenceClient.getStatus()).boardSlug);
+
   await configStore.loadConfig();
   await setLanguage(conferenceClient);
   await setTheme(conferenceClient);
@@ -92,10 +87,9 @@ const setLanguage = async (conferenceClient: any) => {
       preferredLocale || browserLocale || configStore.election.locales[0],
     );
 
-    for (let i = 0; i < configStore.election.locales.length; i++) {
-      const locale = configStore.election.locales[i];
+    for (const locale of configStore.election.locales) {
       const response = await conferenceClient
-        .getTranslationsData(configStore.election.locales[i])
+        .getTranslationsData(locale)
         .catch((err: Error) => {
           console.error(err);
         });

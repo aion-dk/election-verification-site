@@ -36,12 +36,12 @@ test("changing locale", async ({ page, isMobile }) => {
     await page.locator(".Header__Hamburger_Btn").click();
     await analyzeAccesibility(page);
   }
-  await page.locator(".Header__Locales").selectOption("es");
+  await page.locator(".Header__Locales select").selectOption("es");
   await analyzeAccesibility(page);
   await page.getByRole("link", { name: "Testeo de Boleta" }).click();
   if (isMobile) {
     await page.locator(".Header__Hamburger_Btn").click();
   }
-  await page.locator(".Header__Locales").selectOption("en");
+  await page.locator(".Header__Locales select").selectOption("en");
   await page.getByRole("link", { name: "Ballot Tester" }).click();
 });

@@ -1,5 +1,10 @@
 <script setup lang="ts">
 defineProps({
+  id: {
+    type: String,
+    required: false,
+    default: "",
+  },
   helpTitle: {
     type: String,
     required: true,
@@ -20,25 +25,39 @@ defineProps({
 </script>
 
 <template>
-  <div class="ContentLayout">
-    <section id="main_content" class="ContentLayout__Action" tabindex="0">
-      <p v-if="breadcrumb" class="ContentLayout__Breadcrumb">
+  <div :id="id || undefined" class="ContentLayout">
+    <section id="main_content" class="ContentLayout__Action" tabindex="-1">
+      <p
+        v-if="breadcrumb"
+        class="ContentLayout__Breadcrumb"
+        id="content-layout-breadcrumb"
+      >
         {{ breadcrumb }}
       </p>
-      <div class="ContentLayout__Mobile_Wrapper">
+      <div
+        class="ContentLayout__Mobile_Wrapper"
+        id="content-layout-mobile-wrapper"
+      >
         <slot name="action" />
       </div>
     </section>
     <aside
+      id="help-content-aside"
       class="ContentLayout__Help"
-      tabindex="0"
       :aria-label="$t('accessibility.help')"
+      tabindex="0"
     >
-      <h5 class="ContentLayout__Help_Title">
-        {{ helpTitle }}<strong>{{ helpTitleStrong }}</strong>
+      <h5 class="ContentLayout__Help_Title" id="content-layout-help-title">
+        {{ helpTitle
+        }}<strong id="content-layout-help-title-strong">{{
+          helpTitleStrong
+        }}</strong>
       </h5>
 
-      <div class="ContentLayout__Help_Container">
+      <div
+        class="ContentLayout__Help_Container"
+        id="content-layout-help-container"
+      >
         <slot name="help" />
       </div>
       <img
@@ -47,6 +66,7 @@ defineProps({
         :src="logo"
         :alt="$t('header.election_logo_alt')"
         loading="lazy"
+        id="content-layout-brand-logo"
       />
     </aside>
   </div>
@@ -72,7 +92,6 @@ defineProps({
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
-  align-items: start;
 }
 
 .ContentLayout__Breadcrumb {

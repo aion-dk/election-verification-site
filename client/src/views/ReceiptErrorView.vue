@@ -26,10 +26,20 @@ const contactUrl = computed(
     ] || null,
 );
 
-const navigate = (url: string, external = false) =>
-  external ? (window.location.href = url) : router.push(url);
+const navigate = (url: string, external = false) => {
+  if (external) {
+    globalThis.location.href = url;
+  } else {
+    router.push(url);
+  }
+};
 
 const buttons = computed(() => {
+  const primaryUrl = receiptStore.receiptValid
+    ? (contactUrl.value ??
+      `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}`)
+    : `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}/track`;
+
   return {
     primary: {
       visible: true,
@@ -42,11 +52,7 @@ const buttons = computed(() => {
           : i18n.t(
               `views.receipt_error.${translationPath.value}.secondary_action`,
             ),
-      url: receiptStore.receiptValid
-        ? contactUrl.value
-          ? contactUrl.value
-          : `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}`
-        : `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}/track`,
+      url: primaryUrl,
     },
     secondary: {
       visible:
@@ -63,6 +69,7 @@ const buttons = computed(() => {
 
 <template>
   <ContentLayout
+    id="receipt-error-view"
     :help-title="$t('views.tracking.help.title')"
     :help-title-strong="$t('views.tracking.help.title_strong')"
     :logo="configStore.electionStatus?.theme?.logo"
@@ -70,17 +77,22 @@ const buttons = computed(() => {
     <template v-slot:action>
       <MainIcon
         :icon="receiptStore.receiptValid ? 'circle-xmark' : 'file-circle-xmark'"
+        id="receipt-error-main-icon"
       />
-      <h3 class="ReceiptError__Title">
+      <h3 class="ReceiptError__Title" id="receipt-error-title">
         {{ $t(`views.receipt_error.${translationPath}.title`) }}
       </h3>
 
-      <Error :errorPath="`receipt.${translationPath}`" />
-      <div class="ReceiptError__Buttons">
+      <Error
+        :errorPath="`receipt.${translationPath}`"
+        id="receipt-error-message"
+      />
+      <div class="ReceiptError__Buttons" id="receipt-error-buttons">
         <button
           v-if="buttons.primary.visible"
           class="btn btn-theme w-100 rounded-3 ReceiptError__Button"
           type="button"
+          id="receipt-error-primary-button"
           @click="
             navigate(
               buttons.primary.url,
@@ -95,6 +107,7 @@ const buttons = computed(() => {
           v-if="buttons.secondary.visible"
           class="btn btn-theme-outline w-100 rounded-3 ReceiptError__Button"
           type="button"
+          id="receipt-error-secondary-button"
           @click="navigate(buttons.secondary.url)"
         >
           {{ buttons.secondary.label }}
@@ -105,13 +118,19 @@ const buttons = computed(() => {
     <template v-slot:help>
       <div
         v-for="step in steps"
-        :key="`verification-step-${step}`"
+        :key="`receipt-error-step-${step}`"
         class="ReceiptError__Step"
+        :id="`receipt-error-step-${step}`"
       >
-        <span class="ReceiptError__Step_Index">{{ step }}</span>
+        <span
+          class="ReceiptError__Step_Index"
+          :id="`receipt-error-step-index-${step}`"
+          >{{ step }}</span
+        >
         <p
           v-html="$t(`views.tracking.help.steps.step_${step}`)"
           class="ReceiptError__Step_Text text-contrast"
+          :id="`receipt-error-step-text-${step}`"
         />
       </div>
     </template>

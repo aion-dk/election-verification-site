@@ -10,9 +10,11 @@ COPY . .
 
 RUN yarn build
 
-FROM builder AS development
+FROM mcr.microsoft.com/playwright:v1.60.0-noble AS development
 
-RUN npx playwright install --with-deps
+RUN corepack enable
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app .
 
 FROM nginx:1.29-alpine AS production
 # Copy the built app only (Vite default output directory is "dist")

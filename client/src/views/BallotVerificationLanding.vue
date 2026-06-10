@@ -63,31 +63,42 @@ watch(verificationStore, async (newStore) => {
 
 <template>
   <ContentLayout
+    id="ballot-verification-landing"
     :help-title="$t('views.verification.help.title')"
     :help-title-strong="$t('views.verification.help.title_strong')"
     :logo="configStore.electionStatus?.theme?.logo"
   >
     <template v-slot:action>
-      <MainIcon icon="envelope-open-text" />
-      <h3 class="VerificationLanding__Title">
+      <MainIcon icon="envelope-open-text" id="verification-main-icon" />
+      <h3 class="VerificationLanding__Title" id="verification-title">
         {{ $t("views.verification.title") }}
       </h3>
-      <h4 class="VerificationLanding__Subtitle">
+      <h4 class="VerificationLanding__Subtitle" id="verification-subtitle">
         {{ $t("views.verification.subtitle") }}
-        <strong>{{ $t("views.verification.subtitle_strong") }}</strong>
+        <strong id="verification-subtitle-strong">{{
+          $t("views.verification.subtitle_strong")
+        }}</strong>
       </h4>
-      <p class="VerificationLanding__Description">
+      <p class="VerificationLanding__Description" id="verification-description">
         {{ $t("views.verification.description") }}
       </p>
-      <Error v-if="error" :errorPath="error" />
-      <div class="VerificationLanding__Action_Container">
-        <div class="mb-3 w-100">
-          <label for="verification-code" class="form-label">
+      <Error v-if="error" :errorPath="error" id="verification-error" />
+      <div
+        class="VerificationLanding__Action_Container"
+        id="verification-action-container"
+      >
+        <div class="mb-3 w-100" id="verification-input-container">
+          <label
+            for="verification-code"
+            class="form-label"
+            id="verification-code-label"
+          >
             {{ $t("views.verification.placeholder") }}
             <AVIcon
               icon="circle-question"
               class="text-gray-600 cursor-help"
               v-tooltip="$t('views.verification.tooltip_text')"
+              id="verification-tooltip-icon"
             />
           </label>
           <input
@@ -118,16 +129,24 @@ watch(verificationStore, async (newStore) => {
         v-for="step in steps"
         :key="`verification-step-${step}`"
         class="VerificationLanding__Step"
+        :id="`verification-step-${step}`"
       >
-        <span class="VerificationLanding__Step_Index">{{ step }}</span>
+        <span
+          class="VerificationLanding__Step_Index"
+          :id="`verification-step-index-${step}`"
+          >{{ step }}</span
+        >
         <p
           v-html="$t(`views.verification.help.steps.step_${step}`)"
           class="VerificationLanding__Step_Text text-contrast"
+          :id="`verification-step-text-${step}`"
         />
       </div>
-      <span class="VerificationLanding__Help_Footer text-contrast">{{
-        $t(`views.verification.help.footer`)
-      }}</span>
+      <span
+        class="VerificationLanding__Help_Footer text-contrast"
+        id="verification-help-footer"
+        >{{ $t(`views.verification.help.footer`) }}</span
+      >
     </template>
   </ContentLayout>
 </template>

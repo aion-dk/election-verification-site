@@ -1,16 +1,24 @@
 <template>
-  <div class="BallotVerifierContest">
-    <h3 class="BallotVerifierContest__Title">
+  <div
+    class="BallotVerifierContest"
+    :id="`ballot-verifier-contest-${contestSelection.reference}`"
+  >
+    <h3
+      class="BallotVerifierContest__Title"
+      :id="`contest-title-${contestSelection.reference}`"
+    >
       {{ contest.title[$i18n.locale as SupportedLocale] }}
     </h3>
     <p
       v-if="contest.question"
       v-text="contest.question[$i18n.locale as SupportedLocale]"
+      :id="`contest-question-${contestSelection.reference}`"
     ></p>
     <div
       v-for="(selectionPile, pileIndex) in contestSelection.piles"
       :key="JSON.stringify(selectionPile)"
       class="BallotVerifierContest__Piles"
+      :id="`contest-piles-${contestSelection.reference}-${pileIndex}`"
     >
       <AVPileSummary
         :contest="contest"
@@ -19,6 +27,7 @@
         :total-piles="contestSelection.piles.length"
         style="z-index: 90"
         active-state="summary"
+        :id="`contest-pile-summary-${contestSelection.reference}-${pileIndex}`"
       />
     </div>
   </div>

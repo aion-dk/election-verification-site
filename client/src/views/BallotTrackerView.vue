@@ -25,8 +25,14 @@ onMounted(() => (ballot.value = ballotStore.ballot));
 </script>
 
 <template>
-  <div class="BallotTracker" v-if="ballot" aria-flowto="current-tracking-code">
+  <div
+    class="BallotTracker"
+    v-if="ballot"
+    aria-flowto="current-tracking-code"
+    id="ballot-tracker"
+  >
     <ContentLayout
+      id="tracker-content-layout"
       :help-title="$t('views.tracker.help.title')"
       :help-title-strong="$t('views.tracker.help.title_strong')"
       :breadcrumb="$t('views.tracker.title')"
@@ -34,44 +40,64 @@ onMounted(() => (ballot.value = ballotStore.ballot));
     >
       <template v-slot:action>
         <TrackedBallotManager
+          id="tracker-tracked-ballot-manager"
           :tracking-code="ballot.trackingCode"
           @cancel="cancel"
         />
 
-        <h3 class="BallotTracker__Title">
+        <h3 class="BallotTracker__Title" id="tracker-title">
           {{ $t("views.tracker.info.title") }}
         </h3>
-        <p class="BallotTracker__Description">
+        <p class="BallotTracker__Description" id="tracker-description">
           {{ $t("views.tracker.info.description") }}
         </p>
-        <p class="BallotTracker__Description expand">
+        <p
+          class="BallotTracker__Description expand"
+          id="tracker-extended-description"
+        >
           {{ $t("views.tracker.info.extended_description") }}
         </p>
 
         <BallotActivityList
           v-if="ballot.activities.length"
           :activities="ballot.activities"
+          id="tracker-activity-list"
         />
       </template>
 
       <template v-slot:help>
-        <div class="BallotTracker__Info">
-          <p class="BallotTracker__Info_Title text-contrast">
+        <div class="BallotTracker__Info" id="tracker-help-p1">
+          <p
+            class="BallotTracker__Info_Title text-contrast"
+            id="tracker-help-p1-title"
+          >
             {{ $t("views.tracker.help.p1.title") }}
           </p>
-          <p class="BallotTracker__Info_Text text-contrast">
+          <p
+            class="BallotTracker__Info_Text text-contrast"
+            id="tracker-help-p1-text1"
+          >
             {{ $t("views.tracker.help.p1.text1") }}
           </p>
-          <p class="BallotTracker__Info_Text text-contrast">
+          <p
+            class="BallotTracker__Info_Text text-contrast"
+            id="tracker-help-p1-text2"
+          >
             {{ $t("views.tracker.help.p1.text2") }}
           </p>
         </div>
 
-        <div class="BallotTracker__Info">
-          <p class="BallotTracker__Info_Title_Small text-contrast">
+        <div class="BallotTracker__Info" id="tracker-help-p2">
+          <p
+            class="BallotTracker__Info_Title_Small text-contrast"
+            id="tracker-help-p2-title"
+          >
             {{ $t("views.tracker.help.p2.title") }}
           </p>
-          <p class="BallotTracker__Info_Text text-contrast">
+          <p
+            class="BallotTracker__Info_Text text-contrast"
+            id="tracker-help-p2-text"
+          >
             {{ $t("views.tracker.help.p2.text") }}
           </p>
         </div>

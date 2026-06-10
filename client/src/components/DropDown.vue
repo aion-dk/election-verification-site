@@ -9,6 +9,11 @@ const selectEmit = (event: Event) => {
 };
 
 defineProps({
+  id: {
+    type: String,
+    required: false,
+    default: "",
+  },
   options: {
     type: Array as PropType<DropdownOption[]>,
     required: true,
@@ -21,24 +26,28 @@ defineProps({
 </script>
 
 <template>
-  <select
-    :disabled="disabled"
-    :aria-label="$t('header.change_locale.label')"
-    @change="selectEmit"
-  >
-    <option
-      v-for="option in options"
-      :value="option.value"
-      :key="option.value"
-      :selected="option.selected"
+  <div :id="id || undefined" class="Dropdown__Container">
+    <select
+      :disabled="disabled"
+      :aria-label="$t('header.change_locale.label')"
+      @change="selectEmit"
+      :id="id ? `${id}-select` : undefined"
     >
-      {{ option.display || option.value }}
-    </option>
-  </select>
+      <option
+        v-for="option in options"
+        :value="option.value"
+        :key="option.value"
+        :selected="option.selected"
+        :id="id ? `${id}-option-${option.value}` : undefined"
+      >
+        {{ option.display || option.value }}
+      </option>
+    </select>
+  </div>
 </template>
 
 <style type="text/css" scoped>
 select {
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
 }
 </style>
