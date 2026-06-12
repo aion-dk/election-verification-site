@@ -19,16 +19,26 @@ const toggle = () => {
     ? t("components.board_item.collapse")
     : t("components.board_item.expand");
 };
+
+const onKeydown = (event: KeyboardEvent) => {
+  if (event.key === "Enter" || event.key === " ") {
+    event.preventDefault();
+    toggle();
+  }
+};
 </script>
 
 <template>
-  <button
+  <!-- NOSONAR: using div with role=button instead of <button> because slots render block-level content, which is invalid inside <button> -->
+  <div
     @click="toggle"
+    @keydown="onKeydown"
     class="ExpandableSection"
     :class="{
       ['ExpandableSection--expanded']: _expanded,
     }"
-    type="button"
+    role="button"
+    tabindex="0"
     :aria-expanded="_expanded"
   >
     <div class="ExpandableSection__Line" v-if="!_expanded">
@@ -44,7 +54,7 @@ const toggle = () => {
 
       <AVIcon v-else icon="plus" aria-hidden="true" />
     </span>
-  </button>
+  </div>
 </template>
 
 <style type="text/css" scoped>

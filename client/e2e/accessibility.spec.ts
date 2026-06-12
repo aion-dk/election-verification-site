@@ -1,5 +1,5 @@
 import { test, Page } from "@playwright/test";
-import analyzeAccesibility from "./accessibility";
+import analyzeAccessibility from "./accessibility";
 import {
   latestConfig,
   status,
@@ -48,7 +48,7 @@ test.describe("Welcome page", () => {
   test("initial render has no WCAG violations", async ({ page }) => {
     await setupCommonMocks(page);
     await page.goto(BASE_PATH);
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 
   test("mobile hamburger menu open has no WCAG violations", async ({
@@ -59,7 +59,7 @@ test.describe("Welcome page", () => {
     await setupCommonMocks(page);
     await page.goto(BASE_PATH);
     await page.locator(".Header__Hamburger_Btn").click();
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 });
 
@@ -67,7 +67,7 @@ test.describe("Ballot Verification page", () => {
   test("initial render has no WCAG violations", async ({ page }) => {
     await setupCommonMocks(page);
     await page.goto(`${BASE_PATH}/verify`);
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 
   test("after submitting valid code has no WCAG violations", async ({
@@ -89,7 +89,7 @@ test.describe("Ballot Verification page", () => {
     await page.goto(`${BASE_PATH}/verify`);
     await page.getByPlaceholder("Testing code").fill("5ksv8Ee");
     await page.getByRole("button", { name: "Start the Test" }).click();
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 
   test("invalid code error state has no WCAG violations", async ({ page }) => {
@@ -109,7 +109,7 @@ test.describe("Ballot Verification page", () => {
     await page.goto(`${BASE_PATH}/verify`);
     await page.locator("#verification-code").fill("invalid-code");
     await page.getByRole("button", { name: "Start the Test" }).click();
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 });
 
@@ -117,7 +117,7 @@ test.describe("Ballot Tracking page", () => {
   test("initial render has no WCAG violations", async ({ page }) => {
     await setupCommonMocks(page);
     await page.goto(`${BASE_PATH}/track`);
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 
   test("after tracking a valid ballot has no WCAG violations", async ({
@@ -136,7 +136,7 @@ test.describe("Ballot Tracking page", () => {
     await page.goto(`${BASE_PATH}/track`);
     await page.locator("#tracking-code").fill("5ksv8Ee");
     await page.getByRole("button", { name: "Track my ballot" }).click();
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 
   test("after expanding activity section has no WCAG violations", async ({
@@ -156,7 +156,7 @@ test.describe("Ballot Tracking page", () => {
     await page.locator("#tracking-code").fill("5ksv8Ee");
     await page.getByRole("button", { name: "Track my ballot" }).click();
     await page.locator(".ExpandableSection__Expander").first().click();
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 
   test("after canceling tracking has no WCAG violations", async ({ page }) => {
@@ -174,7 +174,7 @@ test.describe("Ballot Tracking page", () => {
     await page.locator("#tracking-code").fill("5ksv8Ee");
     await page.getByRole("button", { name: "Track my ballot" }).click();
     await page.getByRole("button", { name: "Cancel tracking 5ksv8Ee" }).click();
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 
   test("non-existing ballot error state has no WCAG violations", async ({
@@ -193,7 +193,7 @@ test.describe("Ballot Tracking page", () => {
     await page.goto(`${BASE_PATH}/track`);
     await page.locator("#tracking-code").fill("abcdef");
     await page.getByRole("button", { name: "Track my ballot" }).click();
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 });
 
@@ -214,7 +214,7 @@ test.describe("Election Activity Logs page", () => {
       await page.locator(".Header__Hamburger_Btn").click();
     }
     await page.getByRole("link", { name: "Election Activity Log" }).click();
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 
   test("with expanded board items has no WCAG violations", async ({
@@ -238,7 +238,7 @@ test.describe("Election Activity Logs page", () => {
     await page.getByRole("link", { name: "Election Activity Log" }).click();
     await page.getByText("Rejected affidavit").click();
     await page.getByText("Accepted affidavit").click();
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 
   test("after paginating to page 2 has no WCAG violations", async ({
@@ -268,7 +268,7 @@ test.describe("Election Activity Logs page", () => {
     }
     await page.getByRole("link", { name: "Election Activity Log" }).click();
     await page.getByRole("button", { name: "Next page" }).click();
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 });
 
@@ -280,7 +280,7 @@ test.describe("Help page", () => {
       await page.locator(".Header__Hamburger_Btn").click();
     }
     await page.getByRole("link", { name: "FAQ" }).click();
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 });
 
@@ -295,6 +295,6 @@ test.describe("Locale switching", () => {
       await page.locator(".Header__Hamburger_Btn").click();
     }
     await page.locator(".Header__Locales select").selectOption("es");
-    await analyzeAccesibility(page);
+    await analyzeAccessibility(page);
   });
 });
