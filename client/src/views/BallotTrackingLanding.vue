@@ -97,15 +97,15 @@ const button = computed(() => {
   >
     <template v-slot:action>
       <MainIcon icon="magnifying-glass" id="tracking-main-icon" />
-      <h3 class="TrackingLanding__Title" id="tracking-title">
+      <h1 class="TrackingLanding__Title" id="tracking-title">
         {{ $t("views.tracking.title") }}
-      </h3>
-      <h4 class="TrackingLanding__Subtitle" id="tracking-subtitle">
+      </h1>
+      <h2 class="TrackingLanding__Subtitle" id="tracking-subtitle">
         {{ $t("views.tracking.subtitle") }}
         <strong id="tracking-subtitle-strong">{{
           $t("views.tracking.subtitle_strong")
         }}</strong>
-      </h4>
+      </h2>
       <p class="TrackingLanding__Description" id="tracking-description">
         {{ $t("views.tracking.description") }}
       </p>

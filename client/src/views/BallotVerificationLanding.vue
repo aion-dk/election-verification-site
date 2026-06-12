@@ -70,15 +70,15 @@ watch(verificationStore, async (newStore) => {
   >
     <template v-slot:action>
       <MainIcon icon="envelope-open-text" id="verification-main-icon" />
-      <h3 class="VerificationLanding__Title" id="verification-title">
+      <h1 class="VerificationLanding__Title" id="verification-title">
         {{ $t("views.verification.title") }}
-      </h3>
-      <h4 class="VerificationLanding__Subtitle" id="verification-subtitle">
+      </h1>
+      <h2 class="VerificationLanding__Subtitle" id="verification-subtitle">
         {{ $t("views.verification.subtitle") }}
         <strong id="verification-subtitle-strong">{{
           $t("views.verification.subtitle_strong")
         }}</strong>
-      </h4>
+      </h2>
       <p class="VerificationLanding__Description" id="verification-description">
         {{ $t("views.verification.description") }}
       </p>

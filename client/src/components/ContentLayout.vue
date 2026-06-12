@@ -46,12 +46,12 @@ defineProps({
       class="ContentLayout__Help"
       :aria-label="$t('accessibility.help')"
     >
-      <h5 class="ContentLayout__Help_Title" id="content-layout-help-title">
+      <h2 class="ContentLayout__Help_Title" id="content-layout-help-title">
         {{ helpTitle
         }}<strong id="content-layout-help-title-strong">{{
           helpTitleStrong
         }}</strong>
-      </h5>
+      </h2>
 
       <div
         class="ContentLayout__Help_Container"

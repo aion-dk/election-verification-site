@@ -128,7 +128,8 @@ const setTheme = async (conferenceClient: any) => {
 </script>
 
 <template>
-  <div v-if="!isLoaded" class="DBAS__Loading_Page">
+  <div v-if="!isLoaded" class="DBAS__Loading_Page" role="main">
+    <h1 class="visually-hidden">{{ $t("js.components.AVSpinner.loading") }}</h1>
     <AVSpinner size="lg" color="dark" />
   </div>
   <div class="DBAS" v-if="isLoaded">

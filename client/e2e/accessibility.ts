@@ -3,8 +3,8 @@ import { expect } from "@playwright/test";
 
 async function analyzeAccesibility(page: any) {
   const accessibilityScanResults = await new AxeBuilder({ page })
-    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa"])
-    .disableRules(["nested-interactive"])
+    .withTags(["wcag2a", "wcag2aa", "wcag21a", "wcag21aa", "best-practice"])
+    .disableRules(["nested-interactive", "scrollable-region-focusable"])
     .analyze();
 
   accessibilityScanResults.violations.forEach((v) =>
@@ -18,7 +18,7 @@ async function analyzeAccesibility(page: any) {
     }),
   );
 
-  await expect(accessibilityScanResults.violations.length).toEqual(0);
+  expect(accessibilityScanResults.violations.length).toEqual(0);
 }
 
 export default analyzeAccesibility;

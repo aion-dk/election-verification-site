@@ -102,12 +102,12 @@ onMounted(async () => {
   >
     <template v-slot:action>
       <MainIcon icon="square-poll-vertical" id="logs-main-icon" />
-      <h3 class="LogsView__Subtitle" id="logs-subtitle">
+      <h1 class="LogsView__Subtitle" id="logs-subtitle">
         {{ $t("views.logs.subtitle") }}
-      </h3>
-      <h4 class="LogsView__Title" id="logs-title">
+      </h1>
+      <h2 class="LogsView__Title" id="logs-title">
         {{ $t("views.logs.title") }}
-      </h4>
+      </h2>
       <p class="LogsView__Description" id="logs-description">
         {{ $t("views.logs.description") }}
       </p>

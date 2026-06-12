@@ -45,9 +45,9 @@ onMounted(() => (ballot.value = ballotStore.ballot));
           @cancel="cancel"
         />
 
-        <h3 class="BallotTracker__Title" id="tracker-title">
+        <h1 class="BallotTracker__Title" id="tracker-title">
           {{ $t("views.tracker.info.title") }}
-        </h3>
+        </h1>
         <p class="BallotTracker__Description" id="tracker-description">
           {{ $t("views.tracker.info.description") }}
         </p>

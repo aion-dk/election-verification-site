@@ -67,7 +67,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="Header__Navbar" id="header-navbar">
+  <header class="Header__Navbar" id="header-navbar">
     <RouterLink
       class="Header__Election_Info"
       :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}`"
@@ -168,7 +168,7 @@ onBeforeUnmount(() => {
         id="header-hamburger-menu-button"
       />
     </div>
-  </div>
+  </header>
 </template>
 
 <style type="text/css" scoped>

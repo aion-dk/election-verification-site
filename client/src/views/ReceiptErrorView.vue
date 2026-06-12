@@ -79,9 +79,9 @@ const buttons = computed(() => {
         :icon="receiptStore.receiptValid ? 'circle-xmark' : 'file-circle-xmark'"
         id="receipt-error-main-icon"
       />
-      <h3 class="ReceiptError__Title" id="receipt-error-title">
+      <h1 class="ReceiptError__Title" id="receipt-error-title">
         {{ $t(`views.receipt_error.${translationPath}.title`) }}
-      </h3>
+      </h1>
 
       <Error
         :errorPath="`receipt.${translationPath}`"
