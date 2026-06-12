@@ -1,5 +1,8 @@
 import pluginVue from "eslint-plugin-vue";
-import { defineConfigWithVueTs, vueTsConfigs } from "@vue/eslint-config-typescript";
+import {
+  defineConfigWithVueTs,
+  vueTsConfigs,
+} from "@vue/eslint-config-typescript";
 import pluginVitest from "@vitest/eslint-plugin";
 import skipFormatting from "@vue/eslint-config-prettier/skip-formatting";
 import vuejsA11y from "eslint-plugin-vuejs-accessibility";
@@ -58,7 +61,10 @@ export default defineConfigWithVueTs(
       "vuejs-accessibility/heading-has-content": "warn",
       "vuejs-accessibility/iframe-has-title": "warn",
       "vuejs-accessibility/interactive-supports-focus": "warn",
-      "vuejs-accessibility/label-has-for": ["warn", { required: { some: ["nesting", "id"] }, allowChildren: true }],
+      "vuejs-accessibility/label-has-for": [
+        "warn",
+        { required: { some: ["nesting", "id"] }, allowChildren: true },
+      ],
       "vuejs-accessibility/media-has-caption": "warn",
       "vuejs-accessibility/mouse-events-have-key-events": "warn",
       "vuejs-accessibility/no-access-key": "warn",

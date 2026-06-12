@@ -214,16 +214,20 @@ describe("useElectionBranding", () => {
   });
 
   describe("resetBranding", () => {
-    it("resets favicon to default", () => {
-      const { branding } = mountWithBranding({
+    it("resets favicon and document title to defaults", () => {
+      const { branding, setTitle } = mountWithBranding({
         faviconUrl: "/custom-favicon.ico",
+        tabName: { en: "Custom Tab" },
       });
+      setTitle("en");
+      expect(document.title).toBe("Custom Tab");
 
       branding.resetBranding();
 
       const faviconLink =
         document.querySelector<HTMLLinkElement>("link[rel*='icon']");
       expect(faviconLink?.href).toContain("/favicon.ico");
+      expect(document.title).toBe("Election Verification Site");
     });
   });
 

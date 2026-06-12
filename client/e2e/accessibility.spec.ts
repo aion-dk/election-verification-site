@@ -10,7 +10,12 @@ import {
 
 const BASE_PATH = "/en/organisation_slug/election_slug";
 
-async function setupCommonMocks(page: Page, extraMocks?: (url: string) => { status: number; contentType: string; body: string } | null) {
+async function setupCommonMocks(
+  page: Page,
+  extraMocks?: (
+    url: string,
+  ) => { status: number; contentType: string; body: string } | null,
+) {
   await page.route("**/*", async (route) => {
     const url = route.request().url();
 
@@ -70,9 +75,8 @@ test.describe("Ballot Verification page", () => {
   }) => {
     await setupCommonMocks(page, (url) => {
       if (
-        url.indexOf(
-          "organisation_slug/election_slug/verification/vote_track"
-        ) > 0
+        url.indexOf("organisation_slug/election_slug/verification/vote_track") >
+        0
       ) {
         return {
           status: 200,
@@ -91,9 +95,8 @@ test.describe("Ballot Verification page", () => {
   test("invalid code error state has no WCAG violations", async ({ page }) => {
     await setupCommonMocks(page, (url) => {
       if (
-        url.indexOf(
-          "organisation_slug/election_slug/verification/vote_track"
-        ) > 0
+        url.indexOf("organisation_slug/election_slug/verification/vote_track") >
+        0
       ) {
         return {
           status: 404,
@@ -170,9 +173,7 @@ test.describe("Ballot Tracking page", () => {
     await page.goto(`${BASE_PATH}/track`);
     await page.locator("#tracking-code").fill("5ksv8Ee");
     await page.getByRole("button", { name: "Track my ballot" }).click();
-    await page
-      .getByRole("button", { name: "Cancel tracking 5ksv8Ee" })
-      .click();
+    await page.getByRole("button", { name: "Cancel tracking 5ksv8Ee" }).click();
     await analyzeAccesibility(page);
   });
 

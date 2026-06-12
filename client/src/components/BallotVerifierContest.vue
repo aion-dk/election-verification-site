@@ -37,7 +37,11 @@
 import useConfigStore from "@/stores/useConfigStore";
 import type { PropType } from "vue";
 import { defineComponent } from "vue";
-import type { ContestSelection, ContestContent, SupportedLocale } from "@/Types";
+import type {
+  ContestSelection,
+  ContestContent,
+  SupportedLocale,
+} from "@/Types";
 
 export default defineComponent({
   name: "BallotVerifierContest",

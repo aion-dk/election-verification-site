@@ -30,4 +30,4 @@ export default function httpErrorHandler(error: any) {
 
   //Something happened in setting up the request and triggered an Error
   console.log(error.message);
-};
+}

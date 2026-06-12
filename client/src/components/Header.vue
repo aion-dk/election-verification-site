@@ -58,11 +58,11 @@ const setLocale = (newLocale: string) => {
 const onResize = () => (isMenuOpened.value = false);
 
 onMounted(() => {
-  window.addEventListener("resize", onResize);
+  globalThis.addEventListener("resize", onResize);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", onResize);
+  globalThis.removeEventListener("resize", onResize);
 });
 </script>
 

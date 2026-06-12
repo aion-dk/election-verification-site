@@ -159,11 +159,11 @@ onMounted(() => {
           :id="`help-faq-${index}`"
         >
           <template v-slot:collapsed>
-             <h2 class="HelpView__FAQ_Title">{{ question.title }}</h2>
+            <h2 class="HelpView__FAQ_Title">{{ question.title }}</h2>
           </template>
 
           <template v-slot:expanded>
-             <h2 class="HelpView__FAQ_Title mb-3">{{ question.title }}</h2>
+            <h2 class="HelpView__FAQ_Title mb-3">{{ question.title }}</h2>
             <p
               v-for="(p, i) in question.paragraphs"
               :key="`${i}-${p}`"

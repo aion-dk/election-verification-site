@@ -19,7 +19,10 @@ const defaultStubs = {
 
 const i18n = createI18n({ messages });
 
-interface A11yMountOptions extends Omit<Partial<MountingOptions<any>>, 'attachTo'> {
+interface A11yMountOptions extends Omit<
+  Partial<MountingOptions<any>>,
+  "attachTo"
+> {
   attachTo?: boolean;
 }
 
@@ -28,15 +31,28 @@ export async function mountForA11y(
   options: A11yMountOptions = {},
 ) {
   const { attachTo, ...rest } = options;
+  const container =
+    attachTo === false ? undefined : document.createElement("div");
+  if (container) {
+    document.body.appendChild(container);
+  }
   const wrapper = mount(component, {
     ...rest,
-    attachTo: attachTo === false ? undefined : document.body,
+    attachTo: container,
     global: {
       plugins: [i18n],
       stubs: defaultStubs,
       ...rest.global,
     },
   });
+
+  const originalUnmount = wrapper.unmount.bind(wrapper);
+  wrapper.unmount = () => {
+    originalUnmount();
+    if (container && container.parentElement) {
+      container.parentElement.removeChild(container);
+    }
+  };
 
   return wrapper;
 }
