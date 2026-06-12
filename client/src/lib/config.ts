@@ -1,4 +1,4 @@
-const myWindow = window as unknown as {
+const myWindow = globalThis as unknown as {
   __APP_CONFIG__: {
     VITE_LOGO_URL: string; // Unused?
     VITE_DBB_URL: string;

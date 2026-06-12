@@ -99,6 +99,7 @@ watch(verificationStore, async (newStore) => {
               class="text-gray-600 cursor-help"
               v-tooltip="$t('views.verification.tooltip_text')"
               id="verification-tooltip-icon"
+              aria-hidden="true"
             />
           </label>
           <input

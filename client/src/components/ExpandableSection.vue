@@ -22,13 +22,14 @@ const toggle = () => {
 </script>
 
 <template>
-  <div
+  <button
     @click="toggle"
     class="ExpandableSection"
     :class="{
       ['ExpandableSection--expanded']: _expanded,
     }"
-    role="button"
+    type="button"
+    :aria-expanded="_expanded"
   >
     <div class="ExpandableSection__Line" v-if="!_expanded">
       <slot name="collapsed"></slot>
@@ -43,7 +44,7 @@ const toggle = () => {
 
       <AVIcon v-else icon="plus" aria-hidden="true" />
     </span>
-  </div>
+  </button>
 </template>
 
 <style type="text/css" scoped>
@@ -58,6 +59,8 @@ const toggle = () => {
   background-color: white;
   z-index: 10;
   cursor: pointer;
+  width: 100%;
+  text-align: left;
 }
 
 .ExpandableSection__Line {

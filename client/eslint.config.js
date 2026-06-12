@@ -1,10 +1,10 @@
 import pluginVue from "eslint-plugin-vue";
-import vueTsEslintConfig from "@vue/eslint-config-typescript";
+import { defineConfigWithVueTs, vueTsConfigs } from "@vue/eslint-config-typescript";
 import pluginVitest from "@vitest/eslint-plugin";
 import skipFormatting from "@vue/eslint-config-prettier/skip-formatting";
 import vuejsA11y from "eslint-plugin-vuejs-accessibility";
 
-export default [
+export default defineConfigWithVueTs(
   {
     name: "app/files-to-lint",
     files: ["src/**/*.{ts,mts,tsx,vue}"],
@@ -20,9 +20,9 @@ export default [
     ],
   },
 
-  ...pluginVue.configs["flat/essential"],
-  ...vueTsEslintConfig(),
-  ...vuejsA11y.configs["flat/recommended"],
+  pluginVue.configs["flat/essential"],
+  vueTsConfigs.recommended,
+  vuejsA11y.configs["flat/recommended"],
 
   {
     ...pluginVitest.configs.recommended,
@@ -58,7 +58,7 @@ export default [
       "vuejs-accessibility/heading-has-content": "warn",
       "vuejs-accessibility/iframe-has-title": "warn",
       "vuejs-accessibility/interactive-supports-focus": "warn",
-      "vuejs-accessibility/label-has-for": "warn",
+      "vuejs-accessibility/label-has-for": ["warn", { required: { some: ["nesting", "id"] }, allowChildren: true }],
       "vuejs-accessibility/media-has-caption": "warn",
       "vuejs-accessibility/mouse-events-have-key-events": "warn",
       "vuejs-accessibility/no-access-key": "warn",
@@ -70,4 +70,4 @@ export default [
       "vuejs-accessibility/tabindex-no-positive": "warn",
     },
   },
-];
+);
