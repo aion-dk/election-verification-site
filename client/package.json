@@ -40,7 +40,7 @@
     "@assemblyvoting/types": "^1.0.0",
     "@axe-core/playwright": "^4.10.1",
     "@pinia/testing": "^1.0.3",
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.61.0",
     "@rushstack/eslint-patch": "^1.10.5",
     "@types/jsdom": "^28.0.0",
     "@types/node": "^24.10.15",
