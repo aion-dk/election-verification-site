@@ -10,15 +10,10 @@ COPY . .
 
 RUN yarn build
 
-# Playwright browsers are required by CI's e2e job (`yarn test:e2e:ci`), which
-# runs on amd64. On amd64 we let Playwright install the exact browser revisions
-# matching the installed @playwright/test version. On arm64 (Apple Silicon /
-# Docker Desktop) the download+extract step hangs, and the local `evs` service
-# only runs `yarn dev`, so we skip it there. Install manually if you need to run
-# e2e locally:  npx playwright install --with-deps
-FROM builder AS development
-ARG TARGETARCH
-RUN if [ "$TARGETARCH" = "amd64" ]; then npx playwright install --with-deps; fi
+FROM mcr.microsoft.com/playwright:v1.60.0-noble AS development
+
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app .
 
 FROM nginx:1.29-alpine AS production
 # Copy the built app only (Vite default output directory is "dist")
