@@ -22,8 +22,8 @@
   },
   "dependencies": {
     "@assemblyvoting/electa-ui": "^5.6.0",
-    "@assemblyvoting/js-client": "file:./../../../../js-client",
-    "axios": "^1.15.2",
+    "@assemblyvoting/js-client": "^6.0.0",
+    "axios": "^1.16.0",
     "date-fns": "^4.1.0",
     "date-fns-tz": "^3.2.0",
     "jsdom": "^28.1.0",
@@ -40,7 +40,7 @@
     "@assemblyvoting/types": "^1.0.0",
     "@axe-core/playwright": "^4.10.1",
     "@pinia/testing": "^1.0.3",
-    "@playwright/test": "^1.49.1",
+    "@playwright/test": "^1.61.0",
     "@rushstack/eslint-patch": "^1.10.5",
     "@types/jsdom": "^28.0.0",
     "@types/node": "^24.10.15",
@@ -55,7 +55,10 @@
     "prettier": "^3.4.2",
     "typescript": "^5.4.5",
     "vite": "^7.3.2",
-    "vitest": "^4.0.18"
+    "vitest": "^4.1.0"
+  },
+  "resolutions": {
+    "vite": "7.3.2"
   },
   "engines": {
     "node": ">=24.14.0",
