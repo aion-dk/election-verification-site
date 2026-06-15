@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM node:24-bullseye-slim AS builder
+FROM node:24.16-bullseye-slim AS builder
 
 WORKDIR /usr/src/app
 
@@ -10,11 +10,12 @@ COPY . .
 
 RUN yarn build
 
-FROM builder AS development
+FROM mcr.microsoft.com/playwright:v1.61.0-noble AS development
 
-RUN npx playwright install --with-deps
+WORKDIR /usr/src/app
+COPY --from=builder /usr/src/app .
 
-FROM nginx:1.29-alpine AS production
+FROM nginx:1.31-alpine AS production
 # Copy the built app only (Vite default output directory is "dist")
 COPY --from=builder /usr/src/app/dist /usr/share/nginx/html
 ENV VITE_DBB_URL=""
