@@ -10,14 +10,15 @@ COPY . .
 
 RUN yarn build
 
-# We copy the already-extracted browsers from Microsoft's official image instead of running `npx playwright install`, whose download+extract step hangs on Apple Silicon. CI's e2e job needs these browsers in the development image.
-FROM mcr.microsoft.com/playwright:v1.58.2 AS playwright-browsers
-
+# Playwright browsers are required by CI's e2e job (`yarn test:e2e:ci`), which
+# runs on amd64. On amd64 we let Playwright install the exact browser revisions
+# matching the installed @playwright/test version. On arm64 (Apple Silicon /
+# Docker Desktop) the download+extract step hangs, and the local `evs` service
+# only runs `yarn dev`, so we skip it there. Install manually if you need to run
+# e2e locally:  npx playwright install --with-deps
 FROM builder AS development
-
-RUN npx playwright install-deps
-ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
-COPY --from=playwright-browsers /ms-playwright /ms-playwright
+ARG TARGETARCH
+RUN if [ "$TARGETARCH" = "amd64" ]; then npx playwright install --with-deps; fi
 
 FROM nginx:1.29-alpine AS production
 # Copy the built app only (Vite default output directory is "dist")
