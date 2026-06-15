@@ -10,9 +10,14 @@ COPY . .
 
 RUN yarn build
 
+# We copy the already-extracted browsers from Microsoft's official image instead of running `npx playwright install`, whose download+extract step hangs on Apple Silicon. CI's e2e job needs these browsers in the development image.
+FROM mcr.microsoft.com/playwright:v1.58.2 AS playwright-browsers
+
 FROM builder AS development
 
-RUN npx playwright install --with-deps
+RUN npx playwright install-deps
+ENV PLAYWRIGHT_BROWSERS_PATH=/ms-playwright
+COPY --from=playwright-browsers /ms-playwright /ms-playwright
 
 FROM nginx:1.29-alpine AS production
 # Copy the built app only (Vite default output directory is "dist")
