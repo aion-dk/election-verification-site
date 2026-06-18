@@ -24,7 +24,7 @@ test("renders correctly", async () => {
   });
 
   expect(wrapper.find("section").text()).toContain("something");
-  expect(wrapper.find("h5").text()).toContain("titlestrong");
+  expect(wrapper.find("h2").text()).toContain("titlestrong");
   expect(wrapper.find("aside").text()).toContain("sidebar");
   expect(wrapper.html()).to.not.contain("ContentLayout__Breadcrumb");
   expect(wrapper.html()).to.not.contain("ContentLayout__Brand_Logo");

@@ -21,17 +21,23 @@ const goToTracker = () => {
 
 <template>
   <div class="Welcome" id="welcome">
+    <h1
+      class="Welcome__Description_Desktop_Title visually-hidden-mobile"
+      id="welcome-desktop-title"
+    >
+      {{ $t("views.welcome.title") }}
+    </h1>
     <div class="Welcome__Description_Desktop" id="welcome-description-desktop">
       <div
         class="Welcome__Description_Desktop_Container"
         id="welcome-desktop-title-container"
       >
-        <h1
-          class="Welcome__Description_Desktop_Title"
-          id="welcome-desktop-title"
+        <span
+          class="Welcome__Description_Desktop_Title visually-hidden"
+          aria-hidden="true"
         >
           {{ $t("views.welcome.title") }}
-        </h1>
+        </span>
       </div>
 
       <div
@@ -80,9 +86,9 @@ const goToTracker = () => {
               id="welcome-tester-icon"
             />
             <div id="welcome-tester-card-content">
-              <h3 class="Welcome__Card_Title" id="welcome-tester-title">
+              <h2 class="Welcome__Card_Title" id="welcome-tester-title">
                 {{ $t("views.welcome.ballot_tester.title") }}
-              </h3>
+              </h2>
               <p
                 class="Welcome__Card_Description"
                 id="welcome-tester-description"
@@ -111,9 +117,9 @@ const goToTracker = () => {
               id="welcome-tracker-icon"
             />
             <div id="welcome-tracker-card-content">
-              <h3 class="Welcome__Card_Title" id="welcome-tracker-title">
+              <h2 class="Welcome__Card_Title" id="welcome-tracker-title">
                 {{ $t("views.welcome.ballot_tracker.title") }}
-              </h3>
+              </h2>
               <p
                 class="Welcome__Card_Description"
                 id="welcome-tracker-description"
@@ -136,9 +142,9 @@ const goToTracker = () => {
     </section>
 
     <section class="Welcome__About" id="welcome-about">
-      <h4 class="Welcome__About_Title" id="welcome-about-title">
+      <h2 class="Welcome__About_Title" id="welcome-about-title">
         {{ $t("views.welcome.about.title") }}
-      </h4>
+      </h2>
       <div
         class="Welcome__Card Welcome__Description"
         id="welcome-about-description"
@@ -152,12 +158,12 @@ const goToTracker = () => {
           class="Welcome__Card Welcome__Card_Overrides"
           id="welcome-about-tester-card"
         >
-          <h5
+          <h3
             class="Welcome__About_Subtitle"
             id="welcome-about-tester-subtitle"
           >
             {{ $t("views.welcome.about.ballot_tester") }}
-          </h5>
+          </h3>
           <p class="Welcome__About_Description" id="welcome-about-tester-text">
             {{ $t("views.welcome.about.ballot_tester_text") }}
           </p>
@@ -166,12 +172,12 @@ const goToTracker = () => {
           class="Welcome__Card Welcome__Card_Overrides"
           id="welcome-about-tracker-card"
         >
-          <h5
+          <h3
             class="Welcome__About_Subtitle"
             id="welcome-about-tracker-subtitle"
           >
             {{ $t("views.welcome.about.ballot_tracker") }}
-          </h5>
+          </h3>
           <p class="Welcome__About_Description" id="welcome-about-tracker-text">
             {{ $t("views.welcome.about.ballot_tracker_text") }}
           </p>
@@ -180,9 +186,9 @@ const goToTracker = () => {
           class="Welcome__Card Welcome__Card_Overrides"
           id="welcome-about-audit-card"
         >
-          <h5 class="Welcome__About_Subtitle" id="welcome-about-audit-subtitle">
+          <h3 class="Welcome__About_Subtitle" id="welcome-about-audit-subtitle">
             {{ $t("views.welcome.about.audit_log") }}
-          </h5>
+          </h3>
           <p class="Welcome__About_Description" id="welcome-about-audit-text">
             {{ $t("views.welcome.about.audit_log_text") }}
           </p>
@@ -201,6 +207,18 @@ const goToTracker = () => {
 </template>
 
 <style type="text/css" scoped>
+.visually-hidden-mobile {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .Welcome {
   height: calc(100dvh - 70px);
   width: 100%;
@@ -351,6 +369,17 @@ const goToTracker = () => {
 }
 
 @media only screen and (min-width: 80rem) {
+  .visually-hidden-mobile {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
+  }
+
   .Welcome__Description_Desktop {
     padding: 5rem;
     display: flex;

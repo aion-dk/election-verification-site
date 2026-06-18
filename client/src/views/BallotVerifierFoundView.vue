@@ -79,9 +79,9 @@ onMounted(async () => {
         />
 
         <MainIcon icon="envelope-open-text" id="verifier-found-main-icon" />
-        <h3 class="VerificationFound__Title" id="verifier-found-title">
+        <h1 class="VerificationFound__Title" id="verifier-found-title">
           {{ $t("views.verifier.found.title") }}
-        </h3>
+        </h1>
         <p
           class="VerificationFound__Description"
           id="verifier-found-description"

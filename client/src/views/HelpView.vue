@@ -67,9 +67,9 @@ onMounted(() => {
   >
     <template v-slot:action>
       <MainIcon icon="circle-question" id="help-main-icon" />
-      <h2 class="HelpView__Title" id="help-title">
+      <h1 class="HelpView__Title" id="help-title">
         {{ $t("views.faq.title") }}
-      </h2>
+      </h1>
       <p class="HelpView__Description" id="help-description">
         {{ $t("views.faq.description") }}
       </p>
@@ -159,11 +159,11 @@ onMounted(() => {
           :id="`help-faq-${index}`"
         >
           <template v-slot:collapsed>
-            <h3 class="HelpView__FAQ_Title">{{ question.title }}</h3>
+            <h2 class="HelpView__FAQ_Title">{{ question.title }}</h2>
           </template>
 
           <template v-slot:expanded>
-            <h3 class="HelpView__FAQ_Title mb-3">{{ question.title }}</h3>
+            <h2 class="HelpView__FAQ_Title mb-3">{{ question.title }}</h2>
             <p
               v-for="(p, i) in question.paragraphs"
               :key="`${i}-${p}`"

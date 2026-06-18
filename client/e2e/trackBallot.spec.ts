@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { latestConfig, foundBallotStatus, status } from "./mocks";
-import analyzeAccesibility from "./accessibility";
+import analyzeAccessibility from "./accessibility";
 
 test("tracking a ballot", async ({ page }) => {
   // Mock Network calls
@@ -38,15 +38,15 @@ test("tracking a ballot", async ({ page }) => {
   });
 
   await page.goto("/en/organisation_slug/election_slug/track");
-  await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Ballot Tracker");
+  await analyzeAccessibility(page);
+  await expect(page.locator("h1")).toHaveText("Ballot Tracker");
   await page.locator("#tracking-code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Track my ballot" }).click();
-  await analyzeAccesibility(page);
+  await analyzeAccessibility(page);
   await page.locator(".ExpandableSection__Expander").first().click();
-  await analyzeAccesibility(page);
+  await analyzeAccessibility(page);
   await page.getByRole("button", { name: "Cancel tracking 5ksv8Ee" }).click();
-  await analyzeAccesibility(page);
+  await analyzeAccessibility(page);
   await page.locator("#tracking-code").fill("5ksv8Ee");
 });
 
@@ -86,11 +86,11 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
   });
 
   await page.goto("/en/organisation_slug/election_slug/track");
-  await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Ballot Tracker");
+  await analyzeAccessibility(page);
+  await expect(page.locator("h1")).toHaveText("Ballot Tracker");
   await page.locator("#tracking-code").fill("abcdef");
   await page.getByRole("button", { name: "Track my ballot" }).click();
-  await analyzeAccesibility(page);
+  await analyzeAccessibility(page);
   await expect(page.locator(".Error__Title")).toContainText(
     "Tracking code not found",
   );

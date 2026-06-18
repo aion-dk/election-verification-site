@@ -41,18 +41,20 @@ defineProps({
         <slot name="action" />
       </div>
     </section>
+    <!-- tabindex is required for keyboard-scrollable content in Safari (WCAG 2.1.1) -->
+    <!-- sonarqube-disable-next-line sonar/no-tabindex-on-non-interactive-elements -->
     <aside
       id="help-content-aside"
       class="ContentLayout__Help"
       :aria-label="$t('accessibility.help')"
       tabindex="0"
     >
-      <h5 class="ContentLayout__Help_Title" id="content-layout-help-title">
+      <h2 class="ContentLayout__Help_Title" id="content-layout-help-title">
         {{ helpTitle
         }}<strong id="content-layout-help-title-strong">{{
           helpTitleStrong
         }}</strong>
-      </h5>
+      </h2>
 
       <div
         class="ContentLayout__Help_Container"

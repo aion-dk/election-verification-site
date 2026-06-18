@@ -4,7 +4,7 @@ import type { Locale, DefineLocaleMessage } from "vue-i18n";
 import { offlineMessages } from "@/assets/translations";
 
 let locale: Locale = "en";
-const rtlLanguages: Locale[] = [
+const rtlLanguages: Set<Locale> = new Set([
   "ar",
   "dv",
   "fa",
@@ -15,9 +15,20 @@ const rtlLanguages: Locale[] = [
   "ps",
   "ur",
   "yi",
-];
-const url = new URL(window.location.href);
-if (url.pathname.split("/")[1]) locale = url.pathname.split("/")[1];
+]);
+
+function getLocaleFromUrl(): Locale {
+  try {
+    const url = new URL(globalThis.location.href);
+    const segment = url.pathname.split("/")[1];
+    if (segment) return segment as Locale;
+  } catch {
+    // SSR or test environment
+  }
+  return "en";
+}
+
+locale = getLocaleFromUrl();
 
 const i18n = createI18n({
   legacy: false,
@@ -31,9 +42,9 @@ export function setLocale(locale: Locale) {
 
   document.getElementsByTagName("html")[0].lang = locale;
 
-  rtlLanguages.includes(locale)
-    ? (document.getElementsByTagName("html")[0].dir = "rtl")
-    : (document.getElementsByTagName("html")[0].dir = "ltr");
+  document.getElementsByTagName("html")[0].dir = rtlLanguages.has(locale)
+    ? "rtl"
+    : "ltr";
 }
 
 export function loadLocaleMessages(locale: string, messages: object) {

@@ -65,6 +65,7 @@ export function useElectionBranding() {
 
   const resetBranding = () => {
     currentFaviconUrl.value = DEFAULT_FAVICON_URL;
+    document.title = DEFAULT_TAB_NAME;
 
     const faviconLink =
       document.querySelector<HTMLLinkElement>("link[rel*='icon']");

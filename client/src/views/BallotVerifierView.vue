@@ -69,12 +69,12 @@ onMounted(() => {
           id="verifier-spoiled-content"
         >
           <MainIcon icon="spell-check" id="verifier-spoiled-icon" />
-          <h3
+          <h1
             class="BallotVerifier__Title_Secondary"
             id="verifier-spoiled-title"
           >
             {{ $t("views.verifier.spoiled.title") }}
-          </h3>
+          </h1>
           <p class="BallotVerifier__Title" id="verifier-spoiled-description">
             {{ $t("views.verifier.spoiled.description") }}
           </p>
@@ -106,12 +106,12 @@ onMounted(() => {
           id="verifier-inprogress-content"
         >
           <MainIcon icon="asterisk" id="verifier-inprogress-icon" />
-          <h3
+          <h1
             class="BallotVerifier__Title BallotVerifier__Title_Passkey"
             id="verifier-inprogress-title"
           >
             {{ $t("views.verifier.inprogress.title") }}
-          </h3>
+          </h1>
 
           <div
             v-if="showAlert"
