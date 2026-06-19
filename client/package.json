@@ -58,7 +58,7 @@
     "vitest": "^4.1.0"
   },
   "resolutions": {
-    "vite": "7.3.2"
+    "vite": "7.3.5"
   },
   "engines": {
     "node": ">=24.14.0",
