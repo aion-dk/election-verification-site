@@ -6,7 +6,10 @@ WORKDIR /usr/src/app
 COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile && yarn cache clean
 
-COPY . .
+COPY src ./src
+COPY public ./public
+COPY index.html vite.config.ts tsconfig.json tsconfig.app.json tsconfig.config.json tsconfig.vitest.json ./
+COPY env.d.ts ./
 
 RUN yarn build
 
@@ -28,4 +31,5 @@ RUN chmod +x /docker-entrypoint.d/40-write-env-js.sh
 COPY nginx.conf /etc/nginx/nginx.conf
 
 EXPOSE 8080
+USER nginx
 CMD ["nginx", "-g", "daemon off;"]

@@ -30,7 +30,8 @@ export class ReceiptPDFExtractor {
           ) as PDFHexString;
 
           if (receipt == null || trackingCode == null) {
-            reject("Invalid receipt file");
+            reject(new Error("Invalid receipt file"));
+            return;
           }
 
           this.receipt = receipt.decodeText();
@@ -42,9 +43,13 @@ export class ReceiptPDFExtractor {
         }
       };
       reader.onerror = () => {
-        reject("Could not load receipt file");
+        reject(new Error("Could not load receipt file"));
       };
-      reader.readAsArrayBuffer(this.file);
+      this.file.arrayBuffer().then((arrayBuffer) => {
+        reader.onload({ target: { result: arrayBuffer } } as ProgressEvent<FileReader>);
+      }).catch((err: Error) => {
+        reject(err);
+      });
     });
   }
 }

@@ -303,7 +303,6 @@ html[dir="rtl"] .Header__Locales {
   }
 
   .Header__Links {
-    display: block;
     position: static;
     display: flex;
     flex-direction: row;

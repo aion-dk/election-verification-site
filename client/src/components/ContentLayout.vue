@@ -21,7 +21,7 @@ defineProps({
 
 <template>
   <div class="ContentLayout">
-    <section id="main_content" class="ContentLayout__Action" tabindex="0">
+    <section id="main_content" class="ContentLayout__Action">
       <p v-if="breadcrumb" class="ContentLayout__Breadcrumb">
         {{ breadcrumb }}
       </p>
@@ -31,7 +31,6 @@ defineProps({
     </section>
     <aside
       class="ContentLayout__Help"
-      tabindex="0"
       :aria-label="$t('accessibility.help')"
     >
       <h5 class="ContentLayout__Help_Title">
@@ -67,7 +66,6 @@ defineProps({
 }
 
 .ContentLayout__Action {
-  align-items: center;
   width: 100%;
   padding: 1rem 0;
   display: flex;

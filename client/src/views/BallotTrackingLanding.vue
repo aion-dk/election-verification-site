@@ -34,23 +34,17 @@ const lookupBallot = async () => {
     router.push(
       `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode.value}`,
     );
+  } else if (receiptStore.receiptValid) {
+    router.push(
+      `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
+    );
   } else {
-    if (receiptStore.receiptValid) {
-      router.push(
-        `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
-      );
-    } else {
-      error.value = "track.invalid_code";
-    }
+    error.value = "track.invalid_code";
   }
 };
 
 const updateReceipt = async (files: File[]) => {
-  if (!files.length) {
-    receipt.value = null;
-    trackingCode.value = null;
-    error.value = null;
-  } else {
+  if (files.length) {
     receipt.value = files[0];
     await receiptStore.setupAVVerifier(configStore.boardSlug);
     const receiptExtractor = new ReceiptPDFExtractor(receipt.value);

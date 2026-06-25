@@ -26,27 +26,28 @@ const contactUrl = computed(
     ] || null,
 );
 
-const navigate = (url: string, external = false) =>
-  external ? (window.location.href = url) : router.push(url);
+const navigate = (url: string, external = false) => {
+  if (external) {
+    globalThis.location.href = url;
+  } else {
+    router.push(url);
+  }
+};
 
 const buttons = computed(() => {
+  const primaryLabel = !receiptStore.receiptValid || (receiptStore.receiptValid && contactUrl.value)
+    ? i18n.t(`views.receipt_error.${translationPath.value}.primary_action`)
+    : i18n.t(`views.receipt_error.${translationPath.value}.secondary_action`);
+
+  const primaryUrl = receiptStore.receiptValid
+    ? (contactUrl.value ?? `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}`)
+    : `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}/track`;
+
   return {
     primary: {
       visible: true,
-      label:
-        !receiptStore.receiptValid ||
-        (receiptStore.receiptValid && contactUrl.value)
-          ? i18n.t(
-              `views.receipt_error.${translationPath.value}.primary_action`,
-            )
-          : i18n.t(
-              `views.receipt_error.${translationPath.value}.secondary_action`,
-            ),
-      url: receiptStore.receiptValid
-        ? contactUrl.value
-          ? contactUrl.value
-          : `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}`
-        : `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}/track`,
+      label: primaryLabel,
+      url: primaryUrl,
     },
     secondary: {
       visible:

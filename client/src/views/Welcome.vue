@@ -286,8 +286,9 @@ const goToTracker = () => {
 
 @media only screen and (min-width: 48rem) {
   .Welcome__Card_Line {
-    width: 80%;
-    margin: 6rem 0;
+    width: 0.25rem;
+    height: 16rem;
+    margin: 0 3rem;
   }
 
   .Welcome__Button {
@@ -296,21 +297,12 @@ const goToTracker = () => {
 
   .Welcome__Brand_Logo {
     width: 30%;
-  }
-
-  .Welcome__Brand_Logo {
     display: none;
   }
 
   .Welcome__Card_Desktop {
     flex-direction: row !important;
     justify-content: space-evenly;
-  }
-
-  .Welcome__Card_Line {
-    width: 0.25rem;
-    height: 16rem;
-    margin: 0 3rem;
   }
 }
 

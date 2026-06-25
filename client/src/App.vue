@@ -52,7 +52,7 @@ function setTitle() {
   const title = [
     configStore.election.title[i18n.locale.value as SupportedLocale],
     siteTitle,
-  ].filter((s) => s);
+  ].filter(Boolean);
   if (window.top) window.top.document.title = title.join(" - ");
 }
 
@@ -92,10 +92,9 @@ const setLanguage = async (conferenceClient: any) => {
       preferredLocale || browserLocale || configStore.election.locales[0],
     );
 
-    for (let i = 0; i < configStore.election.locales.length; i++) {
-      const locale = configStore.election.locales[i];
+    for (const locale of configStore.election.locales) {
       const response = await conferenceClient
-        .getTranslationsData(configStore.election.locales[i])
+        .getTranslationsData(locale)
         .catch((err: Error) => {
           console.error(err);
         });

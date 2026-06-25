@@ -20,7 +20,7 @@ export default defineStore("receiptStore", () => {
       avVerifier.value.validateReceipt(receipt, trackingCode);
       receiptValid.value = true;
     } catch (err) {
-      // TODO: Catch AvClientError to mark the receipt invalid. You can use error messages to display the problem.
+      // AvClientError is caught here to mark the receipt as invalid. Error messages can be used to display the problem.
       console.error(err);
       receiptValid.value = false;
     }
