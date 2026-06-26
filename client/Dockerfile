@@ -10,6 +10,8 @@ COPY src ./src
 COPY public ./public
 COPY index.html vite.config.ts tsconfig.json tsconfig.app.json tsconfig.config.json tsconfig.vitest.json ./
 COPY env.d.ts ./
+COPY eslint.config.js ./
+COPY playwright.config.ts ./
 
 RUN yarn build
 
