@@ -23,6 +23,7 @@ const toggle = () => {
 
 <template>
   <button
+    type="button"
     @click="toggle"
     class="ExpandableSection"
     :class="{

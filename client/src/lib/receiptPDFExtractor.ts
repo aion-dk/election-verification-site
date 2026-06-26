@@ -10,51 +10,27 @@ export class ReceiptPDFExtractor {
   }
 
   public async extract(): Promise<void> {
-    return new Promise<void>((resolve, reject) => {
-      // FileReader api
-      const reader = new FileReader();
-      reader.onload = async () => {
-        try {
-          const pdfDoc = await PDFDocument.load(reader.result, {
-            updateMetadata: false,
-          });
+    const arrayBuffer = await this.file.arrayBuffer();
 
-          const infoRef = pdfDoc.context.trailerInfo.Info;
-          const infoDict = pdfDoc.context.lookup(infoRef) as PDFDict;
-
-          const receipt = infoDict.lookup(
-            PDFName.of("Receipt"),
-          ) as PDFHexString;
-          const trackingCode = infoDict.lookup(
-            PDFName.of("TrackingCode"),
-          ) as PDFHexString;
-
-          if (receipt == null || trackingCode == null) {
-            reject(new Error("Invalid receipt file"));
-            return;
-          }
-
-          this.receipt = receipt.decodeText();
-          this.trackingCode = trackingCode.decodeText();
-
-          resolve();
-        } catch (err) {
-          reject(err);
-        }
-      };
-      reader.onerror = () => {
-        reject(new Error("Could not load receipt file"));
-      };
-      this.file
-        .arrayBuffer()
-        .then((arrayBuffer) => {
-          reader.onload({
-            target: { result: arrayBuffer },
-          } as ProgressEvent<FileReader>);
-        })
-        .catch((err: Error) => {
-          reject(err);
-        });
+    const pdfDoc = await PDFDocument.load(arrayBuffer, {
+      updateMetadata: false,
     });
+
+    const infoRef = pdfDoc.context.trailerInfo.Info;
+    const infoDict = pdfDoc.context.lookup(infoRef) as PDFDict;
+
+    const receipt = infoDict.lookup(
+      PDFName.of("Receipt"),
+    ) as PDFHexString;
+    const trackingCode = infoDict.lookup(
+      PDFName.of("TrackingCode"),
+    ) as PDFHexString;
+
+    if (receipt == null || trackingCode == null) {
+      throw new Error("Invalid receipt file");
+    }
+
+    this.receipt = receipt.decodeText();
+    this.trackingCode = trackingCode.decodeText();
   }
 }
