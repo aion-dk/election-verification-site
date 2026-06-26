@@ -44,7 +44,7 @@ const toggle = () => {
 
       <AVIcon v-else icon="plus" aria-hidden="true" />
     </span>
-  </button>
+  </div>
 </template>
 
 <style type="text/css" scoped>
