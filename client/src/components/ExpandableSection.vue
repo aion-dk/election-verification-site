@@ -22,9 +22,12 @@ const toggle = () => {
 </script>
 
 <template>
-  <button
-    type="button"
+  <div
+    role="button"
+    tabindex="0"
     @click="toggle"
+    @keydown.enter="toggle"
+    @keydown.space.prevent="toggle"
     class="ExpandableSection"
     :class="{
       ['ExpandableSection--expanded']: _expanded,
