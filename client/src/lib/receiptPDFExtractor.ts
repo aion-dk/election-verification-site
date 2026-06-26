@@ -19,9 +19,7 @@ export class ReceiptPDFExtractor {
     const infoRef = pdfDoc.context.trailerInfo.Info;
     const infoDict = pdfDoc.context.lookup(infoRef) as PDFDict;
 
-    const receipt = infoDict.lookup(
-      PDFName.of("Receipt"),
-    ) as PDFHexString;
+    const receipt = infoDict.lookup(PDFName.of("Receipt")) as PDFHexString;
     const trackingCode = infoDict.lookup(
       PDFName.of("TrackingCode"),
     ) as PDFHexString;
