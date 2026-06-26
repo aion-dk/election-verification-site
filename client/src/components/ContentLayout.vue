@@ -32,6 +32,7 @@ defineProps({
     <aside
       class="ContentLayout__Help"
       :aria-label="$t('accessibility.help')"
+      tabindex="0"
     >
       <h5 class="ContentLayout__Help_Title">
         {{ helpTitle }}<strong>{{ helpTitleStrong }}</strong>
