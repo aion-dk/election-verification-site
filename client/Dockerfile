@@ -7,11 +7,13 @@ COPY package.json yarn.lock ./
 RUN yarn install --frozen-lockfile && yarn cache clean
 
 COPY src ./src
+COPY e2e ./e2e
 COPY public ./public
 COPY index.html vite.config.ts tsconfig.json tsconfig.app.json tsconfig.config.json tsconfig.vitest.json ./
 COPY env.d.ts ./
 COPY eslint.config.js ./
 COPY playwright.config.ts ./
+COPY .prettierignore ./
 
 RUN yarn build
 

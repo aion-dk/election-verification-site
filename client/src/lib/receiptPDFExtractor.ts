@@ -45,11 +45,16 @@ export class ReceiptPDFExtractor {
       reader.onerror = () => {
         reject(new Error("Could not load receipt file"));
       };
-      this.file.arrayBuffer().then((arrayBuffer) => {
-        reader.onload({ target: { result: arrayBuffer } } as ProgressEvent<FileReader>);
-      }).catch((err: Error) => {
-        reject(err);
-      });
+      this.file
+        .arrayBuffer()
+        .then((arrayBuffer) => {
+          reader.onload({
+            target: { result: arrayBuffer },
+          } as ProgressEvent<FileReader>);
+        })
+        .catch((err: Error) => {
+          reject(err);
+        });
     });
   }
 }

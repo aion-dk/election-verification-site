@@ -35,7 +35,10 @@ const dbbLink = computed(() => {
 });
 
 const currentPage = computed(() =>
-  Number.parseInt((route.params.page || boardStore.currentPage || 1).toString(), 10),
+  Number.parseInt(
+    (route.params.page || boardStore.currentPage || 1).toString(),
+    10,
+  ),
 );
 
 const filter = () => {

@@ -3,10 +3,7 @@
     <h3 class="BallotVerifierContest__Title">
       {{ contest.title[locale] }}
     </h3>
-    <p
-      v-if="contest.question"
-      v-text="contest.question[locale]"
-    ></p>
+    <p v-if="contest.question" v-text="contest.question[locale]"></p>
     <div
       v-for="(selectionPile, pileIndex) in contestSelection.piles"
       :key="JSON.stringify(selectionPile)"

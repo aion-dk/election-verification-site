@@ -35,12 +35,15 @@ const navigate = (url: string, external = false) => {
 };
 
 const buttons = computed(() => {
-  const primaryLabel = !receiptStore.receiptValid || (receiptStore.receiptValid && contactUrl.value)
-    ? i18n.t(`views.receipt_error.${translationPath.value}.primary_action`)
-    : i18n.t(`views.receipt_error.${translationPath.value}.secondary_action`);
+  const primaryLabel =
+    !receiptStore.receiptValid ||
+    (receiptStore.receiptValid && contactUrl.value)
+      ? i18n.t(`views.receipt_error.${translationPath.value}.primary_action`)
+      : i18n.t(`views.receipt_error.${translationPath.value}.secondary_action`);
 
   const primaryUrl = receiptStore.receiptValid
-    ? (contactUrl.value ?? `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}`)
+    ? (contactUrl.value ??
+      `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}`)
     : `/${i18n.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}/track`;
 
   return {
