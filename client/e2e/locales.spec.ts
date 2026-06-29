@@ -38,10 +38,10 @@ test("changing locale", async ({ page, isMobile }) => {
   }
   await page.locator(".Header__Locales").selectOption("es");
   await analyzeAccesibility(page);
-  await page.getByRole("link", { name: "Testeo de Boleta" }).click();
+  await page.getByRole("link", { name: "Buscador de Boleta" }).click();
   if (isMobile) {
     await page.locator(".Header__Hamburger_Btn").click();
   }
   await page.locator(".Header__Locales").selectOption("en");
-  await page.getByRole("link", { name: "Ballot Tester" }).click();
+  await page.getByRole("link", { name: "Ballot Finder" }).click();
 });

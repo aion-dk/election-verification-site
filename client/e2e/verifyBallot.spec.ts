@@ -30,9 +30,9 @@ test("verifying a ballot", async ({ page }) => {
 
   await page.goto("/en/organisation_slug/election_slug/verify");
   await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Ballot Tester");
+  await expect(page.locator("h3")).toHaveText("Ballot Finder");
   await page.getByPlaceholder("Testing code").fill("5ksv8Ee");
-  await page.getByRole("button", { name: "Start the Test" }).click();
+  await page.getByRole("button", { name: "Find my ballot" }).click();
   await analyzeAccesibility(page);
 });
 
@@ -74,12 +74,12 @@ test("verifying with an invalid verification code", async ({ page }) => {
   });
 
   await page.goto("/en/organisation_slug/election_slug/verify");
-  await expect(page.locator("h3")).toHaveText("Ballot Tester");
+  await expect(page.locator("h3")).toHaveText("Ballot Finder");
   await page.locator("#verification-code").fill("invalid-code");
-  await page.getByRole("button", { name: "Start the Test" }).click();
+  await page.getByRole("button", { name: "Find my ballot" }).click();
   await analyzeAccesibility(page);
   await expect(page.locator(".Error__Title")).toContainText(
-    "Testing code not found",
+    "Ballot code not found",
   );
   await page.locator("#verification-code").fill("invalid-code");
 });

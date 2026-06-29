@@ -39,9 +39,9 @@ test("tracking a ballot", async ({ page }) => {
 
   await page.goto("/en/organisation_slug/election_slug/track");
   await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Ballot Tracker");
+  await expect(page.locator("h3")).toHaveText("Ballot Finder");
   await page.locator("#tracking-code").fill("5ksv8Ee");
-  await page.getByRole("button", { name: "Track my ballot" }).click();
+  await page.getByRole("button", { name: "Find my ballot" }).click();
   await analyzeAccesibility(page);
   await page.locator(".ExpandableSection__Expander").first().click();
   await analyzeAccesibility(page);
@@ -87,12 +87,12 @@ test("tracking a non-existing ballot shows an error", async ({ page }) => {
 
   await page.goto("/en/organisation_slug/election_slug/track");
   await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Ballot Tracker");
+  await expect(page.locator("h3")).toHaveText("Ballot Finder");
   await page.locator("#tracking-code").fill("abcdef");
-  await page.getByRole("button", { name: "Track my ballot" }).click();
+  await page.getByRole("button", { name: "Find my ballot" }).click();
   await analyzeAccesibility(page);
   await expect(page.locator(".Error__Title")).toContainText(
-    "Tracking code not found",
+    "Ballot code not found",
   );
   await page.locator("#tracking-code").fill("hijklm");
 });

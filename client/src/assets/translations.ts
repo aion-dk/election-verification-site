@@ -234,8 +234,7 @@ export const fallbackMessages: SpreadableDLM = {
     },
     header: {
       dbas: "Election Verification Site",
-      verification: "Ballot Tester",
-      tracking: "Ballot Tracker",
+      find: "Ballot Finder",
       logs: "Election Activity Log",
       help: "FAQ",
       contact: "Contact",
@@ -450,60 +449,25 @@ export const fallbackMessages: SpreadableDLM = {
       },
     },
     views: {
-      welcome: {
-        title: "Election Verification Site",
-        description:
-          "This site provides overview of the election, allows voters to follow and verify their ballot and provides a file for the auditors.",
-        splash_alt: "Election splash screen",
-        ballot_tester: {
-          title: "Test your ballot",
-          description: "I am voting and I want to check my choices",
-          button: "Test my ballot",
-        },
-        ballot_tracker: {
-          title: "Track your ballot",
-          description: "I have voted and I want to track my ballot",
-          button: "Track my ballot",
-        },
-        about: {
-          title: "About this site",
-          ballot_tester: "Ballot Tester",
-          ballot_tester_text:
-            "Use this tab to independently verify that your ballot is recorded and sealed correctly in the digital ballot box. This ballot test is performed before a ballot is submitted. The test is an important tool to ensure every voter's ballot is cast as intended.",
-          ballot_tracker: "Ballot Tracker",
-          ballot_tracker_text:
-            "Voters can use this tab to verify their ballot was received correctly in the digital ballot box. Tracking the ballot is an important step in ensuring end-to-end verifiability as it verifies that the ballot is registered as cast.",
-          audit_log: "Audit Log",
-          audit_log_text:
-            "Election audit log is a representation of the digital ballot box and serves as a public audit of the election. Auditing this log verifies that all ballots submitted to the digital ballot box are counted as registered and that integrity of the election has been held.",
-        },
-      },
-      verification: {
-        title: "Ballot Tester",
+      ballot_finder: {
+        title: "Find your ballot",
         subtitle: "I am voting and I want to",
-        subtitle_strong: "check my choices",
-        description:
-          "You can check that your choices were recorded correctly. Input the testing code that is shown on the voting page and follow the instructions shown on the screen.",
-        placeholder: "Testing Code",
-        button: "Start the Test",
-        tooltip_helper: "Where do I find the testing code",
-        tooltip_text: "Your testing code is displayed on the voting page.",
+        subtitle_strong: "test or track my ballot",
+        description: "Verify your ballot and ensure your choices were recorded correctly and included in the Digital Ballot Box. Input the code shown on the voting page or upload your vote receipt, then follow the instructions.",
+        placeholder: "Ballot code",
+        button: "Find my ballot",
+        input_label: "Write your ballot code",
+        input_placeholder: "F.ex: 12AbCD3",
+        input_tooltip: "Your ballot code is displayed on the voting page",
+        receipt_input_label: "Or upload your vote receipt",
+        receipt_input_tooltip: "Your vote receipt was either sent to your email address or you had the option to download it on the election page after you submitted your ballot",
         help: {
-          title: "How does the ",
-          title_strong: "test work?",
+          title: "How do I ",
+          title_strong: "find my ballot?",
           steps: {
-            step_1:
-              "<strong>Input your testing code</strong> - Find it on the Voting Page",
-            step_2:
-              "<strong>Passkeys</strong> get displayed in both - Voting app and Ballot Tester - check if they <strong>match</strong>",
-            step_3:
-              "On the voting page click on <strong>“Does match” or “Does not match”</strong>",
-            step_4:
-              "<strong>Your choices are now shown</strong> in the Ballot Tester. Check if they are all correct.",
-            step_5:
-              "On the <strong>voting page click</strong> on “Return to voting” if the choices are yours, otherwise contact the election provider.",
+            step_1: "<strong>Input your ballot code</strong>: find it on the Voting Page; or <strong>upload the vote receipt</strong> sent by email or downloaded after you cast your ballot.",
+            step_2: "Follow the <strong>instructions</strong>",
           },
-          footer: "All done!",
         },
       },
       verifier: {
@@ -550,28 +514,6 @@ export const fallbackMessages: SpreadableDLM = {
           },
         },
         blank_pile: "Blank",
-      },
-      tracking: {
-        title: "Ballot Tracker",
-        subtitle: "I have voted and I want to",
-        subtitle_strong: "track my ballot",
-        description:
-          "To verify that your ballot was casted and recorded in the Digital Ballot Box, you need to input the tracking code shown at the end of the voting process on the voting page.",
-        placeholder: "Tracking code",
-        button: "Track my ballot",
-        tooltip_helper: "Where do I find my tracking code?",
-        tooltip_text:
-          "Your ballot tracking code is displayed on the election page after you submitted your ballot.",
-        help: {
-          title: "Make sure your vote counts in ",
-          title_strong: "2 easy steps",
-          steps: {
-            step_1:
-              "<strong>Input your tracking code</strong> - Find it on the Voting Page",
-            step_2:
-              "Check that <strong>your ballot is registered</strong> in the Digital Ballot Box and see all activity connected to it.",
-          },
-        },
       },
       tracker: {
         title: "Ballot Tracker",
@@ -811,8 +753,7 @@ export const fallbackMessages: SpreadableDLM = {
   es: {
     header: {
       dbas: "Sitio de verificación",
-      verification: "Testeo de Boleta",
-      tracking: "Seguimiento de Boleta",
+      find: "Buscador de Boleta",
       logs: "Registro de la elección",
       help: "Preguntas Frecuentes",
       contact: "Contacto",

@@ -2,7 +2,6 @@
 import { ref, onMounted } from "vue";
 import { RouterView, useRoute } from "vue-router";
 import useConfigStore from "./stores/useConfigStore";
-import useBallotStore from "./stores/useBallotStore";
 import { useConferenceConnector } from "./lib/conferenceServices";
 import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
@@ -15,7 +14,6 @@ import { defaultTheme } from "./assets/theme";
 import { SupportedLocale } from "@/Types";
 
 const i18n = useI18n();
-const ballotStore = useBallotStore();
 const configStore = useConfigStore();
 const route = useRoute();
 const isLoaded = ref(false);
@@ -25,13 +23,6 @@ onMounted(async () => {
   const electionSlug = route.params.electionSlug.toString();
   await setConfigurations(organisationSlug, electionSlug);
   setTitle();
-
-  if (route.params.trackingCode) {
-    await ballotStore.loadBallot(
-      route.params.trackingCode.toString(),
-      configStore.boardSlug,
-    );
-  }
 
   isLoaded.value = true;
 });
@@ -147,7 +138,7 @@ const setTheme = async (conferenceClient: any) => {
       :electionName="
         configStore.election.title[$i18n.locale as SupportedLocale]
       "
-      :locale="$i18n.locale"
+      :locale="$i18n.locale as SupportedLocale"
       @changeLocale="updateLocale"
     />
     <main class="DBAS__Content">

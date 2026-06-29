@@ -1,13 +1,11 @@
 import { createWebHistory, createRouter } from "vue-router";
-import Welcome from "../views/Welcome.vue";
 import BallotTrackerView from "../views/BallotTrackerView.vue";
 import BallotVerifierView from "../views/BallotVerifierView.vue";
 import BallotVerifierFoundView from "../views/BallotVerifierFoundView.vue";
 import MissingSlugView from "../views/MissingSlugView.vue";
-import BallotVerificationLanding from "../views/BallotVerificationLanding.vue";
 import LogsView from "../views/LogsView.vue";
 import HelpView from "../views/HelpView.vue";
-import BallotTrackingLanding from "../views/BallotTrackingLanding.vue";
+import BallotUnifiedTracking from "../views/BallotUnifiedTracking.vue";
 import ReceiptErrorView from "../views/ReceiptErrorView.vue";
 
 const router = createRouter({
@@ -21,15 +19,36 @@ const router = createRouter({
       path: "/:locale",
       component: MissingSlugView,
     },
+    // Keep for backwards compatibility
     {
       name: "Welcome",
       path: "/:locale/:organisationSlug/:electionSlug",
-      component: Welcome,
+      redirect: (to) => ({
+        name: "BallotFinder",
+        params: {
+          locale: to.params.locale,
+          organisationSlug: to.params.organisationSlug,
+          electionSlug: to.params.electionSlug,
+        },
+      }),
     },
+    {
+      name: "BallotFinder",
+      path: "/:locale/:organisationSlug/:electionSlug/find",
+      component: BallotUnifiedTracking,
+    },
+    // Keep for backwards compatibility
     {
       name: "BallotTrackingLanding",
       path: "/:locale/:organisationSlug/:electionSlug/track",
-      component: BallotTrackingLanding,
+      redirect: (to) => ({
+        name: "BallotFinder",
+        params: {
+          locale: to.params.locale,
+          organisationSlug: to.params.organisationSlug,
+          electionSlug: to.params.electionSlug,
+        },
+      }),
     },
     {
       name: "BallotTrackerView",
@@ -41,10 +60,18 @@ const router = createRouter({
       path: "/:locale/:organisationSlug/:electionSlug/receipt_error",
       component: ReceiptErrorView,
     },
+    // Keep for backwards compatibility
     {
       name: "BallotVerificationLanding",
       path: "/:locale/:organisationSlug/:electionSlug/verify",
-      component: BallotVerificationLanding,
+      redirect: (to) => ({
+        name: "BallotFinder",
+        params: {
+          locale: to.params.locale,
+          organisationSlug: to.params.organisationSlug,
+          electionSlug: to.params.electionSlug,
+        },
+      }),
     },
     {
       name: "BallotVerifierView",
