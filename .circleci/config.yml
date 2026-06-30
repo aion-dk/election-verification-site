@@ -3,7 +3,7 @@ version: 2.1
 orbs:
   aws-ecr: circleci/aws-ecr@9.8.1
   aws-cli: circleci/aws-cli@5.4.1
-  docker: assemblyvoting/docker@1.6.6
+  docker: assemblyvoting/docker@1.6.7
 
 executors:
   vm-linux-ubuntu:
@@ -211,8 +211,6 @@ jobs:
             docker pull ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:${CIRCLE_SHA1}-untested
       - docker/scan:
           image: ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:${CIRCLE_SHA1}-untested
-          # CVE-2026-22184 we cannot fix this until there's a new version of the nginx:alpine image we're currently using.
-          ignored_cves: 'CVE-2026-22184'
   client-e2e:
     executor: vm-linux-ubuntu-nocache
     steps:

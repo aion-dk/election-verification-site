@@ -5,6 +5,9 @@
     "skipLibCheck": true,
     "strictNullChecks": false,
     "esModuleInterop": true,
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "target": "ES2022",
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]

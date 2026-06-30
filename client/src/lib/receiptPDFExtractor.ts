@@ -10,8 +10,9 @@ export class ReceiptPDFExtractor {
   }
 
   public async extract(): Promise<void> {
-    const buffer = await this.file.arrayBuffer();
-    const pdfDoc = await PDFDocument.load(buffer, {
+    const arrayBuffer = await this.file.arrayBuffer();
+
+    const pdfDoc = await PDFDocument.load(arrayBuffer, {
       updateMetadata: false,
     });
 

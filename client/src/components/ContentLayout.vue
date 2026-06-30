@@ -89,7 +89,6 @@ defineProps({
 }
 
 .ContentLayout__Action {
-  align-items: center;
   width: 100%;
   padding: 1rem 0;
   display: flex;

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export default function httpErrorHandler(error: any) {
+export default function handleHttpError(error: any) {
   if (error === null) throw new Error("Unrecoverable error!! Error is null!");
   if (axios.isAxiosError(error)) {
     //here we have a type guard check, error inside this if will be treated as AxiosError
@@ -29,5 +29,5 @@ export default function httpErrorHandler(error: any) {
   }
 
   //Something happened in setting up the request and triggered an Error
-  console.log(error.message);
+  console.error(error.message);
 }
