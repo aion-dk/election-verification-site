@@ -1,4 +1,4 @@
-import { resolve } from "path";
+import { resolve } from "node:path";
 import { existsSync, watchFile } from "node:fs";
 
 import { defineConfig, type Plugin, type PluginOption } from "vite";

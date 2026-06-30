@@ -34,14 +34,12 @@ const lookupBallot = async () => {
     router.push(
       `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode.value}`,
     );
+  } else if (receiptStore.receiptValid) {
+    router.push(
+      `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
+    );
   } else {
-    if (receiptStore.receiptValid) {
-      router.push(
-        `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
-      );
-    } else {
-      error.value = "track.invalid_code";
-    }
+    error.value = "track.invalid_code";
   }
 };
 
@@ -50,31 +48,29 @@ const updateReceipt = async (files: File[]) => {
     receipt.value = null;
     trackingCode.value = null;
     error.value = null;
-  } else {
-    receipt.value = files[0];
-    await receiptStore.setupAVVerifier(configStore.boardSlug);
-    const receiptExtractor = new ReceiptPDFExtractor(receipt.value);
+    return;
+  }
+  receipt.value = files[0];
+  await receiptStore.setupAVVerifier(configStore.boardSlug);
+  const receiptExtractor = new ReceiptPDFExtractor(receipt.value);
 
-    await receiptExtractor
-      .extract()
-      .then(() => {
-        receiptStore.validateReceipt(
-          receiptExtractor.receipt,
-          receiptExtractor.trackingCode,
-        );
+  try {
+    await receiptExtractor.extract();
+    receiptStore.validateReceipt(
+      receiptExtractor.receipt,
+      receiptExtractor.trackingCode,
+    );
 
-        if (receiptStore.receiptValid) {
-          trackingCode.value = receiptExtractor.trackingCode;
-          lookupBallot();
-        } else {
-          router.push(
-            `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
-          );
-        }
-      })
-      .catch(() => {
-        error.value = "receipt.invalid_file_format";
-      });
+    if (receiptStore.receiptValid) {
+      trackingCode.value = receiptExtractor.trackingCode;
+      lookupBallot();
+    } else {
+      router.push(
+        `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
+      );
+    }
+  } catch {
+    error.value = "receipt.invalid_file_format";
   }
 };
 

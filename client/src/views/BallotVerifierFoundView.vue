@@ -122,12 +122,6 @@ onMounted(async () => {
   text-align: center;
 }
 
-.VerificationFound__Description {
-  color: var(--bs-gray-700);
-  margin: 0 0 1.5rem 0;
-  text-align: center;
-}
-
 .VerificationFound__Step {
   display: flex;
   flex-direction: column;
@@ -159,11 +153,7 @@ onMounted(async () => {
 
   .VerificationFound__Description {
     text-align: left;
-  }
-
-  .VerificationFound__Description {
     margin-bottom: 3rem;
-    text-align: left;
   }
 
   .VerificationFound__Help_Footer {

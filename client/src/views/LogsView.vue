@@ -35,7 +35,10 @@ const dbbLink = computed(() => {
 });
 
 const currentPage = computed(() =>
-  parseInt((route.params.page || boardStore.currentPage || 1).toString(), 10),
+  Number.parseInt(
+    (route.params.page || boardStore.currentPage || 1).toString(),
+    10,
+  ),
 );
 
 const filter = () => {
@@ -74,11 +77,11 @@ const navigate = (page: number) => {
 };
 
 const downloadLog = () => {
-  window.location.href = `${dbbLink.value}/download_log`;
+  globalThis.location.href = `${dbbLink.value}/download_log`;
 };
 
 const downloadAttachments = () => {
-  window.location.href = `${dbbLink.value}/download_attachments`;
+  globalThis.location.href = `${dbbLink.value}/download_attachments`;
 };
 
 onMounted(async () => {
