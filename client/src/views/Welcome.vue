@@ -354,7 +354,6 @@ const goToTracker = () => {
     margin: 0 3rem;
   }
 
-
   .Welcome__Button {
     margin-bottom: 1.25rem;
   }

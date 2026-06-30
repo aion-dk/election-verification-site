@@ -19,7 +19,6 @@ const toggle = () => {
     ? t("components.board_item.collapse")
     : t("components.board_item.expand");
 };
-
 </script>
 
 <template>
