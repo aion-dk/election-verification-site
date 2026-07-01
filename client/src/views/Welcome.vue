@@ -348,23 +348,24 @@ const goToTracker = () => {
 }
 
 @media only screen and (min-width: 48rem) {
+  .Welcome__Card_Line {
+    width: 0.25rem;
+    height: 16rem;
+    margin: 0 3rem;
+  }
+
   .Welcome__Button {
     margin-bottom: 1.25rem;
   }
 
   .Welcome__Brand_Logo {
+    width: 30%;
     display: none;
   }
 
   .Welcome__Card_Desktop {
     flex-direction: row !important;
     justify-content: space-evenly;
-  }
-
-  .Welcome__Card_Line {
-    width: 0.25rem;
-    height: 16rem;
-    margin: 0 3rem;
   }
 }
 

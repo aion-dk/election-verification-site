@@ -40,11 +40,9 @@ const i18n = createI18n({
 export function setLocale(locale: Locale) {
   i18n.global.locale.value = locale;
 
-  document.getElementsByTagName("html")[0].lang = locale;
-
-  document.getElementsByTagName("html")[0].dir = rtlLanguages.has(locale)
-    ? "rtl"
-    : "ltr";
+  const htmlElement = document.getElementsByTagName("html")[0];
+  htmlElement.lang = locale;
+  htmlElement.dir = rtlLanguages.has(locale) ? "rtl" : "ltr";
 }
 
 export function loadLocaleMessages(locale: string, messages: object) {

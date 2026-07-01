@@ -1,9 +1,9 @@
 const myWindow = globalThis as unknown as {
   __APP_CONFIG__: {
-    VITE_LOGO_URL: string; // Unused?
+    VITE_LOGO_URL: string;
     VITE_DBB_URL: string;
     VITE_CONFERENCE_URL: string;
-    VITE_CONTACT_URL: string; // Unused?
+    VITE_CONTACT_URL: string;
   };
 };
 
