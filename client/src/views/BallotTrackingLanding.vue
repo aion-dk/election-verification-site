@@ -44,7 +44,7 @@ const lookupBallot = async () => {
 };
 
 const updateReceipt = async (files: File[]) => {
-  if (!files.length) {
+  if (files.length === 0) {
     receipt.value = null;
     trackingCode.value = null;
     error.value = null;
@@ -88,32 +88,39 @@ const button = computed(() => {
 
 <template>
   <ContentLayout
+    id="ballot-tracking-landing"
     :help-title="$t('views.tracking.help.title')"
     :help-title-strong="$t('views.tracking.help.title_strong')"
     :logo="configStore.electionStatus?.theme?.logo"
   >
     <template v-slot:action>
-      <MainIcon icon="magnifying-glass" />
-      <h3 class="TrackingLanding__Title">
+      <MainIcon icon="magnifying-glass" id="tracking-main-icon" />
+      <h1 class="TrackingLanding__Title" id="tracking-title">
         {{ $t("views.tracking.title") }}
-      </h3>
-      <h4 class="TrackingLanding__Subtitle">
+      </h1>
+      <h2 class="TrackingLanding__Subtitle" id="tracking-subtitle">
         {{ $t("views.tracking.subtitle") }}
-        <strong>{{ $t("views.tracking.subtitle_strong") }}</strong>
-      </h4>
-      <p class="TrackingLanding__Description">
+        <strong id="tracking-subtitle-strong">{{
+          $t("views.tracking.subtitle_strong")
+        }}</strong>
+      </h2>
+      <p class="TrackingLanding__Description" id="tracking-description">
         {{ $t("views.tracking.description") }}
       </p>
-      <Error v-if="error" :errorPath="error" />
-      <div class="TrackingLanding__Action_Container">
-        <div class="TrackingLanding__ActionItem">
-          <div class="mb-3 w-100">
-            <p class="form-label">
+      <Error v-if="error" :errorPath="error" id="tracking-error" />
+      <div
+        class="TrackingLanding__Action_Container"
+        id="tracking-action-container"
+      >
+        <div class="TrackingLanding__ActionItem" id="tracking-action-item">
+          <div class="mb-3 w-100" id="tracking-receipt-container">
+            <p class="form-label" id="tracking-receipt-label">
               {{ $t("views.tracking.receipt_input_label") }}
               <AVIcon
                 icon="circle-question"
                 class="text-gray-600 cursor-help"
                 v-tooltip="$t('views.tracking.receipt_input_tooltip')"
+                id="tracking-receipt-tooltip-icon"
               />
             </p>
             <AVFileInput
@@ -126,13 +133,18 @@ const button = computed(() => {
             />
           </div>
 
-          <div class="mb-3 w-100">
-            <label for="tracking-code" class="form-label">
+          <div class="mb-3 w-100" id="tracking-code-container">
+            <label
+              for="tracking-code"
+              class="form-label"
+              id="tracking-code-label"
+            >
               {{ $t("views.tracking.tracking_input_label") }}
               <AVIcon
                 icon="circle-question"
                 class="text-gray-600 cursor-help"
                 v-tooltip="$t('views.tracking.tracking_input_tooltip')"
+                id="tracking-code-tooltip-icon"
               />
             </label>
             <input
@@ -162,13 +174,19 @@ const button = computed(() => {
     <template v-slot:help>
       <div
         v-for="step in steps"
-        :key="`verification-step-${step}`"
+        :key="`tracking-step-${step}`"
         class="TrackingLanding__Step"
+        :id="`tracking-step-${step}`"
       >
-        <span class="TrackingLanding__Step_Index">{{ step }}</span>
+        <span
+          class="TrackingLanding__Step_Index"
+          :id="`tracking-step-index-${step}`"
+          >{{ step }}</span
+        >
         <p
           v-html="$t(`views.tracking.help.steps.step_${step}`)"
           class="TrackingLanding__Step_Text text-contrast"
+          :id="`tracking-step-text-${step}`"
         />
       </div>
     </template>

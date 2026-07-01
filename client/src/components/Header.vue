@@ -58,30 +58,36 @@ const setLocale = (newLocale: string) => {
 const onResize = () => (isMenuOpened.value = false);
 
 onMounted(() => {
-  window.addEventListener("resize", onResize);
+  globalThis.addEventListener("resize", onResize);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", onResize);
+  globalThis.removeEventListener("resize", onResize);
 });
 </script>
 
 <template>
-  <div class="Header__Navbar">
+  <header class="Header__Navbar" id="header-navbar">
     <RouterLink
       class="Header__Election_Info"
       :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}`"
+      id="header-election-info-link"
     >
       <img
+        id="header-logo"
         v-if="configStore.electionStatus?.theme?.logo"
         class="Header__Logo"
         :src="configStore.electionStatus?.theme?.logo"
         :alt="$t('header.election_logo_alt')"
         loading="lazy"
       />
-      <div class="Header__Text">
-        <span class="Header__Title">{{ $t("header.dbas") }}</span>
-        <span class="Header__Subtitle">{{ electionName }}</span>
+      <div class="Header__Text" id="header-text">
+        <span class="Header__Title" id="header-title">{{
+          $t("header.dbas")
+        }}</span>
+        <span class="Header__Subtitle" id="header-subtitle">{{
+          electionName
+        }}</span>
       </div>
     </RouterLink>
 
@@ -91,12 +97,14 @@ onBeforeUnmount(() => {
       :class="{
         Header__Show: !isMenuOpened,
       }"
+      id="header-nav"
     >
       <RouterLink
         class="Header__Link"
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`"
         @click="toggleMenu(true)"
+        id="header-link-verification"
       >
         {{ $t("header.verification") }}
       </RouterLink>
@@ -106,6 +114,7 @@ onBeforeUnmount(() => {
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`"
         @click="toggleMenu(true)"
+        id="header-link-tracking"
       >
         {{ $t("header.tracking") }}
       </RouterLink>
@@ -115,6 +124,7 @@ onBeforeUnmount(() => {
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/logs`"
         @click="toggleMenu()"
+        id="header-link-logs"
       >
         {{ $t("header.logs") }}
       </RouterLink>
@@ -124,6 +134,7 @@ onBeforeUnmount(() => {
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/help`"
         @click="toggleMenu()"
+        id="header-link-help"
       >
         {{ $t("header.help") }}
       </RouterLink>
@@ -133,27 +144,31 @@ onBeforeUnmount(() => {
         class="Header__Link"
         :href="contactUrl"
         target="_blank"
+        rel="noopener noreferrer"
+        id="header-link-contact"
       >
         {{ $t("header.contact") }}
         <AVIcon icon="arrow-up-right-from-square" aria-hidden="true" />
       </a>
 
       <DropDown
+        id="localizationDropdownMenu"
         class="Header__Locales"
         :options="availableLocales"
         @change="(value) => setLocale(value)"
       />
     </nav>
 
-    <div class="Header__Hamburger_Btn">
+    <div class="Header__Hamburger_Btn" id="header-hamburger-btn">
       <AVAnimatedMenuButton
         variant="cross"
         theme="light"
         class="bg-white"
         v-model:is-opened="isMenuOpened"
+        id="header-hamburger-menu-button"
       />
     </div>
-  </div>
+  </header>
 </template>
 
 <style type="text/css" scoped>
@@ -183,6 +198,8 @@ onBeforeUnmount(() => {
 
 .Header__Logo {
   display: none;
+  width: auto;
+  object-fit: scale-down;
 }
 
 .Header__Text {
@@ -232,6 +249,13 @@ onBeforeUnmount(() => {
   background-color: white;
 }
 
+:deep(.Header__Locales select) {
+  border: none;
+  background: transparent;
+  appearance: none;
+  padding: 0.3rem 1rem;
+}
+
 html[dir="ltr"] .Header__Locales {
   padding: 1rem 0 1rem 1rem;
 }
@@ -279,8 +303,8 @@ html[dir="rtl"] .Header__Locales {
   }
 
   .Header__Logo {
-    height: 3rem;
-    max-width: 12rem;
+    height: 2.4rem;
+    max-width: 11rem;
     object-fit: contain;
     display: block;
   }
@@ -297,7 +321,8 @@ html[dir="rtl"] .Header__Locales {
   }
 
   .Header__Logo {
-    height: 3rem;
+    height: 2.4rem;
+    max-width: 11rem;
     object-fit: contain;
     display: block;
   }

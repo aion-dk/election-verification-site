@@ -37,9 +37,9 @@ export function useConferenceConnector(
         return (status as any).election as ExtendedElectionStatusResponse;
       },
       async getStylingData() {
-        return (await conferenceApi.value.get(
+        return conferenceApi.value.get<string>(
           `/${organisationSlug}/${electionSlug}/theme`,
-        )) as string;
+        );
       },
       async getTranslationsData(locale: SupportedLocale) {
         if (!currentTranslationsData.value) {

@@ -17,8 +17,9 @@ COPY .prettierignore ./
 
 RUN yarn build
 
-FROM mcr.microsoft.com/playwright:v1.61.1-noble AS development
+FROM mcr.microsoft.com/playwright:v1.60.0-noble AS development
 
+RUN corepack enable
 WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app .
 

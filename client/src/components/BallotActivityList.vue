@@ -10,9 +10,16 @@ defineProps({
 </script>
 
 <template>
-  <div class="BallotActivitiesList" role="log">
-    <ul class="BallotActivitiesList__ColumnDescriptions" aria-hidden="true">
-      <li class="BallotActivitiesList__ColumnDescriptions--event">
+  <div class="BallotActivitiesList" role="log" id="ballot-activity-list">
+    <ul
+      class="BallotActivitiesList__ColumnDescriptions"
+      aria-hidden="true"
+      id="ballot-activity-list-columns"
+    >
+      <li
+        class="BallotActivitiesList__ColumnDescriptions--event"
+        id="ballot-activity-list-column-event"
+      >
         <AVTooltip
           :content="$t('components.ballot_activity_list.type_tooltip')"
           :text="$t('components.ballot_activity_list.type')"
@@ -20,10 +27,16 @@ defineProps({
           position="right"
         />
       </li>
-      <li class="BallotActivitiesList__ColumnDescriptions--time">
+      <li
+        class="BallotActivitiesList__ColumnDescriptions--time"
+        id="ballot-activity-list-column-time"
+      >
         {{ $t("components.ballot_activity_list.time") }}
       </li>
-      <li class="BallotActivitiesList__ColumnDescriptions--actor">
+      <li
+        class="BallotActivitiesList__ColumnDescriptions--actor"
+        id="ballot-activity-list-column-actor"
+      >
         <AVTooltip
           :content="$t('components.ballot_activity_list.actor_tooltip')"
           :text="$t('components.ballot_activity_list.actor')"
@@ -35,6 +48,7 @@ defineProps({
 
     <BallotActivity
       :activity="activity"
+      :index="Number(key)"
       v-for="(activity, key) in activities"
       :key="key"
     />

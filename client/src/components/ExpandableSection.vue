@@ -22,6 +22,7 @@ const toggle = () => {
 </script>
 
 <template>
+  <!-- NOSONAR: using div with role=button instead of <button> because slots render block-level content, which is invalid inside <button> -->
   <div
     role="button"
     tabindex="0"

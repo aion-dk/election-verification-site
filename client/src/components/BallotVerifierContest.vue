@@ -1,13 +1,24 @@
 <template>
-  <div class="BallotVerifierContest">
-    <h3 class="BallotVerifierContest__Title">
-      {{ contest.title[locale] }}
+  <div
+    class="BallotVerifierContest"
+    :id="`ballot-verifier-contest-${contestSelection.reference}`"
+  >
+    <h3
+      class="BallotVerifierContest__Title"
+      :id="`contest-title-${contestSelection.reference}`"
+    >
+      {{ contestTitle }}
     </h3>
-    <p v-if="contest.question" v-text="contest.question[locale]"></p>
+    <p
+      v-if="contest.question"
+      v-text="contestQuestion"
+      :id="`contest-question-${contestSelection.reference}`"
+    ></p>
     <div
       v-for="(selectionPile, pileIndex) in contestSelection.piles"
       :key="JSON.stringify(selectionPile)"
       class="BallotVerifierContest__Piles"
+      :id="`contest-piles-${contestSelection.reference}-${pileIndex}`"
     >
       <AVPileSummary
         :contest="contest"
@@ -16,6 +27,7 @@
         :total-piles="contestSelection.piles.length"
         style="z-index: 90"
         active-state="summary"
+        :id="`contest-pile-summary-${contestSelection.reference}-${pileIndex}`"
       />
     </div>
   </div>
@@ -46,8 +58,11 @@ export default defineComponent({
     contest(): ContestContent {
       return this.configStore.getContest(this.contestSelection.reference);
     },
-    locale(): SupportedLocale {
-      return this.$i18n.locale as SupportedLocale;
+    contestTitle(): string {
+      return this.contest.title[this.$i18n.locale as SupportedLocale];
+    },
+    contestQuestion(): string | undefined {
+      return this.contest.question?.[this.$i18n.locale as SupportedLocale];
     },
   },
 });

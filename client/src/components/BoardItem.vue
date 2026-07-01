@@ -19,12 +19,13 @@ const classes = computed(() => {
 </script>
 
 <template>
-  <div :class="classes">
-    <ExpandableSection large>
+  <div :class="classes" :id="`board-item-${item.address}`">
+    <ExpandableSection large :id="`board-item-section-${item.address}`">
       <template v-slot:collapsed>
         <p
           class="BoardItem__Type"
           :aria-label="$t('components.board_item.aria_labels.activity_type')"
+          :id="`board-item-type-${item.address}`"
         >
           {{ $t(`components.board_item.${item.type}.type`) }}
         </p>
@@ -34,6 +35,7 @@ const classes = computed(() => {
           :aria-label="
             $t('components.board_item.aria_labels.activity_registered')
           "
+          :id="`board-item-date-${item.address}`"
         >
           <AVIcon
             icon="clock"
@@ -46,6 +48,7 @@ const classes = computed(() => {
         <p
           class="BoardItem__Author"
           :aria-label="$t('components.board_item.aria_labels.activity_author')"
+          :id="`board-item-author-${item.address}`"
         >
           <AVIcon
             icon="user"
@@ -59,11 +62,17 @@ const classes = computed(() => {
       </template>
 
       <template v-slot:expanded>
-        <p class="BoardItem__Type BoardItem__Type_Expanded">
+        <p
+          class="BoardItem__Type BoardItem__Type_Expanded"
+          :id="`board-item-type-expanded-${item.address}`"
+        >
           {{ $t(`components.board_item.${item.type}.type`) }}
         </p>
 
-        <p class="BoardItem__Date BoardItem__Date_Expanded">
+        <p
+          class="BoardItem__Date BoardItem__Date_Expanded"
+          :id="`board-item-date-expanded-${item.address}`"
+        >
           <AVIcon
             icon="clock"
             class="BoardItem__InlineIcon"
@@ -75,7 +84,10 @@ const classes = computed(() => {
           <DateTime :date-time="item.registeredAt" format="absolute" />
         </p>
 
-        <p class="BoardItem__Author BoardItem__Author_Expanded">
+        <p
+          class="BoardItem__Author BoardItem__Author_Expanded"
+          :id="`board-item-author-expanded-${item.address}`"
+        >
           <AVIcon
             icon="user"
             class="BoardItem__InlineIcon"
@@ -87,16 +99,23 @@ const classes = computed(() => {
           <span>{{ $t(`components.board_item.${item.type}.author`) }}</span>
         </p>
 
-        <p class="BoardItem__Meaning_Expanded BoardItem__Label">
+        <p
+          class="BoardItem__Meaning_Expanded BoardItem__Label"
+          :id="`board-item-meaning-label-${item.address}`"
+        >
           {{ $t("components.board_item.meaning") }}
         </p>
-        <p class="BoardItem__Meaning_Expanded">
+        <p
+          class="BoardItem__Meaning_Expanded"
+          :id="`board-item-meaning-text-${item.address}`"
+        >
           {{ $t(`components.board_item.${item.type}.info`) }}
         </p>
 
         <p
           v-if="item.type === 'ThresholdConfigItem'"
           class="BoardItem__Meaning_Expanded"
+          :id="`board-item-encryption-key-${item.address}`"
         >
           <strong>
             {{ $t(`components.board_item.${item.type}.encryption_key`) }}
