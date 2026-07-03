@@ -19,6 +19,7 @@ RUN yarn build
 
 FROM mcr.microsoft.com/playwright:v1.61.1-noble AS development
 
+RUN corepack enable
 WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app .
 
@@ -34,8 +35,5 @@ RUN chmod +x /docker-entrypoint.d/40-write-env-js.sh
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
-RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx /var/run
-
 EXPOSE 8080
-USER nginx
 CMD ["nginx", "-g", "daemon off;"]
