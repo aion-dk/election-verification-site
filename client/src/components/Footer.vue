@@ -78,28 +78,36 @@ const customFooterHtml = computed(() => {
   background: rgba(var(--bs-primary-rgb), 0.85);
   backdrop-filter: blur(4px);
   width: 100vw;
-  height: 3rem;
+  height: 4rem;
   position: fixed;
   bottom: 0;
   left: 0;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
   z-index: 90;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media only screen and (min-width: 48rem) {
+  .Footer {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
 }
 
 .Footer--custom {
-  height: auto;
-  justify-content: flex-start;
+  min-height: auto;
   align-items: flex-start;
-  padding: 1rem;
+  padding-top: 1rem;
   color: white;
 }
 
 .Footer__Content {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
