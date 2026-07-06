@@ -10,9 +10,28 @@ import HelpView from "../views/HelpView.vue";
 import BallotTrackingLanding from "../views/BallotTrackingLanding.vue";
 import ReceiptErrorView from "../views/ReceiptErrorView.vue";
 import useConfigStore from "@/stores/useConfigStore";
+import type { BasicElectionStatus } from "@/Types";
+import { useConferenceConnector } from "@/lib/conferenceServices";
 
-const verifyGuard = (to: any, from: any, next: any) => {
+const verifyGuard = async (to: any, _from: any, next: any) => {
   const configStore = useConfigStore();
+
+  if (!configStore.electionStatus) {
+    const organisationSlug = to.params.organisationSlug as string;
+    const electionSlug = to.params.electionSlug as string;
+    try {
+      const { conferenceClient } = useConferenceConnector(
+        organisationSlug,
+        electionSlug,
+      );
+      const status = await conferenceClient.getStatus();
+      configStore.setElectionStatus(status as unknown as BasicElectionStatus);
+      configStore.setBoardSlug(status.boardSlug);
+    } catch (err) {
+      console.error("Failed to fetch election status in route guard:", err);
+    }
+  }
+
   if (configStore.electionStatus?.canadianChallenge) {
     next({
       name: "Welcome",

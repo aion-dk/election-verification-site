@@ -26,7 +26,7 @@ const customFooterHtml = computed(() => {
       rawFooterHtml[i18n.locale.value] ??
       rawFooterHtml["en"] ??
       Object.values(rawFooterHtml)[0];
-    raw = (localeHtml as string)?.trim() || null;
+    raw = typeof localeHtml === "string" ? localeHtml.trim() || null : null;
   }
 
   if (!raw) return null;
@@ -99,6 +99,7 @@ const customFooterHtml = computed(() => {
 }
 
 .Footer--custom {
+  height: auto;
   min-height: auto;
   align-items: flex-start;
   padding-top: 1rem;

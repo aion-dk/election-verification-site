@@ -76,7 +76,7 @@ const goToTracker = () => {
           </div>
 
           <div
-            v-if="!configStore.electionStatus?.canadianChallenge"
+            v-if="configStore.electionStatus && !configStore.electionStatus.canadianChallenge"
             class="Welcome__Card_Line"
             id="welcome-card-divider"
           />
