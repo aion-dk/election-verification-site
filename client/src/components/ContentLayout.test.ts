@@ -1,7 +1,9 @@
+import "../test-utils/setupConfig";
 import { expect, test } from "vitest";
 import { mount } from "@vue/test-utils";
 import ContentLayout from "./ContentLayout.vue";
 import { createI18n } from "vue-i18n";
+import { createPinia } from "pinia";
 import { fallbackMessages } from "../assets/translations";
 
 const neededStrings = JSON.stringify(fallbackMessages.en);
@@ -19,7 +21,7 @@ test("renders correctly", async () => {
       help: "sidebar",
     },
     global: {
-      plugins: [i18n],
+      plugins: [i18n, createPinia()],
     },
   });
 

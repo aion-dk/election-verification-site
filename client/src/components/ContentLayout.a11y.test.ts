@@ -1,3 +1,4 @@
+import "../test-utils/setupConfig";
 import { test, expect } from "vitest";
 import { axe } from "vitest-axe";
 import ContentLayout from "./ContentLayout.vue";
