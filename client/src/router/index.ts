@@ -11,7 +11,8 @@ import BallotTrackingLanding from "../views/BallotTrackingLanding.vue";
 import ReceiptErrorView from "../views/ReceiptErrorView.vue";
 import useConfigStore from "@/stores/useConfigStore";
 import type { BasicElectionStatus } from "@/Types";
-import { useConferenceConnector } from "@/lib/conferenceServices";
+import axios from "axios";
+import config from "@/lib/config";
 
 const verifyGuard = async (to: any, _from: any, next: any) => {
   const configStore = useConfigStore();
@@ -20,13 +21,14 @@ const verifyGuard = async (to: any, _from: any, next: any) => {
     const organisationSlug = to.params.organisationSlug as string;
     const electionSlug = to.params.electionSlug as string;
     try {
-      const { conferenceClient } = useConferenceConnector(
-        organisationSlug,
-        electionSlug,
+      const response = await axios.get(
+        `${config.conferenceUrl}/${organisationSlug}/${electionSlug}/status`,
       );
-      const status = await conferenceClient.getStatus();
-      configStore.setElectionStatus(status as unknown as BasicElectionStatus);
-      configStore.setBoardSlug(status.boardSlug);
+      const status = response.data?.election as BasicElectionStatus;
+      if (status) {
+        configStore.setElectionStatus(status);
+        if (status.boardSlug) configStore.setBoardSlug(status.boardSlug);
+      }
     } catch (err) {
       console.error("Failed to fetch election status in route guard:", err);
     }
