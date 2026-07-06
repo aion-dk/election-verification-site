@@ -18,11 +18,7 @@ const electionName = computed(
     <span class="PageTitle__Label" id="page-title-label">{{
       $t("header.dbas")
     }}</span>
-    <h1
-      v-if="electionName"
-      class="PageTitle__Name"
-      id="page-title-name"
-    >
+    <h1 v-if="electionName" class="PageTitle__Name" id="page-title-name">
       {{ electionName }}
     </h1>
   </div>

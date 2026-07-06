@@ -85,12 +85,9 @@ onBeforeUnmount(() => {
         loading="lazy"
         style="height: 2.75rem; max-width: 12rem; object-fit: scale-down"
       />
-      <span
-        v-else
-        class="Header__Title"
-        id="header-title"
-        >{{ $t("header.dbas") }}</span
-      >
+      <span v-else class="Header__Title" id="header-title">{{
+        $t("header.dbas")
+      }}</span>
     </RouterLink>
 
     <nav
