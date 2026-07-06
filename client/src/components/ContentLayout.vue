@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import PageTitle from "@/components/PageTitle.vue";
+
 defineProps({
   id: {
     type: String,
@@ -25,8 +27,10 @@ defineProps({
 </script>
 
 <template>
-  <div :id="id || undefined" class="ContentLayout">
-    <section id="main_content" class="ContentLayout__Action" tabindex="-1">
+  <div class="ContentLayout__Page">
+    <PageTitle />
+    <div :id="id || undefined" class="ContentLayout">
+      <section id="main_content" class="ContentLayout__Action" tabindex="-1">
       <p
         v-if="breadcrumb"
         class="ContentLayout__Breadcrumb"
@@ -71,19 +75,22 @@ defineProps({
         id="content-layout-brand-logo"
       />
     </aside>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.ContentLayout__Page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .ContentLayout {
   display: flex;
-  height: calc(100dvh - 70px);
-  top: 70px;
-  position: fixed;
   width: 100%;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
   background-color: var(--bs-gray-100);
   padding: 1rem 1rem 3rem 1rem;
 }
@@ -185,23 +192,20 @@ defineProps({
   .ContentLayout {
     flex-direction: row;
     padding: 0;
-    overflow: hidden;
+    align-items: stretch;
+    min-height: calc(100dvh - 5rem);
   }
 
   .ContentLayout__Action {
     background-color: white;
     width: calc(100% - 32rem);
-    height: 100%;
     padding: 0;
-    overflow-y: auto;
   }
 
   .ContentLayout__Help {
     width: 32rem;
-    height: 100%;
     padding: 5rem 3rem;
     justify-content: flex-start;
-    overflow-y: auto;
   }
 
   .ContentLayout__Help_Container {

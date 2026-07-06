@@ -9,6 +9,23 @@ import LogsView from "../views/LogsView.vue";
 import HelpView from "../views/HelpView.vue";
 import BallotTrackingLanding from "../views/BallotTrackingLanding.vue";
 import ReceiptErrorView from "../views/ReceiptErrorView.vue";
+import useConfigStore from "@/stores/useConfigStore";
+
+const verifyGuard = (to: any, from: any, next: any) => {
+  const configStore = useConfigStore();
+  if (configStore.electionStatus?.canadianChallenge) {
+    next({
+      name: "Welcome",
+      params: {
+        locale: to.params.locale,
+        organisationSlug: to.params.organisationSlug,
+        electionSlug: to.params.electionSlug,
+      },
+    });
+  } else {
+    next();
+  }
+};
 
 const router = createRouter({
   history: createWebHistory(),
@@ -45,16 +62,19 @@ const router = createRouter({
       name: "BallotVerificationLanding",
       path: "/:locale/:organisationSlug/:electionSlug/verify",
       component: BallotVerificationLanding,
+      beforeEnter: verifyGuard,
     },
     {
       name: "BallotVerifierView",
       path: "/:locale/:organisationSlug/:electionSlug/verify/:pairingCode",
       component: BallotVerifierView,
+      beforeEnter: verifyGuard,
     },
     {
       name: "BallotVerifierFound",
       path: "/:locale/:organisationSlug/:electionSlug/verify/:verificationCode/found",
       component: BallotVerifierFoundView,
+      beforeEnter: verifyGuard,
     },
     {
       name: "LogsView",

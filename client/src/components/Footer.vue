@@ -5,15 +5,30 @@ import avlogo from "../assets/avlogo.svg";
 import DOMPurify from "dompurify";
 import { computed } from "vue";
 import { storeToRefs } from "pinia";
+import { useI18n } from "vue-i18n";
 
 const configStore = useConfigStore();
 const { electionStatus } = storeToRefs(configStore);
+const i18n = useI18n();
 
 const customFooterHtml = computed(() => {
   const cosmetics = electionStatus.value?.cosmetics as
     | CustomCosmetics
     | undefined;
-  const raw = cosmetics?.footerHtml?.trim() || null;
+  const rawFooterHtml = cosmetics?.footerHtml;
+  if (!rawFooterHtml) return null;
+
+  let raw: string | null = null;
+  if (typeof rawFooterHtml === "string") {
+    raw = rawFooterHtml.trim() || null;
+  } else if (typeof rawFooterHtml === "object") {
+    const localeHtml =
+      rawFooterHtml[i18n.locale.value] ??
+      rawFooterHtml["en"] ??
+      Object.values(rawFooterHtml)[0];
+    raw = (localeHtml as string)?.trim() || null;
+  }
+
   if (!raw) return null;
   const sanitized = DOMPurify.sanitize(raw);
   const template = document.createElement("template");
@@ -28,6 +43,7 @@ const customFooterHtml = computed(() => {
 <template>
   <footer
     id="base-footer"
+    class="dark-blurry footer-padding-top pb-3"
     :class="customFooterHtml ? 'Footer Footer--custom' : 'Footer'"
   >
     <div
@@ -78,6 +94,7 @@ const customFooterHtml = computed(() => {
   justify-content: flex-start;
   align-items: flex-start;
   padding: 1rem;
+  color: white;
 }
 
 .Footer__Content {

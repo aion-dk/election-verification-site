@@ -161,7 +161,6 @@ const setTheme = async (conferenceClient: any) => {
 
 body {
   font-family: "Open Sans", sans-serif;
-  overflow: hidden;
   padding: 0;
   margin: 0;
 }
@@ -179,15 +178,13 @@ body {
 .DBAS {
   display: flex;
   flex-direction: column;
-  height: 100dvh;
-  height: 100vh;
+  min-height: 100dvh;
+  min-height: 100vh;
   width: 100vw;
 }
 
 .DBAS__Content {
-  height: calc(100dvh - 70px);
-  height: calc(100vh - 70px);
-  margin-top: 70px;
+  flex: 1;
 }
 
 .popper-content-wrapper {

@@ -10,6 +10,7 @@ declare module "@assemblyvoting/types" {
 
   interface BasicElectionStatus {
     votingPortal?: VotingPortal;
+    canadianChallenge?: boolean;
   }
 }
 
@@ -59,5 +60,5 @@ export interface CustomCosmetics {
   hideElectionClientFooter?: boolean;
   useWideScrollbar?: boolean;
   votingSteps?: any;
-  footerHtml?: string;
+  footerHtml?: string | Record<string, string>;
 }
