@@ -35,5 +35,8 @@ RUN chmod +x /docker-entrypoint.d/40-write-env-js.sh
 
 COPY nginx.conf /etc/nginx/nginx.conf
 
+RUN chown -R nginx:nginx /usr/share/nginx/html /var/cache/nginx
+
 EXPOSE 8080
+USER nginx
 CMD ["nginx", "-g", "daemon off;"]
