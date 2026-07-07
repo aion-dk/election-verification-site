@@ -58,31 +58,36 @@ const setLocale = (newLocale: string) => {
 const onResize = () => (isMenuOpened.value = false);
 
 onMounted(() => {
-  window.addEventListener("resize", onResize);
+  globalThis.addEventListener("resize", onResize);
 });
 
 onBeforeUnmount(() => {
-  window.removeEventListener("resize", onResize);
+  globalThis.removeEventListener("resize", onResize);
 });
 </script>
 
 <template>
-  <div class="Header__Navbar">
+  <header
+    class="Header__Navbar bg-white shadow-sm px-3 px-md-4 py-0"
+    id="header-navbar"
+  >
     <RouterLink
       class="Header__Election_Info"
       :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}`"
+      id="header-election-info-link"
     >
       <img
+        id="header-logo"
         v-if="configStore.electionStatus?.theme?.logo"
         class="Header__Logo"
         :src="configStore.electionStatus?.theme?.logo"
         :alt="$t('header.election_logo_alt')"
         loading="lazy"
+        style="height: 2.75rem; max-width: 12rem; object-fit: scale-down"
       />
-      <div class="Header__Text">
-        <span class="Header__Title">{{ $t("header.dbas") }}</span>
-        <span class="Header__Subtitle">{{ electionName }}</span>
-      </div>
+      <span v-else class="Header__Title" id="header-title">{{
+        $t("header.dbas")
+      }}</span>
     </RouterLink>
 
     <nav
@@ -91,12 +96,15 @@ onBeforeUnmount(() => {
       :class="{
         Header__Show: !isMenuOpened,
       }"
+      id="header-nav"
     >
       <RouterLink
+        v-if="!configStore.electionStatus?.canadianChallenge"
         class="Header__Link"
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`"
         @click="toggleMenu(true)"
+        id="header-link-verification"
       >
         {{ $t("header.verification") }}
       </RouterLink>
@@ -106,6 +114,7 @@ onBeforeUnmount(() => {
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`"
         @click="toggleMenu(true)"
+        id="header-link-tracking"
       >
         {{ $t("header.tracking") }}
       </RouterLink>
@@ -115,6 +124,7 @@ onBeforeUnmount(() => {
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/logs`"
         @click="toggleMenu()"
+        id="header-link-logs"
       >
         {{ $t("header.logs") }}
       </RouterLink>
@@ -124,6 +134,7 @@ onBeforeUnmount(() => {
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/help`"
         @click="toggleMenu()"
+        id="header-link-help"
       >
         {{ $t("header.help") }}
       </RouterLink>
@@ -133,45 +144,42 @@ onBeforeUnmount(() => {
         class="Header__Link"
         :href="contactUrl"
         target="_blank"
+        rel="noopener noreferrer"
+        id="header-link-contact"
       >
         {{ $t("header.contact") }}
         <AVIcon icon="arrow-up-right-from-square" aria-hidden="true" />
       </a>
 
       <DropDown
+        id="localizationDropdownMenu"
         class="Header__Locales"
         :options="availableLocales"
         @change="(value) => setLocale(value)"
       />
     </nav>
 
-    <div class="Header__Hamburger_Btn">
+    <div class="Header__Hamburger_Btn" id="header-hamburger-btn">
       <AVAnimatedMenuButton
         variant="cross"
         theme="light"
         class="bg-white"
         v-model:is-opened="isMenuOpened"
+        id="header-hamburger-menu-button"
       />
     </div>
-  </div>
+  </header>
 </template>
 
 <style type="text/css" scoped>
 .Header__Navbar {
-  padding-right: 1.5rem;
-  padding-left: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  z-index: 50;
-  background-color: white;
-  box-sizing: border-box;
+  z-index: 100;
   width: 100vw;
-  height: 70px;
-  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.15);
 }
 
 .Header__Election_Info {
@@ -182,7 +190,8 @@ onBeforeUnmount(() => {
 }
 
 .Header__Logo {
-  display: none;
+  width: auto;
+  object-fit: scale-down;
 }
 
 .Header__Text {
@@ -232,6 +241,13 @@ onBeforeUnmount(() => {
   background-color: white;
 }
 
+:deep(.Header__Locales select) {
+  border: none;
+  background: transparent;
+  appearance: none;
+  padding: 0.3rem 1rem;
+}
+
 html[dir="ltr"] .Header__Locales {
   padding: 1rem 0 1rem 1rem;
 }
@@ -245,15 +261,16 @@ html[dir="rtl"] .Header__Locales {
 }
 
 .Header__Links {
-  position: absolute;
-  top: 70px;
-  left: 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: calc(100dvh - 70px);
+  height: 100dvh;
+  padding-top: 5rem;
   padding-bottom: 3rem;
   background-color: white;
 }
@@ -279,26 +296,22 @@ html[dir="rtl"] .Header__Locales {
   }
 
   .Header__Logo {
-    height: 3rem;
+    height: 2.75rem;
     max-width: 12rem;
-    object-fit: contain;
+    object-fit: scale-down;
     display: block;
   }
 }
 
 @media only screen and (min-width: 80rem) {
-  .Header__Navbar_Overrides {
-    padding-right: 1.5rem !important;
-    padding-left: 1rem !important;
-  }
-
   .Header__Hamburger_Btn {
     display: none;
   }
 
   .Header__Logo {
-    height: 3rem;
-    object-fit: contain;
+    height: 2.75rem;
+    max-width: 12rem;
+    object-fit: scale-down;
     display: block;
   }
 
@@ -309,7 +322,8 @@ html[dir="rtl"] .Header__Locales {
     align-items: center;
     justify-content: center;
     width: fit-content;
-    height: 2.5rem;
+    height: auto;
+    padding-top: 0;
     padding-bottom: 0;
   }
 

@@ -13,18 +13,20 @@ import type { Locale } from "vue-i18n";
 import { fallbackMessages } from "./assets/translations";
 import { defaultTheme } from "./assets/theme";
 import { SupportedLocale } from "@/Types";
+import { useElectionBranding } from "@/composables/useElectionBranding";
 
 const i18n = useI18n();
 const ballotStore = useBallotStore();
 const configStore = useConfigStore();
 const route = useRoute();
 const isLoaded = ref(false);
+const { updateDocumentTitle } = useElectionBranding();
 
 onMounted(async () => {
   const organisationSlug = route.params.organisationSlug.toString();
   const electionSlug = route.params.electionSlug.toString();
   await setConfigurations(organisationSlug, electionSlug);
-  setTitle();
+  updateDocumentTitle(i18n.locale.value as SupportedLocale);
 
   if (route.params.trackingCode) {
     await ballotStore.loadBallot(
@@ -44,16 +46,7 @@ function updateLocale(newLocale: Locale) {
 
   router.replace(newUrl);
   setLocale(newLocale);
-  setTitle();
-}
-
-function setTitle() {
-  const siteTitle = i18n.messages.value[i18n.locale.value].site_title;
-  const title = [
-    configStore.election.title[i18n.locale.value as SupportedLocale],
-    siteTitle,
-  ].filter(Boolean);
-  if (window.top) window.top.document.title = title.join(" - ");
+  updateDocumentTitle(newLocale as SupportedLocale);
 }
 
 const setConfigurations = async (
@@ -64,7 +57,9 @@ const setConfigurations = async (
     organisationSlug,
     electionSlug,
   );
+
   configStore.setBoardSlug((await conferenceClient.getStatus()).boardSlug);
+
   await configStore.loadConfig();
   await setLanguage(conferenceClient);
   await setTheme(conferenceClient);
@@ -133,7 +128,8 @@ const setTheme = async (conferenceClient: any) => {
 </script>
 
 <template>
-  <div v-if="!isLoaded" class="DBAS__Loading_Page">
+  <div v-if="!isLoaded" class="DBAS__Loading_Page" role="main">
+    <h1 class="visually-hidden">{{ $t("js.components.AVSpinner.loading") }}</h1>
     <AVSpinner size="lg" color="dark" />
   </div>
   <div class="DBAS" v-if="isLoaded">
@@ -165,7 +161,6 @@ const setTheme = async (conferenceClient: any) => {
 
 body {
   font-family: "Open Sans", sans-serif;
-  overflow: hidden;
   padding: 0;
   margin: 0;
 }
@@ -183,15 +178,13 @@ body {
 .DBAS {
   display: flex;
   flex-direction: column;
-  height: 100dvh;
-  height: 100vh;
+  min-height: 100dvh;
+  min-height: 100vh;
   width: 100vw;
 }
 
 .DBAS__Content {
-  height: calc(100dvh - 70px);
-  height: calc(100vh - 70px);
-  margin-top: 70px;
+  flex: 1;
 }
 
 .popper-content-wrapper {

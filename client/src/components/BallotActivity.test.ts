@@ -38,6 +38,7 @@ test("BallotActivity mounts", async () => {
         registeredAt: "2022-03-02T00:10:12+0100",
         type: "some_type",
       },
+      index: 0,
     },
   });
   expect(wrapper.text()).toContain("SomeType");

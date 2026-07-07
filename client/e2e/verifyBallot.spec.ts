@@ -1,6 +1,6 @@
 import { test, expect } from "@playwright/test";
 import { latestConfig, status } from "./mocks";
-import analyzeAccesibility from "./accessibility";
+import analyzeAccessibility from "./accessibility";
 
 test("verifying a ballot", async ({ page }) => {
   // Mock Network calls
@@ -29,11 +29,11 @@ test("verifying a ballot", async ({ page }) => {
   });
 
   await page.goto("/en/organisation_slug/election_slug/verify");
-  await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Ballot Tester");
+  await analyzeAccessibility(page);
+  await expect(page.locator("#verification-title")).toHaveText("Ballot Tester");
   await page.getByPlaceholder("Testing code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Start the Test" }).click();
-  await analyzeAccesibility(page);
+  await analyzeAccessibility(page);
 });
 
 test("verifying with an invalid verification code", async ({ page }) => {
@@ -74,10 +74,10 @@ test("verifying with an invalid verification code", async ({ page }) => {
   });
 
   await page.goto("/en/organisation_slug/election_slug/verify");
-  await expect(page.locator("h3")).toHaveText("Ballot Tester");
+  await expect(page.locator("#verification-title")).toHaveText("Ballot Tester");
   await page.locator("#verification-code").fill("invalid-code");
   await page.getByRole("button", { name: "Start the Test" }).click();
-  await analyzeAccesibility(page);
+  await analyzeAccessibility(page);
   await expect(page.locator(".Error__Title")).toContainText(
     "Testing code not found",
   );

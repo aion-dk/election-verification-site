@@ -1,5 +1,12 @@
 <script setup lang="ts">
+import PageTitle from "@/components/PageTitle.vue";
+
 defineProps({
+  id: {
+    type: String,
+    required: false,
+    default: "",
+  },
   helpTitle: {
     type: String,
     required: true,
@@ -20,48 +27,70 @@ defineProps({
 </script>
 
 <template>
-  <div class="ContentLayout">
-    <section id="main_content" class="ContentLayout__Action" tabindex="-1">
-      <p v-if="breadcrumb" class="ContentLayout__Breadcrumb">
-        {{ breadcrumb }}
-      </p>
-      <div class="ContentLayout__Mobile_Wrapper">
-        <slot name="action" />
-      </div>
-    </section>
-    <aside
-      class="ContentLayout__Help"
-      :aria-label="$t('accessibility.help')"
-      tabindex="0"
-    >
-      <h5 class="ContentLayout__Help_Title">
-        {{ helpTitle }}<strong>{{ helpTitleStrong }}</strong>
-      </h5>
+  <div class="ContentLayout__Page">
+    <PageTitle />
+    <div :id="id || undefined" class="ContentLayout">
+      <section id="main_content" class="ContentLayout__Action" tabindex="-1">
+        <p
+          v-if="breadcrumb"
+          class="ContentLayout__Breadcrumb"
+          id="content-layout-breadcrumb"
+        >
+          {{ breadcrumb }}
+        </p>
+        <div
+          class="ContentLayout__Mobile_Wrapper"
+          id="content-layout-mobile-wrapper"
+        >
+          <slot name="action" />
+        </div>
+      </section>
+      <!-- tabindex is required for keyboard-scrollable content in Safari (WCAG 2.1.1) -->
+      <!-- sonarqube-disable-next-line sonar/no-tabindex-on-non-interactive-elements -->
+      <aside
+        id="help-content-aside"
+        class="ContentLayout__Help"
+        :aria-label="$t('accessibility.help')"
+        tabindex="0"
+      >
+        <h2 class="ContentLayout__Help_Title" id="content-layout-help-title">
+          {{ helpTitle
+          }}<strong id="content-layout-help-title-strong">{{
+            helpTitleStrong
+          }}</strong>
+        </h2>
 
-      <div class="ContentLayout__Help_Container">
-        <slot name="help" />
-      </div>
-      <img
-        v-if="logo"
-        class="ContentLayout__Brand_Logo"
-        :src="logo"
-        :alt="$t('header.election_logo_alt')"
-        loading="lazy"
-      />
-    </aside>
+        <div
+          class="ContentLayout__Help_Container"
+          id="content-layout-help-container"
+        >
+          <slot name="help" />
+        </div>
+        <img
+          v-if="logo"
+          class="ContentLayout__Brand_Logo"
+          :src="logo"
+          :alt="$t('header.election_logo_alt')"
+          loading="lazy"
+          id="content-layout-brand-logo"
+        />
+      </aside>
+    </div>
   </div>
 </template>
 
 <style scoped>
+.ContentLayout__Page {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
 .ContentLayout {
   display: flex;
-  height: calc(100dvh - 70px);
-  top: 70px;
-  position: fixed;
   width: 100%;
   flex-direction: column;
   align-items: center;
-  overflow-y: auto;
   background-color: var(--bs-gray-100);
   padding: 1rem 1rem 3rem 1rem;
 }
@@ -71,7 +100,6 @@ defineProps({
   padding: 1rem 0;
   display: flex;
   flex-direction: column;
-  align-items: start;
 }
 
 .ContentLayout__Breadcrumb {
@@ -164,23 +192,20 @@ defineProps({
   .ContentLayout {
     flex-direction: row;
     padding: 0;
-    overflow: hidden;
+    align-items: stretch;
+    min-height: calc(100dvh - 5rem);
   }
 
   .ContentLayout__Action {
     background-color: white;
     width: calc(100% - 32rem);
-    height: 100%;
     padding: 0;
-    overflow-y: auto;
   }
 
   .ContentLayout__Help {
     width: 32rem;
-    height: 100%;
     padding: 5rem 3rem;
     justify-content: flex-start;
-    overflow-y: auto;
   }
 
   .ContentLayout__Help_Container {

@@ -52,33 +52,52 @@ watch(currentLocale, () => {
   loadTab(currentTab.value);
 });
 
+watch(
+  () => configStore.electionStatus?.canadianChallenge,
+  (isCanadianChallenge) => {
+    if (isCanadianChallenge && currentTab.value === "tester") {
+      switchTab("tracker");
+    }
+  },
+);
+
 onMounted(() => {
   updateQuestions(currentLocale.value);
-  switchTab("tester");
+  switchTab(
+    configStore.electionStatus?.canadianChallenge ? "tracker" : "tester",
+  );
 });
 </script>
 
 <template>
   <ContentLayout
+    id="help-view"
     :help-title="$t('views.faq.help.title')"
     :help-title-strong="$t('views.faq.help.title_strong')"
     :logo="configStore.electionStatus?.theme?.logo"
   >
     <template v-slot:action>
-      <MainIcon icon="circle-question" />
-      <h2 class="HelpView__Title">{{ $t("views.faq.title") }}</h2>
-      <p class="HelpView__Description">{{ $t("views.faq.description") }}</p>
+      <MainIcon icon="circle-question" id="help-main-icon" />
+      <h1 class="HelpView__Title" id="help-title">
+        {{ $t("views.faq.title") }}
+      </h1>
+      <p class="HelpView__Description" id="help-description">
+        {{ $t("views.faq.description") }}
+      </p>
 
       <nav
         class="HelpView__Category_Navigation"
         :aria-label="$t('accessibility.faq_navigation')"
+        id="help-category-navigation"
       >
         <button
+          v-if="!configStore.electionStatus?.canadianChallenge"
           :class="{
             HelpView__Category_Button: true,
             HelpView__Category_Button_Active: currentTab === 'tester',
           }"
           @click="switchTab('tester')"
+          id="help-tab-tester"
         >
           <AVIcon
             icon="envelope-open-text"
@@ -95,6 +114,7 @@ onMounted(() => {
             HelpView__Category_Button_Active: currentTab === 'tracker',
           }"
           @click="switchTab('tracker')"
+          id="help-tab-tracker"
         >
           <AVIcon
             icon="magnifying-glass"
@@ -111,6 +131,7 @@ onMounted(() => {
             HelpView__Category_Button_Active: currentTab === 'logs',
           }"
           @click="switchTab('logs')"
+          id="help-tab-logs"
         >
           <AVIcon
             icon="square-poll-vertical"
@@ -127,6 +148,7 @@ onMounted(() => {
             HelpView__Category_Button_Active: currentTab === 'other',
           }"
           @click="switchTab('other')"
+          id="help-tab-other"
         >
           <AVIcon
             icon="flag"
@@ -139,20 +161,21 @@ onMounted(() => {
         </button>
       </nav>
 
-      <div class="HelpView__Divider" />
+      <div class="HelpView__Divider" id="help-divider" />
 
-      <div class="HelpView__FAQ_Container">
+      <div class="HelpView__FAQ_Container" id="help-faq-container">
         <ExpandableSection
           v-for="(question, index) in currentQuestions"
           :key="`${index}-${question.title}`"
           class="HelpView__FAQ"
+          :id="`help-faq-${index}`"
         >
           <template v-slot:collapsed>
-            <h3 class="HelpView__FAQ_Title">{{ question.title }}</h3>
+            <h2 class="HelpView__FAQ_Title">{{ question.title }}</h2>
           </template>
 
           <template v-slot:expanded>
-            <h3 class="HelpView__FAQ_Title mb-3">{{ question.title }}</h3>
+            <h2 class="HelpView__FAQ_Title mb-3">{{ question.title }}</h2>
             <p
               v-for="(p, i) in question.paragraphs"
               :key="`${i}-${p}`"
@@ -164,13 +187,13 @@ onMounted(() => {
       </div>
     </template>
     <template v-slot:help>
-      <p class="HelpView__Help_Description text-contrast">
+      <p class="HelpView__Help_Description text-contrast" id="help-help-p1">
         {{ $t("views.faq.help.p1") }}
       </p>
-      <p class="HelpView__Help_Description text-contrast">
+      <p class="HelpView__Help_Description text-contrast" id="help-help-p2">
         {{ $t("views.faq.help.p2") }}
       </p>
-      <p class="HelpView__Help_Description text-contrast">
+      <p class="HelpView__Help_Description text-contrast" id="help-help-p3">
         {{ $t("views.faq.help.p3") }}
       </p>
     </template>

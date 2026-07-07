@@ -2,6 +2,18 @@ export type * from "@assemblyvoting/types";
 import type { ElectionStatusResponse } from "@assemblyvoting/types";
 import type { DefineLocaleMessage, Locale } from "vue-i18n";
 
+declare module "@assemblyvoting/types" {
+  interface VotingPortal {
+    tabName?: Record<string, string>;
+    faviconUrl?: string;
+  }
+
+  interface BasicElectionStatus {
+    votingPortal?: VotingPortal;
+    canadianChallenge?: boolean;
+  }
+}
+
 export interface EVSBallot {
   activities: string[];
   trackingCode: string;
@@ -42,4 +54,11 @@ export type SpreadableDLM = { [key: string]: any };
 
 export interface ExtendedElectionStatusResponse extends ElectionStatusResponse {
   boardSlug: string;
+}
+
+export interface CustomCosmetics {
+  hideElectionClientFooter?: boolean;
+  useWideScrollbar?: boolean;
+  votingSteps?: any;
+  footerHtml?: string | Record<string, string>;
 }
