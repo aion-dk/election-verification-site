@@ -2,6 +2,7 @@ import { mount } from "@vue/test-utils";
 import type { MountingOptions } from "@vue/test-utils";
 import type { Component } from "vue";
 import { createI18n } from "vue-i18n";
+import { createPinia } from "pinia";
 import { expect } from "vitest";
 import { toHaveNoViolations } from "vitest-axe/dist/matchers.js";
 import { fallbackMessages } from "../assets/translations";
@@ -40,7 +41,7 @@ export async function mountForA11y(
     ...rest,
     attachTo: container,
     global: {
-      plugins: [i18n],
+      plugins: [i18n, createPinia()],
       stubs: defaultStubs,
       ...rest.global,
     },

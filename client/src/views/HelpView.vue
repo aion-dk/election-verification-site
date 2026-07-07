@@ -52,9 +52,20 @@ watch(currentLocale, () => {
   loadTab(currentTab.value);
 });
 
+watch(
+  () => configStore.electionStatus?.canadianChallenge,
+  (isCanadianChallenge) => {
+    if (isCanadianChallenge && currentTab.value === "tester") {
+      switchTab("tracker");
+    }
+  },
+);
+
 onMounted(() => {
   updateQuestions(currentLocale.value);
-  switchTab("tester");
+  switchTab(
+    configStore.electionStatus?.canadianChallenge ? "tracker" : "tester",
+  );
 });
 </script>
 
@@ -80,6 +91,7 @@ onMounted(() => {
         id="help-category-navigation"
       >
         <button
+          v-if="!configStore.electionStatus?.canadianChallenge"
           :class="{
             HelpView__Category_Button: true,
             HelpView__Category_Button_Active: currentTab === 'tester',

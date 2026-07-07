@@ -67,7 +67,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <header class="Header__Navbar" id="header-navbar">
+  <header
+    class="Header__Navbar bg-white shadow-sm px-3 px-md-4 py-0"
+    id="header-navbar"
+  >
     <RouterLink
       class="Header__Election_Info"
       :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}`"
@@ -80,15 +83,11 @@ onBeforeUnmount(() => {
         :src="configStore.electionStatus?.theme?.logo"
         :alt="$t('header.election_logo_alt')"
         loading="lazy"
+        style="height: 2.75rem; max-width: 12rem; object-fit: scale-down"
       />
-      <div class="Header__Text" id="header-text">
-        <span class="Header__Title" id="header-title">{{
-          $t("header.dbas")
-        }}</span>
-        <span class="Header__Subtitle" id="header-subtitle">{{
-          electionName
-        }}</span>
-      </div>
+      <span v-else class="Header__Title" id="header-title">{{
+        $t("header.dbas")
+      }}</span>
     </RouterLink>
 
     <nav
@@ -100,6 +99,7 @@ onBeforeUnmount(() => {
       id="header-nav"
     >
       <RouterLink
+        v-if="!configStore.electionStatus?.canadianChallenge"
         class="Header__Link"
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`"
@@ -173,20 +173,13 @@ onBeforeUnmount(() => {
 
 <style type="text/css" scoped>
 .Header__Navbar {
-  padding-right: 1.5rem;
-  padding-left: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  position: fixed;
+  position: sticky;
   top: 0;
-  left: 0;
-  z-index: 50;
-  background-color: white;
-  box-sizing: border-box;
+  z-index: 100;
   width: 100vw;
-  height: 70px;
-  box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.15);
 }
 
 .Header__Election_Info {
@@ -197,7 +190,6 @@ onBeforeUnmount(() => {
 }
 
 .Header__Logo {
-  display: none;
   width: auto;
   object-fit: scale-down;
 }
@@ -269,15 +261,16 @@ html[dir="rtl"] .Header__Locales {
 }
 
 .Header__Links {
-  position: absolute;
-  top: 70px;
-  left: 0px;
+  position: fixed;
+  top: 0;
+  left: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 100vw;
-  height: calc(100dvh - 70px);
+  height: 100dvh;
+  padding-top: 5rem;
   padding-bottom: 3rem;
   background-color: white;
 }
@@ -303,27 +296,22 @@ html[dir="rtl"] .Header__Locales {
   }
 
   .Header__Logo {
-    height: 2.4rem;
-    max-width: 11rem;
-    object-fit: contain;
+    height: 2.75rem;
+    max-width: 12rem;
+    object-fit: scale-down;
     display: block;
   }
 }
 
 @media only screen and (min-width: 80rem) {
-  .Header__Navbar_Overrides {
-    padding-right: 1.5rem !important;
-    padding-left: 1rem !important;
-  }
-
   .Header__Hamburger_Btn {
     display: none;
   }
 
   .Header__Logo {
-    height: 2.4rem;
-    max-width: 11rem;
-    object-fit: contain;
+    height: 2.75rem;
+    max-width: 12rem;
+    object-fit: scale-down;
     display: block;
   }
 
@@ -334,7 +322,8 @@ html[dir="rtl"] .Header__Locales {
     align-items: center;
     justify-content: center;
     width: fit-content;
-    height: 2.5rem;
+    height: auto;
+    padding-top: 0;
     padding-bottom: 0;
   }
 

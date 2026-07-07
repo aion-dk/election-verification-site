@@ -3,6 +3,7 @@ import useConfigStore from "../stores/useConfigStore";
 import i18n from "../lib/i18n";
 import router from "../router";
 import { useRoute } from "vue-router";
+import PageTitle from "@/components/PageTitle.vue";
 
 const configStore = useConfigStore();
 const route = useRoute();
@@ -21,44 +22,7 @@ const goToTracker = () => {
 
 <template>
   <div class="Welcome" id="welcome">
-    <h1
-      class="Welcome__Description_Desktop_Title visually-hidden-mobile"
-      id="welcome-desktop-title"
-    >
-      {{ $t("views.welcome.title") }}
-    </h1>
-    <div class="Welcome__Description_Desktop" id="welcome-description-desktop">
-      <div
-        class="Welcome__Description_Desktop_Container"
-        id="welcome-desktop-title-container"
-      >
-        <span
-          class="Welcome__Description_Desktop_Title visually-hidden"
-          aria-hidden="true"
-        >
-          {{ $t("views.welcome.title") }}
-        </span>
-      </div>
-
-      <div
-        class="Welcome__Description_Desktop_Container"
-        id="welcome-desktop-subtitle-container"
-      >
-        <h2
-          class="Welcome__Description_Desktop_Subtitle"
-          id="welcome-desktop-subtitle"
-        >
-          {{ configStore.election.title[$i18n.locale] }}
-        </h2>
-
-        <p
-          class="Welcome__Description_Desktop_About"
-          id="welcome-desktop-about"
-        >
-          {{ $t("views.welcome.description") }}
-        </p>
-      </div>
-    </div>
+    <PageTitle />
 
     <div class="Welcome__Gradient theme-gradient" id="welcome-gradient">
       <img
@@ -78,7 +42,11 @@ const goToTracker = () => {
           class="Welcome__Card Welcome__Card_Overrides Welcome__Card_Desktop"
           id="welcome-cards"
         >
-          <div class="Welcome__Card_Item" id="welcome-tester-card-item">
+          <div
+            v-if="!configStore.electionStatus?.canadianChallenge"
+            class="Welcome__Card_Item"
+            id="welcome-tester-card-item"
+          >
             <AVIcon
               icon="envelope-open-text"
               class="Welcome__Card_Icon"
@@ -107,7 +75,11 @@ const goToTracker = () => {
             </div>
           </div>
 
-          <div class="Welcome__Card_Line" id="welcome-card-divider" />
+          <div
+            v-if="!configStore.electionStatus?.canadianChallenge"
+            class="Welcome__Card_Line"
+            id="welcome-card-divider"
+          />
 
           <div class="Welcome__Card_Item" id="welcome-tracker-card-item">
             <AVIcon
@@ -155,6 +127,7 @@ const goToTracker = () => {
       </div>
       <div id="welcome-about-cards">
         <div
+          v-if="!configStore.electionStatus?.canadianChallenge"
           class="Welcome__Card Welcome__Card_Overrides"
           id="welcome-about-tester-card"
         >
@@ -220,9 +193,8 @@ const goToTracker = () => {
 }
 
 .Welcome {
-  height: calc(100dvh - 70px);
+  min-height: 100dvh;
   width: 100%;
-  overflow-y: auto;
 }
 
 .Welcome__Card {
@@ -236,7 +208,7 @@ const goToTracker = () => {
 
 .Welcome__Gradient {
   width: 100%;
-  height: 22rem;
+  height: 16rem;
   position: absolute;
   z-index: -20;
 }
@@ -305,10 +277,6 @@ const goToTracker = () => {
   text-align: center;
   margin-bottom: 2rem;
   width: 100%;
-}
-
-.Welcome__Description_Desktop {
-  display: none;
 }
 
 .Welcome__About {
@@ -381,54 +349,8 @@ const goToTracker = () => {
     white-space: normal;
   }
 
-  .Welcome__Description_Desktop {
-    padding: 5rem;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: white;
-  }
-
   .Welcome__Description {
     display: none !important;
-  }
-
-  .Welcome__Description_Desktop_Container {
-    display: flex;
-  }
-
-  .Welcome__Description_Desktop_Container:last-of-type > * {
-    width: 50%;
-  }
-
-  .Welcome__Description_Desktop_Title {
-    font-size: 3rem;
-    font-weight: 600;
-    color: var(--bs-gray-800);
-    margin: 0;
-  }
-
-  html[dir="ltr"] .Welcome__Description_Desktop_Title,
-  html[dir="ltr"] .Welcome__Description_Desktop_Subtitle {
-    padding: 0 0 0 5rem;
-  }
-
-  html[dir="rtl"] .Welcome__Description_Desktop_Title,
-  html[dir="rtl"] .Welcome__Description_Desktop_Subtitle {
-    padding: 0 5rem 0 0;
-  }
-
-  .Welcome__Description_Desktop_Subtitle {
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--bs-gray-600);
-    margin: 0;
-  }
-
-  .Welcome__Description_Desktop_About {
-    color: var(--bs-gray-700);
-    margin: 0;
-    padding: 0 5rem 0 0;
   }
 
   .Welcome__Gradient {
@@ -473,10 +395,6 @@ const goToTracker = () => {
 }
 
 @media only screen and (min-width: 120rem) {
-  .Welcome__Description_Desktop {
-    padding: 8rem 20rem;
-  }
-
   .Welcome__About div {
     margin: 0 1rem 0 1rem;
     padding: 0 20rem 5rem 20rem;
@@ -518,10 +436,6 @@ const goToTracker = () => {
   }
 
   .Welcome__About_Description {
-    font-size: 1.25rem;
-  }
-
-  .Welcome__Description_Desktop_About {
     font-size: 1.25rem;
   }
 }

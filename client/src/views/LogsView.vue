@@ -365,17 +365,42 @@ input[type="checkbox"] {
   margin: 1rem auto 0 auto;
 }
 
-html[dir="ltr"] .LogsView__Icon_Set > svg:first-of-type {
+.LogsView__Icon_Set {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.LogsView__Icon_Set :deep(svg) {
+  width: auto;
+  height: 1em;
+  vertical-align: middle;
+}
+
+html[dir="ltr"] .LogsView__Icon_Set :deep(svg:first-of-type) {
   margin-right: -4px;
 }
 
-html[dir="rtl"] .LogsView__Icon_Set > svg:first-of-type {
+html[dir="rtl"] .LogsView__Icon_Set :deep(svg:first-of-type) {
   margin-left: -4px;
 }
 
 .RTL_Rotation {
   display: flex;
+  align-items: center;
   gap: 1rem;
+}
+
+.RTL_Rotation button {
+  display: inline-flex;
+  align-items: center;
+  padding: 0;
+}
+
+.RTL_Rotation button :deep(svg) {
+  height: 1em;
+  width: auto;
+  vertical-align: middle;
 }
 
 html[dir="rtl"] .RTL_Rotation {
@@ -393,6 +418,12 @@ html[dir="rtl"] .RTL_Rotation {
 .LogsView__PageLink_Disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+#logs-page-numbers {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .LogsView__Help_Title {
@@ -441,7 +472,7 @@ html[dir="rtl"] .RTL_Rotation {
 .list-leave-to {
   opacity: 0;
 }
-.list-leave-active {
+.list-leave-active.BoardItem {
   position: absolute;
   width: 100%;
 }
