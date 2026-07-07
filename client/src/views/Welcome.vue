@@ -43,10 +43,7 @@ const goToTracker = () => {
           id="welcome-cards"
         >
           <div
-            v-if="
-              configStore.electionStatus &&
-              !configStore.electionStatus.canadianChallenge
-            "
+            v-if="!configStore.electionStatus?.canadianChallenge"
             class="Welcome__Card_Item"
             id="welcome-tester-card-item"
           >
@@ -79,10 +76,7 @@ const goToTracker = () => {
           </div>
 
           <div
-            v-if="
-              configStore.electionStatus &&
-              !configStore.electionStatus.canadianChallenge
-            "
+            v-if="!configStore.electionStatus?.canadianChallenge"
             class="Welcome__Card_Line"
             id="welcome-card-divider"
           />
@@ -133,10 +127,7 @@ const goToTracker = () => {
       </div>
       <div id="welcome-about-cards">
         <div
-          v-if="
-            configStore.electionStatus &&
-            !configStore.electionStatus.canadianChallenge
-          "
+          v-if="!configStore.electionStatus?.canadianChallenge"
           class="Welcome__Card Welcome__Card_Overrides"
           id="welcome-about-tester-card"
         >

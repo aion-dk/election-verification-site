@@ -1,4 +1,9 @@
-import { createWebHistory, createRouter } from "vue-router";
+import {
+  createWebHistory,
+  createRouter,
+  type RouteLocationNormalized,
+  type NavigationGuardNext,
+} from "vue-router";
 import Welcome from "../views/Welcome.vue";
 import BallotTrackerView from "../views/BallotTrackerView.vue";
 import BallotVerifierView from "../views/BallotVerifierView.vue";
@@ -14,7 +19,11 @@ import type { BasicElectionStatus } from "@/Types";
 import axios from "axios";
 import config from "@/lib/config";
 
-const verifyGuard = async (to: any, _from: any, next: any) => {
+const verifyGuard = async (
+  to: RouteLocationNormalized,
+  _from: RouteLocationNormalized,
+  next: NavigationGuardNext,
+) => {
   const configStore = useConfigStore();
 
   if (!configStore.electionStatus) {

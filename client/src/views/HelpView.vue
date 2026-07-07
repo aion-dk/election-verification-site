@@ -52,6 +52,15 @@ watch(currentLocale, () => {
   loadTab(currentTab.value);
 });
 
+watch(
+  () => configStore.electionStatus?.canadianChallenge,
+  (isCanadianChallenge) => {
+    if (isCanadianChallenge && currentTab.value === "tester") {
+      switchTab("tracker");
+    }
+  },
+);
+
 onMounted(() => {
   updateQuestions(currentLocale.value);
   switchTab(
