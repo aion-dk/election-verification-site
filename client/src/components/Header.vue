@@ -130,6 +130,17 @@ onBeforeUnmount(() => {
       </RouterLink>
 
       <RouterLink
+        v-if="configStore.resultsPublished"
+        class="Header__Link"
+        activeClass="active"
+        :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/results`"
+        @click="toggleMenu(true)"
+        id="header-link-results"
+      >
+        {{ $t("header.results") }}
+      </RouterLink>
+
+      <RouterLink
         class="Header__Link"
         activeClass="active"
         :to="`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/help`"

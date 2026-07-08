@@ -57,8 +57,15 @@ export interface ExtendedElectionStatusResponse extends ElectionStatusResponse {
 }
 
 export interface CustomCosmetics {
-  hideElectionClientFooter?: boolean;
+  hideElectionCommitteeFooter?: boolean;
   useWideScrollbar?: boolean;
   votingSteps?: any;
   footerHtml?: string | Record<string, string>;
+}
+
+export interface PublishedResult {
+  votingRoundName: string;
+  votingRoundClosingDate: string | null;
+  publishedAt: string;
+  pdf: string;
 }

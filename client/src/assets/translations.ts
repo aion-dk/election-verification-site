@@ -237,6 +237,7 @@ export const fallbackMessages: SpreadableDLM = {
       verification: "Ballot Tester",
       tracking: "Ballot Tracker",
       logs: "Election Activity Log",
+      results: "Results",
       help: "FAQ",
       contact: "Contact",
       change_locale: {
@@ -638,6 +639,29 @@ export const fallbackMessages: SpreadableDLM = {
           last_page: "Go to last page",
         },
       },
+      results: {
+        title: "Election Results",
+        description:
+          "The published results of the election's voting rounds are available below. You can preview and download the result PDF for each voting round.",
+        published_on: "Published on",
+        download: "Download PDF",
+        preview_unavailable:
+          "Your browser cannot display the PDF preview. You can download it using the link below.",
+        empty_state:
+          "No results have been published yet. Please check back later.",
+        error_state:
+          "An error occurred while loading the results. Please try again.",
+        retry: "Retry",
+        help: {
+          title: "What are the ",
+          title_strong: "results?",
+          p1: {
+            question: "What are the election results?",
+            answer:
+              "The election results show the official outcome of each voting round. Once a voting round is closed and the results are published, they are displayed here for public review.",
+          },
+        },
+      },
       faq: {
         title: "Frequently Asked Questions",
         description:
@@ -814,6 +838,7 @@ export const fallbackMessages: SpreadableDLM = {
       verification: "Testeo de Boleta",
       tracking: "Seguimiento de Boleta",
       logs: "Registro de la elección",
+      results: "Resultados",
       help: "Preguntas Frecuentes",
       contact: "Contacto",
       change_locale: {
