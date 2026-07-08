@@ -25,9 +25,7 @@ const formattedDate = computed(() => {
   }
 });
 
-const downloadFileName = computed(
-  () => `${source.value.votingRoundName}.pdf`,
-);
+const downloadFileName = computed(() => `${source.value.votingRoundName}.pdf`);
 </script>
 
 <template>
