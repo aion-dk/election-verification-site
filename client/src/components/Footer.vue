@@ -34,7 +34,11 @@ const customFooterHtml = computed(() => {
   const template = document.createElement("template");
   template.innerHTML = sanitized;
   template.content.querySelectorAll("a[target='_blank']").forEach((a) => {
-    a.setAttribute("rel", "noopener noreferrer");
+    const existingRel = a.getAttribute("rel");
+    const tokens = existingRel ? existingRel.split(/\s+/).filter(Boolean) : [];
+    if (!tokens.includes("noopener")) tokens.push("noopener");
+    if (!tokens.includes("noreferrer")) tokens.push("noreferrer");
+    a.setAttribute("rel", tokens.join(" "));
   });
   return template.innerHTML;
 });
