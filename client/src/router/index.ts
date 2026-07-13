@@ -58,12 +58,25 @@ const verifyGuard = async (
   }
 };
 
-const resultsGuard = (
+const resultsGuard = async (
   to: RouteLocationNormalized,
   _from: RouteLocationNormalized,
   next: NavigationGuardNext,
 ) => {
   const configStore = useConfigStore();
+
+  if (!configStore.resultsPublishedLoaded) {
+    const organisationSlug = to.params.organisationSlug as string;
+    const electionSlug = to.params.electionSlug as string;
+    try {
+      const response = await axios.get(
+        `${config.conferenceUrl}/${organisationSlug}/${electionSlug}/results_published`,
+      );
+      configStore.setResultsPublished(response.data?.resultsPublished ?? false);
+    } catch (err) {
+      console.error("Failed to fetch results_published in route guard:", err);
+    }
+  }
 
   if (!configStore.resultsPublished) {
     next({

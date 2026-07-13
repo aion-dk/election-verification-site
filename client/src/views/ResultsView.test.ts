@@ -88,7 +88,7 @@ describe("ResultsView", () => {
 
     const wrapper = await mountResultsView();
 
-    const titles = wrapper.findAll("#result-card-title");
+    const titles = wrapper.findAll('[data-testid="result-card-title"]');
     expect(titles).toHaveLength(3);
     expect(titles[0].text()).toBe("Round A");
     expect(titles[1].text()).toBe("Round B");
@@ -102,7 +102,7 @@ describe("ResultsView", () => {
     const wrapper = await mountResultsView();
 
     expect(wrapper.find("#results-empty").exists()).toBe(true);
-    expect(wrapper.find("#result-card-title").exists()).toBe(false);
+    expect(wrapper.find('[data-testid="result-card-title"]').exists()).toBe(false);
     wrapper.unmount();
   });
 
@@ -113,7 +113,7 @@ describe("ResultsView", () => {
 
     expect(wrapper.find("#results-error").exists()).toBe(true);
     expect(wrapper.find("#results-retry").exists()).toBe(true);
-    expect(wrapper.find("#result-card-title").exists()).toBe(false);
+    expect(wrapper.find('[data-testid="result-card-title"]').exists()).toBe(false);
     wrapper.unmount();
   });
 });

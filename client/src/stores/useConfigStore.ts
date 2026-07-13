@@ -17,6 +17,7 @@ export default defineStore("useConfigStore", () => {
   const electionStatus = ref<BasicElectionStatus | null>(null);
   const electionTheme = ref<string>(null);
   const resultsPublished = ref<boolean>(false);
+  const resultsPublishedLoaded = ref<boolean>(false);
   const pageRefreshIterator = ref<number>(0);
 
   const setBoardSlug = (newBoardSlug: string) => {
@@ -80,6 +81,7 @@ export default defineStore("useConfigStore", () => {
 
   const setResultsPublished = (value: boolean) => {
     resultsPublished.value = value;
+    resultsPublishedLoaded.value = true;
   };
 
   const pageReloaded = () => pageRefreshIterator.value++;
@@ -101,6 +103,7 @@ export default defineStore("useConfigStore", () => {
     electionTheme,
     setElectionTheme,
     resultsPublished,
+    resultsPublishedLoaded,
     setResultsPublished,
     setBoardSlug,
     pageRefreshIterator,

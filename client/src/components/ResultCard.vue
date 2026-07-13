@@ -29,12 +29,12 @@ const downloadFileName = computed(() => `${source.value.votingRoundName}.pdf`);
 </script>
 
 <template>
-  <article class="ResultCard" id="result-card">
+  <article class="ResultCard" data-testid="result-card">
     <header class="ResultCard__Header">
-      <h2 class="ResultCard__Title" id="result-card-title">
+      <h2 class="ResultCard__Title" data-testid="result-card-title">
         {{ result.votingRoundName }}
       </h2>
-      <p class="ResultCard__Date" id="result-card-date">
+      <p class="ResultCard__Date" data-testid="result-card-date">
         <span class="ResultCard__Date_Label">{{
           $t("views.results.published_on")
         }}</span>
@@ -42,24 +42,24 @@ const downloadFileName = computed(() => `${source.value.votingRoundName}.pdf`);
       </p>
     </header>
 
-    <div class="ResultCard__Preview" id="result-card-preview">
+    <div class="ResultCard__Preview" data-testid="result-card-preview">
       <object
         v-if="blobUrl"
         :data="blobUrl"
         type="application/pdf"
         class="ResultCard__Object"
-        id="result-card-pdf-object"
+        data-testid="result-card-pdf-object"
         :title="$t('views.results.preview_unavailable')"
         :aria-label="result.votingRoundName"
       >
-        <p class="ResultCard__Fallback" id="result-card-fallback">
+        <p class="ResultCard__Fallback" data-testid="result-card-fallback">
           {{ $t("views.results.preview_unavailable") }}
         </p>
         <a
           :href="blobUrl"
           :download="downloadFileName"
           class="ResultCard__DownloadLink ResultCard__DownloadLink--fallback"
-          id="result-card-fallback-download"
+          data-testid="result-card-fallback-download"
         >
           <AVIcon icon="download" aria-hidden="true" />
           {{ $t("views.results.download") }}
@@ -72,7 +72,7 @@ const downloadFileName = computed(() => `${source.value.votingRoundName}.pdf`);
       :href="blobUrl"
       :download="downloadFileName"
       class="ResultCard__DownloadLink"
-      id="result-card-download"
+      data-testid="result-card-download"
     >
       <AVIcon icon="download" aria-hidden="true" />
       {{ $t("views.results.download") }}
