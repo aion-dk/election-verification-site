@@ -88,7 +88,9 @@ describe("ResultCard", () => {
       global: { plugins: [i18n, createPinia()] },
     });
 
-    const fallbackLink = wrapper.find('[data-testid="result-card-fallback-download"]');
+    const fallbackLink = wrapper.find(
+      '[data-testid="result-card-fallback-download"]',
+    );
     expect(fallbackLink.exists()).toBe(true);
     expect(fallbackLink.attributes("href")).toBe("blob:fake-url");
     wrapper.unmount();
