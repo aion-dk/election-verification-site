@@ -36,7 +36,7 @@ describe("ResultCard", () => {
       global: { plugins: [i18n, createPinia()] },
     });
 
-    expect(wrapper.find("#result-card-title").text()).toBe(
+    expect(wrapper.find('[data-testid="result-card-title"]').text()).toBe(
       "Round 1 - General Election",
     );
     wrapper.unmount();
@@ -60,7 +60,7 @@ describe("ResultCard", () => {
       global: { plugins: [i18n, createPinia()] },
     });
 
-    const objectEl = wrapper.find("#result-card-pdf-object");
+    const objectEl = wrapper.find('[data-testid="result-card-pdf-object"]');
     expect(objectEl.exists()).toBe(true);
     expect(objectEl.attributes("type")).toBe("application/pdf");
     expect(objectEl.attributes("data")).toBe("blob:fake-url");
@@ -73,7 +73,7 @@ describe("ResultCard", () => {
       global: { plugins: [i18n, createPinia()] },
     });
 
-    const downloadLink = wrapper.find("#result-card-download");
+    const downloadLink = wrapper.find('[data-testid="result-card-download"]');
     expect(downloadLink.exists()).toBe(true);
     expect(downloadLink.attributes("href")).toBe("blob:fake-url");
     expect(downloadLink.attributes("download")).toBe(
@@ -88,7 +88,7 @@ describe("ResultCard", () => {
       global: { plugins: [i18n, createPinia()] },
     });
 
-    const fallbackLink = wrapper.find("#result-card-fallback-download");
+    const fallbackLink = wrapper.find('[data-testid="result-card-fallback-download"]');
     expect(fallbackLink.exists()).toBe(true);
     expect(fallbackLink.attributes("href")).toBe("blob:fake-url");
     wrapper.unmount();

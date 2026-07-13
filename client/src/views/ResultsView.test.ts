@@ -102,7 +102,9 @@ describe("ResultsView", () => {
     const wrapper = await mountResultsView();
 
     expect(wrapper.find("#results-empty").exists()).toBe(true);
-    expect(wrapper.find('[data-testid="result-card-title"]').exists()).toBe(false);
+    expect(wrapper.find('[data-testid="result-card-title"]').exists()).toBe(
+      false,
+    );
     wrapper.unmount();
   });
 
@@ -113,7 +115,9 @@ describe("ResultsView", () => {
 
     expect(wrapper.find("#results-error").exists()).toBe(true);
     expect(wrapper.find("#results-retry").exists()).toBe(true);
-    expect(wrapper.find('[data-testid="result-card-title"]').exists()).toBe(false);
+    expect(wrapper.find('[data-testid="result-card-title"]').exists()).toBe(
+      false,
+    );
     wrapper.unmount();
   });
 });

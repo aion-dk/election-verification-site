@@ -125,14 +125,22 @@ test("viewing published results", async ({ page, isMobile }) => {
   await resultsLink.click();
   await analyzeAccessibility(page);
 
-  await expect(page.locator('[data-testid="result-card-title"]')).toHaveCount(2);
-  await expect(page.locator('[data-testid="result-card-title"]').first()).toHaveText(
-    "Round A",
+  await expect(page.locator('[data-testid="result-card-title"]')).toHaveCount(
+    2,
   );
-  await expect(page.locator('[data-testid="result-card-title"]').nth(1)).toHaveText("Round B");
+  await expect(
+    page.locator('[data-testid="result-card-title"]').first(),
+  ).toHaveText("Round A");
+  await expect(
+    page.locator('[data-testid="result-card-title"]').nth(1),
+  ).toHaveText("Round B");
 
-  await expect(page.locator('[data-testid="result-card-pdf-object"]')).toHaveCount(2);
-  await expect(page.locator('[data-testid="result-card-download"]')).toHaveCount(2);
+  await expect(
+    page.locator('[data-testid="result-card-pdf-object"]'),
+  ).toHaveCount(2);
+  await expect(
+    page.locator('[data-testid="result-card-download"]'),
+  ).toHaveCount(2);
 });
 
 test("results menu hidden when no results published", async ({ page }) => {
