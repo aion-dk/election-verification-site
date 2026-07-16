@@ -12,6 +12,7 @@ import MissingSlugView from "../views/MissingSlugView.vue";
 import BallotVerificationLanding from "../views/BallotVerificationLanding.vue";
 import LogsView from "../views/LogsView.vue";
 import HelpView from "../views/HelpView.vue";
+import ResultsView from "../views/ResultsView.vue";
 import BallotTrackingLanding from "../views/BallotTrackingLanding.vue";
 import ReceiptErrorView from "../views/ReceiptErrorView.vue";
 import useConfigStore from "@/stores/useConfigStore";
@@ -44,6 +45,40 @@ const verifyGuard = async (
   }
 
   if (configStore.electionStatus?.canadianChallenge) {
+    next({
+      name: "Welcome",
+      params: {
+        locale: to.params.locale,
+        organisationSlug: to.params.organisationSlug,
+        electionSlug: to.params.electionSlug,
+      },
+    });
+  } else {
+    next();
+  }
+};
+
+const resultsGuard = async (
+  to: RouteLocationNormalized,
+  _from: RouteLocationNormalized,
+  next: NavigationGuardNext,
+) => {
+  const configStore = useConfigStore();
+
+  if (!configStore.resultsPublishedLoaded) {
+    const organisationSlug = to.params.organisationSlug as string;
+    const electionSlug = to.params.electionSlug as string;
+    try {
+      const response = await axios.get(
+        `${config.conferenceUrl}/${organisationSlug}/${electionSlug}/results_published`,
+      );
+      configStore.setResultsPublished(response.data?.resultsPublished ?? false);
+    } catch (err) {
+      console.error("Failed to fetch results_published in route guard:", err);
+    }
+  }
+
+  if (!configStore.resultsPublished) {
     next({
       name: "Welcome",
       params: {
@@ -119,6 +154,12 @@ const router = createRouter({
       name: "HelpView",
       path: "/:locale/:organisationSlug/:electionSlug/help",
       component: HelpView,
+    },
+    {
+      name: "ResultsView",
+      path: "/:locale/:organisationSlug/:electionSlug/results",
+      component: ResultsView,
+      beforeEnter: resultsGuard,
     },
   ],
 });

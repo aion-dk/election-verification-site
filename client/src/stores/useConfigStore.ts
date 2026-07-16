@@ -16,6 +16,8 @@ export default defineStore("useConfigStore", () => {
   const bcTimeout = computed(() => election.value?.bcTimeout);
   const electionStatus = ref<BasicElectionStatus | null>(null);
   const electionTheme = ref<string>(null);
+  const resultsPublished = ref<boolean>(false);
+  const resultsPublishedLoaded = ref<boolean>(false);
   const pageRefreshIterator = ref<number>(0);
 
   const setBoardSlug = (newBoardSlug: string) => {
@@ -77,6 +79,11 @@ export default defineStore("useConfigStore", () => {
     electionTheme.value = newTheme;
   };
 
+  const setResultsPublished = (value: boolean) => {
+    resultsPublished.value = value;
+    resultsPublishedLoaded.value = true;
+  };
+
   const pageReloaded = () => pageRefreshIterator.value++;
 
   const usesElectionCommittee = computed((): boolean => {
@@ -95,6 +102,9 @@ export default defineStore("useConfigStore", () => {
     setElectionStatus,
     electionTheme,
     setElectionTheme,
+    resultsPublished,
+    resultsPublishedLoaded,
+    setResultsPublished,
     setBoardSlug,
     pageRefreshIterator,
     pageReloaded,
