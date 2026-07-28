@@ -32,7 +32,9 @@ const sortedBallot = computed(() => {
     ),
   );
 
-  const baseOrder = ballotConfig?.content.contestReferences ?? [...ballotReferences];
+  const baseOrder = ballotConfig?.content.contestReferences ?? [
+    ...ballotReferences,
+  ];
   const orderMap = new Map(baseOrder.map((ref, index) => [ref, index]));
 
   const votingRoundConfigs = latestConfig.votingRoundConfigs;
