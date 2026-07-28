@@ -170,7 +170,7 @@ test("finding a ballot that has been cast", async ({ page }) => {
   await page.locator("#unified-code").fill("5ksv8Ee");
 });
 
-test.only("finding a ballot that has been spoiled", async ({ page }) => {
+test("finding a ballot that has been spoiled", async ({ page }) => {
   // Mock Network calls
   await page.route("**/*", async (route) => {
     const url = route.request().url();
