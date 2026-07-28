@@ -219,16 +219,9 @@ export const fallbackMessages: SpreadableDLM = {
       go_to_verification: "Go to the verification site",
       verify: {
         invalid_code: {
-          title: "Testing code not found",
+          title: "Ballot code not found",
           description:
-            "Verify you have entered the testing code correctly. Be sure to match case and try again.",
-        },
-      },
-      track: {
-        invalid_code: {
-          title: "Tracking code not found",
-          description:
-            "Verify you have entered the tracking code correctly. Be sure to match case. Nb.: If you are testing to make sure your choices were recorded correctly before submitting, use the ballot tester instead.",
+            "Verify you have entered the ballot code correctly. Be sure to match case and try again.",
         },
       },
     },

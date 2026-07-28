@@ -31,6 +31,36 @@ export const foundBallotStatus = {
   ],
 };
 
+export const ballotLookup = {
+  verificationTrackStart: { shortAddress: "2a28de915b" },
+  voterCommitment: { content: { commitment: {} } },
+  serverCommitment: { content: { commitment: {} } },
+  ballotCryptograms: {
+    address: "e766728863db15dd021f02ea0c7fffa5937f50ec2edb5e7f8fc97e1d8477d753",
+    content: {} },
+};
+
+export const ballotDecisionCast = {
+  item: {
+    type: "CastRequestItem",
+    address: "2a28de915b",
+  },
+};
+
+export const ballotDecisionSpoil = {
+  item: {
+    type: "SpoilRequestItem",
+    address: "e766728863db15dd021f02ea0c7fffa5937f50ec2edb5e7f8fc97e1d8477d753",
+  },
+};
+
+export const submitVerifier = {
+  verifier: {
+    address: "e766728863db15dd021f02ea0c7fffa5937f50ec2edb5e7f8fc97e1d8477d753",
+    shortAddress: "e766728863"
+  },
+};
+
 export const boardItemsPage1: any = {
   items: [
     {
