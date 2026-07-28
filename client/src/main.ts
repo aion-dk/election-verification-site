@@ -20,6 +20,5 @@ app.directive("focus", {
   },
 });
 
-router.isReady().then(() => {
-  app.mount("#dbas-client");
-});
+await router.isReady();
+app.mount("#dbas-client");

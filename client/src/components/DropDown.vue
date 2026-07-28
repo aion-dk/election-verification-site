@@ -39,6 +39,6 @@ defineProps({
 
 <style type="text/css" scoped>
 select {
-  font-family: "Open Sans";
+  font-family: "Open Sans", sans-serif;
 }
 </style>

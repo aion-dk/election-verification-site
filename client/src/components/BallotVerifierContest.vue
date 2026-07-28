@@ -1,12 +1,9 @@
 <template>
   <div class="BallotVerifierContest">
     <h3 class="BallotVerifierContest__Title">
-      {{ contest.title[$i18n.locale as SupportedLocale] }}
+      {{ contest.title[locale] }}
     </h3>
-    <p
-      v-if="contest.question"
-      v-text="contest.question[$i18n.locale as SupportedLocale]"
-    ></p>
+    <p v-if="contest.question" v-text="contest.question[locale]"></p>
     <div
       v-for="(selectionPile, pileIndex) in contestSelection.piles"
       :key="JSON.stringify(selectionPile)"
@@ -31,7 +28,6 @@ import { defineComponent } from "vue";
 import type {
   ContestSelection,
   ContestContent,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   SupportedLocale,
 } from "@/Types";
 
@@ -49,6 +45,9 @@ export default defineComponent({
     },
     contest(): ContestContent {
       return this.configStore.getContest(this.contestSelection.reference);
+    },
+    locale(): SupportedLocale {
+      return this.$i18n.locale as SupportedLocale;
     },
   },
 });
