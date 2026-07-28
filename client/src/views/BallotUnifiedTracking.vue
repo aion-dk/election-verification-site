@@ -95,7 +95,7 @@ const receiptWithBallotCode = async (receipt: string, ballotCode: string) => {
         `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
       );
     }
-  } catch (e) {
+  } catch (_e) {
     await router.push(
       `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
     );
