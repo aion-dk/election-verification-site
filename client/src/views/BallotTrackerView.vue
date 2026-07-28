@@ -53,10 +53,7 @@ onMounted(async () => {
       :logo="configStore.electionStatus?.theme?.logo"
     >
       <template v-slot:action>
-        <TrackedBallotManager
-          :tracking-code="ballotCode"
-          @cancel="cancel"
-        />
+        <TrackedBallotManager :tracking-code="ballotCode" @cancel="cancel" />
 
         <h3 class="BallotTracker__Title">
           {{ $t("views.tracker.info.title") }}

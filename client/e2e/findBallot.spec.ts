@@ -6,10 +6,9 @@ import {
   status,
   ballotDecisionCast,
   ballotDecisionSpoil,
-  submitVerifier
+  submitVerifier,
 } from "./mocks";
 import analyzeAccesibility from "./accessibility";
-
 
 test("finding a ballot that is pending", async ({ page }) => {
   // Mock Network calls

@@ -446,19 +446,22 @@ export const fallbackMessages: SpreadableDLM = {
         title: "Find your ballot",
         subtitle: "I am voting and I want to",
         subtitle_strong: "test or track my ballot",
-        description: "Verify your ballot and ensure your choices were recorded correctly and included in the Digital Ballot Box. Input the code shown on the voting page or upload your vote receipt, then follow the instructions.",
+        description:
+          "Verify your ballot and ensure your choices were recorded correctly and included in the Digital Ballot Box. Input the code shown on the voting page or upload your vote receipt, then follow the instructions.",
         placeholder: "Ballot code",
         button: "Find my ballot",
         input_label: "Write your ballot code",
         input_placeholder: "F.ex: 12AbCD3",
         input_tooltip: "Your ballot code is displayed on the voting page",
         receipt_input_label: "Or upload your vote receipt",
-        receipt_input_tooltip: "Your vote receipt was either sent to your email address or you had the option to download it on the election page after you submitted your ballot",
+        receipt_input_tooltip:
+          "Your vote receipt was either sent to your email address or you had the option to download it on the election page after you submitted your ballot",
         help: {
           title: "How do I ",
           title_strong: "find my ballot?",
           steps: {
-            step_1: "<strong>Input your ballot code</strong>: find it on the Voting Page; or <strong>upload the vote receipt</strong> sent by email or downloaded after you cast your ballot.",
+            step_1:
+              "<strong>Input your ballot code</strong>: find it on the Voting Page; or <strong>upload the vote receipt</strong> sent by email or downloaded after you cast your ballot.",
             step_2: "Follow the <strong>instructions</strong>",
           },
         },

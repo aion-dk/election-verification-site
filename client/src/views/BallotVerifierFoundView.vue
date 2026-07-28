@@ -30,7 +30,7 @@ async function checkForTrackingCode(store: any) {
   if (!store.trackingCode) return;
 
   await router.push(
-      `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${ballotCode.value}`,
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${ballotCode.value}`,
   );
 }
 
@@ -76,10 +76,7 @@ onMounted(async () => {
       )}`"
     >
       <template v-slot:action>
-        <TrackedBallotManager
-          :tracking-code="ballotCode"
-          @cancel="cancel"
-        />
+        <TrackedBallotManager :tracking-code="ballotCode" @cancel="cancel" />
 
         <MainIcon icon="envelope-open-text" />
         <h3 class="VerificationFound__Title">

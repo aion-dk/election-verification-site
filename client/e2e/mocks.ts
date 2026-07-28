@@ -37,7 +37,8 @@ export const ballotLookup = {
   serverCommitment: { content: { commitment: {} } },
   ballotCryptograms: {
     address: "e766728863db15dd021f02ea0c7fffa5937f50ec2edb5e7f8fc97e1d8477d753",
-    content: {} },
+    content: {},
+  },
 };
 
 export const ballotDecisionCast = {
@@ -57,7 +58,7 @@ export const ballotDecisionSpoil = {
 export const submitVerifier = {
   verifier: {
     address: "e766728863db15dd021f02ea0c7fffa5937f50ec2edb5e7f8fc97e1d8477d753",
-    shortAddress: "e766728863"
+    shortAddress: "e766728863",
   },
 };
 

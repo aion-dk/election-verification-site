@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import useAVVerifier from "../lib/useAVVerifier";
-import type {EVSBallot} from "@/Types";
+import type { EVSBallot } from "@/Types";
 
 export default defineStore("verificationStore", () => {
   const setupAVVerifier = async (boardSlug: string) => {
@@ -41,7 +41,7 @@ export default defineStore("verificationStore", () => {
 
   async function generatePairingCode() {
     const [decision, address] = await avVerifier.value.pollForBallotDecision();
-    switch(decision) {
+    switch (decision) {
       case "spoiled":
         pairingCode.value = await avVerifier.value.submitVerifierKey(address);
         decryptWhenAvailable();
@@ -50,16 +50,20 @@ export default defineStore("verificationStore", () => {
         trackingCode.value = address;
         break;
       default:
-        throw new Error("Unexpected status from pollForSpoilRequest: " + decision);
+        throw new Error(
+          "Unexpected status from pollForSpoilRequest: " + decision,
+        );
     }
   }
 
   async function pollForCastBallot() {
     const [decision, address] = await avVerifier.value.pollForBallotDecision();
-     if (decision === "cast") {
-       trackingCode.value = address;
-     } else {
-        throw new Error("Unexpected status from pollForSpoilRequest: " + decision);
+    if (decision === "cast") {
+      trackingCode.value = address;
+    } else {
+      throw new Error(
+        "Unexpected status from pollForSpoilRequest: " + decision,
+      );
     }
   }
 
@@ -90,6 +94,6 @@ export default defineStore("verificationStore", () => {
     trackingCode,
     ballotStatus,
     reset,
-    setTrackingCode
+    setTrackingCode,
   };
 });

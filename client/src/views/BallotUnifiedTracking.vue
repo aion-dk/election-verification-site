@@ -53,17 +53,25 @@ const updateReceipt = async (files: File[]) => {
       .then(async () => {
         receiptStore.validateReceipt(receiptExtractor.receipt);
         if (!receiptStore.receiptValid) {
-          await router.push(`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`);
+          await router.push(
+            `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
+          );
           return;
         }
 
         if (receiptExtractor.trackingCode) {
-          await receiptWithTrackingCode(receiptExtractor.receipt, receiptExtractor.trackingCode);
+          await receiptWithTrackingCode(
+            receiptExtractor.receipt,
+            receiptExtractor.trackingCode,
+          );
           return;
         }
 
         if (receiptExtractor.ballotCode) {
-          await receiptWithBallotCode(receiptExtractor.receipt, receiptExtractor.ballotCode);
+          await receiptWithBallotCode(
+            receiptExtractor.receipt,
+            receiptExtractor.ballotCode,
+          );
           return;
         }
       })
@@ -79,24 +87,37 @@ const receiptWithBallotCode = async (receipt: string, ballotCode: string) => {
     await verificationStore.pollForCastBallot();
     receiptStore.validateTrackingCode(receipt, verificationStore.trackingCode);
     if (receiptStore.trackingCodeMatching) {
-      await router.push(`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${ballotCode}`);
+      await router.push(
+        `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${ballotCode}`,
+      );
     } else {
-      await router.push(`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`);
+      await router.push(
+        `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
+      );
     }
   } catch (e) {
-    await router.push(`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`);
+    await router.push(
+      `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
+    );
   }
-}
+};
 
-const receiptWithTrackingCode = async (receipt: string, trackingCode: string) => {
+const receiptWithTrackingCode = async (
+  receipt: string,
+  trackingCode: string,
+) => {
   receiptStore.validateTrackingCode(receipt, trackingCode);
   if (receiptStore.trackingCodeMatching) {
     verificationStore.setTrackingCode(trackingCode);
-    await router.push(`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode}`);
+    await router.push(
+      `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode}`,
+    );
   } else {
-    await router.push(`/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`);
+    await router.push(
+      `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
+    );
   }
-}
+};
 
 const lookupBallot = async () => {
   error.value = null;
@@ -106,7 +127,8 @@ const lookupBallot = async () => {
     verificationStore.generatePairingCode();
 
     setTimeout(async () => {
-      if (verificationStore.pairingCode || verificationStore.trackingCode) return;
+      if (verificationStore.pairingCode || verificationStore.trackingCode)
+        return;
 
       await router.push({
         name: "BallotVerifierFound",
@@ -136,7 +158,7 @@ async function checkForTrackingCode(store: any) {
   if (!store.trackingCode) return;
 
   await router.push(
-      `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${store.ballotCode}`,
+    `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${store.ballotCode}`,
   );
 }
 
