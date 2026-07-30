@@ -25,11 +25,14 @@ export default defineStore("verificationStore", () => {
     pairingCode.value = null;
     ballot.value = null;
     ballotAddress.value = null;
+    ballotCode.value = null;
     trackingCode.value = null;
     ballotStatus.value = null;
   }
 
-  // TODO: this needs to be tested to see that it woks even if "hardcoded" a tracking code
+  // This exists for backward compatibility reasons.
+  // This is used when verifying an old receipt PDF file (containing a "trackingCode" attribute
+  // rather than the new "ballotCode").
   function setTrackingCode(code: string) {
     trackingCode.value = code;
   }
@@ -51,7 +54,7 @@ export default defineStore("verificationStore", () => {
         break;
       default:
         throw new Error(
-          "Unexpected status from pollForSpoilRequest: " + decision,
+          "Unexpected status from pollForBallotDecision: " + decision,
         );
     }
   }
@@ -62,7 +65,7 @@ export default defineStore("verificationStore", () => {
       trackingCode.value = address;
     } else {
       throw new Error(
-        "Unexpected status from pollForSpoilRequest: " + decision,
+        "Unexpected status from pollForBallotDecision: " + decision,
       );
     }
   }

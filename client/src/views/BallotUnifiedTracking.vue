@@ -13,7 +13,7 @@ import useReceiptStore from "@/stores/useReceiptStore";
 import useVerificationStore from "@/stores/useVerificationStore";
 import router from "@/router";
 
-const { t, locale } = useI18n();
+const { t } = useI18n();
 const receiptStore = useReceiptStore();
 const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
@@ -54,7 +54,7 @@ const updateReceipt = async (files: File[]) => {
         receiptStore.validateReceipt(receiptExtractor.receipt);
         if (!receiptStore.receiptValid) {
           await router.push(
-            `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
+            `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
           );
           return;
         }
@@ -82,22 +82,22 @@ const updateReceipt = async (files: File[]) => {
 };
 
 const receiptWithBallotCode = async (receipt: string, ballotCode: string) => {
-  await verificationStore.findBallot(ballotCode);
   try {
+    await verificationStore.findBallot(ballotCode);
     await verificationStore.pollForCastBallot();
     receiptStore.validateTrackingCode(receipt, verificationStore.trackingCode);
     if (receiptStore.trackingCodeMatching) {
       await router.push(
-        `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${ballotCode}`,
+        `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${ballotCode}`,
       );
     } else {
       await router.push(
-        `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
+        `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
       );
     }
   } catch (_e) {
     await router.push(
-      `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
+      `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
     );
   }
 };
@@ -110,11 +110,11 @@ const receiptWithTrackingCode = async (
   if (receiptStore.trackingCodeMatching) {
     verificationStore.setTrackingCode(trackingCode);
     await router.push(
-      `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode}`,
+      `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${trackingCode}`,
     );
   } else {
     await router.push(
-      `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
+      `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/receipt_error`,
     );
   }
 };
@@ -158,7 +158,7 @@ async function checkForTrackingCode(store: any) {
   if (!store.trackingCode) return;
 
   await router.push(
-    `/${locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${store.ballotCode}`,
+    `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${store.ballotCode}`,
   );
 }
 
@@ -167,10 +167,10 @@ watch(verificationStore, async (newStore) => {
   await checkForTrackingCode(newStore);
 });
 
-onMounted(() => {
+onMounted(async () => {
   receiptStore.reset();
   verificationStore.reset();
-  verificationStore.setupAVVerifier(configStore.boardSlug);
+  await verificationStore.setupAVVerifier(configStore.boardSlug);
   (document.querySelector("#unified-code") as HTMLInputElement)?.focus();
 });
 </script>

@@ -12,7 +12,7 @@ import i18n from "../lib/i18n";
 const route = useRoute();
 const verificationStore = useVerificationStore();
 const configStore = useConfigStore();
-const steps = [1, 2, 3, 4, 5];
+const steps = [1, 2];
 const ballotCode = ref(null);
 
 async function checkForPairingCode(store: any) {
@@ -68,10 +68,10 @@ onMounted(async () => {
 <template>
   <div class="VerificationFound" aria-flowto="current-tracking-code">
     <ContentLayout
-      :help-title="$t('views.verification.help.title')"
-      :help-title-strong="$t('views.verification.help.title_strong')"
+      :help-title="$t('views.ballot_finder.help.title')"
+      :help-title-strong="$t('views.ballot_finder.help.title_strong')"
       :logo="configStore.electionStatus?.theme?.logo"
-      :breadcrumb="`${$t('header.verification')} / ${$t(
+      :breadcrumb="`${$t('header.find')} / ${$t(
         'breadcrumbs.ballot_found',
       )}`"
     >
@@ -94,12 +94,12 @@ onMounted(async () => {
         >
           <span class="VerificationFound__Step_Index">{{ step }}</span>
           <p
-            v-html="$t(`views.verification.help.steps.step_${step}`)"
+            v-html="$t(`views.ballot_finder.help.steps.step_${step}`)"
             class="VerificationFound__Step_Text text-contrast"
           />
         </div>
         <span class="VerificationFound__Help_Footer text-contrast">{{
-          $t(`views.verification.help.footer`)
+          $t(`views.ballot_finder.help.footer`)
         }}</span>
       </template>
     </ContentLayout>

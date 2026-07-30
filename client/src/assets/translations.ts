@@ -464,6 +464,7 @@ export const fallbackMessages: SpreadableDLM = {
               "<strong>Input your ballot code</strong>: find it on the Voting Page; or <strong>upload the vote receipt</strong> sent by email or downloaded after you cast your ballot.",
             step_2: "Follow the <strong>instructions</strong>",
           },
+          footer: "All done!",
         },
       },
       verifier: {
