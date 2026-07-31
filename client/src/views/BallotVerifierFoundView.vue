@@ -71,9 +71,7 @@ onMounted(async () => {
       :help-title="$t('views.ballot_finder.help.title')"
       :help-title-strong="$t('views.ballot_finder.help.title_strong')"
       :logo="configStore.electionStatus?.theme?.logo"
-      :breadcrumb="`${$t('header.find')} / ${$t(
-        'breadcrumbs.ballot_found',
-      )}`"
+      :breadcrumb="`${$t('header.find')} / ${$t('breadcrumbs.ballot_found')}`"
     >
       <template v-slot:action>
         <TrackedBallotManager :tracking-code="ballotCode" @cancel="cancel" />
