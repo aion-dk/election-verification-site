@@ -1,6 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import useAVVerifier from "../lib/useAVVerifier";
+import type { ContestSelection } from "@/Types";
 
 export default defineStore("verificationStore", () => {
   const setupAVVerifier = async (boardSlug: string) => {
@@ -10,7 +11,7 @@ export default defineStore("verificationStore", () => {
   const avVerifier = ref(null);
   const ballotAddress = ref(null);
   const pairingCode = ref(null);
-  const ballot = ref(null);
+  const ballot = ref<ContestSelection[] | null>(null);
 
   async function decryptWhenAvailable() {
     await avVerifier.value.pollForCommitmentOpening();
