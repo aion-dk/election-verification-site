@@ -163,7 +163,7 @@ async function checkForTrackingCode(store: any) {
 
   // This exists for backwards compatibility reasons
   // For legacy receipts with "trackingCode" attribute, the store ballotCode will be null.
-  const code = store.ballotCode ?? store.trackingCode
+  const code = store.ballotCode ?? store.trackingCode;
   await router.push(
     `/${route.params.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${code}`,
   );
