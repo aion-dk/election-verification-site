@@ -26,11 +26,20 @@ const sortedBallot = computed(() => {
   const ballotReferences = new Set(ballot.map((cs) => cs.reference));
 
   const ballotConfigs = latestConfig.ballotConfigs;
-  const ballotConfig = Object.values(ballotConfigs ?? {}).find((bc) =>
-    [...ballotReferences].every((ref) =>
-      bc.content.contestReferences?.includes(ref),
-    ),
-  );
+  const ballotConfigArray = Object.values(ballotConfigs ?? {});
+  const ballotConfig =
+    ballotConfigArray.find(
+      (bc) =>
+        bc.content.contestReferences?.length === ballotReferences.size &&
+        [...ballotReferences].every((ref) =>
+          bc.content.contestReferences?.includes(ref),
+        ),
+    ) ??
+    ballotConfigArray.find((bc) =>
+      [...ballotReferences].every((ref) =>
+        bc.content.contestReferences?.includes(ref),
+      ),
+    );
 
   const baseOrder = ballotConfig?.content.contestReferences ?? [
     ...ballotReferences,
@@ -38,9 +47,16 @@ const sortedBallot = computed(() => {
   const orderMap = new Map(baseOrder.map((ref, index) => [ref, index]));
 
   const votingRoundConfigs = latestConfig.votingRoundConfigs;
-  const votingRound = Object.values(votingRoundConfigs ?? {}).find((vr) =>
-    vr.content.contestReferences?.some((ref) => ballotReferences.has(ref)),
-  );
+  const votingRoundArray = Object.values(votingRoundConfigs ?? {});
+  const votingRound =
+    votingRoundArray.find((vr) =>
+      [...ballotReferences].every((ref) =>
+        vr.content.contestReferences?.includes(ref),
+      ),
+    ) ??
+    votingRoundArray.find((vr) =>
+      vr.content.contestReferences?.some((ref) => ballotReferences.has(ref)),
+    );
   const positions = votingRound?.content?.contestPositions;
 
   return [...ballot].sort((a, b) => {

@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import useAVVerifier from "../lib/useAVVerifier";
-import type { ContestSelection } from "@assemblyvoting/types";
+import type { ContestSelection } from "@/Types";
 
 export default defineStore("verificationStore", () => {
   const setupAVVerifier = async (boardSlug: string) => {
