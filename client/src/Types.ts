@@ -4,7 +4,7 @@ import type { DefineLocaleMessage, Locale } from "vue-i18n";
 
 export interface EVSBallot {
   activities: string[];
-  trackingCode: string;
+  ballotCode: string;
   status: string;
 }
 

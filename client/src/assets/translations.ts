@@ -431,7 +431,7 @@ export const fallbackMessages: SpreadableDLM = {
       },
       tracked_ballot_manager: {
         currently_tracking: "You are currently tracking",
-        cancel_cross_label: "Cancel tracking {trackingCode}",
+        cancel_cross_label: "Cancel tracking {ballotCode}",
       },
       timedown: {
         expire_text: "The passkey will expire in {time}",

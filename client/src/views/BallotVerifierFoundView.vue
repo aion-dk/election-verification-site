@@ -66,7 +66,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="VerificationFound" aria-flowto="current-tracking-code">
+  <div class="VerificationFound" aria-flowto="current-ballot-code">
     <ContentLayout
       :help-title="$t('views.ballot_finder.help.title')"
       :help-title-strong="$t('views.ballot_finder.help.title_strong')"
@@ -74,7 +74,7 @@ onMounted(async () => {
       :breadcrumb="`${$t('header.find')} / ${$t('breadcrumbs.ballot_found')}`"
     >
       <template v-slot:action>
-        <TrackedBallotManager :tracking-code="ballotCode" @cancel="cancel" />
+        <TrackedBallotManager :ballot-code="ballotCode" @cancel="cancel" />
 
         <MainIcon icon="envelope-open-text" />
         <h3 class="VerificationFound__Title">

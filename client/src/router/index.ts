@@ -52,7 +52,7 @@ const router = createRouter({
     },
     {
       name: "BallotTrackerView",
-      path: "/:locale/:organisationSlug/:electionSlug/track/:trackingCode",
+      path: "/:locale/:organisationSlug/:electionSlug/track/:ballotCode",
       component: BallotTrackerView,
     },
     {

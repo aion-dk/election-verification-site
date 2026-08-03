@@ -12,6 +12,7 @@ export default defineStore("verificationStore", () => {
   const ballotAddress = ref(null);
   const ballotCode = ref(null);
   const pairingCode = ref(null);
+  // The Base58 tracking code, i.e. the short code of the cast request item.
   const trackingCode = ref(null);
   const ballot = ref(null);
   const ballotStatus = ref<EVSBallot>(null);
@@ -37,9 +38,9 @@ export default defineStore("verificationStore", () => {
     trackingCode.value = code;
   }
 
-  async function findBallot(verificationCode: string) {
-    ballotCode.value = verificationCode;
-    ballotAddress.value = await avVerifier.value.findBallot(verificationCode);
+  async function findBallot(ballotCode: string) {
+    ballotCode.value = ballotCode;
+    ballotAddress.value = await avVerifier.value.findBallot(ballotCode);
   }
 
   async function generatePairingCode() {
@@ -75,7 +76,7 @@ export default defineStore("verificationStore", () => {
       const res = await avVerifier.value.checkBallotStatus(trackingCode.value);
 
       ballotStatus.value = {
-        trackingCode: trackingCode.value,
+        ballotCode: ballotCode.value,
         status: res.status,
         activities: (res.activities as any).reverse(),
       };

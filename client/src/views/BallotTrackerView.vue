@@ -23,7 +23,7 @@ const cancel = () => {
 };
 
 onMounted(async () => {
-  ballotCode.value = route.params.trackingCode.toString();
+  ballotCode.value = route.params.ballotCode.toString();
   if (!verificationStore.trackingCode) {
     try {
       verificationStore.reset();
@@ -45,7 +45,7 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="BallotTracker" v-if="ballot" aria-flowto="current-tracking-code">
+  <div class="BallotTracker" v-if="ballot" aria-flowto="current-ballot-code">
     <ContentLayout
       :help-title="$t('views.tracker.help.title')"
       :help-title-strong="$t('views.tracker.help.title_strong')"
@@ -53,7 +53,7 @@ onMounted(async () => {
       :logo="configStore.electionStatus?.theme?.logo"
     >
       <template v-slot:action>
-        <TrackedBallotManager :tracking-code="ballotCode" @cancel="cancel" />
+        <TrackedBallotManager :ballot-code="ballotCode" @cancel="cancel" />
 
         <h3 class="BallotTracker__Title">
           {{ $t("views.tracker.info.title") }}

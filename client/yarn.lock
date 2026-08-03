@@ -66,10 +66,10 @@
     vue "^3.5.29"
     vue-i18n "^11.2.8"
 
-"@assemblyvoting/js-client@7.0.0-alpha.0":
-  version "7.0.0-alpha.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-7.0.0-alpha.0.tgz#baf4bf6ae5fa6de379ad0c0330c420e1b6def763"
-  integrity sha512-HFbKhuDNihBTO5uE/dBW55tHqXQWmhxtKfSAcherGE9j5nb4p8YU4W6l2e57qA97FMYhcVjfKnl5cFn6uUurGg==
+"@assemblyvoting/js-client@7.0.0-alpha.2":
+  version "7.0.0-alpha.2"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-7.0.0-alpha.2.tgz#18045ece2bc4a4cd73c6051018e98ec31d1a9923"
+  integrity sha512-IDxZppfJivf8djr4dxe1nukOx3Hox2RF26o59oYwU8EJb6Ktp8GTaajle5mRtKpieLcUBLpxDIHVKZjHQY22LA==
   dependencies:
     "@assemblyvoting/av-crypto" "^1.3.0"
     "@noble/curves" "^2.2.0"
@@ -82,15 +82,15 @@
     util "^0.12.5"
     xml-js "^1.6.11"
 
+"@assemblyvoting/types@1.2.0-alpha.0":
+  version "1.2.0-alpha.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.2.0-alpha.0.tgz#0e2077b0733f7f2512542eb53a47dd593f2909df"
+  integrity sha512-zrQJKlV9Pk6TMIb751ke1eddbRtPNmavX/LIJfj0+nRMuYXr2ICtBFQ+N5nsTTJ7BNKyBUBwQEl4fIAsSIEeqw==
+
 "@assemblyvoting/types@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.6.tgz#d9969ffcf22d01788f8b9ceff8f214a4929d6971"
   integrity sha512-igYESo5H7Q2zIzN89RT7G/zb+sQ9DH2QhdGb0xmANRJSLNUv1+JQVSNcgsC6mEW0d1ztEcg6eq6+b0+jpfyVsg==
-
-"@assemblyvoting/types@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.8.tgz#1dd6f9feffedc48a6f6e4df1eaaeffcc2aebaf77"
-  integrity sha512-OFx5sstNMWakC6M7XjOIIeEL4V5chfwcfbjeCWV7OVHNYPm72UMf6UkYImxhPSYrczl4V7F1+B2XjrxuDce0Fg==
 
 "@axe-core/playwright@^4.12.1":
   version "4.12.1"

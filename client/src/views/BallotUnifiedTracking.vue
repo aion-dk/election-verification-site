@@ -59,6 +59,8 @@ const updateReceipt = async (files: File[]) => {
           return;
         }
 
+        // This exists for backward compatibility reasons.
+        // Legacy receipts contain a "trackingCode" instead of the "ballotCode" attribute.
         if (receiptExtractor.trackingCode) {
           await receiptWithTrackingCode(
             receiptExtractor.receipt,
@@ -102,6 +104,8 @@ const receiptWithBallotCode = async (receipt: string, ballotCode: string) => {
   }
 };
 
+// This exists for backward compatibility reasons.
+// Legacy receipts contain a "trackingCode" instead of the "ballotCode" attribute.
 const receiptWithTrackingCode = async (
   receipt: string,
   trackingCode: string,

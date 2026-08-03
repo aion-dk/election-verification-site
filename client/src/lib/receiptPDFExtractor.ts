@@ -3,6 +3,8 @@ import { PDFDict, PDFDocument, PDFHexString, PDFName } from "pdf-lib";
 export class ReceiptPDFExtractor {
   private readonly file: File;
   public receipt: string;
+  // Legacy receipts (before `BallotBoxReceipt.trackingCode` was renamed to `ballotCode`)
+  // carry a "TrackingCode" attribute instead of a "BallotCode" one.
   public trackingCode: string;
   public ballotCode: string;
 
