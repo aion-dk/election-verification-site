@@ -66,10 +66,10 @@
     vue "^3.5.29"
     vue-i18n "^11.2.8"
 
-"@assemblyvoting/js-client@7.0.0-alpha.2":
-  version "7.0.0-alpha.2"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-7.0.0-alpha.2.tgz#18045ece2bc4a4cd73c6051018e98ec31d1a9923"
-  integrity sha512-IDxZppfJivf8djr4dxe1nukOx3Hox2RF26o59oYwU8EJb6Ktp8GTaajle5mRtKpieLcUBLpxDIHVKZjHQY22LA==
+"@assemblyvoting/js-client@7.0.0-alpha.3":
+  version "7.0.0-alpha.3"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-7.0.0-alpha.3.tgz#777614b589f442da82550006a86560d69a230781"
+  integrity sha512-Md3OhVl7S7D1gLgavKpwyiCLUuWgWv5UmtTwhiI8h/E2ZurJ0j/KvdzxVE03gKlBAwknziZ1EVBZUuZHr6AvNQ==
   dependencies:
     "@assemblyvoting/av-crypto" "^1.3.0"
     "@noble/curves" "^2.2.0"
