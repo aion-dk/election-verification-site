@@ -38,9 +38,9 @@ export default defineStore("verificationStore", () => {
     trackingCode.value = code;
   }
 
-  async function findBallot(ballotCode: string) {
-    ballotCode.value = ballotCode;
-    ballotAddress.value = await avVerifier.value.findBallot(ballotCode);
+  async function findBallot(code: string) {
+    ballotCode.value = code;
+    ballotAddress.value = await avVerifier.value.findBallot(code);
   }
 
   async function generatePairingCode() {
