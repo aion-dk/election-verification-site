@@ -35,7 +35,9 @@ async function checkForTrackingCode(store: any) {
 }
 
 const cancel = () => {
-  router.push(`/${i18n.global.locale}/${configStore.boardSlug}/verify`);
+  router.push(
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/find`,
+  );
 };
 
 watch(verificationStore, async (store) => {

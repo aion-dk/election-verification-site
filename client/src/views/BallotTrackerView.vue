@@ -18,7 +18,7 @@ const ballotCode = ref(null);
 
 const cancel = () => {
   router.push(
-    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`,
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/find`,
   );
 };
 
