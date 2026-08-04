@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import useConfigStore from "../stores/useConfigStore";
 import router from "../router";
-import { onMounted, ref } from "vue";
+import { computed, onMounted, ref } from "vue";
 import { useRoute } from "vue-router";
 import useVerificationStore from "../stores/useVerificationStore";
 import Timedown from "@/components/Timedown.vue";
@@ -15,6 +15,59 @@ const verificationStore = useVerificationStore();
 const route = useRoute();
 const showAlert = ref<boolean>(false);
 const modal = ref<any>(null);
+
+const sortedBallot = computed(() => {
+  const ballot = verificationStore.ballot;
+  if (!ballot) return ballot;
+
+  const latestConfig = configStore.latestConfig;
+  if (!latestConfig) return ballot;
+
+  const ballotReferences = new Set(ballot.map((cs) => cs.reference));
+
+  const ballotConfigs = latestConfig.ballotConfigs;
+  const ballotConfigArray = Object.values(ballotConfigs ?? {});
+  const ballotConfig =
+    ballotConfigArray.find(
+      (bc) =>
+        bc.content.contestReferences?.length === ballotReferences.size &&
+        [...ballotReferences].every((ref) =>
+          bc.content.contestReferences?.includes(ref),
+        ),
+    ) ??
+    ballotConfigArray.find((bc) =>
+      [...ballotReferences].every((ref) =>
+        bc.content.contestReferences?.includes(ref),
+      ),
+    );
+
+  const baseOrder = ballotConfig?.content.contestReferences ?? [
+    ...ballotReferences,
+  ];
+  const orderMap = new Map(baseOrder.map((ref, index) => [ref, index]));
+
+  const votingRoundConfigs = latestConfig.votingRoundConfigs;
+  const votingRoundArray = Object.values(votingRoundConfigs ?? {});
+  const votingRound =
+    votingRoundArray.find((vr) =>
+      [...ballotReferences].every((ref) =>
+        vr.content.contestReferences?.includes(ref),
+      ),
+    ) ??
+    votingRoundArray.find((vr) =>
+      vr.content.contestReferences?.some((ref) => ballotReferences.has(ref)),
+    );
+  const positions = votingRound?.content?.contestPositions;
+
+  return [...ballot].sort((a, b) => {
+    const posA = positions?.[a.reference] ?? Infinity;
+    const posB = positions?.[b.reference] ?? Infinity;
+
+    if (posA !== posB) return posA - posB;
+
+    return (orderMap.get(a.reference) ?? 0) - (orderMap.get(b.reference) ?? 0);
+  });
+});
 
 const redirectUnlessPairingCode = () => {
   if (!verificationStore.pairingCode) cancel();
@@ -48,7 +101,7 @@ onMounted(() => {
 <template>
   <div class="BallotVerifier">
     <Timedown
-      v-if="!verificationStore.ballot"
+      v-if="!sortedBallot"
       :maxSeconds="configStore.election.bcTimeout"
       :currentSeconds="configStore.election.bcTimeout"
       @alert="setAlert"
@@ -61,7 +114,7 @@ onMounted(() => {
       :logo="configStore.electionStatus?.theme?.logo"
     >
       <template v-slot:action>
-        <div v-if="verificationStore.ballot" class="BallotVerifier__Content">
+        <div v-if="sortedBallot" class="BallotVerifier__Content">
           <MainIcon icon="spell-check" />
           <h3 class="BallotVerifier__Title_Secondary">
             {{ $t("views.verifier.spoiled.title") }}
@@ -74,7 +127,7 @@ onMounted(() => {
           </p>
 
           <BallotVerifierContest
-            v-for="(contestSelection, index) in verificationStore.ballot"
+            v-for="(contestSelection, index) in sortedBallot"
             :key="contestSelection.reference"
             :contest-selection="contestSelection"
             :index="index"
@@ -125,7 +178,7 @@ onMounted(() => {
         </div>
       </template>
       <template v-slot:help>
-        <div v-if="verificationStore.ballot">
+        <div v-if="sortedBallot">
           <AVIcon
             icon="check"
             class="BallotVerifier__Help_Icon text-contrast"

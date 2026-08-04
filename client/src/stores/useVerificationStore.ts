@@ -1,7 +1,7 @@
 import { defineStore } from "pinia";
 import { ref } from "vue";
 import useAVVerifier from "../lib/useAVVerifier";
-import type { EVSBallot } from "@/Types";
+import type { ContestSelection, EVSBallot } from "@/Types";
 
 export default defineStore("verificationStore", () => {
   const setupAVVerifier = async (boardSlug: string) => {
@@ -14,7 +14,7 @@ export default defineStore("verificationStore", () => {
   const pairingCode = ref(null);
   // The Base58 tracking code, i.e. the short code of the cast request item.
   const trackingCode = ref(null);
-  const ballot = ref(null);
+  const ballot = ref<ContestSelection[] | null>(null);
   const ballotStatus = ref<EVSBallot>(null);
 
   async function decryptWhenAvailable() {
