@@ -7,6 +7,7 @@ import LogsView from "../views/LogsView.vue";
 import HelpView from "../views/HelpView.vue";
 import BallotUnifiedTracking from "../views/BallotUnifiedTracking.vue";
 import ReceiptErrorView from "../views/ReceiptErrorView.vue";
+import Welcome from "@/views/Welcome.vue";
 
 const router = createRouter({
   history: createWebHistory(),
@@ -23,14 +24,7 @@ const router = createRouter({
     {
       name: "Welcome",
       path: "/:locale/:organisationSlug/:electionSlug",
-      redirect: (to) => ({
-        name: "BallotFinder",
-        params: {
-          locale: to.params.locale,
-          organisationSlug: to.params.organisationSlug,
-          electionSlug: to.params.electionSlug,
-        },
-      }),
+      component: Welcome,
     },
     {
       name: "BallotFinder",
