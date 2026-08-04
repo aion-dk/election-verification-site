@@ -19,6 +19,8 @@ const configStore = useConfigStore();
 const verificationStore = useVerificationStore();
 const route = useRoute();
 
+const ready = ref(false);
+
 const ballotCode = ref(null);
 
 const receipt = ref(null);
@@ -170,6 +172,8 @@ async function checkForTrackingCode(store: any) {
 }
 
 watch(verificationStore, async (newStore) => {
+  if (!ready.value) return;
+
   await checkForPairingCode(newStore);
   await checkForTrackingCode(newStore);
 });
@@ -178,6 +182,7 @@ onMounted(async () => {
   receiptStore.reset();
   verificationStore.reset();
   await verificationStore.setupAVVerifier(configStore.boardSlug);
+  ready.value = true;
   (document.querySelector("#unified-code") as HTMLInputElement)?.focus();
 });
 </script>
