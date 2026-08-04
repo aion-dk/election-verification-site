@@ -26,8 +26,8 @@
   },
   "dependencies": {
     "@assemblyvoting/electa-ui": "5.7.2-ontario",
-    "@assemblyvoting/js-client": "^6.3.0",
-    "axios": "^1.17.0",
+    "@assemblyvoting/js-client": "^7.0.0",
+    "axios": "^1.18.1",
     "date-fns": "^4.4.0",
     "date-fns-tz": "^3.2.0",
     "dompurify": "^3.4.8",
@@ -42,8 +42,8 @@
     "vue-tsc": "^3.3.4"
   },
   "devDependencies": {
-    "@assemblyvoting/types": "^1.0.6",
-    "@axe-core/playwright": "^4.11.3",
+    "@assemblyvoting/types": "^1.2.0",
+    "@axe-core/playwright": "^4.12.1",
     "@pinia/testing": "^1.0.3",
     "@playwright/test": "^1.60.0",
     "@rushstack/eslint-patch": "^1.10.5",
