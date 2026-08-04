@@ -445,7 +445,7 @@ export const fallbackMessages: SpreadableDLM = {
       welcome: {
         title: "Election Verification Site",
         description:
-            "This site provides overview of the election, allows voters to follow and verify their ballot and provides a file for the auditors.",
+          "This site provides overview of the election, allows voters to follow and verify their ballot and provides a file for the auditors.",
         splash_alt: "Election splash screen",
         ballot_finder: {
           title: "Find your ballot",
@@ -456,10 +456,10 @@ export const fallbackMessages: SpreadableDLM = {
           title: "About this site",
           ballot_finder: "Ballot Tester",
           ballot_finder_text:
-              "Use this tab to independently verify that your ballot is recorded and sealed correctly in the digital ballot box. Verifying your ballot is an important step in ensuring end-to-end verifiability as it verifies that the ballot is cast as intended and registered as cast.",
+            "Use this tab to independently verify that your ballot is recorded and sealed correctly in the digital ballot box. Verifying your ballot is an important step in ensuring end-to-end verifiability as it verifies that the ballot is cast as intended and registered as cast.",
           audit_log: "Audit Log",
           audit_log_text:
-              "Election audit log is a representation of the digital ballot box and serves as a public audit of the election. Auditing this log verifies that all ballots submitted to the digital ballot box are counted as registered and that integrity of the election has been held.",
+            "Election audit log is a representation of the digital ballot box and serves as a public audit of the election. Auditing this log verifies that all ballots submitted to the digital ballot box are counted as registered and that integrity of the election has been held.",
         },
       },
       ballot_finder: {

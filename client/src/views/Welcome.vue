@@ -9,7 +9,7 @@ const route = useRoute();
 
 const goToBallotFinder = () => {
   router.push(
-      `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/find`,
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/find`,
   );
 };
 </script>
@@ -48,13 +48,13 @@ const goToBallotFinder = () => {
     <section id="main_content" class="Welcome__Content">
       <div class="Welcome__Heading_Content">
         <div
-            class="Welcome__Card Welcome__Card_Overrides Welcome__Card_Desktop"
+          class="Welcome__Card Welcome__Card_Overrides Welcome__Card_Desktop"
         >
           <div class="Welcome__Card_Item">
             <AVIcon
-                icon="magnifying-glass"
-                class="Welcome__Card_Icon"
-                aria-hidden="true"
+              icon="magnifying-glass"
+              class="Welcome__Card_Icon"
+              aria-hidden="true"
             />
             <div>
               <h3 class="Welcome__Card_Title">
@@ -64,11 +64,11 @@ const goToBallotFinder = () => {
                 {{ $t("views.welcome.ballot_finder.description") }}
               </p>
               <button
-                  class="btn btn-theme w-100 rounded-3 Welcome__Button"
-                  type="button"
-                  name="find-ballot"
-                  id="find-ballot"
-                  @click="goToBallotFinder()"
+                class="btn btn-theme w-100 rounded-3 Welcome__Button"
+                type="button"
+                name="find-ballot"
+                id="find-ballot"
+                @click="goToBallotFinder()"
               >
                 {{ $t("views.welcome.ballot_finder.button") }}
               </button>
