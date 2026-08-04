@@ -108,7 +108,7 @@ onMounted(() => {
       @timeout="setModal"
     />
     <ContentLayout
-      :breadcrumb="$t('views.verification.title')"
+      :breadcrumb="$t('views.ballot_finder.title')"
       :help-title="$t('views.verifier.inprogress.help.title')"
       :help-title-strong="$t('views.verifier.inprogress.help.title_strong')"
       :logo="configStore.electionStatus?.theme?.logo"

@@ -16,7 +16,9 @@ const route = useRoute();
 const steps = [1, 2];
 
 const translationPath = computed(() =>
-  receiptStore.receiptValid ? "vote_not_found" : "receipt_invalid",
+  receiptStore.receiptValid && !receiptStore.trackingCodeMatching
+    ? "vote_not_found"
+    : "receipt_invalid",
 );
 
 const contactUrl = computed(
@@ -67,8 +69,8 @@ const buttons = computed(() => {
 
 <template>
   <ContentLayout
-    :help-title="$t('views.tracking.help.title')"
-    :help-title-strong="$t('views.tracking.help.title_strong')"
+    :help-title="$t('views.ballot_finder.help.title')"
+    :help-title-strong="$t('views.ballot_finder.help.title_strong')"
     :logo="configStore.electionStatus?.theme?.logo"
   >
     <template v-slot:action>
@@ -114,7 +116,7 @@ const buttons = computed(() => {
       >
         <span class="ReceiptError__Step_Index">{{ step }}</span>
         <p
-          v-html="$t(`views.tracking.help.steps.step_${step}`)"
+          v-html="$t(`views.ballot_finder.help.steps.step_${step}`)"
           class="ReceiptError__Step_Text text-contrast"
         />
       </div>

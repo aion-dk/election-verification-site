@@ -66,10 +66,10 @@
     vue "^3.5.29"
     vue-i18n "^11.2.8"
 
-"@assemblyvoting/js-client@^6.5.0":
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-6.5.0.tgz#338c0267c52549d539f8b6c1e0678e2856273f99"
-  integrity sha512-fMiLANjQojnDJqApr8rRfJ1CnrI7R9L6p+ijotBgnH20vVigTGfdx7lqigadtU5PPbA7DkA1VXXiep2AeHVUoA==
+"@assemblyvoting/js-client@^7.0.0":
+  version "7.0.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/js-client/-/js-client-7.0.0.tgz#5938c7d1a305e2aa5a0e53b687671adfbc40a099"
+  integrity sha512-Fqmv6OHE4+4hvW0a0j1SiChxw5SPZEuBOGkzoanqtOep1IvmIWLY0ExcI17JdN1Jm4FP1N8kXAq8GUB5bib+9g==
   dependencies:
     "@assemblyvoting/av-crypto" "^1.3.0"
     "@noble/curves" "^2.2.0"
@@ -87,10 +87,10 @@
   resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.6.tgz#d9969ffcf22d01788f8b9ceff8f214a4929d6971"
   integrity sha512-igYESo5H7Q2zIzN89RT7G/zb+sQ9DH2QhdGb0xmANRJSLNUv1+JQVSNcgsC6mEW0d1ztEcg6eq6+b0+jpfyVsg==
 
-"@assemblyvoting/types@^1.0.8":
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.8.tgz#1dd6f9feffedc48a6f6e4df1eaaeffcc2aebaf77"
-  integrity sha512-OFx5sstNMWakC6M7XjOIIeEL4V5chfwcfbjeCWV7OVHNYPm72UMf6UkYImxhPSYrczl4V7F1+B2XjrxuDce0Fg==
+"@assemblyvoting/types@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.2.0.tgz#7857f9ec394420a4ad9d1dad1b0afbbf89be0d71"
+  integrity sha512-9Bv/3yiwEluuRF6JRfRcmsV2HdRh21RnG+tvmhBK7H1E3VaGz4SlW2aCcy16RGkXGX88obM7tN6Rc0wv+3c6Qw==
 
 "@axe-core/playwright@^4.12.1":
   version "4.12.1"
@@ -2339,9 +2339,9 @@ jackspeak@^3.1.2:
     "@pkgjs/parseargs" "^0.11.0"
 
 jose@^6.2.3:
-  version "6.2.3"
-  resolved "https://registry.yarnpkg.com/jose/-/jose-6.2.3.tgz#0975197ad973251221c658a3cddc4b951a250c2d"
-  integrity sha512-YYVDInQKFJfR/xa3ojUTl8c2KoTwiL1R5Wg9YCydwH0x0B9grbzlg5HC7mMjCtUJjbQ/YnGEZIhI5tCgfTb4Hw==
+  version "6.2.4"
+  resolved "https://registry.yarnpkg.com/jose/-/jose-6.2.4.tgz#69de7346761cd04942c659e524d988feb16a4a6e"
+  integrity sha512-N8acGzVsQy6M/fjFcxtysNc4Q379TcM5dM/qKkNtsHFji88yANnXTr7BLeP75iPnFwBfQzM/jg2BZ9+HZrHCZA==
 
 js-beautify@^1.14.9:
   version "1.15.4"
@@ -3017,7 +3017,16 @@ stream-browserify@^3.0.0:
     inherits "~2.0.4"
     readable-stream "^3.5.0"
 
-"string-width-cjs@npm:string-width@^4.2.0", string-width@^4.1.0:
+"string-width-cjs@npm:string-width@^4.2.0":
+  version "4.2.3"
+  resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
+  integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
+  dependencies:
+    emoji-regex "^8.0.0"
+    is-fullwidth-code-point "^3.0.0"
+    strip-ansi "^6.0.1"
+
+string-width@^4.1.0:
   version "4.2.3"
   resolved "https://registry.yarnpkg.com/string-width/-/string-width-4.2.3.tgz#269c7117d27b05ad2e536830a8ec895ef9c6d010"
   integrity sha512-wKyQRQpjJ0sIp62ErSZdGsjMJWsap5oRNihHhu6G7JVO/9jIB6UyevL+tXuOqrng8j/cxKTWyWUwvSTriiZz/g==
@@ -3042,7 +3051,14 @@ string_decoder@^1.1.1:
   dependencies:
     safe-buffer "~5.2.0"
 
-"strip-ansi-cjs@npm:strip-ansi@^6.0.1", strip-ansi@^6.0.0, strip-ansi@^6.0.1:
+"strip-ansi-cjs@npm:strip-ansi@^6.0.1":
+  version "6.0.1"
+  resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
+  integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
+  dependencies:
+    ansi-regex "^5.0.1"
+
+strip-ansi@^6.0.0, strip-ansi@^6.0.1:
   version "6.0.1"
   resolved "https://registry.yarnpkg.com/strip-ansi/-/strip-ansi-6.0.1.tgz#9e26c63d30f53443e9489495b2105d37b67a85d9"
   integrity sha512-Y38VPSHcqkFrCpFnQ9vuSXmquuv5oXOKpGeT6aGrr3o3Gc9AlVa6JBfUSOCnbxGGZF+/0ooI7KrPuUSztUdU5A==
@@ -3198,7 +3214,7 @@ undici-types@~8.3.0:
   resolved "https://registry.yarnpkg.com/undici-types/-/undici-types-8.3.0.tgz#44e9fc9f3244648cdea35e4f9bb2d681e9410809"
   integrity sha512-j375ScV60dom+YkPFIfTLcOiPxkN/buHz5GobjLhixFuANaNs3C9l4GmrWqejgXWJ7BbJcFYpTEUkS1Ge8bpZQ==
 
-undici@^7.21.0, undici@^7.28.0:
+undici@7.28.0, undici@^7.21.0:
   version "7.28.0"
   resolved "https://registry.yarnpkg.com/undici/-/undici-7.28.0.tgz#97d64564198b285bc281f0e8e29597e3d11fe7ec"
   integrity sha512-cRZYrTDwWznlnRiPjggAGxZXanty6M8RV1ff8Wm4LWXBp7/IG8v5DnOm74DtUBp9OONpK75YlPnIjQqX0dBDtA==
