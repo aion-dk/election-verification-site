@@ -13,8 +13,7 @@ const i18n = useI18n();
 
 const customFooterHtml = computed(() => {
   const cosmetics = electionStatus.value?.cosmetics as
-    | CustomCosmetics
-    | undefined;
+    CustomCosmetics | undefined;
   const rawFooterHtml = cosmetics?.footerHtml;
   if (!rawFooterHtml) return null;
 
