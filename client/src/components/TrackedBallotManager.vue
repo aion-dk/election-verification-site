@@ -1,6 +1,6 @@
 <script setup lang="ts">
 defineProps({
-  trackingCode: {
+  ballotCode: {
     type: [String, null],
     required: true,
   },
@@ -16,8 +16,8 @@ const cancel = () => {
 <template>
   <div class="BallotManager">
     <div class="BallotManager__Tracking_Container">
-      <code class="BallotManager__Tracking_Code" id="current-tracking-code">{{
-        trackingCode
+      <code class="BallotManager__Tracking_Code" id="current-ballot-code">{{
+        ballotCode
       }}</code>
       <button
         class="BallotManager__Cancel"
@@ -25,7 +25,7 @@ const cancel = () => {
         data-testid="cancel"
         :aria-label="
           $t('components.tracked_ballot_manager.cancel_cross_label', {
-            trackingCode: trackingCode,
+            ballotCode: ballotCode,
           })
         "
       >
