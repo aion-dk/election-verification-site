@@ -6,6 +6,10 @@ import {
   foundBallotStatus,
   boardItemsPage1,
   boardItemsPage2,
+  ballotLookup,
+  ballotDecisionCast,
+  ballotDecisionSpoil,
+  submitVerifier,
 } from "./mocks";
 
 const BASE_PATH = "/en/organisation_slug/election_slug";
@@ -66,7 +70,7 @@ test.describe("Welcome page", () => {
 test.describe("Ballot Verification page", () => {
   test("initial render has no WCAG violations", async ({ page }) => {
     await setupCommonMocks(page);
-    await page.goto(`${BASE_PATH}/verify`);
+    await page.goto(`${BASE_PATH}/find`);
     await analyzeAccessibility(page);
   });
 
@@ -74,30 +78,38 @@ test.describe("Ballot Verification page", () => {
     page,
   }) => {
     await setupCommonMocks(page, (url) => {
-      if (
-        url.indexOf("organisation_slug/election_slug/verification/vote_track") >
-        0
-      ) {
+      if (url.indexOf("board_slug/verification/vote_track") > 0) {
         return {
           status: 200,
           contentType: "application/json",
-          body: JSON.stringify({ status: "found" }),
+          body: JSON.stringify(ballotLookup),
+        };
+      }
+      if (url.indexOf("board_slug/verification/spoil_status") > 0) {
+        return {
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify(ballotDecisionSpoil),
+        };
+      }
+      if (url.indexOf("board_slug/verification/verifiers") > 0) {
+        return {
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify(submitVerifier),
         };
       }
       return null;
     });
-    await page.goto(`${BASE_PATH}/verify`);
-    await page.getByPlaceholder("Testing code").fill("5ksv8Ee");
-    await page.getByRole("button", { name: "Start the Test" }).click();
+    await page.goto(`${BASE_PATH}/find`);
+    await page.locator("#unified-code").fill("5ksv8Ee");
+    await page.getByRole("button", { name: "Find my ballot" }).click();
     await analyzeAccessibility(page);
   });
 
   test("invalid code error state has no WCAG violations", async ({ page }) => {
     await setupCommonMocks(page, (url) => {
-      if (
-        url.indexOf("organisation_slug/election_slug/verification/vote_track") >
-        0
-      ) {
+      if (url.indexOf("board_slug/verification/vote_track") > 0) {
         return {
           status: 404,
           contentType: "application/json",
@@ -106,24 +118,30 @@ test.describe("Ballot Verification page", () => {
       }
       return null;
     });
-    await page.goto(`${BASE_PATH}/verify`);
-    await page.locator("#verification-code").fill("invalid-code");
-    await page.getByRole("button", { name: "Start the Test" }).click();
+    await page.goto(`${BASE_PATH}/find`);
+    await page.locator("#unified-code").fill("invalid-code");
+    await page.getByRole("button", { name: "Find my ballot" }).click();
     await analyzeAccessibility(page);
   });
 });
 
 test.describe("Ballot Tracking page", () => {
-  test("initial render has no WCAG violations", async ({ page }) => {
-    await setupCommonMocks(page);
-    await page.goto(`${BASE_PATH}/track`);
-    await analyzeAccessibility(page);
-  });
-
-  test("after tracking a valid ballot has no WCAG violations", async ({
-    page,
-  }) => {
-    await setupCommonMocks(page, (url) => {
+  const setupTrackingMocks = (page: Page) =>
+    setupCommonMocks(page, (url) => {
+      if (url.indexOf("board_slug/verification/vote_track") > 0) {
+        return {
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify(ballotLookup),
+        };
+      }
+      if (url.indexOf("board_slug/verification/spoil_status") > 0) {
+        return {
+          status: 200,
+          contentType: "application/json",
+          body: JSON.stringify(ballotDecisionCast),
+        };
+      }
       if (url.indexOf("board_slug/ballot_status") > 0) {
         return {
           status: 200,
@@ -133,46 +151,25 @@ test.describe("Ballot Tracking page", () => {
       }
       return null;
     });
-    await page.goto(`${BASE_PATH}/track`);
-    await page.locator("#tracking-code").fill("5ksv8Ee");
-    await page.getByRole("button", { name: "Track my ballot" }).click();
+
+  test("initial render has no WCAG violations", async ({ page }) => {
+    await setupTrackingMocks(page);
+    await page.goto(`${BASE_PATH}/track/5ksv8Ee`);
     await analyzeAccessibility(page);
   });
 
   test("after expanding activity section has no WCAG violations", async ({
     page,
   }) => {
-    await setupCommonMocks(page, (url) => {
-      if (url.indexOf("board_slug/ballot_status") > 0) {
-        return {
-          status: 200,
-          contentType: "application/json",
-          body: JSON.stringify(foundBallotStatus),
-        };
-      }
-      return null;
-    });
-    await page.goto(`${BASE_PATH}/track`);
-    await page.locator("#tracking-code").fill("5ksv8Ee");
-    await page.getByRole("button", { name: "Track my ballot" }).click();
+    await setupTrackingMocks(page);
+    await page.goto(`${BASE_PATH}/track/5ksv8Ee`);
     await page.locator(".ExpandableSection__Expander").first().click();
     await analyzeAccessibility(page);
   });
 
   test("after canceling tracking has no WCAG violations", async ({ page }) => {
-    await setupCommonMocks(page, (url) => {
-      if (url.indexOf("board_slug/ballot_status") > 0) {
-        return {
-          status: 200,
-          contentType: "application/json",
-          body: JSON.stringify(foundBallotStatus),
-        };
-      }
-      return null;
-    });
-    await page.goto(`${BASE_PATH}/track`);
-    await page.locator("#tracking-code").fill("5ksv8Ee");
-    await page.getByRole("button", { name: "Track my ballot" }).click();
+    await setupTrackingMocks(page);
+    await page.goto(`${BASE_PATH}/track/5ksv8Ee`);
     await page.getByRole("button", { name: "Cancel tracking 5ksv8Ee" }).click();
     await analyzeAccessibility(page);
   });
@@ -181,7 +178,7 @@ test.describe("Ballot Tracking page", () => {
     page,
   }) => {
     await setupCommonMocks(page, (url) => {
-      if (url.indexOf("board_slug/ballot_status") > 0) {
+      if (url.indexOf("board_slug/verification/vote_track") > 0) {
         return {
           status: 404,
           contentType: "application/json",
@@ -190,9 +187,7 @@ test.describe("Ballot Tracking page", () => {
       }
       return null;
     });
-    await page.goto(`${BASE_PATH}/track`);
-    await page.locator("#tracking-code").fill("abcdef");
-    await page.getByRole("button", { name: "Track my ballot" }).click();
+    await page.goto(`${BASE_PATH}/track/abcdef`);
     await analyzeAccessibility(page);
   });
 });

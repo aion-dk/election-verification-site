@@ -5,7 +5,7 @@ import { mountForA11y } from "../test-utils/a11y";
 
 test("has no accessibility violations with tracking code", async () => {
   const wrapper = await mountForA11y(TrackedBallotManager, {
-    props: { trackingCode: "ABDCEF" },
+    props: { ballotCode: "ABDCEF" },
   });
   const results = await axe(wrapper.element);
   await expect(results).toHaveNoViolations();

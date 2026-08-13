@@ -7,7 +7,7 @@ import { fallbackMessages } from "../assets/translations";
 const neededStrings = JSON.stringify(fallbackMessages.en);
 const messages = { en: JSON.parse(neededStrings) };
 const i18n = createI18n({ messages });
-const props = { trackingCode: "ABDCEF", periodicedTrackingCode: "123456" };
+const props = { ballotCode: "ABDCEF" };
 
 test("displays correctly", async () => {
   const wrapper = mount(TrackedBallotManager, {

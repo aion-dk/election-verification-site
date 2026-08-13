@@ -3,7 +3,10 @@ import { PDFDict, PDFDocument, PDFHexString, PDFName } from "pdf-lib";
 export class ReceiptPDFExtractor {
   private readonly file: File;
   public receipt: string;
+  // Legacy receipts (before `BallotBoxReceipt.trackingCode` was renamed to `ballotCode`)
+  // carry a "TrackingCode" attribute instead of a "BallotCode" one.
   public trackingCode: string;
+  public ballotCode: string;
 
   constructor(file: File) {
     this.file = file;
@@ -23,12 +26,16 @@ export class ReceiptPDFExtractor {
     const trackingCode = infoDict.lookup(
       PDFName.of("TrackingCode"),
     ) as PDFHexString;
+    const ballotCode = infoDict.lookup(
+      PDFName.of("BallotCode"),
+    ) as PDFHexString;
 
-    if (receipt == null || trackingCode == null) {
+    if (receipt == null || (trackingCode == null && ballotCode == null)) {
       throw new Error("Invalid receipt file");
     }
 
     this.receipt = receipt.decodeText();
-    this.trackingCode = trackingCode.decodeText();
+    this.trackingCode = trackingCode?.decodeText();
+    this.ballotCode = ballotCode?.decodeText();
   }
 }

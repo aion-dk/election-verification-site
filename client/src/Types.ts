@@ -16,7 +16,7 @@ declare module "@assemblyvoting/types" {
 
 export interface EVSBallot {
   activities: string[];
-  trackingCode: string;
+  ballotCode: string;
   status: string;
 }
 

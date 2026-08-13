@@ -8,14 +8,9 @@ import PageTitle from "@/components/PageTitle.vue";
 const configStore = useConfigStore();
 const route = useRoute();
 
-const goToVerifier = () => {
+const goToBallotFinder = () => {
   router.push(
-    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/verify`,
-  );
-};
-const goToTracker = () => {
-  router.push(
-    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track`,
+    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/find`,
   );
 };
 </script>
@@ -42,70 +37,31 @@ const goToTracker = () => {
           class="Welcome__Card Welcome__Card_Overrides Welcome__Card_Desktop"
           id="welcome-cards"
         >
-          <div
-            v-if="!configStore.electionStatus?.canadianChallenge"
-            class="Welcome__Card_Item"
-            id="welcome-tester-card-item"
-          >
-            <AVIcon
-              icon="envelope-open-text"
-              class="Welcome__Card_Icon"
-              aria-hidden="true"
-              id="welcome-tester-icon"
-            />
-            <div id="welcome-tester-card-content">
-              <h2 class="Welcome__Card_Title" id="welcome-tester-title">
-                {{ $t("views.welcome.ballot_tester.title") }}
-              </h2>
-              <p
-                class="Welcome__Card_Description"
-                id="welcome-tester-description"
-              >
-                {{ $t("views.welcome.ballot_tester.description") }}
-              </p>
-              <button
-                class="btn btn-theme w-100 rounded-3 Welcome__Button"
-                type="button"
-                name="test-ballot"
-                id="test-ballot"
-                @click="goToVerifier"
-              >
-                {{ $t("views.welcome.ballot_tester.button") }}
-              </button>
-            </div>
-          </div>
-
-          <div
-            v-if="!configStore.electionStatus?.canadianChallenge"
-            class="Welcome__Card_Line"
-            id="welcome-card-divider"
-          />
-
-          <div class="Welcome__Card_Item" id="welcome-tracker-card-item">
+          <div class="Welcome__Card_Item" id="welcome-finder-card-item">
             <AVIcon
               icon="magnifying-glass"
               class="Welcome__Card_Icon"
               aria-hidden="true"
-              id="welcome-tracker-icon"
+              id="welcome-finder-icon"
             />
-            <div id="welcome-tracker-card-content">
-              <h2 class="Welcome__Card_Title" id="welcome-tracker-title">
-                {{ $t("views.welcome.ballot_tracker.title") }}
+            <div id="welcome-finder-card-content">
+              <h2 class="Welcome__Card_Title" id="welcome-finder-title">
+                {{ $t("views.welcome.ballot_finder.title") }}
               </h2>
               <p
                 class="Welcome__Card_Description"
-                id="welcome-tracker-description"
+                id="welcome-finder-description"
               >
-                {{ $t("views.welcome.ballot_tracker.description") }}
+                {{ $t("views.welcome.ballot_finder.description") }}
               </p>
               <button
                 class="btn btn-theme w-100 rounded-3 Welcome__Button"
                 type="button"
-                name="track-ballot"
-                id="track-ballot"
-                @click="goToTracker"
+                name="find-ballot"
+                id="find-ballot"
+                @click="goToBallotFinder()"
               >
-                {{ $t("views.welcome.ballot_tracker.button") }}
+                {{ $t("views.welcome.ballot_finder.button") }}
               </button>
             </div>
           </div>
@@ -127,32 +83,17 @@ const goToTracker = () => {
       </div>
       <div id="welcome-about-cards">
         <div
-          v-if="!configStore.electionStatus?.canadianChallenge"
           class="Welcome__Card Welcome__Card_Overrides"
-          id="welcome-about-tester-card"
+          id="welcome-about-finder-card"
         >
           <h3
             class="Welcome__About_Subtitle"
-            id="welcome-about-tester-subtitle"
+            id="welcome-about-finder-subtitle"
           >
-            {{ $t("views.welcome.about.ballot_tester") }}
+            {{ $t("views.welcome.about.ballot_finder") }}
           </h3>
-          <p class="Welcome__About_Description" id="welcome-about-tester-text">
-            {{ $t("views.welcome.about.ballot_tester_text") }}
-          </p>
-        </div>
-        <div
-          class="Welcome__Card Welcome__Card_Overrides"
-          id="welcome-about-tracker-card"
-        >
-          <h3
-            class="Welcome__About_Subtitle"
-            id="welcome-about-tracker-subtitle"
-          >
-            {{ $t("views.welcome.about.ballot_tracker") }}
-          </h3>
-          <p class="Welcome__About_Description" id="welcome-about-tracker-text">
-            {{ $t("views.welcome.about.ballot_tracker_text") }}
+          <p class="Welcome__About_Description" id="welcome-about-finder-text">
+            {{ $t("views.welcome.about.ballot_finder_text") }}
           </p>
         </div>
         <div
