@@ -22,21 +22,11 @@ const classes = computed(() => {
   <div :class="classes" :id="`board-item-${item.address}`">
     <ExpandableSection large :id="`board-item-section-${item.address}`">
       <template v-slot:collapsed>
-        <p
-          class="BoardItem__Type"
-          :aria-label="$t('components.board_item.aria_labels.activity_type')"
-          :id="`board-item-type-${item.address}`"
-        >
+        <p class="BoardItem__Type" :id="`board-item-type-${item.address}`">
           {{ $t(`components.board_item.${item.type}.type`) }}
         </p>
 
-        <p
-          class="BoardItem__Date"
-          :aria-label="
-            $t('components.board_item.aria_labels.activity_registered')
-          "
-          :id="`board-item-date-${item.address}`"
-        >
+        <p class="BoardItem__Date" :id="`board-item-date-${item.address}`">
           <AVIcon
             icon="clock"
             class="BoardItem__InlineIcon"
@@ -45,11 +35,7 @@ const classes = computed(() => {
           <DateTime :date-time="item.registeredAt" format="relative" />
         </p>
 
-        <p
-          class="BoardItem__Author"
-          :aria-label="$t('components.board_item.aria_labels.activity_author')"
-          :id="`board-item-author-${item.address}`"
-        >
+        <p class="BoardItem__Author" :id="`board-item-author-${item.address}`">
           <AVIcon
             icon="user"
             class="BoardItem__InlineIcon"

@@ -45,13 +45,14 @@ defineProps({
           <slot name="action" />
         </div>
       </section>
-      <!-- tabindex is required for keyboard-scrollable content in Safari (WCAG 2.1.1) -->
+      <!-- tabindex=-1 keeps the aside programmatically focusable/scrollable in Safari (WCAG 2.1.1) -->
+      <!-- without adding it to the tab order (complementary is a landmark, not a widget role) -->
       <!-- sonarqube-disable-next-line sonar/no-tabindex-on-non-interactive-elements -->
       <aside
         id="help-content-aside"
         class="ContentLayout__Help"
         :aria-label="$t('accessibility.help')"
-        tabindex="0"
+        tabindex="-1"
       >
         <h2 class="ContentLayout__Help_Title" id="content-layout-help-title">
           {{ helpTitle
