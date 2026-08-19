@@ -233,6 +233,7 @@ export const fallbackMessages: SpreadableDLM = {
       help: "FAQ",
       contact: "Contact",
       change_locale: {
+        label: "Switch language",
         en: "Switch to English",
         es: "Cambiar a Español",
         da: "Skift til Dansk",
@@ -539,7 +540,7 @@ export const fallbackMessages: SpreadableDLM = {
           title: "Ballot Registered",
           description: "Your vote has been registered in digital ballot box.",
           extended_description:
-            "Below you can see all the activity attached to the code you are tracking. You can learn more about each activity by opening it up and reading the description.",
+            "You can see all the activity attached to the code you are tracking. You can learn more about each activity by opening it up and reading the description.",
         },
         help: {
           title: "What's ",
@@ -800,6 +801,7 @@ export const fallbackMessages: SpreadableDLM = {
       help: "Preguntas Frecuentes",
       contact: "Contacto",
       change_locale: {
+        label: "Cambiar idioma",
         en: "Switch to English",
         es: "Cambiar a Español",
         da: "Skift til Dansk",

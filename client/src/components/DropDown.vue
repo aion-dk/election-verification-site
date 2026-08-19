@@ -27,11 +27,14 @@ defineProps({
 
 <template>
   <div :id="id || undefined" class="Dropdown__Container">
+    <label v-if="id" class="visually-hidden" :for="`${id}-select`">
+      {{ $t("header.change_locale.label") }}
+    </label>
     <select
       :disabled="disabled"
-      :aria-label="$t('header.change_locale.label')"
       @change="selectEmit"
       :id="id ? `${id}-select` : undefined"
+      :aria-label="id ? undefined : $t('header.change_locale.label')"
     >
       <option
         v-for="option in options"

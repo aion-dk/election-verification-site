@@ -18,21 +18,20 @@ defineProps({
   <div class="BallotActivity" :id="`ballot-activity-${index}`">
     <ExpandableSection :id="`ballot-activity-section-${index}`">
       <template v-slot:collapsed>
-        <p
-          class="BallotActivity__Type"
-          :aria-label="$t('components.board_item.aria_labels.activity_type')"
-          :id="`ballot-activity-type-${index}`"
-        >
+        <p class="BallotActivity__Type" :id="`ballot-activity-type-${index}`">
+          <span class="visually-hidden">{{
+            $t("components.board_item.aria_labels.activity_type")
+          }}</span>
           {{ $t(`components.ballot_activity.${activity.type}.type`) }}
         </p>
 
         <p
           class="BallotActivity__RegisteredAt"
-          :aria-label="
-            $t('components.board_item.aria_labels.activity_registered')
-          "
           :id="`ballot-activity-registered-at-${index}`"
         >
+          <span class="visually-hidden">{{
+            $t("components.board_item.aria_labels.activity_registered")
+          }}</span>
           <AVIcon
             icon="clock"
             class="BallotActivity__Icon"
@@ -43,9 +42,11 @@ defineProps({
 
         <p
           class="BallotActivity__Author"
-          :aria-label="$t('components.board_item.aria_labels.activity_author')"
           :id="`ballot-activity-author-${index}`"
         >
+          <span class="visually-hidden">{{
+            $t("components.board_item.aria_labels.activity_author")
+          }}</span>
           <AVIcon icon="user" class="BallotActivity__Icon" aria-hidden="true" />
           <span>
             {{ $t(`components.ballot_activity.${activity.type}.author`) }}

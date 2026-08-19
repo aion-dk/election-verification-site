@@ -133,9 +133,11 @@ const setTheme = async (conferenceClient: any) => {
     <AVSpinner size="lg" color="dark" />
   </div>
   <div class="DBAS" v-if="isLoaded">
-    <a href="#main_content" class="visually-hidden-focusable">
-      {{ $t("js.accessibility.skip_to_content") }}
-    </a>
+    <nav class="DBAS__Skip_Nav" aria-label="Skip navigation">
+      <a href="#main_content" class="visually-hidden-focusable">
+        {{ $t("js.accessibility.skip_to_content") }}
+      </a>
+    </nav>
 
     <Header
       :election="configStore.election"
@@ -181,6 +183,10 @@ body {
   min-height: 100dvh;
   min-height: 100vh;
   width: 100vw;
+}
+
+.DBAS__Skip_Nav {
+  display: contents;
 }
 
 .DBAS__Content {

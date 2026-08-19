@@ -47,7 +47,8 @@ const label = ref(props.format === "absolute" ? relative : absolute);
 </script>
 
 <template>
-  <span class="DateTime" :aria-label="label">
+  <span class="DateTime">
+    <span class="visually-hidden">{{ label }}</span>
     <AVTooltip :content="label" :text="value" position="top" />
   </span>
 </template>

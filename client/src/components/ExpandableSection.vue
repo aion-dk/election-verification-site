@@ -33,9 +33,9 @@ const toggle = () => {
     :class="{
       ['ExpandableSection--expanded']: _expanded,
     }"
-    :aria-label="_label"
     :aria-expanded="_expanded"
   >
+    <span class="visually-hidden">{{ _label }}</span>
     <div class="ExpandableSection__Line" v-if="!_expanded">
       <slot name="collapsed"></slot>
     </div>
