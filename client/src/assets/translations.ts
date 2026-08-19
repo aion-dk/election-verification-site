@@ -562,7 +562,7 @@ export const fallbackMessages: SpreadableDLM = {
         title: "Election Activity Logs",
         subtitle: "Public audit of the election",
         description:
-          "All election activities are listed in this election activity log. You can go through it or download the whole activity log at the bottom of the page.",
+          "All election activities are listed in this election activity log. You can go through it or download the whole activity log at the end of the page.",
         download_button: "Download the full election activity log (json)",
         config_only: "Configuration items only",
         hide_pending_items: "Hide pending",
