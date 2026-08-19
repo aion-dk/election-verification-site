@@ -69,6 +69,11 @@ const toggle = () => {
   font: inherit;
 }
 
+.ExpandableSection:focus-visible {
+  outline: 2px solid var(--av-theme-background);
+  outline-offset: 2px;
+}
+
 .ExpandableSection__Line {
   display: flex;
   flex-direction: column;
