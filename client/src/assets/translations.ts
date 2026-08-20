@@ -10,6 +10,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "انتقل إلى المحتوى الرئيسي",
+        skip_navigation: "تخطي التنقل",
       },
     },
   },
@@ -22,6 +23,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Vés al contingut principal",
+        skip_navigation: "Omet la navegació",
       },
     },
   },
@@ -34,6 +36,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Neidio i'r prif gynnwys",
+        skip_navigation: "Sgipio llywio",
       },
     },
   },
@@ -46,6 +49,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Spring til hovedindhold",
+        skip_navigation: "Spring navigationen over",
       },
     },
   },
@@ -58,6 +62,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Zum Hauptinhalt springen",
+        skip_navigation: "Navigation überspringen",
       },
     },
   },
@@ -70,6 +75,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Skip to main content",
+        skip_navigation: "Skip navigation",
       },
     },
   },
@@ -82,6 +88,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Ir al contenido principal",
+        skip_navigation: "Saltar navegación",
       },
     },
   },
@@ -94,6 +101,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Siirry pääsisältöön",
+        skip_navigation: "Siirry navigoinnin ohi",
       },
     },
   },
@@ -106,6 +114,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Accéder au contenu principal",
+        skip_navigation: "Ignorer la navigation",
       },
     },
   },
@@ -118,6 +127,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Fara í aðalefni",
+        skip_navigation: "Sleppa flakk",
       },
     },
   },
@@ -130,6 +140,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Vai al contenuto principale",
+        skip_navigation: "Salta la navigazione",
       },
     },
   },
@@ -142,6 +153,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Ga naar de hoofdinhoud",
+        skip_navigation: "Navigatie overslaan",
       },
     },
   },
@@ -154,6 +166,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Przejdź do treści głównej",
+        skip_navigation: "Pomiń nawigację",
       },
     },
   },
@@ -166,6 +179,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Ir para o conteúdo principal",
+        skip_navigation: "Pular navegação",
       },
     },
   },
@@ -178,6 +192,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Treci la conținutul principal",
+        skip_navigation: "Sari peste navigare",
       },
     },
   },
@@ -190,6 +205,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Перейти к основному содержанию",
+        skip_navigation: "Пропустить навигацию",
       },
     },
   },
@@ -202,6 +218,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Hoppa till huvudinnehållet",
+        skip_navigation: "Hoppa över navigering",
       },
     },
   },

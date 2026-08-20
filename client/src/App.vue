@@ -133,7 +133,10 @@ const setTheme = async (conferenceClient: any) => {
     <AVSpinner size="lg" color="dark" />
   </div>
   <div class="DBAS" v-if="isLoaded">
-    <nav class="DBAS__Skip_Nav" aria-label="Skip navigation">
+    <nav
+      class="DBAS__Skip_Nav"
+      :aria-label="$t('js.accessibility.skip_navigation')"
+    >
       <a href="#main_content" class="visually-hidden-focusable">
         {{ $t("js.accessibility.skip_to_content") }}
       </a>
@@ -183,10 +186,6 @@ body {
   min-height: 100dvh;
   min-height: 100vh;
   width: 100vw;
-}
-
-.DBAS__Skip_Nav {
-  display: contents;
 }
 
 .DBAS__Content {
