@@ -237,6 +237,12 @@ onMounted(() => {
   cursor: pointer;
 }
 
+.HelpView__Category_Button:focus-visible {
+  outline: 2px solid var(--av-theme-background);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
 .HelpView__Category_Button_Active {
   font-weight: 600;
 }

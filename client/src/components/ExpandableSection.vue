@@ -33,9 +33,9 @@ const toggle = () => {
     :class="{
       ['ExpandableSection--expanded']: _expanded,
     }"
-    :aria-label="_label"
     :aria-expanded="_expanded"
   >
+    <span class="visually-hidden">{{ _label }}</span>
     <div class="ExpandableSection__Line" v-if="!_expanded">
       <slot name="collapsed"></slot>
     </div>
@@ -67,6 +67,11 @@ const toggle = () => {
   width: 100%;
   text-align: inherit;
   font: inherit;
+}
+
+.ExpandableSection:focus-visible {
+  outline: 2px solid var(--av-theme-background);
+  outline-offset: 2px;
 }
 
 .ExpandableSection__Line {

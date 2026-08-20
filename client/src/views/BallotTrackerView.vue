@@ -87,12 +87,12 @@ onMounted(async () => {
 
       <template v-slot:help>
         <div class="BallotTracker__Info" id="tracker-help-p1">
-          <p
+          <h3
             class="BallotTracker__Info_Title text-contrast"
             id="tracker-help-p1-title"
           >
             {{ $t("views.tracker.help.p1.title") }}
-          </p>
+          </h3>
           <p
             class="BallotTracker__Info_Text text-contrast"
             id="tracker-help-p1-text1"
@@ -108,12 +108,12 @@ onMounted(async () => {
         </div>
 
         <div class="BallotTracker__Info" id="tracker-help-p2">
-          <p
+          <h3
             class="BallotTracker__Info_Title_Small text-contrast"
             id="tracker-help-p2-title"
           >
             {{ $t("views.tracker.help.p2.title") }}
-          </p>
+          </h3>
           <p
             class="BallotTracker__Info_Text text-contrast"
             id="tracker-help-p2-text"
@@ -161,11 +161,13 @@ onMounted(async () => {
   text-align: center;
   font-size: 1.6rem;
   font-weight: 600;
+  margin: 0;
 }
 
 .BallotTracker__Info_Title_Small {
   font-size: 1.3rem;
   font-weight: 600;
+  margin: 0;
 }
 
 @media only screen and (min-width: 48rem) {

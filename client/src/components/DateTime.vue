@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref, computed } from "vue";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { intlFormatDistance } from "date-fns";
 import { toZonedTime } from "date-fns-tz";
@@ -42,12 +42,17 @@ const relative = computed(() => {
   });
 });
 
-const value = ref(props.format === "absolute" ? absolute : relative);
-const label = ref(props.format === "absolute" ? relative : absolute);
+const value = computed(() =>
+  props.format === "absolute" ? absolute.value : relative.value,
+);
+const label = computed(() =>
+  props.format === "absolute" ? relative.value : absolute.value,
+);
 </script>
 
 <template>
-  <span class="DateTime" :aria-label="label">
+  <span class="DateTime">
+    <span class="visually-hidden">{{ label }}</span>
     <AVTooltip :content="label" :text="value" position="top" />
   </span>
 </template>
