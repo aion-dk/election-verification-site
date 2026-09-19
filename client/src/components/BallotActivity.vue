@@ -37,7 +37,7 @@ defineProps({
             class="BallotActivity__Icon"
             aria-hidden="true"
           />
-          <DateTime :date-time="activity.registered_at" />
+          <DateTime :date-time="activity.registered_at" format="absolute" />
         </p>
 
         <p
@@ -74,7 +74,7 @@ defineProps({
           <span class="BallotActivity__Label">{{
             $t("components.ballot_activity.registered_at")
           }}</span>
-          <DateTime :date-time="activity.registered_at" format="long" />
+          <DateTime :date-time="activity.registered_at" format="absolute" />
         </p>
 
         <p

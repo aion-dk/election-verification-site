@@ -32,7 +32,7 @@ const classes = computed(() => {
             class="BoardItem__InlineIcon"
             aria-hidden="true"
           />
-          <DateTime :date-time="item.registeredAt" format="relative" />
+          <DateTime :date-time="item.registeredAt" format="absolute" />
         </p>
 
         <p class="BoardItem__Author" :id="`board-item-author-${item.address}`">
