@@ -36,20 +36,17 @@ commands:
     steps:
       - aws-cli/setup:
           profile_name: default
-          role_arn: arn:aws:iam::534003348933:role/CircleCI_runner_ecr_access
-          region: eu-west-1
+          role_arn: ${AWS_ROLE_ARN}
+          region: ${AWS_DEFAULT_REGION}
       - aws-ecr/ecr_login:
-          account_id: '534003348933'
+          account_id: ${AWS_ACCOUNT_ID}
           profile_name: default
           public_registry: false
-          region: eu-west-1
+          region: ${AWS_DEFAULT_REGION}
   build-image:
     parameters:
       service_name:
         type: string
-      ecr_registry_id:
-        type: string
-        default: "534003348933"
       target:
         type: enum
         default: "development"
@@ -69,8 +66,7 @@ commands:
           name: Set environment variables
           command: |
             echo "export AV_SECRET_KEY_BASE=${RANDOM}" >> "$BASH_ENV"
-            echo 'export ECR_REGISTRY="<< parameters.ecr_registry_id >>.dkr.ecr.eu-west-1.amazonaws.com"' >> "$BASH_ENV"
-            echo 'export ECR_REGISTRY_ID="<< parameters.ecr_registry_id >>"' >> "$BASH_ENV"
+            echo 'export ECR_REGISTRY="${AWS_ECR_REGISTRY_URL}"' >> "$BASH_ENV"
             echo 'export SSH_AUTH_SOCK=/tmp/circleci/ssh/ssh_agent.sock' >> "$BASH_ENV"
       - checkout
       - ecr-login
@@ -89,9 +85,6 @@ commands:
     parameters:
       service_name:
         type: string
-      ecr_registry_id:
-        type: string
-        default: "534003348933"
       tag_prefix:
         type: string
         default: ""
@@ -99,10 +92,10 @@ commands:
       - run:
           name: Set environment variables
           command: |
-            echo 'export ECR_REGISTRY_ID="<< parameters.ecr_registry_id >>"' >> "$BASH_ENV"
-            echo 'export ECR_REGISTRY="${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com"' >> "$BASH_ENV"
+            echo 'export ECR_REGISTRY="${AWS_ECR_REGISTRY_URL}"' >> "$BASH_ENV"
       - ecr-login
       - docker/tag-push:
+          ecr-registry: ${AWS_ECR_REGISTRY_URL}
           service: election-verification-site
           pull-tag: << parameters.tag_prefix >>"${CIRCLE_SHA1}"-untested
           push-tags: main,latest,<< parameters.tag_prefix >>"${CIRCLE_SHA1}"
@@ -110,9 +103,6 @@ commands:
     parameters:
       service_name:
         type: string
-      ecr_registry_id:
-        type: string
-        default: "534003348933"
       tag_prefix:
         type: string
         default: ""
@@ -121,11 +111,11 @@ commands:
       - run:
           name: Pull the image for testing
           command: |
-            docker pull 534003348933.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested
+            docker pull ${AWS_ECR_REGISTRY_URL}/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested
       - run:
           name: Run e2e client tests
           command: |
-            docker run --name=e2e -e CI="1" 534003348933.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested bash -c "yarn build && yarn test:e2e:ci"
+            docker run --name=e2e -e CI="1" ${AWS_ECR_REGISTRY_URL}/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested bash -c "yarn build && yarn test:e2e:ci"
             docker cp e2e:/usr/src/app/test-results .
       - store_artifacts:
           path: test-results
@@ -134,9 +124,6 @@ commands:
     parameters:
       service_name:
         type: string
-      ecr_registry_id:
-        type: string
-        default: "534003348933"
       tag_prefix:
         type: string
         default: ""
@@ -145,11 +132,11 @@ commands:
       - run:
           name: Pull the image for testing
           command: |
-            docker pull 534003348933.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested
+            docker pull ${AWS_ECR_REGISTRY_URL}/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested
       - run:
           name: Run component client tests
           command: |
-            docker run --name=component -e CI="1" 534003348933.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested bash -c "yarn test:unit:ci"
+            docker run --name=component -e CI="1" ${AWS_ECR_REGISTRY_URL}/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested bash -c "yarn test:unit:ci"
             docker cp component:/usr/src/app/src/test-results .
       - store_artifacts:
           path: test-results
@@ -157,9 +144,6 @@ commands:
     parameters:
       service_name:
         type: string
-      ecr_registry_id:
-        type: string
-        default: "534003348933"
       tag_prefix:
         type: string
         default: ""
@@ -168,11 +152,11 @@ commands:
       - run:
           name: Pull the image for testing
           command: |
-            docker pull 534003348933.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested
+            docker pull ${AWS_ECR_REGISTRY_URL}/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested
       - run:
           name: Run linting for client
           command: |
-            docker run --rm 534003348933.dkr.ecr.eu-west-1.amazonaws.com/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested bash -c "yarn lint:ci && yarn prettier:ci"
+            docker run --rm ${AWS_ECR_REGISTRY_URL}/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested bash -c "yarn lint:ci && yarn prettier:ci"
 
 jobs:
   lint-dockerfile-client:
@@ -200,17 +184,15 @@ jobs:
           docker_context: "./client"
   scan-client:
     executor: vm-linux-ubuntu-nocache
-    environment:
-      ECR_REGISTRY_ID: "534003348933"
     steps:
       - checkout
       - ecr-login
       - run:
           name: Pull the image for scanning
           command: |
-            docker pull ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:${CIRCLE_SHA1}-untested
+            docker pull ${AWS_ECR_REGISTRY_URL}/election-verification-site:${CIRCLE_SHA1}-untested
       - docker/scan:
-          image: ${ECR_REGISTRY_ID}.dkr.ecr.eu-west-1.amazonaws.com/election-verification-site:${CIRCLE_SHA1}-untested
+          image: ${AWS_ECR_REGISTRY_URL}/election-verification-site:${CIRCLE_SHA1}-untested
   client-e2e:
     executor: vm-linux-ubuntu-nocache
     steps:
@@ -240,11 +222,10 @@ jobs:
           tag_prefix: ""
   tag-final-client-image-prod:
     executor: vm-linux-ubuntu-nocache
-    environment:
-      ECR_REGISTRY_ID: '534003348933'
     steps:
       - ecr-login
       - docker/tag-push:
+          ecr-registry: ${AWS_ECR_REGISTRY_URL}
           service: election-verification-site
           pull-tag: ${CIRCLE_SHA1}
           push-tags: ${CIRCLE_TAG}
@@ -264,48 +245,36 @@ workflows:
       - build-image-development-client:
           context:
             - "GIT"
-            - "ECR-RW"
           requires:
             - lint-dockerfile-client
           filters: *commit_only
       - build-image-production-client:
           context:
             - "GIT"
-            - "ECR-RW"
           requires:
             - lint-dockerfile-client
           filters: *commit_only
       - scan-client:
           requires:
             - build-image-production-client
-          context:
-            - "ECR-RW"
           filters: *commit_only
       - client-e2e:
           requires:
             - build-image-development-client
-          context:
-            - "ECR-RW"
           filters: *commit_only
       - client-component:
           requires:
             - build-image-development-client
-          context:
-            - "ECR-RW"
           filters: *commit_only
       - client-linting:
           requires:
             - build-image-development-client
-          context:
-            - "ECR-RW"
           filters: *commit_only
       - tag-tested-client-image-dev:
           requires:
             - client-e2e
             - client-component
             - client-linting
-          context:
-            - "ECR-RW"
           filters: *commit_only
       - tag-tested-client-image-prod:
           requires:
@@ -313,12 +282,8 @@ workflows:
             - client-component
             - client-linting
             - scan-client
-          context:
-            - "ECR-RW"
           filters: *commit_only
   tag-final-image:
     jobs:
       - tag-final-client-image-prod:
-          context:
-            - "ECR-RW"
           filters: *release_only
