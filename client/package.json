@@ -55,7 +55,7 @@
     "prettier": "^3.4.2",
     "typescript": "^5.4.5",
     "vite": "^7.3.6",
-    "vitest": "^4.1.0"
+    "vitest": "^4.1.11"
   },
   "resolutions": {
     "vite": "7.3.6",
