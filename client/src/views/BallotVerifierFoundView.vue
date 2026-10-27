@@ -68,43 +68,62 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="VerificationFound" aria-flowto="current-ballot-code">
+  <div
+    class="VerificationFound"
+    aria-flowto="current-ballot-code"
+    id="ballot-verifier-found"
+  >
     <ContentLayout
+      id="verifier-found-content-layout"
       :help-title="$t('views.ballot_finder.help.title')"
       :help-title-strong="$t('views.ballot_finder.help.title_strong')"
       :logo="configStore.electionStatus?.theme?.logo"
       :breadcrumb="`${$t('header.find')} / ${$t('breadcrumbs.ballot_found')}`"
     >
       <template v-slot:action>
-        <TrackedBallotManager :ballot-code="ballotCode" @cancel="cancel" />
+        <TrackedBallotManager
+          id="verifier-found-tracked-ballot-manager"
+          :ballot-code="ballotCode"
+          @cancel="cancel"
+        />
 
-        <MainIcon icon="envelope-open-text" />
-        <h3 class="VerificationFound__Title">
+        <MainIcon icon="envelope-open-text" id="verifier-found-main-icon" />
+        <h1 class="VerificationFound__Title" id="verifier-found-title">
           {{ $t("views.verifier.found.title") }}
-        </h3>
-        <p class="VerificationFound__Description">
+        </h1>
+        <p
+          class="VerificationFound__Description"
+          id="verifier-found-description"
+        >
           {{ $t("views.verifier.found.description") }}
         </p>
       </template>
       <template v-slot:help>
         <div
           v-for="step in steps"
-          :key="`verification-step-${step}`"
+          :key="`verifier-found-step-${step}`"
           class="VerificationFound__Step"
+          :id="`verifier-found-step-${step}`"
         >
-          <span class="VerificationFound__Step_Index">{{ step }}</span>
+          <span
+            class="VerificationFound__Step_Index"
+            :id="`verifier-found-step-index-${step}`"
+            >{{ step }}</span
+          >
           <p
             v-html="$t(`views.ballot_finder.help.steps.step_${step}`)"
             class="VerificationFound__Step_Text text-contrast"
+            :id="`verifier-found-step-text-${step}`"
           />
         </div>
-        <span class="VerificationFound__Help_Footer text-contrast">{{
-          $t(`views.ballot_finder.help.footer`)
-        }}</span>
+        <span
+          class="VerificationFound__Help_Footer text-contrast"
+          id="verifier-found-help-footer"
+          >{{ $t(`views.ballot_finder.help.footer`) }}</span
+        >
       </template>
     </ContentLayout>
   </div>
-  ´
 </template>
 
 <style scoped>
@@ -122,7 +141,7 @@ onMounted(async () => {
 }
 
 .VerificationFound__Description {
-  margin: 0 0 2rem 0;
+  margin: 0 0 1.5rem 0;
   line-height: 2rem;
   color: var(--bs-gray-700);
   text-align: center;

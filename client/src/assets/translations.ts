@@ -10,6 +10,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "انتقل إلى المحتوى الرئيسي",
+        skip_navigation: "تخطي التنقل",
       },
     },
   },
@@ -22,6 +23,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Vés al contingut principal",
+        skip_navigation: "Omet la navegació",
       },
     },
   },
@@ -34,6 +36,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Neidio i'r prif gynnwys",
+        skip_navigation: "Sgipio llywio",
       },
     },
   },
@@ -46,6 +49,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Spring til hovedindhold",
+        skip_navigation: "Spring navigationen over",
       },
     },
   },
@@ -58,6 +62,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Zum Hauptinhalt springen",
+        skip_navigation: "Navigation überspringen",
       },
     },
   },
@@ -70,6 +75,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Skip to main content",
+        skip_navigation: "Skip navigation",
       },
     },
   },
@@ -82,6 +88,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Ir al contenido principal",
+        skip_navigation: "Saltar navegación",
       },
     },
   },
@@ -94,6 +101,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Siirry pääsisältöön",
+        skip_navigation: "Siirry navigoinnin ohi",
       },
     },
   },
@@ -106,6 +114,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Accéder au contenu principal",
+        skip_navigation: "Ignorer la navigation",
       },
     },
   },
@@ -118,6 +127,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Fara í aðalefni",
+        skip_navigation: "Sleppa flakk",
       },
     },
   },
@@ -130,6 +140,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Vai al contenuto principale",
+        skip_navigation: "Salta la navigazione",
       },
     },
   },
@@ -142,6 +153,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Ga naar de hoofdinhoud",
+        skip_navigation: "Navigatie overslaan",
       },
     },
   },
@@ -154,6 +166,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Przejdź do treści głównej",
+        skip_navigation: "Pomiń nawigację",
       },
     },
   },
@@ -166,6 +179,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Ir para o conteúdo principal",
+        skip_navigation: "Pular navegação",
       },
     },
   },
@@ -178,6 +192,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Treci la conținutul principal",
+        skip_navigation: "Sari peste navigare",
       },
     },
   },
@@ -190,6 +205,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Перейти к основному содержанию",
+        skip_navigation: "Пропустить навигацию",
       },
     },
   },
@@ -202,6 +218,7 @@ export const offlineMessages: SpreadableDLM = {
       },
       accessibility: {
         skip_to_content: "Hoppa till huvudinnehållet",
+        skip_navigation: "Hoppa över navigering",
       },
     },
   },
@@ -229,9 +246,11 @@ export const fallbackMessages: SpreadableDLM = {
       dbas: "Election Verification Site",
       find: "Ballot Finder",
       logs: "Election Activity Log",
+      results: "Results",
       help: "FAQ",
       contact: "Contact",
       change_locale: {
+        label: "Switch language",
         en: "Switch to English",
         es: "Cambiar a Español",
         da: "Skift til Dansk",
@@ -538,7 +557,7 @@ export const fallbackMessages: SpreadableDLM = {
           title: "Ballot Registered",
           description: "Your vote has been registered in digital ballot box.",
           extended_description:
-            "Below you can see all the activity attached to the code you are tracking. You can learn more about each activity by opening it up and reading the description.",
+            "You can see all the activity attached to the code you are tracking. You can learn more about each activity by opening it up and reading the description.",
         },
         help: {
           title: "What's ",
@@ -560,7 +579,7 @@ export const fallbackMessages: SpreadableDLM = {
         title: "Election Activity Logs",
         subtitle: "Public audit of the election",
         description:
-          "All election activities are listed in this election activity log. You can go through it or download the whole activity log at the bottom of the page.",
+          "All election activities are listed in this election activity log. You can go through it or download the whole activity log at the end of the page.",
         download_button: "Download the full election activity log (json)",
         config_only: "Configuration items only",
         hide_pending_items: "Hide pending",
@@ -595,6 +614,29 @@ export const fallbackMessages: SpreadableDLM = {
           prev_page: "Previous page",
           next_page: "Next page",
           last_page: "Go to last page",
+        },
+      },
+      results: {
+        title: "Election Results",
+        description:
+          "The published results of the election's voting rounds are available below. You can preview and download the result PDF for each voting round.",
+        published_on: "Published on",
+        download: "Download PDF",
+        preview_unavailable:
+          "Your browser cannot display the PDF preview. You can download it using the link below.",
+        empty_state:
+          "No results have been published yet. Please check back later.",
+        error_state:
+          "An error occurred while loading the results. Please try again.",
+        retry: "Retry",
+        help: {
+          title: "What are the ",
+          title_strong: "results?",
+          p1: {
+            question: "What are the election results?",
+            answer:
+              "The election results show the official outcome of each voting round. Once a voting round is closed and the results are published, they are displayed here for public review.",
+          },
         },
       },
       faq: {
@@ -772,9 +814,11 @@ export const fallbackMessages: SpreadableDLM = {
       dbas: "Sitio de verificación",
       find: "Buscador de Boleta",
       logs: "Registro de la elección",
+      results: "Resultados",
       help: "Preguntas Frecuentes",
       contact: "Contacto",
       change_locale: {
+        label: "Cambiar idioma",
         en: "Switch to English",
         es: "Cambiar a Español",
         da: "Skift til Dansk",

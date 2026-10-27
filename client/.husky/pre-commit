@@ -1,0 +1,1 @@
+cd client && yarn --ignore-engines lint-staged

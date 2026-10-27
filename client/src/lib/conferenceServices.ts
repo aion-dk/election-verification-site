@@ -8,6 +8,7 @@ import type {
   CurrentTranslations,
   SpreadableDLM,
   SupportedLocale,
+  PublishedResult,
 } from "../Types";
 import type { AxiosInstance } from "axios";
 
@@ -18,15 +19,19 @@ const conferenceApi = ref<AxiosInstance>(
 );
 
 const currentTranslationsData = ref<CurrentTranslations>(null);
+let interceptorAttached = false;
 
 export function useConferenceConnector(
   organisationSlug: string,
   electionSlug: string,
 ) {
-  conferenceApi.value.interceptors.response.use(
-    responseHandler,
-    responseErrorHandler,
-  );
+  if (!interceptorAttached) {
+    conferenceApi.value.interceptors.response.use(
+      responseHandler,
+      responseErrorHandler,
+    );
+    interceptorAttached = true;
+  }
 
   return {
     conferenceClient: {
@@ -37,9 +42,9 @@ export function useConferenceConnector(
         return (status as any).election as ExtendedElectionStatusResponse;
       },
       async getStylingData() {
-        return (await conferenceApi.value.get(
+        return conferenceApi.value.get<string>(
           `/${organisationSlug}/${electionSlug}/theme`,
-        )) as string;
+        );
       },
       async getTranslationsData(locale: SupportedLocale) {
         if (!currentTranslationsData.value) {
@@ -64,6 +69,17 @@ export function useConferenceConnector(
         };
 
         return evsTranslations;
+      },
+      async getPublishedResults() {
+        return (await conferenceApi.value.get(
+          `/${organisationSlug}/${electionSlug}/published_results`,
+        )) as unknown as PublishedResult[];
+      },
+      async getResultsPublished() {
+        const response = await conferenceApi.value.get(
+          `/${organisationSlug}/${electionSlug}/results_published`,
+        );
+        return (response as any).resultsPublished as boolean;
       },
     },
   };

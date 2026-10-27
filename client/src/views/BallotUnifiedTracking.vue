@@ -195,13 +195,13 @@ onMounted(async () => {
   >
     <template v-slot:action>
       <MainIcon icon="magnifying-glass" />
-      <h3 class="UnifiedLanding__Title">
+      <h1 class="UnifiedLanding__Title">
         {{ t("views.ballot_finder.title") }}
-      </h3>
-      <h4 class="UnifiedLanding__Subtitle">
+      </h1>
+      <h2 class="UnifiedLanding__Subtitle">
         {{ t("views.ballot_finder.subtitle") }}
         <strong>{{ t("views.ballot_finder.subtitle_strong") }}</strong>
-      </h4>
+      </h2>
       <p class="UnifiedLanding__Description">
         {{ t("views.ballot_finder.description") }}
       </p>

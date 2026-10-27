@@ -47,11 +47,15 @@ test("finding a ballot that is pending", async ({ page }) => {
 
   await page.goto("/en/organisation_slug/election_slug/find");
   await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Find your ballot");
+  await expect(page.locator("h1.UnifiedLanding__Title")).toHaveText(
+    "Find your ballot",
+  );
   await page.locator("#unified-code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Find my ballot" }).click();
   await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Your ballot has been found!");
+  await expect(page.locator("#verifier-found-title")).toHaveText(
+    "Your ballot has been found!",
+  );
   await page.getByRole("button", { name: "Cancel tracking 5ksv8Ee" }).click();
   await analyzeAccesibility(page);
   await page.locator("#unified-code").fill("5ksv8Ee");
@@ -94,7 +98,9 @@ test("finding a non-existing ballot shows an error", async ({ page }) => {
 
   await page.goto("/en/organisation_slug/election_slug/find");
   await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Find your ballot");
+  await expect(page.locator("h1.UnifiedLanding__Title")).toHaveText(
+    "Find your ballot",
+  );
   await page.locator("#unified-code").fill("abcdef");
   await page.getByRole("button", { name: "Find my ballot" }).click();
   await analyzeAccesibility(page);
@@ -159,11 +165,13 @@ test("finding a ballot that has been cast", async ({ page }) => {
 
   await page.goto("/en/organisation_slug/election_slug/find");
   await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Find your ballot");
+  await expect(page.locator("h1.UnifiedLanding__Title")).toHaveText(
+    "Find your ballot",
+  );
   await page.locator("#unified-code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Find my ballot" }).click();
   await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Ballot Registered");
+  await expect(page.locator("#tracker-title")).toHaveText("Ballot Registered");
   await page.getByRole("button", { name: "Cancel tracking 5ksv8Ee" }).click();
   await analyzeAccesibility(page);
   await page.locator("#unified-code").fill("5ksv8Ee");
@@ -224,9 +232,13 @@ test("finding a ballot that has been spoiled", async ({ page }) => {
 
   await page.goto("/en/organisation_slug/election_slug/find");
   await analyzeAccesibility(page);
-  await expect(page.locator("h3")).toHaveText("Find your ballot");
+  await expect(page.locator("h1.UnifiedLanding__Title")).toHaveText(
+    "Find your ballot",
+  );
   await page.locator("#unified-code").fill("5ksv8Ee");
   await page.getByRole("button", { name: "Find my ballot" }).click();
   await analyzeAccesibility(page);
-  await expect(page.locator("h3").first()).toHaveText("Compare passkeys");
+  await expect(page.locator("#verifier-inprogress-title")).toHaveText(
+    "Compare passkeys",
+  );
 });

@@ -3,6 +3,7 @@ import useConfigStore from "../stores/useConfigStore";
 import i18n from "../lib/i18n";
 import router from "../router";
 import { useRoute } from "vue-router";
+import PageTitle from "@/components/PageTitle.vue";
 
 const configStore = useConfigStore();
 const route = useRoute();
@@ -15,26 +16,10 @@ const goToBallotFinder = () => {
 </script>
 
 <template>
-  <div class="Welcome">
-    <div class="Welcome__Description_Desktop">
-      <div class="Welcome__Description_Desktop_Container">
-        <h1 class="Welcome__Description_Desktop_Title">
-          {{ $t("views.welcome.title") }}
-        </h1>
-      </div>
+  <div class="Welcome" id="welcome">
+    <PageTitle />
 
-      <div class="Welcome__Description_Desktop_Container">
-        <h2 class="Welcome__Description_Desktop_Subtitle">
-          {{ configStore.election.title[$i18n.locale] }}
-        </h2>
-
-        <p class="Welcome__Description_Desktop_About">
-          {{ $t("views.welcome.description") }}
-        </p>
-      </div>
-    </div>
-
-    <div class="Welcome__Gradient theme-gradient">
+    <div class="Welcome__Gradient theme-gradient" id="welcome-gradient">
       <img
         v-if="configStore.electionStatus?.theme?.splash"
         :src="configStore.electionStatus?.theme?.splash"
@@ -42,25 +27,31 @@ const goToBallotFinder = () => {
         class="Welcome__Splash"
         loading="lazy"
         aria-hidden="true"
+        id="welcome-splash"
       />
     </div>
 
     <section id="main_content" class="Welcome__Content">
-      <div class="Welcome__Heading_Content">
+      <div class="Welcome__Heading_Content" id="welcome-heading-content">
         <div
           class="Welcome__Card Welcome__Card_Overrides Welcome__Card_Desktop"
+          id="welcome-cards"
         >
-          <div class="Welcome__Card_Item">
+          <div class="Welcome__Card_Item" id="welcome-finder-card-item">
             <AVIcon
               icon="magnifying-glass"
               class="Welcome__Card_Icon"
               aria-hidden="true"
+              id="welcome-finder-icon"
             />
-            <div>
-              <h3 class="Welcome__Card_Title">
+            <div id="welcome-finder-card-content">
+              <h2 class="Welcome__Card_Title" id="welcome-finder-title">
                 {{ $t("views.welcome.ballot_finder.title") }}
-              </h3>
-              <p class="Welcome__Card_Description">
+              </h2>
+              <p
+                class="Welcome__Card_Description"
+                id="welcome-finder-description"
+              >
                 {{ $t("views.welcome.ballot_finder.description") }}
               </p>
               <button
@@ -78,27 +69,41 @@ const goToBallotFinder = () => {
       </div>
     </section>
 
-    <section class="Welcome__About">
-      <h4 class="Welcome__About_Title">
+    <section class="Welcome__About" id="welcome-about">
+      <h2 class="Welcome__About_Title" id="welcome-about-title">
         {{ $t("views.welcome.about.title") }}
-      </h4>
-      <div class="Welcome__Card Welcome__Description">
-        <p>{{ $t("views.welcome.description") }}</p>
+      </h2>
+      <div
+        class="Welcome__Card Welcome__Description"
+        id="welcome-about-description"
+      >
+        <p id="welcome-about-description-text">
+          {{ $t("views.welcome.description") }}
+        </p>
       </div>
-      <div>
-        <div class="Welcome__Card Welcome__Card_Overrides">
-          <h5 class="Welcome__About_Subtitle">
+      <div id="welcome-about-cards">
+        <div
+          class="Welcome__Card Welcome__Card_Overrides"
+          id="welcome-about-finder-card"
+        >
+          <h3
+            class="Welcome__About_Subtitle"
+            id="welcome-about-finder-subtitle"
+          >
             {{ $t("views.welcome.about.ballot_finder") }}
-          </h5>
-          <p class="Welcome__About_Description">
+          </h3>
+          <p class="Welcome__About_Description" id="welcome-about-finder-text">
             {{ $t("views.welcome.about.ballot_finder_text") }}
           </p>
         </div>
-        <div class="Welcome__Card Welcome__Card_Overrides">
-          <h5 class="Welcome__About_Subtitle">
+        <div
+          class="Welcome__Card Welcome__Card_Overrides"
+          id="welcome-about-audit-card"
+        >
+          <h3 class="Welcome__About_Subtitle" id="welcome-about-audit-subtitle">
             {{ $t("views.welcome.about.audit_log") }}
-          </h5>
-          <p class="Welcome__About_Description">
+          </h3>
+          <p class="Welcome__About_Description" id="welcome-about-audit-text">
             {{ $t("views.welcome.about.audit_log_text") }}
           </p>
         </div>
@@ -109,16 +114,28 @@ const goToBallotFinder = () => {
         class="Welcome__Brand_Logo"
         :src="configStore.electionStatus?.theme?.logo"
         :alt="$t('header.election_logo_alt')"
+        id="welcome-brand-logo"
       />
     </section>
   </div>
 </template>
 
 <style type="text/css" scoped>
+.visually-hidden-mobile {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .Welcome {
-  height: calc(100dvh - 70px);
+  min-height: 100dvh;
   width: 100%;
-  overflow-y: auto;
 }
 
 .Welcome__Card {
@@ -127,13 +144,12 @@ const goToBallotFinder = () => {
   padding: 1.25rem;
   display: flex;
   flex-direction: column;
-  box-sizing:;
   box-shadow: 0px 0px 15px 1px rgba(0, 0, 0, 0.05);
 }
 
 .Welcome__Gradient {
   width: 100%;
-  height: 22rem;
+  height: 16rem;
   position: absolute;
   z-index: -20;
 }
@@ -204,10 +220,6 @@ const goToBallotFinder = () => {
   width: 100%;
 }
 
-.Welcome__Description_Desktop {
-  display: none;
-}
-
 .Welcome__About {
   display: flex;
   flex-direction: column;
@@ -267,54 +279,19 @@ const goToBallotFinder = () => {
 }
 
 @media only screen and (min-width: 80rem) {
-  .Welcome__Description_Desktop {
-    padding: 5rem;
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    background-color: white;
+  .visually-hidden-mobile {
+    position: static;
+    width: auto;
+    height: auto;
+    padding: inherit;
+    margin: inherit;
+    overflow: visible;
+    clip: auto;
+    white-space: normal;
   }
 
   .Welcome__Description {
     display: none !important;
-  }
-
-  .Welcome__Description_Desktop_Container {
-    display: flex;
-  }
-
-  .Welcome__Description_Desktop_Container:last-of-type > * {
-    width: 50%;
-  }
-
-  .Welcome__Description_Desktop_Title {
-    font-size: 3rem;
-    font-weight: 600;
-    color: var(--bs-gray-800);
-    margin: 0;
-  }
-
-  html[dir="ltr"] .Welcome__Description_Desktop_Title,
-  html[dir="ltr"] .Welcome__Description_Desktop_Subtitle {
-    padding: 0 0 0 5rem;
-  }
-
-  html[dir="rtl"] .Welcome__Description_Desktop_Title,
-  html[dir="rtl"] .Welcome__Description_Desktop_Subtitle {
-    padding: 0 5rem 0 0;
-  }
-
-  .Welcome__Description_Desktop_Subtitle {
-    font-size: 2rem;
-    font-weight: 600;
-    color: var(--bs-gray-600);
-    margin: 0;
-  }
-
-  .Welcome__Description_Desktop_About {
-    color: var(--bs-gray-700);
-    margin: 0;
-    padding: 0 5rem 0 0;
   }
 
   .Welcome__Gradient {
@@ -359,10 +336,6 @@ const goToBallotFinder = () => {
 }
 
 @media only screen and (min-width: 120rem) {
-  .Welcome__Description_Desktop {
-    padding: 8rem 20rem;
-  }
-
   .Welcome__About div {
     margin: 0 1rem 0 1rem;
     padding: 0 20rem 5rem 20rem;
@@ -404,10 +377,6 @@ const goToBallotFinder = () => {
   }
 
   .Welcome__About_Description {
-    font-size: 1.25rem;
-  }
-
-  .Welcome__Description_Desktop_About {
     font-size: 1.25rem;
   }
 }

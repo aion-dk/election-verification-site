@@ -45,50 +45,79 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="BallotTracker" v-if="ballot" aria-flowto="current-ballot-code">
+  <div
+    class="BallotTracker"
+    v-if="ballot"
+    aria-flowto="current-ballot-code"
+    id="ballot-tracker"
+  >
     <ContentLayout
+      id="tracker-content-layout"
       :help-title="$t('views.tracker.help.title')"
       :help-title-strong="$t('views.tracker.help.title_strong')"
       :breadcrumb="$t('views.tracker.title')"
       :logo="configStore.electionStatus?.theme?.logo"
     >
       <template v-slot:action>
-        <TrackedBallotManager :ballot-code="ballotCode" @cancel="cancel" />
+        <TrackedBallotManager
+          id="tracker-tracked-ballot-manager"
+          :ballot-code="ballotCode"
+          @cancel="cancel"
+        />
 
-        <h3 class="BallotTracker__Title">
+        <h1 class="BallotTracker__Title" id="tracker-title">
           {{ $t("views.tracker.info.title") }}
-        </h3>
-        <p class="BallotTracker__Description">
+        </h1>
+        <p class="BallotTracker__Description" id="tracker-description">
           {{ $t("views.tracker.info.description") }}
         </p>
-        <p class="BallotTracker__Description expand">
+        <p
+          class="BallotTracker__Description expand"
+          id="tracker-extended-description"
+        >
           {{ $t("views.tracker.info.extended_description") }}
         </p>
 
         <BallotActivityList
           v-if="ballot.activities.length"
           :activities="ballot.activities"
+          id="tracker-activity-list"
         />
       </template>
 
       <template v-slot:help>
-        <div class="BallotTracker__Info">
-          <p class="BallotTracker__Info_Title text-contrast">
+        <div class="BallotTracker__Info" id="tracker-help-p1">
+          <h3
+            class="BallotTracker__Info_Title text-contrast"
+            id="tracker-help-p1-title"
+          >
             {{ $t("views.tracker.help.p1.title") }}
-          </p>
-          <p class="BallotTracker__Info_Text text-contrast">
+          </h3>
+          <p
+            class="BallotTracker__Info_Text text-contrast"
+            id="tracker-help-p1-text1"
+          >
             {{ $t("views.tracker.help.p1.text1") }}
           </p>
-          <p class="BallotTracker__Info_Text text-contrast">
+          <p
+            class="BallotTracker__Info_Text text-contrast"
+            id="tracker-help-p1-text2"
+          >
             {{ $t("views.tracker.help.p1.text2") }}
           </p>
         </div>
 
-        <div class="BallotTracker__Info">
-          <p class="BallotTracker__Info_Title_Small text-contrast">
+        <div class="BallotTracker__Info" id="tracker-help-p2">
+          <h3
+            class="BallotTracker__Info_Title_Small text-contrast"
+            id="tracker-help-p2-title"
+          >
             {{ $t("views.tracker.help.p2.title") }}
-          </p>
-          <p class="BallotTracker__Info_Text text-contrast">
+          </h3>
+          <p
+            class="BallotTracker__Info_Text text-contrast"
+            id="tracker-help-p2-text"
+          >
             {{ $t("views.tracker.help.p2.text") }}
           </p>
         </div>
@@ -132,11 +161,13 @@ onMounted(async () => {
   text-align: center;
   font-size: 1.6rem;
   font-weight: 600;
+  margin: 0;
 }
 
 .BallotTracker__Info_Title_Small {
   font-size: 1.3rem;
   font-weight: 600;
+  margin: 0;
 }
 
 @media only screen and (min-width: 48rem) {
