@@ -22,7 +22,7 @@ RUN yarn build
 
 FROM mcr.microsoft.com/playwright:v1.65.1-noble AS development
 
-RUN corepack enable
+RUN npm install -g yarn@1.22.22
 WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app .
 
