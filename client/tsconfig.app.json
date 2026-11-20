@@ -3,11 +3,11 @@
   "exclude": ["src/**/*.spec.js", "node_modules"],
   "compilerOptions": {
     "skipLibCheck": true,
+    "strict": false,
     "strictNullChecks": false,
     "module": "ESNext",
     "moduleResolution": "bundler",
     "target": "ES2022",
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
