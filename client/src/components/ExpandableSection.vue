@@ -32,7 +32,6 @@ const toggle = () => {
     :class="{
       ['ExpandableSection--expanded']: _expanded,
     }"
-    :aria-label="_label"
     :aria-expanded="_expanded"
   >
     <div class="ExpandableSection__Line" v-if="!_expanded">
@@ -42,6 +41,8 @@ const toggle = () => {
     <div class="ExpandableSection__Content" v-if="_expanded">
       <slot name="expanded"></slot>
     </div>
+
+    <span class="visually-hidden">{{ _label }}</span>
 
     <span class="ExpandableSection__Expander">
       <AVIcon v-if="_expanded" icon="minus" aria-hidden="true" />
