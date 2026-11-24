@@ -82,15 +82,15 @@
     util "^0.12.5"
     xml-js "^1.6.11"
 
+"@assemblyvoting/types@1.4.0-beta.0":
+  version "1.4.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.4.0-beta.0.tgz#035e312b40dbfa6f2097a1608ebd805219995414"
+  integrity sha512-iTNjIuxbdBHbZxN6PFAgTNev2JRoHpiFoLZqKD8rTPNsrHpVb6n+bvr/I9z5M2Yv8fIe1b61086aLN/giVnaZg==
+
 "@assemblyvoting/types@^1.0.6":
   version "1.0.6"
   resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.0.6.tgz#d9969ffcf22d01788f8b9ceff8f214a4929d6971"
   integrity sha512-igYESo5H7Q2zIzN89RT7G/zb+sQ9DH2QhdGb0xmANRJSLNUv1+JQVSNcgsC6mEW0d1ztEcg6eq6+b0+jpfyVsg==
-
-"@assemblyvoting/types@^1.2.0":
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.2.0.tgz#7857f9ec394420a4ad9d1dad1b0afbbf89be0d71"
-  integrity sha512-9Bv/3yiwEluuRF6JRfRcmsV2HdRh21RnG+tvmhBK7H1E3VaGz4SlW2aCcy16RGkXGX88obM7tN6Rc0wv+3c6Qw==
 
 "@axe-core/playwright@^4.12.1":
   version "4.12.1"
