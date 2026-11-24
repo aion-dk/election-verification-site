@@ -106,3 +106,40 @@ describe("ResultCard", () => {
     expect(revokeSpy).toHaveBeenCalledWith("blob:fake-url");
   });
 });
+
+describe("ResultCard date formatting", () => {
+  it("formats the published date for the current locale", () => {
+    const wrapper = mount(ResultCard, {
+      props: { result: mockResult },
+      global: { plugins: [i18n, createPinia()] },
+    });
+
+    expect(wrapper.find("time").text()).toContain("January 20, 2025");
+    wrapper.unmount();
+  });
+
+  it("falls back to the raw value when the date cannot be formatted", () => {
+    const wrapper = mount(ResultCard, {
+      props: { result: { ...mockResult, publishedAt: "not-a-date" } },
+      global: { plugins: [i18n, createPinia()] },
+    });
+
+    expect(wrapper.find("time").text()).toBe("not-a-date");
+    wrapper.unmount();
+  });
+
+  it("does not render a preview or download link without a PDF", () => {
+    const wrapper = mount(ResultCard, {
+      props: { result: { ...mockResult, pdf: "" } },
+      global: { plugins: [i18n, createPinia()] },
+    });
+
+    expect(
+      wrapper.find('[data-testid="result-card-pdf-object"]').exists(),
+    ).toBe(false);
+    expect(wrapper.find('[data-testid="result-card-download"]').exists()).toBe(
+      false,
+    );
+    wrapper.unmount();
+  });
+});

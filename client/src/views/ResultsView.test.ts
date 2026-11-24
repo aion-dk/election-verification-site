@@ -120,4 +120,69 @@ describe("ResultsView", () => {
     );
     wrapper.unmount();
   });
+
+  it("falls back to the publication date when a closing date is missing", async () => {
+    getPublishedResultsMock.mockResolvedValue([
+      {
+        votingRoundName: "Published late",
+        votingRoundClosingDate: null,
+        publishedAt: "2025-05-01T00:00:00.000Z",
+        pdf: btoa("%PDF-1.4 late"),
+      },
+      {
+        votingRoundName: "Closed mid",
+        votingRoundClosingDate: "2025-03-01T00:00:00.000Z",
+        publishedAt: "2025-09-01T00:00:00.000Z",
+        pdf: btoa("%PDF-1.4 mid"),
+      },
+      {
+        votingRoundName: "Published early",
+        votingRoundClosingDate: null,
+        publishedAt: "2025-01-01T00:00:00.000Z",
+        pdf: btoa("%PDF-1.4 early"),
+      },
+    ]);
+
+    const wrapper = await mountResultsView();
+
+    const titles = wrapper
+      .findAll('[data-testid="result-card-title"]')
+      .map((t) => t.text());
+    expect(titles).toEqual(["Published early", "Closed mid", "Published late"]);
+    wrapper.unmount();
+  });
+
+  it("reloads the results when retry is clicked after a failure", async () => {
+    const errorSpy = vi.spyOn(console, "error").mockImplementation(() => {});
+    getPublishedResultsMock
+      .mockRejectedValueOnce(new Error("Network error"))
+      .mockResolvedValueOnce(mockResults);
+
+    const wrapper = await mountResultsView();
+    expect(wrapper.find("#results-error").exists()).toBe(true);
+    expect(errorSpy).toHaveBeenCalledWith(new Error("Network error"));
+
+    await wrapper.find("#results-retry").trigger("click");
+    await flushPromises();
+
+    expect(getPublishedResultsMock).toHaveBeenCalledTimes(2);
+    expect(wrapper.find("#results-error").exists()).toBe(false);
+    expect(wrapper.findAll('[data-testid="result-card-title"]')).toHaveLength(
+      3,
+    );
+    errorSpy.mockRestore();
+    wrapper.unmount();
+  });
+
+  it("does not render the list or error before results have loaded", async () => {
+    getPublishedResultsMock.mockReturnValue(new Promise(() => {}));
+
+    const wrapper = await mountResultsView();
+
+    expect(getPublishedResultsMock).toHaveBeenCalledTimes(1);
+    expect(wrapper.find("#results-list").exists()).toBe(false);
+    expect(wrapper.find("#results-error").exists()).toBe(false);
+    expect(wrapper.find("#results-title").exists()).toBe(true);
+    wrapper.unmount();
+  });
 });
