@@ -105,6 +105,19 @@ export const offlineMessages: SpreadableDLM = {
       },
     },
   },
+  fil: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Naglo-load...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Lumaktaw sa pangunahing nilalaman",
+        skip_navigation: "Lumaktaw sa nabigasyon",
+      },
+    },
+  },
   fr: {
     js: {
       components: {
@@ -231,6 +244,7 @@ export const fallbackMessages: SpreadableDLM = {
       de: "Deutsch",
       da: "Dansk",
       es: "Español",
+      fil: "Filipino",
     },
     errors: {
       go_to_verification: "Go to the verification site",
