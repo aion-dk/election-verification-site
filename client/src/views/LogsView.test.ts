@@ -249,8 +249,8 @@ describe("LogsView", () => {
       await wrapper.find(selector).trigger("click");
 
       expect(routerPushMock).toHaveBeenCalledTimes(1);
-      expect(routerPushMock.mock.calls[0][0]).toMatch(
-        new RegExp(`/org_slug/election_slug/logs/${expectedPage}$`),
+      expect(routerPushMock).toHaveBeenCalledWith(
+        `/en/org_slug/election_slug/logs/${expectedPage}`,
       );
     });
 

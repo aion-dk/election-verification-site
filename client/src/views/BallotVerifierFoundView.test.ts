@@ -122,10 +122,8 @@ describe("BallotVerifierFoundView", () => {
 
     expect(useVerificationStore().trackingCode).toBe("TRACK");
     expect(pushMock).toHaveBeenCalledTimes(1);
-    // Only the suffix is asserted: the view interpolates `i18n.global.locale`
-    // (a ref in composition mode), so the locale segment is not "en".
-    expect(pushMock.mock.calls[0][0]).toMatch(
-      /\/org_slug\/election_slug\/track\/CODE42$/,
+    expect(pushMock).toHaveBeenCalledWith(
+      "/en/org_slug/election_slug/track/CODE42",
     );
     wrapper.unmount();
   });
@@ -168,9 +166,7 @@ describe("BallotVerifierFoundView", () => {
     await wrapper.find("[data-testid=cancel]").trigger("click");
 
     expect(pushMock).toHaveBeenCalledTimes(1);
-    expect(pushMock.mock.calls[0][0]).toMatch(
-      /\/org_slug\/election_slug\/find$/,
-    );
+    expect(pushMock).toHaveBeenCalledWith("/en/org_slug/election_slug/find");
     wrapper.unmount();
   });
 });

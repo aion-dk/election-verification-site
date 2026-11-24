@@ -119,8 +119,8 @@ describe("Welcome", () => {
     await wrapper.find("#find-ballot").trigger("click");
 
     expect(routerPushMock).toHaveBeenCalledTimes(1);
-    expect(routerPushMock.mock.calls[0][0]).toMatch(
-      /\/org_slug\/election_slug\/find$/,
+    expect(routerPushMock).toHaveBeenCalledWith(
+      "/en/org_slug/election_slug/find",
     );
   });
 });

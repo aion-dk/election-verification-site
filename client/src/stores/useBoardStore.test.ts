@@ -46,8 +46,7 @@ describe("useBoardStore", () => {
     expect(store.meta.prev_page).toBe(1);
     expect(store.meta.total_count).toBe(50);
     expect(store.meta.total_pages).toBe(5);
-    // Source reads `meta.current_pag` (typo), so current_page is never set.
-    expect(store.meta.current_page).toBeUndefined();
+    expect(store.meta.current_page).toBe(2);
     expect(store.currentPage).toBe(2);
   });
 

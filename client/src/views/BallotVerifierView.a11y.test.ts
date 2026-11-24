@@ -106,12 +106,7 @@ test("BallotVerifierView has no accessibility violations with a decrypted ballot
 
   expect(wrapper.find("#verifier-spoiled-content").exists()).toBe(true);
   expect(wrapper.find("#contest-title-c1").text()).toBe("Contest one");
-  // Known issue: BallotVerifierContest renders an <h3> right after this
-  // view's <h1>, skipping a heading level. Tracked separately; every other
-  // rule is still enforced here.
-  const results = await axe(wrapper.element, {
-    rules: { "heading-order": { enabled: false } },
-  });
+  const results = await axe(wrapper.element);
   await expect(results).toHaveNoViolations();
   wrapper.unmount();
 });

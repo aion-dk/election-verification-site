@@ -1,7 +1,7 @@
 import { beforeAll, expect, test } from "vitest";
 import { mount } from "@vue/test-utils";
 import ExpandableSection from "./ExpandableSection.vue";
-import { loadLocaleMessages } from "../lib/i18n";
+import { loadLocaleMessages, setLocale } from "../lib/i18n";
 import { fallbackMessages } from "../assets/translations";
 
 const props = { expanded: false };
@@ -83,4 +83,30 @@ test("is focusable", () => {
   const wrapper = mount(ExpandableSection, collapsedOptions);
 
   expect(wrapper.find("[role=button]").attributes("tabindex")).toBe("0");
+});
+
+test("labels an initially expanded section as collapsible", () => {
+  const wrapper = mount(ExpandableSection, {
+    props: { expanded: true },
+    slots,
+    global,
+  });
+
+  expect(wrapper.find(".visually-hidden").text()).toBe("Click to read less");
+});
+
+test("updates the label when the locale changes", async () => {
+  await loadLocaleMessages("es", {
+    components: { board_item: { expand: "Leer más", collapse: "Leer menos" } },
+  });
+  const wrapper = mount(ExpandableSection, collapsedOptions);
+  expect(wrapper.find(".visually-hidden").text()).toBe("Click to read more");
+
+  setLocale("es");
+  await wrapper.vm.$nextTick();
+  expect(wrapper.find(".visually-hidden").text()).toBe("Leer más");
+
+  setLocale("en");
+  await wrapper.vm.$nextTick();
+  expect(wrapper.find(".visually-hidden").text()).toBe("Click to read more");
 });

@@ -23,7 +23,7 @@ export default defineStore("boardStore", () => {
     const { data } = await api.get(url);
 
     items.value = data.items;
-    meta.current_page = data.meta?.current_pag;
+    meta.current_page = data.meta?.current_page;
     meta.next_page = data.meta?.next_page;
     meta.prev_page = data.meta?.prev_page;
     meta.total_count = data.meta?.total_count;

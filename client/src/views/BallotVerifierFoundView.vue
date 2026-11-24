@@ -30,13 +30,13 @@ async function checkForTrackingCode(store: any) {
   if (!store.trackingCode) return;
 
   await router.push(
-    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${ballotCode.value}`,
+    `/${i18n.global.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}/track/${ballotCode.value}`,
   );
 }
 
 const cancel = () => {
   router.push(
-    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/find`,
+    `/${i18n.global.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}/find`,
   );
 };
 

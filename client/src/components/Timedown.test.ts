@@ -89,4 +89,13 @@ describe("Timedown", () => {
     expect(wrapper.text()).toContain("0:00");
     expect(progressStyle(wrapper)).toContain("--width: 0%");
   });
+
+  it("stops its timer when unmounted", () => {
+    const wrapper = mountTimedown();
+    expect(vi.getTimerCount()).toBe(1);
+
+    wrapper.unmount();
+
+    expect(vi.getTimerCount()).toBe(0);
+  });
 });

@@ -239,6 +239,7 @@ describe("App", () => {
     const styles = addedStyleTags();
     expect(styles).toHaveLength(1);
     expect(styles[0].innerHTML).toBe(".custom-theme { color: red; }");
+    expect(configStore.electionTheme).toBe(".custom-theme { color: red; }");
 
     expect(wrapper.find(".DBAS").exists()).toBe(true);
     expect(wrapper.find(".header-name").text()).toBe("My Election");
@@ -360,6 +361,7 @@ describe("App", () => {
     const styles = addedStyleTags();
     expect(styles).toHaveLength(1);
     expect(styles[0].innerHTML).toBe(defaultTheme);
+    expect(useConfigStore().electionTheme).toBe(defaultTheme);
     wrapper.unmount();
   });
 

@@ -313,9 +313,10 @@ describe("BallotUnifiedTracking", () => {
       await uploadReceipt(wrapper, [receiptFile]);
 
       expect(extractor.files).toEqual([receiptFile]);
-      expect(wrapper.find("#error-receipt-invalid_file_format").exists()).toBe(
-        true,
-      );
+      const error = wrapper.find("#error-receipt-invalid_file_format");
+      expect(error.exists()).toBe(true);
+      // The offline fallback messages include this error.
+      expect(error.text()).toContain("Invalid receipt file");
       expect(pushMock).not.toHaveBeenCalled();
       wrapper.unmount();
     });

@@ -3,12 +3,12 @@
     class="BallotVerifierContest"
     :id="`ballot-verifier-contest-${contestSelection.reference}`"
   >
-    <h3
+    <h2
       class="BallotVerifierContest__Title"
       :id="`contest-title-${contestSelection.reference}`"
     >
       {{ contestTitle }}
-    </h3>
+    </h2>
     <p
       v-if="contest.question"
       v-text="contestQuestion"

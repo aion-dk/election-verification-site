@@ -29,7 +29,7 @@ const customFooterHtml = computed(() => {
   }
 
   if (!raw) return null;
-  const sanitized = DOMPurify.sanitize(raw);
+  const sanitized = DOMPurify.sanitize(raw, { ADD_ATTR: ["target"] });
   const template = document.createElement("template");
   template.innerHTML = sanitized;
   template.content.querySelectorAll("a[target='_blank']").forEach((a) => {

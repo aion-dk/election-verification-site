@@ -85,12 +85,12 @@ describe("DateTime", () => {
     expect(wrapper.findComponent(AVTooltip).props("text")).toBe("in 3 days");
   });
 
-  it("declares a format checker accepting only absolute or relative", () => {
+  it("declares a format validator accepting only absolute or relative", () => {
     const formatProp = (DateTime as any).props.format;
 
     expect(formatProp.default).toBe("relative");
-    expect(formatProp.validate("absolute")).toBe(true);
-    expect(formatProp.validate("relative")).toBe(true);
-    expect(formatProp.validate("other")).toBe(false);
+    expect(formatProp.validator("absolute")).toBe(true);
+    expect(formatProp.validator("relative")).toBe(true);
+    expect(formatProp.validator("other")).toBe(false);
   });
 });

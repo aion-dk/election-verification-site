@@ -70,7 +70,7 @@ const loadPage = async (page: number) => {
 
 const navigate = (page: number) => {
   router.push(
-    `/${i18n.global.locale}/${route.params.organisationSlug}/${
+    `/${i18n.global.locale.value}/${route.params.organisationSlug}/${
       route.params.electionSlug
     }/logs/${page.toString()}`,
   );

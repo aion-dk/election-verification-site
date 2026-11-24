@@ -64,6 +64,12 @@ errors: {
       title: "Tracking code not found", 
       description: "Verify you have entered the tracking code correctly..."
     }
+  },
+  receipt: {
+    invalid_file_format: {
+      title: "Invalid receipt file",
+      description: "The uploaded file is not a valid vote receipt..."
+    }
   }
 }
 ```

@@ -172,6 +172,8 @@ describe("BallotTrackerView", () => {
       name: "BallotVerificationLanding",
     });
     expect(verifier.pollForBallotDecision).not.toHaveBeenCalled();
+    // It stops after redirecting instead of loading the ballot status.
+    expect(verifier.checkBallotStatus).not.toHaveBeenCalled();
     expect(wrapper.find("#ballot-tracker").exists()).toBe(false);
     wrapper.unmount();
   });
@@ -193,11 +195,7 @@ describe("BallotTrackerView", () => {
     await wrapper.find("[data-testid=cancel]").trigger("click");
 
     expect(pushMock).toHaveBeenCalledTimes(1);
-    // Only the suffix is asserted: the view interpolates `i18n.global.locale`
-    // (a ref in composition mode), so the locale segment is not "en".
-    expect(pushMock.mock.calls[0][0]).toMatch(
-      /\/org_slug\/election_slug\/find$/,
-    );
+    expect(pushMock).toHaveBeenCalledWith("/en/org_slug/election_slug/find");
     wrapper.unmount();
   });
 });

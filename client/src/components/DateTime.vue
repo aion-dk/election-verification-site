@@ -14,7 +14,7 @@ const props = defineProps({
   format: {
     type: String,
     default: "relative",
-    validate: (s: string) => ["absolute", "relative"].includes(s),
+    validator: (s: string) => ["absolute", "relative"].includes(s),
   },
   timeZone: {
     type: String,

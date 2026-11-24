@@ -1,10 +1,9 @@
 import "../test-utils/setupConfig";
-import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { mount } from "@vue/test-utils";
 import { createI18n } from "vue-i18n";
 import { createPinia, setActivePinia, type Pinia } from "pinia";
 import useConfigStore from "@/stores/useConfigStore";
-import DOMPurify from "dompurify";
 import Footer from "./Footer.vue";
 import { fallbackMessages } from "../assets/translations";
 
@@ -135,35 +134,14 @@ describe("Footer", () => {
       expect(html).not.toContain("onerror");
     });
 
-    it("strips target attributes with the default sanitizer configuration", () => {
+    it("keeps target attributes and adds noopener and noreferrer to links opening in a new tab", () => {
       const wrapper = mountFooter(
         '<a href="https://example.com" target="_blank">Example</a>',
       );
 
       const link = wrapper.find("#footer-custom-content a");
       expect(link.attributes("href")).toBe("https://example.com");
-      expect(link.attributes("target")).toBeUndefined();
-      expect(link.attributes("rel")).toBeUndefined();
-    });
-  });
-
-  // DOMPurify drops "target" by default, so the rel hardening below only takes
-  // effect when the sanitizer is configured to keep it.
-  describe("custom footer with target attributes kept by the sanitizer", () => {
-    beforeEach(() => {
-      DOMPurify.setConfig({ ADD_ATTR: ["target"] });
-    });
-
-    afterEach(() => {
-      DOMPurify.clearConfig();
-    });
-
-    it("adds noopener and noreferrer to links opening in a new tab", () => {
-      const wrapper = mountFooter(
-        '<a href="https://example.com" target="_blank">Example</a>',
-      );
-
-      const link = wrapper.find("#footer-custom-content a");
+      expect(link.attributes("target")).toBe("_blank");
       expect(link.attributes("rel")).toBe("noopener noreferrer");
     });
 
