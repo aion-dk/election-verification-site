@@ -167,6 +167,17 @@ describe("BallotUnifiedTracking", () => {
       wrapper.unmount();
     });
 
+    it("tracks by the tracking code when the store gets one without a ballot code", async () => {
+      const wrapper = await mountView();
+
+      useVerificationStore().setTrackingCode("LEGACY");
+      await flushPromises();
+
+      expect(pushMock).toHaveBeenCalledTimes(1);
+      expect(pushMock).toHaveBeenCalledWith(`${BASE}/track/LEGACY`);
+      wrapper.unmount();
+    });
+
     it("shows the election logo from the election status theme", async () => {
       useConfigStore().setElectionStatus({
         theme: { logo: "https://example.com/logo.png" },
@@ -365,8 +376,9 @@ describe("BallotUnifiedTracking", () => {
           "RECEIPT",
           "TRACK",
         );
-        expect(pushMock).toHaveBeenLastCalledWith(`${BASE}/track/CODE42`);
-        expect(pushMock).not.toHaveBeenCalledWith(`${BASE}/receipt_error`);
+        // Navigates once: the store watcher stays quiet while the receipt is processed.
+        expect(pushMock).toHaveBeenCalledTimes(1);
+        expect(pushMock).toHaveBeenCalledWith(`${BASE}/track/CODE42`);
         wrapper.unmount();
       });
 
@@ -378,7 +390,9 @@ describe("BallotUnifiedTracking", () => {
 
         await uploadReceipt(wrapper, [receiptFile]);
 
-        expect(pushMock).toHaveBeenLastCalledWith(`${BASE}/receipt_error`);
+        // Goes straight to the error page, without passing through /track first.
+        expect(pushMock).toHaveBeenCalledTimes(1);
+        expect(pushMock).toHaveBeenCalledWith(`${BASE}/receipt_error`);
         wrapper.unmount();
       });
 
@@ -411,8 +425,8 @@ describe("BallotUnifiedTracking", () => {
         );
         expect(useVerificationStore().trackingCode).toBe("LEGACY");
         expect(verifier.findBallot).not.toHaveBeenCalled();
+        expect(pushMock).toHaveBeenCalledTimes(1);
         expect(pushMock).toHaveBeenCalledWith(`${BASE}/track/LEGACY`);
-        expect(pushMock).not.toHaveBeenCalledWith(`${BASE}/receipt_error`);
         wrapper.unmount();
       });
 

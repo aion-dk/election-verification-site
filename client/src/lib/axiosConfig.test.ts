@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import type { AxiosResponse } from "axios";
+import { AxiosError, type AxiosResponse } from "axios";
 import { HttpError } from "../Types";
 
 const httpErrorHandlerMock = vi.hoisted(() => vi.fn());
@@ -58,17 +58,40 @@ describe("responseErrorHandler", () => {
     httpErrorHandlerMock.mockReset();
   });
 
-  it("returns the response untouched when the request is raw", () => {
-    const response = makeResponse({ raw: true, status: 500 });
-    expect(responseErrorHandler(response)).toBe(response);
+  // Axios passes an AxiosError (carrying the request config and the response)
+  // to the rejection handler.
+  function makeError(raw?: boolean) {
+    const response = makeResponse({ raw, status: 500 });
+    const error = new AxiosError(
+      "Request failed with status code 500",
+      AxiosError.ERR_BAD_RESPONSE,
+      response.config,
+      {},
+      response,
+    );
+    return { error, response };
+  }
+
+  it("resolves raw requests with the error's response", () => {
+    const { error, response } = makeError(true);
+
+    expect(responseErrorHandler(error)).toBe(response);
     expect(httpErrorHandlerMock).not.toHaveBeenCalled();
   });
 
-  it("delegates to the http error handler otherwise", () => {
-    const response = makeResponse({ status: 500 });
+  it("delegates other requests to the http error handler", () => {
+    const { error } = makeError();
     httpErrorHandlerMock.mockReturnValue("handled");
 
-    expect(responseErrorHandler(response)).toBe("handled");
-    expect(httpErrorHandlerMock).toHaveBeenCalledWith(response);
+    expect(responseErrorHandler(error)).toBe("handled");
+    expect(httpErrorHandlerMock).toHaveBeenCalledWith(error);
+  });
+
+  it("delegates errors without a request config to the http error handler", () => {
+    const error = new Error("boom") as AxiosError;
+
+    responseErrorHandler(error);
+
+    expect(httpErrorHandlerMock).toHaveBeenCalledWith(error);
   });
 });

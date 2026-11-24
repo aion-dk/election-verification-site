@@ -69,6 +69,22 @@ describe("DateTime", () => {
     expect(wrapper.findComponent(AVTooltip).props("text")).toContain("09:00");
   });
 
+  it("computes the relative time from the real instant in any time zone", () => {
+    const wrapper = mountDateTime({ timeZone: "UTC" });
+    const tokyo = mountDateTime({ timeZone: "Asia/Tokyo" });
+
+    expect(wrapper.findComponent(AVTooltip).props("text")).toBe("2 hours ago");
+    expect(tokyo.findComponent(AVTooltip).props("text")).toBe("2 hours ago");
+  });
+
+  it("names the given time zone in the absolute time", () => {
+    const wrapper = mountDateTime({ format: "absolute", timeZone: "UTC" });
+
+    const text = wrapper.findComponent(AVTooltip).props("text");
+    expect(text).toContain("12:00");
+    expect(text).toMatch(/UTC|GMT/);
+  });
+
   it("uses the active i18n locale for formatting", () => {
     const wrapper = mountDateTime({}, "es");
 

@@ -7,7 +7,6 @@ export default defineStore("boardStore", () => {
   const items = ref<LatestConfigurationConfig[]>([]);
   const meta = reactive<Meta>({});
   const currentPage = ref<number>(null);
-  const currentFilter = ref<string[]>([]);
 
   const loadPage = async (
     slug: string,
@@ -15,8 +14,8 @@ export default defineStore("boardStore", () => {
     filter: string[],
     hidePending: boolean = false,
   ) => {
-    if (currentPage.value === page && filter == currentFilter.value) return;
-
+    // Always fetch: the board is live data (pending items get confirmed), and
+    // the same page can belong to another election or filter combination.
     let url = `/${slug}/board?page=${page}`;
     filter.forEach((f) => (url = `${url}&filter[type][]=${f}`));
     url += `&filter[hide_pending]=${hidePending}`;
@@ -31,5 +30,5 @@ export default defineStore("boardStore", () => {
     currentPage.value = page;
   };
 
-  return { items, meta, loadPage: loadPage, currentPage, currentFilter };
+  return { items, meta, loadPage: loadPage, currentPage };
 });

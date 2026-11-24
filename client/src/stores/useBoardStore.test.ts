@@ -29,7 +29,6 @@ describe("useBoardStore", () => {
     expect(store.items).toEqual([]);
     expect(store.meta).toEqual({});
     expect(store.currentPage).toBeNull();
-    expect(store.currentFilter).toEqual([]);
   });
 
   it("loads a page with filters and stores items and pagination", async () => {
@@ -78,35 +77,42 @@ describe("useBoardStore", () => {
     expect(store.currentPage).toBe(4);
   });
 
-  it("skips the request when the same page and filter are already loaded", async () => {
-    getMock.mockResolvedValue({ data: { items, meta } });
-    const store = useBoardStore();
-
-    await store.loadPage("slug", 1, store.currentFilter);
-    await store.loadPage("slug", 1, store.currentFilter);
-
-    expect(getMock).toHaveBeenCalledTimes(1);
-  });
-
   it("reloads when the page changes", async () => {
     getMock.mockResolvedValue({ data: { items, meta } });
     const store = useBoardStore();
 
-    await store.loadPage("slug", 1, store.currentFilter);
-    await store.loadPage("slug", 2, store.currentFilter);
+    await store.loadPage("slug", 1, []);
+    await store.loadPage("slug", 2, []);
 
     expect(getMock).toHaveBeenCalledTimes(2);
     expect(store.currentPage).toBe(2);
   });
 
-  it("reloads when a different filter array is passed for the same page", async () => {
-    getMock.mockResolvedValue({ data: { items, meta } });
+  it("always fetches the page again, since the board is live data", async () => {
+    const fresh = [...items, { ...items[0], address: "new-item" }];
+    getMock
+      .mockResolvedValueOnce({ data: { items, meta } })
+      .mockResolvedValueOnce({ data: { items: fresh, meta } });
     const store = useBoardStore();
 
     await store.loadPage("slug", 1, []);
     await store.loadPage("slug", 1, []);
 
     expect(getMock).toHaveBeenCalledTimes(2);
+    expect(store.items).toEqual(fresh);
+  });
+
+  it("does not reuse a page loaded for another election", async () => {
+    getMock.mockResolvedValue({ data: { items, meta } });
+    const store = useBoardStore();
+
+    await store.loadPage("election-a", 1, []);
+    await store.loadPage("election-b", 1, []);
+
+    expect(getMock).toHaveBeenNthCalledWith(
+      2,
+      "/election-b/board?page=1&filter[hide_pending]=false",
+    );
   });
 
   it("propagates request errors without updating state", async () => {

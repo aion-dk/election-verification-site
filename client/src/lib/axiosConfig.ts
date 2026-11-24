@@ -1,4 +1,4 @@
-import type { AxiosResponse } from "axios";
+import type { AxiosError, AxiosResponse } from "axios";
 import { HttpError } from "../Types";
 import httpErrorHandler from "./httpErrorHandler";
 
@@ -30,11 +30,13 @@ export const responseHandler = (response: AxiosResponse<any>) => {
   throw new HttpError("API Error! Invalid status code!");
 };
 
-export const responseErrorHandler = (response: AxiosResponse<any>) => {
-  const config = response?.config;
-  if (config.raw) {
-    return response;
+// Axios calls the rejection handler with an AxiosError (or another error),
+// not with a response. Raw requests resolve with the error's response so the
+// caller can inspect the status itself.
+export const responseErrorHandler = (error: AxiosError<any>) => {
+  if (error?.config?.raw) {
+    return error.response;
   }
 
-  return httpErrorHandler(response);
+  return httpErrorHandler(error);
 };
