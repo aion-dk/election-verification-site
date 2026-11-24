@@ -70,6 +70,10 @@
     "vitest": "^5.1.1",
     "vitest-axe": "^0.1.0"
   },
+  "resolutions": {
+    "**/js-beautify/glob": "^14.0.6",
+    "**/js-beautify/editorconfig": "^4.0.1"
+  },
   "engines": {
     "node": ">=26.13",
     "npm": ">=11.20"
