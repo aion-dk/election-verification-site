@@ -14,16 +14,29 @@ function submitForm(event: Event) {
 </script>
 
 <template>
-  <h1>Error: Missing election identifier</h1>
+  <h1 id="missing-slug-title">Error: Missing election identifier</h1>
 
-  <p>
+  <p id="missing-slug-description">
     To track your ballot or verify your vote, you must provide the election
     identifier.
   </p>
 
-  <form @submit="submitForm">
-    <input type="text" name="election-slug" v-model="_electionSlug" />
+  <form @submit="submitForm" id="missing-slug-form">
+    <label for="election-slug" class="visually-hidden">
+      Election identifier
+    </label>
+    <input
+      type="text"
+      name="election-slug"
+      id="election-slug"
+      v-model="_electionSlug"
+    />
 
-    <input type="submit" name="submit-election-slug" value="Continue" />
+    <input
+      type="submit"
+      name="submit-election-slug"
+      id="submit-election-slug"
+      value="Continue"
+    />
   </form>
 </template>

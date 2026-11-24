@@ -139,7 +139,17 @@ commands:
           name: Run component client tests
           command: |
             docker run --name=component -e CI="1" ${AWS_ECR_REGISTRY_URL}/<< parameters.service_name >>:<< parameters.tag_prefix >>${CIRCLE_SHA1}-untested bash -c "yarn test:unit:ci"
+      - run:
+          name: Copy test results and coverage report
+          # Always copy, so the reports are available even when tests or coverage thresholds fail.
+          when: always
+          command: |
             docker cp component:/usr/src/app/src/test-results .
+      - store_test_results:
+          path: test-results/vitest.xml
+      - store_artifacts:
+          path: test-results/coverage
+          destination: coverage
       - store_artifacts:
           path: test-results
   run-linting:

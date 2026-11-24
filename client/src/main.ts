@@ -1,4 +1,4 @@
-import { createApp } from "vue";
+import { createApp, type Plugin } from "vue";
 import { createPinia } from "pinia";
 import App from "./App.vue";
 import router from "./router";
@@ -9,7 +9,7 @@ import "@assemblyvoting/electa-ui/styles"; // Imports styles
 
 const app = createApp(App);
 
-app.use(UILibrary.default, i18n);
+app.use(UILibrary.default as Plugin, i18n);
 app.use(createPinia());
 app.use(router);
 app.use(i18n);

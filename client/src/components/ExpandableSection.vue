@@ -1,5 +1,5 @@
 <script lang="ts" setup>
-import { ref } from "vue";
+import { computed, ref } from "vue";
 import i18n from "../lib/i18n";
 const { t } = i18n.global;
 
@@ -11,17 +11,20 @@ const props = defineProps({
 });
 
 const _expanded = ref(props.expanded);
-const _label = ref(t("components.board_item.expand"));
+// Computed so the label follows both the expanded state and locale changes.
+const _label = computed(() =>
+  _expanded.value
+    ? t("components.board_item.collapse")
+    : t("components.board_item.expand"),
+);
 
 const toggle = () => {
   _expanded.value = !_expanded.value;
-  _label.value = _expanded.value
-    ? t("components.board_item.collapse")
-    : t("components.board_item.expand");
 };
 </script>
 
 <template>
+  <!-- NOSONAR: using div with role=button instead of <button> because slots render block-level content, which is invalid inside <button> -->
   <div
     role="button"
     tabindex="0"
@@ -34,6 +37,7 @@ const toggle = () => {
     }"
     :aria-expanded="_expanded"
   >
+    <span class="visually-hidden">{{ _label }}</span>
     <div class="ExpandableSection__Line" v-if="!_expanded">
       <slot name="collapsed"></slot>
     </div>
@@ -67,6 +71,11 @@ const toggle = () => {
   width: 100%;
   text-align: inherit;
   font: inherit;
+}
+
+.ExpandableSection:focus-visible {
+  outline: 2px solid var(--av-theme-background);
+  outline-offset: 2px;
 }
 
 .ExpandableSection__Line {

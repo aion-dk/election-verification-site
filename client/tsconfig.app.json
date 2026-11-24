@@ -5,6 +5,7 @@
     "skipLibCheck": true,
     "strict": false,
     "strictNullChecks": false,
+    "esModuleInterop": true,
     "module": "ESNext",
     "moduleResolution": "bundler",
     "target": "ES2022",

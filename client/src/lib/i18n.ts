@@ -16,8 +16,19 @@ const rtlLanguages: Set<Locale> = new Set([
   "ur",
   "yi",
 ]);
-const url = new URL(globalThis.location.href);
-if (url.pathname.split("/")[1]) locale = url.pathname.split("/")[1];
+
+function getLocaleFromUrl(): Locale {
+  try {
+    const url = new URL(globalThis.location.href);
+    const segment = url.pathname.split("/")[1];
+    if (segment) return segment as Locale;
+  } catch {
+    // SSR or test environment
+  }
+  return "en";
+}
+
+locale = getLocaleFromUrl();
 
 const i18n = createI18n({
   legacy: false,

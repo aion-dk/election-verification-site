@@ -7,38 +7,46 @@ defineProps({
     type: Object,
     required: true,
   },
+  index: {
+    type: Number,
+    required: true,
+  },
 });
 </script>
 
 <template>
-  <div class="BallotActivity">
-    <ExpandableSection>
+  <div class="BallotActivity" :id="`ballot-activity-${index}`">
+    <ExpandableSection :id="`ballot-activity-section-${index}`">
       <template v-slot:collapsed>
-        <p
-          class="BallotActivity__Type"
-          :aria-label="$t('components.board_item.aria_labels.activity_type')"
-        >
+        <p class="BallotActivity__Type" :id="`ballot-activity-type-${index}`">
+          <span class="visually-hidden">{{
+            $t("components.board_item.aria_labels.activity_type")
+          }}</span>
           {{ $t(`components.ballot_activity.${activity.type}.type`) }}
         </p>
 
         <p
           class="BallotActivity__RegisteredAt"
-          :aria-label="
-            $t('components.board_item.aria_labels.activity_registered')
-          "
+          :id="`ballot-activity-registered-at-${index}`"
         >
+          <span class="visually-hidden">{{
+            $t("components.board_item.aria_labels.activity_registered")
+          }}</span>
           <AVIcon
             icon="clock"
             class="BallotActivity__Icon"
             aria-hidden="true"
           />
-          <DateTime :date-time="activity.registered_at" />
+          <DateTime :date-time="activity.registered_at" format="absolute" />
         </p>
 
         <p
           class="BallotActivity__Author"
-          :aria-label="$t('components.board_item.aria_labels.activity_author')"
+          :id="`ballot-activity-author-${index}`"
         >
+          <span class="visually-hidden">{{
+            $t("components.board_item.aria_labels.activity_author")
+          }}</span>
           <AVIcon icon="user" class="BallotActivity__Icon" aria-hidden="true" />
           <span>
             {{ $t(`components.ballot_activity.${activity.type}.author`) }}
@@ -47,12 +55,16 @@ defineProps({
       </template>
 
       <template v-slot:expanded>
-        <p class="BallotActivity__Type BallotActivity__Type_Expanded">
+        <p
+          class="BallotActivity__Type BallotActivity__Type_Expanded"
+          :id="`ballot-activity-type-expanded-${index}`"
+        >
           {{ $t(`components.ballot_activity.${activity.type}.type`) }}
         </p>
 
         <p
           class="BallotActivity__RegisteredAt BallotActivity__RegisteredAt_Expanded"
+          :id="`ballot-activity-registered-at-expanded-${index}`"
         >
           <AVIcon
             icon="clock"
@@ -62,10 +74,13 @@ defineProps({
           <span class="BallotActivity__Label">{{
             $t("components.ballot_activity.registered_at")
           }}</span>
-          <DateTime :date-time="activity.registered_at" format="long" />
+          <DateTime :date-time="activity.registered_at" format="absolute" />
         </p>
 
-        <p class="BallotActivity__Author BallotActivity__Author_Expanded">
+        <p
+          class="BallotActivity__Author BallotActivity__Author_Expanded"
+          :id="`ballot-activity-author-expanded-${index}`"
+        >
           <AVIcon icon="user" class="BallotActivity__Icon" aria-hidden="true" />
           <span class="BallotActivity__Label">{{
             $t("components.ballot_activity.author")
@@ -73,7 +88,10 @@ defineProps({
           {{ $t(`components.ballot_activity.${activity.type}.author`) }}
         </p>
 
-        <p class="BallotActivity__Meaning">
+        <p
+          class="BallotActivity__Meaning"
+          :id="`ballot-activity-meaning-label-${index}`"
+        >
           <AVIcon
             icon="circle-info"
             class="BallotActivity__Icon"
@@ -84,7 +102,10 @@ defineProps({
           }}</span>
         </p>
 
-        <p class="BallotActivity__Meaning">
+        <p
+          class="BallotActivity__Meaning"
+          :id="`ballot-activity-meaning-text-${index}`"
+        >
           {{ $t(`components.ballot_activity.${activity.type}.details`) }}
         </p>
       </template>

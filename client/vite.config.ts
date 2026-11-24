@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { resolve } from "node:path";
 import { existsSync, watchFile } from "node:fs";
 
@@ -76,6 +77,31 @@ export default defineConfig(({ command }) => {
             interval: 300,
           }
         : undefined,
+    },
+    test: {
+      // Unit tests run with `--root src/`, so paths here are relative to src/.
+      coverage: {
+        provider: "v8",
+        include: ["**/*.{ts,vue}"],
+        exclude: [
+          "**/*.test.ts",
+          "**/__tests__/**",
+          "test-utils/**",
+          "test-results/**",
+          "**/*.d.ts",
+          // Type-only module: no runtime code to cover.
+          "Types.ts",
+        ],
+        reporter: ["text-summary", "text", "html", "lcov", "cobertura"],
+        reportsDirectory: "./test-results/coverage",
+        // Fail the run if coverage drops: new code must come with tests.
+        thresholds: {
+          statements: 99,
+          branches: 99,
+          functions: 99,
+          lines: 99,
+        },
+      },
     },
     css: {
       preprocessorOptions: {

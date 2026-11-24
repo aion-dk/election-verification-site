@@ -21,6 +21,10 @@ const route = useRoute();
 
 const ready = ref(false);
 
+// While a receipt is processed, its own flow decides where to navigate, so the
+// store watcher must not redirect as soon as a tracking code shows up.
+const processingReceipt = ref(false);
+
 const ballotCode = ref(null);
 
 const receipt = ref(null);
@@ -47,6 +51,7 @@ const updateReceipt = async (files: File[]) => {
     error.value = null;
   } else {
     receipt.value = files[0];
+    processingReceipt.value = true;
     await receiptStore.setupAVVerifier(configStore.boardSlug);
     const receiptExtractor = new ReceiptPDFExtractor(receipt.value);
 
@@ -81,6 +86,9 @@ const updateReceipt = async (files: File[]) => {
       })
       .catch(() => {
         error.value = "receipt.invalid_file_format";
+      })
+      .finally(() => {
+        processingReceipt.value = false;
       });
   }
 };
@@ -172,7 +180,7 @@ async function checkForTrackingCode(store: any) {
 }
 
 watch(verificationStore, async (newStore) => {
-  if (!ready.value) return;
+  if (!ready.value || processingReceipt.value) return;
 
   await checkForPairingCode(newStore);
   await checkForTrackingCode(newStore);
@@ -195,13 +203,13 @@ onMounted(async () => {
   >
     <template v-slot:action>
       <MainIcon icon="magnifying-glass" />
-      <h3 class="UnifiedLanding__Title">
+      <h1 class="UnifiedLanding__Title">
         {{ t("views.ballot_finder.title") }}
-      </h3>
-      <h4 class="UnifiedLanding__Subtitle">
+      </h1>
+      <h2 class="UnifiedLanding__Subtitle">
         {{ t("views.ballot_finder.subtitle") }}
         <strong>{{ t("views.ballot_finder.subtitle_strong") }}</strong>
-      </h4>
+      </h2>
       <p class="UnifiedLanding__Description">
         {{ t("views.ballot_finder.description") }}
       </p>

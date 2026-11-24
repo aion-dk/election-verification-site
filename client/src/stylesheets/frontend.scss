@@ -1,1 +1,30 @@
 @import "bootstrap/bootstrap.customized";
+
+.dark-blurry {
+  background: rgba(var(--bs-primary-rgb), 0.85);
+  backdrop-filter: blur(4px);
+}
+
+.footer-font-weight {
+  font-weight: 400;
+}
+
+.footer-padding-top {
+  padding-top: 1rem;
+}
+
+.theme-gradient {
+  background: linear-gradient(
+    180deg,
+    var(--av-theme-background) 0%,
+    rgba(var(--av-theme-background-rgb), 0.5) 100%
+  );
+}
+
+.text-rubik {
+  font-family: "Rubik", sans-serif;
+}
+
+.text-mono {
+  font-family: "PT Mono", monospace;
+}
