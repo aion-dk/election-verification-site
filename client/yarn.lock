@@ -82,10 +82,10 @@
     util "^0.12.5"
     xml-js "^1.6.11"
 
-"@assemblyvoting/types@1.4.0-beta.0":
-  version "1.4.0-beta.0"
-  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.4.0-beta.0.tgz#035e312b40dbfa6f2097a1608ebd805219995414"
-  integrity sha512-iTNjIuxbdBHbZxN6PFAgTNev2JRoHpiFoLZqKD8rTPNsrHpVb6n+bvr/I9z5M2Yv8fIe1b61086aLN/giVnaZg==
+"@assemblyvoting/types@1.4.0-beta.1":
+  version "1.4.0-beta.1"
+  resolved "https://registry.yarnpkg.com/@assemblyvoting/types/-/types-1.4.0-beta.1.tgz#fe2ac32ffcacfb556d3094f1a52d9f46dff54e05"
+  integrity sha512-+zuuLFcS3dHtKV1PdA4TYrpOyd6BM62bwZCAurnnyrwBPlA5NCxz9sOCyox9C9Qjx5aWdSQtmoZrLjvcCpcv6A==
 
 "@assemblyvoting/types@^1.0.6":
   version "1.0.6"

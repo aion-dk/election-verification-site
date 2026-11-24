@@ -27,7 +27,7 @@
   "dependencies": {
     "@assemblyvoting/electa-ui": "5.7.2-ontario",
     "@assemblyvoting/js-client": "^7.0.0",
-    "@assemblyvoting/types": "1.4.0-beta.0",
+    "@assemblyvoting/types": "1.4.0-beta.1",
     "axios": "^1.18.1",
     "date-fns": "^4.4.0",
     "date-fns-tz": "^3.2.0",
