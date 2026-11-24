@@ -44,6 +44,8 @@ const toggle = () => {
       <slot name="expanded"></slot>
     </div>
 
+    <span class="visually-hidden">{{ _label }}</span>
+
     <span class="ExpandableSection__Expander">
       <AVIcon v-if="_expanded" icon="minus" aria-hidden="true" />
 

@@ -1,13 +1,5 @@
 /// <reference types="vite/client" />
 
-export {};
-
-declare module "@vitest/expect" {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  interface Assertion<T = any> {
-    toHaveNoViolations(): Promise<void>;
-  }
-  interface AsymmetricMatchersContaining {
-    toHaveNoViolations(): Promise<void>;
-  }
-}
+// electa-ui exports its stylesheet as "./styles" (no .css extension), so the
+// ambient "*.css" declaration from vite/client doesn't match it.
+declare module "@assemblyvoting/electa-ui/styles";

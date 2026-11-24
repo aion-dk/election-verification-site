@@ -9,6 +9,19 @@ import { fallbackMessages } from "../assets/translations";
 
 expect.extend({ toHaveNoViolations });
 
+// Since vitest 5, custom matchers are typed by augmenting `Matchers` on the
+// "vitest" module (the type parameters must match vitest's declaration).
+/* eslint-disable @typescript-eslint/no-unused-vars */
+declare module "vitest" {
+  interface Matchers<
+    R extends void | Promise<void> = void | Promise<void>,
+    T = unknown,
+  > {
+    toHaveNoViolations(): Promise<void>;
+  }
+}
+/* eslint-enable @typescript-eslint/no-unused-vars */
+
 const neededStrings = JSON.stringify(fallbackMessages.en);
 const messages = { en: JSON.parse(neededStrings) };
 

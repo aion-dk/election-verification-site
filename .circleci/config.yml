@@ -13,9 +13,11 @@ executors:
   vm-linux-ubuntu-nocache:
     machine:
       image: ubuntu-2204:current
-  license-checker-node24:
+  license-checker-node26:
     docker:
-      - image: public.ecr.aws/assembly-voting/license-checker-image:ruby-latest-node24
+      - image: ${AWS_ECR_REGISTRY_URL}/ruby:4.0-node26-node-main
+        aws_auth:
+          oidc_role_arn: ${AWS_ROLE_ARN}
 
 filters:
   - &commit_only
@@ -238,7 +240,7 @@ workflows:
             - 'GIT'
           filters: *always
           prep-yarn: true
-          executor: license-checker-node24
+          executor: license-checker-node26
           base-path: ./client
       - lint-dockerfile-client:
           filters: *commit_only
