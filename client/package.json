@@ -25,7 +25,7 @@
     "*.{ts,mts,tsx,vue,js,jsx,json,css,scss,md,html,yml,yaml}": "prettier --write"
   },
   "dependencies": {
-    "@assemblyvoting/electa-ui": "5.7.2-ontario",
+    "@assemblyvoting/electa-ui": "6.2.1-beta.0",
     "@assemblyvoting/js-client": "^7.0.0",
     "@assemblyvoting/types": "1.4.0-beta.1",
     "axios": "^1.18.1",
