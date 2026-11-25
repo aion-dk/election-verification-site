@@ -35,7 +35,8 @@ header: {
     en: "Switch to English",
     es: "Cambiar a Español", 
     da: "Skift til Dansk",
-    de: "Auf Deutsch umstellen"
+    de: "Auf Deutsch umstellen",
+    fil: "Lumipat sa Filipino"
   },
   election_logo_alt: "Election logo"
 }
