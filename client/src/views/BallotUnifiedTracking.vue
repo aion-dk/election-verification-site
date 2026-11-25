@@ -21,6 +21,10 @@ const route = useRoute();
 
 const ready = ref(false);
 
+// While a receipt is processed, its own flow decides where to navigate, so the
+// store watcher must not redirect as soon as a tracking code shows up.
+const processingReceipt = ref(false);
+
 const ballotCode = ref(null);
 
 const receipt = ref(null);
@@ -47,6 +51,7 @@ const updateReceipt = async (files: File[]) => {
     error.value = null;
   } else {
     receipt.value = files[0];
+    processingReceipt.value = true;
     await receiptStore.setupAVVerifier(configStore.boardSlug);
     const receiptExtractor = new ReceiptPDFExtractor(receipt.value);
 
@@ -81,6 +86,9 @@ const updateReceipt = async (files: File[]) => {
       })
       .catch(() => {
         error.value = "receipt.invalid_file_format";
+      })
+      .finally(() => {
+        processingReceipt.value = false;
       });
   }
 };
@@ -172,7 +180,7 @@ async function checkForTrackingCode(store: any) {
 }
 
 watch(verificationStore, async (newStore) => {
-  if (!ready.value) return;
+  if (!ready.value || processingReceipt.value) return;
 
   await checkForPairingCode(newStore);
   await checkForTrackingCode(newStore);

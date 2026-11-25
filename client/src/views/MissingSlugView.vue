@@ -22,6 +22,9 @@ function submitForm(event: Event) {
   </p>
 
   <form @submit="submitForm" id="missing-slug-form">
+    <label for="election-slug" class="visually-hidden">
+      Election identifier
+    </label>
     <input
       type="text"
       name="election-slug"

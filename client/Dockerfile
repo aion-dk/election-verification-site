@@ -1,10 +1,13 @@
 # syntax=docker/dockerfile:1
-FROM node:24.16-bullseye-slim AS builder
+FROM node:26-bookworm-slim AS builder
 
 WORKDIR /usr/src/app
 
 COPY package.json yarn.lock ./
-RUN yarn install --frozen-lockfile && yarn cache clean
+
+RUN npm install -g yarn@1.22.22 \
+  && yarn install --frozen-lockfile \
+  && yarn cache clean
 
 COPY src ./src
 COPY e2e ./e2e
@@ -17,9 +20,9 @@ COPY .prettierignore ./
 
 RUN yarn build
 
-FROM mcr.microsoft.com/playwright:v1.62.1-noble AS development
+FROM mcr.microsoft.com/playwright:v1.65.1-noble AS development
 
-RUN corepack enable
+RUN npm install -g yarn@1.22.22
 WORKDIR /usr/src/app
 COPY --from=builder /usr/src/app .
 

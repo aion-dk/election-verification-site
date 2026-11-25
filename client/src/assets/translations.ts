@@ -255,6 +255,13 @@ export const fallbackMessages: SpreadableDLM = {
             "Verify you have entered the ballot code correctly. Be sure to match case and try again.",
         },
       },
+      receipt: {
+        invalid_file_format: {
+          title: "Invalid receipt file",
+          description:
+            "The uploaded file is not a valid vote receipt. Upload the PDF receipt you received by email or downloaded after casting your ballot.",
+        },
+      },
     },
     header: {
       dbas: "Election Verification Site",

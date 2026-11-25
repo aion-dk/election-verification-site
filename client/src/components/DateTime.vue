@@ -2,7 +2,6 @@
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import { intlFormatDistance } from "date-fns";
-import { toZonedTime } from "date-fns-tz";
 
 const i18n = useI18n();
 
@@ -14,7 +13,7 @@ const props = defineProps({
   format: {
     type: String,
     default: "relative",
-    validate: (s: string) => ["absolute", "relative"].includes(s),
+    validator: (s: string) => ["absolute", "relative"].includes(s),
   },
   timeZone: {
     type: String,
@@ -22,10 +21,12 @@ const props = defineProps({
   },
 });
 
-const date = computed(() => toZonedTime(props.dateTime, props.timeZone));
+// Keep the real instant: the time zone only affects how it is displayed.
+const date = computed(() => new Date(props.dateTime));
 
 const absolute = computed(() => {
-  return new Date(date.value).toLocaleString(i18n.locale.value, {
+  return date.value.toLocaleString(i18n.locale.value, {
+    timeZone: props.timeZone,
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -37,7 +38,7 @@ const absolute = computed(() => {
 });
 
 const relative = computed(() => {
-  return intlFormatDistance(new Date(date.value), new Date(), {
+  return intlFormatDistance(date.value, new Date(), {
     locale: i18n.locale.value,
   });
 });

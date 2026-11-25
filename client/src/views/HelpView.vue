@@ -165,10 +165,10 @@ onMounted(() => {
 
       <div class="HelpView__FAQ_Container" id="help-faq-container">
         <ExpandableSection
-          v-for="(question, index) in currentQuestions"
-          :key="`${index}-${question.title}`"
+          v-for="(question, key) in currentQuestions"
+          :key="`${key}-${question.title}`"
           class="HelpView__FAQ"
-          :id="`help-faq-${index}`"
+          :id="`help-faq-${key}`"
         >
           <template v-slot:collapsed>
             <h2 class="HelpView__FAQ_Title">{{ question.title }}</h2>

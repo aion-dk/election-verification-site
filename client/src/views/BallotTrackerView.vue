@@ -18,7 +18,7 @@ const ballotCode = ref(null);
 
 const cancel = () => {
   router.push(
-    `/${i18n.global.locale}/${route.params.organisationSlug}/${route.params.electionSlug}/find`,
+    `/${i18n.global.locale.value}/${route.params.organisationSlug}/${route.params.electionSlug}/find`,
   );
 };
 
@@ -36,6 +36,7 @@ onMounted(async () => {
       await router.push({
         name: "BallotVerificationLanding",
       });
+      return;
     }
   }
 

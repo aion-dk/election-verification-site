@@ -116,10 +116,12 @@ const setTheme = async (conferenceClient: any) => {
         .getStylingData()
         .then((theme: string) => {
           themeStylingTag.innerHTML = theme.toString();
+          return theme.toString();
         })
         .catch((err: Error) => {
           console.error(err);
           themeStylingTag.innerHTML = defaultTheme;
+          return defaultTheme;
         }),
     );
     document.head.appendChild(themeStylingTag);

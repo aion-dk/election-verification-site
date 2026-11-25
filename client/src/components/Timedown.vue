@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, ref, watch, onMounted } from "vue";
+import { computed, ref, watch, onMounted, onUnmounted } from "vue";
 
 const emit = defineEmits(["timeout", "alert"]);
 
@@ -43,6 +43,8 @@ watch(secondsLeft, () => (secondsLeft.value === 180 ? emit("alert") : null));
 onMounted(() => {
   interval.value = setInterval(() => decrementSeconds(), 1000);
 });
+
+onUnmounted(() => clearInterval(interval.value));
 </script>
 
 <template>
