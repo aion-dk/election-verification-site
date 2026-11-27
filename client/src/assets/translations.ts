@@ -105,6 +105,19 @@ export const offlineMessages: SpreadableDLM = {
       },
     },
   },
+  fil: {
+    js: {
+      components: {
+        AVSpinner: {
+          loading: "Naglo-load...",
+        },
+      },
+      accessibility: {
+        skip_to_content: "Lumaktaw sa pangunahing nilalaman",
+        skip_navigation: "Lumaktaw sa nabigasyon",
+      },
+    },
+  },
   fr: {
     js: {
       components: {
@@ -231,6 +244,7 @@ export const fallbackMessages: SpreadableDLM = {
       de: "Deutsch",
       da: "Dansk",
       es: "Español",
+      fil: "Filipino",
     },
     errors: {
       go_to_verification: "Go to the verification site",
@@ -262,6 +276,7 @@ export const fallbackMessages: SpreadableDLM = {
         es: "Cambiar a Español",
         da: "Skift til Dansk",
         de: "Auf Deutsch umstellen",
+        fil: "Lumipat sa Filipino",
       },
       election_logo_alt: "Election logo",
     },
@@ -830,6 +845,7 @@ export const fallbackMessages: SpreadableDLM = {
         es: "Cambiar a Español",
         da: "Skift til Dansk",
         de: "Auf Deutsch umstellen",
+        fil: "Lumipat sa Filipino",
       },
       election_logo_alt: "Logo de la elección",
     },
