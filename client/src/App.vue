@@ -7,6 +7,7 @@ import Header from "./components/Header.vue";
 import Footer from "./components/Footer.vue";
 import router from "./router";
 import { loadLocaleMessages, setLocale } from "./lib/i18n";
+import { matchLocale } from "./lib/matchLocale";
 import { useI18n } from "vue-i18n";
 import type { Locale } from "vue-i18n";
 import { fallbackMessages } from "./assets/translations";
@@ -66,9 +67,7 @@ const setConfigurations = async (
 };
 
 const setLanguage = async (conferenceClient: any) => {
-  const browserLocale: Locale = navigator.languages.find((locale: Locale) =>
-    i18n.availableLocales.includes(locale),
-  );
+  const browserLocale = matchLocale(navigator.languages, i18n.availableLocales);
 
   if (browserLocale) setLocale(browserLocale);
 
@@ -80,8 +79,9 @@ const setLanguage = async (conferenceClient: any) => {
     )
       ? paramLocale
       : null;
-    const browserLocale = navigator.languages.find((locale: string) =>
-      configStore.election.locales.includes(locale as SupportedLocale),
+    const browserLocale = matchLocale(
+      navigator.languages,
+      configStore.election.locales,
     );
     setLocale(
       preferredLocale || browserLocale || configStore.election.locales[0],

@@ -8,7 +8,7 @@ The project uses Vue I18n for internationalization with the following structure:
 - **Main translation file**: `client/src/assets/translations.ts`
 - **i18n configuration**: `client/src/lib/i18n.ts`
 - **Translation usage**: Components use `$t('key.path')` syntax
-- **Supported languages**: English (en), Spanish (es), German (de), Danish (da), and more
+- **Supported languages**: English (en), Spanish (es), German (de), Danish (da), Filipino (fil), and more
 
 ## Global Translation Keys
 
@@ -35,7 +35,8 @@ header: {
     en: "Switch to English",
     es: "Cambiar a Español", 
     da: "Skift til Dansk",
-    de: "Auf Deutsch umstellen"
+    de: "Auf Deutsch umstellen",
+    fil: "Lumipat sa Filipino"
   },
   election_logo_alt: "Election logo"
 }
@@ -455,13 +456,16 @@ locales: {
   en: "English",
   de: "Deutsch", 
   da: "Dansk",
-  es: "Español"
+  es: "Español",
+  fil: "Filipino"
 }
 ```
 
 ### Offline Messages (Component Library)
 ```typescript
-// These are used by the @assemblyvoting/electa-ui component library
+// These are used by the @assemblyvoting/electa-ui component library.
+// Defined per locale in `offlineMessages` (ar, ca, cy, da, de, en, es, fi, fil,
+// fr, is, it, nl, pl, pt, ro, ru, sv); English values shown below.
 components: {
   AVSpinner: {
     loading: "Loading..."
@@ -469,7 +473,8 @@ components: {
 }
 
 accessibility: {
-  skip_to_content: "Skip to main content"
+  skip_to_content: "Skip to main content",
+  skip_navigation: "Skip navigation"
 }
 ```
 
